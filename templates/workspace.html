@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IntelliForm Workspace</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', path='css/workspace.css') }}" />
+
+  <!-- PDF.js Localization -->
+  <link rel="resource" type="application/l10n" href="{{ url_for('static', path='pdfjs/web/locale/locale.properties') }}" />
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="workspace-navbar">
+    <div class="navbar-left">
+      <button id="togglePages" class="icon-button">☰</button>
+    </div>
+    <div class="navbar-center">
+      <span id="pageInfo">Page 1 / 1</span>
+      <span id="zoomInfo">100%</span>
+    </div>
+    <div class="navbar-right">
+      <button id="printPDF" class="icon-button">🖨️</button>
+      <button id="downloadPDF" class="icon-button">⬇️</button>
+    </div>
+  </nav>
+
+  <!-- Sidebar Toggle Icon in Floating Square -->
+  <div id="floatingToggleWrapper">
+    <div id="sidebarToggle" title="Toggle Tools">
+      <img src="{{ url_for('static', path='assets/imgMainLogo.png') }}" alt="Toggle Tools" />
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <div class="sidebar-tool" id="analyzeTool">
+      <img src="{{ url_for('static', path='assets/icoAnalyze.png') }}" alt="Analyze" />
+      <span>Analyze</span>
+    </div>
+
+    <div class="sidebar-tool" id="searchTool">
+      <img src="{{ url_for('static', path='assets/icoSearch.png') }}" alt="Search" />
+      <span>Search</span>
+    </div>
+
+    <!-- IntelliForm Analysis Summary Section -->
+  <div class="analysis-summary p-3 rounded" style="background-color: #1d2b5a;">
+    <h6 class="text-center fw-bold" style="color: #3ed8ff;">🧠 IntelliForm Summary</h6>
+
+    <div class="mb-2 text-center">
+      <span class="badge bg-info text-dark" id="eceScoreBadge" style="font-size: 0.9rem;">
+        📊 ECE Score: --
+      </span>
+    </div>
+
+    <div id="summaryList" class="list-group summary-scroll" style="max-height: 200px; overflow-y: auto;">
+      <!-- Dynamically populated -->
+    </div>
+  </div>
+
+  </div>
+
+  <!-- Thumbnails Sidebar -->
+  <div id="thumbnailSidebar"></div>
+
+  <!-- PDF Canvas Viewer with Overlay -->
+  <div id="pdfContainer">
+    <canvas id="pdfCanvas"></canvas>
+    <canvas id="overlayCanvas" style="position: absolute; left: 0; top: 0; pointer-events: none;"></canvas>
+  </div>
+  
+
+  <!-- PDF.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+  <!-- Custom JS -->
+  <script src="{{ url_for('static', path='js/workspace.js') }}"></script>
+
+</body>
+</html>

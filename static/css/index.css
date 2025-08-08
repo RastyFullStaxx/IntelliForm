@@ -1,0 +1,102 @@
+/* ==========================================================
+   BODY AND GLOBAL
+   ========================================================== */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #0B1E3A; /* Deep navy blue background */
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================================
+   UPLOAD CONTAINER
+   ========================================================== */
+.upload-box {
+  background-color: white;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 420px;
+  margin: auto;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================
+   HEADINGS
+   ========================================================== */
+h1 {
+  color: white;
+  font-size: 10rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.upload-box h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+/* ==========================================================
+   PARAGRAPH
+   ========================================================== */
+.upload-box p {
+  font-size: 0.9rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================
+   UPLOAD BUTTON
+   ========================================================== */
+.upload-btn {
+  display: block;
+  text-align: center;
+  background-color: #f8f9fa;
+  border: 2px dashed #c2c2c2;
+  color: #333;
+  padding: 1rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.upload-btn:hover {
+  background-color: #e6f0ff;
+  border-color: #337ab7;
+}
+
+/* ==========================================================
+   SMALL TEXT FORMAT HINT
+   ========================================================== */
+.small-text {
+  font-size: 0.75rem;
+  color: #666;
+  display: block;
+  margin-top: 0.3rem;
+}
+
+/* ==========================================================
+   SCAN BUTTON
+   ========================================================== */
+.scan-btn {
+  margin-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #0d6efd;
+  padding: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.scan-btn:hover {
+  text-decoration: underline;
+  color: #084298;
+}
+
+/* ==========================================================
+   CENTERED LABEL INSIDE INPUT
+   ========================================================== */
+input[type="file"] {
+  display: none;
+}
