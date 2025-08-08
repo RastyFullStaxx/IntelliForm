@@ -1,0 +1,78 @@
+# ===============================
+# IntelliForm Project Git Ignore
+# ===============================
+
+# -------------------------------
+# Python cache / build artifacts
+# -------------------------------
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+
+# -------------------------------
+# Virtual environments
+# -------------------------------
+venv/
+env/
+ENV/
+.venv/
+
+# -------------------------------
+# Large model files / checkpoints
+# -------------------------------
+saved_models/
+checkpoints/
+*.pt
+*.bin
+*.ckpt
+
+# -------------------------------
+# Datasets
+# -------------------------------
+data/train/annotations/
+data/val/annotations/
+data/*.csv
+data/*.tsv
+data/*.jsonl
+data/*.zip
+data/*.tar
+labels.json  # Optional — ignore if you want to keep label mapping in repo
+
+# -------------------------------
+# Uploaded or generated files
+# -------------------------------
+uploads/
+static/uploads/
+*.pdf
+*.txt
+*.json
+*.log
+metrics_report.txt
+
+# -------------------------------
+# Jupyter Notebook checkpoints
+# -------------------------------
+.ipynb_checkpoints/
+
+# -------------------------------
+# OS / editor specific files
+# -------------------------------
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# -------------------------------
+# Nested git repos (avoid accidental commits)
+# -------------------------------
+**/.git
+
+# -------------------------------
+# Temporary or debug files
+# -------------------------------
+tmp/
+temp/
