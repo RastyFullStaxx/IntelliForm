@@ -1,203 +1,283 @@
+# utils/field_classifier.py
+
 """
 IntelliForm — LayoutLMv3 + GNN + Classifier
 ===========================================
 
 WHAT THIS MODULE DOES
 ---------------------
-Implements the document understanding backbone for IntelliForm:
-- Fine-tunes a LayoutLMv3 encoder on token-level field-label classification.
-- Optionally applies a Graph Neural Network (GNN) layer to enrich token embeddings
-  using spatial/structural edges (from utils.graph_builder).
-- Projects enriched embeddings to label logits via a classifier head.
+Implements the IntelliForm backbone:
+- LayoutLMv3 encoder for token-level representations
+- Optional lightweight GNN to propagate context over layout edges
+- Linear head projecting to label logits
 
 WHEN IT'S USED
 --------------
-- **Training**: called by `scripts/train_classifier.py` to fit LayoutLMv3 (+ GNN) on
-  XFUND/FUNSD-style annotations (tokens, bboxes, labels).
-- **Inference**: used by `utils/llmv3_infer.py` to load the trained weights and
-  produce field-label predictions with confidences and aligned bboxes.
+- Training: scripts/train_classifier.py
+- Inference: utils/llmv3_infer.py
 
 PRIMARY INPUTS
 --------------
-- tokenized batch dict with keys (typical LayoutLMv3 format):
-    input_ids: LongTensor [B, T]
-    attention_mask: LongTensor [B, T]
-    bbox: LongTensor [B, T, 4]  (normalized 0..1000 or 0..1 depending on tokenizer config)
-    image: (optional) pixel values if using image patches (OCR-heavy docs)
-    labels: LongTensor [B, T]  (only at training time)
-- graph_edges (optional): from `utils.graph_builder.build_edges()`
-    edge_index: LongTensor [2, E]
-    edge_attr:  FloatTensor [E, D] (optional)
+Batch dict (LayoutLM-style):
+  input_ids      : LongTensor [B, T]
+  attention_mask : LongTensor [B, T]
+  bbox           : LongTensor [B, T, 4]
+  (optional) pixel_values: FloatTensor [B, 3, H, W] if using image branch
+  (optional) labels      : LongTensor [B, T] for loss computation
+
+Graph dict (optional, per-sample or per-batch):
+  edge_index : LongTensor [2, E]  (node indices in [0..T-1] for each sample)
+  edge_attr  : FloatTensor [E, D] (optional geometric features)
+  num_nodes  : int (== T)
 
 OUTPUTS
 -------
-Training forward():
-    - loss (CrossEntropyLoss over tokens)
-    - logits: FloatTensor [B, T, num_labels]
-    - (optional) hidden states for analysis
-Inference predict():
-    - per-token label ids, confidences
-    - token-level metadata (text span, bbox) for post-processing
+forward(...) -> dict with:
+  logits : FloatTensor [B, T, num_labels]
+  loss   : scalar (if labels provided)
+  hidden : FloatTensor [B, T, H] (optional introspection)
 
 KEY CLASSES / FUNCTIONS
 -----------------------
-- class FieldClassifier(nn.Module):
-    __init__(..., num_labels: int, use_gnn: bool = True, gnn_hidden: int = 256, ...)
-        Loads LayoutLMv3 backbone; attaches optional GNN; adds linear head.
-
-    forward(batch, graph=None, labels=None) -> dict
-        Returns {"loss", "logits", "hidden"} as applicable.
-
-    from_pretrained(model_dir_or_name, **kwargs) -> "FieldClassifier"
-        Convenience loader that mirrors Hugging Face semantics.
-
-- def predict(model, batch, graph=None, id_to_label=None, threshold=0.0) -> List[dict]
-    Runs a no_grad pass and returns structured results:
-    [
-      {"label": "FULL_NAME", "score": 0.94, "token_idx": 17, "bbox": [x0,y0,x1,y1]},
-      ...
-    ]
+- FieldClassifier(nn.Module): LayoutLMv3 (+ optional GNN) + classifier head
+- predict(...): no_grad inference helper returning ids & scores
 
 DEPENDENCIES
 ------------
-- transformers: LayoutLMv3Model / LayoutLMv3ForTokenClassification
 - torch, torch.nn.functional
-- utils.graph_builder (optional): to build graph edges for the GNN
-- utils.metrics (only during training if you compute running metrics inside)
+- transformers (LayoutLMv3Model, LayoutLMv3Processor)
 
 INTERACTIONS
 ------------
-- Called by: scripts/train_classifier.py (training), utils/llmv3_infer.py (inference)
-- Calls to: utils.graph_builder (optional), torch/transformers internals
+- Called by: train scripts & llmv3_infer
+- Consumes graph from: utils.graph_builder (optional)
 
-TRAINING NOTES
---------------
-- Loss: CrossEntropyLoss over token labels (ignore_index for padding/special tokens).
-- Optimizer: AdamW; Scheduler: linear warmup + decay (configured in train script).
-- Checkpointing handled by train script; model exposes state_dict().
-
-INFERENCE NOTES
----------------
-- Ensure identical tokenizer + bbox normalization as training.
-- For stable results, keep `id_to_label` consistent with `labels.json`.
-
-EXTENSION POINTS / TODOs
-------------------------
-- Add CRF decoding for BIO labels if needed.
-- Add masking strategy for irregular OCR tokens.
-- Optional: export ONNX for accelerated inference.
-
+NOTES
+-----
+- We default to text+layout only (no OCR). Set processor with apply_ocr=False.
+- This GNN is a minimal scatter-based layer (no external PyG dependency).
+- For batched graphs, pass a list[graph] of length B or None.
 """
 
-# utils/field_classifier.py
-
+from __future__ import annotations
+from typing import Optional, Dict, List
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from transformers import LayoutLMv3Model, LayoutLMv3Processor
 
-# 📌 Define label set
-LABELS = [
-    "O",
-    "B-TIN", "I-TIN",
-    "B-DateOfBirth", "I-DateOfBirth",
-    "B-Name", "I-Name",
-    "B-Address", "I-Address",
-    "B-Email", "I-Email",
-    "B-ContactNumber", "I-ContactNumber",
-    "B-MonthlyIncome", "I-MonthlyIncome",
-    "B-Employer", "I-Employer"
-]
 
-label2id = {label: idx for idx, label in enumerate(LABELS)}
-id2label = {idx: label for label, idx in label2id.items()}
+# ------------------------------
+# Minimal scatter util (no PyG)
+# ------------------------------
+def scatter_add(src: torch.Tensor, index: torch.Tensor, dim: int, dim_size: int) -> torch.Tensor:
+    out = src.new_zeros(dim_size, *src.shape[1:])
+    return out.index_add(dim, index, src)
 
-# 🧠 Custom classifier with LayoutLMv3 base
-class LayoutLMv3FieldClassifier(nn.Module):
-    def __init__(self, num_labels=len(LABELS)):
-        super(LayoutLMv3FieldClassifier, self).__init__()
-        self.encoder = LayoutLMv3Model.from_pretrained("microsoft/layoutlmv3-base")
-        self.classifier = nn.Linear(self.encoder.config.hidden_size, num_labels)
 
-    def forward(self, input_ids, attention_mask, bbox, pixel_values):
-        outputs = self.encoder(
-            input_ids=input_ids,
-            attention_mask=attention_mask,
-            bbox=bbox,
-            pixel_values=pixel_values
+# ------------------------------
+# Simple GNN Layer
+# ------------------------------
+class SimpleGNNLayer(nn.Module):
+    """
+    A light message-passing layer:
+      m_ij = phi([h_j, e_ij])       (edge-conditioned message)
+      h_i' = LayerNorm(h_i + agg_j m_ij)  (residual + norm)
+
+    Shapes:
+      H: [T, D], edge_index: [2, E], edge_attr: [E, D_e] or None
+    """
+    def __init__(self, hidden_dim: int, edge_dim: int = 3):
+        super().__init__()
+        self.phi = nn.Sequential(
+            nn.Linear(hidden_dim + edge_dim, hidden_dim),
+            nn.GELU(),
+            nn.Linear(hidden_dim, hidden_dim),
         )
-        sequence_output = outputs.last_hidden_state
-        logits = self.classifier(sequence_output)
-        return logits
+        self.norm = nn.LayerNorm(hidden_dim)
 
-# ⚙️ Load processor and models
-processor = LayoutLMv3Processor.from_pretrained(
-    "microsoft/layoutlmv3-base",
-    apply_ocr=False  # ✅ Prevent re-OCRing; we control bbox
-)
+    def forward(self, H: torch.Tensor, edge_index: torch.Tensor,
+                edge_attr: Optional[torch.Tensor] = None) -> torch.Tensor:
+        # H: [T, D]; edge_index: [2,E]
+        src, dst = edge_index[0], edge_index[1]  # j -> i (message from src=j to dst=i)
 
-model = LayoutLMv3FieldClassifier()
-model.eval()
+        if edge_attr is None:
+            edge_attr = torch.zeros((src.size(0), 0), device=H.device, dtype=H.dtype)
 
-# Raw encoder for embedding use elsewhere
-embedding = LayoutLMv3Model.from_pretrained("microsoft/layoutlmv3-base")
+        Hj = H[src]                              # [E, D]
+        feat = torch.cat([Hj, edge_attr], dim=-1) if edge_attr.numel() else Hj
+        m = self.phi(feat)                       # [E, D]
+
+        # Aggregate messages onto destination nodes
+        T, D = H.size(0), H.size(1)
+        agg = scatter_add(m, dst, dim=0, dim_size=T)  # [T, D]
+
+        H_out = self.norm(H + agg)
+        return H_out
+
+
+class GNNBlock(nn.Module):
+    """Stack of SimpleGNNLayer(s)."""
+    def __init__(self, hidden_dim: int, edge_dim: int = 3, num_layers: int = 1):
+        super().__init__()
+        self.layers = nn.ModuleList([SimpleGNNLayer(hidden_dim, edge_dim) for _ in range(num_layers)])
+
+    def forward(self, H: torch.Tensor, graph: Optional[Dict[str, torch.Tensor]]) -> torch.Tensor:
+        if graph is None:
+            return H
+        edge_index = graph["edge_index"]
+        edge_attr = graph.get("edge_attr", None)
+        for layer in self.layers:
+            H = layer(H, edge_index, edge_attr)
+        return H
+
+
+# ------------------------------
+# FieldClassifier
+# ------------------------------
+class FieldClassifier(nn.Module):
+    def __init__(
+        self,
+        num_labels: int,
+        backbone_name: str = "microsoft/layoutlmv3-base",
+        use_gnn: bool = True,
+        gnn_layers: int = 1,
+        edge_dim: int = 3,   # matches graph_builder edge_attr=[dist, dx, dy]
+        dropout: float = 0.1,
+        use_image_branch: bool = False,
+    ):
+        super().__init__()
+        self.backbone = LayoutLMv3Model.from_pretrained(backbone_name)
+        hidden = self.backbone.config.hidden_size
+
+        self.use_gnn = use_gnn
+        self.gnn = GNNBlock(hidden_dim=hidden, edge_dim=edge_dim, num_layers=gnn_layers) if use_gnn else None
+
+        self.dropout = nn.Dropout(dropout)
+        self.classifier = nn.Linear(hidden, num_labels)
+
+        # For optional image branch (we keep the flag; processor controls pixels)
+        self.use_image_branch = use_image_branch
+
+    def forward(
+        self,
+        batch: Dict[str, torch.Tensor],
+        graph: Optional[Dict[str, torch.Tensor]] = None,
+        labels: Optional[torch.Tensor] = None,
+    ) -> Dict[str, torch.Tensor]:
+        """
+        Args:
+          batch : dict with input_ids, attention_mask, bbox, (optional) pixel_values
+          graph : dict or list[dict]; if list, must align with B and we iterate per sample
+          labels: [B, T] for loss
+
+        Returns:
+          dict: {"logits", "loss"(opt), "hidden"}
+        """
+        inputs = {
+            "input_ids": batch["input_ids"],
+            "attention_mask": batch["attention_mask"],
+            "bbox": batch["bbox"],
+        }
+        if self.use_image_branch and "pixel_values" in batch:
+            inputs["pixel_values"] = batch["pixel_values"]
+
+        out = self.backbone(**inputs)
+        H = out.last_hidden_state  # [B, T, D]
+
+        # Apply GNN per-sample (keeps graph API simple without PyG batching)
+        if self.use_gnn and graph is not None:
+            if isinstance(graph, list):
+                # graph is a list of length B; loop over batch items
+                H_list = []
+                for b in range(H.size(0)):
+                    Hb = H[b]  # [T, D]
+                    gb = graph[b] if b < len(graph) else None
+                    H_list.append(self.gnn(Hb, gb))
+                H = torch.stack(H_list, dim=0)
+            else:
+                # assume B==1
+                H = self.gnn(H.squeeze(0), graph).unsqueeze(0)
+
+        H = self.dropout(H)
+        logits = self.classifier(H)  # [B, T, num_labels]
+
+        result = {"logits": logits, "hidden": H}
+
+        if labels is not None:
+            loss = F.cross_entropy(
+                logits.view(-1, logits.size(-1)),
+                labels.view(-1),
+                ignore_index=-100
+            )
+            result["loss"] = loss
+
+        return result
+
+    @classmethod
+    def from_pretrained(cls, model_dir_or_name: str, num_labels: int, **kwargs) -> "FieldClassifier":
+        """
+        Convenience loader to mirror HF style when restoring a whole classifier.
+        Expects a state_dict saved by the training script.
+        """
+        model = cls(num_labels=num_labels, **kwargs)
+        sd = torch.load(model_dir_or_name, map_location="cpu")
+        # Allow loading either a full dict {"state_dict": ...} or raw state_dict
+        state_dict = sd.get("state_dict", sd)
+        model.load_state_dict(state_dict, strict=False)
+        return model
+
 
 @torch.no_grad()
-def predict_fields(model_inputs):
-    print("🧠 Running model forward pass...")
-
-    # ⛑️ Ensure only 1 page worth of pixel_values (shape [1, 3, H, W])
-    pixel_values = model_inputs["pixel_values"]
-    if pixel_values.dim() == 5:
-        pixel_values = pixel_values[:, 0, :, :, :]  # remove batch if nested
-    if pixel_values.size(0) > 1:
-        pixel_values = pixel_values[0].unsqueeze(0)
-
-    logits = model(
-        input_ids=model_inputs["input_ids"],
-        attention_mask=model_inputs["attention_mask"],
-        bbox=model_inputs["bbox"].long(),
-        pixel_values=pixel_values
-    )
-
-    print("✅ Model forward pass complete.")
-
+def predict(
+    model: FieldClassifier,
+    batch: Dict[str, torch.Tensor],
+    graph: Optional[Dict[str, torch.Tensor]] = None,
+    id_to_label: Optional[Dict[int, str]] = None,
+    return_hidden: bool = False,
+):
+    model.eval()
+    out = model(batch, graph=graph, labels=None)
+    logits = out["logits"]  # [B, T, C]
     probs = F.softmax(logits, dim=-1)
-    confs, preds = torch.max(probs, dim=-1)
+    confs, preds = probs.max(dim=-1)  # [B, T]
 
-    print("📊 Softmax and predictions extracted.")
-
-    results = []
-
-    input_ids = model_inputs["input_ids"]
-    bboxes = model_inputs["bbox"][0]  # assuming batch_size=1
-
-    sequence_length = input_ids.size(1)
-
-    for i in range(sequence_length):
-        label_id = preds[0][i].item()
-        label = id2label[label_id]
-        confidence = confs[0][i].item()
-        token_id = input_ids[0][i].item()
-        text = processor.tokenizer.decode([token_id])
-
-        if label != "O" and text.strip():
-            results.append({
+    results: List[List[Dict]] = []
+    B, T = preds.shape
+    for b in range(B):
+        seq = []
+        for t in range(T):
+            label_id = preds[b, t].item()
+            if id_to_label:
+                label = id_to_label.get(label_id, str(label_id))
+            else:
+                label = str(label_id)
+            seq.append({
+                "label_id": label_id,
                 "label": label,
-                "bbox": [int(x) for x in bboxes[i]],
-                "confidence": round(confidence, 3),
-                "text": text
+                "score": float(confs[b, t].item()),
+                "bbox": batch["bbox"][b, t].tolist(),
+                "token_id": int(batch["input_ids"][b, t].item()),
             })
+        results.append(seq)
 
-    print("\n🧾 First 10 decoded tokens with predictions:")
-    for i in range(min(10, sequence_length)):
-        label_id = preds[0][i].item()
-        label = id2label[label_id]
-        confidence = confs[0][i].item()
-        token_id = input_ids[0][i].item()
-        text = processor.tokenizer.decode([token_id])
-        box = bboxes[i]
-
-        print(f"{text} | Box: {box} | Label: {label} | Confidence: {round(confidence, 3)}")
-
+    if return_hidden:
+        return results, out["hidden"]
     return results
+
+
+# ------------------------------
+# Global processor & models (names expected by your stack)
+# ------------------------------
+# Primary tokenizer/processor (apply_ocr=False as per project rule)
+processor = LayoutLMv3Processor.from_pretrained(
+    "microsoft/layoutlmv3-base",
+    apply_ocr=False
+)
+
+# Base embedding encoder exposed for other modules
+embedding = LayoutLMv3Model.from_pretrained("microsoft/layoutlmv3-base")
+
+# Full classifier model (initialize with placeholder num_labels; training script should re-init or load)
+# You can override num_labels at load-time or reassign `model` after training.
+model = FieldClassifier(num_labels=8, use_gnn=True, gnn_layers=1)
