@@ -1,5 +1,4 @@
 # api.py
-
 """
 IntelliForm API Routes (FastAPI)
 ================================
@@ -29,9 +28,20 @@ RESPONSE SHAPE (ANALYZE)
 ------------------------
 {
   "document": "uploads/2025-08-08_form.pdf",
+  "title": "2025-08-08_form.pdf",
   "fields": [
-    {"label":"FULL_NAME","score":0.93,"bbox":[x0,y0,x1,y1],"summary":"...","page":0}
+    {"label":"FULL_NAME","score":0.93,"bbox":[x0,y0,x1,y1],"summary":"...","page":1,"group":"..."}
   ],
+  "metrics": {
+    "precision": null,
+    "recall": null,
+    "f1": 0.82,                    # if GT present (span IoU)
+    "rougeL": 0.44,                # if GT present
+    "meteor": 0.29,                # if GT present
+    "fields_count": 27,            # always useful
+    "processing_sec": 1.42,        # always useful
+    "pages": 3                     # if known
+  },
   "runtime": {"extract_ms":120,"classify_ms":85,"summarize_ms":40}
 }
 
@@ -43,11 +53,12 @@ SECURITY / DEPLOY NOTES
 """
 
 from __future__ import annotations
+
 import os
 import uuid
 import time
 import shutil
-from typing import Optional, List
+from typing import Optional, List, Dict, Any
 
 from fastapi import FastAPI, File, UploadFile, HTTPException, Query, Body
 from fastapi.middleware.cors import CORSMiddleware
@@ -55,7 +66,12 @@ from fastapi.responses import JSONResponse, PlainTextResponse, FileResponse
 from pydantic import BaseModel
 
 from utils.llmv3_infer import analyze_pdf, analyze_tokens
-
+from utils.metrics import (
+    evaluate_spans_iou,
+    compute_rouge_meteor,
+    format_metrics_for_report,
+    save_report_txt,
+)
 
 # -----------------------------------------------------------------------------
 # App & dirs
@@ -77,7 +93,6 @@ METRICS_PATH = os.path.join(STATIC_DIR, "metrics_report.txt")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 os.makedirs(STATIC_DIR, exist_ok=True)
 
-
 # -----------------------------------------------------------------------------
 # Models
 # -----------------------------------------------------------------------------
@@ -92,19 +107,21 @@ class AnalyzeTokensBody(BaseModel):
     classifier: Optional[str] = "saved_models/classifier.pt"
     t5: Optional[str] = "saved_models/t5.pt"
 
-
 # -----------------------------------------------------------------------------
 # Helpers
 # -----------------------------------------------------------------------------
 def _write_quick_report(result: dict, path: str = METRICS_PATH) -> None:
     fields = result.get("fields", [])
-    counts = {}
-    scores = []
+    counts: Dict[str, int] = {}
+    scores: List[float] = []
     for f in fields:
         lbl = f.get("label", "UNK")
         counts[lbl] = counts.get(lbl, 0) + 1
         if "score" in f:
-            scores.append(float(f["score"]))
+            try:
+                scores.append(float(f["score"]))
+            except Exception:
+                pass
     avg_score = (sum(scores) / len(scores)) if scores else 0.0
     rt = result.get("runtime", {})
     lines = []
@@ -127,7 +144,6 @@ def _write_quick_report(result: dict, path: str = METRICS_PATH) -> None:
     with open(path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines))
 
-
 def _cfg_from_knobs(
     device: Optional[str],
     min_conf: Optional[float],
@@ -140,10 +156,11 @@ def _cfg_from_knobs(
         "min_confidence": (min_conf if min_conf is not None else 0.0),
         "max_length": 512,
         "graph": {"use": not bool(no_graph), "strategy": "knn", "k": 8, "radius": None},
-        "model_paths": {"classifier": classifier or "saved_models/classifier.pt",
-                        "t5": t5 or "saved_models/t5.pt"},
+        "model_paths": {
+            "classifier": classifier or "saved_models/classifier.pt",
+            "t5": t5 or "saved_models/t5.pt",
+        },
     }
-
 
 def _validate_under_uploads(path: str) -> str:
     norm = os.path.normpath(path)
@@ -153,6 +170,15 @@ def _validate_under_uploads(path: str) -> str:
         raise HTTPException(status_code=404, detail="File not found.")
     return norm
 
+def _load_gt_for(pdf_path: str) -> List[Dict[str, Any]]:
+    """
+    OPTIONAL: implement your own GT fetch here.
+    For example: look for a JSON next to the PDF: uploads/.../file.gt.json
+    Should return: [{"label": "...", "bbox": [x0,y0,x1,y1], "reference_summary": "..."}]
+    Return [] if none.
+    """
+    # Stub: no ground truth by default
+    return []
 
 # -----------------------------------------------------------------------------
 # Routes
@@ -160,7 +186,6 @@ def _validate_under_uploads(path: str) -> str:
 @app.get("/api/health")
 def health():
     return {"status": "ok", "time": int(time.time())}
-
 
 @app.post("/api/upload")
 async def upload(file: UploadFile = File(...)):
@@ -173,8 +198,8 @@ async def upload(file: UploadFile = File(...)):
             shutil.copyfileobj(file.file, f)
     finally:
         await file.close()
+    # Return a path that the frontend can GET directly
     return {"file_id": fid, "path": out_path}
-
 
 @app.post("/api/analyze")
 async def analyze(
@@ -183,10 +208,11 @@ async def analyze(
 ):
     """
     Two modes:
-      - PDF: pass ?file_path=uploads/....pdf
+      - PDF:   POST /api/analyze?file_path=uploads/....pdf
       - Tokens: POST JSON body with tokens+bboxes (page_ids optional)
     """
     try:
+        t0 = time.time()
         if file_path:
             norm = _validate_under_uploads(file_path)
             cfg = _cfg_from_knobs(
@@ -196,33 +222,74 @@ async def analyze(
                 classifier=(body.classifier if body else None),
                 t5=(body.t5 if body else None),
             )
-            result = analyze_pdf(norm, config=cfg)
+            result = analyze_pdf(norm, config=cfg)  # must return dict with "fields", "runtime", maybe "pages"
+            title = os.path.basename(norm)
         else:
             if body is None:
                 raise HTTPException(status_code=400, detail="Provide file_path or JSON body with tokens/bboxes.")
             cfg = _cfg_from_knobs(body.device, body.min_confidence, body.no_graph, body.classifier, body.t5)
             result = analyze_tokens(body.tokens, body.bboxes, page_ids=body.page_ids, config=cfg)
+            title = "tokens.json"
 
-        # Write quick metrics report for the UI (optional)
-        _write_quick_report(result, METRICS_PATH)
+        elapsed = time.time() - t0
 
-        return JSONResponse(content=result)
+        # Optional GT metrics (only if GT is available)
+        gt = _load_gt_for(file_path or "")
+        spans = None
+        summar = None
+        if gt:
+            spans = evaluate_spans_iou(
+                predicted=[{"label": f.get("label"), "bbox": f.get("bbox")} for f in result.get("fields", [])],
+                ground_truth=[{"label": g.get("label"), "bbox": g.get("bbox")} for g in gt],
+                iou_threshold=0.5,
+            )
+            refs = [g.get("reference_summary", "") for g in gt if g.get("reference_summary")]
+            hyps = [f.get("summary", "") for f in result.get("fields", [])][:len(refs)]
+            if refs and hyps:
+                summar = compute_rouge_meteor(refs, hyps)
+
+            # Optional detailed report
+            report_text = format_metrics_for_report(classif=None, summar=summar, spans=spans)
+            save_report_txt(report_text, path=METRICS_PATH)
+        else:
+            # Still write a quick operational report for the UI
+            _write_quick_report(result, METRICS_PATH)
+
+        # Build frontend-friendly response
+        fields = result.get("fields", [])
+        pages = result.get("pages") or result.get("num_pages")
+        runtime = result.get("runtime", {})
+
+        response = {
+            "document": file_path or title,
+            "title": title,
+            "fields": fields,
+            "metrics": {
+                "precision": None,
+                "recall": None,
+                "f1": (spans or {}).get("f1"),
+                "rougeL": (summar or {}).get("rougeL"),
+                "meteor": (summar or {}).get("meteor"),
+                "fields_count": len(fields),
+                "processing_sec": elapsed,
+                "pages": pages,
+            },
+            "runtime": runtime,
+        }
+        return JSONResponse(content=response)
+
     except HTTPException:
         raise
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 
-
 @app.get("/api/metrics", response_class=PlainTextResponse)
 def metrics():
-    """
-    Returns the latest quick metrics report if available.
-    """
+    """Returns the latest quick metrics report if available."""
     if not os.path.exists(METRICS_PATH):
         return PlainTextResponse("No metrics report found.", status_code=404)
     with open(METRICS_PATH, "r", encoding="utf-8") as f:
         return PlainTextResponse(f.read())
-
 
 @app.get("/api/serve-file")
 def serve_file(path: str = Query(..., description="Path to a file under static/ or uploads/")):
