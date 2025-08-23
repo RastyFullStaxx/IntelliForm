@@ -1,21 +1,21 @@
+# main.py
+
 """
 IntelliForm — FastAPI App Entrypoint
 ====================================
 
 WHAT THIS MODULE DOES
 ---------------------
-Bootstraps the FastAPI application, mounts static files, registers routes,
-and serves Jinja2 templates for the optional UI.
+Bootstraps the FastAPI application, mounts static files, registers UI routes,
+and reuses the API app defined in `api.py`.
 
 RESPONSIBILITIES
 ----------------
-- Create FastAPI app instance.
+- Import the FastAPI app from `api.py` (so /api/* is already wired)
 - Mount `/static` -> ./static
-- Register API routes from `api.py`.
-- Render HTML templates:
-    - GET /           -> index.html        (optional landing)
-    - GET /workspace  -> workspace.html    (PDF viewer + sidebar UI)
-- Provide a local development server via uvicorn.
+- Serve Jinja2 templates for the optional UI:
+    - GET /           -> index.html (optional landing; falls back to workspace)
+    - GET /workspace  -> workspace.html (central UI)
 
 TYPICAL DEV RUN
 ---------------
@@ -23,83 +23,63 @@ $ uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 
 INTERACTIONS
 ------------
-- Uses: api.py (includes /api/* endpoints)
+- Uses: api.py (provides /api/* endpoints and CORS)
 - Serves: templates/workspace.html, static assets (css/js/uploads)
 
 DEPLOY NOTES
 ------------
-- For production, run under a process manager (e.g., uvicorn + systemd, or Gunicorn+Uvicorn workers).
-- Set proper static caching headers if needed.
-
-TODOs
------
-- Add CORS configuration if UI is served from a different origin.
-- Add graceful shutdown hooks for GPU resource cleanup (optional).
-
+- In production, run behind a process manager (e.g., Gunicorn + Uvicorn workers).
+- Tighten CORS in `api.py` and add caching headers for static if needed.
 """
 
+from __future__ import annotations
+import os
 
-from fastapi import FastAPI, File, UploadFile, Request
-from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi import Request
+from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from fastapi.middleware.cors import CORSMiddleware
-from api import router as api_router
-import os
-import shutil
-import traceback
 
-# === FastAPI App Setup ===
-app = FastAPI()
+# Reuse the API app (already includes /api/*, CORS, and directories)
+from api import app as api_app
 
-# === CORS Middleware ===
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],  # 🔒 Use specific origins in production
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# Alias to the app variable expected by uvicorn (uvicorn main:app)
+app = api_app
 
-# === Static Assets & Templates ===
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+# --- Static & Templates ---
+STATIC_DIR = "static"
+TEMPLATES_DIR = "templates"
+os.makedirs(STATIC_DIR, exist_ok=True)
+os.makedirs(TEMPLATES_DIR, exist_ok=True)
 
-# === Upload Directory ===
-UPLOAD_FOLDER = "static/uploads"
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
-# === HTML Routes ===
+
+# --- UI Routes ---
 
 @app.get("/", response_class=HTMLResponse)
-async def render_index(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
-
-@app.get("/workspace", response_class=HTMLResponse)
-async def render_workspace(request: Request):
+async def index(request: Request):
+    """
+    Optional landing page. If templates/index.html is missing,
+    render workspace.html instead.
+    """
+    index_path = os.path.join(TEMPLATES_DIR, "index.html")
+    if os.path.exists(index_path):
+        return templates.TemplateResponse("index.html", {"request": request})
+    # Fallback to workspace if index is absent
     return templates.TemplateResponse("workspace.html", {"request": request})
 
-# === Upload Only (No Inference Here) ===
 
-@app.post("/upload-pdf/", response_class=JSONResponse)
-async def upload_pdf(file: UploadFile = File(...)):
-    try:
-        filename = file.filename.replace(" ", "_")
-        if not filename.lower().endswith(".pdf"):
-            return JSONResponse(content={"error": "Only PDF files allowed"}, status_code=400)
+@app.get("/workspace", response_class=HTMLResponse)
+async def workspace(request: Request):
+    """
+    Main UI page (PDF viewer + results panel).
+    """
+    return templates.TemplateResponse("workspace.html", {"request": request})
 
-        save_path = os.path.join(UPLOAD_FOLDER, filename)
-        print(f"📥 PDF uploaded and saved to: {save_path}")
 
-        with open(save_path, "wb") as buffer:
-            shutil.copyfileobj(file.file, buffer)
-
-        return JSONResponse(content={"filename": filename})
-
-    except Exception as e:
-        print("🔥 Error during file upload:")
-        traceback.print_exc()
-        return JSONResponse(content={"error": str(e)}, status_code=500)
-
-# === Include API Routes (analysis, metrics, etc.) ===
-app.include_router(api_router)
+# --- Local Dev Runner ---
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=8000, reload=True)
