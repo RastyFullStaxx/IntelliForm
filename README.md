@@ -30,12 +30,12 @@ Think of IntelliForm as a **smart assistant for forms** — one that actually *u
 
 ```mermaid
 flowchart LR
-    A[📄 PDF Upload] --> B[🔍 Extractor\n(pdfplumber + OCR)]
-    B --> C[📐 LayoutLMv3 Encoder]
-    C --> D[🔗 Graph Neural Network\n(Spatial Edges)]
-    D --> E[🏷️ Classifier\nField Labels]
-    E --> F[✍️ T5 Summarizer\nHuman-Friendly Labels]
-    F --> G[📊 Results Panel\nUI]
+    A["📄 PDF Upload"] --> B["🔍 Extractor<br/>(pdfplumber)"]
+    B --> C["📐 LayoutLMv3 Encoder"]
+    C --> D["🔗 Graph Neural Network<br/>(Spatial Edges)"]
+    D --> E["🏷️ Classifier<br/>Field Labels"]
+    E --> F["✍️ T5 Summarizer<br/>Human‑Friendly Labels"]
+    F --> G["📊 Results Panel<br/>UI"]
 ```
 
 - **Extractor**: Parses text + bounding boxes from PDFs.  
@@ -128,13 +128,13 @@ Reports are written to `static/metrics_report.txt` for easy access.
 - **Rasty Cannu Espartero**  
   BS Computer Science — Polytechnic University of the Philippines  
 
-- **[Member 2 Name]**  
+- **Roanne Bonifacio Maye Dinglasa**  
   BS Computer Science — Polytechnic University of the Philippines  
 
-- **[Member 3 Name]**  
+- **David Geisler Mahayag**  
   BS Computer Science — Polytechnic University of the Philippines  
 
-- **[Member 4 Name]**  
+- **Yesa Placente**  
   BS Computer Science — Polytechnic University of the Philippines  
 
 ---
@@ -146,7 +146,7 @@ If you use IntelliForm for research, please cite:
 ```bibtex
 @misc{espartero2025intelliform,
   title  = {IntelliForm: Field-Label Disambiguation and Completion-Time Reduction in PDF Forms},
-  author = {Espartero, Rasty Cannu and [Member 2 Name] and [Member 3 Name] and [Member 4 Name]},
+  author = {Espartero, Rasty Cannu and Dinglasa, Roanne Maye B. and Mahayag, David Geisler M.  and Placente, Yesa V. },
   year   = {2025},
   note   = {Undergraduate Thesis, Polytechnic University of the Philippines}
 }
@@ -164,4 +164,3 @@ If you use IntelliForm for research, please cite:
 ---
 
 ✨ IntelliForm is built as a **research-first project** to bridge academic exploration with practical usability.  
-This README is crafted to be both **flashy** (emojis, diagrams) and **educational** (system breakdown, quickstart, roadmap).  
