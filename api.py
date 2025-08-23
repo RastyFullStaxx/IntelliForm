@@ -1,3 +1,5 @@
+# api.py
+
 """
 IntelliForm API Routes (FastAPI)
 ================================
@@ -15,127 +17,219 @@ INTEGRATED MODULES
 - utils.t5_summarize     : T5 summary generation (loaded inside llmv3_infer)
 - utils.metrics          : Metric computation & report formatting (optional at inference)
 
-PRIMARY ENDPOINTS (SUGGESTED)
------------------------------
+PRIMARY ENDPOINTS
+-----------------
 - GET  /api/health
-    Returns {"status": "ok"} for liveness checks.
-
 - POST /api/upload
-    Multipart upload of a PDF. Saves to `uploads/` and returns a file_id/path.
-
-- POST /api/analyze
-    Body: {"pdf_path": "..."} or {"file_id": "..."} plus optional config.
-    Runs full pipeline: extract -> classify -> group -> summarize.
-    Returns structured JSON with fields, bboxes, confidences, summaries, timing.
-
-- GET  /api/metrics
-    Returns latest metrics report (if produced during evaluation runs), or
-    triggers a quick evaluation on a small dev set (optional).
-
-- GET  /api/serve-file?path=...
-    Serves generated artifacts like `static/metrics_report.txt` if needed.
+- POST /api/analyze          (PDF path or tokens+bboxes)
+- GET  /api/metrics          (quick text report)
+- GET  /api/serve-file       (serve artifacts, e.g., metrics report)
 
 RESPONSE SHAPE (ANALYZE)
 ------------------------
 {
-  "document": "uploads/2025-08-08_21-30_form.pdf",
+  "document": "uploads/2025-08-08_form.pdf",
   "fields": [
-    {"label": "FULL_NAME", "score": 0.93, "bbox": [x0,y0,x1,y1], "summary": "...", "page": 1},
-    ...
+    {"label":"FULL_NAME","score":0.93,"bbox":[x0,y0,x1,y1],"summary":"...","page":0}
   ],
-  "runtime": {"extract_ms": 120, "classify_ms": 85, "summarize_ms": 40}
+  "runtime": {"extract_ms":120,"classify_ms":85,"summarize_ms":40}
 }
-
-INTERACTIONS
-------------
-- Called by: frontend (templates/workspace.html + static/js/workspace.js) or external clients
-- Calls into: utils.llmv3_infer.analyze_pdf / analyze_tokens
 
 SECURITY / DEPLOY NOTES
 -----------------------
 - Validate file paths; restrict to `uploads/`.
 - Enforce file size/type limits.
-- Consider async endpoints for long-running analyses.
-
-TODOs
------
-- Add auth if exposing beyond localhost.
-- Add background tasks for large multi-page PDFs.
-
+- Consider async or background tasks for large PDFs.
 """
 
-
+from __future__ import annotations
 import os
+import uuid
+import time
 import shutil
-from fastapi import APIRouter, File, UploadFile, Query
-from fastapi.responses import JSONResponse
-from inference import run_inference
-from utils.metrics import compute_dummy_ece_score, save_analysis_to_txt
+from typing import Optional, List
 
-# 🚩 Router initialization
-router = APIRouter()
+from fastapi import FastAPI, File, UploadFile, HTTPException, Query, Body
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse, PlainTextResponse, FileResponse
+from pydantic import BaseModel
 
-# 📁 Directory to save uploaded PDFs
-UPLOAD_DIR = "static/uploads"
+from utils.llmv3_infer import analyze_pdf, analyze_tokens
+
+
+# -----------------------------------------------------------------------------
+# App & dirs
+# -----------------------------------------------------------------------------
+app = FastAPI(title="IntelliForm API", version="0.1.0")
+
+# CORS: adjust origins for your frontend in production
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],   # tighten later
+    allow_methods=["*"],
+    allow_headers=["*"],
+    allow_credentials=True,
+)
+
+UPLOAD_DIR = "uploads"
+STATIC_DIR = "static"
+METRICS_PATH = os.path.join(STATIC_DIR, "metrics_report.txt")
 os.makedirs(UPLOAD_DIR, exist_ok=True)
+os.makedirs(STATIC_DIR, exist_ok=True)
 
-# 📤 Upload endpoint — saves file only, no inference triggered
-@router.post("/upload-pdf/")
-async def upload_pdf(file: UploadFile = File(...)):
-    filename = file.filename.replace(" ", "_")
-    filepath = os.path.join(UPLOAD_DIR, filename)
 
-    with open(filepath, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
+# -----------------------------------------------------------------------------
+# Models
+# -----------------------------------------------------------------------------
+class AnalyzeTokensBody(BaseModel):
+    tokens: List[str]
+    bboxes: List[List[int]]
+    page_ids: Optional[List[int]] = None
+    # optional knobs
+    device: Optional[str] = None
+    min_confidence: Optional[float] = 0.0
+    no_graph: Optional[bool] = False
+    classifier: Optional[str] = "saved_models/classifier.pt"
+    t5: Optional[str] = "saved_models/t5.pt"
 
-    print(f"📥 PDF uploaded and saved to: {filepath}")
-    return {"filename": filename}
 
-# 🧠 Optional endpoint: Immediate analyze on upload (not used by frontend)
-@router.post("/analyze")
-async def analyze_pdf(file: UploadFile = File(...)):
-    filename = file.filename.replace(" ", "_")
-    filepath = os.path.join(UPLOAD_DIR, filename)
+# -----------------------------------------------------------------------------
+# Helpers
+# -----------------------------------------------------------------------------
+def _write_quick_report(result: dict, path: str = METRICS_PATH) -> None:
+    fields = result.get("fields", [])
+    counts = {}
+    scores = []
+    for f in fields:
+        lbl = f.get("label", "UNK")
+        counts[lbl] = counts.get(lbl, 0) + 1
+        if "score" in f:
+            scores.append(float(f["score"]))
+    avg_score = (sum(scores) / len(scores)) if scores else 0.0
+    rt = result.get("runtime", {})
+    lines = []
+    lines.append("IntelliForm — Metrics (Quick Report)")
+    lines.append("====================================")
+    lines.append(f"Document   : {result.get('document','')}")
+    lines.append(f"Field Count: {len(fields)}")
+    lines.append("")
+    lines.append("Counts by Label:")
+    for k in sorted(counts.keys()):
+        lines.append(f"  - {k}: {counts[k]}")
+    lines.append("")
+    lines.append(f"Average Score: {avg_score:.3f}")
+    lines.append("")
+    lines.append("Runtimes (ms):")
+    lines.append(f"  - extract   : {rt.get('extract_ms','-')}")
+    lines.append(f"  - classify  : {rt.get('classify_ms','-')}")
+    lines.append(f"  - summarize : {rt.get('summarize_ms','-')}")
+    lines.append("")
+    with open(path, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines))
 
-    with open(filepath, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
 
+def _cfg_from_knobs(
+    device: Optional[str],
+    min_conf: Optional[float],
+    no_graph: Optional[bool],
+    classifier: Optional[str],
+    t5: Optional[str],
+) -> dict:
+    return {
+        "device": device or ("cuda" if os.environ.get("USE_CUDA") == "1" else "cpu"),
+        "min_confidence": (min_conf if min_conf is not None else 0.0),
+        "max_length": 512,
+        "graph": {"use": not bool(no_graph), "strategy": "knn", "k": 8, "radius": None},
+        "model_paths": {"classifier": classifier or "saved_models/classifier.pt",
+                        "t5": t5 or "saved_models/t5.pt"},
+    }
+
+
+def _validate_under_uploads(path: str) -> str:
+    norm = os.path.normpath(path)
+    if not norm.startswith(os.path.normpath(UPLOAD_DIR)):
+        raise HTTPException(status_code=400, detail="Path must be under uploads/.")
+    if not os.path.exists(norm):
+        raise HTTPException(status_code=404, detail="File not found.")
+    return norm
+
+
+# -----------------------------------------------------------------------------
+# Routes
+# -----------------------------------------------------------------------------
+@app.get("/api/health")
+def health():
+    return {"status": "ok", "time": int(time.time())}
+
+
+@app.post("/api/upload")
+async def upload(file: UploadFile = File(...)):
+    if not file.filename.lower().endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="Only PDF files are accepted.")
+    fid = f"{uuid.uuid4().hex}_{file.filename.replace(' ', '_')}"
+    out_path = os.path.join(UPLOAD_DIR, fid)
     try:
-        results = run_inference(filepath)
-        ece_score = compute_dummy_ece_score(results)
-        save_analysis_to_txt(results, ece_score)
+        with open(out_path, "wb") as f:
+            shutil.copyfileobj(file.file, f)
+    finally:
+        await file.close()
+    return {"file_id": fid, "path": out_path}
 
-        return JSONResponse(content={
-            "results": results,
-            "ece": ece_score
-        })
 
+@app.post("/api/analyze")
+async def analyze(
+    file_path: Optional[str] = Query(default=None, description="Path under uploads/ to a PDF"),
+    body: Optional[AnalyzeTokensBody] = Body(default=None),
+):
+    """
+    Two modes:
+      - PDF: pass ?file_path=uploads/....pdf
+      - Tokens: POST JSON body with tokens+bboxes (page_ids optional)
+    """
+    try:
+        if file_path:
+            norm = _validate_under_uploads(file_path)
+            cfg = _cfg_from_knobs(
+                device=(body.device if body else None),
+                min_conf=(body.min_confidence if body else None),
+                no_graph=(body.no_graph if body else None),
+                classifier=(body.classifier if body else None),
+                t5=(body.t5 if body else None),
+            )
+            result = analyze_pdf(norm, config=cfg)
+        else:
+            if body is None:
+                raise HTTPException(status_code=400, detail="Provide file_path or JSON body with tokens/bboxes.")
+            cfg = _cfg_from_knobs(body.device, body.min_confidence, body.no_graph, body.classifier, body.t5)
+            result = analyze_tokens(body.tokens, body.bboxes, page_ids=body.page_ids, config=cfg)
+
+        # Write quick metrics report for the UI (optional)
+        _write_quick_report(result, METRICS_PATH)
+
+        return JSONResponse(content=result)
+    except HTTPException:
+        raise
     except Exception as e:
-        print(f"❌ Error during analyze_pdf: {str(e)}")
         return JSONResponse(status_code=500, content={"error": str(e)})
 
-# 🔁 Main endpoint: Analyze a previously uploaded file (used by frontend)
-@router.get("/analyze-saved")
-async def analyze_saved(file: str = Query(...)):
-    filepath = os.path.join(UPLOAD_DIR, file)
-    print(f"📥 [API] Received analyze-saved request for file: {file}")
 
-    if not os.path.exists(filepath):
-        print(f"❌ File not found: {filepath}")
-        return JSONResponse(status_code=404, content={"error": "File not found."})
+@app.get("/api/metrics", response_class=PlainTextResponse)
+def metrics():
+    """
+    Returns the latest quick metrics report if available.
+    """
+    if not os.path.exists(METRICS_PATH):
+        return PlainTextResponse("No metrics report found.", status_code=404)
+    with open(METRICS_PATH, "r", encoding="utf-8") as f:
+        return PlainTextResponse(f.read())
 
-    try:
-        results = run_inference(filepath)
-        ece_score = compute_dummy_ece_score(results)
-        save_analysis_to_txt(results, ece_score)
 
-        print(f"📤 [API] Returning {len(results)} results with ECE: {ece_score:.4f}")
-        return JSONResponse(content={
-            "results": results,
-            "ece": ece_score
-        })
-
-    except Exception as e:
-        print(f"❌ Exception in analyze-saved: {str(e)}")
-        return JSONResponse(status_code=500, content={"error": str(e)})
-
+@app.get("/api/serve-file")
+def serve_file(path: str = Query(..., description="Path to a file under static/ or uploads/")):
+    norm = os.path.normpath(path)
+    allowed_roots = [os.path.normpath(STATIC_DIR), os.path.normpath(UPLOAD_DIR)]
+    if not any(norm.startswith(root) for root in allowed_roots):
+        raise HTTPException(status_code=400, detail="Path must be under static/ or uploads/.")
+    if not os.path.exists(norm):
+        raise HTTPException(status_code=404, detail="File not found.")
+    return FileResponse(norm)
