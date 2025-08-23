@@ -29,13 +29,39 @@ Think of IntelliForm as a **smart assistant for forms** — one that actually *u
 ## 🏗️ System Architecture
 
 ```mermaid
-flowchart LR
-    A["📄 PDF Upload"] --> B["🔍 Extractor<br/>(pdfplumber)"]
-    B --> C["📐 LayoutLMv3 Encoder"]
-    C --> D["🔗 Graph Neural Network<br/>(Spatial Edges)"]
-    D --> E["🏷️ Classifier<br/>Field Labels"]
-    E --> F["✍️ T5 Summarizer<br/>Human‑Friendly Labels"]
-    F --> G["📊 Results Panel<br/>UI"]
+flowchart TD
+
+    %% Input
+    A["📄 Uploaded PDF Form"] --> B["🔍 Text & Layout Extraction<br>(pdfplumber + OCR)"]
+
+    %% Encoding & Graph
+    B --> C["🧠 Layout-Aware Embeddings<br>(LayoutLMv3)"]
+    C --> D["🧭 Spatial Graph Construction<br>(based on token positions)"]
+    D --> E["🔗 Graph Neural Network<br>(adds spatial context)"]
+
+    %% Dual Head (Custom)
+    E --> F1["🏷️ Field Classifier<br>(e.g., Name, Date, Address)"]
+    E --> F2["📝 T5 Summary Generator<br>(short human-readable field description)"]
+
+    %% Output
+    F1 --> G["📦 JSON Output<br>(with labels, summaries, coordinates, confidence)"]
+    F2 --> G
+
+    %% Gateway
+    G --> H["🌐 FastAPI Endpoint<br>/predict"]
+    G --> I["💾 MinIO Storage<br>original PDF + logs"]
+
+    %% Interface
+    H --> J["🖥️ PDF Viewer UI<br>(PDF.js with overlays)"]
+
+    %% Monitoring
+    G --> K["📊 Metrics Logger<br>(Precision, Recall, F1, ECE, IoU)"]
+    J --> K
+    K --> L["📈 Exports for Dashboard<br>(Jupyter/Superset)"]
+
+    %% Highlight custom work
+    classDef custom fill:#FDF6B2,stroke:#333,stroke-width:1px;
+    class F1,F2,E custom;
 ```
 
 - **Extractor**: Parses text + bounding boxes from PDFs.  
