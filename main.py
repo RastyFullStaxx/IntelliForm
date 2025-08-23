@@ -48,11 +48,19 @@ app = api_app
 
 # --- Static & Templates ---
 STATIC_DIR = "static"
+UPLOADS_DIR = "uploads"
 TEMPLATES_DIR = "templates"
+
 os.makedirs(STATIC_DIR, exist_ok=True)
+os.makedirs(UPLOADS_DIR, exist_ok=True)
 os.makedirs(TEMPLATES_DIR, exist_ok=True)
 
+# Serve /static (css/js/assets/metrics_report.txt)
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
+
+# Serve /uploads so PDF.js and the browser can fetch the uploaded PDFs directly
+app.mount("/uploads", StaticFiles(directory=UPLOADS_DIR), name="uploads")
+
 templates = Jinja2Templates(directory=TEMPLATES_DIR)
 
 
