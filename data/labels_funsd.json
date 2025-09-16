@@ -1,0 +1,8 @@
+
+{
+  "O": 0,
+  "B-HEADER": 1, "I-HEADER": 2,
+  "B-QUESTION": 3, "I-QUESTION": 4,
+  "B-ANSWER": 5, "I-ANSWER": 6
+}
+

@@ -1,0 +1,9 @@
+
+{
+  "O": 0,
+  "B-NAME": 1, "I-NAME": 2,
+  "B-EMAIL": 3, "I-EMAIL": 4,
+  "B-DATE": 5, "I-DATE": 6,
+  "B-ADDRESS": 7, "I-ADDRESS": 8
+}
+

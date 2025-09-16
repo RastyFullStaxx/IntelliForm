@@ -31,27 +31,44 @@ checkpoints/
 *.ckpt
 
 # -------------------------------
-# Datasets
+# Datasets (raw + heavy files)
 # -------------------------------
-data/train/annotations/
-data/val/annotations/
-data/*.csv
-data/*.tsv
-data/*.jsonl
-data/*.zip
-data/*.tar
-labels.json  # Optional — ignore if you want to keep label mapping in repo
+# HuggingFace saved_to_disk datasets (arrow files are big)
+data/**/hf_*/
+
+# BIG pdf/image dumps (keep out of git)
+data/**/*.pdf
+data/**/*.png
+data/**/*.jpg
+data/**/*.jpeg
+
+# Annotations:
+# By default, ignore all annotations...
+data/**/annotations/**
+
+# ...but DO track our PH annotation JSONs (work product, small)
+!data/**/ph_forms/annotations/*.json
+
+# Keep label maps (used by training)
+!data/labels.json
+!data/labels_union.json
+!data/labels_funsd.json
+
+# Ignore dataset archives / misc heavy text tables
+data/**/*.csv
+data/**/*.tsv
+data/**/*.jsonl
+data/**/*.zip
+data/**/*.tar
 
 # -------------------------------
 # Uploaded or generated files
 # -------------------------------
 uploads/
 static/uploads/
-*.pdf
-*.txt
-*.json
-*.log
-metrics_report.txt
+
+# Generated metrics report (can re-generate)
+static/metrics_report.txt
 
 # -------------------------------
 # Jupyter Notebook checkpoints
