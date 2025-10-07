@@ -49,7 +49,6 @@ uploads/
 static/uploads/
 *.pdf
 *.txt
-*.json
 *.log
 metrics_report.txt
 
