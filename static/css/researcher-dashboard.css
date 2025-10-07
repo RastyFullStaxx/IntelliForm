@@ -80,45 +80,6 @@ main h1 {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
 
-.user-selection {
-    width: 22rem;
-    height: 25rem;
-    margin-right: 1rem;
-}
-
-.user-list {
-    list-style: none;
-    border: 1px solid #e0e0e0;  
-    border-radius: 6px;
-    overflow: hidden;
-    padding: 0;
-}
-
-.user-item {
-    display: flex;
-    position: relative;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 1rem 0;
-    cursor: pointer;
-}
-
-.bullet {     
-    width: 8px;       
-    height: 20px;     
-    background: #FFD54F;
-    margin-left: 2rem;
-    margin-right: 0.5rem;
-}
-
-.user-item:hover {
-  background: #eaeaea;
-}
-
-.user-item.active {
-  background: #ddd;
-  font-weight: bold;
-}
-
 .record-data {
     width: 100%;
     height: 25rem;
@@ -145,38 +106,3 @@ main h1 {
     text-align: center;
     border-bottom: 2px solid var(--table-border);
 }
-
-
-
-/* In case gusto balikin yung bar graph */
-/* .bar-graph .process {
-    animation: fade-in-text 2.2s 0.1s forwards;
-    opacity: 0;
-}
-
-.bar-graph-horizontal .bar {
-    animation: fade-in-text 2.2s 0.1s forwards;
-    opacity: 0;
-    display: inline-block;
-    border-radius: 3px;
-    height: 2rem;
-    overflow: hidden;
-    position: relative;
-    width: 0;               
-    background-color: #FFB100;
-    transition: width 1s ease; 
-}
-
-.bar-graph-one .bar::after {
-    color: #fff;
-    content: attr(data-value) "s"; 
-    font-weight: 700;
-    position: absolute;
-    right: 16px;
-    top: 7px;
-}
-
-@keyframes fade-in-text {
-    0%   { opacity: 0; }
-    100% { opacity: 1; }
-} */
