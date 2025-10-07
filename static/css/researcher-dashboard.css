@@ -72,6 +72,23 @@ main h1 {
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+.tabs button:hover {
+    background: #eaeaea;
+    color: #0a1a4f;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+}
+
+.tabs button.active {
+    background: #fff;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    color: var(--primary);
+    font-weight: 600;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+    border-bottom: 4px solid var(--accent);
+}
+
 .card {
     background: white;
     padding: 15px;
@@ -82,7 +99,8 @@ main h1 {
 
 .record-data {
     width: 100%;
-    height: 25rem;
+    min-height: 25rem;
+    height: fit-content;
 }
 
 .record-data table {
