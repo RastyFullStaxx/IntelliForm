@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "name": "User 1",
+    "records": [
+      { "process": "IntelliForm", "time": 23 },
+      { "process": "Vanilla LayoutLMv3", "time": 15 },
+      { "process": "Manual Method", "time": 13 }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "User 2",
+    "records": [
+      { "process": "IntelliForm", "time": 18 },
+      { "process": "Vanilla LayoutLMv3", "time": 12 },
+      { "process": "Manual Method", "time": 20 }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "User 2",
+    "records": [
+      { "process": "IntelliForm", "time": 380 },
+      { "process": "Vanilla LayoutLMv3", "time": 620 },
+      { "process": "Manual Method", "time": 200 }
+    ]
+  }
+]

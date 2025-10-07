@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Researcher Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body onload="renderModelMetrics()">
+    <header class="span-width-centered">
+        <img class="logo" src="intelliform-logo.png" alt="IntelliForm Logo"/>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Resources</a>
+        </nav>
+        <button class="login-btn">Login</button>
+    </header>
+    <main>
+        <div class="span-width-centered">
+            <h1>Researcher Dashboard</h1>
+            <div class="download">
+                <button class="download-btn">Download JSON</button>
+            </div>
+        </div>
+        <div class="tabs">
+            <a href="system-eval.html">Tool Metrics</a>
+            <a href="user-eval.html">User Metrics</a>
+        </div>
+        <div class="dashboard span-width-centered">
+            <div class="record-data card" id="recordData">
+            </div>
+        </div>
+    </main>
+</body>
+</html>
