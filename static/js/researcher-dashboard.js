@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
 function renderModelMetrics() {
     const metricsData = document.getElementById("recordData");
 
-    fetch("model-metrics.json")  // Choose file to open
+    fetch("/static/sample data/model-metrics.json")  // Choose file to open
         .then(res => res.json())
         .then(models => {
 
@@ -127,11 +127,39 @@ function renderModelMetrics() {
     });
 }
 
+function renderUserMetrics() {
+    const metricsData = document.getElementById("recordData");
 
-function loadUserMetrics() {
-    
-}
+    fetch("/static/sample data/user-metrics.json")  // Choose file to open
+        .then(res => res.json())
+        .then(models => {
 
-function loadModelMetrics() {
-    
+        let html = `
+            <table>
+                <thead>
+                    <tr>
+                        <th>Participant</th>
+                        <th>IntelliForm</th>
+                        <th>Vanilla LayoutLMv3</th>
+                        <th>Manual Method</th>
+                    </tr>
+                </thead>
+                <tbody>
+        `;
+
+        models.forEach((model, index) => {
+            const m = model.metrics;
+            html += `
+                <tr>
+                    <td>${model.name}</td>
+                    <td>${m.intelliform}s</td>
+                    <td>${m.layoutlmv3}s</td>
+                    <td>${m.manual}s</td>
+                </tr>
+            `;
+        });
+
+        html += `</tbody></table>`;
+        metricsData.innerHTML = html;
+    });
 }

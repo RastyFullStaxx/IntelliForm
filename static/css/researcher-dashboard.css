@@ -38,7 +38,7 @@ header nav a:hover {
 }
 
 .logo {
-    width: 4rem;
+    width: 6rem;
 }
 
 main h1 {
@@ -61,7 +61,7 @@ main h1 {
     cursor: pointer;
 }
 
-.tabs a {
+.tabs button {
     color: var(--primary);
     margin-right: 10px;
     padding: 10px 20px;
@@ -70,7 +70,6 @@ main h1 {
     border-radius: 8px;
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    text-decoration: none;
 }
 
 .card {
@@ -140,15 +139,6 @@ main h1 {
     text-align: center;
 }
 
-.process-col {
-    text-align: left;
-    width: 40%;
-}
-
-.time-col {
-    width: 60%;
-}
-
 .record-data tbody td {
     padding: 1rem 0;
     font-size: 16px;
@@ -158,9 +148,8 @@ main h1 {
 
 
 
-
-/* Bar Graph Horizontal */
-.bar-graph .process {
+/* In case gusto balikin yung bar graph */
+/* .bar-graph .process {
     animation: fade-in-text 2.2s 0.1s forwards;
     opacity: 0;
 }
@@ -190,4 +179,4 @@ main h1 {
 @keyframes fade-in-text {
     0%   { opacity: 0; }
     100% { opacity: 1; }
-}
+} */
