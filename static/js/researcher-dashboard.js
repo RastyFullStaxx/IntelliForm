@@ -15,7 +15,12 @@ function renderModelMetrics() {
     const metricsData = document.getElementById("recordData");
 
     fetch("/static/sample data/model-metrics.json")  // Choose file to open
-        .then(res => res.json())
+        .then(res => { 
+            if (!res.ok) {
+                throw new Error(`File not found: ${res.status}`);
+            }
+            return res.json();
+        })
         .then(models => {
 
         let html = `
@@ -51,6 +56,9 @@ function renderModelMetrics() {
 
         html += `</tbody></table>`;
         metricsData.innerHTML = html;
+    })
+    .catch(err => {
+        displayError(metricsData, err.message);
     });
 }
 
@@ -58,7 +66,12 @@ function renderUserMetrics() {
     const metricsData = document.getElementById("recordData");
 
     fetch("/static/sample data/user-metrics.json")  // Choose file to open
-        .then(res => res.json())
+        .then(res => { 
+            if (!res.ok) {
+                throw new Error(`File not found: ${res.status}`);
+            }
+            return res.json();
+        })
         .then(models => {
 
         let html = `
@@ -88,5 +101,17 @@ function renderUserMetrics() {
 
         html += `</tbody></table>`;
         metricsData.innerHTML = html;
+    })
+    .catch(err => {
+        displayError(metricsData, err.message);
     });
+}
+
+
+function displayError(container, message) {
+    container.innerHTML = `
+            <div class="error-container">
+                <p class="error-message">Error loading metrics: ${message}</p>
+            </div>
+    `;
 }
