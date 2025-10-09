@@ -75,7 +75,6 @@ data/**/*.tar
 # -------------------------------
 # Uploaded or generated files
 # -------------------------------
-uploads/
 static/uploads/
 
 # Generated prelabel annotations (runtime artifacts)
@@ -123,7 +122,6 @@ data/**/*.jpg
 data/**/*.jpeg
 
 # Generated artifacts
-uploads/
 out/overlays/
 explanations/_annotations/
 

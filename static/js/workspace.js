@@ -1,19 +1,18 @@
 ﻿// static/js/workspace.js
-
 window.addEventListener("load", initWorkspace);
 
 function initWorkspace() {
-  console.log("workspace.js 2025-10-09 resolver-v3 curated-probe + canonical refresh");
+  console.log("workspace.js 2025-10-10 template-hash flow");
 
-  // ---- Session state (migrate legacy keys) ----
+  // ---- Session state (legacy-safe) ----
   const legacyWebRaw = sessionStorage.getItem("uploadedFileWithExtension") || "";
   const storedWebRaw = sessionStorage.getItem("uploadedWebPath") || legacyWebRaw || "";
   const storedWeb = normalizeToWebUrl(storedWebRaw);
   let storedDisk = sessionStorage.getItem("uploadedDiskPath") || "";
   const storedName = sessionStorage.getItem("uploadedFileName") || "";
-  let storedFormId = sessionStorage.getItem("uploadedFormId") || null;
+  let currentFormId = sessionStorage.getItem("uploadedFormId") || null; // ← canonical hash
 
-  // ---- DOM helpers ----
+  // ---- DOM refs ----
   const byId = (id) => document.getElementById(id);
   const sidebarToggle = byId("sidebarToggle");
   const sidebar = byId("sidebar");
@@ -36,13 +35,13 @@ function initWorkspace() {
   const pdfCtx = pdfCanvas.getContext("2d");
   const overlayCtx = overlayCanvas.getContext("2d");
 
-  // ---- Title (will be replaced by explainer.title after analysis) ----
+  // ---- Provisional title (replaced by explainer.title later) ----
   if (formTitle) {
     const origName = (storedName || baseFromPath(storedWeb) || "Form").replace(/\.[^.]+$/, "");
     formTitle.textContent = origName || "Form";
   }
 
-  // ---- Sidebar toggle logic ----
+  // ---- Sidebar controls ----
   if (sidebarToggle && sidebar) {
     sidebarToggle.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -52,7 +51,7 @@ function initWorkspace() {
     document.addEventListener("click", (e) => {
       if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
         sidebar.classList.remove("open");
-         sidebarToggle.style.display = "flex";
+        sidebarToggle.style.display = "flex";
       }
     });
   }
@@ -68,8 +67,7 @@ function initWorkspace() {
     boxesWrap.innerHTML = `
       <label style="font-size:12px;opacity:.9;">
         <input type="checkbox" id="toggleBoxes"> Show boxes
-      </label>
-    `;
+      </label>`;
     metricsRow.insertAdjacentElement("afterend", boxesWrap);
     toggleBoxes = byId("toggleBoxes");
   }
@@ -78,16 +76,14 @@ function initWorkspace() {
   let pdfDoc = null;
   let scale = 1.5;
   let currentPage = 1;
-  let currentFormId = storedFormId;
   const pageBaseSize = {};
-  let cachedAnnotations = null;
+  let cachedAnnotations = null; // the annotations JSON currently in memory
 
   // ---- PDF.js check ----
   if (typeof pdfjsLib === "undefined") {
     alert("PDF.js failed to load.");
     return;
   }
-  // pdfjsLib.GlobalWorkerOptions.workerSrc = "/static/pdfjs/pdf.worker.min.js";
 
   // ---- Boot viewer ----
   (async function boot() {
@@ -108,9 +104,7 @@ function initWorkspace() {
       await openPdf(storedWeb);
       if (!storedDisk) {
         const reup = await softReuploadForDisk(storedWeb);
-        if (reup) {
-          persistUpload(reup);
-        }
+        if (reup) persistUpload(reup);
       }
     } catch (e1) {
       console.warn("[viewer] direct open failed:", e1);
@@ -138,12 +132,8 @@ function initWorkspace() {
 
   function persistUpload(obj) {
     if (!obj) return;
-    if (obj.web_path) {
-      sessionStorage.setItem("uploadedWebPath", normalizeToWebUrl(obj.web_path));
-    }
-    if (obj.disk_path) {
-      sessionStorage.setItem("uploadedDiskPath", obj.disk_path);
-    }
+    if (obj.web_path) sessionStorage.setItem("uploadedWebPath", normalizeToWebUrl(obj.web_path));
+    if (obj.disk_path) sessionStorage.setItem("uploadedDiskPath", obj.disk_path);
     if (obj.form_id) {
       sessionStorage.setItem("uploadedFormId", obj.form_id);
       currentFormId = obj.form_id;
@@ -152,6 +142,8 @@ function initWorkspace() {
       sessionStorage.setItem("uploadedFileName", obj.file_name);
       if (formTitle) formTitle.textContent = obj.file_name.replace(/\.[^.]+$/, "");
     }
+    // refresh locals
+    storedDisk = sessionStorage.getItem("uploadedDiskPath") || storedDisk;
   }
 
   async function openPdf(src) {
@@ -221,72 +213,70 @@ function initWorkspace() {
   }
 
   // ========================
-  // 🔸 SWEETALERT PROGRESS + ANALYSIS
+  // 🔸 Run Analysis
   // ========================
   if (analyzeBtn) analyzeBtn.addEventListener("click", runAnalysis);
 
   async function runAnalysis() {
     Swal.fire({
       title: "Analyzing Form...",
-      text: "Thinking for the best summaries",
+      text: "Preparing summaries and overlays",
       allowOutsideClick: false,
       didOpen: () => Swal.showLoading(),
     });
 
     try {
-      // 1) Guess bucket from filename first (used by curated-probe fallback)
-      const web_for_guess = sessionStorage.getItem("uploadedWebPath") || storedWeb || "";
-      const guess = guessFromPath(baseFromPath(web_for_guess) || "form.pdf");
-      let bucket = guess.bucket;
-
-      // 2) Registry first (but we'll prefer curated if available)
-      const reg = await GET_json("/panel");
-      let explainer = await resolveExplainerFor(reg, storedWeb || storedName, bucket);
-      if (explainer && explainer.form_id) currentFormId = explainer.form_id;
-
-      // 3) Ensure we have a server upload with DISK PATH (for /api/prelabel)
+      // Ensure we have an upload with DISK PATH (for /api/prelabel)
       let uploadInfo = await ensureUploadedToServer(storedWeb);
       if (uploadInfo) persistUpload(uploadInfo);
 
       const web_path  = sessionStorage.getItem("uploadedWebPath");
       const disk_path = sessionStorage.getItem("uploadedDiskPath");
-      const form_id   = currentFormId || sessionStorage.getItem("uploadedFormId");
+      let   hashId    = sessionStorage.getItem("uploadedFormId") || currentFormId;
 
-      // 4) If still no explainer, create one via facade
-      if (!explainer) {
-        const make = await createExplainerWithFile(web_path, bucket, guess.formId, guess.title);
-        explainer = make;
-        currentFormId = make.form_id || currentFormId || guess.formId;
-      }
-
-      // 5) Prelabel (TSL + promotion happens server-side)
       if (!disk_path) throw new Error("Upload failed to provide a disk path.");
-      const prelabelResp = await ensurePrelabelAndOverlays({ disk_path }, currentFormId || form_id);
 
-      // If server reused a canonical id (e.g., Healthcare_AXA_MotorClaimForm), update & try curated again
+      // 1) PRELABEL (server returns canonical hash; we enforce it)
+      const prelabelResp = await ensurePrelabelAndOverlays({ disk_path }, hashId);
       if (prelabelResp && prelabelResp.canonical_form_id) {
-        currentFormId = prelabelResp.canonical_form_id;
-        sessionStorage.setItem("uploadedFormId", currentFormId);
-
-        // Try to get curated explainer directly if we’re still on a UUID variant
-        if (!isLikelyCuratedExplainer(explainer)) {
-          const curatedTry = await probeExplainers(bucket, currentFormId);
-          if (curatedTry) explainer = curatedTry;
-        }
+        hashId = prelabelResp.canonical_form_id;
+        currentFormId = hashId;
+        sessionStorage.setItem("uploadedFormId", hashId);
       }
 
-      // 6) Render UI (use explainer.title as the strip title)
+      // 2) EXPLAINER: resolve by exact hash in registry; fallback to ensure
+      const guess = guessFromPath(baseFromPath(web_path) || "form.pdf");
+      const reg = await GET_json("/panel");
+      let explainer = await resolveExplainerByHash(reg, hashId);
+      if (!explainer) {
+        // not found → ensure via facade (LLM fallback); include pdf_disk_path for better context
+        await POST_json("/api/explainer.ensure", {
+          canonical_form_id: hashId,
+          bucket: guess.bucket,
+          human_title: guess.title,
+          pdf_disk_path: disk_path,
+          aliases: [guess.formId, baseFromPath(web_path)]
+        });
+        // reload registry, then fetch
+        const reg2 = await GET_json("/panel");
+        explainer = await resolveExplainerByHash(reg2, hashId);
+      }
+      if (!explainer) throw new Error("Failed to load explainer.");
+
+      // 3) UI: title + summaries
       if (formTitle) formTitle.textContent = explainer.title || (storedName || "Form");
       renderSummaries(explainer);
 
-      // 7) Draw overlays if toggled
-      if (toggleBoxes && toggleBoxes.checked && currentFormId) await drawOverlay(currentFormId, currentPage);
+      // 4) Overlays if toggled
+      if (toggleBoxes && toggleBoxes.checked && currentFormId) {
+        await drawOverlay(currentFormId, currentPage);
+      }
 
       Swal.fire({
         icon: "success",
         title: "Analysis Complete",
-        text: "Summaries generated successfully",
-        timer: 1500,
+        text: "Summaries and overlays are ready",
+        timer: 1400,
         showConfirmButton: false,
       });
     } catch (e) {
@@ -299,7 +289,7 @@ function initWorkspace() {
     }
   }
 
-  // ---- Rendering summaries ----
+  // ---- Render summaries ----
   function renderSummaries(explainer) {
     if (summaryList) summaryList.innerHTML = "";
     (explainer.sections || []).forEach((sec) => {
@@ -317,6 +307,7 @@ function initWorkspace() {
         row.innerHTML = `<span class="summary-label" data-label="${esc(f.label)}">${esc(f.label)}</span>: ${esc(f.summary)}`;
         content.appendChild(row);
       });
+
       header.addEventListener("click", () => content.classList.toggle("active"));
       item.appendChild(header);
       item.appendChild(content);
@@ -325,24 +316,24 @@ function initWorkspace() {
     if (metricsRow) metricsRow.textContent = "";
   }
 
-  // ---- Click-to-jump ----
+  // ---- Click-to-jump from summaries to overlay ----
   summaryList?.addEventListener("click", async (ev) => {
     const lbl = ev.target.closest(".summary-label");
     if (!lbl || !currentFormId || !cachedAnnotations) return;
     const targetLabel = lbl.textContent.trim().toLowerCase();
 
-    let match = (cachedAnnotations.groups || []).find(
+    const match = (cachedAnnotations.groups || []).find(
       (g) => g.label && g.label.toLowerCase() === targetLabel
     );
     if (match) {
       currentPage = (match.page || 0) + 1;
       renderPage(currentPage);
-      await new Promise((r) => setTimeout(r, 400));
+      await new Promise((r) => setTimeout(r, 300));
       drawOverlay(currentFormId, currentPage);
     }
   });
 
-  // ---- Overlay drawing (groups → fallback tokens) ----
+  // ---- Overlay drawing (groups → tokens fallback) ----
   async function drawOverlay(formId, pageNumber) {
     try {
       if (!cachedAnnotations || cachedAnnotations.__formId !== formId) {
@@ -385,7 +376,6 @@ function initWorkspace() {
     }
   }
 
-  // ---- Overlay checkbox ----
   document.addEventListener("change", (ev) => {
     if (ev.target && ev.target.id === "toggleBoxes") {
       if (ev.target.checked && currentFormId) drawOverlay(currentFormId, currentPage);
@@ -409,7 +399,7 @@ function initWorkspace() {
       return {
         web_path: normalizeToWebUrl(out.web_path),
         disk_path: out.disk_path,
-        form_id: out.form_id,
+        form_id: out.canonical_form_id || out.form_id, // prefer hash
         file_name: base,
       };
     } catch {
@@ -420,11 +410,12 @@ function initWorkspace() {
   async function ensureUploadedToServer(webUrl) {
     const sessWeb = sessionStorage.getItem("uploadedWebPath");
     const sessDisk = sessionStorage.getItem("uploadedDiskPath");
-    if (sessWeb && sessDisk) {
+    const sessForm = sessionStorage.getItem("uploadedFormId");
+    if (sessWeb && sessDisk && sessForm) {
       return {
         web_path: normalizeToWebUrl(sessWeb),
         disk_path: sessDisk,
-        form_id: sessionStorage.getItem("uploadedFormId"),
+        form_id: sessForm,
         file_name: sessionStorage.getItem("uploadedFileName"),
       };
     }
@@ -462,49 +453,16 @@ function initWorkspace() {
     return {
       web_path: normalizeToWebUrl(out.web_path),
       disk_path: out.disk_path,
-      form_id: out.form_id,
+      form_id: out.canonical_form_id || out.form_id, // prefer hash
       file_name: file.name,
     };
   }
 
-  // ✅ Explainer creation (facade stays)
-  async function createExplainerWithFile(webPath, bucket, formId, humanTitle) {
-    const safeWeb = normalizeToWebUrl(webPath);
-    const base = baseFromPath(safeWeb) || "form.pdf";
-    let blob = null;
-    try {
-      const r = await fetch(safeWeb, { cache: "no-store" });
-      if (r.ok) blob = await r.blob();
-    } catch {}
-    if (!blob) blob = new Blob([new Uint8Array([0])], { type: "application/pdf" });
-
-    const fd = new FormData();
-    fd.append("file", new File([blob], base, { type: "application/pdf" }));
-    fd.append("bucket", bucket);
-    fd.append("form_id", formId);
-    fd.append("human_title", humanTitle);
-
-    const r = await fetch("/api/explainer", { method: "POST", body: fd });
-    if (!r.ok) throw new Error("explainer failed");
-    const resp = await r.json();
-
-    // Prefer curated from /panel if present, else use returned path
-    try {
-      const reg = await GET_json("/panel");
-      const curated = await resolveExplainerFor(reg, safeWeb, bucket);
-      if (curated) return curated;
-    } catch {}
-
-    const path = typeof resp.path === "string" ? resp.path.replace(/^\//, "") : "";
-    if (!path) throw new Error("explainer path missing");
-    return await GET_json("/" + path + "?ts=" + Date.now());
-  }
-
-  async function ensurePrelabelAndOverlays(server, formId) {
+  async function ensurePrelabelAndOverlays(server, hashId) {
     try {
       const fd = new FormData();
       fd.append("pdf_disk_path", server.disk_path);
-      fd.append("form_id", formId);
+      fd.append("form_id", hashId);
       const r = await fetch("/api/prelabel", { method: "POST", body: fd });
       if (!r.ok) {
         const t = await r.text().catch(() => "");
@@ -518,97 +476,45 @@ function initWorkspace() {
     }
   }
 
-  // ---- Curated resolver helpers ----
-  function isUuidyStem(s) {
-    return /^(?:[0-9a-f]{32}_)+/i.test(String(s || ""));
-  }
-  function isLikelyCuratedExplainer(exp) {
-    if (!exp || !exp.form_id) return false;
-    return !isUuidyStem(exp.form_id);
-  }
-
-  // Main resolver that prefers curated; falls back to probing by bucket/stem
-  async function resolveExplainerFor(reg, pathOrName, bucketHint) {
-    const rawBase = (baseFromPath(pathOrName) || "").replace(/\.pdf$/i, "");
-    const stem = rawBase.replace(/^(?:[0-9a-f]{32}_)+/i, ""); // strip UUIDs
-    // 1) Try registry (prefers curated)
-    const fromReg = await resolveFromRegistrySmart(reg, stem);
-    if (fromReg && isLikelyCuratedExplainer(fromReg)) return fromReg;
-
-    // 2) If registry gave a UUID or missing, probe curated files directly
-    const bucket = bucketHint || guessFromPath(stem).bucket;
-    const probed = await probeExplainers(bucket, stem);
-    if (probed) return probed;
-
-    // 3) Fallback to whatever registry gave (even if UUID)
-    if (fromReg) return fromReg;
-    return null;
-  }
-
-  // Probe likely curated filenames under /explanations/<bucket>/
-  async function probeExplainers(bucket, stemOrId) {
-    const stem = String(stemOrId || "").replace(/\.json$/i, "");
-    const candidates = [];
-    const original = stem;
-    const lower = stem.toLowerCase();
-    const noUuid = original.replace(/^(?:[0-9a-f]{32}_)+/i, "");
-
-    // If stem starts with "healthcare_" etc., try dropping the domain prefix for curated names
-    const domainPrefixes = ["healthcare_", "banking_", "tax_", "government_", "gov_"];
-    let dropped = noUuid;
-    for (const pref of domainPrefixes) {
-      if (noUuid.toLowerCase().startsWith(pref)) {
-        dropped = noUuid.slice(pref.length);
-        break;
-      }
+  // ---- Explainer resolving by exact hash (preferred) ----
+  async function resolveExplainerByHash(reg, hash) {
+    const forms = Array.isArray(reg.forms) ? reg.forms : [];
+    const hit = forms.find((f) => String(f.form_id || "") === String(hash || ""));
+    if (!hit || !hit.path) return null;
+    const url = "/" + String(hit.path).replace(/^\//, "");
+    try {
+      return await GET_json(url + (url.includes("?") ? "&" : "?") + "ts=" + Date.now());
+    } catch {
+      return null;
     }
-
-    // Build candidates in order of likelihood
-    candidates.push(`${dropped}.json`);         // e.g., AXA_MotorClaimForm.json (curated)
-    candidates.push(`${noUuid}.json`);          // e.g., Healthcare_AXA_MotorClaimForm.json
-    candidates.push(`${lower}.json`);           // lowercase safety
-    candidates.push(`${dropped.toLowerCase()}.json`);
-
-    // Also try last N tokens to survive noisy stems
-    const parts = noUuid.split("_");
-    if (parts.length >= 2) {
-      candidates.push(parts.slice(1).join("_") + ".json");
-    }
-
-    for (const c of dedupeStrings(candidates)) {
-      const url = `/explanations/${bucket}/${c}`;
-      try {
-        const exp = await GET_json(url);
-        if (exp && exp.sections) return exp;
-      } catch {}
-    }
-    return null;
   }
 
-  function dedupeStrings(arr) {
-    const seen = new Set();
-    const out = [];
-    for (const s of arr) {
-      const k = String(s);
-      if (!seen.has(k)) { seen.add(k); out.push(k); }
-    }
-    return out;
-  }
-
-  // ---- Small utils ----
+  // ---- Utils ----
   async function GET_json(url) {
     const withTs = url.includes("?") ? url + "&ts=" + Date.now() : url + "?ts=" + Date.now();
     const r = await fetch(withTs, { cache: "no-store" });
     if (!r.ok) throw new Error(url);
     return r.json();
   }
-  function baseFromPath(p) {
-    try {
-      return String(p).split("/").pop().split("\\").pop().split("?")[0];
-    } catch {
-      return p;
+
+  async function POST_json(url, obj) {
+    const r = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(obj || {}),
+    });
+    if (!r.ok) {
+      const t = await r.text().catch(() => "");
+      throw new Error(t || `POST ${url} failed`);
     }
+    return r.json();
   }
+
+  function baseFromPath(p) {
+    try { return String(p).split("/").pop().split("\\").pop().split("?")[0]; }
+    catch { return p; }
+  }
+
   function guessFromPath(stemLike) {
     const s = String(stemLike).toLowerCase();
     let bucket = "government";
@@ -617,51 +523,11 @@ function initWorkspace() {
     else if (/(manulife|sunlife|axa|fwd|claim|philhealth|allianz)/.test(s)) bucket = "healthcare";
     return { bucket, formId: s.replace(/\s+/g, "_").replace(/\.pdf$/i, ""), title: stemLike.replace(/\.pdf$/i, "") };
   }
+
   function esc(s) {
     return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] || c));
   }
 
-  // Registry-based resolver; prefers non-UUID entries at same score
-  async function resolveFromRegistrySmart(reg, pathOrName) {
-    const raw = (baseFromPath(pathOrName) || "").replace(/\.pdf$/i, "");
-    const stem = raw.toLowerCase().replace(/^(?:[0-9a-f]{32}_)+/i, "");
-    const stemNoDelims = stem.replace(/[^a-z0-9]/g, "");
-
-    const forms = Array.isArray(reg.forms) ? reg.forms : (Array.isArray(reg) ? reg : []);
-    const candidates = [];
-
-    for (const f of forms) {
-      if (!f) continue;
-      const id = String(f.form_id || "").toLowerCase();
-      const title = String(f.title || "").toLowerCase();
-      const relPath = String(f.path || "");
-      const base = baseFromPath(relPath).replace(/\.json$/i, "").toLowerCase();
-
-      const hasUUIDPrefix = /^(?:[0-9a-f]{32}_)+/i.test(base);
-      const idNoDelims = id.replace(/[^a-z0-9]/g, "");
-      const baseNoDelims = base.replace(/[^a-z0-9]/g, "");
-      const titleNoDelims = title.replace(/[^a-z0-9]/g, "");
-
-      let score = 0;
-      if (id === stem || base === stem) score = 100;
-      else if (id.endsWith(stem) || base.endsWith(stem)) score = 90;
-      else if (id.includes(stem) || base.includes(stem) || title.includes(stem)) score = 80;
-      else if (idNoDelims === stemNoDelims || baseNoDelims === stemNoDelims || titleNoDelims === stemNoDelims) score = 75;
-      else if (idNoDelims.includes(stemNoDelims) || baseNoDelims.includes(stemNoDelims)) score = 65;
-
-      if (!hasUUIDPrefix) score += 3; // prefer curated when tie
-      if (score > 0) candidates.push({ score, relPath });
-    }
-
-    candidates.sort((a, b) => b.score - a.score);
-    const top = candidates[0];
-    if (top && top.relPath) {
-      try { return await GET_json("/" + String(top.relPath).replace(/^\//, "")); } catch {}
-    }
-    return null;
-  }
-
-  // Normalize any disk/legacy path to a public /uploads/... URL
   function normalizeToWebUrl(p) {
     if (!p) return p;
     const s = String(p).replace(/\\/g, "/");
