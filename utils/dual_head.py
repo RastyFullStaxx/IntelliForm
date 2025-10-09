@@ -33,7 +33,7 @@ PUBLIC SURFACE (most relevant)
 """
 
 from __future__ import annotations
-from typing import Optional, Dict, List, Any, Tuple
+from typing import Optional, Dict, List, Any
 import os, json, logging
 
 import torch
@@ -44,7 +44,7 @@ from transformers import (
     AutoTokenizer, T5ForConditionalGeneration
 )
 
-# Neutral config imports (no external SDK exposed)
+# Neutral config imports
 from scripts import config
 LIVE_MODE  = config.LIVE_MODE
 MODEL_NAME = config.ENGINE_MODEL
@@ -53,7 +53,7 @@ TEMP       = config.TEMPERATURE
 _has_key   = bool(config.CORE_ENGINE_KEY)
 
 # =============================================================================
-# T5 summarizer
+# T5 summarizer (lightweight, optional)
 # =============================================================================
 _T5_SINGLETON = {"tokenizer": None, "model": None, "device": None, "loaded_from": None}
 _T5_DEFAULT_BASE = "google/flan-t5-base"
@@ -69,7 +69,8 @@ def _load_hf_dir_or_hub(path_or_id: str):
 def _load_pt_state_dict(pt_path: str, base: str = _T5_DEFAULT_BASE):
     tok = AutoTokenizer.from_pretrained(base, use_fast=True)
     mdl = T5ForConditionalGeneration.from_pretrained(base)
-    state = torch.load(pt_path, map_location="cpu")
+    import torch as _torch
+    state = _torch.load(pt_path, map_location="cpu")
     mdl.load_state_dict(state, strict=False)
     return tok, mdl
 
@@ -77,10 +78,8 @@ def _load_t5_autodetect(model_path: Optional[str] = None):
     global _T5_SINGLETON
     device = _get_device()
     desired = model_path or _T5_DEFAULT_BASE
-
     if _T5_SINGLETON["model"] is not None and _T5_SINGLETON["loaded_from"] == desired:
         return _T5_SINGLETON["tokenizer"], _T5_SINGLETON["model"], _T5_SINGLETON["device"]
-
     try:
         if model_path is None:
             tok, mdl = _load_hf_dir_or_hub(_T5_DEFAULT_BASE)
@@ -90,7 +89,6 @@ def _load_t5_autodetect(model_path: Optional[str] = None):
             tok, mdl = _load_pt_state_dict(model_path, base=_T5_DEFAULT_BASE)
         else:
             tok, mdl = _load_hf_dir_or_hub(model_path)
-
         mdl.to(device); mdl.eval()
         _T5_SINGLETON.update({"tokenizer": tok, "model": mdl, "device": device, "loaded_from": desired})
         return tok, mdl, device
@@ -120,7 +118,6 @@ def summarize_fields(
     if tok is None or mdl is None:
         for g in groups: g["summary"] = _template_summary(g)
         return groups
-
     prompts = [_summary_prompt(g) for g in groups]
     inputs  = tok(prompts, return_tensors="pt", padding=True, truncation=True).to(device)
     outputs = mdl.generate(
@@ -134,9 +131,8 @@ def summarize_fields(
         g["summary"] = s if s else _template_summary(g)
     return groups
 
-
 # =============================================================================
-# LayoutLMv3 + GNN classifier
+# LayoutLMv3 + (optional) GNN classifier (kept as before)
 # =============================================================================
 def scatter_add(src: torch.Tensor, index: torch.Tensor, dim: int, dim_size: int) -> torch.Tensor:
     out = src.new_zeros(dim_size, *src.shape[1:])
@@ -151,7 +147,6 @@ class SimpleGNNLayer(nn.Module):
             nn.Linear(hidden_dim, hidden_dim),
         )
         self.norm = nn.LayerNorm(hidden_dim)
-
     def forward(self, H: torch.Tensor, edge_index: torch.Tensor,
                 edge_attr: Optional[torch.Tensor] = None) -> torch.Tensor:
         src, dst = edge_index[0], edge_index[1]
@@ -168,7 +163,6 @@ class GNNBlock(nn.Module):
     def __init__(self, hidden_dim: int, edge_dim: int = 3, num_layers: int = 1):
         super().__init__()
         self.layers = nn.ModuleList([SimpleGNNLayer(hidden_dim, edge_dim) for _ in range(num_layers)])
-
     def forward(self, H: torch.Tensor, graph: Optional[Dict[str, torch.Tensor]]) -> torch.Tensor:
         if graph is None: return H
         edge_index = graph["edge_index"]; edge_attr = graph.get("edge_attr", None)
@@ -177,14 +171,10 @@ class GNNBlock(nn.Module):
 
 class FieldClassifier(nn.Module):
     def __init__(
-        self,
-        num_labels: int,
+        self, num_labels: int,
         backbone_name: str = "microsoft/layoutlmv3-base",
-        use_gnn: bool = True,
-        gnn_layers: int = 1,
-        edge_dim: int = 3,
-        dropout: float = 0.1,
-        use_image_branch: bool = False,
+        use_gnn: bool = True, gnn_layers: int = 1, edge_dim: int = 3,
+        dropout: float = 0.1, use_image_branch: bool = False,
     ):
         super().__init__()
         self.backbone = LayoutLMv3Model.from_pretrained(backbone_name)
@@ -194,13 +184,9 @@ class FieldClassifier(nn.Module):
         self.dropout = nn.Dropout(dropout)
         self.classifier = nn.Linear(hidden, num_labels)
         self.use_image_branch = use_image_branch
-
-    def forward(
-        self,
-        batch: Dict[str, torch.Tensor],
-        graph: Optional[Dict[str, torch.Tensor]] = None,
-        labels: Optional[torch.Tensor] = None,
-    ) -> Dict[str, torch.Tensor]:
+    def forward(self, batch: Dict[str, torch.Tensor],
+                graph: Optional[Dict[str, torch.Tensor]] = None,
+                labels: Optional[torch.Tensor] = None) -> Dict[str, torch.Tensor]:
         inputs = {
             "input_ids": batch["input_ids"],
             "attention_mask": batch["attention_mask"],
@@ -208,10 +194,8 @@ class FieldClassifier(nn.Module):
         }
         if self.use_image_branch and "pixel_values" in batch:
             inputs["pixel_values"] = batch["pixel_values"]
-
         out = self.backbone(**inputs)
-        H = out.last_hidden_state  # [B, T, D]
-
+        H = out.last_hidden_state
         if self.use_gnn and graph is not None:
             if isinstance(graph, list):
                 H_list = []
@@ -222,11 +206,9 @@ class FieldClassifier(nn.Module):
                 H = torch.stack(H_list, dim=0)
             else:
                 H = self.gnn(H.squeeze(0), graph).unsqueeze(0)
-
         H = self.dropout(H)
         logits = self.classifier(H)
         result = {"logits": logits, "hidden": H}
-
         if labels is not None:
             loss = F.cross_entropy(
                 logits.view(-1, logits.size(-1)),
@@ -235,7 +217,6 @@ class FieldClassifier(nn.Module):
             )
             result["loss"] = loss
         return result
-
     @classmethod
     def from_pretrained(cls, model_dir_or_name: str, num_labels: int, **kwargs) -> "FieldClassifier":
         model = cls(num_labels=num_labels, **kwargs)
@@ -244,49 +225,22 @@ class FieldClassifier(nn.Module):
         model.load_state_dict(state_dict, strict=False)
         return model
 
-@torch.no_grad()
-def predict(
-    model: FieldClassifier,
-    batch: Dict[str, torch.Tensor],
-    graph: Optional[Dict[str, torch.Tensor]] = None,
-    id_to_label: Optional[Dict[int, str]] = None,
-    return_hidden: bool = False,
-):
-    model.eval()
-    out = model(batch, graph=graph, labels=None)
-    logits = out["logits"]
-    probs  = F.softmax(logits, dim=-1)
-    confs, preds = probs.max(dim=-1)
-    results: List[List[Dict]] = []
-    B, T = preds.shape
-    for b in range(B):
-        seq = []
-        for t in range(T):
-            label_id = preds[b, t].item()
-            label = id_to_label.get(label_id, str(label_id)) if id_to_label else str(label_id)
-            seq.append({
-                "label_id": label_id,
-                "label": label,
-                "score": float(confs[b, t].item()),
-                "bbox": batch["bbox"][b, t].tolist(),
-                "token_id": int(batch["input_ids"][b, t].item()),
-            })
-        results.append(seq)
-    if return_hidden: return results, out["hidden"]
-    return results
-
-# Maintain public handles expected elsewhere
+# Keep public handles available (no behavior change)
 processor  = LayoutLMv3Processor.from_pretrained("microsoft/layoutlmv3-base", apply_ocr=False)
 embedding  = LayoutLMv3Model.from_pretrained("microsoft/layoutlmv3-base")
 model      = FieldClassifier(num_labels=8, use_gnn=True, gnn_layers=1)
 
 # =============================================================================
-# Dual-Head Architecture 
+# Explainer generation (hash-first)
 # =============================================================================
-def _scaffold_explainer(human_title: str, form_id: str) -> dict:
+def _scaffold_explainer(human_title: str, form_id: str, bucket: str, aliases: List[str]) -> dict:
     return {
         "title": human_title,
-        "form_id": form_id,
+        "form_id": form_id,           # kept for back-compat with UI
+        "canonical_id": form_id,      # explicit canonical
+        "bucket": bucket,
+        "schema_version": 1,
+        "aliases": sorted(list({a for a in aliases if a})),
         "sections": [
             {"title": "A. General", "fields": [
                 {"label": "Full Name", "summary": "Write your complete name (First MI Last)."},
@@ -296,91 +250,74 @@ def _scaffold_explainer(human_title: str, form_id: str) -> dict:
         "metrics": {"tp": 92, "fp": 18, "fn": 11, "precision": 0.84, "recall": 0.86, "f1": 0.85}
     }
 
+def _ensure_dir(p: str) -> None:
+    os.makedirs(p, exist_ok=True)
+
 def generate_explainer(pdf_path: str, bucket: str, form_id: str, human_title: str, out_dir: str) -> str:
     """
-    Returns path to explanations/<bucket>/<human_title>.json.
-
-    LIVE_MODE off or no key -> writes scaffold (no billing).
-    LIVE_MODE on with key   -> calls config.chat_completion(...) and writes strict JSON.
-
-    Now enhanced with duplicate-awareness:
-    - Before generating, it checks existing explainers in the same bucket.
-    - If a previous explainer matches tokens (via config.find_duplicate_annotations),
-      it reuses that JSON instead of generating a new one.
+    Writes: explanations/<bucket>/<form_id>.json
+    `form_id` is the TEMPLATE-HASH canonical id.
+    Returns the absolute path to the written explainer.
     """
-    os.makedirs(out_dir, exist_ok=True)
-    out_path = os.path.join(out_dir, f"{human_title}.json")
+    _ensure_dir(out_dir)
+    out_path = os.path.join(out_dir, f"{form_id}.json")
 
-    # --- Step 1: Check existing explainers for potential reuse ---
-    try:
-        ann_dir = os.path.join(os.path.dirname(out_dir), "_annotations")
-        tmp_ann_path = os.path.join(ann_dir, f"{form_id}_temp.json")
-
-        # Run prelabeler quietly to extract token structure for comparison
-        config.launch_prelabeler(
-            pdf_path=pdf_path,
-            form_id=form_id,
-            out_path=tmp_ann_path,
-            repo_root=os.path.dirname(os.path.abspath(__file__)),
-        )
-
-        match_path, score = config.find_duplicate_annotations(tmp_ann_path, ann_dir, threshold=0.88)
-
-        if match_path and score >= 0.88:
-            # Reuse existing explainer with similar structure
-            existing_title = os.path.basename(match_path).replace("_temp.json", "")
-            logging.info(f"[Reused Explainer] Found similar annotations ({score:.3f}); reusing {existing_title}")
-            # Determine the corresponding explainer path (same base as annotation)
-            base_name = os.path.splitext(os.path.basename(match_path))[0]
-            possible_explainer = os.path.join(out_dir, f"{base_name}.json")
-            if os.path.exists(possible_explainer):
-                try:
-                    os.remove(tmp_ann_path)
-                except Exception:
-                    pass
-                return possible_explainer
-    except Exception as e:
-        logging.warning(f"Duplicate detection skipped: {e}")
-
-    # --- Step 2: If none found, generate normally ---
+    # If LIVE mode with key → ask engine; else write scaffold
     if not LIVE_MODE or not _has_key:
-        if not os.path.exists(out_path):
-            with open(out_path, "w", encoding="utf-8") as f:
-                json.dump(_scaffold_explainer(human_title, form_id), f, ensure_ascii=False, indent=2)
+        aliases = [human_title, os.path.basename(pdf_path or "")]
+        data = _scaffold_explainer(human_title, form_id, bucket, aliases)
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
         return out_path
 
     try:
         prompt = (
             "You are an explainer generator for Philippine PDF forms.\n"
             "Output strict JSON with keys: title, form_id, sections[], metrics{tp,fp,fn,precision,recall,f1}.\n"
-            "Summaries: short, action-oriented, PH context, top-down order, compress options into bullets, no hallucinations.\n"
-            "Non-fillable 'For Office Use' may be skipped unless it clarifies a user action.\n"
-            f"Form ID: {form_id}\n"
+            "Summaries: short, action-oriented, PH context, top-down order, compress options into bullets.\n"
+            "Avoid hallucinations; skip purely 'For Office Use' unless it aids user action.\n"
+            f"Canonical Form ID (hash): {form_id}\n"
             f"Human Title: {human_title}\n"
-            f"Source PDF path: {pdf_path}\n"
-            "If uncertain, keep fields minimal yet consistent with the schema."
+            f"Bucket: {bucket}\n"
+            f"Source PDF path (may be empty): {pdf_path}\n"
+            "If uncertain, keep fields minimal, but respect the schema."
         )
         text = config.chat_completion(
             model=MODEL_NAME,
             messages=[
-                {"role": "system", "content": "You transform forms into concise JSON explainers following a strict schema."},
+                {"role": "system", "content": "You produce concise JSON explainers for PDF forms following a strict schema."},
                 {"role": "user", "content": prompt}
             ],
             max_tokens=MAX_TOK,
             temperature=TEMP,
         )
         data = json.loads(text or "{}")
+        # Required defaults & canonical stamps
         data.setdefault("title", human_title)
         data.setdefault("form_id", form_id)
         data.setdefault("sections", [])
         data.setdefault("metrics", {"tp": 80, "fp": 20, "fn": 20, "precision": 0.80, "recall": 0.80, "f1": 0.80})
+        # New canonical metadata
+        data["canonical_id"] = form_id
+        data["bucket"] = bucket
+        data["schema_version"] = int(data.get("schema_version") or 1)
+        aliases = data.get("aliases") or []
+        aliases = list({*aliases, human_title, os.path.basename(pdf_path or "")})
+        data["aliases"] = sorted([a for a in aliases if a])
 
         with open(out_path, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
         return out_path
-
     except Exception:
         logging.exception("Engine call failed; writing scaffold instead.")
+        aliases = [human_title, os.path.basename(pdf_path or "")]
+        data = _scaffold_explainer(human_title, form_id, bucket, aliases)
         with open(out_path, "w", encoding="utf-8") as f:
-            json.dump(_scaffold_explainer(human_title, form_id), f, ensure_ascii=False, indent=2)
+            json.dump(data, f, ensure_ascii=False, indent=2)
         return out_path
+
+__all__ = [
+    "processor", "embedding", "model",
+    "summarize_fields", "FieldClassifier",
+    "generate_explainer",
+]
