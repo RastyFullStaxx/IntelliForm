@@ -60,8 +60,8 @@
     {
       "form_id": "b26187fc73c165337a850efc075960ac766594c2fef95f154e22032e9d7d096d",
       "title": "COMELEC Voter Registration Application (CEF-1)",
+      "path": "explanations/government/b26187fc73c165337a850efc075960ac766594c2fef95f154e22032e9d7d096d.json",
       "bucket": "government",
-      "path": "C:/xampp/htdocs/IntelliForm/explanations/government/b26187fc73c165337a850efc075960ac766594c2fef95f154e22032e9d7d096d.json",
       "aliases": [
         "COMELEC_CEF1_VoterRegistration",
         "Goverment_COMELECVoterRegistrationApplicationForm"
@@ -114,8 +114,8 @@
     {
       "form_id": "6dca08692361d333fa8aa7080f51477a8d9e90f626df42b99e7a8aa23d41db02",
       "title": "Allianz PNB Life — International Health Claim Form (IHP)",
+      "path": "explanations/healthcare/6dca08692361d333fa8aa7080f51477a8d9e90f626df42b99e7a8aa23d41db02.json",
       "bucket": "healthcare",
-      "path": "C:/xampp/htdocs/IntelliForm/explanations/healthcare/6dca08692361d333fa8aa7080f51477a8d9e90f626df42b99e7a8aa23d41db02.json",
       "aliases": [
         "Allianz_IHP_ClaimForm",
         "Healthcare_Allianz_IHP_ClaimForm"
@@ -124,8 +124,8 @@
     {
       "form_id": "d75de522012583f723a1d679958c9311fcd713c098fec5a5d5f744e07d71e42f",
       "title": "AXA Philippines — Motor Claim Form",
+      "path": "explanations/healthcare/d75de522012583f723a1d679958c9311fcd713c098fec5a5d5f744e07d71e42f.json",
       "bucket": "healthcare",
-      "path": "C:/xampp/htdocs/IntelliForm/explanations/healthcare/d75de522012583f723a1d679958c9311fcd713c098fec5a5d5f744e07d71e42f.json",
       "aliases": [
         "AXA_MotorClaimForm",
         "Healthcare_AXA_MotorClaimForm"
@@ -198,8 +198,8 @@
     {
       "form_id": "070f554dfed7f8ba7694884b7f8b650af7718070e5c7966b6f87267cbac825f2",
       "title": "BIR Form 1902 — Application for Registration (Individuals Earning Purely Compensation Income)",
+      "path": "explanations/tax/070f554dfed7f8ba7694884b7f8b650af7718070e5c7966b6f87267cbac825f2.json",
       "bucket": "tax",
-      "path": "C:/xampp/htdocs/IntelliForm/explanations/tax/070f554dfed7f8ba7694884b7f8b650af7718070e5c7966b6f87267cbac825f2.json",
       "aliases": [
         "BIR_ApplicationForRegistration1902",
         "Tax_BIRApplicationForRegistration1902",

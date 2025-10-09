@@ -131,21 +131,22 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!webPath) throw new Error('Upload succeeded but server did not return web_path or file_id.');
 
       const diskPath = data.disk_path || '';
-      const formId   = data.form_id || null;
+      // ✅ HASH FIRST: prefer canonical_form_id; keep form_id for backward compatibility
+      const canonicalId = data.canonical_form_id || data.form_id || null;
 
-      // What workspace.js expects (new keys)
+      // Persist for workspace.js (new keys)
       sessionStorage.setItem('uploadedWebPath', webPath);
       if (diskPath) sessionStorage.setItem('uploadedDiskPath', diskPath);
-      if (formId)   sessionStorage.setItem('uploadedFormId', formId);
+      if (canonicalId) sessionStorage.setItem('uploadedFormId', canonicalId);
 
-      // Legacy keys (kept for compatibility)
+      // Legacy keys (display/compat only)
       const cleanName = (file.name || 'document.pdf');
-      sessionStorage.setItem('uploadedFileName', cleanName);             // display only
-      sessionStorage.setItem('uploadedFileWithExtension', webPath);      // legacy path
+      sessionStorage.setItem('uploadedFileName', cleanName);        // for title display
+      sessionStorage.setItem('uploadedFileWithExtension', webPath); // legacy path
 
       Swal.close();
 
-      // Navigate to routed template (workspace page)
+      // Navigate to workspace
       window.location.href = '/workspace';
     } catch (err) {
       console.error(err);

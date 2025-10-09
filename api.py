@@ -95,7 +95,7 @@ class AnalyzeTokensBody(BaseModel):
     min_confidence: Optional[float] = 0.0
     no_graph: Optional[bool] = False
     classifier: Optional[str] = "saved_models/classifier.pt"
-    t5: Optional[str] = "saved_models/t5.pt"
+    t5: Optional[str] = "saved_models/saved_models/t5.pt"
 
 class EnsureExplainerBody(BaseModel):
     canonical_form_id: str               # TEMPLATE HASH
@@ -280,7 +280,7 @@ async def api_prelabel(
     temp_json = config.temp_annotation_path(form_id)
     try:
         launch = config.launch_prelabeler(pdf_path=disk, out_temp=temp_json)
-    except Exception as e:
+    except Exception:
         launch = None  # still check file presence
 
     if not temp_json.exists():
@@ -370,18 +370,38 @@ async def api_explainer_legacy(
 @app.post("/api/explainer.ensure")
 async def api_explainer_ensure(body: EnsureExplainerBody):
     """
-    New, JSON-friendly helper:
     Ensure an explainer exists for {canonical_form_id (HASH), bucket}.
     If missing → generate via LLM fallback and upsert the registry.
+    Additionally: normalize legacy absolute paths in the registry to relative paths.
     """
     h = body.canonical_form_id
     bucket = body.bucket
     title = body.human_title or h
     pdf_disk_path = body.pdf_disk_path
 
-    # If already present in registry, return info
+    def _relativize(p: str) -> str:
+        if not p:
+            return p
+        # If it's absolute (e.g., C:\... or /home/...), convert to BASE_DIR-relative.
+        is_abs = os.path.isabs(p) or (":" in p.split("/")[0])  # crude Windows drive check when already slashified
+        if is_abs:
+            try:
+                rel = os.path.relpath(p, BASE_DIR)
+            except Exception:
+                rel = p
+            p = rel
+        return p.replace("\\", "/").lstrip("/")  # serve under /<relpath>
+
+    # If already present in registry, normalize its path if needed and return.
     existing = _registry_find_by_hash(h)
     if existing:
+        rel_path = _relativize(str(existing.get("path", "")))
+        # If path changed (was absolute), upsert the normalized one.
+        if rel_path and rel_path != existing.get("path"):
+            _registry_upsert(form_id=h, title=existing.get("title") or title, rel_path=rel_path,
+                             bucket=existing.get("bucket") or bucket,
+                             aliases=existing.get("aliases") or (body.aliases or []))
+            existing = _registry_find_by_hash(h) or {"form_id": h, "title": title, "path": rel_path, "bucket": bucket}
         return {
             "ok": True,
             "form_id": h,
@@ -391,18 +411,17 @@ async def api_explainer_ensure(body: EnsureExplainerBody):
             "already_exists": True,
         }
 
+    # Not in registry → create via fallback
     out_dir = EXPL_DIR / bucket
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    # LLM fallback explainer generation (pdf optional but helpful)
     expl_path = generate_explainer(
         pdf_path=pdf_disk_path or "",
         bucket=bucket,
-        form_id=h,           # HASH
+        form_id=h,         # HASH
         human_title=title,
         out_dir=str(out_dir),
     )
-
     rel_path = os.path.relpath(expl_path, BASE_DIR).replace("\\", "/")
     _registry_upsert(form_id=h, title=title, rel_path=rel_path, bucket=bucket, aliases=(body.aliases or []))
 
