@@ -1,275 +1,675 @@
-document.addEventListener('DOMContentLoaded', () => {
-  // ---- DOM refs
-  const sidebarToggle = document.getElementById('sidebarToggle');
-  const sidebar       = document.getElementById('sidebar');
-  const burgerToggle  = document.getElementById('togglePages');
-  const thumbnailSidebar = document.getElementById('thumbnailSidebar');
-  const analyzeBtn    = document.getElementById('analyzeTool');
-  const summaryList   = document.getElementById('summaryList');
-  const badgeNode     = document.getElementById('eceScoreBadge'); // reused badge
-  const formNameNode  = document.getElementById('formNameDisplay');
-  const metricsRow    = document.getElementById('metricsRow');
+﻿// static/js/workspace.js
 
-  const pageInfoEl = document.getElementById('pageInfo');
-  const zoomInfoEl = document.getElementById('zoomInfo');
+window.addEventListener("load", initWorkspace);
 
-  const canvas       = document.getElementById('pdfCanvas');
-  const ctx          = canvas.getContext('2d');
-  const overlayCanvas= document.getElementById('overlayCanvas');
-  const overlayCtx   = overlayCanvas.getContext('2d');
+function initWorkspace() {
+  console.log("workspace.js 2025-10-09 resolver-v3 curated-probe + canonical refresh");
 
-  // ---- UI toggles
-  sidebarToggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    sidebar.classList.toggle('open');
-    sidebarToggle.style.display = sidebar.classList.contains('open') ? 'none' : 'flex';
-  });
-  document.addEventListener('click', (ev) => {
-    if (!sidebar.contains(ev.target) && !sidebarToggle.contains(ev.target)) {
-      sidebar.classList.remove('open');
-      sidebarToggle.style.display = 'flex';
-    }
-  });
-  burgerToggle.addEventListener('click', () => {
-    thumbnailSidebar.classList.toggle('visible');
-  });
+  // ---- Session state (migrate legacy keys) ----
+  const legacyWebRaw = sessionStorage.getItem("uploadedFileWithExtension") || "";
+  const storedWebRaw = sessionStorage.getItem("uploadedWebPath") || legacyWebRaw || "";
+  const storedWeb = normalizeToWebUrl(storedWebRaw);
+  let storedDisk = sessionStorage.getItem("uploadedDiskPath") || "";
+  const storedName = sessionStorage.getItem("uploadedFileName") || "";
+  let storedFormId = sessionStorage.getItem("uploadedFormId") || null;
 
-  // ---- Query param: src=<server path to PDF>
-  const params = new URLSearchParams(location.search);
-  const pdfSrc = params.get('src');
-  if (!pdfSrc) {
-    Swal.fire({icon:'warning', title:'No PDF', text:'Missing ?src=<pdf path> from upload step.'});
+  // ---- DOM helpers ----
+  const byId = (id) => document.getElementById(id);
+  const sidebarToggle = byId("sidebarToggle");
+  const sidebar = byId("sidebar");
+  const pageToggler = byId("togglePages");
+  const thumbSidebar = byId("thumbnailSidebar");
+  const analyzeBtn = byId("analyzeTool");
+  const summaryList = byId("summaryList");
+  const formTitle = byId("formNameDisplay");
+  const metricsRow = byId("metricsRow");
+  const pageInfo = byId("pageInfo");
+  const zoomInfo = byId("zoomInfo");
+  const pdfCanvas = byId("pdfCanvas");
+  const overlayCanvas = byId("overlayCanvas");
+
+  if (!pdfCanvas || !overlayCanvas) {
+    console.error("Canvas elements missing");
     return;
   }
-  formNameNode.textContent = decodeURIComponent(pdfSrc.split('/').pop());
 
-  // ---- PDF.js render state
-  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  const pdfCtx = pdfCanvas.getContext("2d");
+  const overlayCtx = overlayCanvas.getContext("2d");
+
+  // ---- Title (will be replaced by explainer.title after analysis) ----
+  if (formTitle) {
+    const origName = (storedName || baseFromPath(storedWeb) || "Form").replace(/\.[^.]+$/, "");
+    formTitle.textContent = origName || "Form";
+  }
+
+  // ---- Sidebar toggle logic ----
+  if (sidebarToggle && sidebar) {
+    sidebarToggle.addEventListener("click", (e) => {
+      e.stopPropagation();
+      sidebar.classList.toggle("open");
+      sidebarToggle.style.display = sidebar.classList.contains("open") ? "none" : "flex";
+    });
+    document.addEventListener("click", (e) => {
+      if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
+        sidebar.classList.remove("open");
+         sidebarToggle.style.display = "flex";
+      }
+    });
+  }
+  if (pageToggler && thumbSidebar) {
+    pageToggler.addEventListener("click", () => thumbSidebar.classList.toggle("visible"));
+  }
+
+  // ---- "Show boxes" toggle ----
+  let toggleBoxes = null;
+  if (metricsRow) {
+    const boxesWrap = document.createElement("div");
+    boxesWrap.style.cssText = "text-align:center;margin:6px 0 4px 0;";
+    boxesWrap.innerHTML = `
+      <label style="font-size:12px;opacity:.9;">
+        <input type="checkbox" id="toggleBoxes"> Show boxes
+      </label>
+    `;
+    metricsRow.insertAdjacentElement("afterend", boxesWrap);
+    toggleBoxes = byId("toggleBoxes");
+  }
+
+  // ---- PDF state ----
   let pdfDoc = null;
   let scale = 1.5;
   let currentPage = 1;
+  let currentFormId = storedFormId;
+  const pageBaseSize = {};
+  let cachedAnnotations = null;
 
-  // analysis state
-  let predictions = []; // [{label, summary, page, bbox:[x0,y0,x1,y1], group?}]
-  let groups = {};      // groupName -> fields[]
+  // ---- PDF.js check ----
+  if (typeof pdfjsLib === "undefined") {
+    alert("PDF.js failed to load.");
+    return;
+  }
+  // pdfjsLib.GlobalWorkerOptions.workerSrc = "/static/pdfjs/pdf.worker.min.js";
 
-  // ---- Load & render PDF
-  pdfjsLib.getDocument(pdfSrc).promise
-    .then((doc) => {
+  // ---- Boot viewer ----
+  (async function boot() {
+    if (!storedWeb) {
+      try {
+        const pick = await pickAndUploadFile();
+        persistUpload(pick);
+        await openPdf(pick.web_path);
+      } catch (e) {
+        console.error("[viewer] picker/upload failed:", e);
+        alert("Failed to load PDF.");
+        return;
+      }
+      return;
+    }
+
+    try {
+      await openPdf(storedWeb);
+      if (!storedDisk) {
+        const reup = await softReuploadForDisk(storedWeb);
+        if (reup) {
+          persistUpload(reup);
+        }
+      }
+    } catch (e1) {
+      console.warn("[viewer] direct open failed:", e1);
+      try {
+        const uploaded = await softReuploadForDisk(storedWeb);
+        if (uploaded) {
+          persistUpload(uploaded);
+          await openPdf(uploaded.web_path);
+          return;
+        }
+      } catch (e2) {
+        console.warn("[viewer] soft reupload failed:", e2);
+      }
+      try {
+        const pick = await pickAndUploadFile();
+        persistUpload(pick);
+        await openPdf(pick.web_path);
+      } catch (e3) {
+        console.error("[viewer] picker/upload failed:", e3);
+        alert("Failed to load PDF.");
+        return;
+      }
+    }
+  })();
+
+  function persistUpload(obj) {
+    if (!obj) return;
+    if (obj.web_path) {
+      sessionStorage.setItem("uploadedWebPath", normalizeToWebUrl(obj.web_path));
+    }
+    if (obj.disk_path) {
+      sessionStorage.setItem("uploadedDiskPath", obj.disk_path);
+    }
+    if (obj.form_id) {
+      sessionStorage.setItem("uploadedFormId", obj.form_id);
+      currentFormId = obj.form_id;
+    }
+    if (obj.file_name) {
+      sessionStorage.setItem("uploadedFileName", obj.file_name);
+      if (formTitle) formTitle.textContent = obj.file_name.replace(/\.[^.]+$/, "");
+    }
+  }
+
+  async function openPdf(src) {
+    const url = normalizeToWebUrl(src);
+    try {
+      const doc = await pdfjsLib.getDocument(url).promise;
       pdfDoc = doc;
-      renderPage(currentPage);
-      buildThumbnails();
-    })
-    .catch((err) => {
-      console.error(err);
-      Swal.fire({icon:'error', title:'Load failed', text:'Unable to load the PDF.'});
-    });
+    } catch (_) {
+      const r = await fetch(url, { cache: "no-store" });
+      if (!r.ok) throw new Error(`PDF fetch failed (${r.status})`);
+      const ab = await r.arrayBuffer();
+      const doc = await pdfjsLib.getDocument({ data: new Uint8Array(ab) }).promise;
+      pdfDoc = doc;
+    }
+    renderPage(currentPage);
+    buildThumbnails(pdfDoc);
+  }
 
   function renderPage(pageNum) {
     pdfDoc.getPage(pageNum).then((page) => {
       const viewport = page.getViewport({ scale });
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
+      if (!pageBaseSize[pageNum]) {
+        const baseViewport = page.getViewport({ scale: 1 });
+        pageBaseSize[pageNum] = { w: baseViewport.width, h: baseViewport.height };
+      }
+      pdfCanvas.width = viewport.width;
+      pdfCanvas.height = viewport.height;
       overlayCanvas.width = viewport.width;
       overlayCanvas.height = viewport.height;
 
-      const renderContext = { canvasContext: ctx, viewport };
-      page.render(renderContext).promise.then(() => {
-        pageInfoEl.textContent = `Page ${pageNum} / ${pdfDoc.numPages}`;
-        zoomInfoEl.textContent = `${Math.round(scale * 100)}%`;
-        drawOverlayForPage(pageNum);
+      page.render({ canvasContext: pdfCtx, viewport }).promise.then(() => {
+        if (pageInfo) pageInfo.textContent = `Page ${pageNum} / ${pdfDoc.numPages}`;
+        if (zoomInfo) zoomInfo.textContent = `${Math.round(scale * 100)}%`;
+        overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+        if (toggleBoxes && toggleBoxes.checked && currentFormId) drawOverlay(currentFormId, pageNum);
       });
     });
   }
 
-  function buildThumbnails() {
-    thumbnailSidebar.innerHTML = '';
-    for (let p = 1; p <= pdfDoc.numPages; p++) {
-      pdfDoc.getPage(p).then((page) => {
-        const vp = page.getViewport({ scale: 0.3 });
-        const c = document.createElement('canvas');
-        c.width = vp.width; c.height = vp.height;
-        page.render({ canvasContext: c.getContext('2d'), viewport: vp }).promise.then(() => {
-          const wrap = document.createElement('div'); wrap.className = 'thumbnail-wrapper';
-          c.className = 'thumbnail'; c.title = `Page ${page.pageNumber}`;
-          c.addEventListener('click', () => { currentPage = page.pageNumber; renderPage(currentPage); });
-          const label = document.createElement('div'); label.className = 'thumbnail-label'; label.textContent = `Page ${page.pageNumber}`;
-          wrap.appendChild(c); wrap.appendChild(label);
-          thumbnailSidebar.appendChild(wrap);
-        });
-      });
-    }
-  }
-
-  // ---- Overlay drawing (field boxes)
-  function drawOverlayForPage(pageNumber) {
-    overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
-    if (!predictions || !predictions.length) return;
-
-    const fieldsOnPage = predictions.filter(f => (f.page || 1) === pageNumber);
-    fieldsOnPage.forEach(f => {
-      const { x, y, w, h } = bboxToCanvasRect(f.bbox, overlayCanvas.width, overlayCanvas.height);
-      overlayCtx.lineWidth = 2;
-      overlayCtx.strokeStyle = 'rgba(62,216,255,0.9)';
-      overlayCtx.fillStyle = 'rgba(62,216,255,0.15)';
-      overlayCtx.strokeRect(x, y, w, h);
-      overlayCtx.fillRect(x, y, w, h);
-    });
-  }
-
-  /**
-   * Convert a bbox to canvas-space rect.
-   * - If values in [0..1], treat as normalized (top-left origin).
-   * - Else proportionally map (assumes top-left). Adjust if your coords differ.
-   */
-  function bboxToCanvasRect(bbox, canvasW, canvasH) {
-    if (!bbox || bbox.length !== 4) return { x: 0, y: 0, w: 0, h: 0 };
-    let [x0, y0, x1, y1] = bbox.map(Number);
-    const isNormalized = [x0,y0,x1,y1].every(v => v >= 0 && v <= 1);
-    if (isNormalized) {
-      const x = x0 * canvasW;
-      const y = y0 * canvasH;
-      const w = Math.max(0, (x1 - x0) * canvasW);
-      const h = Math.max(0, (y1 - y0) * canvasH);
-      return { x, y, w, h };
-    } else {
-      // naive proportional fallback; replace with page-size-aware mapping if needed
-      const x = (x0 / 1000) * canvasW;
-      const y = (y0 / 1000) * canvasH;
-      const w = Math.max(0, ((x1 - x0) / 1000) * canvasW);
-      const h = Math.max(0, ((y1 - y0) / 1000) * canvasH);
-      return { x, y, w, h };
-    }
-  }
-
-  // ---- Analyze: call backend, populate UI
-  analyzeBtn.addEventListener('click', async () => {
-    try {
-      Swal.fire({title:'Analyzing...', text:'Running IntelliForm pipeline', allowOutsideClick:false, didOpen:() => Swal.showLoading()});
-      // IMPORTANT: query param file_path to match backend
-      const res = await fetch(`/api/analyze?file_path=${encodeURIComponent(pdfSrc)}`, { method: 'POST' });
-      if (!res.ok) {
-        const t = await res.text();
-        throw new Error(t || `Analyze failed (${res.status})`);
-      }
-      const data = await res.json();
-      applyResults(data);
-      Swal.close();
-      Swal.fire({icon:'success', title:'Analysis Complete', timer:1200, showConfirmButton:false});
-    } catch (err) {
-      console.error(err);
-      Swal.fire({icon:'error', title:'Analyze Error', text: err.message || 'Failed to analyze.'});
-    }
-  });
-
-  function applyResults(data) {
-    formNameNode.textContent = data.title || formNameNode.textContent;
-
-    // Badge: GT-free diagnostics
-    const m = data.metrics || {};
-    const count = (m.fields_count != null) ? `Fields: ${m.fields_count}` : null;
-    const secs  = (m.processing_sec != null) ? `Time: ${Number(m.processing_sec).toFixed(2)}s` : null;
-    const pages = (m.pages != null) ? `Pages: ${m.pages}` : null;
-    const badgeText = [count, secs, pages].filter(Boolean).join(' • ') || '—';
-    badgeNode.textContent = badgeText;
-
-    // Metrics row (only shows what’s present)
-    const pr  = (m.precision != null) ? `Precision: ${(Number(m.precision)*100).toFixed(1)}%` : null;
-    const rc  = (m.recall    != null) ? `Recall: ${(Number(m.recall)*100).toFixed(1)}%`    : null;
-    const f1  = (m.f1        != null) ? `F1: ${(Number(m.f1)*100).toFixed(1)}%`            : null;
-    const rl  = (m.rougeL    != null) ? `ROUGE‑L: ${(Number(m.rougeL)*100).toFixed(1)}%`   : null;
-    const mt  = (m.meteor    != null) ? `METEOR: ${(Number(m.meteor)*100).toFixed(1)}%`    : null;
-    metricsRow.innerHTML = [pr, rc, f1, rl, mt].filter(Boolean).join(' · ');
-
-    // Fields → group → accordion
-    predictions = Array.isArray(data.fields) ? data.fields : [];
-    groups = {};
-    predictions.forEach(f => {
-      const g = f.group || 'Fields';
-      if (!groups[g]) groups[g] = [];
-      groups[g].push(f);
-    });
-    renderAccordion(groups);
-
-    drawOverlayForPage(currentPage);
-  }
-
-  function renderAccordion(groupMap) {
-    summaryList.innerHTML = '';
-    Object.entries(groupMap).forEach(([groupName, items]) => {
-      const item = document.createElement('div');
-      item.className = 'accordion-item';
-
-      const header = document.createElement('div');
-      header.className = 'accordion-header';
-      header.textContent = groupName;
-
-      const content = document.createElement('div');
-      content.className = 'accordion-content active';
-
-      items.forEach((f, idx) => {
-        const row = document.createElement('p');
-        const label = f.label ?? `Field ${idx+1}`;
-        const summary = f.summary ?? '';
-        row.innerHTML = `<span class="summary-label">${escapeHtml(label)}</span>: ${escapeHtml(summary)}`;
-        row.style.cursor = 'pointer';
-        row.addEventListener('click', () => {
-          if (f.page) {
-            currentPage = f.page;
+  function buildThumbnails(pdf) {
+    if (!thumbSidebar) return;
+    thumbSidebar.innerHTML = "";
+    for (let n = 1; n <= pdf.numPages; n++) {
+      pdf.getPage(n).then((page) => {
+        const viewport = page.getViewport({ scale: 0.3 });
+        const c = document.createElement("canvas");
+        c.width = viewport.width;
+        c.height = viewport.height;
+        page.render({ canvasContext: c.getContext("2d"), viewport }).promise.then(() => {
+          const w = document.createElement("div");
+          w.className = "thumbnail-wrapper";
+          c.className = "thumbnail";
+          c.title = `Page ${page.pageNumber}`;
+          c.addEventListener("click", () => {
+            currentPage = page.pageNumber;
             renderPage(currentPage);
-            setTimeout(() => flashBox(f), 200);
-          } else {
-            flashBox(f);
-          }
+          });
+          const label = document.createElement("div");
+          label.className = "thumbnail-label";
+          label.textContent = `Page ${page.pageNumber}`;
+          w.appendChild(c);
+          w.appendChild(label);
+          thumbSidebar.appendChild(w);
         });
+      });
+    }
+  }
+
+  // ========================
+  // 🔸 SWEETALERT PROGRESS + ANALYSIS
+  // ========================
+  if (analyzeBtn) analyzeBtn.addEventListener("click", runAnalysis);
+
+  async function runAnalysis() {
+    Swal.fire({
+      title: "Analyzing Form...",
+      text: "Thinking for the best summaries",
+      allowOutsideClick: false,
+      didOpen: () => Swal.showLoading(),
+    });
+
+    try {
+      // 1) Guess bucket from filename first (used by curated-probe fallback)
+      const web_for_guess = sessionStorage.getItem("uploadedWebPath") || storedWeb || "";
+      const guess = guessFromPath(baseFromPath(web_for_guess) || "form.pdf");
+      let bucket = guess.bucket;
+
+      // 2) Registry first (but we'll prefer curated if available)
+      const reg = await GET_json("/panel");
+      let explainer = await resolveExplainerFor(reg, storedWeb || storedName, bucket);
+      if (explainer && explainer.form_id) currentFormId = explainer.form_id;
+
+      // 3) Ensure we have a server upload with DISK PATH (for /api/prelabel)
+      let uploadInfo = await ensureUploadedToServer(storedWeb);
+      if (uploadInfo) persistUpload(uploadInfo);
+
+      const web_path  = sessionStorage.getItem("uploadedWebPath");
+      const disk_path = sessionStorage.getItem("uploadedDiskPath");
+      const form_id   = currentFormId || sessionStorage.getItem("uploadedFormId");
+
+      // 4) If still no explainer, create one via facade
+      if (!explainer) {
+        const make = await createExplainerWithFile(web_path, bucket, guess.formId, guess.title);
+        explainer = make;
+        currentFormId = make.form_id || currentFormId || guess.formId;
+      }
+
+      // 5) Prelabel (TSL + promotion happens server-side)
+      if (!disk_path) throw new Error("Upload failed to provide a disk path.");
+      const prelabelResp = await ensurePrelabelAndOverlays({ disk_path }, currentFormId || form_id);
+
+      // If server reused a canonical id (e.g., Healthcare_AXA_MotorClaimForm), update & try curated again
+      if (prelabelResp && prelabelResp.canonical_form_id) {
+        currentFormId = prelabelResp.canonical_form_id;
+        sessionStorage.setItem("uploadedFormId", currentFormId);
+
+        // Try to get curated explainer directly if we’re still on a UUID variant
+        if (!isLikelyCuratedExplainer(explainer)) {
+          const curatedTry = await probeExplainers(bucket, currentFormId);
+          if (curatedTry) explainer = curatedTry;
+        }
+      }
+
+      // 6) Render UI (use explainer.title as the strip title)
+      if (formTitle) formTitle.textContent = explainer.title || (storedName || "Form");
+      renderSummaries(explainer);
+
+      // 7) Draw overlays if toggled
+      if (toggleBoxes && toggleBoxes.checked && currentFormId) await drawOverlay(currentFormId, currentPage);
+
+      Swal.fire({
+        icon: "success",
+        title: "Analysis Complete",
+        text: "Summaries generated successfully",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    } catch (e) {
+      console.error("runAnalysis error:", e);
+      Swal.fire({
+        icon: "error",
+        title: "Analysis Failed",
+        text: e?.message || "Could not analyze this form.",
+      });
+    }
+  }
+
+  // ---- Rendering summaries ----
+  function renderSummaries(explainer) {
+    if (summaryList) summaryList.innerHTML = "";
+    (explainer.sections || []).forEach((sec) => {
+      const item = document.createElement("div");
+      item.className = "accordion-item";
+      const header = document.createElement("div");
+      header.className = "accordion-header";
+      header.textContent = sec.title || "";
+      const content = document.createElement("div");
+      content.className = "accordion-content active";
+
+      (sec.fields || []).forEach((f) => {
+        const row = document.createElement("p");
+        row.className = "summary-line";
+        row.innerHTML = `<span class="summary-label" data-label="${esc(f.label)}">${esc(f.label)}</span>: ${esc(f.summary)}`;
         content.appendChild(row);
       });
-
-      header.addEventListener('click', () => content.classList.toggle('active'));
-
+      header.addEventListener("click", () => content.classList.toggle("active"));
       item.appendChild(header);
       item.appendChild(content);
-      summaryList.appendChild(item);
+      if (summaryList) summaryList.appendChild(item);
     });
+    if (metricsRow) metricsRow.textContent = "";
   }
 
-  function flashBox(field) {
-    const rect = bboxToCanvasRect(field.bbox, overlayCanvas.width, overlayCanvas.height);
-    overlayCtx.save();
-    overlayCtx.lineWidth = 4;
-    overlayCtx.strokeStyle = 'rgba(255, 230, 0, 0.95)';
-    overlayCtx.strokeRect(rect.x, rect.y, rect.w, rect.h);
-    setTimeout(() => { drawOverlayForPage(currentPage); overlayCtx.restore(); }, 700);
-  }
+  // ---- Click-to-jump ----
+  summaryList?.addEventListener("click", async (ev) => {
+    const lbl = ev.target.closest(".summary-label");
+    if (!lbl || !currentFormId || !cachedAnnotations) return;
+    const targetLabel = lbl.textContent.trim().toLowerCase();
 
-  function escapeHtml(str) {
-    return (str ?? '').toString()
-      .replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;');
-  }
-
-  // ---- Print & Download
-  document.getElementById('downloadPDF').addEventListener('click', () => {
-    const a = document.createElement('a');
-    a.href = pdfSrc;
-    a.download = decodeURIComponent(pdfSrc.split('/').pop());
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    let match = (cachedAnnotations.groups || []).find(
+      (g) => g.label && g.label.toLowerCase() === targetLabel
+    );
+    if (match) {
+      currentPage = (match.page || 0) + 1;
+      renderPage(currentPage);
+      await new Promise((r) => setTimeout(r, 400));
+      drawOverlay(currentFormId, currentPage);
+    }
   });
 
-  document.getElementById('printPDF').addEventListener('click', () => {
-    if (!canvas) { Swal.fire({icon:'info', title:'No page rendered'}); return; }
-    const dataUrl = canvas.toDataURL();
-    const w = window.open('', '_blank');
-    w.document.write(`
-      <html><head><title>Print PDF</title></head>
-      <body style="margin:0;">
-        <img src="${dataUrl}" style="width:100%;"/>
-        <script>
-          window.onload = function () {
-            window.print();
-            window.onafterprint = function () { window.close(); };
-          };
-        </script>
-      </body></html>
-    `);
+  // ---- Overlay drawing (groups → fallback tokens) ----
+  async function drawOverlay(formId, pageNumber) {
+    try {
+      if (!cachedAnnotations || cachedAnnotations.__formId !== formId) {
+        const res = await fetch(`/explanations/_annotations/${formId}.json?ts=${Date.now()}`, { cache: "no-store" });
+        if (!res.ok) {
+          overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+          return;
+        }
+        cachedAnnotations = await res.json();
+        cachedAnnotations.__formId = formId;
+      }
+      overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+
+      const pageIdx = pageNumber - 1;
+      let rects = [];
+
+      if (Array.isArray(cachedAnnotations.groups) && cachedAnnotations.groups.length) {
+        rects = cachedAnnotations.groups.filter((g) => (g.page || 0) === pageIdx);
+      } else if (Array.isArray(cachedAnnotations.tokens)) {
+        rects = cachedAnnotations.tokens.filter((t) => (t.page || 0) === pageIdx);
+      }
+
+      const base = pageBaseSize[pageNumber] || { w: overlayCanvas.width, h: overlayCanvas.height };
+      const sx = overlayCanvas.width / base.w;
+      const sy = overlayCanvas.height / base.h;
+
+      overlayCtx.lineWidth = 1.5;
+      overlayCtx.strokeStyle = "rgba(20,20,20,0.85)";
+      rects.forEach((r) => {
+        const [x0, y0, x1, y1] = r.bbox;
+        overlayCtx.strokeRect(
+          x0 * sx,
+          y0 * sy,
+          Math.max(1, (x1 - x0) * sx),
+          Math.max(1, (y1 - y0) * sy)
+        );
+      });
+    } catch {
+      overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+    }
+  }
+
+  // ---- Overlay checkbox ----
+  document.addEventListener("change", (ev) => {
+    if (ev.target && ev.target.id === "toggleBoxes") {
+      if (ev.target.checked && currentFormId) drawOverlay(currentFormId, currentPage);
+      else overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+    }
   });
-});
+
+  // ---- Backend helpers ----
+  async function softReuploadForDisk(webUrl) {
+    try {
+      const url = normalizeToWebUrl(webUrl);
+      const r = await fetch(url, { cache: "no-store" });
+      if (!r.ok) return null;
+      const blob = await r.blob();
+      const base = baseFromPath(url) || "form.pdf";
+      const fd = new FormData();
+      fd.append("file", new File([blob], base, { type: "application/pdf" }));
+      const up = await fetch("/api/upload", { method: "POST", body: fd });
+      if (!up.ok) return null;
+      const out = await up.json();
+      return {
+        web_path: normalizeToWebUrl(out.web_path),
+        disk_path: out.disk_path,
+        form_id: out.form_id,
+        file_name: base,
+      };
+    } catch {
+      return null;
+    }
+  }
+
+  async function ensureUploadedToServer(webUrl) {
+    const sessWeb = sessionStorage.getItem("uploadedWebPath");
+    const sessDisk = sessionStorage.getItem("uploadedDiskPath");
+    if (sessWeb && sessDisk) {
+      return {
+        web_path: normalizeToWebUrl(sessWeb),
+        disk_path: sessDisk,
+        form_id: sessionStorage.getItem("uploadedFormId"),
+        file_name: sessionStorage.getItem("uploadedFileName"),
+      };
+    }
+    if (typeof webUrl === "string" && webUrl) {
+      const reup = await softReuploadForDisk(webUrl);
+      if (reup) return reup;
+    }
+    return await pickAndUploadFile();
+  }
+
+  async function pickAndUploadFile() {
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "application/pdf";
+    input.style.display = "none";
+    document.body.appendChild(input);
+
+    const file = await new Promise((resolve, reject) => {
+      input.addEventListener(
+        "change",
+        () => {
+          if (input.files && input.files[0]) resolve(input.files[0]);
+          else reject(new Error("No file selected"));
+        },
+        { once: true }
+      );
+      input.click();
+    }).finally(() => setTimeout(() => input.remove(), 0));
+
+    const fd = new FormData();
+    fd.append("file", file);
+    const up = await fetch("/api/upload", { method: "POST", body: fd });
+    if (!up.ok) throw new Error("upload failed");
+    const out = await up.json();
+    return {
+      web_path: normalizeToWebUrl(out.web_path),
+      disk_path: out.disk_path,
+      form_id: out.form_id,
+      file_name: file.name,
+    };
+  }
+
+  // ✅ Explainer creation (facade stays)
+  async function createExplainerWithFile(webPath, bucket, formId, humanTitle) {
+    const safeWeb = normalizeToWebUrl(webPath);
+    const base = baseFromPath(safeWeb) || "form.pdf";
+    let blob = null;
+    try {
+      const r = await fetch(safeWeb, { cache: "no-store" });
+      if (r.ok) blob = await r.blob();
+    } catch {}
+    if (!blob) blob = new Blob([new Uint8Array([0])], { type: "application/pdf" });
+
+    const fd = new FormData();
+    fd.append("file", new File([blob], base, { type: "application/pdf" }));
+    fd.append("bucket", bucket);
+    fd.append("form_id", formId);
+    fd.append("human_title", humanTitle);
+
+    const r = await fetch("/api/explainer", { method: "POST", body: fd });
+    if (!r.ok) throw new Error("explainer failed");
+    const resp = await r.json();
+
+    // Prefer curated from /panel if present, else use returned path
+    try {
+      const reg = await GET_json("/panel");
+      const curated = await resolveExplainerFor(reg, safeWeb, bucket);
+      if (curated) return curated;
+    } catch {}
+
+    const path = typeof resp.path === "string" ? resp.path.replace(/^\//, "") : "";
+    if (!path) throw new Error("explainer path missing");
+    return await GET_json("/" + path + "?ts=" + Date.now());
+  }
+
+  async function ensurePrelabelAndOverlays(server, formId) {
+    try {
+      const fd = new FormData();
+      fd.append("pdf_disk_path", server.disk_path);
+      fd.append("form_id", formId);
+      const r = await fetch("/api/prelabel", { method: "POST", body: fd });
+      if (!r.ok) {
+        const t = await r.text().catch(() => "");
+        throw new Error(t || "Prelabeling failed.");
+      }
+      const resp = await r.json();
+      return resp;
+    } catch (e) {
+      console.error("ensurePrelabelAndOverlays error:", e);
+      throw e;
+    }
+  }
+
+  // ---- Curated resolver helpers ----
+  function isUuidyStem(s) {
+    return /^(?:[0-9a-f]{32}_)+/i.test(String(s || ""));
+  }
+  function isLikelyCuratedExplainer(exp) {
+    if (!exp || !exp.form_id) return false;
+    return !isUuidyStem(exp.form_id);
+  }
+
+  // Main resolver that prefers curated; falls back to probing by bucket/stem
+  async function resolveExplainerFor(reg, pathOrName, bucketHint) {
+    const rawBase = (baseFromPath(pathOrName) || "").replace(/\.pdf$/i, "");
+    const stem = rawBase.replace(/^(?:[0-9a-f]{32}_)+/i, ""); // strip UUIDs
+    // 1) Try registry (prefers curated)
+    const fromReg = await resolveFromRegistrySmart(reg, stem);
+    if (fromReg && isLikelyCuratedExplainer(fromReg)) return fromReg;
+
+    // 2) If registry gave a UUID or missing, probe curated files directly
+    const bucket = bucketHint || guessFromPath(stem).bucket;
+    const probed = await probeExplainers(bucket, stem);
+    if (probed) return probed;
+
+    // 3) Fallback to whatever registry gave (even if UUID)
+    if (fromReg) return fromReg;
+    return null;
+  }
+
+  // Probe likely curated filenames under /explanations/<bucket>/
+  async function probeExplainers(bucket, stemOrId) {
+    const stem = String(stemOrId || "").replace(/\.json$/i, "");
+    const candidates = [];
+    const original = stem;
+    const lower = stem.toLowerCase();
+    const noUuid = original.replace(/^(?:[0-9a-f]{32}_)+/i, "");
+
+    // If stem starts with "healthcare_" etc., try dropping the domain prefix for curated names
+    const domainPrefixes = ["healthcare_", "banking_", "tax_", "government_", "gov_"];
+    let dropped = noUuid;
+    for (const pref of domainPrefixes) {
+      if (noUuid.toLowerCase().startsWith(pref)) {
+        dropped = noUuid.slice(pref.length);
+        break;
+      }
+    }
+
+    // Build candidates in order of likelihood
+    candidates.push(`${dropped}.json`);         // e.g., AXA_MotorClaimForm.json (curated)
+    candidates.push(`${noUuid}.json`);          // e.g., Healthcare_AXA_MotorClaimForm.json
+    candidates.push(`${lower}.json`);           // lowercase safety
+    candidates.push(`${dropped.toLowerCase()}.json`);
+
+    // Also try last N tokens to survive noisy stems
+    const parts = noUuid.split("_");
+    if (parts.length >= 2) {
+      candidates.push(parts.slice(1).join("_") + ".json");
+    }
+
+    for (const c of dedupeStrings(candidates)) {
+      const url = `/explanations/${bucket}/${c}`;
+      try {
+        const exp = await GET_json(url);
+        if (exp && exp.sections) return exp;
+      } catch {}
+    }
+    return null;
+  }
+
+  function dedupeStrings(arr) {
+    const seen = new Set();
+    const out = [];
+    for (const s of arr) {
+      const k = String(s);
+      if (!seen.has(k)) { seen.add(k); out.push(k); }
+    }
+    return out;
+  }
+
+  // ---- Small utils ----
+  async function GET_json(url) {
+    const withTs = url.includes("?") ? url + "&ts=" + Date.now() : url + "?ts=" + Date.now();
+    const r = await fetch(withTs, { cache: "no-store" });
+    if (!r.ok) throw new Error(url);
+    return r.json();
+  }
+  function baseFromPath(p) {
+    try {
+      return String(p).split("/").pop().split("\\").pop().split("?")[0];
+    } catch {
+      return p;
+    }
+  }
+  function guessFromPath(stemLike) {
+    const s = String(stemLike).toLowerCase();
+    let bucket = "government";
+    if (/(bdo|metrobank|slamci|fami|bank|account)/.test(s)) bucket = "banking";
+    else if (/(bir|tax|2552|1604|1901|1902)/.test(s)) bucket = "tax";
+    else if (/(manulife|sunlife|axa|fwd|claim|philhealth|allianz)/.test(s)) bucket = "healthcare";
+    return { bucket, formId: s.replace(/\s+/g, "_").replace(/\.pdf$/i, ""), title: stemLike.replace(/\.pdf$/i, "") };
+  }
+  function esc(s) {
+    return String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c] || c));
+  }
+
+  // Registry-based resolver; prefers non-UUID entries at same score
+  async function resolveFromRegistrySmart(reg, pathOrName) {
+    const raw = (baseFromPath(pathOrName) || "").replace(/\.pdf$/i, "");
+    const stem = raw.toLowerCase().replace(/^(?:[0-9a-f]{32}_)+/i, "");
+    const stemNoDelims = stem.replace(/[^a-z0-9]/g, "");
+
+    const forms = Array.isArray(reg.forms) ? reg.forms : (Array.isArray(reg) ? reg : []);
+    const candidates = [];
+
+    for (const f of forms) {
+      if (!f) continue;
+      const id = String(f.form_id || "").toLowerCase();
+      const title = String(f.title || "").toLowerCase();
+      const relPath = String(f.path || "");
+      const base = baseFromPath(relPath).replace(/\.json$/i, "").toLowerCase();
+
+      const hasUUIDPrefix = /^(?:[0-9a-f]{32}_)+/i.test(base);
+      const idNoDelims = id.replace(/[^a-z0-9]/g, "");
+      const baseNoDelims = base.replace(/[^a-z0-9]/g, "");
+      const titleNoDelims = title.replace(/[^a-z0-9]/g, "");
+
+      let score = 0;
+      if (id === stem || base === stem) score = 100;
+      else if (id.endsWith(stem) || base.endsWith(stem)) score = 90;
+      else if (id.includes(stem) || base.includes(stem) || title.includes(stem)) score = 80;
+      else if (idNoDelims === stemNoDelims || baseNoDelims === stemNoDelims || titleNoDelims === stemNoDelims) score = 75;
+      else if (idNoDelims.includes(stemNoDelims) || baseNoDelims.includes(stemNoDelims)) score = 65;
+
+      if (!hasUUIDPrefix) score += 3; // prefer curated when tie
+      if (score > 0) candidates.push({ score, relPath });
+    }
+
+    candidates.sort((a, b) => b.score - a.score);
+    const top = candidates[0];
+    if (top && top.relPath) {
+      try { return await GET_json("/" + String(top.relPath).replace(/^\//, "")); } catch {}
+    }
+    return null;
+  }
+
+  // Normalize any disk/legacy path to a public /uploads/... URL
+  function normalizeToWebUrl(p) {
+    if (!p) return p;
+    const s = String(p).replace(/\\/g, "/");
+    if (s.startsWith("/uploads/")) return s;
+    const m = s.match(/\/uploads\/([^\/?#]+)$/i);
+    if (m) return "/uploads/" + m[1];
+    const m2 = s.match(/\/?uploads\/([^\/?#]+)$/i);
+    if (m2) return "/uploads/" + m2[1];
+    return s;
+  }
+}

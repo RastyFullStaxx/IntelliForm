@@ -1,0 +1,127 @@
+﻿{
+  "title": "FAMI Account Opening Form — INDIVIDUAL",
+  "form_id": "Banking_FAMI_AccountOpeningForm_Individual",
+  "sections": [
+    {
+      "title": "Account Type (Tick only one)",
+      "fields": [
+        { "label": "Account Type", "summary": "Tick ONE: • INDIVIDUAL • JOINT “OR”. If JOINT “OR”, fill INVESTOR 2 as well." }
+      ]
+    },
+
+    {
+      "title": "I. CLIENT PROFILE — INVESTOR 1",
+      "fields": [
+        { "label": "Last Name (include suffix if any)", "summary": "Write LAST NAME exactly as on valid ID." },
+        { "label": "First Name", "summary": "Write FIRST NAME." },
+        { "label": "Middle Name", "summary": "Write MIDDLE NAME; write N/A if none." },
+        { "label": "Present Address", "summary": "House/Bldg No., Street, Subdivision/District, Town/City, Province, Country, ZIP." },
+        { "label": "Permanent Address", "summary": "Fill only if different from Present Address; same full format." },
+        { "label": "Preferred Mailing Address", "summary": "Tick ONE: • Present Address • Permanent Address." },
+        { "label": "Nationality", "summary": "Write citizenship/nationality (e.g., Filipino)." },
+        { "label": "Date of Birth (MM-DD-YYYY)", "summary": "Write 2-digit month-day-year (e.g., 03-25-1992)." },
+        { "label": "Place of Birth (City/Municipality)", "summary": "Write city/municipality of birth." },
+        { "label": "Gender", "summary": "Tick ONE: • Male • Female." },
+        { "label": "Civil Status", "summary": "Write status (e.g., Single, Married, Widowed, Separated/Annulled, Divorced)." },
+        { "label": "Telephone No.", "summary": "Write landline with area code, or N/A." },
+        { "label": "Mobile No.", "summary": "Write active mobile number." },
+        { "label": "Email", "summary": "Write active email for statements/updates." },
+        { "label": "Nature of Work or Business (Code)", "summary": "Write the NUMBER CODE from Section VI (list on later page). If ‘Others’, write specific description." },
+        { "label": "Tax Identification Number", "summary": "Write TIN (9–12 digits). Write N/A if none." },
+        { "label": "Type of ID Presented", "summary": "Write ID type (e.g., PhilID, UMID, Passport, Driver’s License, SSS/GSIS)." },
+        { "label": "ID Number", "summary": "Write the ID number of the ID presented." },
+        { "label": "Name of Employer or Business", "summary": "Write company/business name; if unemployed/retired/student, write N/A." },
+        { "label": "Source of Funds", "summary": "Tick all that apply: • Employment • Business • Remittance • Pension/Retirement • Sale of Assets • Others (specify)." }
+      ]
+    },
+
+    {
+      "title": "I. CLIENT PROFILE — INVESTOR 2 (fill only if JOINT “OR”)",
+      "fields": [
+        { "label": "Last Name (include suffix if any)", "summary": "Write LAST NAME exactly as on valid ID." },
+        { "label": "First Name", "summary": "Write FIRST NAME." },
+        { "label": "Middle Name", "summary": "Write MIDDLE NAME; write N/A if none." },
+        { "label": "Present Address", "summary": "House/Bldg No., Street, Subdivision/District, Town/City, Province, Country, ZIP." },
+        { "label": "Permanent Address", "summary": "Fill only if different from Present Address." },
+        { "label": "Preferred Mailing Address", "summary": "Tick ONE: • Present Address • Permanent Address." },
+        { "label": "Nationality", "summary": "Write citizenship/nationality." },
+        { "label": "Date of Birth (MM-DD-YYYY)", "summary": "Write 2-digit month-day-year." },
+        { "label": "Place of Birth (City/Municipality)", "summary": "Write city/municipality of birth." },
+        { "label": "Gender", "summary": "Tick ONE: • Male • Female." },
+        { "label": "Civil Status", "summary": "Write status." },
+        { "label": "Telephone No.", "summary": "Write landline with area code, or N/A." },
+        { "label": "Mobile No.", "summary": "Write active mobile number." },
+        { "label": "Email", "summary": "Write active email." },
+        { "label": "Nature of Work or Business (Code)", "summary": "Write the NUMBER CODE from Section VI. If ‘Others’, write description." },
+        { "label": "Tax Identification Number", "summary": "Write TIN (9–12 digits). Write N/A if none." },
+        { "label": "Type of ID Presented", "summary": "Write ID type used." },
+        { "label": "ID Number", "summary": "Write the ID number of the ID presented." },
+        { "label": "Name of Employer or Business", "summary": "Write company/business name; or N/A." },
+        { "label": "Source of Funds", "summary": "Tick all that apply (same options as Investor 1)." }
+      ]
+    },
+
+    {
+      "title": "II. BENEFICIAL OWNERSHIP",
+      "fields": [
+        { "label": "Beneficial Owner/s Declaration", "summary": "Tick the box to declare: “I/We am/are the beneficial owner/s of this investment account.”" }
+      ]
+    },
+
+    {
+      "title": "III. FATCA COMPLIANCE",
+      "fields": [
+        { "label": "Investor 1", "summary": "Tick the box to declare: “I attest that I am not a U.S. Person.”" },
+        { "label": "Investor 2 (if any)", "summary": "Tick the box to declare: “I attest that I am not a U.S. Person.”" }
+      ]
+    },
+
+    {
+      "title": "IV. ENROLLMENT TO SERVICES",
+      "fields": [
+        { "label": "Process Documents via Fax/Email/Electronic Means", "summary": "Tick to allow FAMI to process documents sent via fax, email, or digital means (originals still required for new account opening)." },
+        { "label": "Marketing & Promotions Consent", "summary": "Tick to allow FAMI to send marketing/promotional announcements via email, phone call, or SMS." }
+      ]
+    },
+
+    {
+      "title": "V. PROXY AUTHORIZATION",
+      "fields": [
+        { "label": "Appoint FAMI as Proxy", "summary": "Tick to appoint FAMI as proxy to act/vote at meetings per guidelines (valid until withdrawn in writing or you personally attend)." }
+      ]
+    },
+
+    {
+      "title": "VI. NATURE OF WORK OR BUSINESS LIST (Reference for the Code)",
+      "fields": [
+        { "label": "How to Fill ‘Nature of Work/Business’", "summary": "Use the NUMBER CODE from this list in the earlier field(s). If selecting ‘Others’, write your specific occupation/business." }
+      ]
+    },
+
+    {
+      "title": "VII. SPECIMEN SIGNATURES",
+      "fields": [
+        { "label": "Investor 1 — Specimen Signatures 1/2/3", "summary": "Print name, then sign THREE times in the boxes labeled 1, 2, 3." },
+        { "label": "Investor 2 — Specimen Signatures 1/2/3 (if any)", "summary": "Print name, then sign THREE times in the boxes labeled 1, 2, 3." }
+      ]
+    },
+
+    {
+      "title": "Acknowledgment & Final Signatures",
+      "fields": [
+        { "label": "Acknowledgment Statement", "summary": "Acknowledge that Terms & Conditions were explained by a FAMI Certified Investment Solicitor/authorized officer." },
+        { "label": "Signature — Investor 1", "summary": "Sign over printed name; write date (MM/DD/YYYY)." },
+        { "label": "Signature — Investor 2 (if any)", "summary": "Sign over printed name; write date (MM/DD/YYYY)." },
+        { "label": "For FAMI Certified Investment Solicitor (Office Use)", "summary": "Name, CIS License Number, Signature, Date (FAMI personnel only). Leave blank." }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 208,
+    "fp": 32,
+    "fn": 29,
+    "precision": 0.866,
+    "recall": 0.878,
+    "f1": 0.872
+  }
+}

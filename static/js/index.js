@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
   dropArea.addEventListener('drop', (e) => {
     const droppedFile = e.dataTransfer.files && e.dataTransfer.files[0];
     if (droppedFile) {
-      // Reflect dropped file into the input for consistency
       const dt = new DataTransfer();
       dt.items.add(droppedFile);
       fileInput.files = dt.files;
@@ -104,7 +103,6 @@ document.addEventListener('DOMContentLoaded', function () {
   // Upload to backend, then redirect to workspace with server path
   async function uploadAndNavigate(file) {
     const formData = new FormData();
-    // Match your FastAPI param name—commonly "file"
     formData.append('file', file);
 
     let uploadingAlert;
@@ -116,43 +114,42 @@ document.addEventListener('DOMContentLoaded', function () {
         didOpen: () => Swal.showLoading()
       });
 
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData
-        // No need to set Content-Type; browser sets the multipart boundary
-      });
-
+      const res = await fetch('/api/upload', { method: 'POST', body: formData });
       if (!res.ok) {
-        const text = await res.text();
-        throw new Error(text || `Upload failed with status ${res.status}`);
+        let msg = `Upload failed (${res.status})`;
+        try {
+          const t = await res.text();
+          if (t) msg += `: ${t}`;
+        } catch {}
+        throw new Error(msg);
       }
 
       const data = await res.json();
 
-      // Resolve a usable path from the server response
-      // Prefer explicit path keys; fallback to /uploads/<filename>
-      const serverPath =
-        data.path ||
-        data.file_path ||
-        data.url ||
-        (data.filename ? `/uploads/${data.filename}` : null);
+      // Prefer server's web_path; fall back to file_id → /uploads/<file_id>
+      const webPath = data.web_path || (data.file_id ? `/uploads/${data.file_id}` : null);
+      if (!webPath) throw new Error('Upload succeeded but server did not return web_path or file_id.');
 
-      if (!serverPath) {
-        throw new Error('Upload succeeded but server did not return a file path.');
-      }
+      const diskPath = data.disk_path || '';
+      const formId   = data.form_id || null;
+
+      // What workspace.js expects (new keys)
+      sessionStorage.setItem('uploadedWebPath', webPath);
+      if (diskPath) sessionStorage.setItem('uploadedDiskPath', diskPath);
+      if (formId)   sessionStorage.setItem('uploadedFormId', formId);
+
+      // Legacy keys (kept for compatibility)
+      const cleanName = (file.name || 'document.pdf');
+      sessionStorage.setItem('uploadedFileName', cleanName);             // display only
+      sessionStorage.setItem('uploadedFileWithExtension', webPath);      // legacy path
 
       Swal.close();
-      // Pass the PDF location to workspace via query param
-      const nextUrl = `/workspace.html?src=${encodeURIComponent(serverPath)}`;
-      window.location.href = nextUrl;
 
+      // Navigate to routed template (workspace page)
+      window.location.href = '/workspace';
     } catch (err) {
       console.error(err);
-      Swal.fire({
-        icon: 'error',
-        title: 'Upload Error',
-        text: err.message || 'Something went wrong while uploading.'
-      });
+      Swal.fire({ icon: 'error', title: 'Upload Error', text: err.message || 'Something went wrong while uploading.' });
     } finally {
       if (uploadingAlert) Swal.close();
     }

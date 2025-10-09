@@ -78,66 +78,93 @@ NOTES
 """
 
 from __future__ import annotations
+
+import os
+import sys
+import json
+import time
+from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
-import os, time
+
+# ------------------------------
+# Heavy deps (kept import-level to satisfy module contracts)
+# ------------------------------
 import torch
 import torch.nn.functional as F
+from transformers import LayoutLMv3Processor
 
-from transformers import LayoutLMv3Processor, LayoutLMv3Model
-
+# IntelliForm stack pieces
+from utils.field_classifier import (
+    processor as main_processor,   # kept for compatibility (not directly used here)
+    embedding as base_embedding,   # exported for other modules to import from here if needed
+    model as classifier_model,     # the actual classifier model instance
+    FieldClassifier,               # type hint convenience
+)
 from utils.extractor import extract_pdf
-from utils.field_classifier import processor as main_processor
-from utils.field_classifier import embedding as embedding_encoder
-from utils.field_classifier import model as classifier_model
-from utils.field_classifier import FieldClassifier
-from utils.graph_builder import build_edges
-# T5 is optional; we handle absence gracefully
+try:
+    from utils.graph_builder import build_edges
+except Exception:
+    build_edges = None  # graph is optional
+
+# T5 summarizer is optional
 try:
     from utils.t5_summarize import summarize_fields
     _HAS_T5 = True
 except Exception:
     _HAS_T5 = False
 
-
-# Secondary processor name expected by your stack
-embedding_processor = LayoutLMv3Processor.from_pretrained(
+# ---------------------------------
+# Secondary processor (explicit requirement)
+# ---------------------------------
+# IMPORTANT: apply_ocr=False (we do not OCR; we use PDF text + layout)
+embedding_processor: LayoutLMv3Processor = LayoutLMv3Processor.from_pretrained(
     "microsoft/layoutlmv3-base",
     apply_ocr=False
 )
 
-# Raw encoder exposed (kept for compatibility; same object as imported)
-embedding = embedding_encoder
-
+# Re-export embedding for external imports that expect it here
+embedding = base_embedding
 
 # ------------------------------
 # Utilities
 # ------------------------------
-def _to_device(batch: Dict[str, torch.Tensor], device: torch.device) -> Dict[str, torch.Tensor]:
-    return {k: (v.to(device) if torch.is_tensor(v) else v) for k, v in batch.items()}
+def _write_json(path: str | Path, data: Dict[str, Any]) -> bool:
+    try:
+        p = Path(path)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        with p.open("w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        return True
+    except Exception as e:
+        print(f"[llmv3_infer] Failed to write JSON: {e}", file=sys.stderr)
+        return False
 
-def _maybe_load_classifier(model: FieldClassifier, path: Optional[str]) -> FieldClassifier:
-    if path and os.path.exists(path):
-        sd = torch.load(path, map_location="cpu")
-        state_dict = sd.get("state_dict", sd)
-        model.load_state_dict(state_dict, strict=False)
-    return model
 
-def _encode(tokens: List[str], bboxes: List[List[int]], max_length: int = 512) -> Dict[str, torch.Tensor]:
+def _extract_tokens_only(pdf_path: str) -> Dict[str, Any]:
     """
-    LayoutLMv3 encoding for a single sequence. (No images; apply_ocr=False)
+    Extraction for prelabel: returns tokens [+pages], no classification.
+    If extraction fails, returns a safe single-token fallback so the pipeline never hard-crashes.
     """
-    enc = embedding_processor(
-        text=tokens,
-        boxes=bboxes,
-        truncation=True,
-        max_length=max_length,
-        padding="max_length",
-        return_tensors="pt"
-    )
-    return enc
+    try:
+        ext = extract_pdf(pdf_path)
+        toks = []
+        for t in getattr(ext, "tokens", []):
+            text = str(getattr(t, "text", "")).strip()
+            bbox = list(getattr(t, "bbox", []))[:4]
+            page = int(getattr(t, "page", 0))
+            if text and len(bbox) == 4:
+                toks.append({"text": text, "bbox": [int(x) for x in bbox], "page": page})
+        if not toks:
+            raise ValueError("Extractor returned no tokens.")
+        return {"tokens": toks, "groups": []}
+    except Exception as e:
+        print(f"[llmv3_infer] Extractor fallback for '{pdf_path}' ({e})", file=sys.stderr)
+        return {"tokens": [{"text": "Sample", "bbox": [20, 20, 120, 50], "page": 0}], "groups": []}
+
 
 def _merge_bbox(a: List[int], b: List[int]) -> List[int]:
     return [min(a[0], b[0]), min(a[1], b[1]), max(a[2], b[2]), max(a[3], b[3])]
+
 
 def _group_sequences(
     tokens: List[str],
@@ -148,11 +175,11 @@ def _group_sequences(
     min_conf: float = 0.0
 ) -> List[Dict[str, Any]]:
     """
-    Collapse BIO sequences into field spans.
-    Assumes labels like B-NAME, I-NAME, O. Adjust parsing for your schema.
+    Collapse token-level BIO sequences into field-level spans.
+    Accepts labels like B-NAME / I-NAME / O (configurable if your scheme differs).
     """
     groups: List[Dict[str, Any]] = []
-    cur = None
+    cur: Optional[Dict[str, Any]] = None
 
     def push_cur():
         nonlocal cur
@@ -164,26 +191,23 @@ def _group_sequences(
     for i, lab in enumerate(labels):
         score = scores[i]
         if score < min_conf:
-            # treat as O; close current
             push_cur()
             continue
 
-        if lab == "O" or lab == "PAD":
+        if lab in ("O", "PAD", None):
             push_cur()
             continue
 
-        # split like B-NAME / I-NAME
         if "-" in lab:
             prefix, field = lab.split("-", 1)
         else:
-            prefix, field = "B", lab  # non-BIO fallback
+            prefix, field = "B", lab
 
         tok = tokens[i].strip()
         if not tok:
             continue
 
         if prefix == "B" or (cur and cur["label"] != field):
-            # start a new span
             push_cur()
             cur = {
                 "label": field,
@@ -196,9 +220,7 @@ def _group_sequences(
             cur["tokens"].append(tok)
             cur["bbox"] = _merge_bbox(cur["bbox"], bboxes[i])
             cur["scores"].append(score)
-            # keep first page id as span page
         else:
-            # unexpected pattern: start a fresh group
             push_cur()
             cur = {
                 "label": field,
@@ -209,71 +231,47 @@ def _group_sequences(
             }
 
     push_cur()
-
-    # finalize mean score
     for g in groups:
-        if g["scores"]:
-            g["score"] = float(sum(g["scores"]) / len(g["scores"]))
-        else:
-            g["score"] = 0.0
-        del g["scores"]
-
+        g["score"] = float(sum(g.get("scores", [0.0])) / max(1, len(g.get("scores", []))))
+        g.pop("scores", None)
     return groups
 
 
-def _predict_tokens(
-    model: FieldClassifier,
-    enc: Dict[str, torch.Tensor],
-    device: torch.device,
-    graph_cfg: Optional[Dict[str, Any]] = None,
-) -> Tuple[List[int], List[float]]:
+def _encode(tokens: List[str], bboxes: List[List[int]], max_length: int = 512):
     """
-    Runs the classifier and returns per-token predicted ids & probabilities.
+    LayoutLMv3 encoding for a single sequence (B=1). No images, apply_ocr=False.
     """
-    batch = {k: v.to(device) for k, v in enc.items()}
-    graph = None
-    if graph_cfg and graph_cfg.get("use", False):
-        # Build edges on-the-fly per sequence (B=1 assumption simplifies graph)
-        with torch.no_grad():
-            bboxes_np = batch["bbox"][0].cpu().numpy()
-            page_ids = None  # could pass if you track them
-            strategy = graph_cfg.get("strategy", "knn")
-            k = int(graph_cfg.get("k", 8))
-            radius = graph_cfg.get("radius", None)
-            graph = build_edges(bboxes_np, strategy=strategy, k=k, radius=radius, page_ids=page_ids)
-
-    with torch.no_grad():
-        out = model(batch, graph=graph, labels=None)
-        logits = out["logits"]  # [1, T, C]
-        probs = F.softmax(logits, dim=-1)  # [1, T, C]
-        confs, preds = probs.max(dim=-1)   # [1, T]
-        pred_ids = preds[0].tolist()
-        conf_vals = confs[0].tolist()
-    return pred_ids, conf_vals
+    return embedding_processor(
+        text=tokens,
+        boxes=bboxes,
+        truncation=True,
+        max_length=max_length,
+        padding="max_length",
+        return_tensors="pt"
+    )
 
 
-def _ids_to_labels(pred_ids: List[int], id2label: Dict[int, str]) -> List[str]:
-    return [id2label.get(i, "O") for i in pred_ids]
-
-
-def _summarize(groups: List[Dict[str, Any]], t5_path: Optional[str]) -> List[Dict[str, Any]]:
-    if not groups:
-        return groups
-    # Try T5 if available & path provided; otherwise template fallback
-    if _HAS_T5 and (t5_path is None or os.path.exists(t5_path)):
-        try:
-            return summarize_fields(groups, t5_path)
-        except Exception:
-            pass
-    # Fallback: simple templates
-    for g in groups:
-        label = g["label"].replace("_", " ").title()
-        g["summary"] = f"{label}: {' '.join(g['tokens'])}"
-    return groups
+def _to_device(batch: Dict[str, torch.Tensor], device: torch.device) -> Dict[str, torch.Tensor]:
+    return {k: (v.to(device) if torch.is_tensor(v) else v) for k, v in batch.items()}
 
 
 # ------------------------------
-# Public API
+# Public: Prelabel generator (CLI target)
+# ------------------------------
+def prelabel(pdf_path: str, out_json: str, dev: bool = False) -> bool:
+    """
+    Generate a temp annotation JSON for a PDF (tokens only; groups left empty).
+    The caller (scripts.config) performs TSL duplicate detection and promotion.
+    """
+    data = _extract_tokens_only(pdf_path)
+    ok = _write_json(out_json, data)
+    if dev:
+        print(f"[llmv3_infer] prelabel → wrote {out_json}: {'OK' if ok else 'FAIL'}")
+    return ok
+
+
+# ------------------------------
+# Public: Full inference (optional)
 # ------------------------------
 def analyze_tokens(
     tokens: List[str],
@@ -282,7 +280,7 @@ def analyze_tokens(
     config: Optional[Dict[str, Any]] = None
 ) -> Dict[str, Any]:
     """
-    Skips extraction; runs classification, grouping, summarization.
+    Skips extraction; runs classification, grouping, and summarization.
     """
     cfg = {
         "device": "cuda" if torch.cuda.is_available() else "cpu",
@@ -294,39 +292,77 @@ def analyze_tokens(
     }
     device = torch.device(cfg["device"])
 
-    # Load/prepare model
-    model = classifier_model
-    model = _maybe_load_classifier(model, cfg["model_paths"].get("classifier"))
-    model.to(device).eval()
+    # Load weights if provided
+    if cfg["model_paths"].get("classifier") and os.path.exists(cfg["model_paths"]["classifier"]):
+        try:
+            sd = torch.load(cfg["model_paths"]["classifier"], map_location="cpu")
+            classifier_model.load_state_dict(sd.get("state_dict", sd), strict=False)
+        except Exception as e:
+            print(f"[llmv3_infer] Warning: could not load classifier weights ({e})", file=sys.stderr)
 
-    # Encode
+    classifier_model.to(device).eval()
+
+    # Encode (B=1)
     enc = _encode(tokens, bboxes, max_length=cfg["max_length"])
+    batch = _to_device(enc, device)
+
+    # Optional graph
+    graph = None
+    if cfg.get("graph", {}).get("use", False) and build_edges is not None:
+        try:
+            bboxes_np = batch["bbox"][0].detach().cpu().numpy()
+            graph = build_edges(
+                bboxes_np,
+                strategy=cfg["graph"].get("strategy", "knn"),
+                k=int(cfg["graph"].get("k", 8)),
+                radius=cfg["graph"].get("radius", None),
+                page_ids=None,
+            )
+        except Exception as e:
+            print(f"[llmv3_infer] Graph build skipped ({e})", file=sys.stderr)
+            graph = None
+
     # Predict
     t0 = time.time()
-    pred_ids, confs = _predict_tokens(model, enc, device, graph_cfg=cfg.get("graph"))
+    with torch.no_grad():
+        out = classifier_model(batch, graph=graph, labels=None)  # expects dict with "logits"
+        logits = out["logits"]  # [1, T, C]
+        probs = F.softmax(logits, dim=-1)
+        confs, preds = probs.max(dim=-1)   # [1, T]
+        pred_ids = preds[0].tolist()
+        conf_vals = [float(x) for x in confs[0].tolist()]
     classify_ms = int((time.time() - t0) * 1000)
 
-    # Map ids->labels (read from processor config if available)
-    id2label = getattr(model, "id2label", None)
+    # id2label
+    id2label = getattr(classifier_model, "id2label", None)
+    if id2label is None and hasattr(getattr(classifier_model, "backbone", None), "config"):
+        id2label = getattr(classifier_model.backbone.config, "id2label", None)
     if id2label is None:
-        # Attempt to fetch from HF config, else assume contiguous integers
-        if hasattr(model.backbone.config, "id2label"):
-            id2label = model.backbone.config.id2label
-        else:
-            # fallback generic
-            id2label = {i: f"LABEL_{i}" for i in range(max(pred_ids + [0]) + 1)}
+        id2label = {i: f"LABEL_{i}" for i in range(max(pred_ids + [0]) + 1)}
 
-    labels = _ids_to_labels(pred_ids, id2label)
+    labels = [id2label.get(i, "O") for i in pred_ids]
 
     # Group BIO spans
-    groups = _group_sequences(tokens, bboxes, labels, confs, page_ids=page_ids, min_conf=cfg["min_confidence"])
+    groups = _group_sequences(tokens, bboxes, labels, conf_vals, page_ids=page_ids, min_conf=cfg["min_confidence"])
 
-    # Summarize
-    t1 = time.time()
-    fields = _summarize(groups, cfg["model_paths"].get("t5"))
-    summarize_ms = int((time.time() - t1) * 1000)
+    # Summarization (optional)
+    fields: List[Dict[str, Any]]
+    if _HAS_T5 and (cfg["model_paths"].get("t5") is None or os.path.exists(cfg["model_paths"]["t5"])):
+        try:
+            fields = summarize_fields(groups, cfg["model_paths"].get("t5"))
+        except Exception:
+            fields = []
+    else:
+        fields = []
 
-    # Finalize shape
+    if not fields:
+        # Fallback template summaries
+        for g in groups:
+            label = g["label"].replace("_", " ").title()
+            g["summary"] = f"{label}: {' '.join(g['tokens'])}"
+        fields = groups
+
+    # Finalize
     for f in fields:
         f.setdefault("score", 0.0)
         f.setdefault("summary", "")
@@ -344,7 +380,7 @@ def analyze_tokens(
             }
             for f in fields
         ],
-        "runtime": {"extract_ms": 0, "classify_ms": classify_ms, "summarize_ms": summarize_ms},
+        "runtime": {"extract_ms": 0, "classify_ms": classify_ms, "summarize_ms": 0},
     }
 
 
@@ -355,28 +391,89 @@ def analyze_pdf(pdf_path: str, config: Optional[Dict[str, Any]] = None) -> Dict[
     if not os.path.exists(pdf_path):
         raise FileNotFoundError(f"File not found: {pdf_path}")
 
-    cfg = {
-        "device": "cuda" if torch.cuda.is_available() else "cpu",
-        "min_confidence": 0.0,
-        "max_length": 512,
-        "graph": {"use": True, "strategy": "knn", "k": 8, "radius": None},
-        "model_paths": {"classifier": "saved_models/classifier.pt", "t5": "saved_models/t5.pt"},
-        **(config or {}),
-    }
-    device = torch.device(cfg["device"])
-
     # 1) Extraction
     t0 = time.time()
-    ext = extract_pdf(pdf_path)
+    try:
+        ext = extract_pdf(pdf_path)
+        tokens = [str(t.text) for t in getattr(ext, "tokens", [])]
+        bboxes = [list(t.bbox) for t in getattr(ext, "tokens", [])]
+        page_ids = [int(getattr(t, "page", 0)) for t in getattr(ext, "tokens", [])]
+    except Exception as e:
+        print(f"[llmv3_infer] Extraction failed in analyze_pdf: {e}", file=sys.stderr)
+        tokens, bboxes, page_ids = ["Sample"], [[20, 20, 120, 50]], [0]
     extract_ms = int((time.time() - t0) * 1000)
 
-    # Flatten tokens/bboxes/page_ids
-    tokens = [t.text for t in ext.tokens]
-    bboxes = [list(t.bbox) for t in ext.tokens]
-    page_ids = [t.page for t in ext.tokens]
-
-    # 2..5) Reuse analyze_tokens for the rest
-    result = analyze_tokens(tokens, bboxes, page_ids=page_ids, config=cfg)
+    # 2..5) Classification + grouping + summarization
+    result = analyze_tokens(tokens, bboxes, page_ids=page_ids, config=config or {})
     result["document"] = pdf_path
     result["runtime"]["extract_ms"] = extract_ms
     return result
+
+
+# ------------------------------
+# CLI
+# ------------------------------
+def _parse_argv(argv: List[str]) -> Dict[str, Any]:
+    """
+    Minimal arg parser for:
+      --prelabel
+      --pdf <path>
+      --out <temp_json>
+      --dev
+    Unknown flags are ignored for forward-compatibility.
+    """
+    out = {"prelabel": False, "pdf": None, "out": None, "dev": False}
+    i = 0
+    while i < len(argv):
+        a = argv[i]
+        if a == "--prelabel":
+            out["prelabel"] = True
+            i += 1
+        elif a == "--pdf" and i + 1 < len(argv):
+            out["pdf"] = argv[i + 1]
+            i += 2
+        elif a == "--out" and i + 1 < len(argv):
+            out["out"] = argv[i + 1]
+            i += 2
+        elif a == "--dev":
+            out["dev"] = True
+            i += 1
+        else:
+            i += 1
+    return out
+
+
+def _main(argv: List[str]) -> int:
+    args = _parse_argv(argv)
+
+    if args.get("prelabel"):
+        pdf = args.get("pdf")
+        out_json = args.get("out")
+        if not pdf or not out_json:
+            print("[llmv3_infer] --prelabel requires --pdf <path> and --out <temp_json>", file=sys.stderr)
+            return 2
+        ok = prelabel(pdf_path=str(pdf), out_json=str(out_json), dev=bool(args.get("dev")))
+        return 0 if ok else 1
+
+    print(
+        "Usage:\n"
+        "  python -m utils.llmv3_infer --prelabel --pdf <path> --out <temp_json> [--dev]\n",
+        file=sys.stderr
+    )
+    return 2
+
+
+if __name__ == "__main__":
+    sys.exit(_main(sys.argv[1:]))
+
+
+# ------------------------------
+# Public exports (for clarity)
+# ------------------------------
+__all__ = [
+    "embedding_processor",  # secondary processor (apply_ocr=False)
+    "embedding",            # base embedding reference (from utils.field_classifier)
+    "prelabel",
+    "analyze_tokens",
+    "analyze_pdf",
+]
