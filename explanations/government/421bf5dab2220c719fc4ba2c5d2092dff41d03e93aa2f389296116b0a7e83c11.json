@@ -1,0 +1,168 @@
+{
+  "title": "PhilHealth Member Registration Form (PMRF)",
+  "form_id": "Government_PhilHealthMemberRegistrationForm",
+  "sections": [
+    {
+      "title": "I. Personal Details",
+      "fields": [
+        {
+          "label": "Full Name",
+          "summary": "Write LAST, FIRST, MIDDLE. Add name extension (Jr./Sr./III) if any. Check 'No Middle Name' only if applicable."
+        },
+        {
+          "label": "Date of Birth",
+          "summary": "Enter in MM/DD/YYYY. Use digits in the boxes."
+        },
+        {
+          "label": "Place of Birth",
+          "summary": "City/Municipality/Province/Country (indicate country if born abroad)."
+        },
+        {
+          "label": "Sex",
+          "summary": "Tick Male or Female."
+        },
+        {
+          "label": "Citizenship",
+          "summary": "Select Filipino or Foreign National. If dual citizen, indicate basis (e.g., by birth, by law) and ID ref if any."
+        },
+        {
+          "label": "Civil Status",
+          "summary": "Single, Married, Widowed/er, Annulled, or Legally Separated."
+        },
+        {
+          "label": "PhilSys ID Number (Optional)",
+          "summary": "Enter your PhilSys ID (if available)."
+        },
+        {
+          "label": "TIN (Optional)",
+          "summary": "Enter your Taxpayer Identification Number if available."
+        },
+        {
+          "label": "Mother’s Maiden Name",
+          "summary": "Write your mother’s full maiden name as on the birth certificate."
+        },
+        {
+          "label": "Spouse (if Married)",
+          "summary": "Write spouse’s full name."
+        }
+      ]
+    },
+    {
+      "title": "II. Address & Contact Details",
+      "fields": [
+        {
+          "label": "Permanent Home Address",
+          "summary": "Complete: Unit/Room/Floor, Building, Lot/Block/Phase/House No., Street, Subdivision, Barangay, Municipality/City, Province/State/Country, ZIP."
+        },
+        {
+          "label": "Mailing Address",
+          "summary": "Provide full mailing address. Tick 'Same as Above' if identical to permanent address."
+        },
+        {
+          "label": "Contact Numbers",
+          "summary": "Home (with country/area code), Mobile (required), Business (direct/trunk + local)."
+        },
+        {
+          "label": "Email Address",
+          "summary": "Provide a valid email (required for OFW)."
+        }
+      ]
+    },
+    {
+      "title": "IV. Member Type (Check One)",
+      "fields": [
+        {
+          "label": "Direct Contributor",
+          "summary": "Choose the specific sub-type (Employed Private/Government, Self-earning, Professional Practitioner, Kasambahay/Family Driver, Migrant Worker Land/Sea, Dual Citizen/Living Abroad, Foreign National, etc.)."
+        },
+        {
+          "label": "Indirect Contributor",
+          "summary": "Select applicable (Listahanan, 4Ps/MCCT, LGU/NGA-sponsored, Senior Citizen, Lifetime Member, POS Financially Incapable, etc.)."
+        },
+        {
+          "label": "Profession / Monthly Income / Proof",
+          "summary": "For Direct Contributors (except Employed, Sea-based, Lifetime): indicate profession, monthly income, and attach proof."
+        }
+      ]
+    },
+    {
+      "title": "III. Declaration of Dependents",
+      "fields": [
+        {
+          "label": "Dependents List",
+          "summary": "List living spouse, children <21, and parents (≥60) totally dependent. Provide full names, dates of birth, relationship, and citizenship. Mark permanent disability if applicable."
+        },
+        {
+          "label": "PWD Coverage Note",
+          "summary": "Persons with disability (PWD) are registered as principal members under RA 11228."
+        }
+      ]
+    },
+    {
+      "title": "V. Updating / Amendment (If Applicable)",
+      "fields": [
+        {
+          "label": "Update Type",
+          "summary": "Tick what to update: Name (any part), Date of Birth, Sex, Civil Status, Personal Information, Address, Phone/Mobile, Email."
+        },
+        {
+          "label": "Correct Data",
+          "summary": "Provide the correct entries in the appropriate fields and attach supporting documents."
+        }
+      ]
+    },
+    {
+      "title": "KonSulTa & Other Preferences",
+      "fields": [
+        {
+          "label": "Preferred KonSulTa Provider",
+          "summary": "Indicate preferred KonSulTa provider near home or work (not for Employed, Lifetime, Sea-based MW)."
+        }
+      ]
+    },
+    {
+      "title": "Declaration & Signature",
+      "fields": [
+        {
+          "label": "Member’s Declaration",
+          "summary": "Sign over printed name and date. Certify truthfulness and authorize validation/data sharing per law with adequate security."
+        },
+        {
+          "label": "Right Thumbmark",
+          "summary": "Affix if unable to write."
+        }
+      ]
+    },
+    {
+      "title": "For PhilHealth Use Only",
+      "fields": [
+        {
+          "label": "Receiving Details",
+          "summary": "To be filled by PRO/LHIO/Branch: receiver’s name, date/time, and office codes."
+        },
+        {
+          "label": "PIN Reminder",
+          "summary": "Your PhilHealth Identification Number (PIN) is unique and permanent; always use it for transactions."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 148,
+    "fp": 33,
+    "fn": 21,
+    "precision": 0.82,
+    "recall": 0.88,
+    "f1": 0.85
+  },
+  "canonical_id": "421bf5dab2220c719fc4ba2c5d2092dff41d03e93aa2f389296116b0a7e83c11",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2025-10-10T05:32:26+08:00",
+  "updated_at": "2025-10-10T05:32:26+08:00",
+  "aliases": [
+    "Government_PhilHealthMemberRegistrationForm",
+    "Government_PhilHealth_MemberRegistration",
+    "PhilHealth_MemberRegistration"
+  ]
+}

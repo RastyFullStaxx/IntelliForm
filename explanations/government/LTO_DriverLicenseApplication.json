@@ -1,0 +1,83 @@
+﻿{
+  "title": "LTO Application for Driver's License (ADL)",
+  "form_id": "Government_DriverLicenseApplicationForm",
+  "sections": [
+    {
+      "title": "Applicant Information",
+      "fields": [
+        { "label": "Full Name", "summary": "Write FAMILY NAME, FIRST NAME, MIDDLE NAME as on valid ID." },
+        { "label": "Present Address", "summary": "House/Unit/Street, City/Municipality, Province. Provide Tel/CP No. and TIN if available." },
+        { "label": "Birth Details", "summary": "Birth Date (MM/DD/YY) and Birthplace (City/Municipality, Province)." },
+        { "label": "Nationality & Gender", "summary": "State nationality and tick Gender (F/M)." },
+        { "label": "Physical Stats", "summary": "Height (cm) and Weight (kg)." }
+      ]
+    },
+    {
+      "title": "Type of Application & License",
+      "fields": [
+        { "label": "Type of Application (TOA)", "summary": "Mark one: New, Delinquent/Dormant, Change Classification (Non-Prof↔Prof), Foreign License Conversion, Renewal, Duplicate, Revision of Records, Others (specify)." },
+        { "label": "Type of License Applied For", "summary": "Mark Student Permit, Non-Professional, Professional, or Conductor." },
+        { "label": "Restriction Code (RC)", "summary": "Tick allowable vehicle categories (e.g., MC/Tricycles; up to 4500 kg GVW; above 4500 kg; automatic clutch only; articulated, etc.)." }
+      ]
+    },
+    {
+      "title": "Education & Skills",
+      "fields": [
+        { "label": "Educational Attainment", "summary": "Tick highest: Informal, Elementary, High School, Vocational, College, Post-Graduate." },
+        { "label": "Driving Skill Acquired Thru", "summary": "Select Driving School, Licensed Private Person, or Schooling." }
+      ]
+    },
+    {
+      "title": "Medical & Conditions",
+      "fields": [
+        { "label": "Blood Type", "summary": "Write known blood type (e.g., O+, A−)." },
+        { "label": "Eyes / Complexion / Built / Hair", "summary": "Select the option that best describes you (e.g., Eyes: Black/Brown/Gray/Others; Complexion: Light/Medium/Heavy/Dark)." },
+        { "label": "Organ Donor", "summary": "Tick YES if you consent to be an organ donor; otherwise NO." },
+        { "label": "Driving Conditions", "summary": "Tick if applicable: With Corrective Lenses, With Hearing Aid, Daylight Driving Only, Drive Only w/ Special Equipment for Upper/Lower Limbs, Drive Only w/ Customized Vehicle." }
+      ]
+    },
+    {
+      "title": "Family & Employment",
+      "fields": [
+        { "label": "Civil Status", "summary": "Single, Married, Widower/Widow, Separated, or Others (specify)." },
+        { "label": "Parents / Spouse", "summary": "Provide Father’s, Mother’s, and, if applicable, Spouse’s full names (indicate even if deceased)." },
+        { "label": "Employer Details", "summary": "Employer’s Business Name, Address, and Telephone No. (if employed)." }
+      ]
+    },
+    {
+      "title": "Revisions & Previous Name",
+      "fields": [
+        { "label": "Revision of Records", "summary": "For Change of Address, Change Civil Status, Change Name, Change Date of Birth, etc., tick the correct item and attach supporting documents." },
+        { "label": "Previous Name", "summary": "If your current name differs from your previous license, write your former full name." }
+      ]
+    },
+    {
+      "title": "Declaration & Signatures",
+      "fields": [
+        { "label": "Applicant’s Certification", "summary": "Sign above printed name to certify information is true and correct." },
+        { "label": "LTO Evaluator/Approver", "summary": "To be accomplished by LTO personnel only (CSR/Evaluator). Attach required supporting documents." }
+      ]
+    },
+    {
+      "title": "Fees (For LTO Use)",
+      "fields": [
+        { "label": "Computation of Fees", "summary": "Application Fee, Computer Fee, License Fee, Additional Restriction Code Fee; totals computed by LTO." }
+      ]
+    },
+    {
+      "title": "Road Test Score Sheet (Back Page)",
+      "fields": [
+        { "label": "Scoring & Passing", "summary": "Start with 100 points; deductions for errors. Passing score is 70. Automatic failure for striking a car/pedestrian/object or causing near collision." },
+        { "label": "Assessment Areas", "summary": "Pre-Driving Check-up (10 pts), Driving Skills (50), Observance to Traffic Rules (40). Specific demerits recorded by examiner." }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 165,
+    "fp": 36,
+    "fn": 27,
+    "precision": 0.82,
+    "recall": 0.86,
+    "f1": 0.84
+  }
+}

@@ -12,6 +12,11 @@ __pycache__/
 *.egg-info/
 dist/
 build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.xml
 
 # -------------------------------
 # Virtual environments
@@ -20,6 +25,13 @@ venv/
 env/
 ENV/
 .venv/
+
+# -------------------------------
+# Env / secrets
+# -------------------------------
+.env
+.env.*
+*.env
 
 # -------------------------------
 # Large model files / checkpoints
@@ -42,10 +54,9 @@ data/**/*.png
 data/**/*.jpg
 data/**/*.jpeg
 
-# Annotations:
+# Annotations in datasets:
 # By default, ignore all annotations...
 data/**/annotations/**
-
 # ...but DO track our PH annotation JSONs (work product, small)
 !data/**/ph_forms/annotations/*.json
 
@@ -66,6 +77,12 @@ data/**/*.tar
 # -------------------------------
 uploads/
 static/uploads/
+
+# Generated prelabel annotations (runtime artifacts)
+explanations/_annotations/**
+
+# Generated overlays (runtime artifacts)
+out/overlays/**
 
 # Generated metrics report (can re-generate)
 static/metrics_report.txt
@@ -93,3 +110,5 @@ Thumbs.db
 # -------------------------------
 tmp/
 temp/
+*.log
+logs/
