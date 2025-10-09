@@ -112,3 +112,26 @@ tmp/
 temp/
 *.log
 logs/
+
+# HuggingFace shards (huge)
+data/**/hf_*/
+
+# Any straggler dataset binaries
+data/**/*.pdf
+data/**/*.png
+data/**/*.jpg
+data/**/*.jpeg
+
+# Generated artifacts
+uploads/
+out/overlays/
+explanations/_annotations/
+
+# Models / checkpoints
+saved_models/
+checkpoints/
+
+# Local reports
+_inventory.txt
+_tracked-files.txt
+_tree.txt
