@@ -29,6 +29,7 @@ SECURITY / DEPLOY NOTES
 - Tighten CORS in prod.
 """
 
+# api.py
 from __future__ import annotations
 
 import os
@@ -38,6 +39,8 @@ import json
 import shutil
 from typing import Optional, List, Dict, Any
 from pathlib import Path
+import re
+import fitz  # PyMuPDF, already in your project via overlay renderer
 
 from fastapi import FastAPI, File, UploadFile, HTTPException, Query, Body, Form
 from fastapi.middleware.cors import CORSMiddleware
@@ -49,6 +52,13 @@ from scripts import config
 from utils.llmv3_infer import analyze_pdf, analyze_tokens    # optional analyzer
 from utils.dual_head import generate_explainer               # LLM fallback explainer
 from services.overlay_renderer import render_overlays
+
+# ✅ New: centralized registry helpers
+from services.registry import (
+    load_registry as reg_load,
+    upsert_registry as reg_upsert,
+    find_by_hash as reg_find,
+)
 
 # -----------------------------
 # Paths & mounts (ORDER MATTERS)
@@ -101,7 +111,7 @@ class EnsureExplainerBody(BaseModel):
     canonical_form_id: str               # TEMPLATE HASH
     bucket: str                          # e.g., healthcare / banking / government / tax
     human_title: Optional[str] = None    # pretty title for UI
-    pdf_disk_path: Optional[str] = None  # optional; can be used by fallback for better context
+    pdf_disk_path: Optional[str] = None  # optional; used by fallback for better context
     aliases: Optional[List[str]] = None  # optional extra aliases to save in registry
 
 # -----------------------------
@@ -166,43 +176,19 @@ def _validate_upload_path(path: str) -> str:
         raise HTTPException(status_code=404, detail="File not found.")
     return disk
 
-def _registry_load() -> Dict[str, Any]:
-    data = config.load_registry() or {}
-    if not isinstance(data, dict):
-        data = {}
-    data.setdefault("forms", [])
-    return data
-
-def _registry_save(data: Dict[str, Any]) -> None:
-    REG_PATH.parent.mkdir(parents=True, exist_ok=True)
-    REG_PATH.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-
-def _registry_find_by_hash(h: str) -> Optional[Dict[str, Any]]:
-    reg = _registry_load()
-    for f in reg.get("forms", []):
-        if f.get("form_id") == h:
-            return f
-    return None
-
-def _registry_upsert(form_id: str, title: str, rel_path: str, *, bucket: Optional[str] = None, aliases: Optional[List[str]] = None) -> None:
-    reg = _registry_load()
-    forms: List[Dict[str, Any]] = reg.get("forms", [])
-    idx = next((i for i, f in enumerate(forms) if f.get("form_id") == form_id), None)
-    entry = {
-        "form_id": form_id,
-        "title": title or form_id,
-        "path": rel_path,
-    }
-    if bucket:
-        entry["bucket"] = bucket
-    if aliases:
-        entry["aliases"] = sorted(list(dict.fromkeys([a for a in aliases if a])))
-    if idx is not None:
-        forms[idx] = entry
-    else:
-        forms.append(entry)
-    reg["forms"] = forms
-    _registry_save(reg)
+def _extract_embedded_form_id(pdf_path: str) -> Optional[str]:
+    """
+    Read PDF metadata and extract IntelliForm-embedded form_id, if any.
+    We set this in the client export as:
+        Subject: "IntelliForm-FormId:<hash>"
+    """
+    try:
+        with fitz.open(pdf_path) as doc:
+            subj = (doc.metadata or {}).get("subject") or ""
+    except Exception:
+        return None
+    m = re.search(r"IntelliForm-FormId:([A-Za-z0-9_-]{8,128})", subj)
+    return m.group(1) if m else None
 
 # -----------------------------
 # Routes
@@ -213,13 +199,15 @@ def api_health():
 
 @app.get("/panel")
 def panel():
-    data = _registry_load()
+    data = reg_load(str(REG_PATH))
     return JSONResponse(content=data)
 
 @app.post("/api/upload")
 async def api_upload(file: UploadFile = File(...)):
     """
     Save PDF → compute TEMPLATE hash → return canonical_form_id.
+    If the PDF carries our embedded Subject "IntelliForm-FormId:<hash>",
+    prefer that as the canonical_form_id so edited PDFs map to the same explainer.
     """
     if not file.filename.lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only PDF files are accepted.")
@@ -237,18 +225,22 @@ async def api_upload(file: UploadFile = File(...)):
     finally:
         await file.close()
 
-    # Compute TEMPLATE-based hash (robust to filled values)
-    canonical_form_id = config.canonical_template_hash(disk_path)
+    # 1) Compute TEMPLATE-based hash from file content (robust to filled values)
+    template_hash = config.canonical_template_hash(disk_path)
+
+    # 2) Prefer embedded IntelliForm FormId (for edited PDFs we exported client-side)
+    embedded_form_id = _extract_embedded_form_id(disk_path)
+    canonical_form_id = embedded_form_id or template_hash
 
     # Return BOTH new and legacy fields for full compatibility
     return {
         "ok": True,
         "web_path": web_path,
         "disk_path": disk_path,
-        # NEW truth:
+        # NEW truth (may come from embedded metadata if present):
         "canonical_form_id": canonical_form_id,
-        # Legacy/compat:
-        "form_id": canonical_form_id,  # frontend may still read `form_id`
+        # Legacy/compat (front-end still reads `form_id`):
+        "form_id": canonical_form_id,
         "file_id": stored,
         "path": web_path,
     }
@@ -287,7 +279,7 @@ async def api_prelabel(
         detail = getattr(launch, "stderr", None) if launch and not isinstance(launch, bool) else None
         raise HTTPException(status_code=500, detail=detail or "Prelabeler failed to produce temp annotation.")
 
-    # Promote to canonical <HASH>.json (no matching/dedup anymore)
+    # Promote to canonical <HASH>.json
     promo = config.promote_or_reuse_annotation(form_id=form_id, temp_path=temp_json)
     if not promo.success or not promo.canonical_path:
         raise HTTPException(status_code=500, detail=promo.error or "Promotion failed.")
@@ -322,7 +314,7 @@ async def api_explainer_legacy(
     file: UploadFile = File(...),
     bucket: str = Form(...),
     form_id: str = Form(...),           # SHOULD be the TEMPLATE HASH
-    human_title: str = Form(...)
+    human_title: str = Form(...),
 ):
     """
     Legacy-compatible: accept a PDF blob, save it, then generate an explainer.
@@ -357,7 +349,7 @@ async def api_explainer_legacy(
 
     # Store relative path for the client
     rel_path = os.path.relpath(expl_path, BASE_DIR).replace("\\", "/")
-    _registry_upsert(form_id=form_id, title=human_title, rel_path=rel_path, bucket=bucket)
+    reg_upsert(str(REG_PATH), form_id=form_id, title=human_title, rel_path=rel_path, bucket=bucket)
 
     return {
         "ok": True,
@@ -393,15 +385,20 @@ async def api_explainer_ensure(body: EnsureExplainerBody):
         return p.replace("\\", "/").lstrip("/")  # serve under /<relpath>
 
     # If already present in registry, normalize its path if needed and return.
-    existing = _registry_find_by_hash(h)
+    existing = reg_find(str(REG_PATH), h)
     if existing:
         rel_path = _relativize(str(existing.get("path", "")))
         # If path changed (was absolute), upsert the normalized one.
         if rel_path and rel_path != existing.get("path"):
-            _registry_upsert(form_id=h, title=existing.get("title") or title, rel_path=rel_path,
-                             bucket=existing.get("bucket") or bucket,
-                             aliases=existing.get("aliases") or (body.aliases or []))
-            existing = _registry_find_by_hash(h) or {"form_id": h, "title": title, "path": rel_path, "bucket": bucket}
+            reg_upsert(
+                str(REG_PATH),
+                form_id=h,
+                title=(existing.get("title") or title),
+                rel_path=rel_path,
+                bucket=(existing.get("bucket") or bucket),
+                aliases=(existing.get("aliases") or (body.aliases or [])),
+            )
+            existing = reg_find(str(REG_PATH), h) or {"form_id": h, "title": title, "path": rel_path, "bucket": bucket}
         return {
             "ok": True,
             "form_id": h,
@@ -423,7 +420,15 @@ async def api_explainer_ensure(body: EnsureExplainerBody):
         out_dir=str(out_dir),
     )
     rel_path = os.path.relpath(expl_path, BASE_DIR).replace("\\", "/")
-    _registry_upsert(form_id=h, title=title, rel_path=rel_path, bucket=bucket, aliases=(body.aliases or []))
+
+    reg_upsert(
+        str(REG_PATH),
+        form_id=h,
+        title=title,
+        rel_path=rel_path,
+        bucket=bucket,
+        aliases=(body.aliases or []),
+    )
 
     return {
         "ok": True,
