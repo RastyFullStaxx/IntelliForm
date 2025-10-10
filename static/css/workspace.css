@@ -30,6 +30,30 @@ body {
 .vertical-divider{font-size:18px;color:#ccc;font-weight:300}
 #togglePages{margin-left:2rem}
 
+/* ===== NEW: Navbar edit toolbar ===== */
+.edit-toolbar { display:flex; align-items:center; gap:6px; margin-right:16px; }
+.toolbar-divider { opacity:.6; }
+.toolbar-pill {
+  padding:6px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.15);
+  background: rgba(255,255,255,.06); color:#fff; font-weight:700;
+}
+.toolbar-pill.success { background:#155e34; border-color:#1e9c5a; }
+.tool-btn {
+  width:34px; height:34px; border-radius:8px; border:1px solid rgba(255,255,255,.15);
+  display:flex; align-items:center; justify-content:center; font-size:18px;
+  background: rgba(255,255,255,.06); color:#fff;
+}
+.tool-btn.active { outline:2px solid #ffd54a; }
+.tool-btn:disabled, #btnUndo:disabled, #btnClear:disabled, #btnSave:disabled, #enterEdit.disabled {
+  opacity:.45; cursor:not-allowed;
+}
+
+/* Widen buttons that have dropdown carets (Pen/Highlight) */
+.tool-dropdown > .tool-btn {
+  width: 46px;                /* room for caret */
+  padding-right: 4px;         /* tiny breathing space */
+}
+
 /* ===== Sidebar Toggle Button ===== */
 #floatingToggleWrapper{position:fixed; top:200px; right:-10px; z-index:1001}
 #sidebarToggle{
@@ -89,7 +113,9 @@ body {
 }
 .accordion-content{ background:#152c58; padding:6px 12px; color:white; font-size:12px; display:none; border-radius:12px; margin-bottom:15px }
 .accordion-content.active{ display:block }
-.summary-label{ color:#FFD700; font-weight:600 }
+.summary-label{ color:#FFD700; font-weight:600; cursor:pointer; text-decoration:underline; }
+.summary-label:focus,.summary-label:hover{ text-decoration:underline; outline:none; }
+
 #formNameDisplay{
   font-size:13px; font-weight:700; text-align:center; margin-bottom:10px;
   background: linear-gradient(90deg,#ffeb3b,#f5c400,#ffd700); color:#000; padding:8px 12px; border-radius:20px;
@@ -98,10 +124,35 @@ body {
 @keyframes shimmerGlow{0%{background-position:0% 50%}100%{background-position:100% 50%}}
 @keyframes headerGradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-/* ===== PDF container ===== */
-#pdfContainer{ flex:1; overflow-y:auto; padding:20px; display:flex; justify-content:center; align-items:start; position:relative }
+/* ===== PDF container & aligned layers ===== */
+#pdfContainer{
+  flex:1;
+  overflow-y:auto;
+  padding:20px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;   /* top align the page */
+  position:relative;
+}
 #pdfContainer::-webkit-scrollbar{ display:none }
+
+/* Shared wrapper so all layers share origin & CSS size */
+.pageLayer { position: relative; margin-top:60px; }
+
+/* All layers fill the wrapper; internal resolution handled in JS via DPR */
+#pdfCanvas, #overlayCanvas, .annotationLayer {
+  position:absolute;
+  left:0; top:0;
+  width:100%; height:100%;
+}
+
+/* (Legacy rule removed) — sizing is now driven by wrapper+JS DPR
 #pdfCanvas{ max-width:90%; height:auto; background:#fff; box-shadow:0 0 10px rgba(0,0,0,.4); margin-top:60px }
+*/
+#pdfCanvas{
+  background:#fff;
+  box-shadow:0 0 10px rgba(0,0,0,.4);
+}
 
 /* ===== Thumbnails ===== */
 #thumbnailSidebar{
@@ -113,3 +164,81 @@ body {
 .thumbnail:hover{ border-color:#3ca2ff }
 .thumbnail-wrapper{text-align:center; margin-bottom:15px}
 .thumbnail-label{ font-size:.8rem; color:#fff; margin-top:4px }
+
+/* ===== Edit-layer pointer hints ===== */
+body.pen-mode    { cursor: crosshair; }
+body.hl-mode     { cursor: crosshair; }
+body.text-mode   { cursor: text; }
+
+/* Text annotation nodes (floating while editing) */
+.text-annot {
+  position: absolute;
+  min-width: 40px;
+  padding: 2px 4px;
+  background: rgba(255,255,255,.85);
+  color: #000;
+  border: 1px dashed #666;
+  border-radius: 3px;
+  font: 14px/1.2 'Inter', sans-serif;
+  z-index: 5;
+}
+.text-annot[contenteditable="true"]:focus { outline: 2px solid #0ea5e9; }
+
+/* Sidebar sticky footer */
+.sidebar-footer{
+  position: sticky;
+  bottom: 0;
+  justify-content: center;
+  z-index: 1;
+}
+
+/* Reuse pill look but neutral name (no 'ECE' wording) */
+.badge-pill{
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 18px;
+  border-radius: 999px;
+  color: #fff;
+  display: inline-block;
+  cursor: pointer;
+  background: linear-gradient(270deg,#1766dd,#22c55e,#0a2c5a);
+  background-size: 400% 400%;
+  animation: eceGlowGradient 8s ease infinite;
+  box-shadow: inset 0 0 8px rgba(62,216,255,.25), 0 0 8px rgba(34,197,94,.25);
+  user-select: none;
+}
+
+/* Text annotation: better drag affordance */
+.text-annot{ cursor: text; }
+.text-annot:hover{ cursor: move; }
+.text-annot.dragging{ cursor: grabbing; }
+
+.workspace-navbar { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.navbar-right { display:flex; align-items:center; }
+.edit-toolbar { display:flex; align-items:center; gap:6px; flex-wrap:nowrap; }
+.toolbar-divider { opacity:.4; padding:0 4px; }
+.icon-button { display:inline-flex; align-items:center; justify-content:center; gap:4px; }
+
+.edit-toolbar { display:flex; align-items:center; gap:8px; }
+.icon-button.active { background: #ffeaa7; } /* subtle yellow */
+.tool-dropdown { position: relative; }
+.tool-dropdown .caret { font-size: 0.8em; margin-left: 4px; }
+.dropdown-menu {
+  position: absolute; top: 100%; left: 0;
+  display: none; min-width: 180px; z-index: 10;
+  padding: 8px; border: 1px solid rgba(0,0,0,.1); border-radius: 8px;
+  background: #fff; box-shadow: 0 8px 24px rgba(0,0,0,.12);
+}
+.dropdown-menu.open { display: block; }
+.dropdown-menu .menu-row { display:flex; align-items:center; justify-content:space-between; gap:8px; margin:6px 0; }
+
+/* ===== Responsive tweaks (13–14″ laptops) ===== */
+@media (max-width: 1366px) {
+  #sidebar { width: 300px; right: -330px; }
+  #thumbnailSidebar { width: 170px; }
+  .workspace-navbar { height: 64px; }
+  #togglePages { margin-left: 1rem; }
+  .edit-toolbar { gap: 4px; }
+  .tool-dropdown > .tool-btn { width: 44px; } /* slightly tighter but still comfy */
+  #pdfContainer { padding: 12px; }
+}
