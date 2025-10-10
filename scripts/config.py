@@ -188,6 +188,28 @@ def canonical_template_hash(path: Union[str, Path]) -> str:
         or template_hash_via_pypdf_text(path)
         or _sha256_bytes(path)
     )
+    
+def extract_embedded_form_id(pdf_path: Union[str, Path]) -> Optional[str]:
+    """
+    Read PDF metadata and extract IntelliForm-embedded form_id, if any.
+    We set this on the client export as:
+        Subject: "IntelliForm-FormId:<hash>"
+    """
+    import re
+    try:
+        import fitz  # PyMuPDF
+    except Exception:
+        return None
+
+    try:
+        with fitz.open(str(pdf_path)) as doc:
+            subj = (doc.metadata or {}).get("subject") or ""
+    except Exception:
+        return None
+
+    m = re.search(r"IntelliForm-FormId:([A-Za-z0-9_-]{8,128})", subj)
+    return m.group(1) if m else None
+
 
 # ------------------ Annotation paths ------------------
 
@@ -474,4 +496,9 @@ __all__ = [
     "LaunchResult", "PromotionResult",
     # chat
     "chat_completion",
+    # ids / hashing
+    "sanitize_form_id",
+    "template_hash_via_render", "template_hash_via_pypdf_text", "canonical_template_hash",
+    "extract_embedded_form_id",
+
 ]
