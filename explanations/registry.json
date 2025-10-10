@@ -3,8 +3,8 @@
     {
       "form_id": "2cf15a26f7337cc3aa1fdeac88486a77ec398988ad3486272381f49655a136b6",
       "title": "BDO Offer to Buy & Buyer’s Profile — Real Estate (Individual / Sole Proprietorship)",
+      "path": "explanations/banking/2cf15a26f7337cc3aa1fdeac88486a77ec398988ad3486272381f49655a136b6.json",
       "bucket": "banking",
-      "path": "C:/xampp/htdocs/IntelliForm/explanations/banking/2cf15a26f7337cc3aa1fdeac88486a77ec398988ad3486272381f49655a136b6.json",
       "aliases": [
         "BDO_RealEstate_OfferToBuy_Individual",
         "Banking_BDO_RealEstateOfferToBuy_Individual",
@@ -16,7 +16,7 @@
       "form_id": "75bc025f4b67f43ccc0ca805f08277cf52463aaaf282d3217d2d9d936a82152d",
       "title": "BDO Tenant’s Information Sheet (Leased Assets)",
       "bucket": "banking",
-      "path": "C:/xampp/htdocs/IntelliForm/explanations/banking/75bc025f4b67f43ccc0ca805f08277cf52463aaaf282d3217d2d9d936a82152d.json",
+      "path": "explanations/banking/75bc025f4b67f43ccc0ca805f08277cf52463aaaf282d3217d2d9d936a82152d.json",
       "aliases": [
         "BDO_TenantsInformationSheet",
         "Banking_BDO_TenantsInformationSheet",
@@ -37,8 +37,8 @@
     {
       "form_id": "e6b97f5e2924562d7c021596cfb685cd43d37ea9b72f82b4e1037f2020e027a2",
       "title": "Metrobank Account Information Form & Enrollment to Electronic Platforms (with SSI)",
+      "path": "explanations/banking/e6b97f5e2924562d7c021596cfb685cd43d37ea9b72f82b4e1037f2020e027a2.json",
       "bucket": "banking",
-      "path": "C:/xampp/htdocs/IntelliForm/explanations/banking/e6b97f5e2924562d7c021596cfb685cd43d37ea9b72f82b4e1037f2020e027a2.json",
       "aliases": [
         "Banking_Metrobank_AccountInformationAndEnrollment",
         "Banking_Metrobank_AccountInformationEnrollment",
@@ -50,7 +50,7 @@
       "form_id": "73f5c45536d2ccfb60557c41f71c4bceba6f814ad8958a0151c53d558ae567f7",
       "title": "SLAMCI Investor Information Form 2024 (FCPA)",
       "bucket": "banking",
-      "path": "C:/xampp/htdocs/IntelliForm/explanations/banking/73f5c45536d2ccfb60557c41f71c4bceba6f814ad8958a0151c53d558ae567f7.json",
+      "path": "explanations/banking/73f5c45536d2ccfb60557c41f71c4bceba6f814ad8958a0151c53d558ae567f7.json",
       "aliases": [
         "Banking_SLAMCI_InvestorInfoForm2024",
         "Finance_SLAMCIInvestorInfoForm2024FCPA",
@@ -70,8 +70,8 @@
     {
       "form_id": "f944d8645856b0474e41537346ae5dd63e0ba59ab976517b158e2872d83cd612",
       "title": "LTO Application for Driver's License (ADL)",
+      "path": "explanations/government/f944d8645856b0474e41537346ae5dd63e0ba59ab976517b158e2872d83cd612.json",
       "bucket": "government",
-      "path": "C:/xampp/htdocs/IntelliForm/explanations/government/f944d8645856b0474e41537346ae5dd63e0ba59ab976517b158e2872d83cd612.json",
       "aliases": [
         "Government_DriverLicenseApplicationForm",
         "Government_LTO_DriverLicenseApplication",
@@ -81,8 +81,8 @@
     {
       "form_id": "9d5d70b7876646686d67a0a34363a670bfd7587bae2219255fc82c4d8bf31059",
       "title": "Pag-IBIG Fund Membership Registration (MDF)",
+      "path": "explanations/government/9d5d70b7876646686d67a0a34363a670bfd7587bae2219255fc82c4d8bf31059.json",
       "bucket": "government",
-      "path": "C:/xampp/htdocs/IntelliForm/explanations/government/9d5d70b7876646686d67a0a34363a670bfd7587bae2219255fc82c4d8bf31059.json",
       "aliases": [
         "Government_PagIBIGFundMembershipRegistration",
         "Government_PagIBIG_MembershipRegistration",
@@ -103,8 +103,8 @@
     {
       "form_id": "efda51c98f9d226323f9dd823fdd559a11efdc00632e31fd5a7a2c3089bbf103",
       "title": "PSA Birth Certificate Request Form",
+      "path": "explanations/government/efda51c98f9d226323f9dd823fdd559a11efdc00632e31fd5a7a2c3089bbf103.json",
       "bucket": "government",
-      "path": "C:/xampp/htdocs/IntelliForm/explanations/government/efda51c98f9d226323f9dd823fdd559a11efdc00632e31fd5a7a2c3089bbf103.json",
       "aliases": [
         "Government_BirthCertificateRequestForm",
         "Government_PSA_BirthCertificateRequest",
@@ -215,6 +215,46 @@
         "BIR_PercentageTaxReturn2552",
         "Tax_BIRPercentagetaxReturn2552",
         "Tax_BIR_PercentageTaxReturn2552"
+      ]
+    },
+    {
+      "form_id": "bd79fd88d4a0fcc050400a6f3fc854e4d5c9b41495125859aa4e26619eaef64c",
+      "title": "80f84acc3e9d4a82871a168f588a4574_Healthcare_Allianz_IHP_ClaimFormmmm_edited",
+      "path": "explanations/healthcare/bd79fd88d4a0fcc050400a6f3fc854e4d5c9b41495125859aa4e26619eaef64c.json",
+      "bucket": "healthcare",
+      "aliases": [
+        "80f84acc3e9d4a82871a168f588a4574_Healthcare_Allianz_IHP_ClaimFormmmm_edited.pdf",
+        "80f84acc3e9d4a82871a168f588a4574_healthcare_allianz_ihp_claimformmmm_edited"
+      ]
+    },
+    {
+      "form_id": "baa3cf132588149072f6eb740535ffa9ce7c52ea1d59b9809cf8cf7ca4f394eb",
+      "title": "d7f3b8497d2644b2a5b08d579b83def0_Healthcare_Allianz_IHP_ClaimFormmmm_edited",
+      "path": "explanations/healthcare/baa3cf132588149072f6eb740535ffa9ce7c52ea1d59b9809cf8cf7ca4f394eb.json",
+      "bucket": "healthcare",
+      "aliases": [
+        "d7f3b8497d2644b2a5b08d579b83def0_Healthcare_Allianz_IHP_ClaimFormmmm_edited.pdf",
+        "d7f3b8497d2644b2a5b08d579b83def0_healthcare_allianz_ihp_claimformmmm_edited"
+      ]
+    },
+    {
+      "form_id": "fae84fc2a6692f7930913c815b9b171b4862f00407fb6b4d083bcec8ec7f397b",
+      "title": "b0aeceb27d724842aa05d632a4308d4e_Healthcare_Allianz_IHP_ClaimFormmmm_edited",
+      "path": "explanations/healthcare/fae84fc2a6692f7930913c815b9b171b4862f00407fb6b4d083bcec8ec7f397b.json",
+      "bucket": "healthcare",
+      "aliases": [
+        "b0aeceb27d724842aa05d632a4308d4e_Healthcare_Allianz_IHP_ClaimFormmmm_edited.pdf",
+        "b0aeceb27d724842aa05d632a4308d4e_healthcare_allianz_ihp_claimformmmm_edited"
+      ]
+    },
+    {
+      "form_id": "fbf5da3c7a172a076e62bca133e685189d775ceef1baa7078310a3e8df028776",
+      "title": "5166df9b106149f9aead6998bc4189c4_Finance_SLAMCIInvestorInfoForm2024FCPA_edited",
+      "path": "explanations/banking/fbf5da3c7a172a076e62bca133e685189d775ceef1baa7078310a3e8df028776.json",
+      "bucket": "banking",
+      "aliases": [
+        "5166df9b106149f9aead6998bc4189c4_finance_slamciinvestorinfoform2024fcpa_edited",
+        "5166df9b106149f9aead6998bc4189c4_Finance_SLAMCIInvestorInfoForm2024FCPA_edited.pdf"
       ]
     }
   ]
