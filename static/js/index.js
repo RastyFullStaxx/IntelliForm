@@ -1,0 +1,171 @@
+document.addEventListener('DOMContentLoaded', function () {
+  const fileInput = document.getElementById('fileUpload');
+  const dropArea = document.getElementById('dropArea');
+  const fileDisplayContainer = document.getElementById('fileDisplayContainer');
+  const uploadedFileName = document.getElementById('uploadedFileName');
+  const deleteBtn = document.getElementById('deleteFileBtn');
+  const startBtn = document.getElementById('startFillingBtn');
+  const scanText = document.getElementById('scanText');
+  const uploadBox = document.querySelector('.upload-btn');
+
+  let selectedFile = null;
+
+  function showUploadedFile(name) {
+    uploadedFileName.textContent = name;
+    fileDisplayContainer.classList.remove('d-none');
+    startBtn.classList.remove('d-none');
+    scanText.classList.add('d-none');
+    uploadBox.classList.add('d-none');
+  }
+
+  function resetUI() {
+    fileDisplayContainer.classList.add('d-none');
+    startBtn.classList.add('d-none');
+    scanText.classList.remove('d-none');
+    uploadBox.classList.remove('d-none');
+    fileInput.value = '';
+    selectedFile = null;
+  }
+
+  function handleFile(file) {
+    if (file && file.type === 'application/pdf') {
+      selectedFile = file;
+      Swal.fire({
+        icon: 'success',
+        title: 'File ready',
+        text: `“${file.name}” selected.`,
+        timer: 1200,
+        showConfirmButton: false
+      });
+      showUploadedFile(file.name);
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid File',
+        text: 'Please upload a valid PDF file.'
+      });
+    }
+  }
+
+  // File input
+  fileInput.addEventListener('change', (e) => handleFile(e.target.files[0]));
+
+  // Drag events
+  ['dragenter', 'dragover'].forEach(type => {
+    dropArea.addEventListener(type, e => {
+      e.preventDefault();
+      dropArea.classList.add('drag-over');
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(type => {
+    dropArea.addEventListener(type, e => {
+      e.preventDefault();
+      dropArea.classList.remove('drag-over');
+    });
+  });
+
+  // Drop handler
+  dropArea.addEventListener('drop', (e) => {
+    const droppedFile = e.dataTransfer.files && e.dataTransfer.files[0];
+    if (droppedFile) {
+      const dt = new DataTransfer();
+      dt.items.add(droppedFile);
+      fileInput.files = dt.files;
+      handleFile(droppedFile);
+    }
+  });
+
+  // Delete uploaded file (client-side reset only)
+  deleteBtn.addEventListener('click', () => {
+    Swal.fire({
+      title: 'Remove uploaded file?',
+      text: 'This will cancel the selection and allow you to choose another file.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, remove it',
+      cancelButtonText: 'Cancel',
+      reverseButtons: true
+    }).then(result => {
+      if (result.isConfirmed) {
+        resetUI();
+        Swal.fire({
+          icon: 'info',
+          title: 'Selection cleared',
+          text: 'You may now upload another PDF file.',
+          timer: 1500,
+          showConfirmButton: false
+        });
+      }
+    });
+  });
+
+  // Upload to backend, then redirect to workspace with server path
+  async function uploadAndNavigate(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    let uploadingAlert;
+    try {
+      uploadingAlert = Swal.fire({
+        title: 'Uploading...',
+        text: 'Please wait while we upload your document.',
+        allowOutsideClick: false,
+        didOpen: () => Swal.showLoading()
+      });
+
+      const res = await fetch('/api/upload', { method: 'POST', body: formData });
+      if (!res.ok) {
+        let msg = `Upload failed (${res.status})`;
+        try {
+          const t = await res.text();
+          if (t) msg += `: ${t}`;
+        } catch {}
+        throw new Error(msg);
+      }
+
+      const data = await res.json();
+
+      // Prefer server's web_path; fall back to file_id → /uploads/<file_id>
+      const webPath = data.web_path || (data.file_id ? `/uploads/${data.file_id}` : null);
+      if (!webPath) throw new Error('Upload succeeded but server did not return web_path or file_id.');
+
+      const diskPath = data.disk_path || '';
+      // ✅ HASH FIRST: prefer canonical_form_id; keep form_id for backward compatibility
+      const canonicalId = data.canonical_form_id || data.form_id || null;
+
+      // Persist for workspace.js (new keys)
+      sessionStorage.setItem('uploadedWebPath', webPath);
+      if (diskPath) sessionStorage.setItem('uploadedDiskPath', diskPath);
+      if (canonicalId) sessionStorage.setItem('uploadedFormId', canonicalId);
+
+      // Legacy keys (display/compat only)
+      const cleanName = (file.name || 'document.pdf');
+      sessionStorage.setItem('uploadedFileName', cleanName);        // for title display
+      sessionStorage.setItem('uploadedFileWithExtension', webPath); // legacy path
+
+      Swal.close();
+
+      // Navigate to workspace
+      window.location.href = '/workspace';
+    } catch (err) {
+      console.error(err);
+      Swal.fire({ icon: 'error', title: 'Upload Error', text: err.message || 'Something went wrong while uploading.' });
+    } finally {
+      if (uploadingAlert) Swal.close();
+    }
+  }
+
+  // Start Filling Button → uploads to server, then navigates
+  startBtn.addEventListener('click', () => {
+    if (!selectedFile) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'No file selected',
+        text: 'Please choose a PDF file first.'
+      });
+      return;
+    }
+    uploadAndNavigate(selectedFile);
+  });
+});

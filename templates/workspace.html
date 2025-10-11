@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>IntelliForm Workspace</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/static/css/workspace.css" />
+
+  <!-- Bootstrap Icons (only the icon font; no Bootstrap CSS required) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+  <!-- Small layout helpers to guarantee left alignment -->
+  <style>
+    .workspace-navbar{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:12px; height:56px; padding:0 12px;
+    }
+    .navbar-left,.navbar-center,.navbar-right{ display:flex; align-items:center; gap:10px; }
+    .navbar-left{ flex:1 1 auto; }
+    .navbar-center{ flex:0 0 auto; }
+    .navbar-right{ flex:0 0 auto; }
+    .icon-button{ display:inline-flex; align-items:center; justify-content:center; gap:6px; }
+    .edit-toolbar{ display:flex; align-items:center; gap:6px; }
+    .tool-dropdown{ position:relative; }
+    .tool-dropdown .caret{ font-size:.8em; margin-left:2px; }
+    .dropdown-menu{
+      position:absolute; top:100%; left:0; z-index:20;
+      display:none; min-width:200px; padding:10px; margin-top:6px;
+      border-radius:10px; background:#fff; box-shadow:0 12px 32px rgba(0,0,0,.15);
+    }
+    .dropdown-menu.open{ display:block; }
+    .dropdown-menu .menu-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin:8px 0; }
+    .vertical-divider{ opacity:.5; }
+    /* keep buttons unselected by default; JS toggles .active */
+    .tool-btn.active{ background:#ffeaa7; }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="workspace-navbar">
+    <!-- LEFT: hamburger + tools (left aligned as a single cluster) -->
+    <div class="navbar-left">
+      <!-- Hamburger (thumbnails toggle) -->
+      <button id="togglePages" class="icon-button" title="Toggle Thumbnails">☰</button>
+
+      <!-- Tools (no default active) -->
+      <div id="editToolbar" class="edit-toolbar" aria-label="Edit tools">
+        <!-- Text -->
+        <button class="icon-button tool-btn" data-tool="text" title="Text (T)">
+          <i class="bi bi-type"></i>
+        </button>
+
+        <!-- Draw (pen) with dropdown -->
+        <div class="tool-dropdown">
+          <button class="icon-button tool-btn" data-tool="pen" title="Draw (D)" aria-haspopup="true" aria-expanded="false">
+            <i class="bi bi-pencil"></i><i class="bi bi-caret-down-fill caret" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown-menu" data-for="pen" role="menu">
+            <div class="menu-row">
+              <label for="penWidth">Thickness</label>
+              <input id="penWidth" type="range" min="1" max="12" step="1" value="2">
+            </div>
+            <div class="menu-row">
+              <label for="penColor">Color</label>
+              <input id="penColor" type="color" value="#111111">
+            </div>
+          </div>
+        </div>
+
+        <!-- Highlight with dropdown -->
+        <div class="tool-dropdown">
+          <button class="icon-button tool-btn" data-tool="highlight" title="Highlight (H)" aria-haspopup="true" aria-expanded="false">
+            <i class="bi bi-highlighter"></i><i class="bi bi-caret-down-fill caret" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown-menu" data-for="highlight" role="menu">
+            <div class="menu-row">
+              <label for="hlWidth">Thickness</label>
+              <input id="hlWidth" type="range" min="6" max="24" step="1" value="10">
+            </div>
+            <div class="menu-row">
+              <label for="hlColor">Color</label>
+              <input id="hlColor" type="color" value="#ffff00">
+            </div>
+          </div>
+        </div>
+
+        <!-- Eraser -->
+        <button class="icon-button tool-btn" data-tool="erase" title="Erase (E)">
+          <i class="bi bi-eraser"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- CENTER: page + zoom -->
+    <div class="navbar-center">
+      <span id="pageInfo" class="rounded-box dark-box">Page —</span>
+      <span class="vertical-divider">|</span>
+      <span id="zoomInfo" class="rounded-box dark-box">100%</span>
+    </div>
+
+    <!-- RIGHT: undo/clear/print/download -->
+    <div class="navbar-right">
+      <button id="btnUndo" class="icon-button" title="Undo (Ctrl+Z)"><i class="bi bi-arrow-counterclockwise"></i></button>
+      <button id="btnClear" class="icon-button" title="Clear Page"><i class="bi bi-trash"></i></button>
+      <span class="toolbar-divider">|</span>
+      <button id="printPDF" class="icon-button" aria-label="Print PDF" title="Print">
+        <img src="/static/img/round-print.png" alt="Print"/>
+      </button>
+      <button id="downloadPDF" class="icon-button" aria-label="Download PDF" title="Download">
+        <img src="/static/img/round-download.png" alt="Download"/>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Sidebar Toggle Icon -->
+  <div id="floatingToggleWrapper">
+    <div id="sidebarToggle" title="Toggle Tools">
+      <img src="/static/img/imgMainLogo.png" alt="Toggle Tools" />
+    </div>
+  </div>
+
+  <!-- Tools Sidebar -->
+  <aside id="sidebar">
+    <div class="sidebar-title"><h5>IntelliForm</h5></div>
+
+    <div class="sidebar-tool" id="analyzeTool">
+      <img src="/static/img/icoAnalyze.png" alt="Analyze"/><span class="tool-label">Analyze</span>
+    </div>
+
+    <div class="sidebar-tool" id="searchTool">
+      <img src="/static/img/icoSearch.png" alt="Search"/><span class="tool-label">Search</span>
+    </div>
+
+    <div id="formNameDisplay" class="text-center my-3"></div>
+
+    <div class="analysis-summary p-3 rounded">
+      <div id="summaryList" class="accordion summary-scroll"></div>
+      <div class="mb-2 text-center" id="metricsRow" style="font-size:12px; opacity:.9;"></div>
+    </div>
+
+    <div class="sidebar-footer">
+      <span id="eceScoreBadge" class="badge-pill">Save</span>
+    </div>
+  </aside>
+
+  <!-- Thumbnails -->
+  <div id="thumbnailSidebar"></div>
+
+  <!-- PDF Canvas Viewer -->
+  <main id="pdfContainer">
+    <!-- Single per-page wrapper with aligned layers -->
+    <div id="pageLayer" class="pageLayer">
+      <canvas id="pdfCanvas"></canvas>
+      <div id="annotationLayer" class="annotationLayer"></div>
+      <canvas id="overlayCanvas" style="pointer-events:none;"></canvas>
+    </div>
+  </main>
+
+  <!-- PDF.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script>pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';</script>
+
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- pdf-lib for client-side PDF writing -->
+  <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+
+  <!-- App JS -->
+  <script src="/static/js/workspace.js?v=20251011d"></script>
+
+  <!-- Tiny helper so the pen/highlight dropdowns open/close nicely -->
+  <script>
+    (function(){
+      const toolbar = document.getElementById('editToolbar');
+      if (!toolbar) return;
+
+      // open on caret click, keep tool selection behavior as-is (workspace.js handles active state)
+      toolbar.addEventListener('click', (e) => {
+        const btn = e.target.closest('.tool-btn');
+        if (!btn) return;
+
+        // if this button has a dropdown sibling, only toggle its menu when the caret (or empty space on the button) is clicked
+        const ddWrap = btn.parentElement?.classList.contains('tool-dropdown') ? btn.parentElement : null;
+        const hasMenu = !!ddWrap?.querySelector('.dropdown-menu');
+
+        if (hasMenu) {
+          const caret = e.target.closest('.caret');
+          if (caret || (!e.target.closest('i') && e.offsetX > btn.clientWidth - 18)) {
+            // toggle only the menu; do not interfere with active tool highlighting
+            const menu = ddWrap.querySelector('.dropdown-menu');
+            const open = menu.classList.contains('open');
+            document.querySelectorAll('#editToolbar .dropdown-menu.open').forEach(m => m.classList.remove('open'));
+            menu.classList.toggle('open', !open);
+            btn.setAttribute('aria-expanded', String(!open));
+            e.stopPropagation();
+          }
+        }
+      });
+
+      // close dropdowns on outside click or ESC
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('.tool-dropdown')) return;
+        document.querySelectorAll('#editToolbar .dropdown-menu.open').forEach(m => m.classList.remove('open'));
+        document.querySelectorAll('#editToolbar .tool-dropdown > .tool-btn[aria-expanded="true"]').forEach(b => b.setAttribute('aria-expanded','false'));
+      });
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('#editToolbar .dropdown-menu.open').forEach(m => m.classList.remove('open'));
+          document.querySelectorAll('#editToolbar .tool-dropdown > .tool-btn[aria-expanded="true"]').forEach(b => b.setAttribute('aria-expanded','false'));
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

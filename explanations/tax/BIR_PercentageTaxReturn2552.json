@@ -1,0 +1,97 @@
+﻿{
+  "title": "BIR Form 2552 — Percentage Tax Return (Shares of Stock)",
+  "form_id": "Tax_BIR_PercentageTaxReturn2552",
+  "sections": [
+    {
+      "title": "Header",
+      "fields": [
+        { "label": "1. Date of Transaction or Listing", "summary": "Write MM/DD/YYYY (date of stock transaction or LSE listing)." },
+        { "label": "2. Amended Return?", "summary": "Tick Yes if correcting a prior return; otherwise No." },
+        { "label": "3. Number of Sheets Attached", "summary": "Write number of extra schedules/attachments submitted." }
+      ]
+    },
+
+    {
+      "title": "Part I – Background Information",
+      "fields": [
+        { "label": "4. Taxpayer Identification Number (TIN)", "summary": "Write TIN (9–12 digits)." },
+        { "label": "5. RDO Code", "summary": "Write assigned RDO code." },
+        { "label": "6. Name of Stockbroker/Issuing Corporation", "summary": "For individual: Last, First, Middle. For corporation: Registered Name." },
+        { "label": "7. Registered Address", "summary": "Write complete address. If branch, write branch address." },
+        { "label": "7A. ZIP Code", "summary": "Write ZIP code." },
+        { "label": "8. Contact Number", "summary": "Write mobile/landline number." },
+        { "label": "9. Email Address", "summary": "Write valid email address." },
+        { "label": "10. Availing of Tax Relief under Special Law or Treaty?", "summary": "Tick Yes/No. If Yes, specify the law or treaty." },
+        { "label": "11. Kind of Transaction", "summary": "Tick: • Shares listed/traded in LSE • Initial Public Offering (Primary/Secondary)." },
+        { "label": "12. For Initial Public Offering", "summary": "12A: Write No. of Shares Sold/Exchanged. 12B: Write Total Outstanding Shares after Listing." }
+      ]
+    },
+
+    {
+      "title": "Part II – Computation of Tax",
+      "fields": [
+        { "label": "13. Tax Due (Schedule 1, PT 200)", "summary": "Carry from Part V Schedule 1 Item 6." },
+        { "label": "14. Tax Due (Schedule 2, PT 201)", "summary": "Carry from Part V Schedule 2 Item 6." },
+        { "label": "15. Tax Due (Schedule 3, PT 202)", "summary": "Carry from Part V Schedule 3 Item 6." },
+        { "label": "16. TOTAL TAX DUE", "summary": "Add Items 13–15." },
+        { "label": "17. Tax Paid in Previously Filed Return", "summary": "If amended, write prior payment." },
+        { "label": "18. Creditable Tax Withheld (BIR Form 2307)", "summary": "Write amount of creditable withholding tax claimed." },
+        { "label": "19. Total Tax Credits/Payments", "summary": "Sum of Items 17 and 18." },
+        { "label": "20. Total Tax Still Due/(Overpayment)", "summary": "Subtract Item 19 from Item 16." },
+        { "label": "21–23. Penalties", "summary": "Write surcharge, interest, and compromise penalties, if any." },
+        { "label": "24. Total Penalties", "summary": "Sum of Items 21–23." },
+        { "label": "25. TOTAL AMOUNT PAYABLE/(OVERPAYMENT)", "summary": "Add Item 20 + Item 24. Tick box if overpayment: Refund or Tax Credit Certificate." }
+      ]
+    },
+
+    {
+      "title": "Part III – Details of Payment",
+      "fields": [
+        { "label": "26. Cash/Bank Debit Memo", "summary": "Write drawee bank, code, date, and amount." },
+        { "label": "27. Check", "summary": "Write bank, code, date, and check amount." },
+        { "label": "28. Tax Debit Memo", "summary": "Write bank, code, date, and amount." },
+        { "label": "29. Others (Specify)", "summary": "Write details of other payment modes." }
+      ]
+    },
+
+    {
+      "title": "Part IV – Summary of Transactions Not Subject to Tax",
+      "fields": [
+        { "label": "Transaction Classification & Amount", "summary": "List classifications and corresponding amounts." }
+      ]
+    },
+
+    {
+      "title": "Part V – Details of Taxable Transactions",
+      "fields": [
+        { "label": "Schedule 1 – Sale/Exchange via LSE", "summary": "List Date, Seller, Buyer, Issuing Corporation, No. of Shares, Tax Base, Tax Rate, Tax Due." },
+        { "label": "Schedule 2 – Sale/Exchange via Primary Public Offering", "summary": "List Date, Seller, Buyer, Issuing Corporation, No. of Shares, Tax Base, Tax Rate, Tax Due." },
+        { "label": "Schedule 3 – Sale/Exchange via Secondary Public Offering", "summary": "List Date, Seller, Buyer, Issuing Corporation, No. of Shares, Tax Base, Tax Rate, Tax Due." }
+      ]
+    },
+
+    {
+      "title": "Part VI – Details of Transactions Not Subject to Percentage Tax",
+      "fields": [
+        { "label": "List Non-Taxable Transactions", "summary": "For each: Date, Seller, Buyer, Issuing Corporation, No. of Shares." }
+      ]
+    },
+
+    {
+      "title": "Signatures & Certification",
+      "fields": [
+        { "label": "Taxpayer/Authorized Representative", "summary": "Sign above printed name; write title/designation and TIN." },
+        { "label": "Non-Individual (Corp/Org)", "summary": "Signature of President/Vice President/Authorized Officer with Title and TIN." },
+        { "label": "Tax Agent Accreditation/Attorney’s Roll No.", "summary": "If applicable, write number, date of issue and expiry." }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 186,
+    "fp": 28,
+    "fn": 23,
+    "precision": 0.869,
+    "recall": 0.890,
+    "f1": 0.879
+  }
+}
