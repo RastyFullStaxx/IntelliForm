@@ -1,0 +1,205 @@
+{
+  "title": "Metrobank Account Information Form & Enrollment to Electronic Platforms (with SSI)",
+  "form_id": "Banking_Metrobank_AccountInformationEnrollment",
+  "sections": [
+    {
+      "title": "Account Information",
+      "fields": [
+        {
+          "label": "Trust/IMA Account No.",
+          "summary": "Write account number as assigned by Metrobank."
+        },
+        {
+          "label": "Account Name",
+          "summary": "Write full account name."
+        },
+        {
+          "label": "Date",
+          "summary": "Write MM/DD/YYYY."
+        },
+        {
+          "label": "Type of Account",
+          "summary": "Tick: • Trust Account • Investment Management Account (IMA)."
+        },
+        {
+          "label": "Degree of Account Discretion",
+          "summary": "Tick: • Discretionary • Directional. (Submit Annex B if changing from Discretionary to Directional.)"
+        },
+        {
+          "label": "Designated Settlement Account (DSA)",
+          "summary": "Write DSA account number. All withdrawals/contributions will go through this unless instructed otherwise."
+        }
+      ]
+    },
+    {
+      "title": "Suitability Assessment (Directional Accounts only)",
+      "fields": [
+        {
+          "label": "Primary Client Name",
+          "summary": "Write client name, risk score, and risk profile."
+        },
+        {
+          "label": "Other Co-trustors/Principals",
+          "summary": "List each client with Score and Profile."
+        },
+        {
+          "label": "Assessment Agreement",
+          "summary": "Tick one: • Accept assessment • Do not agree and request re-classification (acknowledge higher risk)."
+        }
+      ]
+    },
+    {
+      "title": "Business Model & Asset Classification (Directional Accounts only)",
+      "fields": [
+        {
+          "label": "Capital Preservation",
+          "summary": "Tick: • Hold to Collect (Amortized Cost) • Hold to Collect and Sell (FVOCI) • Other (specify)."
+        },
+        {
+          "label": "Capital Growth/Trading",
+          "summary": "Tick: • Hold to Realize Cash Flows (FVTPL) • Other (specify)."
+        },
+        {
+          "label": "Income",
+          "summary": "Tick: • Hold to Collect (Amortized Cost) • Hold to Collect and Sell (FVOCI) • Other (specify)."
+        },
+        {
+          "label": "Total Return",
+          "summary": "Tick: • Managed/Fair Value basis (FVTPL) • Hold to Collect and Sell (FVOCI) • Other (specify)."
+        }
+      ]
+    },
+    {
+      "title": "Enrollment to Electronic Platforms",
+      "fields": [
+        {
+          "label": "Client Type",
+          "summary": "Tick: • Individual (write email & mobile) • Corporate (submit Secretary’s Certificate)."
+        },
+        {
+          "label": "Registered Contact Information",
+          "summary": "List encrypted email address(es) and mobile number(s)."
+        },
+        {
+          "label": "Authorized Users",
+          "summary": "List names, office phone/mobile, office encrypted email, authorized transaction type and amount limit. Tick which apply: Send Instructions • Approve/Confirm Instructions."
+        },
+        {
+          "label": "Designated Recipient(s)",
+          "summary": "List names and contact details of recipients for Financial Statements, Confirmations, Reports."
+        }
+      ]
+    },
+    {
+      "title": "Declarations & Consents",
+      "fields": [
+        {
+          "label": "Accuracy of Contact Info",
+          "summary": "Certify registered contact info is correct, protected, and accessible only to client/authorized users."
+        },
+        {
+          "label": "Electronic Instructions Binding",
+          "summary": "Acknowledge instructions are valid and binding even without original signature; originals may still be required."
+        },
+        {
+          "label": "Data Privacy Consent",
+          "summary": "Consent to Metrobank’s use of personal data for processing, verification, regulatory purposes, per Data Privacy Act and Metrobank policy."
+        },
+        {
+          "label": "Customer Signatures",
+          "summary": "Customer(s) sign over printed name and date."
+        },
+        {
+          "label": "Bank Use Only",
+          "summary": "Signed by Account Manager and Supervising Officer."
+        }
+      ]
+    },
+    {
+      "title": "Annex A — MOSE Terms & Conditions",
+      "fields": [
+        {
+          "label": "Access & Security",
+          "summary": "Only account owner/authorized reps may access MOSE; safeguard PIN and reference codes."
+        },
+        {
+          "label": "Approvals via MOSE",
+          "summary": "Approvals/rejections are binding, equivalent to written signatures."
+        },
+        {
+          "label": "Termination/Changes",
+          "summary": "Notify MBTC-TBG in writing to opt-out or update Registered Contact Info."
+        },
+        {
+          "label": "Data Processing",
+          "summary": "Consent to Metrobank’s processing of data for MOSE transactions."
+        }
+      ]
+    },
+    {
+      "title": "Annex B — Change Degree of Discretion (Discretionary → Directional)",
+      "fields": [
+        {
+          "label": "Instruction Letter",
+          "summary": "Submit signed LOI with account name/number, type, and effective date."
+        },
+        {
+          "label": "Fee Acknowledgment",
+          "summary": "Acknowledge fee basis and frequency for directional accounts."
+        },
+        {
+          "label": "Income Payment Instruction",
+          "summary": "Tick: • Credit to DSA (Metrobank only) • Retain in account for reinvestment."
+        },
+        {
+          "label": "Maturity Proceeds Instruction",
+          "summary": "Tick: • Credit to DSA (Metrobank only) • Retain in account for reinvestment."
+        },
+        {
+          "label": "Customer Signatures",
+          "summary": "Sign over printed name(s) and date."
+        }
+      ]
+    },
+    {
+      "title": "Annex C — Standard Settlement Instruction (Corporate Accounts)",
+      "fields": [
+        {
+          "label": "SSI Effective Date",
+          "summary": "Write date of SSI."
+        },
+        {
+          "label": "Client Name & TBG Account No.",
+          "summary": "Write account details."
+        },
+        {
+          "label": "Settlement Instructions",
+          "summary": "State that all withdrawals/credits go through the Designated Settlement Account. If Other Bank Accounts or Branch Accounts are allowed, list bank name, SWIFT, account number, account name, currency."
+        },
+        {
+          "label": "Authorized Signatories",
+          "summary": "Names and signatures as per Secretary’s Certificate."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 188,
+    "fp": 31,
+    "fn": 27,
+    "precision": 0.858,
+    "recall": 0.874,
+    "f1": 0.866
+  },
+  "canonical_id": "e6b97f5e2924562d7c021596cfb685cd43d37ea9b72f82b4e1037f2020e027a2",
+  "bucket": "banking",
+  "schema_version": 1,
+  "created_at": "2025-10-10T05:32:26+08:00",
+  "updated_at": "2025-10-10T05:32:26+08:00",
+  "aliases": [
+    "Banking_Metrobank_AccountInformationAndEnrollment",
+    "Banking_Metrobank_AccountInformationEnrollment",
+    "Finance_AccountInformationFormAndEnrollmentToElectronicPlatformsWithStandardSettlementInstruction",
+    "Metrobank_AccountInformationAndEnrollment"
+  ]
+}

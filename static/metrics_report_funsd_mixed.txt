@@ -1,0 +1,7 @@
+IntelliForm — Test Metrics
+==========================
+
+Token Classification:
+  Precision : 0.6413
+  Recall    : 0.6413
+  F1        : 0.6413

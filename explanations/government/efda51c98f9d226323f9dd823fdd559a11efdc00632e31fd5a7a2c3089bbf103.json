@@ -1,0 +1,96 @@
+{
+  "title": "PSA Birth Certificate Request Form",
+  "form_id": "Government_BirthCertificateRequestForm",
+  "sections": [
+    {
+      "title": "Requester Information",
+      "fields": [
+        {
+          "label": "Full Name of Requester",
+          "summary": "Write your complete name as shown on your valid government-issued ID."
+        },
+        {
+          "label": "Relationship to Document Owner",
+          "summary": "Indicate if you are the Owner, Parent, Spouse, Direct Descendant, Guardian, or Authorized Representative."
+        },
+        {
+          "label": "Valid ID Details",
+          "summary": "List the ID type and number you are presenting (must be government-issued)."
+        },
+        {
+          "label": "Contact Information",
+          "summary": "Provide your mobile number or email for transaction updates."
+        }
+      ]
+    },
+    {
+      "title": "Document Owner Information",
+      "fields": [
+        {
+          "label": "Full Name of Child",
+          "summary": "Write the complete name appearing on the birth certificate."
+        },
+        {
+          "label": "Date of Birth",
+          "summary": "Enter the birth date in MM/DD/YYYY format."
+        },
+        {
+          "label": "Place of Birth",
+          "summary": "Provide the city/municipality and province where the child was born."
+        },
+        {
+          "label": "Father’s Name",
+          "summary": "Enter the full name of the father, if acknowledged."
+        },
+        {
+          "label": "Mother’s Maiden Name",
+          "summary": "Enter the mother’s full maiden name."
+        }
+      ]
+    },
+    {
+      "title": "Purpose of Request",
+      "fields": [
+        {
+          "label": "Reason for Request",
+          "summary": "Select or write the purpose (e.g., Passport Application, Employment, School, Marriage License)."
+        }
+      ]
+    },
+    {
+      "title": "Authorization & Declaration",
+      "fields": [
+        {
+          "label": "Authorization (if applicable)",
+          "summary": "If applying on behalf of the document owner, attach a signed authorization letter and copy of valid IDs."
+        },
+        {
+          "label": "Data Privacy Consent",
+          "summary": "Acknowledge that PSA complies with the Data Privacy Act of 2012; your information will be protected."
+        },
+        {
+          "label": "Signature of Requester",
+          "summary": "Affix your signature to confirm the accuracy of the details and your consent."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 74,
+    "fp": 19,
+    "fn": 15,
+    "precision": 0.8,
+    "recall": 0.83,
+    "f1": 0.81
+  },
+  "canonical_id": "efda51c98f9d226323f9dd823fdd559a11efdc00632e31fd5a7a2c3089bbf103",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2025-10-10T05:32:26+08:00",
+  "updated_at": "2025-10-10T05:32:26+08:00",
+  "aliases": [
+    "Government_BirthCertificateRequestForm",
+    "Government_PSA_BirthCertificateRequest",
+    "PSA_BirthCertificateRequest"
+  ]
+}

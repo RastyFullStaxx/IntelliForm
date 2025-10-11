@@ -1,0 +1,232 @@
+{
+  "forms": [
+    {
+      "form_id": "2cf15a26f7337cc3aa1fdeac88486a77ec398988ad3486272381f49655a136b6",
+      "title": "BDO Offer to Buy & Buyer’s Profile — Real Estate (Individual / Sole Proprietorship)",
+      "path": "explanations/banking/2cf15a26f7337cc3aa1fdeac88486a77ec398988ad3486272381f49655a136b6.json",
+      "bucket": "banking",
+      "aliases": [
+        "BDO_RealEstate_OfferToBuy_Individual",
+        "Banking_BDO_RealEstateOfferToBuy_Individual",
+        "Banking_BDO_RealEstate_OfferToBuy_Individual",
+        "Banking_RealEstateIndividualBDO"
+      ]
+    },
+    {
+      "form_id": "75bc025f4b67f43ccc0ca805f08277cf52463aaaf282d3217d2d9d936a82152d",
+      "title": "BDO Tenant’s Information Sheet (Leased Assets)",
+      "bucket": "banking",
+      "path": "explanations/banking/75bc025f4b67f43ccc0ca805f08277cf52463aaaf282d3217d2d9d936a82152d.json",
+      "aliases": [
+        "BDO_TenantsInformationSheet",
+        "Banking_BDO_TenantsInformationSheet",
+        "Banking_UXD_PMUTenantsInfoSheet"
+      ]
+    },
+    {
+      "form_id": "7957cb5ff9100aba319e0a9b3d970c3924f2df43b4f1c944ca51d6faeb401bbd",
+      "title": "FAMI (First Metro Asset Management, Inc.) — Account Opening Form",
+      "bucket": "banking",
+      "path": "explanations/banking/7957cb5ff9100aba319e0a9b3d970c3924f2df43b4f1c944ca51d6faeb401bbd.json",
+      "aliases": [
+        "Banking_FAMI_AccountOpeningForm",
+        "FAMI_AccountOpeningForm",
+        "Finance_FAMIAccountOpeningForm",
+        "Banking_FAMI_AccountOpeningForm_Individual"
+      ]
+    },
+    {
+      "form_id": "e6b97f5e2924562d7c021596cfb685cd43d37ea9b72f82b4e1037f2020e027a2",
+      "title": "Metrobank Account Information Form & Enrollment to Electronic Platforms (with SSI)",
+      "path": "explanations/banking/e6b97f5e2924562d7c021596cfb685cd43d37ea9b72f82b4e1037f2020e027a2.json",
+      "bucket": "banking",
+      "aliases": [
+        "Banking_Metrobank_AccountInformationAndEnrollment",
+        "Banking_Metrobank_AccountInformationEnrollment",
+        "Finance_AccountInformationFormAndEnrollmentToElectronicPlatformsWithStandardSettlementInstruction",
+        "Metrobank_AccountInformationAndEnrollment"
+      ]
+    },
+    {
+      "form_id": "73f5c45536d2ccfb60557c41f71c4bceba6f814ad8958a0151c53d558ae567f7",
+      "title": "SLAMCI Investor Information Form 2024 (FCPA)",
+      "bucket": "banking",
+      "path": "explanations/banking/73f5c45536d2ccfb60557c41f71c4bceba6f814ad8958a0151c53d558ae567f7.json",
+      "aliases": [
+        "Banking_SLAMCI_InvestorInfoForm2024",
+        "Finance_SLAMCIInvestorInfoForm2024FCPA",
+        "SLAMCI_InvestorInfoForm2024"
+      ]
+    },
+    {
+      "form_id": "b26187fc73c165337a850efc075960ac766594c2fef95f154e22032e9d7d096d",
+      "title": "COMELEC Voter Registration Application (CEF-1)",
+      "path": "explanations/government/b26187fc73c165337a850efc075960ac766594c2fef95f154e22032e9d7d096d.json",
+      "bucket": "government",
+      "aliases": [
+        "COMELEC_CEF1_VoterRegistration",
+        "Goverment_COMELECVoterRegistrationApplicationForm"
+      ]
+    },
+    {
+      "form_id": "f944d8645856b0474e41537346ae5dd63e0ba59ab976517b158e2872d83cd612",
+      "title": "LTO Application for Driver's License (ADL)",
+      "path": "explanations/government/f944d8645856b0474e41537346ae5dd63e0ba59ab976517b158e2872d83cd612.json",
+      "bucket": "government",
+      "aliases": [
+        "Government_DriverLicenseApplicationForm",
+        "Government_LTO_DriverLicenseApplication",
+        "LTO_DriverLicenseApplication"
+      ]
+    },
+    {
+      "form_id": "9d5d70b7876646686d67a0a34363a670bfd7587bae2219255fc82c4d8bf31059",
+      "title": "Pag-IBIG Fund Membership Registration (MDF)",
+      "path": "explanations/government/9d5d70b7876646686d67a0a34363a670bfd7587bae2219255fc82c4d8bf31059.json",
+      "bucket": "government",
+      "aliases": [
+        "Government_PagIBIGFundMembershipRegistration",
+        "Government_PagIBIG_MembershipRegistration",
+        "PagIBIG_MembershipRegistration"
+      ]
+    },
+    {
+      "form_id": "421bf5dab2220c719fc4ba2c5d2092dff41d03e93aa2f389296116b0a7e83c11",
+      "title": "PhilHealth Member Registration Form (PMRF)",
+      "bucket": "government",
+      "path": "explanations/government/421bf5dab2220c719fc4ba2c5d2092dff41d03e93aa2f389296116b0a7e83c11.json",
+      "aliases": [
+        "Government_PhilHealthMemberRegistrationForm",
+        "Government_PhilHealth_MemberRegistration",
+        "PhilHealth_MemberRegistration"
+      ]
+    },
+    {
+      "form_id": "efda51c98f9d226323f9dd823fdd559a11efdc00632e31fd5a7a2c3089bbf103",
+      "title": "PSA Birth Certificate Request Form",
+      "path": "explanations/government/efda51c98f9d226323f9dd823fdd559a11efdc00632e31fd5a7a2c3089bbf103.json",
+      "bucket": "government",
+      "aliases": [
+        "Government_BirthCertificateRequestForm",
+        "Government_PSA_BirthCertificateRequest",
+        "PSA_BirthCertificateRequest"
+      ]
+    },
+    {
+      "form_id": "6dca08692361d333fa8aa7080f51477a8d9e90f626df42b99e7a8aa23d41db02",
+      "title": "Allianz PNB Life — International Health Claim Form (IHP)",
+      "path": "explanations/healthcare/6dca08692361d333fa8aa7080f51477a8d9e90f626df42b99e7a8aa23d41db02.json",
+      "bucket": "healthcare",
+      "aliases": [
+        "Allianz_IHP_ClaimForm",
+        "Healthcare_Allianz_IHP_ClaimForm"
+      ]
+    },
+    {
+      "form_id": "d75de522012583f723a1d679958c9311fcd713c098fec5a5d5f744e07d71e42f",
+      "title": "AXA Philippines — Motor Claim Form",
+      "path": "explanations/healthcare/d75de522012583f723a1d679958c9311fcd713c098fec5a5d5f744e07d71e42f.json",
+      "bucket": "healthcare",
+      "aliases": [
+        "AXA_MotorClaimForm",
+        "Healthcare_AXA_MotorClaimForm"
+      ]
+    },
+    {
+      "form_id": "4ba2fb2bc7dbc86020820cf31ea0538166562996fcd280f510c896b277709e54",
+      "title": "FWD Total and Permanent Disability / Dismemberment Claim Form",
+      "bucket": "healthcare",
+      "path": "explanations/healthcare/4ba2fb2bc7dbc86020820cf31ea0538166562996fcd280f510c896b277709e54.json",
+      "aliases": [
+        "FWD_TPD_DismembermentClaimForm",
+        "Healthcare_FWD_TPD_DismembermentClaimForm"
+      ]
+    },
+    {
+      "form_id": "b3a12f4bf45eb84bd9d0034a0f77e5bffbd2eee50e0ca473c2a6c769593a6dca",
+      "title": "Manulife — Attending Physician’s Statement (APS): Amyotrophic Lateral Sclerosis",
+      "bucket": "healthcare",
+      "path": "explanations/healthcare/b3a12f4bf45eb84bd9d0034a0f77e5bffbd2eee50e0ca473c2a6c769593a6dca.json",
+      "aliases": [
+        "Healthcare_Manulife_APS_ALS",
+        "Healthcare_Manulife_APS_AmyotrophicLateralSclerosis",
+        "Manulife_APS_AmyotrophicLateralSclerosis"
+      ]
+    },
+    {
+      "form_id": "d3f1d9a486000e86a2ae051a0da1f67a40bf3b39948ec079870c92106f6c1ae6",
+      "title": "Sun Life Mutual Fund Account Opening Form",
+      "bucket": "healthcare",
+      "path": "explanations/healthcare/d3f1d9a486000e86a2ae051a0da1f67a40bf3b39948ec079870c92106f6c1ae6.json",
+      "aliases": [
+        "Healthcare_SunLife_AccountOpeningForm",
+        "SunLife_AccountOpeningForm"
+      ]
+    },
+    {
+      "form_id": "b491f8fbd047aa99c90b00f9d5084a26765f9975e2e331b8cd16ba20b3e6b962",
+      "title": "BIR Form 1604-E — Annual Information Return of Creditable Income Taxes Withheld (Expanded)",
+      "bucket": "tax",
+      "path": "explanations/tax/b491f8fbd047aa99c90b00f9d5084a26765f9975e2e331b8cd16ba20b3e6b962.json",
+      "aliases": [
+        "BIR_AnnualReturn1604E",
+        "Tax_BIRAnnualInformationReturn1604E",
+        "Tax_BIR_AnnualReturn1604E"
+      ]
+    },
+    {
+      "form_id": "fdf7f854869568d1d373b165c091086487d7faf269cfae1cc8cb0c7e75f14f99",
+      "title": "BIR Form 1913 — Application for Refund of Excess Withholding Tax (DTC)",
+      "bucket": "tax",
+      "path": "explanations/tax/fdf7f854869568d1d373b165c091086487d7faf269cfae1cc8cb0c7e75f14f99.json",
+      "aliases": [
+        "BIR_ApplicationForRefund1913",
+        "Tax_BIRApplicationForRefund1913",
+        "Tax_BIR_ApplicationForRefund1913"
+      ]
+    },
+    {
+      "form_id": "d4817a35cb04a3f748e6613b1f2ba824f7e742a666dae650f2551bcceb3b2280",
+      "title": "BIR Form 1901 — Application for Registration",
+      "bucket": "tax",
+      "path": "explanations/tax/d4817a35cb04a3f748e6613b1f2ba824f7e742a666dae650f2551bcceb3b2280.json",
+      "aliases": [
+        "BIR_ApplicationForRegistration1901",
+        "Tax_BIRApplicationForRegistration1901",
+        "Tax_BIR_ApplicationForRegistration1901"
+      ]
+    },
+    {
+      "form_id": "070f554dfed7f8ba7694884b7f8b650af7718070e5c7966b6f87267cbac825f2",
+      "title": "BIR Form 1902 — Application for Registration (Individuals Earning Purely Compensation Income)",
+      "path": "explanations/tax/070f554dfed7f8ba7694884b7f8b650af7718070e5c7966b6f87267cbac825f2.json",
+      "bucket": "tax",
+      "aliases": [
+        "BIR_ApplicationForRegistration1902",
+        "Tax_BIRApplicationForRegistration1902",
+        "Tax_BIR_ApplicationForRegistration1902"
+      ]
+    },
+    {
+      "form_id": "6afe3cc018fe80d769e1e9dd0e1df156c68a0787966521641efe913d0dba3638",
+      "title": "BIR Form 2552 — Percentage Tax Return (Shares of Stock)",
+      "bucket": "tax",
+      "path": "explanations/tax/6afe3cc018fe80d769e1e9dd0e1df156c68a0787966521641efe913d0dba3638.json",
+      "aliases": [
+        "BIR_PercentageTaxReturn2552",
+        "Tax_BIRPercentagetaxReturn2552",
+        "Tax_BIR_PercentageTaxReturn2552"
+      ]
+    },
+    {
+      "form_id": "f8cad298c27bc68a09d09cc3b58f2bfc1ce03a5b33a104fd7345c5660d955cc1",
+      "title": "bb8bcd17189c49f3ac4c850b9f561ba0_doestseiformh",
+      "path": "explanations/government/f8cad298c27bc68a09d09cc3b58f2bfc1ce03a5b33a104fd7345c5660d955cc1.json",
+      "bucket": "government",
+      "aliases": [
+        "bb8bcd17189c49f3ac4c850b9f561ba0_doestseiformh",
+        "bb8bcd17189c49f3ac4c850b9f561ba0_doestseiformh.pdf"
+      ]
+    }
+  ]
+}

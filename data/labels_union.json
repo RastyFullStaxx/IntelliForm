@@ -1,0 +1,17 @@
+{
+  "O": 0,
+  "B-HEADER": 1,
+  "I-HEADER": 2,
+  "B-QUESTION": 3,
+  "I-QUESTION": 4,
+  "B-ANSWER": 5,
+  "I-ANSWER": 6,
+  "B-NAME": 7,
+  "I-NAME": 8,
+  "B-EMAIL": 9,
+  "I-EMAIL": 10,
+  "B-DATE": 11,
+  "I-DATE": 12,
+  "B-ADDRESS": 13,
+  "I-ADDRESS": 14
+}
