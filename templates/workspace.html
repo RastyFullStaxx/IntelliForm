@@ -9,7 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
-
+<link rel="icon" href="/static/img/imgMainLogo.png" type="image/png">
+<link rel="apple-touch-icon" href="/static/img/imgMainLogo.png">
+<link rel="shortcut icon" href="/static/img/imgMainLogo.png" type="image/png">
   <!-- CSS -->
   <link rel="stylesheet" href="/static/css/workspace.css" />
 
@@ -20,7 +22,7 @@
   <style>
     .workspace-navbar{
       display:flex; align-items:center; justify-content:space-between;
-      gap:12px; height:56px; padding:0 12px;
+      gap:12px; height:80px; padding:0 12px;
     }
     .navbar-left,.navbar-center,.navbar-right{ display:flex; align-items:center; gap:10px; }
     .navbar-left{ flex:1 1 auto; }
@@ -111,6 +113,11 @@
       <button id="btnUndo" class="icon-button" title="Undo (Ctrl+Z)"><i class="bi bi-arrow-counterclockwise"></i></button>
       <button id="btnClear" class="icon-button" title="Clear Page"><i class="bi bi-trash"></i></button>
       <span class="toolbar-divider">|</span>
+            <!-- EXIT (go back to home / start fresh) -->
+      <button id="btnExit" class="icon-button" aria-label="Exit to Home" title="Exit to Home">
+        <i class="bi bi-box-arrow-right"></i>
+      </button>
+      <span class="toolbar-divider">|</span>
       <button id="printPDF" class="icon-button" aria-label="Print PDF" title="Print">
         <img src="/static/img/round-print.png" alt="Print"/>
       </button>
@@ -135,8 +142,15 @@
       <img src="/static/img/icoAnalyze.png" alt="Analyze"/><span class="tool-label">Analyze</span>
     </div>
 
-    <div class="sidebar-tool" id="searchTool">
-      <img src="/static/img/icoSearch.png" alt="Search"/><span class="tool-label">Search</span>
+    <div class="sidebar-tool search-inline" id="searchTool">
+      <img src="/static/img/icoSearch.png" alt="Search"/>
+      <input id="searchInput" type="text" placeholder="Find in form…" />
+      <div class="search-ctrls">
+        <button id="searchPrev" title="Previous"><i class="bi bi-chevron-up"></i></button>
+        <span id="searchStatus">0/0</span>
+        <button id="searchNext" title="Next"><i class="bi bi-chevron-down"></i></button>
+        <button id="searchClear" title="Clear"><i class="bi bi-x"></i></button>
+      </div>
     </div>
 
     <div id="formNameDisplay" class="text-center my-3"></div>

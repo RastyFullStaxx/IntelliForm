@@ -1,8 +1,9 @@
 ﻿// static/js/workspace.js
+
 window.addEventListener("load", initWorkspace);
 
 function initWorkspace() {
-  console.log("workspace.js 2025-10-11d DPR-align, base-coords, dynamic-pageLayer");
+  console.log("workspace.js 2025-10-12 overlay-split: boxesCanvas + drawCanvas, fixed z-index, label-jump");
 
   // ---- Session state ----
   const legacyWebRaw = sessionStorage.getItem("uploadedFileWithExtension") || "";
@@ -24,11 +25,40 @@ function initWorkspace() {
   const metricsRow = $("metricsRow");
   const pageInfo = $("pageInfo");
   const zoomInfo = $("zoomInfo");
+  const searchTool     = $("searchTool");
+  const searchInput    = $("searchInput");
+  const searchNextBtn  = $("searchNext");
+  const searchPrevBtn  = $("searchPrev");
+  const searchClearBtn = $("searchClear");
+  const searchStatus   = $("searchStatus");
+
+
+  // Base canvases coming from HTML
   let pdfCanvas = $("pdfCanvas");
-  let overlayCanvas = $("overlayCanvas");
+  let overlayCanvas = $("overlayCanvas"); // <- will become "draw canvas" only
+
   const eceBadge = $("eceScoreBadge");
   const downloadBtn = $("downloadPDF");
   const printBtn = $("printPDF");
+
+    // Exit button → confirm, log, and start fresh
+    const exitBtn = document.getElementById("btnExit");
+    exitBtn?.addEventListener("click", async () => {
+      const ok = await Swal.fire({
+        title: "Exit and start over?",
+        text: "This will discard the current workspace and return to the home screen.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Exit",
+        cancelButtonText: "Stay"
+      }).then(r => r.isConfirmed);
+
+      if (!ok) return;
+
+      // best-effort session close log, then reset
+      try { ws_sendAbandonBeacon("exit_clicked"); } catch {}
+      resetAndGoHome();
+    });
 
   // Toolbar
   const enterEditBtn = $("enterEdit");        // optional; we auto-enter
@@ -37,14 +67,24 @@ function initWorkspace() {
   const toolButtons = Array.from(document.querySelectorAll(".tool-btn"));
 
   if (!pdfCanvas || !overlayCanvas) { console.error("Canvas elements missing"); return; }
+
   const pdfCtx = pdfCanvas.getContext("2d");
-  const overlayCtx = overlayCanvas.getContext("2d", { willReadFrequently: true });
+  const overlayCtx = overlayCanvas.getContext("2d", { willReadFrequently: true }); // drawing layer only
   overlayCanvas.style.touchAction = "none";
   overlayCanvas.style.cursor = "crosshair";
 
-  // Ensure a single wrapper with both canvases and an annotation layer
+  // Ensure wrapper + annotation layer + BOXES canvas (new)
   const pageLayer = ensurePageLayer();
+  const boxesCanvas = ensureBoxesCanvas();             // <— NEW canvas for boxes/highlights
+  const boxesCtx = boxesCanvas.getContext("2d");
   const annotationLayer = ensureAnnotationLayer();
+
+  // Z-order (bottom → top):
+  // pdfCanvas (z:0) → boxesCanvas (z:1) → annotationLayer (z:2) → overlayCanvas (z:3) → .text-annot (z:4)
+  pdfCanvas.style.zIndex = "0";
+  boxesCanvas.style.zIndex = "1";
+  annotationLayer.style.zIndex = "2";
+  overlayCanvas.style.zIndex = "3";
 
   // Save hooks
   eceBadge?.addEventListener("click", onSaveClick);
@@ -52,13 +92,36 @@ function initWorkspace() {
 
   // Print
   printBtn?.addEventListener("click", async () => {
+    // confirmation moment is the print click
+    const tConfirm = ws_now();
+
     try {
       if (!editMode) enterEdit();
+
+      const t0 = ws_now();
       const bytes = await exportEditedPdf();
+      const renderMs = ws_now() - t0;
+
       const blob = new Blob([bytes], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       const w = window.open(url, "_blank");
       setTimeout(() => { try { w?.print(); } catch {} }, 500);
+
+      // Log completion with finished_at = user click time
+      await logWorkspaceEvent("printed", tConfirm, { render_ms: renderMs });
+
+      // Optional follow-up: ask to start fresh after print
+      const startFresh = await Swal.fire({
+        title: "Start a new session?",
+        text: "Return to the home screen to upload a new PDF.",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes, start fresh",
+        cancelButtonText: "Stay here"
+      }).then(r => r.isConfirmed);
+
+      if (startFresh) resetAndGoHome();
+
     } catch (e) {
       console.error("Print failed", e);
       Swal.fire({ icon:"error", title:"Print failed", text: e?.message || "Could not generate PDF for printing." });
@@ -88,17 +151,17 @@ function initWorkspace() {
   pageToggler?.addEventListener("click", () => thumbSidebar?.classList.toggle("visible"));
 
   // ---- "Show boxes" toggle ----
-  let toggleBoxes = null;
-  if (metricsRow) {
-    const boxesWrap = document.createElement("div");
-    boxesWrap.style.cssText = "text-align:center;margin:6px 0 4px 0;";
-    boxesWrap.innerHTML = `
-      <label style="font-size:12px;opacity:.9;">
-        <input type="checkbox" id="toggleBoxes"> Show boxes
-      </label>`;
-    metricsRow.insertAdjacentElement("afterend", boxesWrap);
-    toggleBoxes = $("toggleBoxes");
-  }
+  // let toggleBoxes = null;
+  // if (metricsRow) {
+  //   const boxesWrap = document.createElement("div");
+  //   boxesWrap.style.cssText = "text-align:center;margin:6px 0 4px 0;";
+  //   boxesWrap.innerHTML = `
+  //     <label style="font-size:12px;opacity:.9;">
+  //       <input type="checkbox" id="toggleBoxes"> Show boxes
+  //     </label>`;
+  //   metricsRow.insertAdjacentElement("afterend", boxesWrap);
+  //   toggleBoxes = $("toggleBoxes");
+  // }
 
   // ---- PDF state ----
   let pdfDoc = null;
@@ -152,6 +215,13 @@ function initWorkspace() {
   window.addEventListener("resize", () => renderPage(currentPage));
 
   function persistUpload(obj) {
+    // Reset workspace session when a new file is loaded
+    workspaceShownAt = null;
+    workspaceFinishedAt = null;
+    workspaceDuration = null;
+    workspaceLogged = false;
+    ws_clearInflight();
+    
     if (!obj) return;
     if (obj.web_path) sessionStorage.setItem("uploadedWebPath", normalizeToWebUrl(obj.web_path));
     if (obj.disk_path) sessionStorage.setItem("uploadedDiskPath", obj.disk_path);
@@ -188,7 +258,7 @@ function initWorkspace() {
       // Record current CSS size for this page
       pageCssSize[pageNum] = { w: viewport.width, h: viewport.height };
 
-       // Device Pixel Ratio
+      // Device Pixel Ratio
       const dpr = window.devicePixelRatio || 1;
 
       // Set wrapper CSS size
@@ -197,30 +267,81 @@ function initWorkspace() {
 
       // Set canvas CSS size
       setCssSize(pdfCanvas, viewport.width, viewport.height);
+      setCssSize(boxesCanvas, viewport.width, viewport.height);     // NEW
       setCssSize(overlayCanvas, viewport.width, viewport.height);
       setCssSize(annotationLayer, viewport.width, viewport.height);
 
       // Internal resolution in device pixels
       setDeviceSize(pdfCanvas, viewport.width * dpr, viewport.height * dpr);
+      setDeviceSize(boxesCanvas, viewport.width * dpr, viewport.height * dpr); // NEW
       setDeviceSize(overlayCanvas, viewport.width * dpr, viewport.height * dpr);
 
-      /// ✅ Correct transform: just scale by DPR, no double-flip
+      // Correct transforms: DPR scaling
       pdfCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      boxesCtx.setTransform(dpr, 0, 0, dpr, 0, 0);      // NEW
       overlayCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      try {
-        const annots = await page.getAnnotations({ intent: "display" });
-        pageHasFormFields[pageNum] = Array.isArray(annots) && annots.some(a => a && a.subtype === "Widget");
-      } catch { pageHasFormFields[pageNum] = false; }
+      // try {
+      //   const annots = await page.getAnnotations({ intent: "display" });
+      //   pageHasFormFields[pageNum] = Array.isArray(annots) && annots.some(a => a && a.subtype === "Widget");
+      // } catch { pageHasFormFields[pageNum] = false; }
 
-      page.render({ canvasContext: pdfCtx, viewport, renderInteractiveForms: true }).promise.then(() => {
+      async function renderPdfAnnotations(page, viewport) {
+        try {
+          // Clear previous DOM widgets
+          annotationLayer.innerHTML = "";
+
+          // Get annotations
+          const annotations = await page.getAnnotations({ intent: "display" });
+
+          // Use a dontFlip viewport (PDF.js expects this for annotation DOM)
+          const view = viewport.clone({ dontFlip: true });
+
+          const params = {
+            viewport: view,
+            div: annotationLayer,
+            annotations,
+            page,
+            renderForms: false,                    // render form widgets
+            annotationStorage: pdfDoc?.annotationStorage || null,
+            enableScripting: false                // keep JS off for safety
+          };
+
+          if (pdfjsLib?.AnnotationLayer?.render) {
+            pdfjsLib.AnnotationLayer.render(params);
+          } else if (pdfjsLib?.AnnotationLayerBuilder) {
+            const builder = new pdfjsLib.AnnotationLayerBuilder({
+              pageDiv: annotationLayer.parentElement,
+              pdfPage: page,
+              annotationStorage: pdfDoc?.annotationStorage || null
+            });
+            builder.render(view, "display");
+          }
+        } catch (e) {
+          console.warn("[annotation render] failed:", e);
+          annotationLayer.innerHTML = "";
+        }
+      }
+
+      // page.render({ canvasContext: pdfCtx, viewport, renderInteractiveForms: true }).promise.then(() => {
+        page.render({ canvasContext: pdfCtx, viewport }).promise.then(() => {
+        renderPdfAnnotations(page, viewport);
         if (pageInfo) pageInfo.textContent = `Page ${pageNum} / ${pdfDoc.numPages}`;
         if (zoomInfo) zoomInfo.textContent = `${Math.round(scale * 100)}%`;
 
+        // Clear both overlay layers appropriately
+        boxesCtx.clearRect(0, 0, boxesCanvas.width, boxesCanvas.height);
         overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
 
         if (toggleBoxes && toggleBoxes.checked && currentFormId) drawOverlay(currentFormId, pageNum);
         if (editMode) paintEdits(pageNum);
+
+        // Start workspace timer first render
+        if (!workspaceShownAt) {
+          workspaceShownAt = ws_now();
+          workspaceLogged = false;
+          ws_persistInflight();
+        }
 
         applyPointerRouting();
       });
@@ -251,46 +372,205 @@ function initWorkspace() {
     }
   }
 
+  // ---------- SweetAlert determinate progress helpers (force-centered) ----------
+  function openProgress(title, subtitle){
+    Swal.fire({
+      title,
+      html: `
+        <div id="ap-wrap" style="max-width:360px; width:90vw; margin:0 auto;">
+          <div id="ap-sub" style="margin:8px 0 12px; font-size:13px; opacity:.85;">
+            ${subtitle || ""}
+          </div>
+
+          <div class="ap-track"
+              style="height:10px; background:#eee; border-radius:6px; overflow:hidden;">
+            <div id="ap-bar" style="height:100%; width:0%"></div>
+          </div>
+
+          <div id="ap-pct" style="margin-top:8px; font-size:12px; opacity:.75;">0%</div>
+        </div>
+      `,
+      showConfirmButton: false,
+      allowOutsideClick: false,
+      didOpen: () => {
+        // Center the whole HTML container (this beats any global CSS)
+        const html = Swal.getHtmlContainer();
+        if (html) {
+          html.style.display = 'flex';
+          html.style.flexDirection = 'column';
+          html.style.alignItems = 'center';
+          html.style.textAlign = 'center';
+          // also make the inner track full width of the wrapper
+          const track = html.querySelector('.ap-track');
+          if (track) { track.style.width = '100%'; }
+        }
+        const bar = html.querySelector('#ap-bar');
+        bar.style.background = 'linear-gradient(90deg, rgba(77,139,255,.95), rgba(77,139,255,.7))';
+        bar.style.transition = 'width .25s ease';
+      }
+    });
+  }
+
+  function closeProgressSuccess(){
+    Swal.update({
+      icon: 'success',
+      title: 'Analysis complete',
+      html: `
+        <div style="max-width:360px; margin:0 auto; text-align:center; font-size:14px; opacity:.9;">
+          You can start filling or use the tools on the left.
+        </div>
+      `,
+      showConfirmButton: true,
+      confirmButtonText: 'Close'
+    });
+    // Ensure centering after update
+    const html = Swal.getHtmlContainer();
+    if (html) {
+      html.style.display = 'flex';
+      html.style.flexDirection = 'column';
+      html.style.alignItems = 'center';
+      html.style.textAlign = 'center';
+    }
+  }
+
+  function updateProgress(pct, subtitle){
+    const box = Swal.getHtmlContainer(); if (!box) return;
+    const bar = box.querySelector('#ap-bar');
+    const pctLbl = box.querySelector('#ap-pct');
+    const sub = box.querySelector('#ap-sub');
+    if (typeof pct === 'number') {
+      const clamped = Math.max(0, Math.min(100, pct));
+      bar.style.width = `${clamped}%`;
+      pctLbl.textContent = `${Math.round(clamped)}%`;
+    }
+    if (subtitle != null) sub.textContent = subtitle;
+  }
+
+  function closeProgressSuccess(){
+    // show an explicit Close button (no timer), keep centered layout
+    Swal.update({
+      icon: 'success',
+      title: 'Analysis complete',
+      html: `
+        <div style="text-align:center; font-size:14px; opacity:.85;">
+          You can start filling or use the tools on the left.
+        </div>
+      `,
+      showConfirmButton: true,
+      confirmButtonText: 'Close'
+    });
+  }
+
+  function closeProgressError(msg){
+    Swal.fire({ icon: 'error', title: 'Analysis failed', text: msg || 'Could not analyze this form.' });
+  }
+
+  // Utility to run a step with weight and auto progress update
+  async function runStep(label, weight, fn, basePctRef){
+    updateProgress(basePctRef.pct, label);
+    try {
+      const out = await fn();
+      const target = basePctRef.pct + weight;
+      const pctEl = Swal.getHtmlContainer()?.querySelector('#ap-pct');
+      const nowPct = pctEl ? parseFloat(pctEl.textContent) || basePctRef.pct : basePctRef.pct;
+
+      if (target - nowPct > 2) {
+        updateProgress(nowPct + Math.min(5, (target - nowPct) * 0.5));
+        await new Promise(r=>setTimeout(r, 120));
+      }
+      basePctRef.pct = target;
+      updateProgress(basePctRef.pct, label);
+      return out;
+    } catch (e) {
+      throw e;
+    }
+  }
+
   // ========================
   // Run Analysis
   // ========================
   analyzeBtn?.addEventListener("click", runAnalysis);
+
   async function runAnalysis() {
-    Swal.fire({ title: "Analyzing Form...", text: "Preparing summaries and overlays", allowOutsideClick: false, didOpen: () => Swal.showLoading() });
+    analysisStartAt = nowMs();
+    lastFinishAt = null;
+    lastDuration = null;
+
+    // Open determinate progress
+    openProgress("Analyzing form…", "Preparing your PDF viewer");
+    const P = { pct: 0 }; // progress accumulator
+
     try {
-      let uploadInfo = await ensureUploadedToServer(storedWeb);
-      if (uploadInfo) persistUpload(uploadInfo);
+      // 1) Ensure the PDF is uploaded / available (20%)
+      const uploadInfo = await runStep("Processing your PDF…", 20, async () => {
+        let up = await ensureUploadedToServer(storedWeb);
+        if (up) persistUpload(up);
+        return up;
+      }, P);
+
       const web_path  = sessionStorage.getItem("uploadedWebPath");
       const disk_path = sessionStorage.getItem("uploadedDiskPath");
       let   hashId    = sessionStorage.getItem("uploadedFormId") || currentFormId;
       if (!disk_path) throw new Error("Upload failed to provide a disk path.");
 
-      const pre = await ensurePrelabelAndOverlays({ disk_path }, hashId);
-      if (pre && pre.canonical_form_id) {
-        hashId = pre.canonical_form_id; currentFormId = hashId; sessionStorage.setItem("uploadedFormId", hashId);
-      }
+      // 2) Prelabel + overlays (25%)
+      const pre = await runStep("Identifying labels and positions…", 25, async () => {
+        const r = await ensurePrelabelAndOverlays({ disk_path }, hashId);
+        if (r && r.canonical_form_id) {
+          hashId = r.canonical_form_id; currentFormId = hashId; sessionStorage.setItem("uploadedFormId", hashId);
+        }
+        return r;
+      }, P);
 
-      const guess = guessFromPath(baseFromPath(web_path) || "form.pdf");
-      const reg = await GET_json("/panel");
-      let explainer = await resolveExplainerByHash(reg, hashId);
-      if (!explainer) {
-        await POST_json("/api/explainer.ensure", {
-          canonical_form_id: hashId, bucket: guess.bucket, human_title: guess.title,
-          pdf_disk_path: disk_path, aliases: [guess.formId, baseFromPath(web_path)]
-        });
-        const reg2 = await GET_json("/panel");
-        explainer = await resolveExplainerByHash(reg2, hashId);
-      }
-      if (!explainer) throw new Error("Failed to load explainer.");
+      // 3) Resolve explainer registry (15%)
+      const explainer = await runStep("Validating structure and sections…", 15, async () => {
+        const guess = guessFromPath(baseFromPath(web_path) || "form.pdf");
+        const reg = await GET_json("/panel");
+        let ex = await resolveExplainerByHash(reg, hashId);
+        if (!ex) {
+          await POST_json("/api/explainer.ensure", {
+            canonical_form_id: hashId, bucket: guess.bucket, human_title: guess.title,
+            pdf_disk_path: disk_path, aliases: [guess.formId, baseFromPath(web_path)]
+          });
+          const reg2 = await GET_json("/panel");
+          ex = await resolveExplainerByHash(reg2, hashId);
+        }
+        if (!ex) throw new Error("Failed to load explainer.");
+        return ex;
+      }, P);
 
-      if (formTitle) formTitle.textContent = explainer.title || (storedName || "Form");
-      renderSummaries(explainer);
-      if (toggleBoxes && toggleBoxes.checked && currentFormId) await drawOverlay(currentFormId, currentPage);
+      // 4) Render summaries (15%)
+      await runStep("Generating summaries…", 15, async () => {
+        // cache canonical id for user log and log tool metrics
+        lastCanonicalId = explainer.canonical_id || hashId || currentFormId;
+        logToolMetricsFromExplainer(explainer);
 
-      Swal.fire({ icon: "success", title: "Analysis Complete", timer: 1200, showConfirmButton: false });
+        if (formTitle) formTitle.textContent = explainer.title || (storedName || "Form");
+        renderSummaries(explainer);
+      }, P);
+
+      // 5) Initial overlay draw (15%)
+      await runStep("Overlaying navigation aids…", 15, async () => {
+        if (toggleBoxes && toggleBoxes.checked && currentFormId) await drawOverlay(currentFormId, currentPage);
+      }, P);
+
+      // 6) Final polish (10%)
+      await runStep("Finalizing… Please hold on!", 10, async () => {
+        // any quick, non-blocking polish can go here later
+      }, P);
+
+      // Success
+      lastFinishAt = nowMs();
+      lastDuration = lastFinishAt - analysisStartAt;
+      logUserSession({ status: "success" });
+      closeProgressSuccess();
+
     } catch (e) {
       console.error("runAnalysis error:", e);
-      Swal.fire({ icon: "error", title: "Analysis Failed", text: e?.message || "Could not analyze this form." });
+      lastFinishAt = nowMs();
+      lastDuration = lastFinishAt - (analysisStartAt || lastFinishAt);
+      logUserSession({ status: "error", message: e?.message || String(e) });
+      closeProgressError(e?.message);
     }
   }
 
@@ -340,10 +620,12 @@ function initWorkspace() {
     try {
       if (!cachedAnnotations || cachedAnnotations.__formId !== formId) {
         const res = await fetch(`/explanations/_annotations/${formId}.json?ts=${Date.now()}`, { cache: "no-store" });
-        if (!res.ok) { overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height); return; }
+        if (!res.ok) { boxesCtx.clearRect(0, 0, boxesCanvas.width, boxesCanvas.height); return; }
         cachedAnnotations = await res.json(); cachedAnnotations.__formId = formId;
       }
-      overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+
+      // Only clear boxes layer
+      boxesCtx.clearRect(0, 0, boxesCanvas.width, boxesCanvas.height);
 
       const pageIdx = pageNumber - 1;
       let rects = [];
@@ -353,38 +635,38 @@ function initWorkspace() {
         rects = cachedAnnotations.tokens.filter((t) => (t.page || 0) === pageIdx);
       }
 
-      const base = pageBaseSize[pageNumber];                  // scale=1 size from renderPage()
-      const cssW = pageLayer.clientWidth;                     // wrapper’s CSS width
-      const cssH = pageLayer.clientHeight;                    // wrapper’s CSS height
-      const sx = cssW / base.w;                               // CSS scale only
-      const sy = cssH / base.h;                               // CSS scale only
+      const cssW = pageLayer.clientWidth;
+      const cssH = pageLayer.clientHeight;
+      // bboxes are normalized 0..1000 → convert directly to CSS pixels
+      const sx = cssW / 1000.0;
+      const sy = cssH / 1000.0;
 
-      overlayCtx.save();
-      overlayCtx.lineWidth = 1;
-      overlayCtx.strokeStyle = "rgba(20,20,20,0.25)";
+      boxesCtx.save();
+      boxesCtx.lineWidth = 1;
+      boxesCtx.strokeStyle = "rgba(20,20,20,0.25)";
       rects.forEach((r) => {
         const [x0,y0,x1,y1] = r.bbox;
-        overlayCtx.strokeRect(x0*sx, y0*sy, Math.max(1,(x1-x0)*sx), Math.max(1,(y1-y0)*sy));
+        boxesCtx.strokeRect(x0*sx, y0*sy, Math.max(1,(x1-x0)*sx), Math.max(1,(y1-y0)*sy));
       });
 
       if (anchor && Array.isArray(anchor.bbox)) {
-        overlayCtx.lineWidth = 2;
-        overlayCtx.strokeStyle = "rgba(0,0,0,0.95)";
-        overlayCtx.fillStyle   = "rgba(255,255,0,0.2)";
+        boxesCtx.lineWidth = 2;
+        boxesCtx.strokeStyle = "rgba(0,0,0,0.95)";
+        boxesCtx.fillStyle   = "rgba(255,255,0,0.2)";
         const [x0,y0,x1,y1] = anchor.bbox;
-        overlayCtx.fillRect(x0*sx, y0*sy, Math.max(1,(x1-x0)*sx), Math.max(1,(y1-y0)*sy));
-        overlayCtx.strokeRect(x0*sx, y0*sy, Math.max(1,(x1-x0)*sx), Math.max(1,(y1-y0)*sy));
+        boxesCtx.fillRect(x0*sx, y0*sy, Math.max(1,(x1-x0)*sx), Math.max(1,(y1-y0)*sy));
+        boxesCtx.strokeRect(x0*sx, y0*sy, Math.max(1,(x1-x0)*sx), Math.max(1,(y1-y0)*sy));
       }
-      overlayCtx.restore();
+      boxesCtx.restore();
     } catch {
-      overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+      boxesCtx.clearRect(0, 0, boxesCanvas.width, boxesCanvas.height);
     }
   }
 
   document.addEventListener("change", (ev) => {
     if (ev.target && ev.target.id === "toggleBoxes") {
       if (ev.target.checked && currentFormId) drawOverlay(currentFormId, currentPage);
-      else overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
+      else boxesCtx.clearRect(0, 0, boxesCanvas.width, boxesCanvas.height);
     }
   });
 
@@ -473,16 +755,8 @@ function initWorkspace() {
   function setDeviceSize(canvas, w, h) { canvas.width = Math.max(1, Math.round(w)); canvas.height = Math.max(1, Math.round(h)); }
 
   // ===== Label helpers (robust fuzzy jump) =====
-  function bboxUnion(a, b) {
-    return [
-      Math.min(a[0], b[0]),
-      Math.min(a[1], b[1]),
-      Math.max(a[2], b[2]),
-      Math.max(a[3], b[3]),
-    ];
-  }
+  function bboxUnion(a, b) { return [ Math.min(a[0], b[0]), Math.min(a[1], b[1]), Math.max(a[2], b[2]), Math.max(a[3], b[3]) ]; }
 
-  // Tiny synonym map that helps common banking/ID terms align
   const SYN_MAP = {
     "tin": "tax identification number",
     "zipcode": "zip code",
@@ -499,11 +773,8 @@ function initWorkspace() {
 
   function normalizeText(s) {
     if (!s) return "";
-    // lowercase + strip diacritics
     s = s.toString().toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
-    // collapse punctuation to space, keep a-z0-9
     s = s.replace(/[^a-z0-9]+/g, " ").trim().replace(/\s+/g, " ");
-    // synonym expansion
     for (const k of Object.keys(SYN_MAP)) {
       const re = new RegExp(`\\b${k}\\b`, "g");
       s = s.replace(re, SYN_MAP[k]);
@@ -511,17 +782,9 @@ function initWorkspace() {
     return s;
   }
 
-  function tokenize(s) {
-    return normalizeText(s).split(" ").filter(Boolean);
-  }
+  function tokenize(s) { return normalizeText(s).split(" ").filter(Boolean); }
+  function bigrams(tokens) { const out = []; for (let i = 0; i < tokens.length - 1; i++) out.push(tokens[i] + " " + tokens[i + 1]); return out; }
 
-  function bigrams(tokens) {
-    const out = [];
-    for (let i = 0; i < tokens.length - 1; i++) out.push(tokens[i] + " " + tokens[i + 1]);
-    return out;
-  }
-
-  // Weighted similarity: token overlap + bigram overlap + substring bonus + slight length preference
   function similarity(labelRaw, textRaw) {
     const L = tokenize(labelRaw);
     const T = tokenize(textRaw);
@@ -544,7 +807,7 @@ function initWorkspace() {
   function sameLine(tA, tB) {
     const midA = (tA.bbox[1] + tA.bbox[3]) / 2;
     const midB = (tB.bbox[1] + tB.bbox[3]) / 2;
-    return Math.abs(midA - midB) < 8; // keep your tolerance
+    return Math.abs(midA - midB) < 8;
   }
 
   function unionLine(seed, pageTokens) {
@@ -553,13 +816,12 @@ function initWorkspace() {
     return box;
   }
 
-  // Main resolver with page prior + threshold
   function findAnchorForLabel(label, annotations) {
     if (!annotations) return null;
     const labelNorm = normalizeText(label);
-    const MIN_SCORE = 0.60; // adjust 0.58–0.65 to taste
+    const MIN_SCORE = 0.60;
 
-    // 1) Prefer exact normalized group label match
+    // exact group label match
     if (Array.isArray(annotations.groups) && annotations.groups.length) {
       const exact = annotations.groups.find(g => normalizeText(g.label || "") === labelNorm);
       if (exact && Array.isArray(exact.bbox) && exact.bbox.length === 4) {
@@ -570,7 +832,6 @@ function initWorkspace() {
     const tokens = Array.isArray(annotations.tokens) ? annotations.tokens : [];
     if (!tokens.length && !(annotations.groups && annotations.groups.length)) return null;
 
-    // 2) Page prior: if groups exist, use their pages; else rank pages by token similarity
     let pageCandidates = null;
 
     if (annotations.groups && annotations.groups.length) {
@@ -579,12 +840,12 @@ function initWorkspace() {
         .filter(x => x.s > 0);
       if (scoredGroups.length) {
         scoredGroups.sort((a, b) => b.s - a.s);
-        pageCandidates = [...new Set(scoredGroups.slice(0, 2).map(x => x.g.page || 0))]; // top 1–2 pages
+        pageCandidates = [...new Set(scoredGroups.slice(0, 2).map(x => x.g.page || 0))];
       }
     }
 
     if (!pageCandidates) {
-      const pageScore = new Map(); // page -> max score
+      const pageScore = new Map();
       for (const t of tokens) {
         const s = similarity(label, t.text || "");
         if (s <= 0) continue;
@@ -596,13 +857,12 @@ function initWorkspace() {
       pageCandidates = sorted.slice(0, 1);
     }
 
-    // 3) Within candidates, pick best token and expand to its whole line
     let best = null;
     for (const p of pageCandidates) {
       const pageTokens = tokens.filter(t => (t.page || 0) === p);
       for (const t of pageTokens) {
         const s = similarity(label, t.text || "");
-        const leftBias = (t.bbox?.[0] ?? 1e9) / 1e6; // tiny preference for left-most labels
+        const leftBias = (t.bbox?.[0] ?? 1e9) / 1e6;
         const score = s - leftBias;
         if (!best || score > best.score) best = { token: t, score, page: p };
       }
@@ -618,17 +878,17 @@ function initWorkspace() {
   // EDIT LAYER
   // =========================
   let editMode = false;
-  let currentTool = null;     // << no default active
+  let currentTool = null;     // no default active
   let drawing = false;
 
   const pageEdits = {};
   const EDIT = (p) => (pageEdits[p] ??= { strokes: [], texts: [] });
 
-  // Draw config (defaults; UI sliders can override)
+  // Draw config
   const PEN = { color: "#111111", width: 2.0,  alpha: 1.0 };
   const HL  = { color: "rgba(255,255,0,0.35)", width: 10.0, alpha: 0.35 };
 
-  // Apply live pen/highlight settings from dropdowns if present
+  // UI inputs (optional)
   const penWidthInput = document.getElementById("penWidth");
   const penColorInput = document.getElementById("penColor");
   const hlWidthInput  = document.getElementById("hlWidth");
@@ -643,21 +903,17 @@ function initWorkspace() {
   function currentHL() {
     const col = (hlColorInput && hlColorInput.value) || "#ffff00";
     const alpha = 0.35;
-    return {
-      color: rgbaFromHex(col, alpha),
-      width: (hlWidthInput && (+hlWidthInput.value || HL.width)) || HL.width,
-      alpha
-    };
+    return { color: rgbaFromHex(col, alpha), width: (hlWidthInput && (+hlWidthInput.value || HL.width)) || HL.width, alpha };
   }
   function rgbaFromHex(hex, a) {
     const h = hex.replace("#",""); const r = parseInt(h.slice(0,2),16); const g = parseInt(h.slice(2,4),16); const b = parseInt(h.slice(4,6),16);
     return `rgba(${r},${g},${b},${a})`;
   }
 
-  // Track active text node (for keyboard size tweaks)
+  // Track active text node
   let activeTextNode = null;
 
-  // tool selection — click again to deselect
+  // tool selection
   document.getElementById("editToolbar")?.addEventListener("click", (e) => {
     const btn = e.target.closest(".tool-btn"); if (!btn || btn.disabled) return;
     const name = btn.dataset.tool;
@@ -672,31 +928,38 @@ function initWorkspace() {
     applyPointerRouting();
   });
 
-  // pointer routing
+  // // pointer routing
+  // function applyPointerRouting() {
+  //   if (!editMode || !currentTool) { overlayCanvas.style.pointerEvents = "none"; return; }
+  //   // if (currentTool === "text" && pageHasFormFields[currentPage]) overlayCanvas.style.pointerEvents = "none";
+  //   // else overlayCanvas.style.pointerEvents = "auto";
+  //   overlayCanvas.style.pointerEvents = currentTool ? "auto" : "none";
+  //   document.body.classList.toggle("text-mode", currentTool === "text");
+  //   document.body.classList.toggle("pen-mode", currentTool === "pen");
+  //   document.body.classList.toggle("hl-mode", currentTool === "highlight");
+  // }
+
   function applyPointerRouting() {
-    if (!editMode || !currentTool) { overlayCanvas.style.pointerEvents = "none"; return; }
-    if (currentTool === "text" && pageHasFormFields[currentPage]) overlayCanvas.style.pointerEvents = "none";
-    else overlayCanvas.style.pointerEvents = "auto";
+    overlayCanvas.style.pointerEvents = (editMode && currentTool) ? "auto" : "none";
+    annotationLayer.style.pointerEvents = "none"; // we’ve disabled widgets globally
     document.body.classList.toggle("text-mode", currentTool === "text");
-    document.body.classList.toggle("pen-mode", currentTool === "pen");
-    document.body.classList.toggle("hl-mode", currentTool === "highlight");
+    document.body.classList.toggle("pen-mode",  currentTool === "pen");
+    document.body.classList.toggle("hl-mode",   currentTool === "highlight");
   }
 
-  // scale helpers (base<->current CSS)
+  // scale helpers
   function pageScaleFactors(pageNum) {
     const base = pageBaseSize[pageNum] || { w: overlayCanvas.width, h: overlayCanvas.height };
     const cssW = pageLayer?.clientWidth  || overlayCanvas.clientWidth  || base.w;
     const cssH = pageLayer?.clientHeight || overlayCanvas.clientHeight || base.h;
     return { sx: cssW / base.w, sy: cssH / base.h, invx: base.w / cssW, invy: base.h / cssH };
   }
-  
-  // CSS pixel coordinates under mouse
   function toCssXY(evt) {
     const rect = overlayCanvas.getBoundingClientRect();
     return { x: (evt.clientX - rect.left), y: (evt.clientY - rect.top) };
   }
 
-  // paint strokes (convert base → current CSS)
+  // paint strokes (draw layer only)
   function paintEdits(pageNum) {
     overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
     const ed = pageEdits[pageNum]; if (!ed) return;
@@ -717,20 +980,19 @@ function initWorkspace() {
     }
   }
 
-  // --- Draggable + editable text nodes (Acrobat-like) ---
+  // --- Draggable + editable text nodes ---
   function spawnTextNode(cssX, cssY) {
     const pageNum = currentPage;
-    const { invx, invy, sx, sy } = pageScaleFactors(pageNum);
+    const { invx, invy } = pageScaleFactors(pageNum);
 
     const wrap = document.createElement("div");
     wrap.className = "text-annot";
     wrap.style.cssText = `
-      position:absolute; left:${cssX}px; top:${cssY}px;
+      position:absolute; left:${cssX}px; top:${cssY}px; z-index:4;
       outline:1.5px dashed #1e90ff; outline-offset:2px; border-radius:4px; padding:6px 8px 8px 28px;
       background:rgba(255,255,255,0.01); user-select:none;`;
     wrap.dataset.page = String(pageNum);
 
-    // handle (six dots)
     const handle = document.createElement("div");
     handle.className = "ta-handle";
     handle.title = "Drag";
@@ -744,7 +1006,6 @@ function initWorkspace() {
     }
     wrap.appendChild(handle);
 
-    // content (editable)
     const content = document.createElement("div");
     content.className = "ta-content";
     content.contentEditable = "true";
@@ -755,12 +1016,11 @@ function initWorkspace() {
     content.textContent = "Type here";
     wrap.appendChild(content);
 
-    // mini toolbar
     const bar = document.createElement("div");
     bar.className = "ta-toolbar";
     bar.style.cssText = `
       position:absolute; left:0; transform:translateY(100%); margin-top:6px; padding:6px 8px;
-      border-radius:8px; box-shadow:0 6px 24px rgba(0,0,0,.12); background:#fff; display:none; gap:6px;`;
+      border-radius:8px; box-shadow:0 6px 24px rgba(0,0,0,.12); background:#fff; display:none; gap:6px; z-index:5;`;
     bar.innerHTML = `
       <button data-act="smaller" title="Decrease font">A<span style="font-size:10px;vertical-align:super;">ˇ</span></button>
       <button data-act="larger" title="Increase font">A<span style="font-size:10px;vertical-align:super;">^</span></button>
@@ -772,26 +1032,22 @@ function initWorkspace() {
 
     const model = {
       id: "t" + Date.now() + Math.random().toString(36).slice(2,6),
-      x: cssX * invx, y: cssY * invy,                  // store in base coords
+      x: cssX * invx, y: cssY * invy,                  // base coords
       text: "Type here", font: "Inter", size: 14, color: "#000000"
     };
     const ed = EDIT(pageNum); ed.texts.push(model);
     wrap.dataset.key = model.id;
 
-    // focus/toolbar
     const showBar = () => { bar.style.display = "flex"; activeTextNode = wrap; };
     const hideBar = () => { bar.style.display = "none"; if (activeTextNode === wrap) activeTextNode = null; };
-
     content.addEventListener("focus", showBar);
     content.addEventListener("blur", () => setTimeout(() => { if (!wrap.contains(document.activeElement)) hideBar(); }, 0));
 
-    // typing sync
     content.addEventListener("input", () => {
       model.text = content.textContent || "";
       model.size = parseInt(getComputedStyle(content).fontSize,10) || model.size;
     });
 
-    // toolbar actions
     bar.addEventListener("click", (e) => {
       const btn = e.target.closest("button"); if (!btn) return;
       if (btn.dataset.act === "smaller") {
@@ -808,7 +1064,6 @@ function initWorkspace() {
       content.focus();
     });
 
-    // drag only from handle or border
     let dragging = false, offX = 0, offY = 0;
     function startDrag(e) {
       dragging = true;
@@ -823,7 +1078,8 @@ function initWorkspace() {
       const nx = e.clientX - parentRect.left - offX;
       const ny = e.clientY - parentRect.top  - offY;
       wrap.style.left = `${nx}px`; wrap.style.top = `${ny}px`;
-      model.x = nx * invx; model.y = ny * invy;       // keep base coords
+      model.x = nx * (pageScaleFactors(pageNum).invx); 
+      model.y = ny * (pageScaleFactors(pageNum).invy);
     }
     function endDrag(e){ if(!dragging)return; dragging=false; wrap.releasePointerCapture?.(e.pointerId); }
 
@@ -832,7 +1088,6 @@ function initWorkspace() {
     wrap.addEventListener("pointermove", moveDrag);
     ["pointerup","pointercancel","pointerleave"].forEach(t => wrap.addEventListener(t, endDrag));
 
-    // insert
     const parent = pdfCanvas.parentElement || document.body;
     if (getComputedStyle(parent).position === "static") parent.style.position = "relative";
     parent.appendChild(wrap);
@@ -881,7 +1136,7 @@ function initWorkspace() {
     paintEdits(currentPage);
   });
 
-  // Smooth drawing (pointer capture + rAF) + base-coordinate storage
+  // Smooth drawing
   let rafPending = false;
   function schedulePaint() {
     if (rafPending) return;
@@ -893,7 +1148,7 @@ function initWorkspace() {
     if (!editMode || !currentTool) return;
 
     if (currentTool === "text") {
-      if (pageHasFormFields[currentPage]) return;  // yield to native fields
+      if (pageHasFormFields[currentPage]) return;
       const css = toCssXY(e);
       spawnTextNode(css.x, css.y);
       return;
@@ -913,7 +1168,6 @@ function initWorkspace() {
         EDIT(currentPage).strokes.push({ tool: currentTool, color: conf.color, width: conf.width, alpha: conf.alpha, points: [ startBase ] });
       } else {
         const ed = EDIT(currentPage); const R = 10;
-        // Compare in base space: convert radius to base units using inv factors (approx with x)
         const rBase = R * invx;
         ed.strokes = ed.strokes.filter(st => !st.points.some(p => Math.hypot(p.x-startBase.x, p.y-startBase.y) < rBase));
       }
@@ -924,8 +1178,8 @@ function initWorkspace() {
   overlayCanvas.addEventListener("pointermove", (e) => {
     if (!editMode || !drawing) return;
     const css = toCssXY(e);
-    const { invx, invy } = pageScaleFactors(currentPage);
-    const ptBase = { x: css.x * invx, y: css.y * invy };
+    const { invx } = pageScaleFactors(currentPage);
+    const ptBase = { x: css.x * invx, y: css.y * (pageScaleFactors(currentPage).invy) };
 
     if (currentTool === "erase") {
       const ed = EDIT(currentPage); const R = 10;
@@ -981,8 +1235,59 @@ function initWorkspace() {
     }
   });
 
-  // ---- Save / Download ----
-  async function onSaveClick() {
+        // ---- Workspace event logger: duration ends at the user's confirmation moment ----
+        async function logWorkspaceEvent(status, finishedAt, extraMeta) {
+          try {
+            if (!workspaceShownAt || workspaceLogged) return;
+            const cid = ws_currentCanonical();
+            if (!cid) return;
+
+            const payload = {
+              user_id: getUserId(),
+              canonical_id: cid,
+              method: "intelliform",
+              started_at: workspaceShownAt,
+              finished_at: finishedAt,
+              duration_ms: Math.max(0, finishedAt - workspaceShownAt),
+              meta: Object.assign({ status }, extraMeta || {})
+            };
+
+            if (navigator.sendBeacon) {
+              const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
+              navigator.sendBeacon("/api/user.log", blob);
+            } else {
+              await POST_JSON("/api/user.log", payload);
+            }
+            workspaceLogged = true;
+            ws_clearInflight();
+          } catch (e) {
+            console.warn("[workspace event log] failed:", e);
+          }
+        }
+
+        // ---- Reset session storage and go back to index (fresh user upload) ----
+        function resetAndGoHome() {
+          try {
+            // Do NOT clear the research user id – keep the identity across sessions.
+            const KEEP = "research_user_id";
+
+            [
+              "uploadedWebPath",
+              "uploadedDiskPath",
+              "uploadedFormId",
+              "uploadedFileName",
+              "uploadedFileWithExtension",
+              "WS_INFLIGHT_V1"
+            ].forEach(k => { if (k !== KEEP) sessionStorage.removeItem(k); });
+
+            // (Optional) also clear the same doc keys from localStorage if you store any there,
+            // but do NOT touch 'research_user_id'.
+          } catch {}
+          window.location.href = "/";
+        }
+
+    // ---- Save / Download ----
+    async function onSaveClick() {
     const ok = await Swal.fire({
       title: "Save edited PDF?",
       text: "Export and download a copy with your drawings and inserted text.",
@@ -993,20 +1298,52 @@ function initWorkspace() {
     }).then(r=>r.isConfirmed);
     if (!ok) return;
 
+    // capture confirmation time BEFORE any rendering/export
+    const tConfirm = ws_now();
+
     if (!editMode) enterEdit();
+
+    let renderMs = 0;
     try {
+      const t0 = ws_now();
       const bytes = await exportEditedPdf();
+      renderMs = ws_now() - t0;
+
       const base = (sessionStorage.getItem("uploadedFileName") || "form.pdf").replace(/\.pdf$/i,"");
       const filename = `${base}_edited.pdf`;
       const blob = new Blob([bytes], { type: "application/pdf" });
+
       const a = document.createElement("a");
       a.href = URL.createObjectURL(blob); a.download = filename;
       document.body.appendChild(a); a.click(); a.remove();
       URL.revokeObjectURL(a.href);
-      Swal.fire({ icon:"success", title:"Saved", timer:1000, showConfirmButton:false });
+
+      // Success toast
+      await Swal.fire({ icon:"success", title:"Saved", timer:800, showConfirmButton:false });
+
+      // Ask if the user wants to start fresh
+      const startFresh = await Swal.fire({
+        title: "Start a new session?",
+        text: "Return to the home screen to upload a new PDF.",
+        icon: "question",
+        showCancelButton: true,
+        confirmButtonText: "Yes, start fresh",
+        cancelButtonText: "Stay here"
+      }).then(r => r.isConfirmed);
+
+      // Log completion with finished_at = user confirmation time (not including export time)
+      await logWorkspaceEvent("saved", tConfirm, { render_ms: renderMs });
+
+      if (startFresh) {
+        resetAndGoHome();
+        return;
+      }
+
     } catch (e) {
       console.error("Save failed", e);
       Swal.fire({ icon:"error", title:"Save failed", text: e?.message || "Could not generate edited PDF." });
+      // do not log a completion if save failed
+      return;
     }
   }
 
@@ -1018,7 +1355,6 @@ function initWorkspace() {
     const pngPages = [];
     for (let n=1; n<=pdfDoc.numPages; n++) {
       const page = await pdfDoc.getPage(n);
-      // Use current scale for consistency with on-screen view
       const viewport = page.getViewport({ scale });
       const c = document.createElement("canvas");
       c.width = Math.max(1, Math.round(viewport.width));
@@ -1028,7 +1364,6 @@ function initWorkspace() {
 
       const ed = pageEdits[n];
       if (ed) {
-        // Scale base -> export viewport
         const base = pageBaseSize[n] || { w: viewport.width, h: viewport.height };
         const sx = viewport.width / base.w;
         const sy = viewport.height / base.h;
@@ -1074,7 +1409,7 @@ function initWorkspace() {
     }
     const bytes = await outPdf.save();
 
-    // optional: register checksum so backend can map edited files back to the form id
+    // optional: register checksum
     try {
       const digest = await crypto.subtle.digest("SHA-256", bytes);
       const hex = Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,"0")).join("");
@@ -1095,11 +1430,9 @@ function initWorkspace() {
 
   // ---- Dynamic wrapper helpers ----
   function ensurePageLayer() {
-    // If already present (from HTML update), reuse it
     let layer = document.querySelector("#pdfContainer .pageLayer");
     if (layer) return layer;
 
-    // Otherwise create and wrap canvases
     const container = document.getElementById("pdfContainer");
     layer = document.createElement("div");
     layer.id = "pageLayer";
@@ -1107,43 +1440,416 @@ function initWorkspace() {
     layer.style.position = "relative";
     layer.style.marginTop = "60px";
 
-    // Move canvases inside the layer
-    const first = pdfCanvas; const second = overlayCanvas;
-    // Remove any absolute on overlay for now; CSS will handle later
-    second.style.left = "0"; second.style.top = "0";
-    second.style.position = "absolute";
-    second.style.pointerEvents = "none";
-
-    // Clear container then append wrapper with canvases
+    // Move canvases inside the layer; overlay is positioned abs by CSS
+    // We'll insert a separate boxesCanvas next.
     if (container) {
       container.innerHTML = "";
       container.appendChild(layer);
-      layer.appendChild(first);
-      layer.appendChild(second);
+      layer.appendChild(pdfCanvas);
+      overlayCanvas.style.left = "0"; overlayCanvas.style.top = "0";
+      overlayCanvas.style.position = "absolute";
+      overlayCanvas.style.pointerEvents = "none"; // enabled only when tools active
+      layer.appendChild(overlayCanvas);
     }
     return layer;
   }
 
-  function ensureAnnotationLayer() {
-    let anno = document.getElementById("annotationLayer");
-    if (anno) return anno;
-    anno = document.createElement("div");
-    anno.id = "annotationLayer";
-    anno.className = "annotationLayer";
-    anno.style.position = "absolute";
-    anno.style.left = "0";
-    anno.style.top = "0";
-    anno.style.width = "100%";
-    anno.style.height = "100%";
-    anno.style.pointerEvents = "none"; // we’re not mounting native inputs yet
-    pageLayer.insertBefore(anno, overlayCanvas); // between pdf and overlay
-    return anno;
+  function ensureBoxesCanvas() {
+    let c = document.getElementById("boxesCanvas");
+    if (c) return c;
+    c = document.createElement("canvas");
+    c.id = "boxesCanvas";
+    c.style.position = "absolute";
+    c.style.left = "0";
+    c.style.top  = "0";
+    c.style.pointerEvents = "none"; // overlays are not interactive
+    // Insert between pdf and overlay
+    pageLayer.insertBefore(c, overlayCanvas);
+    return c;
   }
 
-  // ===== Keyboard-aware tool toggles helpers (exported within closure) =====
-  function toggleTool(name){
-    currentTool = currentTool === name ? null : name;
-    toolButtons.forEach(b => b.classList.toggle("active", b.dataset.tool === currentTool));
-    applyPointerRouting();
+  function ensureAnnotationLayer() {
+      let anno = document.getElementById("annotationLayer");
+      if (anno) return anno;
+
+      anno = document.createElement("div");
+      anno.id = "annotationLayer";
+      anno.className = "annotationLayer";
+      anno.style.position = "absolute";
+      anno.style.left = "0";
+      anno.style.top = "0";
+      anno.style.width = "100%";
+      anno.style.height = "100%";
+      anno.style.pointerEvents = "none";         // <-- keep
+      anno.style.zIndex = "2";                   // explicit, just in case
+
+      // Inject minimal PDF.js annotation styles once
+      if (!document.getElementById("pdfjs-annot-style")) {
+        const s = document.createElement("style");
+        s.id = "pdfjs-annot-style";
+        s.textContent = `
+          .annotationLayer { position:absolute; top:0; left:0; }
+          .annotationLayer * { box-sizing: border-box; }
+          /* Make the widgets visible and clickable */
+          .annotationLayer .buttonWidgetAnnotation,
+          .annotationLayer .textWidgetAnnotation input,
+          .annotationLayer .choiceWidgetAnnotation select,
+          .annotationLayer .checkboxWidgetAnnotation input {
+            pointer-events: auto;
+            font: 12px/1.2 Inter, system-ui, sans-serif;
+          }
+        `;
+        document.head.appendChild(s);
+      }
+
+      // Place above boxesCanvas but below overlayCanvas
+      pageLayer.insertBefore(anno, overlayCanvas);
+      return anno;
   }
-}
+
+  // ===== Workspace session (viewing/annotating) timing =====
+  const WS_SS_KEY = "WS_INFLIGHT_V1";
+  let workspaceShownAt   = null;
+  let workspaceFinishedAt = null;
+  let workspaceDuration   = null;
+  let workspaceLogged     = false;
+
+  function ws_now() { return Date.now(); }
+  function ws_currentCanonical() {
+    return lastCanonicalId || sessionStorage.getItem("uploadedFormId") || "";
+  }
+
+  function ws_persistInflight() {
+    try {
+      const cid = ws_currentCanonical();
+      if (!workspaceShownAt || !cid) return;
+      sessionStorage.setItem(WS_SS_KEY, JSON.stringify({
+        started_at: workspaceShownAt,
+        canonical_id: cid,
+        user_id: getUserId(),
+        method: "intelliform",
+        page_url: location.pathname + location.search
+      }));
+    } catch {}
+  }
+
+  function ws_clearInflight() { try { sessionStorage.removeItem(WS_SS_KEY); } catch {} }
+
+  async function ws_tryRecoverAbandoned() {
+    try {
+      const raw = sessionStorage.getItem(WS_SS_KEY);
+      if (!raw) return;
+      const rec = JSON.parse(raw);
+      if (!rec || !rec.started_at || !rec.canonical_id) { ws_clearInflight(); return; }
+
+      const finished = ws_now();
+      const duration = Math.max(0, finished - Number(rec.started_at));
+
+      const body = JSON.stringify({
+        user_id: rec.user_id || getUserId(),
+        canonical_id: rec.canonical_id,
+        method: rec.method || "intelliform",
+        started_at: rec.started_at,
+        finished_at: finished,
+        duration_ms: duration,
+        meta: { status: "abandoned_recovery", page_url: rec.page_url || null }
+      });
+
+      if (navigator.sendBeacon) {
+        const blob = new Blob([body], { type: "application/json" });
+        navigator.sendBeacon("/api/user.log", blob);
+      } else {
+        await POST_JSON("/api/user.log", JSON.parse(body));
+      }
+    } catch (e) {
+      console.warn("[workspace recovery] failed:", e);
+    } finally {
+      ws_clearInflight();
+    }
+  }
+
+  ws_tryRecoverAbandoned();
+
+  // ===== Research logging (timers + endpoints) =====
+  const LS_KEY_UID = "research_user_id";
+
+  function getUserId() {
+    const v =
+      (window.getResearchUserId && window.getResearchUserId()) ||
+      sessionStorage.getItem(LS_KEY_UID) ||
+      localStorage.getItem(LS_KEY_UID);
+    const s = (v ?? "").toString().trim();
+    return s || "ANON";
+  }
+
+  // Optional helper so index page (or anywhere) can set it:
+  window.setResearchUserId = function(name){
+    const s = (name ?? "").toString().trim();
+    if (!s) return;
+    try {
+      sessionStorage.setItem(LS_KEY_UID, s);
+      localStorage.setItem(LS_KEY_UID, s);
+    } catch {}
+  };
+
+  async function POST_JSON(url, obj) {
+    const r = await fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(obj || {})
+    });
+    if (!r.ok) throw new Error(`${url} -> ${r.status}`);
+    return r.json();
+  }
+
+  // --- timers & session state ---
+  let analysisStartAt = null;
+  let lastFinishAt    = null;
+  let lastDuration    = null;
+  let lastCanonicalId = null;
+
+  function nowMs() { return Date.now(); }
+
+  async function logToolMetricsFromExplainer(explainer) {
+    try {
+      const payload = {
+        canonical_id: explainer.canonical_id || currentFormId || sessionStorage.getItem("uploadedFormId") || "",
+        form_title:   explainer.title || (storedName || "Form"),
+        bucket:       explainer.bucket || (guessFromPath(baseFromPath(storedWeb) || "form.pdf").bucket),
+        metrics:      explainer.metrics || {},
+        source:       "analysis",
+        note:         "workspace.js post-analysis"
+      };
+      if (!payload.canonical_id) return;
+      await POST_JSON("/api/metrics.log", payload);
+    } catch (e) {
+      console.warn("[metrics.log] failed:", e);
+    }
+  }
+
+  async function logUserSession(finalMeta) {
+    try {
+      if (!lastCanonicalId) return;
+      const user_id = getUserId();
+      const body = {
+        user_id,
+        canonical_id: lastCanonicalId,
+        method: "intelliform",
+        started_at: analysisStartAt,
+        finished_at: lastFinishAt,
+        duration_ms: lastDuration,
+        meta: finalMeta || {}
+      };
+      await POST_JSON("/api/user.log", body);
+    } catch (e) {
+      console.warn("[user.log] failed:", e);
+    }
+  }
+
+  window.addEventListener("beforeunload", () => {
+    try {
+      if (!analysisStartAt || lastFinishAt) return;
+      const cid = lastCanonicalId || sessionStorage.getItem("uploadedFormId") || "";
+      if (!cid) return;
+      const body = JSON.stringify({
+        user_id: getUserId(),
+        canonical_id: cid,
+        method: "intelliform",
+        started_at: analysisStartAt,
+        finished_at: nowMs(),
+        duration_ms: nowMs() - analysisStartAt,
+        meta: { status: "abandoned" }
+      });
+      const blob = new Blob([body], { type: "application/json" });
+      navigator.sendBeacon && navigator.sendBeacon("/api/user.log", blob);
+    } catch {}
+  });
+
+  function ws_sendAbandonBeacon(tag) {
+    try {
+      if (!workspaceShownAt || workspaceLogged) return;
+      const cid = ws_currentCanonical();
+      if (!cid) return;
+      const finished = ws_now();
+      const payload = {
+        user_id: getUserId(),
+        canonical_id: cid,
+        method: "intelliform",
+        started_at: workspaceShownAt,
+        finished_at: finished,
+        duration_ms: finished - workspaceShownAt,
+        meta: { status: tag || "abandoned" }
+      };
+      const body = JSON.stringify(payload);
+      if (navigator.sendBeacon) {
+        const blob = new Blob([body], { type: "application/json" });
+        navigator.sendBeacon("/api/user.log", blob);
+        workspaceLogged = true;
+        ws_clearInflight();
+      } else {
+        fetch("/api/user.log", { method: "POST", headers: { "Content-Type": "application/json" }, body }).catch(()=>{});
+        workspaceLogged = true;
+        ws_clearInflight();
+      }
+    } catch {}
+  }
+
+  window.addEventListener("pagehide", () => ws_sendAbandonBeacon("abandoned_pagehide"));
+  let ws_visTimer = null;
+  document.addEventListener("visibilitychange", () => {
+    try {
+      if (document.visibilityState === "hidden") {
+        ws_visTimer = setTimeout(() => ws_sendAbandonBeacon("abandoned_hidden"), 2000);
+      } else if (document.visibilityState === "visible" && ws_visTimer) {
+        clearTimeout(ws_visTimer);
+        ws_visTimer = null;
+      }
+    } catch {}
+  });
+  window.addEventListener("beforeunload", () => ws_sendAbandonBeacon("abandoned_beforeunload"));
+
+    // ===== Ctrl+F-like search across tokens (uses annotations) =====
+  let searchMatches = [];   // [{page, bbox, tokenIndex}]
+  let searchIndex   = -1;
+
+  function norm(s){
+    return (s||"").toString().toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
+  }
+
+  async function ensureAnnotations(formId) {
+    if (!cachedAnnotations || cachedAnnotations.__formId !== formId) {
+      const res = await fetch(`/explanations/_annotations/${formId}.json?ts=${Date.now()}`, { cache: "no-store" });
+      if (!res.ok) throw new Error("Annotations not found");
+      cachedAnnotations = await res.json(); cachedAnnotations.__formId = formId;
+    }
+    return cachedAnnotations;
+  }
+
+    let lastQuery = "";
+
+  async function runSearch(query){
+    searchMatches = [];
+    searchIndex = -1;
+    if (searchStatus) searchStatus.textContent = "0/0";
+    if (!query) return;
+
+    const ok = await ensureAnnotationsReady();
+    if (!ok) return;
+
+    const ann = cachedAnnotations;
+    const toks = Array.isArray(ann.tokens) ? ann.tokens : [];
+    const q = norm(query);
+
+    for (let i=0;i<toks.length;i++){
+      const t = toks[i];
+      if (!t || !t.text || !Array.isArray(t.bbox)) continue;
+      if (norm(t.text).includes(q)) {
+        searchMatches.push({ page: t.page||0, bbox: t.bbox, tokenIndex: i });
+      }
+    }
+
+    if (!searchMatches.length) {
+      try { boxesCtx.clearRect(0,0,boxesCanvas.width,boxesCanvas.height); } catch {}
+      if (searchStatus) searchStatus.textContent = "0/0";
+      return;
+    }
+    lastQuery = query;
+    gotoMatch(0, /*isDelta*/false);
+  }
+
+  // Enter: new search if query changed; otherwise cycle forward
+  searchInput?.addEventListener("keydown", (e)=>{
+    if (e.key === "Enter") {
+      const q = (searchInput.value || "").trim();
+      if (!q) { e.preventDefault(); return; }
+      if (q !== lastQuery) {
+        runSearch(q);
+      } else if (searchMatches.length) {
+        gotoMatch(+1, true);
+      } else {
+        runSearch(q);
+      }
+      e.preventDefault();
+    }
+  });
+
+  async function gotoMatch(idxOrDelta, isDelta=true){
+    if (!searchMatches.length) return;
+    if (isDelta) {
+      searchIndex = (searchIndex + idxOrDelta + searchMatches.length) % searchMatches.length;
+    } else {
+      searchIndex = Math.min(Math.max(0, idxOrDelta), searchMatches.length-1);
+    }
+    const m = searchMatches[searchIndex];
+    if (searchStatus) searchStatus.textContent = `${searchIndex+1}/${searchMatches.length}`;
+
+    // jump to page & highlight
+    currentPage = (m.page||0) + 1;
+    renderPage(currentPage);
+    setTimeout(()=> drawOverlay(currentFormId, currentPage, { page: m.page||0, bbox: m.bbox }), 160);
+  }
+
+  // UI bindings
+  searchTool?.addEventListener("click", (e) => {
+    // focus input when the tile is clicked (but let buttons work)
+    if (!e.target.closest("button") && searchInput) {
+      searchInput.focus(); searchInput.select?.();
+    }
+  });
+
+  searchInput?.addEventListener("keydown", (e)=>{
+    if (e.key === "Enter") {
+      if (searchMatches.length) gotoMatch(+1, true); // Enter cycles forward
+      else runSearch(searchInput.value);
+      e.preventDefault();
+    }
+  });
+
+  searchNextBtn?.addEventListener("click", ()=> gotoMatch(+1, true));
+  searchPrevBtn?.addEventListener("click", ()=> gotoMatch(-1, true));
+  searchClearBtn?.addEventListener("click", ()=>{
+    if (searchInput) searchInput.value = "";
+    searchMatches = []; searchIndex = -1;
+    if (searchStatus) searchStatus.textContent = "0/0";
+    try { boxesCtx.clearRect(0,0,boxesCanvas.width,boxesCanvas.height); } catch {}
+  });
+
+  // Optional: capture Ctrl/Cmd+F to focus our search box
+  document.addEventListener("keydown", (e) => {
+    const isCtrlF = (e.key.toLowerCase() === "f") && (e.ctrlKey || e.metaKey);
+    if (isCtrlF) {
+      e.preventDefault();
+      searchInput?.focus();
+      searchInput?.select?.();
+    }
+  });
+
+  // --- make search work even before Analyze
+  async function ensureAnnotationsReady() {
+    try {
+      if (currentFormId && cachedAnnotations && cachedAnnotations.__formId === currentFormId) return true;
+
+      // try to fetch; if missing, force prelabel (no full analysis UI needed)
+      const formId = sessionStorage.getItem("uploadedFormId") || currentFormId;
+      const disk   = sessionStorage.getItem("uploadedDiskPath");
+      if (!formId || !disk) return false;
+
+      // try fetch first
+      let ok = true;
+      try {
+        const res = await fetch(`/explanations/_annotations/${formId}.json?ts=${Date.now()}`, { cache: "no-store" });
+        if (!res.ok) ok = false; else { cachedAnnotations = await res.json(); cachedAnnotations.__formId = formId; currentFormId = formId; }
+      } catch { ok = false; }
+
+      if (!ok) {
+        // run prelabel to generate annotations, then refetch
+        await ensurePrelabelAndOverlays({ disk_path: disk }, formId);
+        const res2 = await fetch(`/explanations/_annotations/${formId}.json?ts=${Date.now()}`, { cache: "no-store" });
+        if (!res2.ok) return false;
+        cachedAnnotations = await res2.json(); cachedAnnotations.__formId = formId; currentFormId = formId;
+      }
+      return true;
+    } catch { return false; }
+  }
+
+} // end initWorkspace
