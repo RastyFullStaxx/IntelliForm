@@ -1,2 +1,24 @@
-# Auto detect text files and perform LF normalization
 * text=auto
+
+# Force LF for cross-platform code
+*.py  text eol=lf
+*.js  text eol=lf
+*.ts  text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.md  text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.php text eol=lf
+
+# Windows-native scripts can keep CRLF
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.pdf binary
+*.woff* binary

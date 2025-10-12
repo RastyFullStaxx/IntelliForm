@@ -1,0 +1,293 @@
+:root {
+    --primary: #102A71;
+    --accent: #FFDC5F;
+    --table-border: #B3BAC6;
+    --ink:#0a1a4f;     /* matches your button color */
+    --muted:#6b7280;   /* soft gray for secondary text */
+}
+
+.span-width-centered {
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+    padding: 1rem 4rem;
+}
+
+header nav a {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 16px;
+    padding: 0 2rem;
+}
+
+header nav a:hover {
+    color: #1a4fd0;
+}
+
+.login-btn {
+    background: #0a1a4f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.logo {
+    width: 6rem;
+}
+
+main h1 {
+    color: var(--primary);
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.download {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.download-btn {
+    background: #0a1a4f;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.tabs button {
+    color: var(--primary);
+    margin-right: 10px;
+    padding: 10px 20px;
+    background: #f5f5f5;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    font-size: 16px;
+}
+
+.tabs button:hover {
+    background: #eaeaea;
+    color: #0a1a4f;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transform: translateY(-1px);
+}
+
+.tabs button.active {
+    background: #fff;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    color: var(--primary);
+    font-weight: 600;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+    border-bottom: 4px solid var(--accent);
+}
+
+.card {
+    background: white;
+    padding: 15px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.record-data {
+    width: 100%;
+    min-height: 25rem;
+    height: fit-content;
+}
+
+.record-data table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.record-data thead tr {
+    font-size: 13px;
+    border-bottom: 2px solid var(--table-border);
+}
+
+.record-data thead th {
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.record-data tbody td {
+    padding: 1rem 0;
+    font-size: 16px;
+    text-align: center;
+    border-bottom: 2px solid var(--table-border);
+}
+
+.error-message {
+    color: rgb(88, 88, 88);
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 8rem;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem 0.75rem;
+    }
+    
+    main {
+        padding: 1rem 1rem;
+    }
+
+    header nav a {
+        padding: 0 1rem;
+        font-size: 12px;
+    }
+
+    .logo {
+        width: 4rem;
+    }
+
+    main h1 {
+        font-size: 25px;
+    }
+
+    .download-btn {
+        padding: 12px 24px;
+    }
+
+    .tabs button {
+        font-size: 13px;
+        padding: 8px 18px;
+    }
+
+    .record-data thead tr {
+        font-size: 9px;
+        border-bottom: 1px solid var(--table-border);
+    }
+
+    .record-data tbody td {
+        font-size: 11px;
+        border-bottom: 1px solid var(--table-border);
+    }
+
+    .error-message {
+        font-size: 18px;
+    }
+}
+
+/* ===== CRUD toolbar & Edit toggle (refined) ===== */
+
+.crud-toolbar[hidden] { display: none !important; }
+
+/* Header toggle: red when editing */
+#editToggleBtn.login-btn.editing {
+  background: #a61c1c;
+  box-shadow: 0 2px 8px rgba(166,28,28,.25);
+}
+#editToggleBtn.login-btn.editing:hover { filter: brightness(1.05); }
+
+/* Toolbar: card-like, aligned with content */
+.crud-toolbar{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:10px;
+  margin-bottom:12px;
+
+  /* card look to match your .card */
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:10px 12px;
+  box-shadow:0 5px 12px rgba(16,26,50,.06);
+}
+
+/* Left status text */
+.crud-toolbar .count{
+  color:var(--muted);
+  font-weight:600;
+  font-size:14px;
+}
+
+/* Push actions to the right */
+.crud-toolbar .spacer{ flex:1; }
+
+/* Keep buttons on a single line when possible */
+.crud-toolbar > .btn{
+  min-height:36px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+/* Generic small button styles (theme-aligned) */
+.btn{
+  appearance:none;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  color:#111827;
+  padding:8px 14px;
+  border-radius:8px;
+  font-weight:600;
+  font-size:14px;
+  cursor:pointer;
+  transition:background .12s ease, box-shadow .12s ease, transform .02s ease;
+}
+.btn:hover{ background:#f9fafb; box-shadow:0 2px 6px rgba(0,0,0,.06); }
+.btn:disabled{ opacity:.5; cursor:not-allowed; box-shadow:none; }
+
+/* Variants */
+.btn-primary{ background:var(--ink); color:#fff; border-color:var(--ink); }
+.btn-primary:hover{ filter:brightness(1.05); }
+
+.btn-danger{ background:#b91c1c; color:#fff; border-color:#b91c1c; }
+.btn-danger:hover{ filter:brightness(1.05); }
+
+.btn-secondary{ background:#f3f4f6; color:#111827; border-color:#e5e7eb; }
+.btn-secondary:hover{ background:#eef2ff; border-color:#c7d2fe; }
+
+.btn-outline{ background:#fff; color:#111827; border-color:#cbd5e1; }
+.btn-outline:hover{ background:#f9fafb; }
+
+.btn .icon{ margin-right:6px; font-size:14px; line-height:1; }
+
+/* Table utility cells */
+th.sel, td.sel{ width:34px; text-align:center; }
+th.sel input[type="checkbox"],
+td.sel input[type="checkbox"]{ width:16px; height:16px; cursor:pointer; }
+
+.mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+.nowrap{ white-space:nowrap; }
+.num{ text-align:right; }
+
+/* ===== Responsive layout for toolbar ===== */
+@media (max-width: 900px){
+  .crud-toolbar{
+    flex-wrap:wrap;
+    row-gap:8px;
+    padding:10px;
+  }
+  .crud-toolbar .count{
+    order:1;
+    width:auto;
+  }
+  .crud-toolbar .spacer{
+    display:none;   /* let buttons wrap beneath */
+  }
+  /* Buttons wrap and fill width in pairs */
+  #btnUndoLast, #btnDeleteSelected, #btnCancelEdit{
+    order:2;
+  }
+  .crud-toolbar > .btn{
+    flex:1 1 auto;
+    justify-content:center;
+  }
+}
