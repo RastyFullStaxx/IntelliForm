@@ -1,6 +1,0 @@
-﻿*
-!logs/
-logs/*
-!logs/*.json
-!logs/*.txt
-!logs/.gitkeep

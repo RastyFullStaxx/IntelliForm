@@ -1,4 +1,4 @@
-# ===============================
+﻿# ===============================
 # IntelliForm Project Git Ignore
 # ===============================
 
@@ -99,3 +99,29 @@ _tree.txt
 !explanations/logs/**scripts/.secrets/
 .env
 *.key
+
+# ---- Secrets & env ----
+scripts/.secrets/
+*.key
+.env
+
+# ---- Python cruft ----
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# ---- Big/generated artifacts ----
+uploads/
+explanations/
+out/
+
+# If any slip outside those dirs, ignore common render types too
+*.PDF
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff
+*.gif
