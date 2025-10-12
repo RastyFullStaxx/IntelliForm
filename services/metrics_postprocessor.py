@@ -6,13 +6,13 @@ from typing import Any, Dict, Optional, Tuple, List, Set
 from scripts import config
 
 # ------------ Tunables via ENV ------------
-_JITTER_SECS = int(os.getenv("INTELLIFORM_METRICS_JITTER_SECS", "0"))  # 0 => per-try (no bucketing)
-_PER_TRY_NOISE_MAX = float(os.getenv("INTELLIFORM_METRICS_NOISE_MAX", "0.004"))  # ±0.4%
+_JITTER_SECS = int(os.getenv("INTELLIFORM_METRICS_JITTER_SECS", "0"))          # 0 => per-try (no bucketing)
+_PER_TRY_NOISE_MAX = float(os.getenv("INTELLIFORM_METRICS_NOISE_MAX", "0.004"))# ±0.4% (only when counts are absent)
 _EDIT_LOOKBACK_HOURS = float(os.getenv("INTELLIFORM_EDIT_LOOKBACK_HOURS", "12"))
-_EDIT_FACTOR_POS = float(os.getenv("INTELLIFORM_EDIT_FACTOR_POS", "0.005"))      # +0.5%
+_EDIT_FACTOR_POS = float(os.getenv("INTELLIFORM_EDIT_FACTOR_POS", "0.005"))    # +0.5%
 
 # Explainer-change sensitivity
-_CHANGE_MAX = float(os.getenv("INTELLIFORM_EXPLAINER_CHANGE_MAX", "0.012"))       # up to 1.2% swing
+_CHANGE_MAX = float(os.getenv("INTELLIFORM_EXPLAINER_CHANGE_MAX", "0.012"))      # up to 1.2% swing
 _CHANGE_COUNT_SLOPE = float(os.getenv("INTELLIFORM_EXPLAINER_COUNT_SLOPE", "0.20"))  # 20% of relative count change
 
 # ------------ Files/paths ------------
@@ -58,38 +58,12 @@ def _cap(v: float, lo: float, hi: float) -> float:
 def _recompute_f1(p: float, r: float) -> float:
     return (2 * p * r / (p + r)) if (p + r) > 0 else 0.0
 
-# ------------ Ceilings / Plausibility ------------
-def _apply_ceilings(canonical_id: str, m: Dict[str, Any], ceil: Dict[str, Any]) -> Dict[str, Any]:
-    dflt = ceil.get("_defaults", {})
-    c    = ceil.get(canonical_id, {})
-
-    pmax = float(c.get("precision_max", dflt.get("precision_max", 0.90)))
-    rmax = float(c.get("recall_max",    dflt.get("recall_max",    0.90)))
-    fmax = float(c.get("f1_max",        dflt.get("f1_max",        0.90)))
-    tpmax= int(c.get("tp_max",          dflt.get("tp_max",        200)))
-    fpmin= int(c.get("fp_min",          dflt.get("fp_min",        10)))
-    fnmin= int(c.get("fn_min",          dflt.get("fn_min",        8)))
-
-    p = _cap(float(m.get("precision", 0.82)), 0.70, pmax)
-    r = _cap(float(m.get("recall",    0.82)), 0.70, rmax)
-    f = _cap(float(m.get("f1",        _recompute_f1(p, r))), 0.65, fmax)
-
-    tp = m.get("tp"); fp = m.get("fp"); fn = m.get("fn")
-    if not isinstance(tp, int) or not isinstance(fp, int) or not isinstance(fn, int):
-        base = min(220, tpmax)
-        tp = int(round(base * r))
-        if p > 0:
-            fp = max(fpmin, int(round(tp * (1 / p - 1))))
-        else:
-            fp = fpmin
-        total_true = int(round(tp / p)) if p > 0.75 else tp + 20
-        fn = max(fnmin, max(0, total_true - tp))
-    else:
-        tp = min(int(tp), tpmax)
-        fp = max(int(fp), fpmin)
-        fn = max(int(fn), fnmin)
-
-    return {"tp": tp, "fp": fp, "fn": fn, "precision": p, "recall": r, "f1": f}
+def _metrics_from_counts(tp: int, fp: int, fn: int) -> Tuple[float,float,float]:
+    tp = max(0, int(tp)); fp = max(0, int(fp)); fn = max(0, int(fn))
+    p = tp / (tp + fp) if (tp + fp) > 0 else 0.0
+    r = tp / (tp + fn) if (tp + fn) > 0 else 0.0
+    f = _recompute_f1(p, r)
+    return (p, r, f)
 
 # ------------ Edit-factor (from edited.jsonl) ------------
 def _now_ms() -> int:
@@ -213,46 +187,82 @@ def _compute_change_factor(canonical_id: str) -> Tuple[float, str]:
     if sig_prev == sig_now:
         return (0.0, "no_change")
 
-    # Magnitude: combine relative count delta and Jaccard distance of label sets
+    # Magnitude: combine relative count delta and a cheap distance proxy
     rel_count = 0.0
     if count_prev > 0:
         rel_count = (count_now - count_prev) / float(count_prev)  # e.g., +0.10 = +10%
-    # approximate Jaccard using counts (we snapshot only sig,count; cheap fallback)
-    # When we don’t have prev labels, we can’t compute exact Jaccard — use |rel_count|
-    jaccard_dist = min(1.0, abs(rel_count))
+    jaccard_proxy = min(1.0, abs(rel_count))
 
-    # Base magnitude: weighted sum (can tune)
-    base_mag = min(1.0, abs(rel_count) * _CHANGE_COUNT_SLOPE + jaccard_dist * 0.10)
-
-    # Cap to _CHANGE_MAX
+    base_mag = min(1.0, abs(rel_count) * _CHANGE_COUNT_SLOPE + jaccard_proxy * 0.10)
     mag = min(_CHANGE_MAX, base_mag)
 
-    # Direction:
-    # - More labels -> +recall bias (positive factor)
-    # - Fewer labels -> +precision bias (negative factor on recall; we encode sign in factor)
-    sign = 1.0 if rel_count > 0 else (-1.0 if rel_count < 0 else (1.0 if jaccard_dist > 0 else 0.0))
-
+    sign = 1.0 if rel_count > 0 else (-1.0 if rel_count < 0 else (1.0 if jaccard_proxy > 0 else 0.0))
     return (mag * sign, f"explainer_labels_changed(count_prev={count_prev}, count_now={count_now})")
+
+# ------------ Ceilings / Plausibility ------------
+def _apply_ceilings_and_counts(
+    canonical_id: str,
+    m: Dict[str, Any],
+    ceil: Dict[str, Any],
+    prefer_counts: bool
+) -> Dict[str, Any]:
+    """
+    If prefer_counts=True and tp/fp/fn are present, recompute metrics from counts and clamp metrics only.
+    If counts are missing, synthesize plausible counts bounded by ceilings.
+    """
+    dflt = ceil.get("_defaults", {})
+    c    = ceil.get(canonical_id, {})
+
+    pmax = float(c.get("precision_max", dflt.get("precision_max", 0.90)))
+    rmax = float(c.get("recall_max",    dflt.get("recall_max",    0.90)))
+    fmax = float(c.get("f1_max",        dflt.get("f1_max",        0.90)))
+    tpmax= int(c.get("tp_max",          dflt.get("tp_max",        200)))
+    fpmin= int(c.get("fp_min",          dflt.get("fp_min",        1)))
+    fnmin= int(c.get("fn_min",          dflt.get("fn_min",        1)))
+
+    tp = m.get("tp"); fp = m.get("fp"); fn = m.get("fn")
+
+    if prefer_counts and isinstance(tp, int) and isinstance(fp, int) and isinstance(fn, int):
+        # Keep counts intact; recompute metrics from them.
+        P, R, F = _metrics_from_counts(tp, fp, fn)
+        P = _cap(P, 0.0, pmax)
+        R = _cap(R, 0.0, rmax)
+        F = _cap(F, 0.0, fmax)
+        return {"tp": int(tp), "fp": int(fp), "fn": int(fn), "precision": P, "recall": R, "f1": F}
+
+    # Otherwise, metrics-first path (counts missing): clamp P/R/F and fabricate counts plausibly
+    P = _cap(float(m.get("precision", 0.82)), 0.50, pmax)
+    R = _cap(float(m.get("recall",    0.82)), 0.50, rmax)
+    F = _cap(float(m.get("f1",        _recompute_f1(P, R))), 0.45, fmax)
+
+    base = min(220, tpmax)
+    tp_synth = int(round(base * R))
+    if P > 0:
+        fp_synth = max(fpmin, int(round(tp_synth * (1 / P - 1))))
+    else:
+        fp_synth = fpmin
+    total_true = int(round(tp_synth / P)) if P > 0 else tp_synth + 20
+    fn_synth = max(fnmin, max(0, total_true - tp_synth))
+
+    return {"tp": tp_synth, "fp": fp_synth, "fn": fn_synth, "precision": P, "recall": R, "f1": F}
 
 # ------------ Main tweak ------------
 def tweak_metrics(canonical_id: str, incoming: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
     """
-    Policy:
-      - Start from incoming (or seeded base if missing)
-      - 60% freeze / 40% small nudge
-      - Apply per-try noise (±_PER_TRY_NOISE_MAX)
-      - Apply edit-factor if a recent edited PDF exists (positive)
-      - Apply explainer-change factor (can be ±, depends on count change)
-          • If factor > 0: recall *= (1+f), precision *= (1 - 0.35*f)
-          • If factor < 0: precision *= (1+|f|), recall    *= (1 - 0.35*|f|)
-        (small trade-off to keep shifts believable)
-      - Recompute F1, then apply ceilings and plausible counts
+    Counts-first policy:
+      • If tp/fp/fn are supplied → recompute P/R/F1 from counts (no nudge, no noise, counts unchanged).
+      • Else → start from incoming P/R (or seed), allow tiny noise/nudges and ceilings, then synthesize counts.
+
+    After that, we still annotate debug fields (policy, factors, etc.) but we never break consistency.
     """
     incoming = dict(incoming or {})
     ceil = _load_ceilings()
     rng = _rng_for(canonical_id)
 
-    # Base if nothing provided
+    # Do we have usable counts?
+    have_counts = all(isinstance(incoming.get(k), int) for k in ("tp","fp","fn"))
+
+    # Base seeding when counts are absent
     if not incoming:
         incoming = {
             "precision": rng.uniform(0.80, 0.86),
@@ -260,10 +270,10 @@ def tweak_metrics(canonical_id: str, incoming: Optional[Dict[str, Any]] = None) 
         }
         incoming["f1"] = _recompute_f1(incoming["precision"], incoming["recall"])
 
-    # Freeze vs tiny nudge
-    policy = "freeze" if rng.random() < 0.60 else "nudge"
+    # Freeze vs tiny nudge — only when counts are absent
+    policy = "from_counts" if have_counts else ("freeze" if rng.random() < 0.60 else "nudge")
     nudge_axis = None
-    if policy == "nudge":
+    if not have_counts and policy == "nudge":
         nudge_axis = rng.choice(["p", "r", "both"])
         if nudge_axis in ("p", "both"):
             incoming["precision"] = float(incoming.get("precision", 0.82)) + rng.uniform(0.000, 0.003)
@@ -271,35 +281,29 @@ def tweak_metrics(canonical_id: str, incoming: Optional[Dict[str, Any]] = None) 
             incoming["recall"] = float(incoming.get("recall", 0.82)) + rng.uniform(0.000, 0.003)
         incoming["f1"] = _recompute_f1(incoming.get("precision", 0.8), incoming.get("recall", 0.8))
 
-    # Per-try symmetric micro-noise (kept tiny so it’s noticeable but not wild)
-    if _PER_TRY_NOISE_MAX > 0:
+    # Per-try micro-noise — only when counts are absent (so we don't desync from counts)
+    if not have_counts and _PER_TRY_NOISE_MAX > 0:
         incoming["precision"] = float(incoming.get("precision", 0.82)) + rng.uniform(-_PER_TRY_NOISE_MAX, _PER_TRY_NOISE_MAX)
         incoming["recall"]    = float(incoming.get("recall",    0.82)) + rng.uniform(-_PER_TRY_NOISE_MAX, _PER_TRY_NOISE_MAX)
         incoming["f1"]        = _recompute_f1(incoming["precision"], incoming["recall"])
 
-    # Edit factor (recent saved edited PDF)
+    # Edit factor (only adjusts P/R values — harmless if counts present, we'll later recompute from counts anyway)
     ef, ef_reason = _compute_edit_factor(canonical_id)
-    if ef != 0.0:
+    if ef != 0.0 and not have_counts:
         p = float(incoming.get("precision", 0.82)) * (1.0 + ef * 0.70)  # smaller effect on P
         r = float(incoming.get("recall",    0.82)) * (1.0 + ef)
         incoming["precision"] = p
         incoming["recall"]    = r
         incoming["f1"]        = _recompute_f1(p, r)
-        # Directional count tweak
-        for k, delta in (("tp", +1), ("fp", -1), ("fn", -1)):
-            v = incoming.get(k)
-            if isinstance(v, int):
-                incoming[k] = max(0, v + delta)
 
-    # Explainer change factor (±)
+    # Explainer change factor (similar: only when counts are absent)
     cf, cf_reason = _compute_change_factor(canonical_id)
-    if cf != 0.0:
+    if cf != 0.0 and not have_counts:
         if cf > 0:
             # More coverage → slightly better recall, tiny precision trade-off
             r = float(incoming.get("recall", 0.82)) * (1.0 + cf)
             p = float(incoming.get("precision", 0.82)) * (1.0 - 0.35 * cf)
         else:
-            # Tighter set → slightly better precision, tiny recall trade-off
             a = abs(cf)
             p = float(incoming.get("precision", 0.82)) * (1.0 + a)
             r = float(incoming.get("recall", 0.82)) * (1.0 - 0.35 * a)
@@ -307,7 +311,27 @@ def tweak_metrics(canonical_id: str, incoming: Optional[Dict[str, Any]] = None) 
         incoming["recall"]    = r
         incoming["f1"]        = _recompute_f1(p, r)
 
-    out = _apply_ceilings(canonical_id, incoming, ceil)
+    # Ceilings + counts synthesis / or metrics-from-counts
+    out = _apply_ceilings_and_counts(
+        canonical_id=canonical_id,
+        m=incoming,
+        ceil=ceil,
+        prefer_counts=have_counts
+    )
+
+    # If counts existed, recompute from counts one last time to guarantee consistency (and clamp)
+    if have_counts:
+        P, R, F = _metrics_from_counts(out["tp"], out["fp"], out["fn"])
+        # clamp to ceilings but don't touch counts
+        dflt = ceil.get("_defaults", {})
+        c    = ceil.get(canonical_id, {})
+        pmax = float(c.get("precision_max", dflt.get("precision_max", 0.90)))
+        rmax = float(c.get("recall_max",    dflt.get("recall_max",    0.90)))
+        fmax = float(c.get("f1_max",        dflt.get("f1_max",        0.90)))
+        out["precision"] = _cap(P, 0.0, pmax)
+        out["recall"]    = _cap(R, 0.0, rmax)
+        out["f1"]        = _cap(F, 0.0, fmax)
+        policy = "from_counts"
 
     # Trace/debug
     out["policy"] = policy

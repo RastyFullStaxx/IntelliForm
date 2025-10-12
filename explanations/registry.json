@@ -227,6 +227,36 @@
         "bb8bcd17189c49f3ac4c850b9f561ba0_doestseiformh",
         "bb8bcd17189c49f3ac4c850b9f561ba0_doestseiformh.pdf"
       ]
+    },
+    {
+      "form_id": "c06e012d72e9633fb7447aad3bc002a7c5793b03aa1096e508e7e3b55dff84e7",
+      "title": "e026ef02946d416688309a7553ca1127_Banking_CreditCardholdersAutoChargeForm",
+      "path": "explanations/banking/c06e012d72e9633fb7447aad3bc002a7c5793b03aa1096e508e7e3b55dff84e7.json",
+      "bucket": "banking",
+      "aliases": [
+        "e026ef02946d416688309a7553ca1127_banking_creditcardholdersautochargeform",
+        "e026ef02946d416688309a7553ca1127_Banking_CreditCardholdersAutoChargeForm.pdf"
+      ]
+    },
+    {
+      "form_id": "957ce719d2ee82d86d0b2bb33d6edfcd59ee5fde755eaec15ac222053c3ebabc",
+      "title": "84833aa1244942fb8b824aed8c2c6dda_HealthcareInsurance_AllianzPNBLifeIHPeAZyHealthClaimForm",
+      "path": "explanations/healthcare/957ce719d2ee82d86d0b2bb33d6edfcd59ee5fde755eaec15ac222053c3ebabc.json",
+      "bucket": "healthcare",
+      "aliases": [
+        "84833aa1244942fb8b824aed8c2c6dda_healthcareinsurance_allianzpnblifeihpeazyhealthclaimform",
+        "84833aa1244942fb8b824aed8c2c6dda_HealthcareInsurance_AllianzPNBLifeIHPeAZyHealthClaimForm.pdf"
+      ]
+    },
+    {
+      "form_id": "c1c1852280e305ffad935f6d5850639806bd9ea5bacd69781f2f6837a6e26ae5",
+      "title": "4651983e83e344b39f62e2aa82bb6f2b_Government_PassportApplicationForm",
+      "path": "explanations/government/c1c1852280e305ffad935f6d5850639806bd9ea5bacd69781f2f6837a6e26ae5.json",
+      "bucket": "government",
+      "aliases": [
+        "4651983e83e344b39f62e2aa82bb6f2b_government_passportapplicationform",
+        "4651983e83e344b39f62e2aa82bb6f2b_Government_PassportApplicationForm.pdf"
+      ]
     }
   ]
 }

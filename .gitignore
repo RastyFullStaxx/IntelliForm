@@ -37,28 +37,15 @@ ENV/
 # Large model files / checkpoints
 # -------------------------------
 saved_models/
-checkpoints/
 *.pt
 *.bin
 *.ckpt
-
-# -------------------------------
-# Datasets (raw + heavy files)
-# -------------------------------
-# HuggingFace saved_to_disk datasets (arrow files are big)
-data/**/hf_*/
 
 # BIG pdf/image dumps (keep out of git)
 data/**/*.pdf
 data/**/*.png
 data/**/*.jpg
 data/**/*.jpeg
-
-# Annotations in datasets:
-# By default, ignore all annotations...
-data/**/annotations/**
-# ...but DO track our PH annotation JSONs (work product, small)
-!data/**/ph_forms/annotations/*.json
 
 # Keep label maps (used by training)
 !data/labels.json
@@ -75,13 +62,6 @@ data/**/*.tar
 # -------------------------------
 # Uploaded or generated files
 # -------------------------------
-static/uploads/
-
-# Generated prelabel annotations (runtime artifacts)
-explanations/_annotations/**
-
-# Generated overlays (runtime artifacts)
-out/overlays/**
 
 # Generated metrics report (can re-generate)
 static/metrics_report.txt
@@ -104,30 +84,6 @@ Thumbs.db
 # -------------------------------
 **/.git
 
-# -------------------------------
-# Temporary or debug files
-# -------------------------------
-tmp/
-temp/
-*.log
-logs/
-
-# HuggingFace shards (huge)
-data/**/hf_*/
-
-# Any straggler dataset binaries
-data/**/*.pdf
-data/**/*.png
-data/**/*.jpg
-data/**/*.jpeg
-
-# Generated artifacts
-out/overlays/
-explanations/_annotations/
-
-# Models / checkpoints
-saved_models/
-checkpoints/
 
 # Local reports
 _inventory.txt
@@ -140,4 +96,6 @@ _tree.txt
 
 !explanations/
 !explanations/logs/
-!explanations/logs/**
+!explanations/logs/**scripts/.secrets/
+.env
+*.key

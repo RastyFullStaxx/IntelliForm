@@ -319,9 +319,14 @@ def load_registry() -> Optional[Dict[str, Any]]:
         log.error("Failed to read registry %s: %s", path, e)
         return None
     
-# --- ADD near top-level helpers in scripts/config.py ---
-def quick_text_snippet(pdf_path: str, max_chars: int = 4000) -> str:
-    """Extract visible page text via PyMuPDF; return a capped snippet."""
+# --- REPLACE quick_text_snippet in scripts/config.py ---
+
+def quick_text_snippet(pdf_path: str, max_chars: int = 12000) -> str:
+    """
+    Extract visible text. Strategy:
+      1) Fast: PyMuPDF page text
+      2) Fallback (opt-in via INTELLIFORM_OCR_SNIPPET=1): OCR first few pages (dpi=180)
+    """
     try:
         import fitz  # PyMuPDF
         acc = []
@@ -330,10 +335,32 @@ def quick_text_snippet(pdf_path: str, max_chars: int = 4000) -> str:
                 t = page.get_text("text") or ""
                 if t.strip():
                     acc.append(t.strip())
-                if sum(len(x) for x in acc) > max_chars:
+                if sum(len(x) for x in acc) >= max_chars:
                     break
-        blob = "\n".join(acc)
-        return blob[:max_chars]
+        blob = "\n".join(acc).strip()
+        if blob:
+            return blob[:max_chars]
+    except Exception:
+        pass
+
+    # Optional OCR fallback
+    use_ocr = str(os.getenv("INTELLIFORM_OCR_SNIPPET", "0")).lower() in {"1", "true", "yes"}
+    if not use_ocr:
+        return ""
+
+    try:
+        import fitz
+        from PIL import Image
+        import pytesseract
+        chunks = []
+        with fitz.open(pdf_path) as doc:
+            pages = min(3, len(doc))  # OCR first few pages only
+            for pno in range(pages):
+                pm = doc[pno].get_pixmap(dpi=180)  # decent speed/quality balance
+                im = Image.frombytes("RGB", [pm.width, pm.height], pm.samples)
+                chunks.append(pytesseract.image_to_string(im))
+        ocr_txt = "\n".join(x.strip() for x in chunks if x and x.strip())
+        return ocr_txt[:max_chars]
     except Exception:
         return ""
 
@@ -718,6 +745,89 @@ def chat_completion(
         # Let caller’s try/except decide to scaffold
         return json.dumps({"error":"engine_call_failed","detail":str(e)})
 
+# --- ADD in scripts/config.py (below chat_completion) ---
+
+def generate_explainer_json_strict(
+    *,
+    canonical_id: str,
+    bucket_guess: str,
+    title_guess: str,
+    text_snippet: str,
+    candidate_labels: Optional[List[str]] = None,
+    model: Optional[str] = None,
+    max_tokens: Optional[int] = None,
+    temperature: Optional[float] = None,
+    log_dir: Optional[Path] = None,
+) -> str:
+    """
+    Builds context-rich messages and calls the chat backend with:
+      - response_format=json_object
+      - one retry if parsing/sections empty
+      - optional raw dump logs
+    Returns a JSON string (may be a scaffold-like minimal JSON if both tries fail).
+    """
+    m = model or ENGINE_MODEL
+    mt = max_tokens or MAX_TOKENS
+    tmp = temperature if temperature is not None else TEMPERATURE
+
+    messages = build_explainer_messages_with_context(
+        canonical_id=canonical_id,
+        bucket_guess=bucket_guess,
+        title_guess=title_guess,
+        text_snippet=text_snippet,
+        candidate_labels=candidate_labels,
+    )
+
+    def _dump_raw(tag: str, payload: str):
+        try:
+            if not log_dir:
+                return
+            log_dir.mkdir(parents=True, exist_ok=True)
+            (log_dir / f"{canonical_id}.{tag}.json").write_text(payload, encoding="utf-8")
+        except Exception:
+            pass
+
+    # try 1
+    raw1 = chat_completion(
+        model=m, messages=messages, max_tokens=mt, temperature=tmp, enforce_json=True
+    )
+    _dump_raw("try1", raw1)
+
+    def _parse_js(s: str) -> Dict[str, Any]:
+        try:
+            return json.loads(s)
+        except Exception:
+            return {}
+
+    data1 = _parse_js(raw1)
+    if (data1.get("sections") or []) and isinstance(data1.get("sections"), list):
+        return raw1
+
+    # try 2 with extra nudge
+    messages2 = messages + [{"role": "system", "content": "Return strict JSON only (no prose)."}]
+    raw2 = chat_completion(
+        model=m, messages=messages2, max_tokens=mt, temperature=tmp, enforce_json=True
+    )
+    _dump_raw("try2", raw2)
+
+    data2 = _parse_js(raw2)
+    if (data2.get("sections") or []) and isinstance(data2.get("sections"), list):
+        return raw2
+
+    # last resort: minimal scaffold; caller can fill metadata/metrics
+    return json.dumps({
+        "title": title_guess,
+        "form_id": sanitize_form_id(title_guess),
+        "sections": [],
+        "metrics": {"tp": 0, "fp": 0, "fn": 0, "precision": 0.0, "recall": 0.0, "f1": 0.0},
+        "canonical_id": canonical_id,
+        "bucket": bucket_guess,
+        "schema_version": 1,
+        "created_at": time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+        "updated_at": time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+        "aliases": []
+    }, ensure_ascii=False)
+
 # ------------------ Exports ------------------
 
 __all__ = [
@@ -751,4 +861,6 @@ __all__ = [
     "ENGINE_KEY_FILE", "INLINE_FALLBACK_KEY",
     "quick_text_snippet",
     "build_explainer_messages_with_context",
+    # add to __all__ list:
+    "generate_explainer_json_strict",
 ]
