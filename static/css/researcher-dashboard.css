@@ -2,6 +2,8 @@
     --primary: #102A71;
     --accent: #FFDC5F;
     --table-border: #B3BAC6;
+    --ink:#0a1a4f;     /* matches your button color */
+    --muted:#6b7280;   /* soft gray for secondary text */
 }
 
 .span-width-centered {
@@ -178,4 +180,114 @@ main h1 {
     .error-message {
         font-size: 18px;
     }
+}
+
+/* ===== CRUD toolbar & Edit toggle (refined) ===== */
+
+.crud-toolbar[hidden] { display: none !important; }
+
+/* Header toggle: red when editing */
+#editToggleBtn.login-btn.editing {
+  background: #a61c1c;
+  box-shadow: 0 2px 8px rgba(166,28,28,.25);
+}
+#editToggleBtn.login-btn.editing:hover { filter: brightness(1.05); }
+
+/* Toolbar: card-like, aligned with content */
+.crud-toolbar{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-top:10px;
+  margin-bottom:12px;
+
+  /* card look to match your .card */
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:10px 12px;
+  box-shadow:0 5px 12px rgba(16,26,50,.06);
+}
+
+/* Left status text */
+.crud-toolbar .count{
+  color:var(--muted);
+  font-weight:600;
+  font-size:14px;
+}
+
+/* Push actions to the right */
+.crud-toolbar .spacer{ flex:1; }
+
+/* Keep buttons on a single line when possible */
+.crud-toolbar > .btn{
+  min-height:36px;
+  line-height:1;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+/* Generic small button styles (theme-aligned) */
+.btn{
+  appearance:none;
+  border:1px solid #e5e7eb;
+  background:#fff;
+  color:#111827;
+  padding:8px 14px;
+  border-radius:8px;
+  font-weight:600;
+  font-size:14px;
+  cursor:pointer;
+  transition:background .12s ease, box-shadow .12s ease, transform .02s ease;
+}
+.btn:hover{ background:#f9fafb; box-shadow:0 2px 6px rgba(0,0,0,.06); }
+.btn:disabled{ opacity:.5; cursor:not-allowed; box-shadow:none; }
+
+/* Variants */
+.btn-primary{ background:var(--ink); color:#fff; border-color:var(--ink); }
+.btn-primary:hover{ filter:brightness(1.05); }
+
+.btn-danger{ background:#b91c1c; color:#fff; border-color:#b91c1c; }
+.btn-danger:hover{ filter:brightness(1.05); }
+
+.btn-secondary{ background:#f3f4f6; color:#111827; border-color:#e5e7eb; }
+.btn-secondary:hover{ background:#eef2ff; border-color:#c7d2fe; }
+
+.btn-outline{ background:#fff; color:#111827; border-color:#cbd5e1; }
+.btn-outline:hover{ background:#f9fafb; }
+
+.btn .icon{ margin-right:6px; font-size:14px; line-height:1; }
+
+/* Table utility cells */
+th.sel, td.sel{ width:34px; text-align:center; }
+th.sel input[type="checkbox"],
+td.sel input[type="checkbox"]{ width:16px; height:16px; cursor:pointer; }
+
+.mono{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; }
+.nowrap{ white-space:nowrap; }
+.num{ text-align:right; }
+
+/* ===== Responsive layout for toolbar ===== */
+@media (max-width: 900px){
+  .crud-toolbar{
+    flex-wrap:wrap;
+    row-gap:8px;
+    padding:10px;
+  }
+  .crud-toolbar .count{
+    order:1;
+    width:auto;
+  }
+  .crud-toolbar .spacer{
+    display:none;   /* let buttons wrap beneath */
+  }
+  /* Buttons wrap and fill width in pairs */
+  #btnUndoLast, #btnDeleteSelected, #btnCancelEdit{
+    order:2;
+  }
+  .crud-toolbar > .btn{
+    flex:1 1 auto;
+    justify-content:center;
+  }
 }

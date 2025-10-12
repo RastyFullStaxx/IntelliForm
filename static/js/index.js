@@ -1,3 +1,4 @@
+// static/js/index.js
 document.addEventListener('DOMContentLoaded', function () {
   const fileInput = document.getElementById('fileUpload');
   const dropArea = document.getElementById('dropArea');
@@ -131,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function () {
       if (!webPath) throw new Error('Upload succeeded but server did not return web_path or file_id.');
 
       const diskPath = data.disk_path || '';
-      // ✅ HASH FIRST: prefer canonical_form_id; keep form_id for backward compatibility
+      // HASH FIRST: prefer canonical_form_id; keep form_id for backward compatibility
       const canonicalId = data.canonical_form_id || data.form_id || null;
 
       // Persist for workspace.js (new keys)
@@ -156,8 +157,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Start Filling Button → uploads to server, then navigates
-  startBtn.addEventListener('click', () => {
+  // Start Filling Button → ensure we have a user id, then upload
+  startBtn.addEventListener('click', async () => {
     if (!selectedFile) {
       Swal.fire({
         icon: 'warning',
@@ -166,6 +167,86 @@ document.addEventListener('DOMContentLoaded', function () {
       });
       return;
     }
+
+    try {
+      // Last-chance: ensure a non-empty research_user_id
+      const currentId = (window.getResearchUserId && window.getResearchUserId()) || '';
+      if (!currentId || currentId.trim() === '' || currentId.trim().toUpperCase() === 'ANON') {
+        if (window.promptForResearchUserId) {
+          const id = await window.promptForResearchUserId();
+          if (id && id.trim()) {
+            sessionStorage.setItem('research_user_id', id.trim());
+            localStorage.setItem('research_user_id', id.trim());
+          }
+        }
+      }
+    } catch (e) {
+      console.warn('User ID ensure step failed:', e);
+    }
+
     uploadAndNavigate(selectedFile);
   });
 });
+
+
+// static/js/index.userid.js — user_id capture (research participant)
+(function () {
+  const LS_KEY = "research_user_id";
+  const ALWAYS_PROMPT = true; // ask on every index load/refresh
+
+  // normalize: trim, collapse spaces, UPPERCASE for consistent display
+  function normalizeId(s) {
+    return String(s || "").trim().replace(/\s+/g, " ").toUpperCase();
+  }
+
+  async function promptForUserId() {
+    if (!ALWAYS_PROMPT) {
+      const existing = localStorage.getItem(LS_KEY);
+      if (existing && existing.trim()) return existing;
+    }
+
+    const { value } = await Swal.fire({
+      title: "Enter Your Name (or ID)",
+      input: "text",
+      inputLabel: "Example: JUAN DELA CRUZ",
+      inputPlaceholder: "TYPE YOUR NAME",
+      inputAttributes: { autocapitalize: "characters", autocorrect: "off", spellcheck: "false" },
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      confirmButtonText: "Save",
+      showCancelButton: false,
+      preConfirm: (val) => {
+        const v = normalizeId(val);
+        if (!v || v.length < 2) {
+          Swal.showValidationMessage("Please enter at least 2 characters");
+          return false;
+        }
+        return v;
+      }
+    });
+
+    const normalized = normalizeId(value);
+    localStorage.setItem(LS_KEY, normalized);
+    sessionStorage.setItem(LS_KEY, normalized); // mirror for this tab
+    return normalized;
+  }
+
+  // Expose helpers for other scripts (used by workspace.js and the Start button)
+  window.getResearchUserId = function () {
+    return localStorage.getItem(LS_KEY) || sessionStorage.getItem(LS_KEY) || null;
+  };
+  window.promptForResearchUserId = async function () {
+    return await promptForUserId();
+  };
+
+  // Prompt immediately on index load
+  document.addEventListener("DOMContentLoaded", async () => {
+    try {
+      const id = await promptForUserId();
+      sessionStorage.setItem(LS_KEY, id); // ensure present even if storage is blocked later
+    } catch (e) {
+      console.warn("User ID prompt failed:", e);
+      sessionStorage.setItem(LS_KEY, "ANON");
+    }
+  });
+})();
