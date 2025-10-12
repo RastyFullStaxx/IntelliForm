@@ -1,135 +1,24 @@
-﻿# ===============================
-# IntelliForm Project Git Ignore
-# ===============================
-
-# -------------------------------
-# Python cache / build artifacts
-# -------------------------------
-__pycache__/
-*.py[cod]
-*.so
-*.egg
-*.egg-info/
-dist/
-build/
-.pytest_cache/
-.mypy_cache/
-.ruff_cache/
-.coverage
-coverage.xml
-
-# -------------------------------
-# Virtual environments
-# -------------------------------
+# environments & OS
 venv/
-env/
-ENV/
-.venv/
-
-# -------------------------------
-# Env / secrets
-# -------------------------------
 .env
 .env.*
 *.env
-
-# -------------------------------
-# Large model files / checkpoints
-# -------------------------------
-saved_models/
-*.pt
-*.bin
-*.ckpt
-
-# BIG pdf/image dumps (keep out of git)
-data/**/*.pdf
-data/**/*.png
-data/**/*.jpg
-data/**/*.jpeg
-
-# Keep label maps (used by training)
-!data/labels.json
-!data/labels_union.json
-!data/labels_funsd.json
-
-# Ignore dataset archives / misc heavy text tables
-data/**/*.csv
-data/**/*.tsv
-data/**/*.jsonl
-data/**/*.zip
-data/**/*.tar
-
-# -------------------------------
-# Uploaded or generated files
-# -------------------------------
-
-# Generated metrics report (can re-generate)
-static/metrics_report.txt
-
-# -------------------------------
-# Jupyter Notebook checkpoints
-# -------------------------------
-.ipynb_checkpoints/
-
-# -------------------------------
-# OS / editor specific files
-# -------------------------------
-.DS_Store
-Thumbs.db
-*.swp
-*.swo
-
-# -------------------------------
-# Nested git repos (avoid accidental commits)
-# -------------------------------
-**/.git
-
-
-# Local reports
-_inventory.txt
-_tracked-files.txt
-_tree.txt
-
-_inventory.txt
-_tracked-files.txt
-_tree.txt
-
-!explanations/
-!explanations/logs/
-!explanations/logs/**scripts/.secrets/
-.env
-*.key
-
-# ---- Secrets & env ----
-scripts/.secrets/
-*.key
-.env
-
-# ---- Python cruft ----
 __pycache__/
 *.pyc
-.venv/
-venv/
+.DS_Store
+Thumbs.db
 
-# ---- Big/generated artifacts ----
-uploads/
-explanations/
-out/
+# notebooks checkpoints
+.ipynb_checkpoints/
 
-# If any slip outside those dirs, ignore common render types too
-*.PDF
-*.pdf
-*.png
-*.jpg
-*.jpeg
-*.tif
-*.tiff
-*.gifuploads/
-explanations/
-out/
-*.pdf
-*.png
-*.jpg
-*.jpeg
-*.mp4
-*.zip
+# build/cache
+dist/
+build/
+*.egg-info/
+.pytest_cache/
+
+# logs & temps
+*.log
+*.tmp
+*.temp
+*.bak
