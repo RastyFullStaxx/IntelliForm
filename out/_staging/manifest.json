@@ -1,0 +1,167 @@
+[
+  {
+    "src": "out\\gnn\\6afe3cc018fe80d769e1e9dd0e1df156c68a0787966521641efe913d0dba3638",
+    "dst": "out\\_staging\\gnn\\_strays",
+    "new_items": 3
+  },
+  {
+    "src": "out\\gnn\\73f5c45536d2ccfb60557c41f71c4bceba6f814ad8958a0151c53d558ae567f7",
+    "dst": "out\\_staging\\gnn\\_strays",
+    "new_items": 7
+  },
+  {
+    "src": "out\\gnn\\b3a12f4bf45eb84bd9d0034a0f77e5bffbd2eee50e0ca473c2a6c769593a6dca",
+    "dst": "out\\_staging\\gnn\\_strays",
+    "new_items": 6
+  },
+  {
+    "src": "out\\gnn\\b491f8fbd047aa99c90b00f9d5084a26765f9975e2e331b8cd16ba20b3e6b962",
+    "dst": "out\\_staging\\gnn\\_strays",
+    "new_items": 3
+  },
+  {
+    "src": "out\\gnn\\d3f1d9a486000e86a2ae051a0da1f67a40bf3b39948ec079870c92106f6c1ae6",
+    "dst": "out\\_staging\\gnn\\_strays",
+    "new_items": 9
+  },
+  {
+    "src": "out\\gnn\\d75de522012583f723a1d679958c9311fcd713c098fec5a5d5f744e07d71e42f",
+    "dst": "out\\_staging\\gnn\\_strays",
+    "new_items": 8
+  },
+  {
+    "src": "out\\gnn\\e6b97f5e2924562d7c021596cfb685cd43d37ea9b72f82b4e1037f2020e027a2",
+    "dst": "out\\_staging\\gnn\\_strays",
+    "new_items": 9
+  },
+  {
+    "src": "out\\gnn\\f944d8645856b0474e41537346ae5dd63e0ba59ab976517b158e2872d83cd612",
+    "dst": "out\\_staging\\gnn\\_strays",
+    "new_items": 3
+  },
+  {
+    "src": "out\\gnn\\fdf7f854869568d1d373b165c091086487d7faf269cfae1cc8cb0c7e75f14f99",
+    "dst": "out\\_staging\\gnn\\_strays",
+    "new_items": 2
+  },
+  {
+    "src": "out\\gnn\\funsd-test",
+    "dst": "out\\_staging\\gnn\\funsd-test",
+    "new_items": 26
+  },
+  {
+    "src": "out\\gnn\\funsd-train",
+    "dst": "out\\_staging\\gnn\\funsd-train",
+    "new_items": 299
+  },
+  {
+    "src": "out\\overlay\\6afe3cc018fe80d769e1e9dd0e1df156c68a0787966521641efe913d0dba3638",
+    "dst": "out\\_staging\\overlay\\_strays",
+    "new_items": 3
+  },
+  {
+    "src": "out\\overlay\\73f5c45536d2ccfb60557c41f71c4bceba6f814ad8958a0151c53d558ae567f7",
+    "dst": "out\\_staging\\overlay\\_strays",
+    "new_items": 7
+  },
+  {
+    "src": "out\\overlay\\b3a12f4bf45eb84bd9d0034a0f77e5bffbd2eee50e0ca473c2a6c769593a6dca",
+    "dst": "out\\_staging\\overlay\\_strays",
+    "new_items": 6
+  },
+  {
+    "src": "out\\overlay\\b491f8fbd047aa99c90b00f9d5084a26765f9975e2e331b8cd16ba20b3e6b962",
+    "dst": "out\\_staging\\overlay\\_strays",
+    "new_items": 3
+  },
+  {
+    "src": "out\\overlay\\d3f1d9a486000e86a2ae051a0da1f67a40bf3b39948ec079870c92106f6c1ae6",
+    "dst": "out\\_staging\\overlay\\_strays",
+    "new_items": 9
+  },
+  {
+    "src": "out\\overlay\\d75de522012583f723a1d679958c9311fcd713c098fec5a5d5f744e07d71e42f",
+    "dst": "out\\_staging\\overlay\\_strays",
+    "new_items": 8
+  },
+  {
+    "src": "out\\overlay\\e6b97f5e2924562d7c021596cfb685cd43d37ea9b72f82b4e1037f2020e027a2",
+    "dst": "out\\_staging\\overlay\\_strays",
+    "new_items": 9
+  },
+  {
+    "src": "out\\overlay\\f944d8645856b0474e41537346ae5dd63e0ba59ab976517b158e2872d83cd612",
+    "dst": "out\\_staging\\overlay\\_strays",
+    "new_items": 3
+  },
+  {
+    "src": "out\\overlay\\fdf7f854869568d1d373b165c091086487d7faf269cfae1cc8cb0c7e75f14f99",
+    "dst": "out\\_staging\\overlay\\_strays",
+    "new_items": 2
+  },
+  {
+    "src": "out\\overlay\\funsd-test",
+    "dst": "out\\_staging\\overlay\\funsd-test",
+    "new_items": 27
+  },
+  {
+    "src": "out\\overlay\\funsd-train",
+    "dst": "out\\_staging\\overlay\\funsd-train",
+    "new_items": 299
+  },
+  {
+    "src": "out\\llmgnnenhancedembeddings\\6afe3cc018fe80d769e1e9dd0e1df156c68a0787966521641efe913d0dba3638.json",
+    "dst": "out\\_staging\\emb\\_strays",
+    "new_items": 1
+  },
+  {
+    "src": "out\\llmgnnenhancedembeddings\\73f5c45536d2ccfb60557c41f71c4bceba6f814ad8958a0151c53d558ae567f7.json",
+    "dst": "out\\_staging\\emb\\_strays",
+    "new_items": 1
+  },
+  {
+    "src": "out\\llmgnnenhancedembeddings\\b3a12f4bf45eb84bd9d0034a0f77e5bffbd2eee50e0ca473c2a6c769593a6dca.json",
+    "dst": "out\\_staging\\emb\\_strays",
+    "new_items": 1
+  },
+  {
+    "src": "out\\llmgnnenhancedembeddings\\b491f8fbd047aa99c90b00f9d5084a26765f9975e2e331b8cd16ba20b3e6b962.json",
+    "dst": "out\\_staging\\emb\\_strays",
+    "new_items": 1
+  },
+  {
+    "src": "out\\llmgnnenhancedembeddings\\d3f1d9a486000e86a2ae051a0da1f67a40bf3b39948ec079870c92106f6c1ae6.json",
+    "dst": "out\\_staging\\emb\\_strays",
+    "new_items": 1
+  },
+  {
+    "src": "out\\llmgnnenhancedembeddings\\d75de522012583f723a1d679958c9311fcd713c098fec5a5d5f744e07d71e42f.json",
+    "dst": "out\\_staging\\emb\\_strays",
+    "new_items": 1
+  },
+  {
+    "src": "out\\llmgnnenhancedembeddings\\e6b97f5e2924562d7c021596cfb685cd43d37ea9b72f82b4e1037f2020e027a2.json",
+    "dst": "out\\_staging\\emb\\_strays",
+    "new_items": 1
+  },
+  {
+    "src": "out\\llmgnnenhancedembeddings\\f944d8645856b0474e41537346ae5dd63e0ba59ab976517b158e2872d83cd612.json",
+    "dst": "out\\_staging\\emb\\_strays",
+    "new_items": 1
+  },
+  {
+    "src": "out\\llmgnnenhancedembeddings\\fdf7f854869568d1d373b165c091086487d7faf269cfae1cc8cb0c7e75f14f99.json",
+    "dst": "out\\_staging\\emb\\_strays",
+    "new_items": 1
+  },
+  {
+    "src": "out\\llmgnnenhancedembeddings\\funsd-test",
+    "dst": "out\\_staging\\llmgnnenhancedembeddings\\funsd-test",
+    "new_items": 13
+  },
+  {
+    "src": "out\\llmgnnenhancedembeddings\\funsd-train",
+    "dst": "out\\_staging\\llmgnnenhancedembeddings\\funsd-train",
+    "new_items": 150
+  }
+]
