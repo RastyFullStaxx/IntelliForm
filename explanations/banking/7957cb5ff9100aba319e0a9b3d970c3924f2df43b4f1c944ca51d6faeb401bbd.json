@@ -278,6 +278,7 @@
   "aliases": [
     "Banking_FAMI_AccountOpeningForm",
     "FAMI_AccountOpeningForm",
-    "Finance_FAMIAccountOpeningForm"
+    "Finance_FAMIAccountOpeningForm",
+    "Banking_FAMI_AccountOpeningForm_Individual"
   ]
 }
