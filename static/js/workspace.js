@@ -151,17 +151,17 @@ function initWorkspace() {
   pageToggler?.addEventListener("click", () => thumbSidebar?.classList.toggle("visible"));
 
   // ---- "Show boxes" toggle ----
-  // let toggleBoxes = null;
-  // if (metricsRow) {
-  //   const boxesWrap = document.createElement("div");
-  //   boxesWrap.style.cssText = "text-align:center;margin:6px 0 4px 0;";
-  //   boxesWrap.innerHTML = `
-  //     <label style="font-size:12px;opacity:.9;">
-  //       <input type="checkbox" id="toggleBoxes"> Show boxes
-  //     </label>`;
-  //   metricsRow.insertAdjacentElement("afterend", boxesWrap);
-  //   toggleBoxes = $("toggleBoxes");
-  // }
+  let toggleBoxes = null;
+  if (metricsRow) {
+    const boxesWrap = document.createElement("div");
+    boxesWrap.style.cssText = "text-align:center;margin:6px 0 4px 0;";
+    boxesWrap.innerHTML = `
+      <label style="font-size:12px;opacity:.9;">
+        <input type="checkbox" id="toggleBoxes"> Show boxes
+      </label>`;
+    metricsRow.insertAdjacentElement("afterend", boxesWrap);
+    toggleBoxes = $("toggleBoxes");
+  }
 
   // ---- PDF state ----
   let pdfDoc = null;

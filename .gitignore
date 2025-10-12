@@ -137,3 +137,7 @@ _tree.txt
 _inventory.txt
 _tracked-files.txt
 _tree.txt
+
+!explanations/
+!explanations/logs/
+!explanations/logs/**
