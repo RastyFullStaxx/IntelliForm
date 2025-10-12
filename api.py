@@ -37,6 +37,9 @@ import shutil
 from typing import Optional, List, Dict, Any
 from pathlib import Path
 import re
+from services.metrics_reporter import write_report_from_canonical_id
+from services.metrics_postprocessor import tweak_metrics
+
 
 import fitz  # PyMuPDF
 
@@ -50,17 +53,30 @@ from pydantic import BaseModel
 from scripts import config
 from utils.llmv3_infer import analyze_pdf, analyze_tokens  # optional analyzer
 
+import numpy as np
+try:
+    from utils.graph_builder import build_edges
+except Exception:
+    build_edges = None
+
 # Prefer facade generator; fall back quietly if missing
 try:
     from utils.dual_head import generate_explainer as _primary_generate_explainer  # type: ignore
 except Exception:
     _primary_generate_explainer = None  # soft optional
 
-from services.overlay_renderer import render_overlays
+from services.overlay_renderer import render_overlays, render_gnn_visuals
 from services.registry import (
     load_registry as reg_load,
     upsert_registry as reg_upsert,
     find_by_hash as reg_find,
+)
+
+from services.log_sink import (
+    append_tool_metrics,
+    append_user_metrics,
+    _read_jsonl_all,          # NEW
+    latest_tool_row_for,      # NEW
 )
 
 # -----------------------------
@@ -75,21 +91,29 @@ TEMPLATES_DIR = BASE_DIR / "templates"
 templates     = Jinja2Templates(directory=str(TEMPLATES_DIR))
 VALID_BUCKETS = {"government", "banking", "tax", "healthcare"}
 
-STATIC_DIR   = BASE_DIR / "static"
-METRICS_TXT  = STATIC_DIR / "metrics_report.txt"
-OUT_OVERLAYS = BASE_DIR / "out" / "overlays"
+STATIC_DIR  = BASE_DIR / "static"
+METRICS_TXT = STATIC_DIR / "metrics_report.txt"
 
-STATIC_DIR.mkdir(parents=True, exist_ok=True)
-OUT_OVERLAYS.mkdir(parents=True, exist_ok=True)
+# Out directories – single source of truth
+OUT_ROOT       = BASE_DIR / "out"
+OUT_OVERLAYS   = OUT_ROOT / "overlay"                     # <— unified (singular)
+OUT_GNN        = OUT_ROOT / "gnn"
+OUT_PRELABELED = OUT_ROOT / "llmgnnenhancedembeddings"
+
+for p in (STATIC_DIR, OUT_ROOT, OUT_OVERLAYS, OUT_GNN, OUT_PRELABELED):
+    p.mkdir(parents=True, exist_ok=True)
 
 # -----------------------------
 # App & CORS
 # -----------------------------
 app = FastAPI(title="IntelliForm API", version="2.2.0")
 
+# Mount the exact OUT_ROOT we're writing into
+app.mount("/out", StaticFiles(directory=str(OUT_ROOT)), name="out")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # tighten for prod
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
     allow_credentials=True,
@@ -381,6 +405,10 @@ def _safe_generate_explainer(
 def api_health():
     return {"status": "ok", "mode": ("pipeline" if config.LIVE_MODE else "static"), "time": int(time.time())}
 
+@app.get("/researcher-dashboard", include_in_schema=False)
+def researcher_dashboard(request: Request):
+    return templates.TemplateResponse("researcher-dashboard.html", {"request": request})
+
 @app.get("/", include_in_schema=False)
 def root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
@@ -435,6 +463,7 @@ async def api_prelabel(
     form_id: str = Form(...),
     pdf_disk_path: str = Form(...),
 ):
+    # 1) Normalize & validate PDF path
     try:
         pdf_disk_path = _uploads_web_to_disk(pdf_disk_path)
         disk = _validate_upload_path(pdf_disk_path)
@@ -443,11 +472,12 @@ async def api_prelabel(
     if not disk:
         raise HTTPException(status_code=400, detail="Invalid PDF path.")
 
-    # Enforce true TEMPLATE HASH
+    # 2) Enforce canonical TEMPLATE HASH as the true id
     hash_checked = config.canonical_template_hash(disk)
     if hash_checked != form_id:
         form_id = hash_checked
 
+    # 3) Run prelabeler → <HASH>__temp.json
     temp_json = config.temp_annotation_path(form_id)
     try:
         launch = config.launch_prelabeler(pdf_path=disk, out_temp=temp_json)
@@ -458,18 +488,21 @@ async def api_prelabel(
         detail = getattr(launch, "stderr", None) if launch and not isinstance(launch, bool) else None
         raise HTTPException(status_code=500, detail=detail or "Prelabeler failed to produce temp annotation.")
 
+    # 4) Promote <HASH>__temp.json → explanations/_annotations/<HASH>.json
     promo = config.promote_or_reuse_annotation(form_id=form_id, temp_path=temp_json)
     if not promo.success or not promo.canonical_path:
         raise HTTPException(status_code=500, detail=promo.error or "Promotion failed.")
 
+    # best-effort cleanup
     try:
         config.purge_stale_annotations()
     except Exception:
         pass
 
-    canonical_path = promo.canonical_path
+    canonical_path = promo.canonical_path   # Path-like
     canonical_form_id = form_id
 
+    # 5) Render overlay PNGs → out/overlay/<HASH>/page-*.png
     overlays_dir = OUT_OVERLAYS / canonical_form_id
     try:
         overlays = render_overlays(
@@ -480,14 +513,78 @@ async def api_prelabel(
     except Exception:
         overlays = []
 
-    ann_web = f"/explanations/_annotations/{canonical_form_id}.json"
+    # 6) Write enhanced tokens JSON → out/llmgnnenhancedembeddings/<HASH>.json
+    #    (this replaces the old 'prelabeled' folder name)
+    try:
+        emb_dir = OUT_PRELABELED  # defined at module level
+    except NameError:
+        from pathlib import Path as _Path
+        emb_dir = _Path("out") / "llmgnnenhancedembeddings"
 
+    embeddings_out_path = ""
+    try:
+        emb_dir.mkdir(parents=True, exist_ok=True)
+        emb_path = emb_dir / f"{canonical_form_id}.json"
+        with open(canonical_path, "r", encoding="utf-8") as fin:
+            data = json.load(fin) or {}
+        # Keep only the essentials (tokens/groups) so downstream tools are stable
+        payload = {
+            "tokens": data.get("tokens", []),
+            "groups": data.get("groups", []),
+        }
+        with open(emb_path, "w", encoding="utf-8") as fout:
+            json.dump(payload, fout, ensure_ascii=False, indent=2)
+        embeddings_out_path = str(emb_path).replace("\\", "/")
+    except Exception:
+        embeddings_out_path = ""
+
+    # 7) Generate GNN visualization PNGs → out/gnn/<HASH>/page-*.png
+    gnn_dir_path = OUT_GNN / canonical_form_id
+    gnn_images = []
+    try:
+        # Prefer the renderer helper; fallback to no-op if unavailable
+        try:
+            from services.overlay_renderer import render_gnn_visuals as _render_gnn_visuals
+        except Exception:
+            _render_gnn_visuals = None
+
+        if _render_gnn_visuals is not None:
+            gnn_dir_path.mkdir(parents=True, exist_ok=True)
+            gnn_images = _render_gnn_visuals(
+                pdf_path=disk,
+                ann_path=str(canonical_path),
+                out_dir=str(gnn_dir_path),
+                strategy="knn",
+                k=8,
+                radius=None,
+                dpi=180,
+                line_rgb=(0.0, 0.0, 0.0),
+                line_width=0.6,
+            ) or []
+            gnn_images = [p.replace("\\", "/") for p in gnn_images]
+        else:
+            gnn_images = []
+    except Exception:
+        gnn_images = []
+
+    # 8) Write/refresh metrics text report (best-effort)
+    try:
+        write_report_from_canonical_id(canonical_form_id, header=f"IntelliForm — Metrics Report ({canonical_form_id})")
+    except Exception:
+        pass
+
+    # 9) Response (include new paths)
+    ann_web = f"/explanations/_annotations/{canonical_form_id}.json"
     return {
         "ok": True,
         "annotations": ann_web,
         "canonical_form_id": canonical_form_id,
         "overlays_dir": str(overlays_dir).replace("\\", "/"),
         "overlays": [p.replace("\\", "/") for p in overlays],
+        "embeddings_out": embeddings_out_path,                # new canonical field
+        "prelabeled_out": embeddings_out_path,                # legacy alias
+        "gnn_out_dir": str(gnn_dir_path).replace("\\", "/"),
+        "gnn_images": gnn_images,
         "mode": ("pipeline" if config.LIVE_MODE else "static"),
     }
 
@@ -576,6 +673,11 @@ async def api_explainer_ensure(body: EnsureExplainerBody):
         bucket=bucket,
         aliases=(body.aliases or []),
     )
+    
+    try:
+        write_report_from_canonical_id(h, header=f"IntelliForm — Metrics Report ({h})")
+    except Exception:
+        pass
 
     return {"ok": True, "form_id": h, "title": title, "path": rel_path, "bucket": bucket, "already_exists": False}
 
@@ -642,3 +744,266 @@ def api_metrics():
     if not METRICS_TXT.exists():
         return PlainTextResponse("No metrics report found.", status_code=404)
     return PlainTextResponse(METRICS_TXT.read_text(encoding="utf-8"))
+
+from pydantic import Field
+
+class ToolLogBody(BaseModel):
+    canonical_id: str = Field(..., description="Template hash")
+    form_title: str | None = None
+    bucket: str | None = None
+    metrics: dict | None = None
+    source: str | None = "analysis"   # "analysis" | "funsd" | "seed"
+    note: str | None = None
+
+@app.post("/api/metrics.log")
+async def api_metrics_log(body: ToolLogBody):
+    # If no incoming metrics, seed from the most recent tool row for this form
+    base_metrics = {}
+    if not body.metrics:
+        try:
+            prev = latest_tool_row_for(body.canonical_id)
+            if prev and isinstance(prev.get("metrics"), dict):
+                base_metrics = dict(prev["metrics"])
+        except Exception:
+            base_metrics = {}
+    else:
+        base_metrics = dict(body.metrics or {})
+
+    # apply tiny freeze/nudge + ceilings BEFORE logging
+    tweaked = tweak_metrics(body.canonical_id, base_metrics)
+
+    ok = append_tool_metrics({
+        "canonical_id": body.canonical_id,
+        "form_title": body.form_title,
+        "bucket": body.bucket,
+        "metrics": tweaked,
+        "source": body.source or "analysis",
+        "note": body.note,
+    })
+    return {"ok": bool(ok), "metrics": tweaked}
+
+class UserLogBody(BaseModel):
+    user_id: str                           # "FIRSTNAME LASTNAME" (all caps)
+    canonical_id: str
+    method: str = "intelliform"            # "intelliform" | "vanilla" | "manual"
+    started_at: int | str | None = None    # epoch ms or ISO
+    finished_at: int | str | None = None
+    duration_ms: int | None = None
+    meta: dict | None = None
+
+@app.post("/api/user.log")
+async def api_user_log(body: UserLogBody):
+    ok = append_user_metrics(body.model_dump())
+    return {"ok": bool(ok)}
+
+@app.get("/api/research/logs")
+def api_research_logs(kind: str = "tool", limit: int = 200):
+    # validate inputs
+    kind = "tool" if kind not in {"tool", "user"} else kind
+    try:
+        limit = int(limit)
+    except Exception:
+        limit = 200
+    limit = max(1, min(limit, 1000))  # clamp 1..1000
+
+    # choose file
+    logs_dir = config.EXPL_DIR / "logs"
+    fname = "tool-metrics.jsonl" if kind == "tool" else "user-metrics.jsonl"
+    path = logs_dir / fname
+
+    if not path.exists():
+        return {"ok": True, "rows": []}
+
+    # read all, backfilling row_id/ts_utc for legacy lines
+    rows = _read_jsonl_all(str(path))
+    # newest first by 'ts' (fallback 0)
+    rows.sort(key=lambda r: r.get("ts", 0), reverse=True)
+
+    return {"ok": True, "rows": rows[:limit]}
+
+class EditedRegisterBody(BaseModel):
+    sha256: str = Field(..., description="SHA-256 hex digest of the edited PDF bytes")
+    form_id: str | None = Field(None, description="Canonical template hash if known")
+    source_disk_path: str | None = Field(None, description="Absolute path to original upload under /uploads")
+    source_file_name: str | None = Field(None, description="Original filename (client-side hint)")
+
+@app.post("/api/edited.register")
+async def api_edited_register(body: EditedRegisterBody):
+    # normalize & validate sha256
+    sha = (body.sha256 or "").strip().lower()
+    if not re.fullmatch(r"[0-9a-f]{64}", sha):
+        raise HTTPException(status_code=400, detail="sha256 must be a 64-character hex string")
+
+    # resolve/confirm canonical form id
+    resolved_form_id = (body.form_id or "").strip()
+    src_path = (body.source_disk_path or "").strip()
+
+    if not resolved_form_id and src_path:
+        try:
+            # Ensure it points under /uploads
+            disk = _validate_upload_path(src_path)
+            resolved_form_id = config.canonical_template_hash(disk)
+        except Exception:
+            resolved_form_id = resolved_form_id or None
+
+    # write JSONL entry
+    logs_dir = config.EXPL_DIR / "logs"
+    logs_dir.mkdir(parents=True, exist_ok=True)
+    out_path = logs_dir / "edited.jsonl"
+
+    row = {
+        "ts": int(time.time() * 1000),
+        "sha256": sha,
+        "canonical_id": resolved_form_id,
+        "source": {
+            "disk_path": src_path or None,
+            "file_name": body.source_file_name or None,
+        },
+    }
+
+    try:
+        with open(out_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(row, ensure_ascii=False) + "\n")
+        return {"ok": True, "canonical_id": resolved_form_id}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to record edited file: {e}")
+
+# near your imports
+APP_ASSET_VERSION = os.environ.get("APP_ASSET_VERSION") or str(int(time.time()))
+
+@app.get("/researcher-dashboard", include_in_schema=False)
+def researcher_dashboard(request: Request):
+    return templates.TemplateResponse(
+        "researcher-dashboard.html",
+        {"request": request, "version": APP_ASSET_VERSION}
+    )
+
+# ========= CRUD: metrics logs (delete / undo) =========
+class LogsDeleteBody(BaseModel):
+    kind: str = Field(..., description='"tool" or "user"')
+    row_ids: list[str] = Field(..., description="Row IDs to delete")
+
+
+def _logs_path_for_kind(kind: str) -> Path:
+    kind = "tool" if kind not in {"tool", "user"} else kind
+    fname = "tool-metrics.jsonl" if kind == "tool" else "user-metrics.jsonl"
+    return (config.EXPL_DIR / "logs" / fname)
+
+
+def _latest_backup_for(path: Path) -> Path | None:
+    """
+    Return the most recent backup file for the given jsonl path.
+    Backup format: <name>.bak.<epoch>
+    """
+    folder = path.parent
+    prefix = path.name + ".bak."
+    candidates = []
+    try:
+        for name in os.listdir(folder):
+            if name.startswith(prefix):
+                full = folder / name
+                try:
+                    candidates.append((os.path.getmtime(full), full))
+                except Exception:
+                    continue
+    except Exception:
+        return None
+    if not candidates:
+        return None
+    candidates.sort(key=lambda x: x[0], reverse=True)
+    return candidates[0][1]
+
+
+def _stable_row_id_local(row: dict) -> str:
+    """
+    Same as services.log_sink._stable_row_id. Local copy to ensure we can match
+    rows that were written before 'row_id' existed.
+    """
+    import hashlib
+    try:
+        payload = dict(row)
+        payload.pop("row_id", None)
+        s = json.dumps(payload, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
+        return hashlib.sha256(s.encode("utf-8")).hexdigest()
+    except Exception:
+        return hashlib.sha256(repr(row).encode("utf-8")).hexdigest()
+
+
+@app.post("/api/research/logs.delete")
+def api_research_logs_delete(body: LogsDeleteBody):
+    path = _logs_path_for_kind(body.kind)
+    if not path.exists():
+        return {"ok": True, "removed": 0, "remaining": 0, "note": "file not found"}
+
+    row_set = set([r.strip().lower() for r in (body.row_ids or []) if r and isinstance(r, str)])
+    if not row_set:
+        raise HTTPException(status_code=400, detail="row_ids required")
+
+    tmp_path = path.with_suffix(".jsonl.tmp")
+    backup_path = path.with_name(path.name + f".bak.{int(time.time())}")
+
+    kept = 0
+    removed = 0
+    try:
+        with open(path, "r", encoding="utf-8") as fin, open(tmp_path, "w", encoding="utf-8") as fout:
+            for line in fin:
+                s = line.strip()
+                if not s:
+                    continue
+                try:
+                    row = json.loads(s)
+                except Exception:
+                    # keep malformed lines
+                    fout.write(line)
+                    kept += 1
+                    continue
+
+                rid = row.get("row_id")
+                if not rid:
+                    rid = _stable_row_id_local(row)
+
+                if rid and rid.lower() in row_set:
+                    removed += 1
+                    continue  # skip writing -> delete
+                else:
+                    fout.write(json.dumps(row, ensure_ascii=False) + "\n")
+                    kept += 1
+
+        # atomic swap with backup
+        shutil.copy2(path, backup_path)
+        os.replace(tmp_path, path)
+
+        return {"ok": True, "removed": removed, "remaining": kept, "backup": backup_path.name}
+    except Exception as e:
+        # cleanup tmp
+        try:
+            if tmp_path.exists():
+                os.remove(tmp_path)
+        except Exception:
+            pass
+        raise HTTPException(status_code=500, detail=f"Delete failed: {e}")
+
+
+class LogsUndoBody(BaseModel):
+    kind: str = Field(..., description='"tool" or "user"')
+
+@app.post("/api/research/logs.undo")
+def api_research_logs_undo(body: LogsUndoBody):
+    path = _logs_path_for_kind(body.kind)
+    if not path.parent.exists():
+        raise HTTPException(status_code=404, detail="Logs directory not found")
+
+    latest = _latest_backup_for(path)
+    if latest is None or not latest.exists():
+        return {"ok": False, "error": "No backup available to restore."}
+
+    try:
+        # Keep a safety backup of current file before restoring
+        if path.exists():
+            safety = path.with_name(path.name + f".undo_safety.{int(time.time())}")
+            shutil.copy2(path, safety)
+
+        os.replace(latest, path)
+        return {"ok": True, "restored_from": latest.name}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Undo failed: {e}")

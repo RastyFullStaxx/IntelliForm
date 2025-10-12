@@ -242,3 +242,55 @@ body.text-mode   { cursor: text; }
   .tool-dropdown > .tool-btn { width: 44px; } /* slightly tighter but still comfy */
   #pdfContainer { padding: 12px; }
 }
+
+/* ==== Inline search tile (icon + input + controls) ==== */
+.sidebar-tool.search-inline{
+  gap: 10px;
+  align-items: center;
+  padding: 10px;
+}
+.sidebar-tool.search-inline img{
+  width: 32px;
+  height: 26px;
+  margin-right: 6px;
+  flex: 0 0 auto;
+}
+.sidebar-tool.search-inline input{
+  flex: 1 1 auto;
+  min-width: 0; /* allow shrink */
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,.25);
+  padding: 8px 10px;
+  background: rgba(255,255,255,.08);
+  color: #fff;
+  outline: none;
+}
+.sidebar-tool.search-inline .search-ctrls{
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+.sidebar-tool.search-inline .search-ctrls button{
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.25);
+  color: #fff;
+  border-radius: 8px;
+  padding: 6px 8px;
+  cursor: pointer;
+}
+.sidebar-tool.search-inline #searchStatus{
+  font-size: 12px;
+  opacity: .9;
+  min-width: 36px;
+  text-align: center;
+}
+@media (max-width: 360px){
+  .sidebar-tool.search-inline{ flex-direction: column; align-items: stretch; }
+  .sidebar-tool.search-inline .search-ctrls{ justify-content: flex-end; }
+}
+
+/* make the Exit icon a bit more "danger" flavored */
+#btnExit { color: #fca5a5; }
+#btnExit:hover { color: #ef4444; }
+
