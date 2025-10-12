@@ -124,4 +124,12 @@ out/
 *.jpeg
 *.tif
 *.tiff
-*.gif
+*.gifuploads/
+explanations/
+out/
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.mp4
+*.zip
