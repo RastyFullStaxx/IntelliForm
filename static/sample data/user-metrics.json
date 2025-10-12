@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "name": "Participant 1",
+        "metrics": {
+            "intelliform": 224,
+            "layoutlmv3": 303,
+            "manual": 270
+        }
+    },
+    {
+        "id": 2,
+        "name": "Participant 2",
+        "metrics": {
+            "intelliform": 190,
+            "layoutlmv3": 240,
+            "manual": 178
+        }
+    }
+]

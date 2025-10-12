@@ -36,6 +36,7 @@ from fastapi import Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from fastapi.responses import RedirectResponse
 
 # Neutral runtime knobs (host/port/loglevel) come from config, if present
 try:
@@ -90,3 +91,8 @@ if __name__ == "__main__":
         pass
 
     uvicorn.run("main:app", host=host, port=port, reload=True, log_level=log_level)
+
+@app.get("/favicon.ico")
+async def favicon():
+    # Serve the PNG as the canonical favicon for agents that request /favicon.ico
+    return RedirectResponse(url="/static/img/imgMainLogo.png")

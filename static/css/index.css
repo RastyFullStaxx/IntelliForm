@@ -278,6 +278,22 @@
       text-shadow: 0 0 5px rgba(255,255,255,0.4), 0 0 10px rgba(114, 225, 255, 0.5);
     }
     
-    
+    /* ==== Uploaded filename wrapping / clamp ==== */
+#fileDisplayContainer { gap: 8px; }
+
+#uploadedFileName.filename-wrap{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;        /* clamp to 2 lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  max-width: 70vw;               /* keep inside the pill on phones */
+}
+
+@media (min-width: 576px){
+  #uploadedFileName.filename-wrap{ max-width: 380px; }
+}
+
   
   

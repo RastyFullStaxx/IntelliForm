@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Researcher Dashboard</title>
+<link rel="icon" href="/static/img/imgMainLogo.png" type="image/png">
+<link rel="apple-touch-icon" href="/static/img/imgMainLogo.png">
+<link rel="shortcut icon" href="/static/img/imgMainLogo.png" type="image/png">
+  <link rel="stylesheet" href="/static/css/researcher-dashboard.css?v=20251013e" />
+  <!-- SweetAlert2 (CDN) -->
+<!-- SweetAlert2 (CDN, no SRI) -->
+<script defer src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+
+<!-- Your dashboard JS -->
+<script defer src="/static/js/researcher-dashboard.js?v=20251013e"></script>
+</head>
+<body>
+  <header class="span-width-centered">
+    <a href="/" style="display:flex;align-items:center;gap:.5rem;text-decoration:none;">
+      <img class="logo" src="/static/img/imgMainLogo.png" alt="IntelliForm Logo"/>
+    </a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/workspace">Workspace</a>
+      <a href="/researcher-dashboard">Dashboard</a>
+    </nav>
+
+    <!-- Edit toggle replaces the old Login button -->
+    <button id="editToggleBtn" class="login-btn" aria-pressed="false">Edit</button>
+  </header>
+
+  <main>
+    <div class="span-width-centered">
+      <h1>Researcher Dashboard</h1>
+      <div class="download">
+        <button class="download-btn" id="downloadJsonBtn">Download JSON</button>
+      </div>
+    </div>
+
+    <!-- Tabs (4 separate buttons) -->
+    <div class="tabs" role="tablist" aria-label="Metrics Views">
+      <button class="active" data-tab="live"    role="tab" aria-selected="true">Live Tool Metrics</button>
+      <button               data-tab="trained" role="tab" aria-selected="false">Trained PH Forms Tool Metrics</button>
+      <button               data-tab="funsd"   role="tab" aria-selected="false">FUNSD Tool Metrics</button>
+      <button               data-tab="user"    role="tab" aria-selected="false">User Metrics</button>
+    </div>
+
+    <!-- CRUD toolbar (appears only in Edit mode) -->
+    <div id="editToolbar" class="crud-toolbar" hidden>
+        <span id="selectedCount" class="count">0 selected</span>
+        <div class="spacer"></div>
+        <button id="btnUndoLast" class="btn btn-outline" disabled>
+            <span class="icon">↩</span> Undo Last
+        </button>
+        <button id="btnDeleteSelected" class="btn btn-danger" disabled>
+            <span class="icon">🗑</span> Delete Selected
+        </button>
+        <button id="btnCancelEdit" class="btn btn-secondary">
+            Cancel
+        </button>
+    </div>
+
+    <!-- Single results container (Option A) -->
+    <section class="dashboard span-width-centered" role="tabpanel" aria-live="polite" aria-busy="false">
+      <div class="record-data card" id="recordData">
+        <!-- JS will render the selected view here -->
+      </div>
+    </section>
+  </main>
+</body>
+</html>
