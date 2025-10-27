@@ -50,6 +50,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
+from services.baseline_mutator import get_degraded_explainer
+
 from scripts import config
 from utils.llmv3_infer import analyze_pdf, analyze_tokens  # optional analyzer
 
@@ -99,6 +101,9 @@ OUT_ROOT       = BASE_DIR / "out"
 OUT_OVERLAYS   = OUT_ROOT / "overlay"                     # <— unified (singular)
 OUT_GNN        = OUT_ROOT / "gnn"
 OUT_PRELABELED = OUT_ROOT / "llmgnnenhancedembeddings"
+
+OUT_BASELINE    = OUT_ROOT / "baseline"   # ephemeral degraded explainers
+OUT_BASELINE.mkdir(parents=True, exist_ok=True)
 
 for p in (STATIC_DIR, OUT_ROOT, OUT_OVERLAYS, OUT_GNN, OUT_PRELABELED):
     p.mkdir(parents=True, exist_ok=True)
@@ -249,6 +254,21 @@ def _extract_json_block(text: str) -> str:
     m = re.search(r"\{.*\}", cleaned, re.DOTALL)
     return (m.group(0) if m else cleaned).strip()
 
+def _best_effort_json(text: str) -> str:
+    import re
+    s = (text or "").strip()
+    # strip code fences if any
+    s = re.sub(r"^\s*```(?:json)?\s*|\s*```\s*$", "", s, flags=re.IGNORECASE|re.DOTALL)
+    # normalize smart quotes
+    s = s.replace("“", '"').replace("”", '"').replace("’", "'").replace("‘", "'")
+    # keep only the outermost JSON object if extra prose is around
+    i, j = s.find("{"), s.rfind("}")
+    if i != -1 and j != -1 and j > i:
+        s = s[i:j+1]
+    # drop dangling commas like ", }" or ", ]"
+    s = re.sub(r",\s*([}\]])", r"\1", s)
+    return s
+
 def _compute_fallback_metrics(payload: dict, text: str) -> dict:
     import re
     def _norm(s: str) -> str:
@@ -306,57 +326,82 @@ def _compute_fallback_metrics(payload: dict, text: str) -> dict:
 def _fallback_generate_explainer(
     *, pdf_path: str, bucket: str, form_id: str, human_title: str, out_dir: str
 ) -> str:
-    msgs = config.build_explainer_messages(
+    # 1) Extract a short verbatim text snippet from the PDF (keeps outputs concise & grounded)
+    text_snip = ""
+    try:
+        text_snip = config.quick_text_snippet(pdf_path, max_chars=4000)
+    except Exception:
+        text_snip = ""
+
+    # 2) Build context-aware messages that force verbatim labels only
+    msgs = config.build_explainer_messages_with_context(
         canonical_id=form_id,
         bucket_guess=bucket,
         title_guess=human_title or form_id,
+        text_snippet=text_snip,
+        candidate_labels=None,  # pass detector labels here if you have them
     )
-    # Force JSON from the backend; still sanitize defensively.
+
+    # 3) Call the engine with strict JSON format and low temperature to reduce drift
     text = config.chat_completion(
         model=config.ENGINE_MODEL,
         messages=msgs,
         max_tokens=config.MAX_TOKENS,
-        temperature=config.TEMPERATURE,
-        enforce_json=True,  # << ensure JSON-structured reply
+        temperature=min(0.1, config.TEMPERATURE),  # stricter for schema conformance
+        enforce_json=True,
     )
 
     out_dir_path = Path(out_dir)
     out_dir_path.mkdir(parents=True, exist_ok=True)
     out_path = out_dir_path / f"{form_id}.json"
 
-    # Sanitize → load JSON
+    # 4) Sanitize → try to load JSON; if it fails, try a small "repair" pass before scaffolding
     try:
-        cleaned = _extract_json_block(text)
-        payload = json.loads(cleaned)
+        cleaned = _extract_json_block(text)  # already strips code fences / isolates {...}
+        try:
+            payload = json.loads(cleaned)
+        except json.JSONDecodeError:
+            # Best-effort repair: normalize quotes, drop trailing commas, clip to outer {...}
+            fixed = _best_effort_json(cleaned)
+            payload = json.loads(fixed)
+
+        if not isinstance(payload, dict):
+            raise ValueError("LLM reply is not a JSON object")
+
         # Canonical stamps / defaults
         payload.setdefault("title", human_title or form_id)
         payload.setdefault("form_id", form_id)
         payload["canonical_id"] = form_id
         payload["bucket"] = bucket
         payload["schema_version"] = int(payload.get("schema_version") or 1)
+
         aliases = payload.get("aliases") or []
         aliases = list({*aliases, (human_title or ""), os.path.basename(pdf_path or "")})
         payload["aliases"] = sorted([a for a in aliases if a])
+
     except Exception as e:
-        # minimal, UI-safe scaffold
+        # Minimal, UI-safe scaffold (keeps the app working even when parsing fails)
         payload = {
             "title": human_title or form_id,
             "form_id": form_id,
             "canonical_id": form_id,
             "bucket": bucket,
             "schema_version": 1,
-            "aliases": [human_title or form_id, os.path.basename(pdf_path or "")],
+            "aliases": [a for a in {human_title or form_id, os.path.basename(pdf_path or "")} if a],
             "sections": [
-                {"title": "A. General", "fields": [
-                    {"label": "Full Name", "summary": "Write your complete name (First MI Last)."},
-                    {"label": "Signature", "summary": "Sign above the line (blue/black ink)."},
-                ]}
+                {
+                    "title": "A. General",
+                    "fields": [
+                        {"label": "Full Name", "summary": "Write your complete name (First MI Last)."},
+                        {"label": "Signature", "summary": "Sign above the line (blue/black ink)."},
+                    ],
+                }
             ],
             "metrics": {"tp": 80, "fp": 20, "fn": 20, "precision": 0.80, "recall": 0.80, "f1": 0.80},
             "_note": f"fallback parse error: {str(e)}",
         }
 
-    # Add realistic metrics & ISO timestamps
+    # 5) Compute realistic-ish metrics from the actual page text (best-effort)
     try:
         snippet = ""
         try:
@@ -367,11 +412,13 @@ def _fallback_generate_explainer(
     except Exception:
         payload.setdefault("metrics", {"tp": 0, "fp": 0, "fn": 0, "precision": 0.800, "recall": 0.800, "f1": 0.800})
 
+    # 6) ISO timestamps
     from datetime import datetime, timezone
     now_iso = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     payload.setdefault("created_at", now_iso)
     payload["updated_at"] = now_iso
 
+    # 7) Write file
     out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     return str(out_path)
 
@@ -403,7 +450,12 @@ def _safe_generate_explainer(
 # -----------------------------
 @app.get("/api/health")
 def api_health():
-    return {"status": "ok", "mode": ("pipeline" if config.LIVE_MODE else "static"), "time": int(time.time())}
+    return {
+        "status": "ok",
+        "mode": ("baseline" if config.BASELINE_MODE else ("pipeline" if config.LIVE_MODE else "static")),
+        "baseline": bool(getattr(config, "BASELINE_MODE", False)),
+        "time": int(time.time())
+    }
 
 @app.get("/researcher-dashboard", include_in_schema=False)
 def researcher_dashboard(request: Request):
@@ -605,6 +657,7 @@ async def api_explainer_legacy(
     finally:
         await file.close()
 
+    # Reconfirm deterministic ID
     hash_checked = config.canonical_template_hash(pdf_disk_path)
     if hash_checked != form_id:
         form_id = hash_checked
@@ -621,10 +674,52 @@ async def api_explainer_legacy(
         out_dir=str(out_dir),
     )
 
+    # ===== BASELINE AUTO-TAKEOVER (no frontend changes) =====
+    if getattr(config, "BASELINE_MODE", False):
+        try:
+            degraded = get_degraded_explainer(
+                form_id,
+                bucket_hint=bucket,
+                title_hint=human_title,
+                pdf_disk_path=pdf_disk_path,   # helps when canonical doesn’t exist yet
+                backend=None,                  # use config default (llm/local)
+                seed=None,
+                drop_rate=None,
+                mislabel_rate=None,
+                vague_rate=None,
+                strict_ephemeral=True,         # NEVER write canonical; returns dict only
+            )
+            OUT_BASELINE.mkdir(parents=True, exist_ok=True)
+            baseline_path = OUT_BASELINE / f"{form_id}.json"
+            baseline_path.write_text(json.dumps(degraded, ensure_ascii=False, indent=2), encoding="utf-8")
+            # optional cleanup
+            try:
+                _purge_old_baseline(3600)
+            except Exception:
+                pass
+            rel_baseline = os.path.relpath(baseline_path, BASE_DIR).replace("\\", "/")
+            return {
+                "ok": True,
+                "path": rel_baseline,
+                "form_id": form_id,
+                "title": human_title,
+                "mode": "baseline",
+                "baseline": True
+            }
+        except Exception:
+            # Fall back to canonical below if degrading fails
+            pass
+
+    # ===== Canonical return (normal IntelliForm) =====
     rel_path = os.path.relpath(expl_path, BASE_DIR).replace("\\", "/")
     reg_upsert(str(REG_PATH), form_id=form_id, title=human_title, rel_path=rel_path, bucket=bucket)
-
-    return {"ok": True, "path": rel_path, "form_id": form_id, "title": human_title, "mode": ("pipeline" if config.LIVE_MODE else "static")}
+    return {
+        "ok": True,
+        "path": rel_path,
+        "form_id": form_id,
+        "title": human_title,
+        "mode": ("pipeline" if config.LIVE_MODE else "static")
+    }
 
 @app.post("/api/explainer.ensure")
 async def api_explainer_ensure(body: EnsureExplainerBody):
@@ -646,8 +741,54 @@ async def api_explainer_ensure(body: EnsureExplainerBody):
                 aliases=(existing.get("aliases") or (body.aliases or [])),
             )
             existing = reg_find(str(REG_PATH), h) or {"form_id": h, "title": title, "path": rel_path, "bucket": bucket}
-        return {"ok": True, "form_id": h, "title": existing.get("title", title), "path": existing.get("path"), "bucket": existing.get("bucket", bucket), "already_exists": True}
 
+        # ===== BASELINE AUTO-TAKEOVER (even when canonical exists) =====
+        if getattr(config, "BASELINE_MODE", False):
+            try:
+                degraded = get_degraded_explainer(
+                    h,
+                    bucket_hint=(existing.get("bucket") or bucket),
+                    title_hint=(existing.get("title") or title),
+                    pdf_disk_path=(pdf_disk_path or None),
+                    backend=None,
+                    seed=None,
+                    drop_rate=None,
+                    mislabel_rate=None,
+                    vague_rate=None,
+                    strict_ephemeral=True,
+                )
+                OUT_BASELINE.mkdir(parents=True, exist_ok=True)
+                baseline_path = OUT_BASELINE / f"{h}.json"
+                baseline_path.write_text(json.dumps(degraded, ensure_ascii=False, indent=2), encoding="utf-8")
+                try:
+                    _purge_old_baseline(3600)
+                except Exception:
+                    pass
+                rel_baseline = os.path.relpath(baseline_path, BASE_DIR).replace("\\", "/")
+                return {
+                    "ok": True,
+                    "form_id": h,
+                    "title": (existing.get("title") or title),
+                    "path": rel_baseline,
+                    "bucket": (existing.get("bucket") or bucket),
+                    "already_exists": True,
+                    "mode": "baseline",
+                    "baseline": True
+                }
+            except Exception:
+                pass  # fall through to canonical return
+
+        # Canonical (existing) return
+        return {
+            "ok": True,
+            "form_id": h,
+            "title": existing.get("title", title),
+            "path": existing.get("path"),
+            "bucket": existing.get("bucket", bucket),
+            "already_exists": True
+        }
+
+    # Generate canonical if missing
     out_dir = EXPL_DIR / bucket
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -665,6 +806,44 @@ async def api_explainer_ensure(body: EnsureExplainerBody):
     rel_path = os.path.relpath(expl_path, BASE_DIR).replace("\\", "/")
     print(f"[explainer.ensure] wrote → {rel_path}")
 
+    # ===== BASELINE AUTO-TAKEOVER (no frontend changes) =====
+    if getattr(config, "BASELINE_MODE", False):
+        try:
+            degraded = get_degraded_explainer(
+                h,
+                bucket_hint=bucket,
+                title_hint=title,
+                pdf_disk_path=(pdf_disk_path or None),
+                backend=None,
+                seed=None,
+                drop_rate=None,
+                mislabel_rate=None,
+                vague_rate=None,
+                strict_ephemeral=True,
+            )
+            OUT_BASELINE.mkdir(parents=True, exist_ok=True)
+            baseline_path = OUT_BASELINE / f"{h}.json"
+            baseline_path.write_text(json.dumps(degraded, ensure_ascii=False, indent=2), encoding="utf-8")
+            try:
+                _purge_old_baseline(3600)
+            except Exception:
+                pass
+            rel_baseline = os.path.relpath(baseline_path, BASE_DIR).replace("\\", "/")
+            # Do NOT upsert registry for baseline; keep canonical pristine
+            return {
+                "ok": True,
+                "form_id": h,
+                "title": title,
+                "path": rel_baseline,
+                "bucket": bucket,
+                "already_exists": False,
+                "mode": "baseline",
+                "baseline": True
+            }
+        except Exception:
+            pass  # continue to canonical flow
+
+    # Canonical registry + metrics (normal IntelliForm)
     reg_upsert(
         str(REG_PATH),
         form_id=h,
@@ -673,13 +852,19 @@ async def api_explainer_ensure(body: EnsureExplainerBody):
         bucket=bucket,
         aliases=(body.aliases or []),
     )
-    
     try:
         write_report_from_canonical_id(h, header=f"IntelliForm — Metrics Report ({h})")
     except Exception:
         pass
 
-    return {"ok": True, "form_id": h, "title": title, "path": rel_path, "bucket": bucket, "already_exists": False}
+    return {
+        "ok": True,
+        "form_id": h,
+        "title": title,
+        "path": rel_path,
+        "bucket": bucket,
+        "already_exists": False
+    }
 
 @app.post("/api/analyze")
 async def api_analyze(
@@ -1007,3 +1192,15 @@ def api_research_logs_undo(body: LogsUndoBody):
         return {"ok": True, "restored_from": latest.name}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Undo failed: {e}")
+
+def _purge_old_baseline(ttl_seconds: int = 3600):
+    now = time.time()
+    try:
+        for p in OUT_BASELINE.glob("*.json"):
+            try:
+                if now - p.stat().st_mtime > ttl_seconds:
+                    p.unlink(missing_ok=True)
+            except Exception:
+                pass
+    except Exception:
+        pass

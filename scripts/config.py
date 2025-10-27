@@ -67,7 +67,7 @@ def _read_bool_env(name: str, default: bool = False) -> bool:
     return val in {"1", "true", "yes", "y", "on"}
 
 DEV_MODE: bool = _read_bool_env("INTELLIFORM_DEV_MODE", True)
-LIVE_MODE: bool = _read_bool_env("INTELLIFORM_LLM_ENABLED", False)
+LIVE_MODE: bool = _read_bool_env("INTELLIFORM_LLM_ENABLED", True)
 
 # === Facade knobs (needed by utils/dual_head.py) ===
 # Neutral secret name (no vendor wording)
@@ -76,7 +76,7 @@ CORE_ENGINE_KEY: str = (os.getenv("INTELLIFORM_CORE_KEY") or os.getenv("INTELLIF
 CORE_BACKEND: str = (os.getenv("INTELLIFORM_BACKEND") or "oai").strip().lower()
 # Treat these like hyperparameters
 ENGINE_MODEL: str = os.getenv("INTELLIFORM_ENGINE_MODEL", "gpt-4o-mini")
-MAX_TOKENS: int = int(os.getenv("INTELLIFORM_ENGINE_MAXTOK", os.getenv("INTELLIFORM_MAX_TOKENS", "1200")) or 1200)
+MAX_TOKENS: int = int(os.getenv("INTELLIFORM_ENGINE_MAXTOK", os.getenv("INTELLIFORM_MAX_TOKENS", "4000")) or 4000)
 TEMPERATURE: float = float(os.getenv("INTELLIFORM_ENGINE_TEMP", os.getenv("INTELLIFORM_TEMPERATURE", "0.2")) or 0.2)
 
 _LOG_LEVEL = os.getenv("INTELLIFORM_LOG_LEVEL", "INFO").upper()
@@ -85,6 +85,15 @@ logging.basicConfig(
     format="[%(asctime)s] %(levelname)s %(name)s: %(message)s",
 )
 log = logging.getLogger("intelliform.config")
+
+# === Baseline mode (A/B) switches ===
+BASELINE_MODE: bool = _read_bool_env("INTELLIFORM_BASELINE_MODE", True)
+BASELINE_BACKEND: str = (os.getenv("INTELLIFORM_BASELINE_BACKEND", "llm") or "llm").strip().lower()
+BASELINE_DROP_RATE: float = float(os.getenv("INTELLIFORM_BASELINE_DROP_RATE", "0.35"))
+BASELINE_MISLABEL_RATE: float = float(os.getenv("INTELLIFORM_BASELINE_MISLABEL_RATE", "0.15"))
+BASELINE_VAGUE_RATE: float = float(os.getenv("INTELLIFORM_BASELINE_VAGUE_RATE", "0.60"))
+BASELINE_SEED = (int(os.getenv("INTELLIFORM_BASELINE_SEED", "").strip())
+                 if os.getenv("INTELLIFORM_BASELINE_SEED") not in (None, "",) else None)
 
 # ------------------ Secrets & Key persistence ------------------
 
@@ -138,7 +147,7 @@ for _p in (UPLOADS_DIR, EXPL_DIR, ANNO_DIR, SECRETS_DIR):
 
 # If True: keep canonical files for a short time only (so frontend path is stable)
 # and purge old ones automatically.
-EPHEMERAL_ANNOS: bool = _read_bool_env("INTELLIFORM_EPHEMERAL_ANNOS", False)
+EPHEMERAL_ANNOS: bool = _read_bool_env("INTELLIFORM_EPHEMERAL_ANNOS", True)
 ANNO_TTL_SECONDS: int = int(os.getenv("INTELLIFORM_ANNO_TTL_SECONDS", "7200"))  # 2 hours default
 
 def purge_stale_annotations(now: Optional[float] = None) -> int:
@@ -751,4 +760,7 @@ __all__ = [
     "ENGINE_KEY_FILE", "INLINE_FALLBACK_KEY",
     "quick_text_snippet",
     "build_explainer_messages_with_context",
+        "BASELINE_MODE", "BASELINE_BACKEND",
+    "BASELINE_DROP_RATE", "BASELINE_MISLABEL_RATE", "BASELINE_VAGUE_RATE",
+    "BASELINE_SEED",
 ]

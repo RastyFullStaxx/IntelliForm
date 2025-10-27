@@ -76,12 +76,21 @@ async function renderTab(tab, forceRefetch = false) {
     if (tab === "live") {
       filtered = all.filter(r => (r.source || "analysis").toLowerCase() === "analysis");
     } else if (tab === "trained") {
-      filtered = all.filter(r => {
-        const s = (r.source || "").toLowerCase();
-        return s === "seed" || s === "training";
-      });
+      // Load the 20 PH-trained rows we just generated
+      const rows = await fetchStaticRows("ph_trained");
+      lastData.trained = rows;
+      box.innerHTML = renderToolTable(rows, { withCheckboxes: editMode });
+      bindCheckboxHandlers();
+      refreshCrudToolbar();
+      return;
     } else if (tab === "funsd") {
-      filtered = all.filter(r => (r.source || "").toLowerCase() === "funsd");
+      // Use our static rows (built from outputs/funsd artifacts)
+      const funsdRows = await fetchFunsdRowsStatic();
+      lastData.funsd = funsdRows;
+      box.innerHTML = renderToolTable(funsdRows, { withCheckboxes: editMode });
+      bindCheckboxHandlers();
+      refreshCrudToolbar();
+      return;
     }
 
     filtered.sort((a, b) => (toTs(b.ts_utc || b.ts) - toTs(a.ts_utc || a.ts)));
@@ -447,3 +456,51 @@ function toNum(x){ const n=Number(x); return Number.isFinite(n)?n:NaN; }
 function toInt(x){ const n=parseInt(x,10); return Number.isFinite(n)?n:0; }
 function toTs(v){ if(!v)return 0; if(typeof v==="number")return v; const t=Date.parse(v); return Number.isFinite(t)?t:0; }
 function fmtWhen(v){ const t=toTs(v); if(!t)return"—"; try{ return new Date(t).toLocaleString(); }catch{ return "—"; } }
+
+async function fetchAggregate(datasetKey) {
+  // datasetKey: "ph_trained" or "funsd"
+  const url = `/static/research_dashboard/${datasetKey}/${datasetKey}_aggregate.json?v=${Date.now()}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Aggregate not found: ${datasetKey} (${res.status})`);
+  return await res.json();
+}
+
+function aggregateToRows(agg, label = "Summary") {
+  // Produce ONE summary row that your existing table can render
+  const m = agg?.macro || {};
+  return [{
+    row_id: `${label}-${agg?.generated_at || ""}`,
+    ts_utc: Date.now(),
+    form_title: `${label} — ${agg?.count ?? 0} forms`,
+    metrics: {
+      tp: agg?.spans?.TP ?? undefined,   // only if you later add spans here
+      fp: agg?.spans?.FP ?? undefined,
+      fn: agg?.spans?.FN ?? undefined,
+      precision: m.precision ?? NaN,
+      recall: m.recall ?? NaN,
+      f1: m.f1 ?? NaN
+    }
+  }];
+}
+
+async function fetchStaticRows(datasetKey) {
+  // datasetKey: "ph_trained"
+  const url = `/static/research_dashboard/${datasetKey}/${datasetKey}_rows.json?v=${Date.now()}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Rows not found: ${datasetKey} (${res.status})`);
+  const rows = await res.json();
+  // Ensure newest-first
+  rows.sort((a, b) => (toTs(b.ts_utc || b.ts) - toTs(a.ts_utc || a.ts)));
+  return rows;
+}
+
+async function fetchFunsdRowsStatic() {
+  const url = `/static/research_dashboard/funsd/funsd_rows.json?ts=${Date.now()}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Failed to load FUNSD rows (${res.status})`);
+  const data = await res.json();
+  const rows = Array.isArray(data.rows) ? data.rows : [];
+  // newest first by ts_utc
+  rows.sort((a, b) => (toTs(b.ts_utc || b.ts) - toTs(a.ts_utc || a.ts)));
+  return rows;
+}

@@ -94,6 +94,32 @@
           </div>
         </div>
 
+                <!-- Check Placer (prefilled text) with dropdown -->
+        <div class="tool-dropdown">
+          <button class="icon-button tool-btn" data-tool="check" title="Check Placer" aria-haspopup="true" aria-expanded="false">
+            <i class="bi bi-check2-square"></i><i class="bi bi-caret-down-fill caret" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown-menu" data-for="check" role="menu">
+            <div class="menu-row">
+              <label for="checkGlyph">Glyph</label>
+              <select id="checkGlyph">
+                <option value="✓" selected>✓ (check)</option>
+                <option value="✔">✔ (heavy check)</option>
+                <option value="✗">✗ (cross)</option>
+                <option value="X">X (letter X)</option>
+                <option value="/">/ (slash)</option>
+                <option value="☑">☑ (ballot box with check)</option>
+                <option value="☒">☒ (ballot box with X)</option>
+                <option value="■">■ (filled box)</option>
+              </select>
+            </div>
+            <div class="menu-row">
+              <label for="checkFontSize">Size</label>
+              <input id="checkFontSize" type="number" min="10" max="48" step="1" value="16" style="width:72px;">
+            </div>
+          </div>
+        </div>
+
         <!-- Eraser -->
         <button class="icon-button tool-btn" data-tool="erase" title="Erase (E)">
           <i class="bi bi-eraser"></i>
