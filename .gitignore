@@ -6,6 +6,7 @@
 # Python cache / build artifacts
 # -------------------------------
 __pycache__/
+**/__pycache__/
 *.py[cod]
 *.so
 *.egg
@@ -21,10 +22,10 @@ coverage.xml
 # -------------------------------
 # Virtual environments
 # -------------------------------
+.venv/
 venv/
 env/
 ENV/
-.venv/
 
 # -------------------------------
 # Env / secrets
@@ -45,62 +46,31 @@ checkpoints/
 *.ckpt
 
 # -------------------------------
-# Datasets (raw + heavy files)
+# Datasets
 # -------------------------------
-# HuggingFace saved_to_disk datasets (arrow files are big)
+# Keep datasets tracked (use Git LFS for binaries)
+# Still ignore HF saved_to_disk artifacts (too big, auto-generated)
 data/**/hf_*/
 
-# BIG pdf/image dumps (keep out of git)
-data/**/*.pdf
-data/**/*.png
-data/**/*.jpg
-data/**/*.jpeg
-
-# Annotations in datasets:
-# By default, ignore all annotations...
-data/**/annotations/**
-# ...but DO track our PH annotation JSONs (work product, small)
-!data/**/ph_forms/annotations/*.json
-
-# Keep label maps (used by training)
+# Keep label maps
 !data/labels.json
 !data/labels_union.json
 !data/labels_funsd.json
 
-# Ignore dataset archives / misc heavy text tables
-data/**/*.csv
-data/**/*.tsv
-data/**/*.jsonl
-data/**/*.zip
-data/**/*.tar
-
-# Exclude trained artifacts per your note
-data/ph_trained/**
-!data/ph_trained/.gitkeep
+# NOTE: We DO NOT ignore dataset PDFs/PNGs/JPGs/CSV/TSV/JSONL/ZIP/TAR anymore.
+# NOTE: We also DO NOT ignore:
+#   data/ph_trained/**
+#   uploads/**
+#   static/uploads/**
+#   out/**
+#   outputs/**
+#   explanations/_annotations/**
+# so they will be pushed.
 
 # -------------------------------
-# Uploaded or generated files
+# Generated metrics report (optional ignore)
 # -------------------------------
-# Keep the folders; ignore contents
-uploads/**
-!uploads/.gitkeep
-
-# PDF uploads sometimes land here in older builds
-static/uploads/**
-!static/uploads/.gitkeep
-
-# Generated prelabel annotations (runtime artifacts)
-explanations/_annotations/**
-!explanations/_annotations/.gitkeep
-
-# Generated overlays/outputs (runtime artifacts)
-out/**
-!out/.gitkeep
-outputs/**
-!outputs/.gitkeep
-
-# Generated metrics report (can re-generate)
-static/metrics_report.txt
+# static/metrics_report.txt
 
 # -------------------------------
 # Jupyter Notebook checkpoints
@@ -116,7 +86,7 @@ Thumbs.db
 *.swo
 
 # -------------------------------
-# Nested git repos (avoid accidental commits)
+# Nested git repos
 # -------------------------------
 **/.git
 
@@ -127,10 +97,3 @@ tmp/
 temp/
 *.log
 logs/
-
-# (dup keep - harmless)
-data/**/hf_*/
-data/**/*.pdf
-data/**/*.png
-data/**/*.jpg
-data/**/*.jpeg
