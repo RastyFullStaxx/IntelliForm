@@ -29,49 +29,55 @@
   <script src="/static/js/index.js" defer></script>
 </head>
 
-<body class="bg-dark text-white d-flex justify-content-center align-items-center vh-100">
-  <div class="container text-center">
-    <h1 class="mb-4 fw-bold" style="font-family: 'Inter', sans-serif;">IntelliForm</h1>
-
-    <div class="upload-box mx-auto" style="max-width: 480px;">
-      <h2 class="h4 mb-3">Upload File</h2>
-
-      <p class="mb-4 small">
-        Please upload the PDF form you’d like to fill. IntelliForm will help you understand and
-        complete it more easily using smart field recognition and guided navigation.
+<body class="landing-body">
+  <div class="landing-shell">
+    <section class="hero">
+      <h1>IntelliForm</h1>
+      <p class="lead">
+        Upload a PDF, let IntelliForm map the fields, and start filling faster with smart detection and navigation.
       </p>
+  </section>
+
+  <section class="upload-panel">
+    <div class="panel-head">
+      <div>
+          <div class="eyebrow">Upload a PDF</div>
+          <div class="panel-sub">Drag a file or choose one to continue.</div>
+        </div>
+      </div>
 
       <!-- Drop area -->
-      <label class="upload-btn drop-area w-100 py-3 rounded border border-secondary mb-3"
-             for="fileUpload" id="dropArea" style="cursor: pointer;">
-        Drop file
-        <div class="small-text text-white">Format: PDF</div>
+      <label class="drop-area" for="fileUpload" id="dropArea">
+        <div class="drop-icon"><i class="bi bi-cloud-arrow-up-fill"></i></div>
+        <div class="drop-text">Drop your PDF here or click to browse</div>
+        <div class="small-text">We support PDF forms up to 50MB.</div>
       </label>
       <input type="file" id="fileUpload" accept=".pdf" hidden />
 
       <!-- Uploaded file display -->
-      <div id="fileDisplayContainer"
-           class="mt-3 d-flex align-items-center justify-content-between px-3 py-2 rounded d-none"
-           style="background-color: rgba(255,255,255,0.05); border: 1px solid #6c757d;">
-        <div class="d-flex align-items-center gap-2">
-          <i class="bi bi-file-earmark-pdf text-light fs-5"></i>
-          <span id="uploadedFileName" class="text-white small filename-wrap"></span>
+      <div id="fileDisplayContainer" class="file-display d-none">
+        <div class="file-meta">
+          <i class="bi bi-file-earmark-pdf"></i>
+          <span id="uploadedFileName" class="file-name"></span>
         </div>
-        <button id="deleteFileBtn" class="btn btn-outline-danger btn-sm" title="Remove file">
-          <i class="bi bi-trash"></i>
+        <button id="deleteFileBtn" class="icon-btn" title="Remove file">
+          <i class="bi bi-x-lg"></i>
         </button>
       </div>
 
-      <!-- Start Filling Button -->
-      <button id="startFillingBtn" class="btn btn-primary mt-3 d-none">
-        Start Filling
-      </button>
-
-      <!-- Scan Info -->
-      <div class="scan-btn text-primary mt-4" id="scanText">
-        <i class="bi bi-file-earmark-arrow-up-fill"></i> <span class="fw-semibold text-white">Scan a document</span><br />
-        <span class="small-text text-white">Scanned documents will be automatically saved in PDF format</span>
+      <!-- Actions -->
+      <div class="action-row">
+        <button id="startFillingBtn" class="btn primary-btn d-none">Go to workspace</button>
+        <div class="hint">
+          Not a beta tester? Continue as guest — metrics stay off until you opt in.
+        </div>
       </div>
+    </section>
+    <div class="beta-fab">
+      <button id="betaTesterBtn" class="btn beta-btn">
+        <i class="bi bi-stars"></i> Beta Tester
+      </button>
+      <div id="betaStatus" class="beta-status">Metrics: off (guest)</div>
     </div>
   </div>
 </body>
