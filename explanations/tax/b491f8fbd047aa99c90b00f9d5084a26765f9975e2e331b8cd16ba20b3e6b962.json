@@ -1,0 +1,125 @@
+{
+  "title": "Annual Information Return of Creditable Income Taxes Withheld (Expanded)/Income Payments Exempt from Withholding Tax",
+  "form_id": "1604-E",
+  "sections": [
+    {
+      "title": "Part I – Background Information",
+      "fields": [
+        {
+          "label": "For the Year (20YY)",
+          "summary": "Enter the year."
+        },
+        {
+          "label": "Amended Return?",
+          "summary": "Mark Yes or No."
+        },
+        {
+          "label": "Number of Sheet/s Attached",
+          "summary": "Indicate the number of sheets."
+        },
+        {
+          "label": "Taxpayer Identification Number (TIN)",
+          "summary": "Enter TIN."
+        },
+        {
+          "label": "RDO Code",
+          "summary": "Enter RDO code."
+        },
+        {
+          "label": "Withholding Agent’s Name (Last Name, First Name, Middle Name for Individual OR Registered Name for Non-Individual)",
+          "summary": "Enter full name."
+        },
+        {
+          "label": "Registered Address (Indicate complete address. If branch, indicate the branch address. If the registered address is different from the current address, go to the RDO to update registered address by using BIR Form No. 1905)",
+          "summary": "Enter complete address."
+        },
+        {
+          "label": "ZIP Code",
+          "summary": "Enter ZIP code."
+        },
+        {
+          "label": "Category of Withholding Agent",
+          "summary": "Mark Private or Government."
+        },
+        {
+          "label": "If private, top withholding agent?",
+          "summary": "Mark Yes or No."
+        },
+        {
+          "label": "Contact Number",
+          "summary": "Enter contact number."
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter email address."
+        }
+      ]
+    },
+    {
+      "title": "Part II – Summary of Remittances",
+      "fields": [
+        {
+          "label": "Schedule 1 – Remittance per BIR Form No. 1601-EQ",
+          "summary": "Fill in remittance details for each quarter."
+        },
+        {
+          "label": "Schedule 2 – Remittance per BIR Form No. 1606",
+          "summary": "Fill in remittance details for each month."
+        }
+      ]
+    },
+    {
+      "title": "Part III – Alphabetical List of Payees (Format Only)",
+      "fields": [
+        {
+          "label": "Schedule 3 - Alphalist of Payees Subject to Expanded Withholding Tax (Declared and Certified using BIR Form No.2307)",
+          "summary": "List payees and details."
+        }
+      ]
+    },
+    {
+      "title": "Signature Section",
+      "fields": [
+        {
+          "label": "Signature over Printed Name of Taxpayer/Authorized Representative/Tax Agent (Indicate Title/Designation and TIN)",
+          "summary": "Sign and print name."
+        },
+        {
+          "label": "Signature over Printed Name of President/Vice President/Authorized Officer or Representative/Tax Agent (Indicate Title/Designation and TIN)",
+          "summary": "Sign and print name."
+        },
+        {
+          "label": "Tax Agent Accreditation No./Date of Issue",
+          "summary": "Enter accreditation number and issue date."
+        },
+        {
+          "label": "Date of Expiry",
+          "summary": "Enter expiry date."
+        },
+        {
+          "label": "Attorney’s Roll No. (if applicable)",
+          "summary": "Enter roll number."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 20,
+    "fp": 1,
+    "fn": 0,
+    "precision": 0.952,
+    "recall": 1.0,
+    "f1": 0.976
+  },
+  "canonical_id": "b491f8fbd047aa99c90b00f9d5084a26765f9975e2e331b8cd16ba20b3e6b962",
+  "bucket": "tax",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-11-17T13:20:07+00:00",
+  "aliases": [
+    "1604-E",
+    "BIR Form No. 1604-E",
+    "b74c9482c60943aea32598613bd04032_1604E-Jan-2018-ENCS-Final2",
+    "b74c9482c60943aea32598613bd04032_1604E-Jan-2018-ENCS-Final2.pdf"
+  ]
+}

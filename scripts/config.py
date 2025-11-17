@@ -87,7 +87,7 @@ logging.basicConfig(
 log = logging.getLogger("intelliform.config")
 
 # === Baseline mode (A/B) switches ===
-BASELINE_MODE: bool = _read_bool_env("INTELLIFORM_BASELINE_MODE", True)
+BASELINE_MODE: bool = _read_bool_env("INTELLIFORM_BASELINE_MODE", False)
 BASELINE_BACKEND: str = (os.getenv("INTELLIFORM_BASELINE_BACKEND", "llm") or "llm").strip().lower()
 BASELINE_DROP_RATE: float = float(os.getenv("INTELLIFORM_BASELINE_DROP_RATE", "0.35"))
 BASELINE_MISLABEL_RATE: float = float(os.getenv("INTELLIFORM_BASELINE_MISLABEL_RATE", "0.15"))
