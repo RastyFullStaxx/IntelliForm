@@ -83,6 +83,7 @@ import os
 import sys
 import json
 import time
+from PIL import Image
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
 
@@ -239,9 +240,13 @@ def _group_sequences(
 
 def _encode(tokens: List[str], bboxes: List[List[int]], max_length: int = 512):
     """
-    LayoutLMv3 encoding for a single sequence (B=1). No images, apply_ocr=False.
+    LayoutLMv3 encoding for a single sequence (B=1).
+    Some transformers versions require an `images` arg even with apply_ocr=False.
+    We pass a blank canvas and let the processor handle resizing.
     """
+    blank = Image.new("RGB", (1000, 1414), "white")
     return embedding_processor(
+        images=[blank],          # <-- important for your version
         text=tokens,
         boxes=bboxes,
         truncation=True,
