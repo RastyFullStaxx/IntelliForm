@@ -1,0 +1,160 @@
+{
+  "title": "COMELEC Voter Registration Application (CEF-1)",
+  "form_id": "Goverment_COMELECVoterRegistrationApplicationForm",
+  "sections": [
+    {
+      "title": "Part 1 — Personal Information",
+      "fields": [
+        {
+          "label": "Precinct Number",
+          "summary": "Write your current voting precinct. If unknown, leave blank for COMELEC to fill."
+        },
+        {
+          "label": "Full Name",
+          "summary": "Print your complete legal name (Last, First, Middle) exactly as on your valid ID."
+        },
+        {
+          "label": "Residence / Address",
+          "summary": "Provide house number, street, barangay, city/municipality, and province."
+        },
+        {
+          "label": "Sex",
+          "summary": "Tick Male or Female."
+        },
+        {
+          "label": "Date of Birth",
+          "summary": "Enter your birthdate in MM/DD/YYYY format."
+        },
+        {
+          "label": "Place of Birth",
+          "summary": "Write city/municipality and province where you were born."
+        },
+        {
+          "label": "Citizenship",
+          "summary": "Mark if by Birth, Naturalized, or Reacquired. If not by birth, state date and certificate/order number."
+        },
+        {
+          "label": "Civil Status",
+          "summary": "Select Single, Married, Widowed, or Legally Separated."
+        },
+        {
+          "label": "Period of Residence",
+          "summary": "How long you have lived in the city/municipality and in the Philippines (years and months)."
+        },
+        {
+          "label": "Profession / Occupation",
+          "summary": "State your current work or primary source of livelihood."
+        },
+        {
+          "label": "TIN (if any)",
+          "summary": "Enter your Tax Identification Number if available."
+        },
+        {
+          "label": "Name of Spouse",
+          "summary": "If married, write the full name of your spouse."
+        },
+        {
+          "label": "Supplemental Data",
+          "summary": "Tick if you are a Person with Disability (PWD), Indigenous Person (IP), or Illiterate. Attach supplemental data form if needed."
+        }
+      ]
+    },
+    {
+      "title": "Part 2 — Oath & Biometrics",
+      "fields": [
+        {
+          "label": "Oath of Applicant",
+          "summary": "Read and affirm that you meet voter qualifications and consent to data processing."
+        },
+        {
+          "label": "Rolled Thumbprints",
+          "summary": "Affix both thumbprints clearly in the spaces provided."
+        },
+        {
+          "label": "Specimen Signatures",
+          "summary": "Sign three times above printed name for record validation."
+        },
+        {
+          "label": "Election Officer",
+          "summary": "For COMELEC use only: signature and details of the officer administering the oath."
+        }
+      ]
+    },
+    {
+      "title": "Part 3 — Action by the ERB",
+      "fields": [
+        {
+          "label": "ERB Decision",
+          "summary": "Marked Approved or Disapproved, with reason if disapproved."
+        },
+        {
+          "label": "Date of Hearing",
+          "summary": "Scheduled date for ERB action on your application."
+        },
+        {
+          "label": "Signatures of ERB",
+          "summary": "Signatures of Chairman and Members of the Election Registration Board."
+        },
+        {
+          "label": "Acknowledgement Receipt",
+          "summary": "Stub returned to applicant as proof of filing."
+        }
+      ]
+    },
+    {
+      "title": "Part 4 — Voter’s ID Number (COMELEC Use)",
+      "fields": [
+        {
+          "label": "Application Number & Codes",
+          "summary": "For official use only: provincial and city/municipal codes, district, and application number."
+        },
+        {
+          "label": "Type of Application",
+          "summary": "Tick the appropriate: New Registration, Transfer, Change of Name/Correction, Reactivation, or Inclusion/Reinstatement."
+        }
+      ]
+    },
+    {
+      "title": "Part 5 — Additional Applications (Back Page)",
+      "fields": [
+        {
+          "label": "Transfer of Registration",
+          "summary": "If moving residence, indicate new address and length of stay."
+        },
+        {
+          "label": "Reactivation of Record",
+          "summary": "If previously deactivated (e.g., didn’t vote twice, imprisonment, etc.), state reason and attach proof if required."
+        },
+        {
+          "label": "Change of Name / Correction",
+          "summary": "For marriage or court order. Provide supporting documents (birth certificate, marriage certificate, court order)."
+        },
+        {
+          "label": "Inclusion / Reinstatement",
+          "summary": "Request to include or reinstate name if omitted from the list of voters."
+        },
+        {
+          "label": "Jurat",
+          "summary": "Applicant’s signature above printed name; sworn before an Election Officer with date and place."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 87,
+    "fp": 14,
+    "fn": 11,
+    "precision": 0.86,
+    "recall": 0.89,
+    "f1": 0.87
+  },
+  "canonical_id": "b26187fc73c165337a850efc075960ac766594c2fef95f154e22032e9d7d096d",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2025-10-10T05:32:26+08:00",
+  "updated_at": "2025-10-10T05:32:26+08:00",
+  "aliases": [
+    "COMELEC_CEF1_VoterRegistration",
+    "Goverment_COMELECVoterRegistrationApplicationForm"
+  ]
+}
