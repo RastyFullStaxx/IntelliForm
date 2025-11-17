@@ -1,0 +1,170 @@
+﻿{
+    "title":  "Application for Treaty Purposes",
+    "form_id":  "bir-0901-s3",
+    "sections":  [
+                     {
+                         "title":  "Part I â€“ Legal Basis of Claim for Relief",
+                         "fields":  [
+                                        {
+                                            "label":  "Article",
+                                            "summary":  "Enter the article number."
+                                        },
+                                        {
+                                            "label":  "Tax Treatment Under the Treaty",
+                                            "summary":  "Select the applicable tax treatment."
+                                        },
+                                        {
+                                            "label":  "Tax Rate",
+                                            "summary":  "Enter the tax rate percentage."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Part II â€“ Identification of Income Recipient",
+                         "fields":  [
+                                        {
+                                            "label":  "Name of Income Recipient",
+                                            "summary":  "Enter the full name."
+                                        },
+                                        {
+                                            "label":  "Local Taxpayer Identification Number (TIN)",
+                                            "summary":  "Enter the local TIN."
+                                        },
+                                        {
+                                            "label":  "RDO Code",
+                                            "summary":  "Enter the RDO code."
+                                        },
+                                        {
+                                            "label":  "Foreign TIN",
+                                            "summary":  "Enter the foreign TIN."
+                                        },
+                                        {
+                                            "label":  "Date of Birth (MM/DD/YYYY)",
+                                            "summary":  "Enter the date of birth."
+                                        },
+                                        {
+                                            "label":  "Citizenship",
+                                            "summary":  "Enter the citizenship."
+                                        },
+                                        {
+                                            "label":  "Contact Number (Landline/Mobile No.)",
+                                            "summary":  "Enter the contact number."
+                                        },
+                                        {
+                                            "label":  "Email Address",
+                                            "summary":  "Enter the email address."
+                                        },
+                                        {
+                                            "label":  "Place of Domicile before entry into the Philippines",
+                                            "summary":  "Enter the place of domicile."
+                                        },
+                                        {
+                                            "label":  "Country where the recipient is taxable as resident and where he/she is to pay tax",
+                                            "summary":  "Enter the country of tax residency."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Part III â€“ Details of Income Payor",
+                         "fields":  [
+                                        {
+                                            "label":  "School or place of business in the Philippines where the recipient teaches, studies or is trained",
+                                            "summary":  "Enter the name of the school or business."
+                                        },
+                                        {
+                                            "label":  "Taxpayer Identification Number (TIN)",
+                                            "summary":  "Enter the taxpayer identification number."
+                                        },
+                                        {
+                                            "label":  "RDO Code",
+                                            "summary":  "Enter the RDO code."
+                                        },
+                                        {
+                                            "label":  "Registered Address",
+                                            "summary":  "Enter the registered address."
+                                        },
+                                        {
+                                            "label":  "ZIP Code",
+                                            "summary":  "Enter the ZIP code."
+                                        },
+                                        {
+                                            "label":  "Contact Number (Landline/Mobile No.)",
+                                            "summary":  "Enter the contact number."
+                                        },
+                                        {
+                                            "label":  "Email Address",
+                                            "summary":  "Enter the email address."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Part IV â€“ Details of Income and Withholding Tax",
+                         "fields":  [
+                                        {
+                                            "label":  "Kind of Income",
+                                            "summary":  "Select the kind of income."
+                                        },
+                                        {
+                                            "label":  "Description of Service Rendered",
+                                            "summary":  "Enter the description of service."
+                                        },
+                                        {
+                                            "label":  "Date of Contract (MM/DD/YYY)",
+                                            "summary":  "Enter the date of the contract."
+                                        },
+                                        {
+                                            "label":  "Contract Period",
+                                            "summary":  "Enter the contract period."
+                                        },
+                                        {
+                                            "label":  "Amount of Remuneration (per month/year)",
+                                            "summary":  "Enter the amount of remuneration."
+                                        },
+                                        {
+                                            "label":  "Method of Payment",
+                                            "summary":  "Enter the method of payment."
+                                        },
+                                        {
+                                            "label":  "Date of Payment (MM/DD/YYY)",
+                                            "summary":  "Enter the date of payment."
+                                        },
+                                        {
+                                            "label":  "Other remuneration, etc., paid by other persons for personal services, etc., performed in the Philippines",
+                                            "summary":  "Enter other remuneration details."
+                                        },
+                                        {
+                                            "label":  "Amount of Withholding Tax Paid, if any",
+                                            "summary":  "Enter the amount of withholding tax."
+                                        },
+                                        {
+                                            "label":  "Date of Payment (MM/DD/YYYY)",
+                                            "summary":  "Enter the date of payment."
+                                        }
+                                    ]
+                     }
+                 ],
+    "metrics":  {
+                    "tp":  25,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9,
+                    "policy":  "from_counts",
+                    "ceiling_applied":  true,
+                    "edit_factor":  0.0,
+                    "edit_factor_reason":  "no_edited_log",
+                    "change_factor":  0.0,
+                    "change_factor_reason":  "no_registry_entry",
+                    "jitter_secs":  0,
+                    "per_try_noise_max":  0.004
+                },
+    "canonical_id":  "3c365a1c9a4000b944ea8b6c098f20c51f1f24445a0d70fbc5cabffb483f9ee0",
+    "bucket":  "training",
+    "schema_version":  1,
+    "created_at":  "2023-10-01T00:00:00Z",
+    "updated_at":  "2025-10-12T22:06:07Z",
+    "aliases":  [
+                    "Tax BIRApplicationForTreatyPurposes0901 S3"
+                ]
+}

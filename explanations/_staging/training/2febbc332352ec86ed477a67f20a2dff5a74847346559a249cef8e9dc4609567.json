@@ -1,0 +1,129 @@
+﻿{
+    "title":  "Personal Accident Claim Form",
+    "form_id":  "personal-accident-claim-form",
+    "sections":  [
+                     {
+                         "title":  "Claim Requirements",
+                         "fields":  [
+                                        {
+                                            "label":  "Policy Number",
+                                            "summary":  "Enter the policy number."
+                                        },
+                                        {
+                                            "label":  "Claim Reference Number",
+                                            "summary":  "Enter the claim reference number."
+                                        },
+                                        {
+                                            "label":  "Birth Certificate",
+                                            "summary":  "Submit the birth certificate issued by PSA or Local Civil Registry."
+                                        },
+                                        {
+                                            "label":  "Death Certificate with Post-Mortem Examination",
+                                            "summary":  "Submit the death certificate issued by PSA or Local Civil Registry."
+                                        },
+                                        {
+                                            "label":  "Photocopy of Contract of Burial and Funeral Services",
+                                            "summary":  "Provide a photocopy of the contract."
+                                        },
+                                        {
+                                            "label":  "Official Receipts of Medical Expenses",
+                                            "summary":  "Attach official receipts for medical expenses."
+                                        },
+                                        {
+                                            "label":  "Autopsy Report",
+                                            "summary":  "Submit the autopsy report if available."
+                                        },
+                                        {
+                                            "label":  "Photocopy of Hospital Records",
+                                            "summary":  "Provide photocopies of hospital records if available."
+                                        },
+                                        {
+                                            "label":  "Marriage Certificate",
+                                            "summary":  "Submit the marriage certificate if applicable."
+                                        },
+                                        {
+                                            "label":  "Official Receipts of Burial and Funeral Services",
+                                            "summary":  "Attach receipts only if claiming under accidental burial expense coverage."
+                                        },
+                                        {
+                                            "label":  "Completed Personal Accident Claim Form",
+                                            "summary":  "Fill out and submit the claim form."
+                                        },
+                                        {
+                                            "label":  "Attending Physicianâ€™s Statement or Medical Certificate",
+                                            "summary":  "Provide the physician\u0027s statement or medical certificate."
+                                        },
+                                        {
+                                            "label":  "Police Investigation Report or Statement of Witness/es",
+                                            "summary":  "Submit the police report or witness statements."
+                                        },
+                                        {
+                                            "label":  "Valid IDs of the Insured and Beneficiary",
+                                            "summary":  "Provide valid IDs, including at least one government-issued ID."
+                                        },
+                                        {
+                                            "label":  "Complete Medical Records",
+                                            "summary":  "Submit medical records showing proof of disability."
+                                        },
+                                        {
+                                            "label":  "Photos of amputated/aï¬€ected body parts of the Insured",
+                                            "summary":  "Include photos of the affected body parts."
+                                        },
+                                        {
+                                            "label":  "Statement of Account (SOA) with Admission and Discharge Date",
+                                            "summary":  "Provide the statement of account for medical reimbursement."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "For Office Use Only",
+                         "fields":  [
+                                        {
+                                            "label":  "Date Received",
+                                            "summary":  "Enter the date the claim was received."
+                                        },
+                                        {
+                                            "label":  "Time Received",
+                                            "summary":  "Enter the time the claim was received."
+                                        },
+                                        {
+                                            "label":  "Receiving Dept./Office",
+                                            "summary":  "Specify the department or office receiving the claim."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "For Witness Only",
+                         "fields":  [
+                                        {
+                                            "label":  "Full Name",
+                                            "summary":  "Enter the full name of the witness."
+                                        }
+                                    ]
+                     }
+                 ],
+    "metrics":  {
+                    "tp":  20,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9,
+                    "policy":  "from_counts",
+                    "ceiling_applied":  true,
+                    "edit_factor":  0.0,
+                    "edit_factor_reason":  "no_edited_log",
+                    "change_factor":  0.0,
+                    "change_factor_reason":  "no_registry_entry",
+                    "jitter_secs":  0,
+                    "per_try_noise_max":  0.004
+                },
+    "canonical_id":  "2febbc332352ec86ed477a67f20a2dff5a74847346559a249cef8e9dc4609567",
+    "bucket":  "training",
+    "schema_version":  1,
+    "created_at":  "2023-10-01T00:00:00Z",
+    "updated_at":  "2025-10-12T22:06:06Z",
+    "aliases":  [
+                    "HealthcareInsurance AXAPersonalAccidentClaimForm(Claimant s Statement)"
+                ]
+}

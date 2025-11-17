@@ -1,0 +1,186 @@
+{
+  "title": "EAZY HEALTH CLAIM FORM FOR CRITICAL ILLNESS & DISABILITY",
+  "form_id": "health_claim_form",
+  "sections": [
+    {
+      "title": "INFORMATION ON THE INSURED",
+      "fields": [
+        {
+          "label": "Full Name",
+          "summary": "Enter your full name."
+        },
+        {
+          "label": "Date of birth",
+          "summary": "Enter your date of birth."
+        },
+        {
+          "label": "Nationality",
+          "summary": "Enter your nationality."
+        },
+        {
+          "label": "Occupation",
+          "summary": "Enter your occupation."
+        },
+        {
+          "label": "Address",
+          "summary": "Enter your address."
+        },
+        {
+          "label": "Contact nos.",
+          "summary": "Enter your contact numbers."
+        },
+        {
+          "label": "E-mail address",
+          "summary": "Enter your email address."
+        }
+      ]
+    },
+    {
+      "title": "DETAILS OF THE ACCIDENT",
+      "fields": [
+        {
+          "label": "Policy No",
+          "summary": "Enter your policy number."
+        },
+        {
+          "label": "Date of accident",
+          "summary": "Enter the date of the accident."
+        },
+        {
+          "label": "Place of accident",
+          "summary": "Enter the place of the accident."
+        },
+        {
+          "label": "Cause of accident (please provide details)",
+          "summary": "Describe the cause of the accident."
+        }
+      ]
+    },
+    {
+      "title": "DETAILS OF THE ILLNESS",
+      "fields": [
+        {
+          "label": "Describe the nature and symptoms of your illness/disease",
+          "summary": "Describe your illness or disease."
+        },
+        {
+          "label": "Date the symptoms ﬁrst occurred",
+          "summary": "Enter the date symptoms first occurred."
+        },
+        {
+          "label": "Have you recovered from your illness/disease?",
+          "summary": "Indicate if you have recovered."
+        },
+        {
+          "label": "What is your present health condition?",
+          "summary": "Describe your current health condition."
+        },
+        {
+          "label": "Have you had this condition or a similar one previously? Please provide details.",
+          "summary": "Provide details if applicable."
+        }
+      ]
+    },
+    {
+      "title": "ACTIVITIES OF DAILY LIVING (ADLS)",
+      "fields": [
+        {
+          "label": "Ability to feed oneself",
+          "summary": "Indicate ability to feed yourself."
+        },
+        {
+          "label": "Ability to get in and out of bed",
+          "summary": "Indicate ability to get in and out of bed."
+        },
+        {
+          "label": "Ability to move from room to room",
+          "summary": "Indicate ability to move indoors."
+        },
+        {
+          "label": "Ability to attend to own toilet needs",
+          "summary": "Indicate ability to manage toilet needs."
+        },
+        {
+          "label": "Ability to wash and bathe oneself",
+          "summary": "Indicate ability to wash and bathe."
+        },
+        {
+          "label": "Ability to dress oneself",
+          "summary": "Indicate ability to dress yourself."
+        },
+        {
+          "label": "Activity of Daily Living",
+          "summary": "Indicate the activity of daily living."
+        },
+        {
+          "label": "Date of Onset",
+          "summary": "Enter the date of onset."
+        },
+        {
+          "label": "No help needed",
+          "summary": "Tick if no help is needed."
+        },
+        {
+          "label": "Some help/supervision needed",
+          "summary": "Tick if some help is needed."
+        },
+        {
+          "label": "Needs help most of the time",
+          "summary": "Tick if help is needed most of the time."
+        },
+        {
+          "label": "Not able to do alone",
+          "summary": "Tick if not able to do alone."
+        }
+      ]
+    },
+    {
+      "title": "OTHER MEDICAL PLANS",
+      "fields": [
+        {
+          "label": "Do you have other medical plans with any other insurance company or Health Maintenance Organization (HMO)?",
+          "summary": "Indicate Yes or No."
+        },
+        {
+          "label": "If “Yes”, please provide the company name and policy no.",
+          "summary": "Provide company name and policy number."
+        },
+        {
+          "label": "Have you ﬁled claims for these beneﬁts with these companies?",
+          "summary": "Indicate Yes or No."
+        }
+      ]
+    },
+    {
+      "title": "OCCUPATION AND JOB DESCRIPTION",
+      "fields": [
+        {
+          "label": "What was your occupation and designation on the date of the onset of your present disability?",
+          "summary": "Enter your occupation and designation."
+        },
+        {
+          "label": "What were the activities related to your work, routine functions and/or job description?",
+          "summary": "Describe your work activities."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 33,
+    "fp": 1,
+    "fn": 0,
+    "precision": 0.971,
+    "recall": 1.0,
+    "f1": 0.985
+  },
+  "canonical_id": "957ce719d2ee82d86d0b2bb33d6edfcd59ee5fde755eaec15ac222053c3ebabc",
+  "bucket": "healthcare",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-10-12T20:50:40+00:00",
+  "aliases": [
+    "84833aa1244942fb8b824aed8c2c6dda_HealthcareInsurance_AllianzPNBLifeIHPeAZyHealthClaimForm",
+    "84833aa1244942fb8b824aed8c2c6dda_HealthcareInsurance_AllianzPNBLifeIHPeAZyHealthClaimForm.pdf",
+    "HealthcareInsurance_AllianzPNBLifeIHPeAZyHealthClaimForm"
+  ]
+}

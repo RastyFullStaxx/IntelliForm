@@ -1,0 +1,122 @@
+{
+  "title": "AutoCharge Facility (ACF) for BPI Credit Cards Authorization Form",
+  "form_id": "bpi_autocharged_form",
+  "sections": [
+    {
+      "title": "CARDHOLDER INFORMATION",
+      "fields": [
+        {
+          "label": "Principal Cardholder’s Name",
+          "summary": "Enter the principal cardholder's name."
+        },
+        {
+          "label": "Supplementary Cardholder’s Name",
+          "summary": "Enter the supplementary cardholder's name if applicable."
+        },
+        {
+          "label": "Mobile Phone Number",
+          "summary": "Enter the mobile phone number."
+        }
+      ]
+    },
+    {
+      "title": "PURPOSE",
+      "fields": [
+        {
+          "label": "I want to",
+          "summary": "Select the purpose of enrollment."
+        },
+        {
+          "label": "Card Number",
+          "summary": "Enter the card number."
+        },
+        {
+          "label": "Card Expiry (MM/YY)",
+          "summary": "Enter the card expiry date in MM/YY format."
+        },
+        {
+          "label": "Change/Update my nominated credit card and/or card expiry",
+          "summary": "Select if changing/updating card details."
+        },
+        {
+          "label": "From",
+          "summary": "Enter the previous card expiry date."
+        },
+        {
+          "label": "To",
+          "summary": "Enter the new card expiry date."
+        },
+        {
+          "label": "Cancel my BPI AutoCharge Facility enrollment",
+          "summary": "Select if canceling enrollment."
+        }
+      ]
+    },
+    {
+      "title": "UTILITY BILL DETAILS: MERALCO AUTOCHARGE",
+      "fields": [
+        {
+          "label": "Account Name",
+          "summary": "Enter the account name for Meralco."
+        },
+        {
+          "label": "Customer Account Number",
+          "summary": "Enter the customer account number for Meralco."
+        }
+      ]
+    },
+    {
+      "title": "UTILITY BILL DETAILS: GLOBE AUTOCHARGE",
+      "fields": [
+        {
+          "label": "Account Name",
+          "summary": "Enter the account name for Globe."
+        },
+        {
+          "label": "Account Number",
+          "summary": "Enter the account number for Globe."
+        }
+      ]
+    },
+    {
+      "title": "SIGNATURE",
+      "fields": [
+        {
+          "label": "Principal Cardholder’s Name and Signature",
+          "summary": "Sign and print the principal cardholder's name."
+        },
+        {
+          "label": "Date",
+          "summary": "Enter the date."
+        },
+        {
+          "label": "Supplementary Cardholder’s Name and Signature",
+          "summary": "Sign and print the supplementary cardholder's name if applicable."
+        },
+        {
+          "label": "Date",
+          "summary": "Enter the date."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 18,
+    "fp": 1,
+    "fn": 0,
+    "precision": 0.947,
+    "recall": 1.0,
+    "f1": 0.973
+  },
+  "canonical_id": "c06e012d72e9633fb7447aad3bc002a7c5793b03aa1096e508e7e3b55dff84e7",
+  "bucket": "banking",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-10-12T20:15:28+00:00",
+  "aliases": [
+    "BPI_AutoCharge_Form",
+    "BPI_CreditCardholdersAutoChargeForm",
+    "e026ef02946d416688309a7553ca1127_Banking_CreditCardholdersAutoChargeForm",
+    "e026ef02946d416688309a7553ca1127_Banking_CreditCardholdersAutoChargeForm.pdf"
+  ]
+}

@@ -1,0 +1,119 @@
+﻿{
+    "title":  "AutoCharge Facility (ACF) for BPI Credit Cards",
+    "form_id":  "bpi-autocharged-form",
+    "sections":  [
+                     {
+                         "title":  "CARDHOLDER INFORMATION",
+                         "fields":  [
+                                        {
+                                            "label":  "Principal Cardholderâ€™s Name",
+                                            "summary":  "Enter the principal cardholder\u0027s name."
+                                        },
+                                        {
+                                            "label":  "Supplementary Cardholderâ€™s Name",
+                                            "summary":  "Enter the supplementary cardholder\u0027s name if applicable."
+                                        },
+                                        {
+                                            "label":  "Mobile Phone Number",
+                                            "summary":  "Enter the mobile phone number."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "PURPOSE",
+                         "fields":  [
+                                        {
+                                            "label":  "I want to",
+                                            "summary":  "Select the purpose: Enroll, Change/Update, or Cancel."
+                                        },
+                                        {
+                                            "label":  "Card Number",
+                                            "summary":  "Enter the card number."
+                                        },
+                                        {
+                                            "label":  "Card Expiry (MM/YY)",
+                                            "summary":  "Enter the card expiry date in MM/YY format."
+                                        },
+                                        {
+                                            "label":  "From",
+                                            "summary":  "Enter the previous card expiry date in MM/YY format."
+                                        },
+                                        {
+                                            "label":  "To",
+                                            "summary":  "Enter the new card expiry date in MM/YY format."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "UTILITY BILL DETAILS: MERALCO AUTOCHARGE",
+                         "fields":  [
+                                        {
+                                            "label":  "Account Name",
+                                            "summary":  "Enter the account name."
+                                        },
+                                        {
+                                            "label":  "Customer Account Number",
+                                            "summary":  "Enter the customer account number."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "UTILITY BILL DETAILS: GLOBE AUTOCHARGE",
+                         "fields":  [
+                                        {
+                                            "label":  "Account Name",
+                                            "summary":  "Enter the account name."
+                                        },
+                                        {
+                                            "label":  "Account Number",
+                                            "summary":  "Enter the account number."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "SIGNATURE",
+                         "fields":  [
+                                        {
+                                            "label":  "Principal Cardholderâ€™s Name and Signature",
+                                            "summary":  "Sign and print the principal cardholder\u0027s name."
+                                        },
+                                        {
+                                            "label":  "Date",
+                                            "summary":  "Enter the date."
+                                        },
+                                        {
+                                            "label":  "Supplementary Cardholderâ€™s Name and Signature",
+                                            "summary":  "Sign and print the supplementary cardholder\u0027s name if applicable."
+                                        },
+                                        {
+                                            "label":  "Date",
+                                            "summary":  "Enter the date."
+                                        }
+                                    ]
+                     }
+                 ],
+    "metrics":  {
+                    "tp":  20,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9,
+                    "policy":  "from_counts",
+                    "ceiling_applied":  true,
+                    "edit_factor":  0.0,
+                    "edit_factor_reason":  "no_edited_log",
+                    "change_factor":  0.0,
+                    "change_factor_reason":  "no_change",
+                    "jitter_secs":  0,
+                    "per_try_noise_max":  0.004
+                },
+    "canonical_id":  "c06e012d72e9633fb7447aad3bc002a7c5793b03aa1096e508e7e3b55dff84e7",
+    "bucket":  "training",
+    "schema_version":  1,
+    "created_at":  "2023-10-01T00:00:00Z",
+    "updated_at":  "2025-10-12T22:06:07Z",
+    "aliases":  [
+                    "Banking CreditCardholdersAutoChargeForm"
+                ]
+}

@@ -1,0 +1,174 @@
+﻿{
+    "title":  "Prosperity Card Purchase Form",
+    "form_id":  "prosperity-card-purchase-form",
+    "sections":  [
+                     {
+                         "title":  "General Information",
+                         "fields":  [
+                                        {
+                                            "label":  "Name of Buyer",
+                                            "summary":  "Provide Last Name, First Name, Middle Name"
+                                        },
+                                        {
+                                            "label":  "Permanent Home Address",
+                                            "summary":  "Enter complete address (No., Street, Village/Subdivision, Barangay, City/Municipality, Province/State, Country)"
+                                        },
+                                        {
+                                            "label":  "Zip Code",
+                                            "summary":  "Enter Zip Code"
+                                        },
+                                        {
+                                            "label":  "Contact Number",
+                                            "summary":  "Enter contact number with country code"
+                                        },
+                                        {
+                                            "label":  "Birthdate",
+                                            "summary":  "Enter Day, Month, Year"
+                                        },
+                                        {
+                                            "label":  "Citizenship/Nationality",
+                                            "summary":  "Specify Citizenship/Nationality"
+                                        },
+                                        {
+                                            "label":  "Birthplace",
+                                            "summary":  "Enter City/Province/State and Country"
+                                        },
+                                        {
+                                            "label":  "E-mail Address",
+                                            "summary":  "Provide E-mail Address"
+                                        },
+                                        {
+                                            "label":  "Name of Employer/Business",
+                                            "summary":  "Enter Name of Employer/Business"
+                                        },
+                                        {
+                                            "label":  "Nature of Work/Business",
+                                            "summary":  "Specify Nature of Work/Business"
+                                        },
+                                        {
+                                            "label":  "SSS No., GSIS No. or Philippine Tax Identification No. (TIN)",
+                                            "summary":  "Provide SSS No., GSIS No. or TIN"
+                                        },
+                                        {
+                                            "label":  "Source of Funds",
+                                            "summary":  "Select source of funds and specify if other"
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Card Details",
+                         "fields":  [
+                                        {
+                                            "label":  "Denomination",
+                                            "summary":  "Specify Denomination"
+                                        },
+                                        {
+                                            "label":  "Quantity",
+                                            "summary":  "Enter Quantity"
+                                        },
+                                        {
+                                            "label":  "Total",
+                                            "summary":  "Enter Total in PHP"
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Compliance with the Anti-Money Laundering Act (AMLA)",
+                         "fields":  [
+                                        {
+                                            "label":  "Is there any Third Party/Beneficial Owner, other than the buyer",
+                                            "summary":  "Indicate Yes or No"
+                                        },
+                                        {
+                                            "label":  "If there is a Third Party/Beneficial Owner, provide details below",
+                                            "summary":  "Provide details of Third Party/Beneficial Owner"
+                                        },
+                                        {
+                                            "label":  "Name (Last, First, M.I.) / Business Name",
+                                            "summary":  "Enter Name or Business Name"
+                                        },
+                                        {
+                                            "label":  "Relationship to the Buyer",
+                                            "summary":  "Specify Relationship to Buyer"
+                                        },
+                                        {
+                                            "label":  "Occupation",
+                                            "summary":  "Enter Occupation"
+                                        },
+                                        {
+                                            "label":  "Permanent Address",
+                                            "summary":  "Enter complete address (No., Street, Village/Subdivision, Barangay, City/Municipality, Province/State, Country)"
+                                        },
+                                        {
+                                            "label":  "Zip Code",
+                                            "summary":  "Enter Zip Code"
+                                        },
+                                        {
+                                            "label":  "Birthdate",
+                                            "summary":  "Enter Day, Month, Year"
+                                        },
+                                        {
+                                            "label":  "Birthplace",
+                                            "summary":  "Enter City/Province/State and Country"
+                                        },
+                                        {
+                                            "label":  "Philippine Tax Identification No. (TIN)",
+                                            "summary":  "Provide TIN"
+                                        },
+                                        {
+                                            "label":  "Type of Entity",
+                                            "summary":  "Specify Type of Entity"
+                                        },
+                                        {
+                                            "label":  "Nature of Business",
+                                            "summary":  "Specify Nature of Business"
+                                        },
+                                        {
+                                            "label":  "Date of Incorporation",
+                                            "summary":  "Enter Day, Month, Year"
+                                        },
+                                        {
+                                            "label":  "Country of Incorporation",
+                                            "summary":  "Specify Country of Incorporation"
+                                        },
+                                        {
+                                            "label":  "Source of Funds",
+                                            "summary":  "Select source of funds and specify if other"
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Terms and Conditions",
+                         "fields":  [
+                                        {
+                                            "label":  "You understand that the value of the Prosperity Card shall be invested in select Funds",
+                                            "summary":  "Acknowledge understanding of terms"
+                                        }
+                                    ]
+                     }
+                 ],
+    "metrics":  {
+                    "tp":  27,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9,
+                    "policy":  "from_counts",
+                    "ceiling_applied":  true,
+                    "edit_factor":  0.0,
+                    "edit_factor_reason":  "no_edited_log",
+                    "change_factor":  0.0,
+                    "change_factor_reason":  "no_registry_entry",
+                    "jitter_secs":  0,
+                    "per_try_noise_max":  0.004
+                },
+    "canonical_id":  "1b5425cbf588c82fd29c3d5ee2fa8722844a65a17cdca4bf89e93397450db01d",
+    "bucket":  "training",
+    "schema_version":  1,
+    "created_at":  "2023-10-01T00:00:00Z",
+    "updated_at":  "2025-10-12T22:06:06Z",
+    "aliases":  [
+                    "HealthcareInsuranceSunLifeProsperityCardPurchaseForm"
+                ]
+}

@@ -1,0 +1,153 @@
+﻿{
+    "title":  "Government UnifiedMulti PurposeIDApplication Form",
+    "form_id":  "government-unified-multi-purpose-id-application-form",
+    "sections":  [
+                     {
+                         "title":  "PART I - NAME",
+                         "fields":  [
+                                        {
+                                            "label":  "NAME",
+                                            "summary":  "Enter your last, first, middle name and suffix."
+                                        },
+                                        {
+                                            "label":  "MAIDEN NAME",
+                                            "summary":  "Enter your maiden last, first, middle name and suffix."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "PART II - FACTS OF BIRTH",
+                         "fields":  [
+                                        {
+                                            "label":  "DATE OF BIRTH",
+                                            "summary":  "Enter your date of birth in MMDDYYYY format."
+                                        },
+                                        {
+                                            "label":  "PLACE OF BIRTH",
+                                            "summary":  "Enter your city/municipality, province/state, and country."
+                                        },
+                                        {
+                                            "label":  "SEX",
+                                            "summary":  "Select your sex: Male or Female."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "PART III - DEMOGRAPHIC DATA",
+                         "fields":  [
+                                        {
+                                            "label":  "FATHER\u0027S NAME",
+                                            "summary":  "Enter your father\u0027s last, first, middle name and suffix."
+                                        },
+                                        {
+                                            "label":  "MOTHER\u0027S MAIDEN NAME",
+                                            "summary":  "Enter your mother\u0027s maiden last, first, middle name and suffix."
+                                        },
+                                        {
+                                            "label":  "HOME ADDRESS",
+                                            "summary":  "Enter your complete home address including zip code and country code."
+                                        },
+                                        {
+                                            "label":  "MARITAL STATUS",
+                                            "summary":  "Select your marital status: Single, Married, Widowed, Divorced/Annulled, Legally Separated."
+                                        },
+                                        {
+                                            "label":  "HEIGHT",
+                                            "summary":  "Enter your height in centimeters."
+                                        },
+                                        {
+                                            "label":  "WEIGHT",
+                                            "summary":  "Enter your weight in kilograms."
+                                        },
+                                        {
+                                            "label":  "DISTINGUISHING FEATURE(S)",
+                                            "summary":  "Describe any distinguishing features."
+                                        },
+                                        {
+                                            "label":  "SS NUMBER",
+                                            "summary":  "Enter your Social Security number."
+                                        },
+                                        {
+                                            "label":  "TELEPHONE NUMBER",
+                                            "summary":  "Enter your telephone number including area code."
+                                        },
+                                        {
+                                            "label":  "MOBILE/CELLPHONE NUMBER",
+                                            "summary":  "Enter your mobile or cellphone number."
+                                        },
+                                        {
+                                            "label":  "E-MAIL ADDRESS",
+                                            "summary":  "Enter your email address."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "PART IV - STATEMENT OF CONSENT",
+                         "fields":  [
+                                        {
+                                            "label":  "SIGNATURE OVER PRINTED NAME",
+                                            "summary":  "Sign above your printed name."
+                                        },
+                                        {
+                                            "label":  "DATE \u0026 TIME",
+                                            "summary":  "Enter the date and time."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "PART V - OTHER ENROLLEE DATA",
+                         "fields":  [
+                                        {
+                                            "label":  "TAX IDENTIFICATION NUMBER",
+                                            "summary":  "Enter your tax identification number if any."
+                                        },
+                                        {
+                                            "label":  "BRANCH",
+                                            "summary":  "Enter the branch."
+                                        },
+                                        {
+                                            "label":  "SS NUMBER/COMMON REFERENCE NUMBER",
+                                            "summary":  "Enter the SS number or common reference number of the deceased/pensioner member if applicable."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "PART VI - FOR SSS USE ONLY",
+                         "fields":  [
+                                        {
+                                            "label":  "NAME OF AGENCY",
+                                            "summary":  "Enter the name of the agency."
+                                        },
+                                        {
+                                            "label":  "COMMON REFERENCE NUMBER",
+                                            "summary":  "Enter the common reference number if any."
+                                        }
+                                    ]
+                     }
+                 ],
+    "metrics":  {
+                    "tp":  30,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9,
+                    "policy":  "from_counts",
+                    "ceiling_applied":  true,
+                    "edit_factor":  0.0,
+                    "edit_factor_reason":  "no_edited_log",
+                    "change_factor":  0.0,
+                    "change_factor_reason":  "no_registry_entry",
+                    "jitter_secs":  0,
+                    "per_try_noise_max":  0.004
+                },
+    "canonical_id":  "e6871e86993c819a631fdf891b87c0456e996e63712eb74651bdc5e77f94be45",
+    "bucket":  "training",
+    "schema_version":  1,
+    "created_at":  "2023-10-01T00:00:00Z",
+    "updated_at":  "2025-10-12T22:06:07Z",
+    "aliases":  [
+                    "government-unified-multi-purpose-id-application-form",
+                    "UMID application form"
+                ]
+}

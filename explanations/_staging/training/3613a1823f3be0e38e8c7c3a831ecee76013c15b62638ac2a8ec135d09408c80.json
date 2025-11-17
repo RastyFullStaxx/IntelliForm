@@ -1,0 +1,47 @@
+﻿{
+    "title":  "Healthcare Insurance Sun Life Variable Life Insurance Request for Fund Withdrawal",
+    "form_id":  "healthcare-insurance-sun-life-variable-life-insurance-request-for-fund-withdrawal",
+    "sections":  [
+                     {
+                         "title":  "General Information",
+                         "fields":  [
+                                        {
+                                            "label":  "Currency",
+                                            "summary":  "Select currency (US $ or Php)"
+                                        },
+                                        {
+                                            "label":  "Amount in words and figures",
+                                            "summary":  "Write amount in words and figures"
+                                        },
+                                        {
+                                            "label":  "Special Instructions",
+                                            "summary":  "Specify for which Fund and the corresponding amount"
+                                        }
+                                    ]
+                     }
+                 ],
+    "metrics":  {
+                    "tp":  3,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9,
+                    "policy":  "from_counts",
+                    "ceiling_applied":  true,
+                    "edit_factor":  0.0,
+                    "edit_factor_reason":  "no_edited_log",
+                    "change_factor":  0.0,
+                    "change_factor_reason":  "no_registry_entry",
+                    "jitter_secs":  0,
+                    "per_try_noise_max":  0.004
+                },
+    "canonical_id":  "3613a1823f3be0e38e8c7c3a831ecee76013c15b62638ac2a8ec135d09408c80",
+    "bucket":  "training",
+    "schema_version":  1,
+    "created_at":  "2023-10-01T00:00:00Z",
+    "updated_at":  "2025-10-12T22:06:06Z",
+    "aliases":  [
+                    "HealthcareInsuranceSunLifeVariableLifeInsuranceRequestforFundWithdrawal"
+                ]
+}

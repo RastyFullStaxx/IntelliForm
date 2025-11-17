@@ -1,0 +1,36 @@
+{
+  "title": "166c4749346f499fa2e4268d114a7cb8_Tax_BIRApplicationForTreatyPurposes0901-S1",
+  "form_id": "f6ae09b2421c6668541cb6abe6c2faeb572a29b736faeff495796a2a8fa225d6",
+  "canonical_id": "f6ae09b2421c6668541cb6abe6c2faeb572a29b736faeff495796a2a8fa225d6",
+  "bucket": "tax",
+  "schema_version": 1,
+  "aliases": [
+    "166c4749346f499fa2e4268d114a7cb8_Tax_BIRApplicationForTreatyPurposes0901-S1",
+    "166c4749346f499fa2e4268d114a7cb8_Tax_BIRApplicationForTreatyPurposes0901-S1.pdf"
+  ],
+  "sections": [
+    {
+      "title": "A. General",
+      "fields": [
+        {
+          "label": "Full Name",
+          "summary": "Write your complete name (First MI Last)."
+        },
+        {
+          "label": "Signature",
+          "summary": "Sign above the line (blue/black ink)."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 92,
+    "fp": 18,
+    "fn": 11,
+    "precision": 0.84,
+    "recall": 0.86,
+    "f1": 0.85
+  },
+  "created_at": "2025-10-13T00:31:23+00:00",
+  "updated_at": "2025-10-13T00:31:23+00:00"
+}

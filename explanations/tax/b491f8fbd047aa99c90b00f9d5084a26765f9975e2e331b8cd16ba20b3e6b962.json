@@ -1,0 +1,36 @@
+{
+  "title": "85656b280f75487f884ae766997f919d_1604E-Jan-2018-ENCS-Final2",
+  "form_id": "b491f8fbd047aa99c90b00f9d5084a26765f9975e2e331b8cd16ba20b3e6b962",
+  "canonical_id": "b491f8fbd047aa99c90b00f9d5084a26765f9975e2e331b8cd16ba20b3e6b962",
+  "bucket": "tax",
+  "schema_version": 1,
+  "aliases": [
+    "85656b280f75487f884ae766997f919d_1604E-Jan-2018-ENCS-Final2",
+    "85656b280f75487f884ae766997f919d_1604E-Jan-2018-ENCS-Final2.pdf"
+  ],
+  "sections": [
+    {
+      "title": "A. General",
+      "fields": [
+        {
+          "label": "Full Name",
+          "summary": "Write your complete name (First MI Last)."
+        },
+        {
+          "label": "Signature",
+          "summary": "Sign above the line (blue/black ink)."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 92,
+    "fp": 18,
+    "fn": 11,
+    "precision": 0.84,
+    "recall": 0.86,
+    "f1": 0.85
+  },
+  "created_at": "2025-11-17T10:19:15+00:00",
+  "updated_at": "2025-11-17T10:19:15+00:00"
+}

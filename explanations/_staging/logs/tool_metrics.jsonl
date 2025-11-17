@@ -1,0 +1,306 @@
+﻿{
+    "row_id":  "0133db29-ed98-4695-b1d8-4ed2a806959f",
+    "ts_utc":  "2025-10-12T22:12:36Z",
+    "canonical_id":  "c1c1852280e305ffad935f6d5850639806bd9ea5bacd69781f2f6837a6e26ae5",
+    "form_title":  "PASSPORT APPLICATION FORM",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  30,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "dd574dca-af07-4fce-8980-cdb5c6f1a7ae",
+    "ts_utc":  "2025-10-12T22:06:06Z",
+    "canonical_id":  "f6ae09b2421c6668541cb6abe6c2faeb572a29b736faeff495796a2a8fa225d6",
+    "form_title":  "Application for Treaty Purposes",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  23,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "84cdc932-02de-49ce-a7a3-f3203ecc7773",
+    "ts_utc":  "2025-10-12T22:06:07Z",
+    "canonical_id":  "476abe18d6172cfc096135ada8b30afcdcbf6f8b7b2eba014f81d9a852ee0e37",
+    "form_title":  "Application for Treaty Purposes",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  24,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "a76b9a39-2747-4f1e-9dc9-d1fa264ba0aa",
+    "ts_utc":  "2025-10-12T22:06:07Z",
+    "canonical_id":  "3c365a1c9a4000b944ea8b6c098f20c51f1f24445a0d70fbc5cabffb483f9ee0",
+    "form_title":  "Application for Treaty Purposes",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  25,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "5f3a26f9-9176-4ad8-a008-07f3ce783963",
+    "ts_utc":  "2025-10-12T22:06:07Z",
+    "canonical_id":  "4fb62e27185804a63d5489808a2348e32dbc0c618bd9a6774ccab6a62ddf39c5",
+    "form_title":  "Application for Treaty Purposes",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  30,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "dec1f68a-2a0c-4638-889d-07743d5a05c8",
+    "ts_utc":  "2025-10-12T22:06:07Z",
+    "canonical_id":  "706fa7449dde29fcccffa882057534f3578c268a1b223221331993fb26365214",
+    "form_title":  "Application for Treaty Purposes",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  30,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "83978159-c844-4718-a8ea-66a53c578fc8",
+    "ts_utc":  "2025-10-12T22:06:07Z",
+    "canonical_id":  "5ca4193248779b59a2e117c38a471aae9f8a9a009d56c81aa7203cf7bc912d51",
+    "form_title":  "Finance Auto InvestEnrollmentForm",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  10,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "ab0b56af-a232-479c-af7e-934e50f13d48",
+    "ts_utc":  "2025-10-12T22:06:07Z",
+    "canonical_id":  "7c3a92ff111482a6f825d829a3f1c29e281a17c19630fb716e571660047619c3",
+    "form_title":  "Government NBIClearanceApplicationForm",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  40,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "52c94a42-da63-48ab-9edb-a82f7fab029e",
+    "ts_utc":  "2025-10-12T22:06:07Z",
+    "canonical_id":  "897a6087afcc3f5773cc014d19ec5850813b1960f5d36f7390aebc2f2e7cbeb5",
+    "form_title":  "Finance Suitability Assessment Form",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  25,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "3a810406-0087-4da0-8208-db69e9fdbc59",
+    "ts_utc":  "2025-10-12T22:06:07Z",
+    "canonical_id":  "8a70c20c72bb8fde363abfc59e7fb64c8812a918ea8efe50428860713b1d7668",
+    "form_title":  "APPLICATION FOR HEALTH CARE ASSISTANCE",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  15,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "c32bdc89-0f0f-4aec-9f8d-c2b7720930b3",
+    "ts_utc":  "2025-10-12T22:06:07Z",
+    "canonical_id":  "957ce719d2ee82d86d0b2bb33d6edfcd59ee5fde755eaec15ac222053c3ebabc",
+    "form_title":  "EAZY HEALTH CLAIM FORM FOR CRITICAL ILLNESS \u0026 DISABILITY",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  20,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "cbd5056a-ace4-410f-af51-b42952424c36",
+    "ts_utc":  "2025-10-12T22:06:07Z",
+    "canonical_id":  "c06e012d72e9633fb7447aad3bc002a7c5793b03aa1096e508e7e3b55dff84e7",
+    "form_title":  "AutoCharge Facility (ACF) for BPI Credit Cards",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  20,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "1efb79f3-7732-4112-a4b2-9fd232a6707c",
+    "ts_utc":  "2025-10-12T22:06:07Z",
+    "canonical_id":  "c396696003fdca83a99bd73603098a3f4678fc4df5d109c38ed85a17677f9172",
+    "form_title":  "Government BusinessPermitApplicationForm",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  40,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "e7beb481-a48b-4cb7-bd52-e620fd114a7c",
+    "ts_utc":  "2025-10-12T22:06:07Z",
+    "canonical_id":  "e6871e86993c819a631fdf891b87c0456e996e63712eb74651bdc5e77f94be45",
+    "form_title":  "Government UnifiedMulti PurposeIDApplication Form",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  30,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "8ae0f4c0-27d9-49f2-8259-d25c8b49b66b",
+    "ts_utc":  "2025-10-12T22:06:06Z",
+    "canonical_id":  "0d66a3e2264c45deedb577c32bbcddf74c6a66fd93d29ad47e36fcd6ddec3ff7",
+    "form_title":  "OPTIONAL LIFE INSURANCE POLICY LOAN APPLICATION",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  20,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "8d691279-593b-43be-951a-79a5b881a1bf",
+    "ts_utc":  "2025-10-12T22:06:06Z",
+    "canonical_id":  "1b5425cbf588c82fd29c3d5ee2fa8722844a65a17cdca4bf89e93397450db01d",
+    "form_title":  "Prosperity Card Purchase Form",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  27,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "e13ed2f1-c356-46d1-b9bf-a7931da9d7d7",
+    "ts_utc":  "2025-10-12T22:06:06Z",
+    "canonical_id":  "2febbc332352ec86ed477a67f20a2dff5a74847346559a249cef8e9dc4609567",
+    "form_title":  "Personal Accident Claim Form",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  20,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}
+{
+    "row_id":  "2975a4eb-4a85-4a6f-9278-23549a5451d0",
+    "ts_utc":  "2025-10-12T22:06:06Z",
+    "canonical_id":  "3613a1823f3be0e38e8c7c3a831ecee76013c15b62638ac2a8ec135d09408c80",
+    "form_title":  "Healthcare Insurance Sun Life Variable Life Insurance Request for Fund Withdrawal",
+    "bucket":  "training",
+    "source":  "training",
+    "metrics":  {
+                    "tp":  3,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9
+                },
+    "note":  "Patched metrics (dashboard backfill)"
+}

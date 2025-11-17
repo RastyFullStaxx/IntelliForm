@@ -1,0 +1,161 @@
+﻿{
+    "title":  "Application for Treaty Purposes",
+    "form_id":  "BIR_0901-S2",
+    "sections":  [
+                     {
+                         "title":  "Part I â€“ Legal Basis of Claim for Relief",
+                         "fields":  [
+                                        {
+                                            "label":  "Article",
+                                            "summary":  "Enter the article number"
+                                        },
+                                        {
+                                            "label":  "Tax Treatment Under the Treaty",
+                                            "summary":  "Select tax treatment option"
+                                        },
+                                        {
+                                            "label":  "Tax Rate",
+                                            "summary":  "Enter tax rate percentage"
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Part II â€“ Identification of Income Recipient",
+                         "fields":  [
+                                        {
+                                            "label":  "Name of Income Recipient",
+                                            "summary":  "Enter full name"
+                                        },
+                                        {
+                                            "label":  "Local Taxpayer Identification Number (TIN)",
+                                            "summary":  "Enter TIN"
+                                        },
+                                        {
+                                            "label":  "RDO Code",
+                                            "summary":  "Enter RDO code"
+                                        },
+                                        {
+                                            "label":  "Foreign TIN",
+                                            "summary":  "Enter foreign TIN"
+                                        },
+                                        {
+                                            "label":  "Place of Residence in the Philippines",
+                                            "summary":  "Enter place of residence"
+                                        },
+                                        {
+                                            "label":  "ZIP Code",
+                                            "summary":  "Enter ZIP code"
+                                        },
+                                        {
+                                            "label":  "Date of Birth (MM/DD/YYYY)",
+                                            "summary":  "Enter date of birth"
+                                        },
+                                        {
+                                            "label":  "Citizenship",
+                                            "summary":  "Enter citizenship"
+                                        },
+                                        {
+                                            "label":  "Contact Number (Landline/Mobile No.)",
+                                            "summary":  "Enter contact number"
+                                        },
+                                        {
+                                            "label":  "Email Address",
+                                            "summary":  "Enter email address"
+                                        },
+                                        {
+                                            "label":  "Country where the recipient is taxable as resident and where he/she is to pay tax",
+                                            "summary":  "Enter country of residence for tax purposes"
+                                        },
+                                        {
+                                            "label":  "Date of Arrival in the Philippines (MM/DD/YYYY)",
+                                            "summary":  "Enter date of arrival"
+                                        },
+                                        {
+                                            "label":  "Date of Final Departure from the Philippines (MM/DD/YYYY)",
+                                            "summary":  "Enter date of final departure"
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Part III â€“ Details of Income Payor / Foreign Employer",
+                         "fields":  [
+                                        {
+                                            "label":  "Registered Name (Last Name, First Name, Middle Name for Individual OR Registered Name for Non-Individual)",
+                                            "summary":  "Enter registered name"
+                                        },
+                                        {
+                                            "label":  "Local Taxpayer Identification Number (TIN)",
+                                            "summary":  "Enter TIN"
+                                        },
+                                        {
+                                            "label":  "RDO Code",
+                                            "summary":  "Enter RDO code"
+                                        },
+                                        {
+                                            "label":  "Foreign TIN",
+                                            "summary":  "Enter foreign TIN"
+                                        },
+                                        {
+                                            "label":  "Country of Residence",
+                                            "summary":  "Enter country of residence"
+                                        },
+                                        {
+                                            "label":  "Complete Address in the Country of Residence",
+                                            "summary":  "Enter complete address"
+                                        },
+                                        {
+                                            "label":  "Contact Number (Landline/Mobile No.)",
+                                            "summary":  "Enter contact number"
+                                        },
+                                        {
+                                            "label":  "Email Address",
+                                            "summary":  "Enter email address"
+                                        },
+                                        {
+                                            "label":  "Does the income payor have a Permanent Establishment (PE) in the Philippines?",
+                                            "summary":  "Select Yes or No"
+                                        },
+                                        {
+                                            "label":  "If yes, does the PE have a license to do business in the Philippines?",
+                                            "summary":  "Select Yes or No"
+                                        },
+                                        {
+                                            "label":  "Taxpayer Identification Number of the PE",
+                                            "summary":  "Enter TIN of PE"
+                                        },
+                                        {
+                                            "label":  "RDO Code",
+                                            "summary":  "Enter RDO code"
+                                        },
+                                        {
+                                            "label":  "Address of the PE",
+                                            "summary":  "Enter address of PE"
+                                        }
+                                    ]
+                     }
+                 ],
+    "metrics":  {
+                    "tp":  24,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9,
+                    "policy":  "from_counts",
+                    "ceiling_applied":  true,
+                    "edit_factor":  0.0,
+                    "edit_factor_reason":  "no_edited_log",
+                    "change_factor":  0.0,
+                    "change_factor_reason":  "no_registry_entry",
+                    "jitter_secs":  0,
+                    "per_try_noise_max":  0.004
+                },
+    "canonical_id":  "476abe18d6172cfc096135ada8b30afcdcbf6f8b7b2eba014f81d9a852ee0e37",
+    "bucket":  "training",
+    "schema_version":  1,
+    "created_at":  "2023-10-01T00:00:00Z",
+    "updated_at":  "2025-10-12T22:06:07Z",
+    "aliases":  [
+                    "Tax BIRApplicationForTreatyPurposes0901 S2"
+                ]
+}

@@ -1,0 +1,224 @@
+{
+  "title": "Finance LOLCLoanApplicationFormIndividual",
+  "form_id": "finance-loan-application-individual",
+  "sections": [
+    {
+      "title": "PERSONAL INFORMATION",
+      "fields": [
+        {
+          "label": "Name of Applicant",
+          "summary": "Write Last Name, First Name, Middle Name"
+        },
+        {
+          "label": "Date of Birth",
+          "summary": "Write your date of birth"
+        },
+        {
+          "label": "Age",
+          "summary": "Write your age"
+        },
+        {
+          "label": "Place of Birth",
+          "summary": "Write your place of birth"
+        },
+        {
+          "label": "Nickname",
+          "summary": "Write your nickname"
+        },
+        {
+          "label": "Mother’s Maiden Name",
+          "summary": "Write your mother's maiden name"
+        },
+        {
+          "label": "TIN No",
+          "summary": "Write your TIN number"
+        },
+        {
+          "label": "SSS / GSIS No",
+          "summary": "Write your SSS or GSIS number"
+        },
+        {
+          "label": "Contact Number/s",
+          "summary": "Write your contact number(s)"
+        },
+        {
+          "label": "Email / Facebook account",
+          "summary": "Write your email or Facebook account"
+        },
+        {
+          "label": "Highest Educational Attainment",
+          "summary": "Tick the highest educational attainment"
+        },
+        {
+          "label": "Present/Home Address",
+          "summary": "Write your present/home address"
+        },
+        {
+          "label": "Length of Stay",
+          "summary": "Write length of stay at present address"
+        },
+        {
+          "label": "Permanent Address",
+          "summary": "Write your permanent address"
+        },
+        {
+          "label": "Length of Stay",
+          "summary": "Write length of stay at permanent address"
+        },
+        {
+          "label": "Business / Employers Address",
+          "summary": "Write your business or employer's address"
+        },
+        {
+          "label": "Length of Stay",
+          "summary": "Write length of stay at business/employer's address"
+        },
+        {
+          "label": "Business Name / Company Name",
+          "summary": "Write your business or company name"
+        },
+        {
+          "label": "Yrs.in Business or Yrs. Employed",
+          "summary": "Write years in business or employed"
+        },
+        {
+          "label": "House",
+          "summary": "Tick the type of house ownership"
+        },
+        {
+          "label": "Civil Status",
+          "summary": "Tick your civil status"
+        },
+        {
+          "label": "Gender",
+          "summary": "Tick your gender"
+        },
+        {
+          "label": "Name of Spouse",
+          "summary": "Write your spouse's name"
+        },
+        {
+          "label": "Age",
+          "summary": "Write your spouse's age"
+        },
+        {
+          "label": "Nickname",
+          "summary": "Write your spouse's nickname"
+        },
+        {
+          "label": "Date of Birth",
+          "summary": "Write your spouse's date of birth"
+        },
+        {
+          "label": "Place of Birth",
+          "summary": "Write your spouse's place of birth"
+        },
+        {
+          "label": "TIN No",
+          "summary": "Write your spouse's TIN number"
+        },
+        {
+          "label": "SSS/GSIS No",
+          "summary": "Write your spouse's SSS or GSIS number"
+        },
+        {
+          "label": "Highest Educational Attainment",
+          "summary": "Tick your spouse's highest educational attainment"
+        },
+        {
+          "label": "Contact Number/s",
+          "summary": "Write your spouse's contact number(s)"
+        },
+        {
+          "label": "No. of dependents",
+          "summary": "Write the number of dependents"
+        },
+        {
+          "label": "Occupation",
+          "summary": "Write your occupation"
+        },
+        {
+          "label": "Yrs.in Service /Employed",
+          "summary": "Write years in service or employed"
+        }
+      ]
+    },
+    {
+      "title": "SOURCES OF INCOME",
+      "fields": [
+        {
+          "label": "SOURCES OF INCOME",
+          "summary": "Write all sources of income"
+        },
+        {
+          "label": "# of yrs.in service",
+          "summary": "Write number of years in service"
+        },
+        {
+          "label": "# of Paid Employees",
+          "summary": "Write number of paid employees"
+        },
+        {
+          "label": "Estimated Monthly Gross Sales",
+          "summary": "Write estimated monthly gross sales"
+        },
+        {
+          "label": "Estimated Monthly Gross Expenses",
+          "summary": "Write estimated monthly gross expenses"
+        },
+        {
+          "label": "Estimated Net Income",
+          "summary": "Write estimated net income"
+        },
+        {
+          "label": "Who looks after the business when you’re sick or away?",
+          "summary": "Write who looks after the business"
+        },
+        {
+          "label": "Who among the family members usually assist the applicant in running the business?",
+          "summary": "Write family members assisting in business"
+        },
+        {
+          "label": "INCOME FROM SALARIES",
+          "summary": "Write income from salaries"
+        },
+        {
+          "label": "Relationship",
+          "summary": "Write relationship to the applicant"
+        },
+        {
+          "label": "Current Position",
+          "summary": "Write current position"
+        },
+        {
+          "label": "# of Yrs.in the Job",
+          "summary": "Write number of years in the job"
+        },
+        {
+          "label": "Company Name and Address",
+          "summary": "Write company name and address"
+        },
+        {
+          "label": "Estimated Net Take Home Pay",
+          "summary": "Write estimated net take home pay"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 40,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.000,
+    "recall": 1.000,
+    "f1": 1.000
+  },
+  "canonical_id": "92add0b0523cc2c15efacc90ff6483aed8aa35fd12b071e06d01a8bf6c8e33da",
+  "bucket": "banking",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2023-10-01T00:00:00Z",
+  "aliases": [
+    "Finance LOLCLoanApplicationFormIndividual"
+  ]
+}

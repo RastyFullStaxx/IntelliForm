@@ -1,0 +1,235 @@
+﻿{
+    "title":  "Government NBIClearanceApplicationForm",
+    "form_id":  "nbi_clearance_application",
+    "sections":  [
+                     {
+                         "title":  "Applicant Information",
+                         "fields":  [
+                                        {
+                                            "label":  "ID PRESENTED",
+                                            "summary":  "Indicate ID Number"
+                                        },
+                                        {
+                                            "label":  "SEX",
+                                            "summary":  "Select gender"
+                                        },
+                                        {
+                                            "label":  "CIVIL STATUS",
+                                            "summary":  "Select civil status"
+                                        },
+                                        {
+                                            "label":  "CITIZENSHIP",
+                                            "summary":  "Indicate citizenship"
+                                        },
+                                        {
+                                            "label":  "PURPOSE",
+                                            "summary":  "Indicate purpose"
+                                        },
+                                        {
+                                            "label":  "SCARS / MARKS / PECULIARITIES",
+                                            "summary":  "Describe any scars or marks"
+                                        },
+                                        {
+                                            "label":  "COMPLEXION",
+                                            "summary":  "Describe complexion"
+                                        },
+                                        {
+                                            "label":  "RELIGION",
+                                            "summary":  "Indicate religion"
+                                        },
+                                        {
+                                            "label":  "LAST NAME",
+                                            "summary":  "Enter last name"
+                                        },
+                                        {
+                                            "label":  "HEIGHT",
+                                            "summary":  "Enter height in ft or cm"
+                                        },
+                                        {
+                                            "label":  "WEIGHT",
+                                            "summary":  "Enter weight in lbs or Kg"
+                                        },
+                                        {
+                                            "label":  "HUSBANDâ€™S SURNAME FOR MARRIED WOMAN",
+                                            "summary":  "Enter husband\u0027s surname"
+                                        },
+                                        {
+                                            "label":  "NAME OF Husband or Wife",
+                                            "summary":  "Enter name of spouse"
+                                        },
+                                        {
+                                            "label":  "PLACE OF BIRTH",
+                                            "summary":  "Indicate town/city, province"
+                                        },
+                                        {
+                                            "label":  "FIRST NAME",
+                                            "summary":  "Enter first name"
+                                        },
+                                        {
+                                            "label":  "NAME OF FATHER",
+                                            "summary":  "Enter father\u0027s name"
+                                        },
+                                        {
+                                            "label":  "PLACE OF BIRTH",
+                                            "summary":  "Indicate town/city, province"
+                                        },
+                                        {
+                                            "label":  "MIDDLE NAME",
+                                            "summary":  "Enter middle name"
+                                        },
+                                        {
+                                            "label":  "NAME OF MOTHER (Maiden Name)",
+                                            "summary":  "Enter mother\u0027s maiden name"
+                                        },
+                                        {
+                                            "label":  "PLACE OF BIRTH",
+                                            "summary":  "Indicate town/city, province"
+                                        },
+                                        {
+                                            "label":  "NICKNAME",
+                                            "summary":  "Enter nickname"
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Alien Information",
+                         "fields":  [
+                                        {
+                                            "label":  "APPLICANT IS ALIEN",
+                                            "summary":  "Check if applicable"
+                                        },
+                                        {
+                                            "label":  "OTHER NAME / AKA",
+                                            "summary":  "Enter other name or AKA"
+                                        },
+                                        {
+                                            "label":  "PASSPORT or ACR NAME",
+                                            "summary":  "Enter passport or ACR name"
+                                        },
+                                        {
+                                            "label":  "PRESENT ADDRESS",
+                                            "summary":  "Enter present address"
+                                        },
+                                        {
+                                            "label":  "ADDRESS ABROAD",
+                                            "summary":  "Enter address abroad"
+                                        },
+                                        {
+                                            "label":  "DATE OF BIRTH",
+                                            "summary":  "Enter date of birth"
+                                        },
+                                        {
+                                            "label":  "PLACE OF BIRTH",
+                                            "summary":  "Indicate town/city, province"
+                                        },
+                                        {
+                                            "label":  "PASSPORT NUMBER",
+                                            "summary":  "Enter passport number"
+                                        },
+                                        {
+                                            "label":  "DATE ISSUED",
+                                            "summary":  "Enter date issued"
+                                        },
+                                        {
+                                            "label":  "PLACE ISSUED",
+                                            "summary":  "Enter place issued"
+                                        },
+                                        {
+                                            "label":  "HIGHEST EDUCATIONAL ATTAINMENT",
+                                            "summary":  "Enter highest educational attainment"
+                                        },
+                                        {
+                                            "label":  "OCCUPATION",
+                                            "summary":  "Enter occupation"
+                                        },
+                                        {
+                                            "label":  "ACR NUMBER",
+                                            "summary":  "Enter ACR number"
+                                        },
+                                        {
+                                            "label":  "DATE ISSUED",
+                                            "summary":  "Enter date issued"
+                                        },
+                                        {
+                                            "label":  "PLACE ISSUED",
+                                            "summary":  "Enter place issued"
+                                        },
+                                        {
+                                            "label":  "CONTACT NUMBER / S",
+                                            "summary":  "Enter contact number(s)"
+                                        },
+                                        {
+                                            "label":  "e-MAIL ADDRESS",
+                                            "summary":  "Enter email address"
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Certification",
+                         "fields":  [
+                                        {
+                                            "label":  "SIGNATURE OF APPLICANT",
+                                            "summary":  "Sign here"
+                                        },
+                                        {
+                                            "label":  "DATE",
+                                            "summary":  "Enter date"
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "For NBI Use Only",
+                         "fields":  [
+                                        {
+                                            "label":  "REMARKS",
+                                            "summary":  "N/A"
+                                        },
+                                        {
+                                            "label":  "R/C",
+                                            "summary":  "Enter R/C"
+                                        },
+                                        {
+                                            "label":  "Q/C",
+                                            "summary":  "Enter Q/C"
+                                        },
+                                        {
+                                            "label":  "CLEARANCE PROCESSING CENTER",
+                                            "summary":  "Enter processing center"
+                                        },
+                                        {
+                                            "label":  "BRANCH",
+                                            "summary":  "Enter branch"
+                                        },
+                                        {
+                                            "label":  "CLEARANCE APPLICATION FORM OR NUMBER",
+                                            "summary":  "Enter application form or number"
+                                        }
+                                    ]
+                     }
+                 ],
+    "metrics":  {
+                    "tp":  40,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9,
+                    "policy":  "from_counts",
+                    "ceiling_applied":  true,
+                    "edit_factor":  0.0,
+                    "edit_factor_reason":  "no_edited_log",
+                    "change_factor":  0.0,
+                    "change_factor_reason":  "no_registry_entry",
+                    "jitter_secs":  0,
+                    "per_try_noise_max":  0.004
+                },
+    "canonical_id":  "7c3a92ff111482a6f825d829a3f1c29e281a17c19630fb716e571660047619c3",
+    "bucket":  "training",
+    "schema_version":  1,
+    "created_at":  "2023-10-01T00:00:00Z",
+    "updated_at":  "2025-10-12T22:06:07Z",
+    "aliases":  [
+                    "NBI Clearance Application Form",
+                    "NBI Clearance Form"
+                ]
+}

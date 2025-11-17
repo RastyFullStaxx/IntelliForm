@@ -1,0 +1,77 @@
+﻿{
+    "title":  "Finance Auto InvestEnrollmentForm",
+    "form_id":  "finance-auto-invest-enrollment-form",
+    "sections":  [
+                     {
+                         "title":  "A",
+                         "fields":  [
+                                        {
+                                            "label":  "MF Account Number",
+                                            "summary":  "Enter your MF Account Number (e.g. 01234567CF01)"
+                                        },
+                                        {
+                                            "label":  "MF Account Type",
+                                            "summary":  "Select your MF Account Type"
+                                        },
+                                        {
+                                            "label":  "MF Account Name",
+                                            "summary":  "Enter your MF Account Name"
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "B",
+                         "fields":  [
+                                        {
+                                            "label":  "Select Fund/s to Enroll",
+                                            "summary":  "Choose the Fund(s) you want to enroll in"
+                                        },
+                                        {
+                                            "label":  "Select Sales Load",
+                                            "summary":  "Indicate your choice of Sales Load"
+                                        },
+                                        {
+                                            "label":  "Indicate Investment Amount",
+                                            "summary":  "Specify the amount you wish to invest"
+                                        },
+                                        {
+                                            "label":  "Bank Details",
+                                            "summary":  "Provide your Bank Name, Branch, Account Number, and Account Type"
+                                        },
+                                        {
+                                            "label":  "Schedule of Investment",
+                                            "summary":  "Fill out the frequency and schedule for your investments"
+                                        },
+                                        {
+                                            "label":  "Please select the source(s) of funding you will use for your additional investment(s)",
+                                            "summary":  "Select all applicable sources of funding"
+                                        }
+                                    ]
+                     }
+                 ],
+    "metrics":  {
+                    "tp":  10,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9,
+                    "policy":  "from_counts",
+                    "ceiling_applied":  true,
+                    "edit_factor":  0.0,
+                    "edit_factor_reason":  "no_edited_log",
+                    "change_factor":  0.0,
+                    "change_factor_reason":  "no_registry_entry",
+                    "jitter_secs":  0,
+                    "per_try_noise_max":  0.004
+                },
+    "canonical_id":  "5ca4193248779b59a2e117c38a471aae9f8a9a009d56c81aa7203cf7bc912d51",
+    "bucket":  "training",
+    "schema_version":  1,
+    "created_at":  "2023-10-01T00:00:00Z",
+    "updated_at":  "2025-10-12T22:06:07Z",
+    "aliases":  [
+                    "finance-auto-invest-enrollment-form",
+                    "MAIE0524F1"
+                ]
+}

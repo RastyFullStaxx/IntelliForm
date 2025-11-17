@@ -1,0 +1,222 @@
+﻿{
+    "title":  "Government BusinessPermitApplicationForm",
+    "form_id":  "government-business-permit-application-form",
+    "sections":  [
+                     {
+                         "title":  "Business Information and Registration",
+                         "fields":  [
+                                        {
+                                            "label":  "Taxpayer/Corporate Name",
+                                            "summary":  "Enter the name of the taxpayer or corporation."
+                                        },
+                                        {
+                                            "label":  "Trade Name/Franchise",
+                                            "summary":  "Enter the trade name or franchise if applicable."
+                                        },
+                                        {
+                                            "label":  "DTI TRN or BNN/SEC or CDA Registration Number",
+                                            "summary":  "Provide the registration number."
+                                        },
+                                        {
+                                            "label":  "Tax Identification Number (TIN)",
+                                            "summary":  "Enter the TIN."
+                                        },
+                                        {
+                                            "label":  "Change Address",
+                                            "summary":  "Specify the new address."
+                                        },
+                                        {
+                                            "label":  "Change Area",
+                                            "summary":  "Specify the new area."
+                                        },
+                                        {
+                                            "label":  "Change Name",
+                                            "summary":  "Specify the new name."
+                                        },
+                                        {
+                                            "label":  "Additional Line of Business",
+                                            "summary":  "Specify any additional lines of business."
+                                        },
+                                        {
+                                            "label":  "Others",
+                                            "summary":  "Specify any other changes."
+                                        },
+                                        {
+                                            "label":  "Business Area Total",
+                                            "summary":  "Enter the total business area."
+                                        },
+                                        {
+                                            "label":  "Floor Area (sq.m)",
+                                            "summary":  "Enter the floor area in square meters."
+                                        },
+                                        {
+                                            "label":  "Do you have tax incentives from any Government Entity?",
+                                            "summary":  "Indicate Yes or No."
+                                        },
+                                        {
+                                            "label":  "Date registered",
+                                            "summary":  "Enter the registration date."
+                                        },
+                                        {
+                                            "label":  "If Yes (Please select applicable tax incentive/s and attach a copy of your certificate)",
+                                            "summary":  "Select applicable tax incentives."
+                                        },
+                                        {
+                                            "label":  "Number or employees residing in Taguig",
+                                            "summary":  "Enter the number of employees residing in Taguig."
+                                        },
+                                        {
+                                            "label":  "Number or employees in establishment",
+                                            "summary":  "Enter the total number of employees."
+                                        },
+                                        {
+                                            "label":  "Property owned?",
+                                            "summary":  "Indicate Yes or No."
+                                        },
+                                        {
+                                            "label":  "If Yes, PIN or TD Number",
+                                            "summary":  "Enter the PIN or TD number."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Business Contacts",
+                         "fields":  [
+                                        {
+                                            "label":  "Office Address",
+                                            "summary":  "Enter the office address."
+                                        },
+                                        {
+                                            "label":  "Telephone Number",
+                                            "summary":  "Enter the telephone number."
+                                        },
+                                        {
+                                            "label":  "Mobile Number",
+                                            "summary":  "Enter the mobile number."
+                                        },
+                                        {
+                                            "label":  "Email Address",
+                                            "summary":  "Enter the email address."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Business Activity",
+                         "fields":  [
+                                        {
+                                            "label":  "BUSINESS ACTIVITY",
+                                            "summary":  "Specify the business activity."
+                                        },
+                                        {
+                                            "label":  "Retail Cigarette",
+                                            "summary":  "Indicate if applicable."
+                                        },
+                                        {
+                                            "label":  "Retail Softdrinks",
+                                            "summary":  "Indicate if applicable."
+                                        },
+                                        {
+                                            "label":  "Wholesaler",
+                                            "summary":  "Indicate if applicable."
+                                        },
+                                        {
+                                            "label":  "License to Sell Liquor",
+                                            "summary":  "Indicate if applicable."
+                                        },
+                                        {
+                                            "label":  "License to Serve Liquor till 10:00pm",
+                                            "summary":  "Indicate if applicable."
+                                        },
+                                        {
+                                            "label":  "License to Serve Liquor till 2:00am",
+                                            "summary":  "Indicate if applicable."
+                                        },
+                                        {
+                                            "label":  "Office Classification",
+                                            "summary":  "Check applicable classification."
+                                        },
+                                        {
+                                            "label":  "Other Business Activity",
+                                            "summary":  "Check applicable activities."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Delivery Options",
+                         "fields":  [
+                                        {
+                                            "label":  "Delivery Options",
+                                            "summary":  "Choose between Pick-Up or Courier."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Payment Options",
+                         "fields":  [
+                                        {
+                                            "label":  "Mode of Payment",
+                                            "summary":  "Choose between ANNUAL, BI-ANNUAL, or QUARTERLY."
+                                        },
+                                        {
+                                            "label":  "Payment Options",
+                                            "summary":  "Choose between eWallet, Card, or Cash/Check."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Authorized Representative",
+                         "fields":  [
+                                        {
+                                            "label":  "Authorized Representative",
+                                            "summary":  "Enter the name of the authorized representative."
+                                        },
+                                        {
+                                            "label":  "Designated Safety Officer",
+                                            "summary":  "Enter the name of the designated safety officer."
+                                        },
+                                        {
+                                            "label":  "Position",
+                                            "summary":  "Enter the position of the authorized representative."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Signature",
+                         "fields":  [
+                                        {
+                                            "label":  "Signature of the Proprietor/Representative over printed name",
+                                            "summary":  "Sign above your printed name."
+                                        },
+                                        {
+                                            "label":  "Designation and Date",
+                                            "summary":  "Enter your designation and the date."
+                                        }
+                                    ]
+                     }
+                 ],
+    "metrics":  {
+                    "tp":  40,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9,
+                    "policy":  "from_counts",
+                    "ceiling_applied":  true,
+                    "edit_factor":  0.0,
+                    "edit_factor_reason":  "no_edited_log",
+                    "change_factor":  0.0,
+                    "change_factor_reason":  "no_registry_entry",
+                    "jitter_secs":  0,
+                    "per_try_noise_max":  0.004
+                },
+    "canonical_id":  "c396696003fdca83a99bd73603098a3f4678fc4df5d109c38ed85a17677f9172",
+    "bucket":  "training",
+    "schema_version":  1,
+    "created_at":  "2023-10-01T00:00:00Z",
+    "updated_at":  "2025-10-12T22:06:07Z",
+    "aliases":  [
+                    "GovernmentBusinessPermitApplicationForm",
+                    "BusinessPermitApplicationForm"
+                ]
+}

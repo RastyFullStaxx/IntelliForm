@@ -1,0 +1,130 @@
+﻿{
+    "title":  "OPTIONAL LIFE INSURANCE POLICY LOAN APPLICATION",
+    "form_id":  "optional-life-insurance-policy-loan-application",
+    "sections":  [
+                     {
+                         "title":  "Applicant Information",
+                         "fields":  [
+                                        {
+                                            "label":  "Name of Applicant",
+                                            "summary":  "Enter full name."
+                                        },
+                                        {
+                                            "label":  "Birth Date (mm/dd/yyyy)",
+                                            "summary":  "Enter birth date."
+                                        },
+                                        {
+                                            "label":  "Last Name",
+                                            "summary":  "Enter last name."
+                                        },
+                                        {
+                                            "label":  "First Name",
+                                            "summary":  "Enter first name."
+                                        },
+                                        {
+                                            "label":  "Middle Name",
+                                            "summary":  "Enter middle name."
+                                        },
+                                        {
+                                            "label":  "GSIS ID No.",
+                                            "summary":  "Enter GSIS ID number."
+                                        },
+                                        {
+                                            "label":  "Gender",
+                                            "summary":  "Select gender."
+                                        },
+                                        {
+                                            "label":  "BP No.",
+                                            "summary":  "Enter BP number."
+                                        },
+                                        {
+                                            "label":  "E-Card/UMID Card No.",
+                                            "summary":  "Enter E-Card/UMID card number."
+                                        },
+                                        {
+                                            "label":  "E-Card/UMID Bank Account No.",
+                                            "summary":  "Enter bank account number."
+                                        },
+                                        {
+                                            "label":  "Mailing/Residential Address",
+                                            "summary":  "Enter address."
+                                        },
+                                        {
+                                            "label":  "Present Office",
+                                            "summary":  "Enter present office."
+                                        },
+                                        {
+                                            "label":  "Telephone No.",
+                                            "summary":  "Enter telephone number."
+                                        },
+                                        {
+                                            "label":  "Mobile Phone No.",
+                                            "summary":  "Enter mobile phone number."
+                                        },
+                                        {
+                                            "label":  "Email Address",
+                                            "summary":  "Enter email address."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "For DEPED Personnel",
+                         "fields":  [
+                                        {
+                                            "label":  "Division No.",
+                                            "summary":  "Enter division number."
+                                        },
+                                        {
+                                            "label":  "Station No.",
+                                            "summary":  "Enter station number."
+                                        },
+                                        {
+                                            "label":  "Employee No.",
+                                            "summary":  "Enter employee number."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Loan Type",
+                         "fields":  [
+                                        {
+                                            "label":  "TYPE OF LOAN",
+                                            "summary":  "Select New or Renewal."
+                                        }
+                                    ]
+                     },
+                     {
+                         "title":  "Loan Amount and Terms",
+                         "fields":  [
+                                        {
+                                            "label":  "Amount of the Loan",
+                                            "summary":  "Enter loan amount."
+                                        }
+                                    ]
+                     }
+                 ],
+    "metrics":  {
+                    "tp":  20,
+                    "fp":  0,
+                    "fn":  0,
+                    "precision":  0.9,
+                    "recall":  0.9,
+                    "f1":  0.9,
+                    "policy":  "from_counts",
+                    "ceiling_applied":  true,
+                    "edit_factor":  0.0,
+                    "edit_factor_reason":  "no_edited_log",
+                    "change_factor":  0.0,
+                    "change_factor_reason":  "no_registry_entry",
+                    "jitter_secs":  0,
+                    "per_try_noise_max":  0.004
+                },
+    "canonical_id":  "0d66a3e2264c45deedb577c32bbcddf74c6a66fd93d29ad47e36fcd6ddec3ff7",
+    "bucket":  "training",
+    "schema_version":  1,
+    "created_at":  "2023-10-01T00:00:00Z",
+    "updated_at":  "2025-10-12T22:06:06Z",
+    "aliases":  [
+                    "government-gsis-loan-application-form"
+                ]
+}
