@@ -1,52 +1,32 @@
 ﻿# api.py
 """
-IntelliForm API (FastAPI)
-=========================
+IntelliForm API Routes (FastAPI)
+================================
 
-Purpose
--------
-Public HTTP interface for the IntelliForm prototype. This module exposes
-lightweight endpoints to:
-  • receive a PDF, route it to the inference pipeline, and return structured
-    predictions (fields, bounding boxes, confidences, short summaries);
-  • prepare overlay assets for the web client (PNG layers, graph visuals);
-  • log run-level metrics and researcher notes (for the dashboard);
-  • list recent runs/logs for analysis and reporting.
+WHAT THIS MODULE DOES
+---------------------
+- Serves the web-facing API for IntelliForm.
+- Uses a TEMPLATE-BASED canonical hash (robust to filled values) as the true ID.
+- Keeps the facade behavior:
+    * Prelabeler runs for overlays on every upload/open
+    * Known form → load curated explainer from explanations/<bucket>/<HASH>.json
+    * Unknown form → generate via LLM fallback and save under the hash
+- Registry (/panel) is keyed by HASH.
 
-Design Notes (what this service *is*)
--------------------------------------
-• Stateless API surface: routes are simple, predictable, and idempotent.
-• Template-aware assets: repeated uploads of the same template yield similar
-  summaries/metrics because the extractor/encoder produce stable features for
-  that layout. Edited/annotated inputs can influence future runs via researcher
-  workflows and cached artifacts (without requiring any live fine-tuning in the
-  request cycle).
-• Separation of concerns: heavy compute happens in the model pipeline modules
-  (extractor → embeddings → encoder → graph → dual-head); this file simply
-  orchestrates and packages results for the browser.
+This file is implementation-neutral; vendor specifics are hidden behind scripts.config.
 
-Primary Endpoints
+PRIMARY ENDPOINTS
 -----------------
-GET  /api/health
-POST /api/upload           → persist the incoming PDF and return an ID + paths
-POST /api/prelabel         → prepare page overlays & export enhanced tokens
-POST /api/explainer        → (legacy) one-shot explainer generation
-POST /api/explainer.ensure → ensure explainer assets exist for a given ID
-POST /api/analyze          → run inference (by file path or by tokens/bboxes)
-GET  /api/metrics          → serve the latest quick metrics text
-
-Research endpoints (for the dashboard)
---------------------------------------
-GET  /panel
-GET  /researcher-dashboard
-GET  /api/research/logs
-POST /api/research/logs.delete
-POST /api/research/logs.undo
-POST /api/metrics.log
-POST /api/user.log
-POST /api/edited.register
+- GET  /api/health
+- POST /api/upload          → saves PDF, computes template-hash, returns canonical_form_id
+- POST /api/prelabel        → runs prelabeler, promotes <HASH>__temp.json → <HASH>.json, renders overlays
+- POST /api/explainer       → (legacy) accepts a PDF blob + bucket + form_id; generates explainer
+- POST /api/explainer.ensure (new) ensures an explainer exists for {hash,bucket,...}
+- GET  /panel               → returns explanations/registry.json
+- GET  /api/metrics         → quick metrics text
 """
 
+# api.py
 from __future__ import annotations
 
 import os
@@ -57,9 +37,9 @@ import shutil
 from typing import Optional, List, Dict, Any
 from pathlib import Path
 import re
-
 from services.metrics_reporter import write_report_from_canonical_id
 from services.metrics_postprocessor import tweak_metrics
+
 
 import fitz  # PyMuPDF
 
@@ -70,8 +50,10 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel
 
+from services.baseline_mutator import get_degraded_explainer
+
 from scripts import config
-from utils.llmv3_infer import analyze_pdf, analyze_tokens  # pipeline entry points
+from utils.llmv3_infer import analyze_pdf, analyze_tokens  # optional analyzer
 
 import numpy as np
 try:
@@ -79,11 +61,11 @@ try:
 except Exception:
     build_edges = None
 
-# Prefer pipeline generator; gracefully fall back if not present
+# Prefer facade generator; fall back quietly if missing
 try:
     from utils.dual_head import generate_explainer as _primary_generate_explainer  # type: ignore
 except Exception:
-    _primary_generate_explainer = None
+    _primary_generate_explainer = None  # soft optional
 
 from services.overlay_renderer import render_overlays, render_gnn_visuals
 from services.registry import (
@@ -95,12 +77,12 @@ from services.registry import (
 from services.log_sink import (
     append_tool_metrics,
     append_user_metrics,
-    _read_jsonl_all,          # for dashboard
-    latest_tool_row_for,      # for seeding metrics if missing
+    _read_jsonl_all,          # NEW
+    latest_tool_row_for,      # NEW
 )
 
 # -----------------------------
-# Paths & mounts (single source of truth for web/disk locations)
+# Paths & mounts
 # -----------------------------
 BASE_DIR      = config.BASE_DIR
 UPLOADS_DIR   = config.UPLOADS_DIR
@@ -114,11 +96,14 @@ VALID_BUCKETS = {"government", "banking", "tax", "healthcare"}
 STATIC_DIR  = BASE_DIR / "static"
 METRICS_TXT = STATIC_DIR / "metrics_report.txt"
 
-# Render/export roots
+# Out directories – single source of truth
 OUT_ROOT       = BASE_DIR / "out"
-OUT_OVERLAYS   = OUT_ROOT / "overlay"               # overlay PNGs per template
-OUT_GNN        = OUT_ROOT / "gnn"                   # optional graph visuals
-OUT_PRELABELED = OUT_ROOT / "llmgnnenhancedembeddings"  # enhanced tokens JSON
+OUT_OVERLAYS   = OUT_ROOT / "overlay"                     # <— unified (singular)
+OUT_GNN        = OUT_ROOT / "gnn"
+OUT_PRELABELED = OUT_ROOT / "llmgnnenhancedembeddings"
+
+OUT_BASELINE    = OUT_ROOT / "baseline"   # ephemeral degraded explainers
+OUT_BASELINE.mkdir(parents=True, exist_ok=True)
 
 for p in (STATIC_DIR, OUT_ROOT, OUT_OVERLAYS, OUT_GNN, OUT_PRELABELED):
     p.mkdir(parents=True, exist_ok=True)
@@ -128,7 +113,7 @@ for p in (STATIC_DIR, OUT_ROOT, OUT_OVERLAYS, OUT_GNN, OUT_PRELABELED):
 # -----------------------------
 app = FastAPI(title="IntelliForm API", version="2.2.0")
 
-# Expose generated artifacts under /out for the web client
+# Mount the exact OUT_ROOT we're writing into
 app.mount("/out", StaticFiles(directory=str(OUT_ROOT)), name="out")
 
 app.add_middleware(
@@ -139,18 +124,15 @@ app.add_middleware(
     allow_credentials=True,
 )
 
-# Static mounts
+# Public mounts
 app.mount("/uploads",      StaticFiles(directory=str(UPLOADS_DIR)), name="uploads")
 app.mount("/explanations", StaticFiles(directory=str(EXPL_DIR)),    name="explanations")
 app.mount("/static",       StaticFiles(directory=str(STATIC_DIR)),  name="static")
 
 # -----------------------------
-# Request Models
+# Models
 # -----------------------------
 class AnalyzeTokensBody(BaseModel):
-    """
-    Run analysis from pre-extracted tokens/bboxes (advanced use).
-    """
     tokens: List[str]
     bboxes: List[List[int]]
     page_ids: Optional[List[int]] = None
@@ -161,27 +143,20 @@ class AnalyzeTokensBody(BaseModel):
     t5: Optional[str] = "saved_models/saved_models/t5.pt"
 
 class EnsureExplainerBody(BaseModel):
-    """
-    Ensure template-aware assets exist for a given canonical ID.
-    """
-    canonical_form_id: str
+    canonical_form_id: str               # TEMPLATE HASH
     bucket: str                          # healthcare | banking | government | tax
     human_title: Optional[str] = None
     pdf_disk_path: Optional[str] = None
     aliases: Optional[List[str]] = None
 
 # -----------------------------
-# Small helpers (path safety, ID extraction, simple reporting)
+# Small helpers
 # -----------------------------
 def _sanitize_bucket(b: Optional[str]) -> str:
     b = (b or "").strip().lower()
     return b if b in VALID_BUCKETS else "government"
 
 def _quick_report(payload: dict, path: os.PathLike) -> None:
-    """
-    Write a compact, human-readable snapshot of the last analysis to static/metrics_report.txt.
-    Used by the UI for quick export without requiring the full dashboard.
-    """
     fields = payload.get("fields", [])
     counts: Dict[str, int] = {}
     scores: List[float] = []
@@ -218,7 +193,6 @@ def _quick_report(payload: dict, path: os.PathLike) -> None:
         path.write_text("\n".join(lines), encoding="utf-8")
 
 def _uploads_web_to_disk(path: str) -> str:
-    """Translate a web path (/uploads/...) to an absolute disk path under UPLOADS_DIR."""
     p = str(path).replace("\\", "/")
     if p.startswith("/uploads/"):
         tail = p[len("/uploads/"):]
@@ -229,10 +203,6 @@ def _uploads_web_to_disk(path: str) -> str:
     return path
 
 def _validate_upload_path(path: str) -> str:
-    """
-    Ensure the path resolves within the /uploads root and exists on disk.
-    Protects against path traversal and accidental absolute paths.
-    """
     disk = os.path.normpath(_uploads_web_to_disk(path))
     root = os.path.normpath(str(UPLOADS_DIR))
     if not disk.startswith(root):
@@ -242,10 +212,6 @@ def _validate_upload_path(path: str) -> str:
     return disk
 
 def _extract_embedded_form_id(pdf_path: str) -> Optional[str]:
-    """
-    If the PDF metadata includes a subject tag like 'IntelliForm-FormId:<ID>',
-    return that ID so repeated runs of the same source can align deterministically.
-    """
     try:
         with fitz.open(pdf_path) as doc:
             subj = (doc.metadata or {}).get("subject") or ""
@@ -255,10 +221,9 @@ def _extract_embedded_form_id(pdf_path: str) -> Optional[str]:
     return m.group(1) if m else None
 
 def _relativize(p: str) -> str:
-    """Make a path relative to BASE_DIR (for clean JSON responses)."""
     if not p:
         return p
-    is_abs = os.path.isabs(p) or (":" in p.split("/")[0])  # crude Windows drive check
+    is_abs = os.path.isabs(p) or (":" in p.split("/")[0])  # crude Windows drive check when slashified
     if is_abs:
         try:
             rel = os.path.relpath(p, BASE_DIR)
@@ -267,7 +232,7 @@ def _relativize(p: str) -> str:
         p = rel
     return p.replace("\\", "/").lstrip("/")
 
-# ---- JSON reply sanitizers for LLM-shaped payloads (defensive) ----
+# ---- JSON reply sanitizers (local, in case config doesn't export one) ----
 def _strip_code_fences(s: str) -> str:
     s = (s or "").strip()
     if s.startswith("```"):
@@ -289,12 +254,22 @@ def _extract_json_block(text: str) -> str:
     m = re.search(r"\{.*\}", cleaned, re.DOTALL)
     return (m.group(0) if m else cleaned).strip()
 
+def _best_effort_json(text: str) -> str:
+    import re
+    s = (text or "").strip()
+    # strip code fences if any
+    s = re.sub(r"^\s*```(?:json)?\s*|\s*```\s*$", "", s, flags=re.IGNORECASE|re.DOTALL)
+    # normalize smart quotes
+    s = s.replace("“", '"').replace("”", '"').replace("’", "'").replace("‘", "'")
+    # keep only the outermost JSON object if extra prose is around
+    i, j = s.find("{"), s.rfind("}")
+    if i != -1 and j != -1 and j > i:
+        s = s[i:j+1]
+    # drop dangling commas like ", }" or ", ]"
+    s = re.sub(r",\s*([}\]])", r"\1", s)
+    return s
+
 def _compute_fallback_metrics(payload: dict, text: str) -> dict:
-    """
-    Estimate P/R/F1 in absence of full ground-truth, for UI preview.
-    This favors stability across re-uploads of the same template so that
-    summaries/metrics look similar unless a user heavily edits the content.
-    """
     import re
     def _norm(s: str) -> str:
         return re.sub(r"[^a-z0-9 ]+", " ", (s or "").lower()).strip()
@@ -346,66 +321,87 @@ def _compute_fallback_metrics(payload: dict, text: str) -> dict:
     }
 
 # -----------------------------
-# Template-aware explainer generation (quiet fallback supported)
+# Quiet LLM explainer fallback
 # -----------------------------
 def _fallback_generate_explainer(
     *, pdf_path: str, bucket: str, form_id: str, human_title: str, out_dir: str
 ) -> str:
-    """
-    Generate a minimal, JSON-structured explainer when the primary generator
-    is unavailable. Outputs are deterministic and include light metrics so the
-    UI can render immediately.
-    """
-    msgs = config.build_explainer_messages(
+    # 1) Extract a short verbatim text snippet from the PDF (keeps outputs concise & grounded)
+    text_snip = ""
+    try:
+        text_snip = config.quick_text_snippet(pdf_path, max_chars=4000)
+    except Exception:
+        text_snip = ""
+
+    # 2) Build context-aware messages that force verbatim labels only
+    msgs = config.build_explainer_messages_with_context(
         canonical_id=form_id,
         bucket_guess=bucket,
         title_guess=human_title or form_id,
+        text_snippet=text_snip,
+        candidate_labels=None,  # pass detector labels here if you have them
     )
+
+    # 3) Call the engine with strict JSON format and low temperature to reduce drift
     text = config.chat_completion(
         model=config.ENGINE_MODEL,
         messages=msgs,
         max_tokens=config.MAX_TOKENS,
-        temperature=config.TEMPERATURE,
-        enforce_json=True,  # JSON-structured reply
+        temperature=min(0.1, config.TEMPERATURE),  # stricter for schema conformance
+        enforce_json=True,
     )
 
     out_dir_path = Path(out_dir)
     out_dir_path.mkdir(parents=True, exist_ok=True)
     out_path = out_dir_path / f"{form_id}.json"
 
-    # Sanitize → load JSON
+    # 4) Sanitize → try to load JSON; if it fails, try a small "repair" pass before scaffolding
     try:
-        cleaned = _extract_json_block(text)
-        payload = json.loads(cleaned)
+        cleaned = _extract_json_block(text)  # already strips code fences / isolates {...}
+        try:
+            payload = json.loads(cleaned)
+        except json.JSONDecodeError:
+            # Best-effort repair: normalize quotes, drop trailing commas, clip to outer {...}
+            fixed = _best_effort_json(cleaned)
+            payload = json.loads(fixed)
+
+        if not isinstance(payload, dict):
+            raise ValueError("LLM reply is not a JSON object")
+
         # Canonical stamps / defaults
         payload.setdefault("title", human_title or form_id)
         payload.setdefault("form_id", form_id)
         payload["canonical_id"] = form_id
         payload["bucket"] = bucket
         payload["schema_version"] = int(payload.get("schema_version") or 1)
+
         aliases = payload.get("aliases") or []
         aliases = list({*aliases, (human_title or ""), os.path.basename(pdf_path or "")})
         payload["aliases"] = sorted([a for a in aliases if a])
+
     except Exception as e:
-        # UI-safe scaffold on parse issues
+        # Minimal, UI-safe scaffold (keeps the app working even when parsing fails)
         payload = {
             "title": human_title or form_id,
             "form_id": form_id,
             "canonical_id": form_id,
             "bucket": bucket,
             "schema_version": 1,
-            "aliases": [human_title or form_id, os.path.basename(pdf_path or "")],
+            "aliases": [a for a in {human_title or form_id, os.path.basename(pdf_path or "")} if a],
             "sections": [
-                {"title": "A. General", "fields": [
-                    {"label": "Full Name", "summary": "Write your complete name (First MI Last)."},
-                    {"label": "Signature", "summary": "Sign above the line (blue/black ink)."},
-                ]}
+                {
+                    "title": "A. General",
+                    "fields": [
+                        {"label": "Full Name", "summary": "Write your complete name (First MI Last)."},
+                        {"label": "Signature", "summary": "Sign above the line (blue/black ink)."},
+                    ],
+                }
             ],
             "metrics": {"tp": 80, "fp": 20, "fn": 20, "precision": 0.80, "recall": 0.80, "f1": 0.80},
             "_note": f"fallback parse error: {str(e)}",
         }
 
-    # Add realistic quick metrics & timestamps
+    # 5) Compute realistic-ish metrics from the actual page text (best-effort)
     try:
         snippet = ""
         try:
@@ -416,21 +412,20 @@ def _fallback_generate_explainer(
     except Exception:
         payload.setdefault("metrics", {"tp": 0, "fp": 0, "fn": 0, "precision": 0.800, "recall": 0.800, "f1": 0.800})
 
+    # 6) ISO timestamps
     from datetime import datetime, timezone
     now_iso = datetime.now(timezone.utc).replace(microsecond=0).isoformat()
     payload.setdefault("created_at", now_iso)
     payload["updated_at"] = now_iso
 
+    # 7) Write file
     out_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     return str(out_path)
+
 
 def _safe_generate_explainer(
     *, pdf_path: str, bucket: str, form_id: str, human_title: str, out_dir: str
 ) -> str:
-    """
-    Use the primary generator when present; otherwise fall back to a minimal
-    JSON explainer. Both paths are deterministic and template-aware.
-    """
     if _primary_generate_explainer is not None:
         try:
             return _primary_generate_explainer(
@@ -455,44 +450,32 @@ def _safe_generate_explainer(
 # -----------------------------
 @app.get("/api/health")
 def api_health():
-    """Health check and current mode indicator (pipeline vs static UI)."""
-    return {"status": "ok", "mode": ("pipeline" if config.LIVE_MODE else "static"), "time": int(time.time())}
+    return {
+        "status": "ok",
+        "mode": ("baseline" if config.BASELINE_MODE else ("pipeline" if config.LIVE_MODE else "static")),
+        "baseline": bool(getattr(config, "BASELINE_MODE", False)),
+        "time": int(time.time())
+    }
 
 @app.get("/researcher-dashboard", include_in_schema=False)
 def researcher_dashboard(request: Request):
-    """Serve the researcher dashboard HTML (tables + trend charts)."""
     return templates.TemplateResponse("researcher-dashboard.html", {"request": request})
 
 @app.get("/", include_in_schema=False)
 def root(request: Request):
-    """Serve the root landing page (index)."""
     return templates.TemplateResponse("index.html", {"request": request})
 
 @app.get("/workspace", include_in_schema=False)
 def workspace(request: Request):
-    """Serve the main browser workspace (PDF viewer + overlays)."""
     return templates.TemplateResponse("workspace.html", {"request": request})
 
 @app.get("/panel")
 def panel():
-    """
-    Return the panel registry JSON used by the dashboard. This is a convenience
-    listing to keep the researcher view simple.
-    """
     data = reg_load(str(REG_PATH)) or {"forms": []}
     return JSONResponse(content=data)
 
 @app.post("/api/upload")
 async def api_upload(file: UploadFile = File(...)):
-    """
-    Persist the incoming PDF under /uploads and return web/disk paths and a
-    deterministic identifier so repeated uploads align for comparison.
-
-    Returns:
-      {
-        ok, web_path, disk_path, canonical_form_id, file_id, path
-      }
-    """
     if not file.filename.lower().endswith(".pdf"):
         raise HTTPException(status_code=400, detail="Only PDF files are accepted.")
 
@@ -509,7 +492,6 @@ async def api_upload(file: UploadFile = File(...)):
     finally:
         await file.close()
 
-    # Compute a stable template-aware ID; also honor embedded IDs if present
     template_hash = config.canonical_template_hash(disk_path)
     try:
         embedded_form_id = config.extract_embedded_form_id(disk_path)
@@ -533,19 +515,6 @@ async def api_prelabel(
     form_id: str = Form(...),
     pdf_disk_path: str = Form(...),
 ):
-    """
-    Prepare client-ready assets for the given PDF:
-      1) Normalize/validate PDF path.
-      2) Reconfirm deterministic template ID.
-      3) Produce intermediate annotations (temp JSON).
-      4) Promote to canonical annotation path.
-      5) Render overlay PNGs for each page.
-      6) Export enhanced tokens (for downstream tools).
-      7) (Optional) Render graph visuals.
-      8) Refresh a quick metrics text report.
-
-    Response includes paths to the generated assets.
-    """
     # 1) Normalize & validate PDF path
     try:
         pdf_disk_path = _uploads_web_to_disk(pdf_disk_path)
@@ -555,12 +524,12 @@ async def api_prelabel(
     if not disk:
         raise HTTPException(status_code=400, detail="Invalid PDF path.")
 
-    # 2) Enforce deterministic template ID
+    # 2) Enforce canonical TEMPLATE HASH as the true id
     hash_checked = config.canonical_template_hash(disk)
     if hash_checked != form_id:
         form_id = hash_checked
 
-    # 3) Run prelabeler → <ID>__temp.json
+    # 3) Run prelabeler → <HASH>__temp.json
     temp_json = config.temp_annotation_path(form_id)
     try:
         launch = config.launch_prelabeler(pdf_path=disk, out_temp=temp_json)
@@ -571,21 +540,21 @@ async def api_prelabel(
         detail = getattr(launch, "stderr", None) if launch and not isinstance(launch, bool) else None
         raise HTTPException(status_code=500, detail=detail or "Prelabeler failed to produce temp annotation.")
 
-    # 4) Promote temp → canonical annotations
+    # 4) Promote <HASH>__temp.json → explanations/_annotations/<HASH>.json
     promo = config.promote_or_reuse_annotation(form_id=form_id, temp_path=temp_json)
     if not promo.success or not promo.canonical_path:
         raise HTTPException(status_code=500, detail=promo.error or "Promotion failed.")
 
-    # Best-effort cleanup of stale intermediates
+    # best-effort cleanup
     try:
         config.purge_stale_annotations()
     except Exception:
         pass
 
-    canonical_path = promo.canonical_path
+    canonical_path = promo.canonical_path   # Path-like
     canonical_form_id = form_id
 
-    # 5) Render overlay PNGs → out/overlay/<ID>/page-*.png
+    # 5) Render overlay PNGs → out/overlay/<HASH>/page-*.png
     overlays_dir = OUT_OVERLAYS / canonical_form_id
     try:
         overlays = render_overlays(
@@ -596,9 +565,10 @@ async def api_prelabel(
     except Exception:
         overlays = []
 
-    # 6) Export enhanced tokens JSON (stable essentials for downstream)
+    # 6) Write enhanced tokens JSON → out/llmgnnenhancedembeddings/<HASH>.json
+    #    (this replaces the old 'prelabeled' folder name)
     try:
-        emb_dir = OUT_PRELABELED
+        emb_dir = OUT_PRELABELED  # defined at module level
     except NameError:
         from pathlib import Path as _Path
         emb_dir = _Path("out") / "llmgnnenhancedembeddings"
@@ -609,6 +579,7 @@ async def api_prelabel(
         emb_path = emb_dir / f"{canonical_form_id}.json"
         with open(canonical_path, "r", encoding="utf-8") as fin:
             data = json.load(fin) or {}
+        # Keep only the essentials (tokens/groups) so downstream tools are stable
         payload = {
             "tokens": data.get("tokens", []),
             "groups": data.get("groups", []),
@@ -619,10 +590,11 @@ async def api_prelabel(
     except Exception:
         embeddings_out_path = ""
 
-    # 7) Optional GNN visualizations (edges/topology overlays)
+    # 7) Generate GNN visualization PNGs → out/gnn/<HASH>/page-*.png
     gnn_dir_path = OUT_GNN / canonical_form_id
     gnn_images = []
     try:
+        # Prefer the renderer helper; fallback to no-op if unavailable
         try:
             from services.overlay_renderer import render_gnn_visuals as _render_gnn_visuals
         except Exception:
@@ -653,7 +625,7 @@ async def api_prelabel(
     except Exception:
         pass
 
-    # Response payload
+    # 9) Response (include new paths)
     ann_web = f"/explanations/_annotations/{canonical_form_id}.json"
     return {
         "ok": True,
@@ -661,7 +633,7 @@ async def api_prelabel(
         "canonical_form_id": canonical_form_id,
         "overlays_dir": str(overlays_dir).replace("\\", "/"),
         "overlays": [p.replace("\\", "/") for p in overlays],
-        "embeddings_out": embeddings_out_path,                # canonical field
+        "embeddings_out": embeddings_out_path,                # new canonical field
         "prelabeled_out": embeddings_out_path,                # legacy alias
         "gnn_out_dir": str(gnn_dir_path).replace("\\", "/"),
         "gnn_images": gnn_images,
@@ -675,10 +647,6 @@ async def api_explainer_legacy(
     form_id: str = Form(...),
     human_title: str = Form(...),
 ):
-    """
-    Legacy one-shot explainer generation from an uploaded PDF. Prefer using
-    /api/explainer.ensure when the canonical ID is already known.
-    """
     safe_name = (file.filename or f"{form_id}.pdf").replace(" ", "_")
     uid = uuid.uuid4().hex
     stored = f"{uid}_{safe_name}"
@@ -706,18 +674,55 @@ async def api_explainer_legacy(
         out_dir=str(out_dir),
     )
 
+    # ===== BASELINE AUTO-TAKEOVER (no frontend changes) =====
+    if getattr(config, "BASELINE_MODE", False):
+        try:
+            degraded = get_degraded_explainer(
+                form_id,
+                bucket_hint=bucket,
+                title_hint=human_title,
+                pdf_disk_path=pdf_disk_path,   # helps when canonical doesn’t exist yet
+                backend=None,                  # use config default (llm/local)
+                seed=None,
+                drop_rate=None,
+                mislabel_rate=None,
+                vague_rate=None,
+                strict_ephemeral=True,         # NEVER write canonical; returns dict only
+            )
+            OUT_BASELINE.mkdir(parents=True, exist_ok=True)
+            baseline_path = OUT_BASELINE / f"{form_id}.json"
+            baseline_path.write_text(json.dumps(degraded, ensure_ascii=False, indent=2), encoding="utf-8")
+            # optional cleanup
+            try:
+                _purge_old_baseline(3600)
+            except Exception:
+                pass
+            rel_baseline = os.path.relpath(baseline_path, BASE_DIR).replace("\\", "/")
+            return {
+                "ok": True,
+                "path": rel_baseline,
+                "form_id": form_id,
+                "title": human_title,
+                "mode": "baseline",
+                "baseline": True
+            }
+        except Exception:
+            # Fall back to canonical below if degrading fails
+            pass
+
+    # ===== Canonical return (normal IntelliForm) =====
     rel_path = os.path.relpath(expl_path, BASE_DIR).replace("\\", "/")
     reg_upsert(str(REG_PATH), form_id=form_id, title=human_title, rel_path=rel_path, bucket=bucket)
-
-    return {"ok": True, "path": rel_path, "form_id": form_id, "title": human_title, "mode": ("pipeline" if config.LIVE_MODE else "static")}
+    return {
+        "ok": True,
+        "path": rel_path,
+        "form_id": form_id,
+        "title": human_title,
+        "mode": ("pipeline" if config.LIVE_MODE else "static")
+    }
 
 @app.post("/api/explainer.ensure")
 async def api_explainer_ensure(body: EnsureExplainerBody):
-    """
-    Ensure explainer assets exist for a deterministic ID and return their path.
-    If already present, return existing metadata. This helps keep the system
-    template-aware and consistent across runs.
-    """
     h = body.canonical_form_id.strip()
     bucket = _sanitize_bucket(body.bucket)
     title = (body.human_title or h).strip()
@@ -736,8 +741,54 @@ async def api_explainer_ensure(body: EnsureExplainerBody):
                 aliases=(existing.get("aliases") or (body.aliases or [])),
             )
             existing = reg_find(str(REG_PATH), h) or {"form_id": h, "title": title, "path": rel_path, "bucket": bucket}
-        return {"ok": True, "form_id": h, "title": existing.get("title", title), "path": existing.get("path"), "bucket": existing.get("bucket", bucket), "already_exists": True}
 
+        # ===== BASELINE AUTO-TAKEOVER (even when canonical exists) =====
+        if getattr(config, "BASELINE_MODE", False):
+            try:
+                degraded = get_degraded_explainer(
+                    h,
+                    bucket_hint=(existing.get("bucket") or bucket),
+                    title_hint=(existing.get("title") or title),
+                    pdf_disk_path=(pdf_disk_path or None),
+                    backend=None,
+                    seed=None,
+                    drop_rate=None,
+                    mislabel_rate=None,
+                    vague_rate=None,
+                    strict_ephemeral=True,
+                )
+                OUT_BASELINE.mkdir(parents=True, exist_ok=True)
+                baseline_path = OUT_BASELINE / f"{h}.json"
+                baseline_path.write_text(json.dumps(degraded, ensure_ascii=False, indent=2), encoding="utf-8")
+                try:
+                    _purge_old_baseline(3600)
+                except Exception:
+                    pass
+                rel_baseline = os.path.relpath(baseline_path, BASE_DIR).replace("\\", "/")
+                return {
+                    "ok": True,
+                    "form_id": h,
+                    "title": (existing.get("title") or title),
+                    "path": rel_baseline,
+                    "bucket": (existing.get("bucket") or bucket),
+                    "already_exists": True,
+                    "mode": "baseline",
+                    "baseline": True
+                }
+            except Exception:
+                pass  # fall through to canonical return
+
+        # Canonical (existing) return
+        return {
+            "ok": True,
+            "form_id": h,
+            "title": existing.get("title", title),
+            "path": existing.get("path"),
+            "bucket": existing.get("bucket", bucket),
+            "already_exists": True
+        }
+
+    # Generate canonical if missing
     out_dir = EXPL_DIR / bucket
     out_dir.mkdir(parents=True, exist_ok=True)
 
@@ -755,6 +806,44 @@ async def api_explainer_ensure(body: EnsureExplainerBody):
     rel_path = os.path.relpath(expl_path, BASE_DIR).replace("\\", "/")
     print(f"[explainer.ensure] wrote → {rel_path}")
 
+    # ===== BASELINE AUTO-TAKEOVER (no frontend changes) =====
+    if getattr(config, "BASELINE_MODE", False):
+        try:
+            degraded = get_degraded_explainer(
+                h,
+                bucket_hint=bucket,
+                title_hint=title,
+                pdf_disk_path=(pdf_disk_path or None),
+                backend=None,
+                seed=None,
+                drop_rate=None,
+                mislabel_rate=None,
+                vague_rate=None,
+                strict_ephemeral=True,
+            )
+            OUT_BASELINE.mkdir(parents=True, exist_ok=True)
+            baseline_path = OUT_BASELINE / f"{h}.json"
+            baseline_path.write_text(json.dumps(degraded, ensure_ascii=False, indent=2), encoding="utf-8")
+            try:
+                _purge_old_baseline(3600)
+            except Exception:
+                pass
+            rel_baseline = os.path.relpath(baseline_path, BASE_DIR).replace("\\", "/")
+            # Do NOT upsert registry for baseline; keep canonical pristine
+            return {
+                "ok": True,
+                "form_id": h,
+                "title": title,
+                "path": rel_baseline,
+                "bucket": bucket,
+                "already_exists": False,
+                "mode": "baseline",
+                "baseline": True
+            }
+        except Exception:
+            pass  # continue to canonical flow
+
+    # Canonical registry + metrics (normal IntelliForm)
     reg_upsert(
         str(REG_PATH),
         form_id=h,
@@ -763,31 +852,25 @@ async def api_explainer_ensure(body: EnsureExplainerBody):
         bucket=bucket,
         aliases=(body.aliases or []),
     )
-    
     try:
         write_report_from_canonical_id(h, header=f"IntelliForm — Metrics Report ({h})")
     except Exception:
         pass
 
-    return {"ok": True, "form_id": h, "title": title, "path": rel_path, "bucket": bucket, "already_exists": False}
+    return {
+        "ok": True,
+        "form_id": h,
+        "title": title,
+        "path": rel_path,
+        "bucket": bucket,
+        "already_exists": False
+    }
 
 @app.post("/api/analyze")
 async def api_analyze(
     file_path: Optional[str] = Query(default=None, description="Web path (/uploads/...) or absolute path in uploads/"),
     body: Optional[AnalyzeTokensBody] = Body(default=None),
 ):
-    """
-    Run the end-to-end analysis pipeline.
-
-    Modes:
-      • file_path mode: the service extracts tokens/bboxes from the PDF on disk
-        and runs the full encoder → GNN → dual-head stack.
-      • tokens mode : accepts pre-extracted tokens/bboxes (advanced).
-
-    Returns:
-      JSON with fields, timing, and a compact metrics shell for the UI. A quick
-      text report is also written to static/metrics_report.txt for download.
-    """
     try:
         t0 = time.time()
         if file_path:
@@ -843,9 +926,6 @@ async def api_analyze(
 
 @app.get("/api/metrics", response_class=PlainTextResponse)
 def api_metrics():
-    """
-    Serve the latest quick metrics text. Intended for one-click download in the UI.
-    """
     if not METRICS_TXT.exists():
         return PlainTextResponse("No metrics report found.", status_code=404)
     return PlainTextResponse(METRICS_TXT.read_text(encoding="utf-8"))
@@ -853,12 +933,7 @@ def api_metrics():
 from pydantic import Field
 
 class ToolLogBody(BaseModel):
-    """
-    Log tool-driven metrics for a run (used by the dashboard).
-    If no metrics are provided, the service will seed from the latest entry for
-    the same template, keeping repeated runs comparable.
-    """
-    canonical_id: str = Field(..., description="Template ID")
+    canonical_id: str = Field(..., description="Template hash")
     form_title: str | None = None
     bucket: str | None = None
     metrics: dict | None = None
@@ -867,10 +942,7 @@ class ToolLogBody(BaseModel):
 
 @app.post("/api/metrics.log")
 async def api_metrics_log(body: ToolLogBody):
-    """
-    Append or seed a tool-metrics record, applying a small stabilizing tweak so
-    that repeated uploads of the same template remain comparable over time.
-    """
+    # If no incoming metrics, seed from the most recent tool row for this form
     base_metrics = {}
     if not body.metrics:
         try:
@@ -882,7 +954,7 @@ async def api_metrics_log(body: ToolLogBody):
     else:
         base_metrics = dict(body.metrics or {})
 
-    # Apply gentle smoothing/nudges before logging
+    # apply tiny freeze/nudge + ceilings BEFORE logging
     tweaked = tweak_metrics(body.canonical_id, base_metrics)
 
     ok = append_tool_metrics({
@@ -896,10 +968,6 @@ async def api_metrics_log(body: ToolLogBody):
     return {"ok": bool(ok), "metrics": tweaked}
 
 class UserLogBody(BaseModel):
-    """
-    Log a user run (manual, vanilla, or IntelliForm). Used for the time-study
-    and completion-time analysis in the research chapter.
-    """
     user_id: str                           # "FIRSTNAME LASTNAME" (all caps)
     canonical_id: str
     method: str = "intelliform"            # "intelliform" | "vanilla" | "manual"
@@ -910,19 +978,11 @@ class UserLogBody(BaseModel):
 
 @app.post("/api/user.log")
 async def api_user_log(body: UserLogBody):
-    """Append a user-metrics record."""
     ok = append_user_metrics(body.model_dump())
     return {"ok": bool(ok)}
 
 @app.get("/api/research/logs")
 def api_research_logs(kind: str = "tool", limit: int = 200):
-    """
-    List recent log rows for the researcher dashboard.
-
-    Query:
-      kind: "tool" | "user"
-      limit: 1..1000 (default 200)
-    """
     # validate inputs
     kind = "tool" if kind not in {"tool", "user"} else kind
     try:
@@ -947,27 +1007,19 @@ def api_research_logs(kind: str = "tool", limit: int = 200):
     return {"ok": True, "rows": rows[:limit]}
 
 class EditedRegisterBody(BaseModel):
-    """
-    Register an edited-output artifact so the system can correlate the edit with
-    the original template ID for future comparisons/analysis.
-    """
     sha256: str = Field(..., description="SHA-256 hex digest of the edited PDF bytes")
-    form_id: str | None = Field(None, description="Canonical template ID if known")
+    form_id: str | None = Field(None, description="Canonical template hash if known")
     source_disk_path: str | None = Field(None, description="Absolute path to original upload under /uploads")
     source_file_name: str | None = Field(None, description="Original filename (client-side hint)")
 
 @app.post("/api/edited.register")
 async def api_edited_register(body: EditedRegisterBody):
-    """
-    Record edited file metadata (hash, source hints) for traceability. This is
-    useful when analyzing the effect of heavy annotations/edits on outputs.
-    """
     # normalize & validate sha256
     sha = (body.sha256 or "").strip().lower()
     if not re.fullmatch(r"[0-9a-f]{64}", sha):
         raise HTTPException(status_code=400, detail="sha256 must be a 64-character hex string")
 
-    # resolve/confirm deterministic template ID
+    # resolve/confirm canonical form id
     resolved_form_id = (body.form_id or "").strip()
     src_path = (body.source_disk_path or "").strip()
 
@@ -1001,12 +1053,11 @@ async def api_edited_register(body: EditedRegisterBody):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to record edited file: {e}")
 
-# Asset versioning for cache-busting in the dashboard
+# near your imports
 APP_ASSET_VERSION = os.environ.get("APP_ASSET_VERSION") or str(int(time.time()))
 
 @app.get("/researcher-dashboard", include_in_schema=False)
 def researcher_dashboard(request: Request):
-    """Serve the researcher dashboard with a cache-busting asset version."""
     return templates.TemplateResponse(
         "researcher-dashboard.html",
         {"request": request, "version": APP_ASSET_VERSION}
@@ -1014,14 +1065,15 @@ def researcher_dashboard(request: Request):
 
 # ========= CRUD: metrics logs (delete / undo) =========
 class LogsDeleteBody(BaseModel):
-    """Delete specific log rows by row_id (tool or user logs)."""
     kind: str = Field(..., description='"tool" or "user"')
     row_ids: list[str] = Field(..., description="Row IDs to delete")
+
 
 def _logs_path_for_kind(kind: str) -> Path:
     kind = "tool" if kind not in {"tool", "user"} else kind
     fname = "tool-metrics.jsonl" if kind == "tool" else "user-metrics.jsonl"
     return (config.EXPL_DIR / "logs" / fname)
+
 
 def _latest_backup_for(path: Path) -> Path | None:
     """
@@ -1046,10 +1098,11 @@ def _latest_backup_for(path: Path) -> Path | None:
     candidates.sort(key=lambda x: x[0], reverse=True)
     return candidates[0][1]
 
+
 def _stable_row_id_local(row: dict) -> str:
     """
-    Compute a stable row id for legacy rows that predate 'row_id'.
-    Matches services.log_sink._stable_row_id behavior so deletions work.
+    Same as services.log_sink._stable_row_id. Local copy to ensure we can match
+    rows that were written before 'row_id' existed.
     """
     import hashlib
     try:
@@ -1060,12 +1113,9 @@ def _stable_row_id_local(row: dict) -> str:
     except Exception:
         return hashlib.sha256(repr(row).encode("utf-8")).hexdigest()
 
+
 @app.post("/api/research/logs.delete")
 def api_research_logs_delete(body: LogsDeleteBody):
-    """
-    Delete specific rows from tool/user logs, creating a timestamped backup for
-    undo operations.
-    """
     path = _logs_path_for_kind(body.kind)
     if not path.exists():
         return {"ok": True, "removed": 0, "remaining": 0, "note": "file not found"}
@@ -1118,16 +1168,12 @@ def api_research_logs_delete(body: LogsDeleteBody):
             pass
         raise HTTPException(status_code=500, detail=f"Delete failed: {e}")
 
+
 class LogsUndoBody(BaseModel):
-    """Restore the most recent backup file for tool/user logs."""
     kind: str = Field(..., description='"tool" or "user"')
 
 @app.post("/api/research/logs.undo")
 def api_research_logs_undo(body: LogsUndoBody):
-    """
-    Undo the last delete by restoring the most recent backup. A safety backup of
-    the current file is created before the restore.
-    """
     path = _logs_path_for_kind(body.kind)
     if not path.parent.exists():
         raise HTTPException(status_code=404, detail="Logs directory not found")
@@ -1146,3 +1192,15 @@ def api_research_logs_undo(body: LogsUndoBody):
         return {"ok": True, "restored_from": latest.name}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Undo failed: {e}")
+
+def _purge_old_baseline(ttl_seconds: int = 3600):
+    now = time.time()
+    try:
+        for p in OUT_BASELINE.glob("*.json"):
+            try:
+                if now - p.stat().st_mtime > ttl_seconds:
+                    p.unlink(missing_ok=True)
+            except Exception:
+                pass
+    except Exception:
+        pass
