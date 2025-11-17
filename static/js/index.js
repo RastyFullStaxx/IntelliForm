@@ -6,24 +6,84 @@ document.addEventListener('DOMContentLoaded', function () {
   const uploadedFileName = document.getElementById('uploadedFileName');
   const deleteBtn = document.getElementById('deleteFileBtn');
   const startBtn = document.getElementById('startFillingBtn');
-  const scanText = document.getElementById('scanText');
-  const uploadBox = document.querySelector('.upload-btn');
+  const betaBtn = document.getElementById('betaTesterBtn');
+  const betaStatus = document.getElementById('betaStatus');
+  const METRICS_KEY = 'if_metrics_opt_in';
+  const LS_UID = 'research_user_id';
 
   let selectedFile = null;
+
+  // Always start the landing page fresh: clear any previously saved tester name/flag
+  try {
+    sessionStorage.removeItem(METRICS_KEY);
+    localStorage.removeItem(METRICS_KEY);
+    sessionStorage.removeItem(LS_UID);
+    localStorage.removeItem(LS_UID);
+  } catch {}
+
+  function setMetricsOptIn(on, name) {
+    try {
+      sessionStorage.setItem(METRICS_KEY, on ? '1' : '0');
+      localStorage.setItem(METRICS_KEY, on ? '1' : '0');
+      if (on && name) {
+        sessionStorage.setItem(LS_UID, name);
+        localStorage.setItem(LS_UID, name);
+      }
+    } catch {}
+    if (betaStatus) {
+      betaStatus.textContent = on && name ? `Metrics on — ${name}` : 'Metrics: off (guest)';
+      betaStatus.classList.toggle('active', !!(on && name));
+    }
+  }
+
+  function ensureMetricsDefault() {
+    const hasFlag = sessionStorage.getItem(METRICS_KEY) || localStorage.getItem(METRICS_KEY);
+    if (!hasFlag) setMetricsOptIn(false);
+  }
+
+  ensureMetricsDefault();
+
+  betaBtn?.addEventListener('click', async () => {
+    try {
+      const promptFn = window.promptForResearchUserId || (async () => {
+        const { value } = await Swal.fire({
+          title: "Enter Your Name",
+          input: "text",
+          inputLabel: "For beta metrics",
+          inputPlaceholder: "TYPE YOUR NAME",
+          inputAttributes: { autocapitalize: "characters", autocorrect: "off", spellcheck: "false" },
+          allowOutsideClick: false,
+          confirmButtonText: "Save",
+          showCancelButton: true,
+          preConfirm: (val) => {
+            const v = String(val || "").trim();
+            if (!v || v.length < 2) {
+              Swal.showValidationMessage("Please enter at least 2 characters");
+              return false;
+            }
+            return v;
+          }
+        });
+        return value;
+      });
+      const id = await promptFn();
+      if (id && id.trim()) {
+        setMetricsOptIn(true, id.trim());
+      }
+    } catch (e) {
+      console.warn('Beta opt-in failed', e);
+    }
+  });
 
   function showUploadedFile(name) {
     uploadedFileName.textContent = name;
     fileDisplayContainer.classList.remove('d-none');
     startBtn.classList.remove('d-none');
-    scanText.classList.add('d-none');
-    uploadBox.classList.add('d-none');
   }
 
   function resetUI() {
     fileDisplayContainer.classList.add('d-none');
     startBtn.classList.add('d-none');
-    scanText.classList.remove('d-none');
-    uploadBox.classList.remove('d-none');
     fileInput.value = '';
     selectedFile = null;
   }
@@ -168,20 +228,10 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
-    try {
-      // Last-chance: ensure a non-empty research_user_id
-      const currentId = (window.getResearchUserId && window.getResearchUserId()) || '';
-      if (!currentId || currentId.trim() === '' || currentId.trim().toUpperCase() === 'ANON') {
-        if (window.promptForResearchUserId) {
-          const id = await window.promptForResearchUserId();
-          if (id && id.trim()) {
-            sessionStorage.setItem('research_user_id', id.trim());
-            localStorage.setItem('research_user_id', id.trim());
-          }
-        }
-      }
-    } catch (e) {
-      console.warn('User ID ensure step failed:', e);
+    // If the user never opted in, force metrics off and anonymize id
+    const opted = sessionStorage.getItem(METRICS_KEY) === '1' || localStorage.getItem(METRICS_KEY) === '1';
+    if (!opted) {
+      setMetricsOptIn(false, 'ANON');
     }
 
     uploadAndNavigate(selectedFile);
@@ -192,7 +242,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // static/js/index.userid.js — user_id capture (research participant)
 (function () {
   const LS_KEY = "research_user_id";
-  const ALWAYS_PROMPT = true; // ask on every index load/refresh
+  const ALWAYS_PROMPT = true; // always prompt when Beta Tester opts in
 
   // normalize: trim, collapse spaces, UPPERCASE for consistent display
   function normalizeId(s) {
@@ -238,15 +288,4 @@ document.addEventListener('DOMContentLoaded', function () {
   window.promptForResearchUserId = async function () {
     return await promptForUserId();
   };
-
-  // Prompt immediately on index load
-  document.addEventListener("DOMContentLoaded", async () => {
-    try {
-      const id = await promptForUserId();
-      sessionStorage.setItem(LS_KEY, id); // ensure present even if storage is blocked later
-    } catch (e) {
-      console.warn("User ID prompt failed:", e);
-      sessionStorage.setItem(LS_KEY, "ANON");
-    }
-  });
 })();

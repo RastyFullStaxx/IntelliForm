@@ -23,6 +23,7 @@ function initWorkspace() {
   const summaryList = $("summaryList");
   const formTitle = $("formNameDisplay");
   const metricsRow = $("metricsRow");
+  const sidebarTitle = document.querySelector(".sidebar-title h5");
   const pageInfo = $("pageInfo");
   const zoomInfo = $("zoomInfo");
   const searchTool     = $("searchTool");
@@ -31,6 +32,10 @@ function initWorkspace() {
   const searchPrevBtn  = $("searchPrev");
   const searchClearBtn = $("searchClear");
   const searchStatus   = $("searchStatus");
+  const toastHost = document.createElement("div");
+  toastHost.id = "toolToast";
+  toastHost.className = "tool-toast";
+  document.body.appendChild(toastHost);
 
 
   // Base canvases coming from HTML
@@ -148,25 +153,48 @@ function initWorkspace() {
       }
     });
   }
-  pageToggler?.addEventListener("click", () => thumbSidebar?.classList.toggle("visible"));
+  const syncThumbToggle = () => {
+    if (!thumbSidebar || !pageToggler) return;
+    const open = thumbSidebar.classList.contains("visible");
+    pageToggler.classList.toggle("active", open);
+  };
+  pageToggler?.addEventListener("click", () => {
+    thumbSidebar?.classList.toggle("visible");
+    syncThumbToggle();
+  });
+  syncThumbToggle();
 
   // ---- "Show boxes" toggle ----
-  let toggleBoxes = null;
-  if (metricsRow) {
-    const boxesWrap = document.createElement("div");
-    boxesWrap.style.cssText = "text-align:center;margin:6px 0 4px 0;";
-    boxesWrap.innerHTML = `
-      <label style="font-size:12px;opacity:.9;">
-        <input type="checkbox" id="toggleBoxes"> Show boxes
-      </label>`;
-    metricsRow.insertAdjacentElement("afterend", boxesWrap);
-    toggleBoxes = $("toggleBoxes");
-  }
+  const showBoxesBtn = $("btnShowBoxes");
+  let showBoxes = false;
+  const syncShowBoxesButton = () => {
+    if (!showBoxesBtn) return;
+    showBoxesBtn.classList.toggle("active", showBoxes);
+    showBoxesBtn.setAttribute("aria-pressed", showBoxes ? "true" : "false");
+  };
+  syncShowBoxesButton();
+  showBoxesBtn?.addEventListener("click", async () => {
+    showBoxes = !showBoxes;
+    syncShowBoxesButton();
+    if (showBoxes && currentFormId) await drawOverlay(currentFormId, currentPage);
+    else boxesCtx.clearRect(0, 0, boxesCanvas.width, boxesCanvas.height);
+  });
 
   // ---- PDF state ----
   let pdfDoc = null;
   let scale = 1.5;
   let currentPage = 1;
+  const syncNavInfo = (pageNum = currentPage) => {
+    if (pageInfo && pdfDoc) pageInfo.textContent = `Page ${pageNum} / ${pdfDoc.numPages || 1}`;
+    if (zoomInfo) zoomInfo.textContent = `${Math.round(scale * 100)}%`;
+  };
+  const markActiveThumbnail = (pageNum) => {
+    document.querySelectorAll("#thumbnailSidebar .thumbnail").forEach((thumb) => {
+      const match = (parseInt(thumb.dataset.page || "0", 10) === pageNum);
+      thumb.classList.toggle("active", match);
+      thumb.parentElement?.classList.toggle("active", match);
+    });
+  };
 
   // For proper scaling across zoom/DPR
   const pageBaseSize = {};    // pageNo -> { w, h } at scale 1 (CSS px)
@@ -244,133 +272,159 @@ function initWorkspace() {
     }
     renderPage(currentPage);
     buildThumbnails(pdfDoc);
+    syncNavInfo(currentPage);
   }
 
+  // ---- Render gate ----
+  let RENDER_SEQ = 0;        // increases every render request
+  let LAST_COMMIT_SEQ = 0;   // the last seq that actually committed
+
+  const setScaleAndRender = (nextScale) => {
+    const clamped = Math.min(3, Math.max(0.5, nextScale));
+    if (Math.abs(clamped - scale) < 0.001) return;
+    scale = clamped;
+    renderPage(currentPage);
+    syncNavInfo(currentPage);
+  };
+
   function renderPage(pageNum) {
-    pdfDoc.getPage(pageNum).then(async (page) => {
-      const viewport = page.getViewport({ scale });
-      const baseViewport = page.getViewport({ scale: 1 });
+    const mySeq = ++RENDER_SEQ;
+    return new Promise((resolve, reject) => {
+      if (!pdfDoc) { resolve(); return; }
+      pdfDoc.getPage(pageNum).then(async (page) => {
+        // If a newer render started, abort early
+        if (mySeq !== RENDER_SEQ) { resolve(); return; }
 
-      if (!pageBaseSize[pageNum]) {
-        pageBaseSize[pageNum] = { w: baseViewport.width, h: baseViewport.height };
-      }
+        const viewport = page.getViewport({ scale });
+        const baseViewport = page.getViewport({ scale: 1 });
 
-      // Record current CSS size for this page
-      pageCssSize[pageNum] = { w: viewport.width, h: viewport.height };
-
-      // Device Pixel Ratio
-      const dpr = window.devicePixelRatio || 1;
-
-      // Set wrapper CSS size
-      pageLayer.style.width  = `${viewport.width}px`;
-      pageLayer.style.height = `${viewport.height}px`;
-
-      // Set canvas CSS size
-      setCssSize(pdfCanvas, viewport.width, viewport.height);
-      setCssSize(boxesCanvas, viewport.width, viewport.height);     // NEW
-      setCssSize(overlayCanvas, viewport.width, viewport.height);
-      setCssSize(annotationLayer, viewport.width, viewport.height);
-
-      // Internal resolution in device pixels
-      setDeviceSize(pdfCanvas, viewport.width * dpr, viewport.height * dpr);
-      setDeviceSize(boxesCanvas, viewport.width * dpr, viewport.height * dpr); // NEW
-      setDeviceSize(overlayCanvas, viewport.width * dpr, viewport.height * dpr);
-
-      // Correct transforms: DPR scaling
-      pdfCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      boxesCtx.setTransform(dpr, 0, 0, dpr, 0, 0);      // NEW
-      overlayCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      // try {
-      //   const annots = await page.getAnnotations({ intent: "display" });
-      //   pageHasFormFields[pageNum] = Array.isArray(annots) && annots.some(a => a && a.subtype === "Widget");
-      // } catch { pageHasFormFields[pageNum] = false; }
-
-      async function renderPdfAnnotations(page, viewport) {
-        try {
-          // Clear previous DOM widgets
-          annotationLayer.innerHTML = "";
-
-          // Get annotations
-          const annotations = await page.getAnnotations({ intent: "display" });
-
-          // Use a dontFlip viewport (PDF.js expects this for annotation DOM)
-          const view = viewport.clone({ dontFlip: true });
-
-          const params = {
-            viewport: view,
-            div: annotationLayer,
-            annotations,
-            page,
-            renderForms: false,                    // render form widgets
-            annotationStorage: pdfDoc?.annotationStorage || null,
-            enableScripting: false                // keep JS off for safety
-          };
-
-          if (pdfjsLib?.AnnotationLayer?.render) {
-            pdfjsLib.AnnotationLayer.render(params);
-          } else if (pdfjsLib?.AnnotationLayerBuilder) {
-            const builder = new pdfjsLib.AnnotationLayerBuilder({
-              pageDiv: annotationLayer.parentElement,
-              pdfPage: page,
-              annotationStorage: pdfDoc?.annotationStorage || null
-            });
-            builder.render(view, "display");
-          }
-        } catch (e) {
-          console.warn("[annotation render] failed:", e);
-          annotationLayer.innerHTML = "";
+        if (!pageBaseSize[pageNum]) {
+          pageBaseSize[pageNum] = { w: baseViewport.width, h: baseViewport.height };
         }
-      }
+        pageCssSize[pageNum] = { w: viewport.width, h: viewport.height };
 
-      // page.render({ canvasContext: pdfCtx, viewport, renderInteractiveForms: true }).promise.then(() => {
-        page.render({ canvasContext: pdfCtx, viewport }).promise.then(() => {
-        renderPdfAnnotations(page, viewport);
-        if (pageInfo) pageInfo.textContent = `Page ${pageNum} / ${pdfDoc.numPages}`;
-        if (zoomInfo) zoomInfo.textContent = `${Math.round(scale * 100)}%`;
+        const dpr = window.devicePixelRatio || 1;
+        pageLayer.style.width  = `${viewport.width}px`;
+        pageLayer.style.height = `${viewport.height}px`;
 
-        // Clear both overlay layers appropriately
+        setCssSize(pdfCanvas, viewport.width, viewport.height);
+        setCssSize(boxesCanvas, viewport.width, viewport.height);
+        setCssSize(overlayCanvas, viewport.width, viewport.height);
+        setCssSize(annotationLayer, viewport.width, viewport.height);
+
+        setDeviceSize(pdfCanvas, viewport.width * dpr, viewport.height * dpr);
+        setDeviceSize(boxesCanvas, viewport.width * dpr, viewport.height * dpr);
+        setDeviceSize(overlayCanvas, viewport.width * dpr, viewport.height * dpr);
+
+        pdfCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        boxesCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        overlayCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        // Render the page bitmap
+        await page.render({ canvasContext: pdfCtx, viewport }).promise;
+        if (mySeq !== RENDER_SEQ) { resolve(); return; }
+
+        // Render annotations DOM
+        await (async () => {
+          try {
+            annotationLayer.innerHTML = "";
+            const annotations = await page.getAnnotations({ intent: "display" });
+            const view = viewport.clone({ dontFlip: true });
+            const params = {
+              viewport: view, div: annotationLayer, annotations, page,
+              renderForms: false, annotationStorage: pdfDoc?.annotationStorage || null, enableScripting: false
+            };
+            if (pdfjsLib?.AnnotationLayer?.render) {
+              pdfjsLib.AnnotationLayer.render(params);
+            } else if (pdfjsLib?.AnnotationLayerBuilder) {
+              const builder = new pdfjsLib.AnnotationLayerBuilder({
+                pageDiv: annotationLayer.parentElement,
+                pdfPage: page,
+                annotationStorage: pdfDoc?.annotationStorage || null
+              });
+              builder.render(view, "display");
+            }
+          } catch { annotationLayer.innerHTML = ""; }
+        })();
+
+        if (mySeq !== RENDER_SEQ) { resolve(); return; }
+
+        // UI + clear overlays after a successful commit
+        syncNavInfo(pageNum);
+        markActiveThumbnail(pageNum);
+
         boxesCtx.clearRect(0, 0, boxesCanvas.width, boxesCanvas.height);
         overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
 
-        if (toggleBoxes && toggleBoxes.checked && currentFormId) drawOverlay(currentFormId, pageNum);
-        if (editMode) paintEdits(pageNum);
-
-        // Start workspace timer first render
-        if (!workspaceShownAt) {
-          workspaceShownAt = ws_now();
-          workspaceLogged = false;
-          ws_persistInflight();
-        }
-
         applyPointerRouting();
-      });
+
+        LAST_COMMIT_SEQ = mySeq;
+        // Give layout a tick to settle, then resolve
+        requestAnimationFrame(() => resolve());
+      }).catch(reject);
     });
   }
 
-  function buildThumbnails(pdf) {
+  async function buildThumbnails(pdf) {
     const host = thumbSidebar; if (!host) return;
     host.innerHTML = "";
+
+    // 1) Create ordered placeholders first (guarantees 1..N top-to-bottom)
+    const frag = document.createDocumentFragment();
+    const items = new Array(pdf.numPages);
+
     for (let n = 1; n <= pdf.numPages; n++) {
-      pdf.getPage(n).then((page) => {
-        const viewport = page.getViewport({ scale: 0.3 });
-        const c = document.createElement("canvas");
-        c.width = viewport.width; c.height = viewport.height;
-        page.render({ canvasContext: c.getContext("2d"), viewport }).promise.then(() => {
-          const w = document.createElement("div");
-          w.className = "thumbnail-wrapper";
-          c.className = "thumbnail";
-          c.title = `Page ${page.pageNumber}`;
-          c.addEventListener("click", () => { currentPage = page.pageNumber; renderPage(currentPage); });
-          const label = document.createElement("div");
-          label.className = "thumbnail-label";
-          label.textContent = `Page ${page.pageNumber}`;
-          w.appendChild(c); w.appendChild(label);
-          host.appendChild(w);
-        });
+      const w = document.createElement("div");
+      w.className = "thumbnail-wrapper";
+      w.dataset.page = String(n); // 1-based
+
+      const c = document.createElement("canvas");
+      c.className = "thumbnail";
+      c.title = `Page ${n}`;
+      c.dataset.page = String(n);
+
+      const label = document.createElement("div");
+      label.className = "thumbnail-label";
+      label.textContent = `Page ${n}`;
+
+      // click always uses the 1-based dataset, never a closure over pdf.js pageNumber
+      c.addEventListener("click", () => {
+        const p = parseInt(c.dataset.page, 10) || 1;
+        currentPage = p;
+        renderPage(currentPage);
       });
+
+      w.appendChild(c);
+      w.appendChild(label);
+      frag.appendChild(w);
+
+      items[n - 1] = { n, canvas: c };
     }
+
+    host.appendChild(frag);
+
+    // 2) Render pages sequentially into the pre-ordered canvases
+    for (const it of items) {
+      const page = await pdf.getPage(it.n);
+      const viewport = page.getViewport({ scale: 0.3 });
+      it.canvas.width = viewport.width;
+      it.canvas.height = viewport.height;
+      await page.render({ canvasContext: it.canvas.getContext("2d"), viewport }).promise;
+    }
+
+    markActiveThumbnail(currentPage);
   }
+
+  // Scroll-to-zoom (CTRL/⌘ + wheel, or two-finger trackpad with ctrl)
+  const pdfContainer = document.getElementById("pdfContainer");
+  pdfContainer?.addEventListener("wheel", (e) => {
+    // Only zoom when modifier is held to avoid blocking natural scroll
+    if (!e.ctrlKey && !e.metaKey) return;
+    e.preventDefault();
+    const delta = e.deltaY;
+    const factor = delta > 0 ? 0.9 : 1.1;
+    setScaleAndRender(scale * factor);
+  }, { passive: false });
 
   // ---------- SweetAlert determinate progress helpers (force-centered) ----------
   function openProgress(title, subtitle){
@@ -492,6 +546,10 @@ function initWorkspace() {
   analyzeBtn?.addEventListener("click", runAnalysis);
 
   async function runAnalysis() {
+    if (analyzeBtn) {
+      analyzeBtn.classList.add("running");
+      analyzeBtn.setAttribute("aria-busy", "true");
+    }
     analysisStartAt = nowMs();
     lastFinishAt = null;
     lastDuration = null;
@@ -547,11 +605,20 @@ function initWorkspace() {
 
         if (formTitle) formTitle.textContent = explainer.title || (storedName || "Form");
         renderSummaries(explainer);
+        sidebar?.classList.remove("sidebar-collapsed");
+        if (analyzeBtn) {
+          analyzeBtn.classList.add("dismissed");
+          analyzeBtn.setAttribute("aria-hidden", "true");
+          analyzeBtn.setAttribute("tabindex", "-1");
+          analyzeBtn.classList.remove("running");
+          analyzeBtn.removeAttribute("aria-busy");
+        }
+        if (sidebarTitle) sidebarTitle.textContent = "Here are your summaries";
       }, P);
 
       // 5) Initial overlay draw (15%)
       await runStep("Overlaying navigation aids…", 15, async () => {
-        if (toggleBoxes && toggleBoxes.checked && currentFormId) await drawOverlay(currentFormId, currentPage);
+        if (showBoxes && currentFormId) await drawOverlay(currentFormId, currentPage);
       }, P);
 
       // 6) Final polish (10%)
@@ -571,6 +638,11 @@ function initWorkspace() {
       lastDuration = lastFinishAt - (analysisStartAt || lastFinishAt);
       logUserSession({ status: "error", message: e?.message || String(e) });
       closeProgressError(e?.message);
+    } finally {
+      if (analyzeBtn && !analyzeBtn.classList.contains("dismissed")) {
+        analyzeBtn.classList.remove("running");
+        analyzeBtn.removeAttribute("aria-busy");
+      }
     }
   }
 
@@ -597,23 +669,26 @@ function initWorkspace() {
     if (metricsRow) metricsRow.textContent = "";
   }
 
+  // Debounce guard so clicks don't pile up
+  let jumping = false;
+
   // click → jump
   summaryList?.addEventListener("click", async (ev) => {
     const lbl = ev.target.closest(".summary-label");
-    if (!lbl || !currentFormId) return;
+    if (!lbl || !currentFormId || jumping) return;
+
+    jumping = true;
     try {
-      if (!cachedAnnotations || cachedAnnotations.__formId !== currentFormId) {
-        const res = await fetch(`/explanations/_annotations/${currentFormId}.json?ts=${Date.now()}`, { cache: "no-store" });
-        if (!res.ok) throw new Error("Annotations not found");
-        cachedAnnotations = await res.json(); cachedAnnotations.__formId = currentFormId;
-      }
+      const ok = await ensureAnnotationsReady();
+      if (!ok) return;
+
       const anchor = findAnchorForLabel(lbl.textContent.trim(), cachedAnnotations);
-      if (!anchor) return;
-      currentPage = (anchor.page || 0) + 1;
-      renderPage(currentPage);
-      await new Promise((r) => setTimeout(r, 250));
-      drawOverlay(currentFormId, currentPage, anchor);
-    } catch (e) { console.warn("Label jump failed:", e); }
+      await jumpToAnchor(anchor); // assumes the cancellable, awaited renderPage version
+    } catch (e) {
+      console.warn("Label jump failed:", e);
+    } finally {
+      jumping = false;
+    }
   });
 
   async function drawOverlay(formId, pageNumber, anchor = null) {
@@ -621,54 +696,64 @@ function initWorkspace() {
       if (!cachedAnnotations || cachedAnnotations.__formId !== formId) {
         const res = await fetch(`/explanations/_annotations/${formId}.json?ts=${Date.now()}`, { cache: "no-store" });
         if (!res.ok) { boxesCtx.clearRect(0, 0, boxesCanvas.width, boxesCanvas.height); return; }
-        cachedAnnotations = await res.json(); cachedAnnotations.__formId = formId;
+        cachedAnnotations = await res.json();
+        cachedAnnotations.__formId = formId;
       }
 
-      // Only clear boxes layer
+      // clear only the boxes layer
       boxesCtx.clearRect(0, 0, boxesCanvas.width, boxesCanvas.height);
 
       const pageIdx = pageNumber - 1;
-      let rects = [];
-      if (Array.isArray(cachedAnnotations.groups) && cachedAnnotations.groups.length) {
-        rects = cachedAnnotations.groups.filter((g) => (g.page || 0) === pageIdx);
-      } else if (Array.isArray(cachedAnnotations.tokens)) {
-        rects = cachedAnnotations.tokens.filter((t) => (t.page || 0) === pageIdx);
+      // Draw background rectangles only if showBoxes is ON
+      if (showBoxes) {
+        let rects = [];
+        if (Array.isArray(cachedAnnotations.groups) && cachedAnnotations.groups.length) {
+          rects = cachedAnnotations.groups.filter((g) => (g.page || 0) === pageIdx);
+        } else if (Array.isArray(cachedAnnotations.tokens)) {
+          rects = cachedAnnotations.tokens.filter((t) => (t.page || 0) === pageIdx);
+        }
+
+        boxesCtx.save();
+        boxesCtx.lineWidth = 1;
+        boxesCtx.strokeStyle = "rgba(20,20,20,0.25)";
+        for (const r of rects) {
+          const rect = pdfBBoxToCssRect(r.bbox, pageNumber);
+          boxesCtx.strokeRect(rect.x, rect.y, rect.w, rect.h);
+        }
+        boxesCtx.restore();
       }
 
-      const cssW = pageLayer.clientWidth;
-      const cssH = pageLayer.clientHeight;
-      // bboxes are normalized 0..1000 → convert directly to CSS pixels
-      const sx = cssW / 1000.0;
-      const sy = cssH / 1000.0;
-
-      boxesCtx.save();
-      boxesCtx.lineWidth = 1;
-      boxesCtx.strokeStyle = "rgba(20,20,20,0.25)";
-      rects.forEach((r) => {
-        const [x0,y0,x1,y1] = r.bbox;
-        boxesCtx.strokeRect(x0*sx, y0*sy, Math.max(1,(x1-x0)*sx), Math.max(1,(y1-y0)*sy));
-      });
-
+      // Anchor highlight (always draw if provided)
       if (anchor && Array.isArray(anchor.bbox)) {
+        const rect = pdfBBoxToCssRect(anchor.bbox, pageNumber);
+        boxesCtx.save();
         boxesCtx.lineWidth = 2;
         boxesCtx.strokeStyle = "rgba(0,0,0,0.95)";
         boxesCtx.fillStyle   = "rgba(255,255,0,0.2)";
-        const [x0,y0,x1,y1] = anchor.bbox;
-        boxesCtx.fillRect(x0*sx, y0*sy, Math.max(1,(x1-x0)*sx), Math.max(1,(y1-y0)*sy));
-        boxesCtx.strokeRect(x0*sx, y0*sy, Math.max(1,(x1-x0)*sx), Math.max(1,(y1-y0)*sy));
+        boxesCtx.fillRect(rect.x, rect.y, rect.w, rect.h);
+        boxesCtx.strokeRect(rect.x, rect.y, rect.w, rect.h);
+        boxesCtx.restore();
       }
-      boxesCtx.restore();
-    } catch {
+    } catch (e) {
+      // If anything fails, clear the layer but don't double-restore
       boxesCtx.clearRect(0, 0, boxesCanvas.width, boxesCanvas.height);
+      // console.warn("drawOverlay failed:", e);
     }
   }
 
-  document.addEventListener("change", (ev) => {
-    if (ev.target && ev.target.id === "toggleBoxes") {
-      if (ev.target.checked && currentFormId) drawOverlay(currentFormId, currentPage);
-      else boxesCtx.clearRect(0, 0, boxesCanvas.width, boxesCanvas.height);
-    }
-  });
+  function centerOnAnchor(pageNum, anchor){
+    try {
+      const scroller = document.getElementById("pdfContainer") || document.scrollingElement || document.documentElement;
+      const rect = pdfBBoxToCssRect(anchor.bbox, pageNum);
+      const midY = rect.y + rect.h * 0.5;
+
+      // Get the page layer's top offset relative to the scroller
+      const pageTop = (pageLayer.getBoundingClientRect().top + scroller.scrollTop) - (document.documentElement.getBoundingClientRect().top || 0);
+      const target = Math.max(0, pageTop + midY - (scroller.clientHeight * 0.5));
+
+      scroller.scrollTo({ top: target, behavior: "smooth" });
+    } catch {}
+  }
 
   // ---- Backend helpers ----
   async function softReuploadForDisk(webUrl) { try {
@@ -782,6 +867,11 @@ function initWorkspace() {
     return s;
   }
 
+  function cleanLabelRaw(s){
+    // Trim trailing ":" or "*" and collapse spaces, case-insensitive compare
+    return (s||"").toString().replace(/[:*]+$/,"").replace(/\s+/g," ").trim().toLowerCase();
+  }
+
   function tokenize(s) { return normalizeText(s).split(" ").filter(Boolean); }
   function bigrams(tokens) { const out = []; for (let i = 0; i < tokens.length - 1; i++) out.push(tokens[i] + " " + tokens[i + 1]); return out; }
 
@@ -812,67 +902,168 @@ function initWorkspace() {
 
   function unionLine(seed, pageTokens) {
     let box = seed.bbox.slice(0, 4);
-    for (const t of pageTokens) if (sameLine(seed, t)) box = bboxUnion(box, t.bbox);
+    for (const t of pageTokens) if (sameLineLoose(seed, t)) box = bboxUnion(box, t.bbox);
     return box;
   }
 
-  function findAnchorForLabel(label, annotations) {
-    if (!annotations) return null;
-    const labelNorm = normalizeText(label);
-    const MIN_SCORE = 0.60;
-
-    // exact group label match
-    if (Array.isArray(annotations.groups) && annotations.groups.length) {
-      const exact = annotations.groups.find(g => normalizeText(g.label || "") === labelNorm);
-      if (exact && Array.isArray(exact.bbox) && exact.bbox.length === 4) {
-        return { page: (exact.page || 0), bbox: exact.bbox, source: "group-exact", score: 1 };
-      }
-    }
-
-    const tokens = Array.isArray(annotations.tokens) ? annotations.tokens : [];
-    if (!tokens.length && !(annotations.groups && annotations.groups.length)) return null;
-
-    let pageCandidates = null;
-
-    if (annotations.groups && annotations.groups.length) {
-      const scoredGroups = annotations.groups
-        .map(g => ({ g, s: similarity(label, g.label || "") }))
-        .filter(x => x.s > 0);
-      if (scoredGroups.length) {
-        scoredGroups.sort((a, b) => b.s - a.s);
-        pageCandidates = [...new Set(scoredGroups.slice(0, 2).map(x => x.g.page || 0))];
-      }
-    }
-
-    if (!pageCandidates) {
-      const pageScore = new Map();
-      for (const t of tokens) {
-        const s = similarity(label, t.text || "");
-        if (s <= 0) continue;
-        const p = t.page || 0;
-        pageScore.set(p, Math.max(pageScore.get(p) || 0, s));
-      }
-      const sorted = [...pageScore.entries()].sort((a, b) => b[1] - a[1]).map(([p]) => p);
-      if (!sorted.length) return null;
-      pageCandidates = sorted.slice(0, 1);
-    }
-
-    let best = null;
-    for (const p of pageCandidates) {
-      const pageTokens = tokens.filter(t => (t.page || 0) === p);
-      for (const t of pageTokens) {
-        const s = similarity(label, t.text || "");
-        const leftBias = (t.bbox?.[0] ?? 1e9) / 1e6;
-        const score = s - leftBias;
-        if (!best || score > best.score) best = { token: t, score, page: p };
-      }
-    }
-
-    if (!best || best.score < MIN_SCORE) return null;
-
-    const lineBox = unionLine(best.token, tokens.filter(t => (t.page || 0) === best.page));
-    return { page: best.page, bbox: lineBox, score: best.score, source: "token-fuzzy" };
+  function stripPunctLite(s){
+    // keep letters/numbers/spaces; drop common label punctuation (: * · – — . , / \ ( ) [ ])
+    return (s||"").replace(/[:*·–—.,\/\\()[\]]/g, " ").replace(/\s+/g," ").trim();
   }
+
+  function normalizeLabel(s){
+    // your normalizeText + colon/asterisk handling, aggressive but safe for labels
+    s = (s||"").toString().trim();
+    // tolerate common UI suffixes like ":" or " *"
+    s = s.replace(/[:*]+$/,"").trim();
+    s = stripPunctLite(s);
+    return normalizeText(s); // uses your SYN_MAP + lowercasing + space collapse
+  }
+
+  function sameLineLoose(a, b){
+    // more tolerant than the old 8px; PDFs vary a lot
+    const midA = (a.bbox[1] + a.bbox[3]) / 2;
+    const midB = (b.bbox[1] + b.bbox[3]) / 2;
+    return Math.abs(midA - midB) < 14;
+  }
+
+  function unionTokensBBox(tokens){
+    let box = tokens[0].bbox.slice(0,4);
+    for (let i=1;i<tokens.length;i++) box = bboxUnion(box, tokens[i].bbox);
+    return box;
+  }
+
+  function buildLabelIndex(annotations) {
+  const out = { map: new Map() };
+  const tokens = Array.isArray(annotations.tokens) ? annotations.tokens : [];
+  if (!tokens.length) return out;
+
+  // group tokens by page + normalize
+  const byPage = new Map();
+  for (const t of tokens) {
+    if (!t || !t.text || !Array.isArray(t.bbox)) continue;
+    const p = t.page || 0;
+    if (!byPage.has(p)) byPage.set(p, []);
+    byPage.get(p).push({ ...t, _norm: normalizeLabel(t.text) });
+  }
+
+  for (const [pageIdx, arr] of byPage.entries()) {
+    // sort by row then x
+    arr.sort((a,b)=> (a.bbox[1]-b.bbox[1]) || (a.bbox[0]-b.bbox[0]));
+
+    // segment to lines with loose tolerance
+    const lines = [];
+    for (const tok of arr) {
+      let placed = false;
+      for (const line of lines) {
+        if (sameLineLoose(line[line.length-1], tok)) { line.push(tok); placed = true; break; }
+      }
+      if (!placed) lines.push([tok]);
+    }
+
+    // index windows up to length 8
+    for (const line of lines) {
+      line.sort((a,b)=> a.bbox[0]-b.bbox[0]);
+      const norms = line.map(t => (t._norm||"").trim()).filter(Boolean);
+      for (let i=0;i<line.length;i++){
+        let joined = "";
+        const acc = [];
+        for (let j=i;j<line.length && (j-i)<8; j++){
+          const piece = norms[j]; if (!piece) continue;
+          joined = (joined ? (joined + " " + piece) : piece);
+          acc.push(line[j]);
+
+          const key = joined;
+          if (!out.map.has(key)) out.map.set(key, { page: pageIdx, bbox: unionTokensBBox(acc) });
+
+          const nospace = key.replace(/\s+/g,"");
+          if (!out.map.has(nospace)) out.map.set(nospace, { page: pageIdx, bbox: unionTokensBBox(acc) });
+        }
+      }
+    }
+  }
+
+  return out;
+}
+
+// Helper: keep punctuation that often appears in labels out of the comparison
+function cleanLabelRaw(s){
+  return (s || "")
+    .toString()
+    .replace(/[:*]+$/,"")       // trim trailing ":" or "*" (common UI suffixes)
+    .replace(/\s+/g," ")        // collapse whitespace
+    .trim()
+    .toLowerCase();
+}
+
+/**
+ * Robust label → anchor:
+ * 0) EXACT phrase match on line-constrained token windows (index fast path)
+ * 0a) RAW exact group-label match (literal wording, punctuation-trimmed)
+ * 1) Exact group-label match (normalized)
+ * 2) Fuzzy group (similarity)
+ * 3) Fuzzy token (similarity) with small left-bias
+ */
+function findAnchorForLabel(labelRaw, annotations){
+  if (!annotations) return null;
+
+  const labelNorm    = normalizeLabel(labelRaw);
+  const labelRawClean = cleanLabelRaw(labelRaw);
+  if (!labelNorm) return null;
+
+  // 0) phrase index (wins)
+  const idx = annotations.__index;
+  if (idx && idx.map) {
+    const direct = idx.map.get(labelNorm) || idx.map.get(labelNorm.replace(/\s+/g,""));
+    if (direct) return { page: direct.page, bbox: direct.bbox, score: 1.0, source: "index-exact" };
+  }
+
+  // 0a) RAW exact group label (strongest for “exact wording in PDF”)
+  const groups0 = Array.isArray(annotations.groups) ? annotations.groups : [];
+  if (groups0.length){
+    const exactRaw = groups0.find(g => cleanLabelRaw(g.label || "") === labelRawClean);
+    if (exactRaw && Array.isArray(exactRaw.bbox)) {
+      return { page:(exactRaw.page||0), bbox: exactRaw.bbox, score: 1.0, source: "group-raw-exact" };
+    }
+  }
+
+  // 1) exact group label (normalized)
+  const groups = groups0;
+  if (groups.length){
+    const exact = groups.find(g => normalizeLabel(g.label || "") === labelNorm);
+    if (exact && Array.isArray(exact.bbox)) {
+      return { page:(exact.page||0), bbox:exact.bbox, score:.98, source:"group-exact" };
+    }
+  }
+
+  // 2) fuzzy group
+  let best = null;
+  for (const g of groups){
+    const s = similarity(labelRaw, g.label || "");
+    if (s > 0 && (!best || s > best.score)) best = { page:(g.page||0), bbox:g.bbox, score:s, source:"group-fuzzy" };
+  }
+  if (best && best.score >= 0.70 && Array.isArray(best.bbox)) return best;
+
+  // 3) fuzzy tokens (line union)
+  const tokens = Array.isArray(annotations.tokens) ? annotations.tokens : [];
+  if (tokens.length){
+    let tBest = null;
+    for (const t of tokens){
+      const s = similarity(labelRaw, t.text || "");
+      if (s <= 0) continue;
+      const leftBias = (t.bbox?.[0] ?? 0) / 20000;
+      const sc = s - leftBias;
+      if (!tBest || sc > tBest.score) tBest = { token:t, score:sc, page:(t.page||0) };
+    }
+    if (tBest && tBest.score >= 0.48){
+      const pageTokens = tokens.filter(x => (x.page||0) === tBest.page);
+      const lineBox = unionLine(tBest.token, pageTokens);
+      return { page: tBest.page, bbox: lineBox, score: tBest.score, source:"token-fuzzy" };
+    }
+  }
+
+  return null;
+}
 
   // =========================
   // EDIT LAYER
@@ -926,6 +1117,14 @@ function initWorkspace() {
     currentTool = name;
     toolButtons.forEach(b => b.classList.toggle("active", b === btn));
     applyPointerRouting();
+    const toolName = {
+      text: "Insert text",
+      pen: "Draw (pen)",
+      highlight: "Highlight",
+      check: "Check placer",
+      erase: "Eraser"
+    }[name] || "Tool selected";
+    showToolToast(`${toolName} activated`);
   });
 
   // // pointer routing
@@ -953,6 +1152,19 @@ function initWorkspace() {
     const cssW = pageLayer?.clientWidth  || overlayCanvas.clientWidth  || base.w;
     const cssH = pageLayer?.clientHeight || overlayCanvas.clientHeight || base.h;
     return { sx: cssW / base.w, sy: cssH / base.h, invx: base.w / cssW, invy: base.h / cssH };
+  }
+  function pdfBBoxToCssRect(bbox, pageNum) {
+    // Convert PDF-space bbox (origin already top-left from our OCR) into CSS px
+    const { sx, sy } = pageScaleFactors(pageNum);
+    const x0 = bbox[0], y0 = bbox[1], x1 = bbox[2], y1 = bbox[3];
+    const yTop = y0;
+    const yBot = y1;
+    return {
+      x: x0 * sx,
+      y: yTop * sy,
+      w: Math.max(1, (x1 - x0) * sx),
+      h: Math.max(1, (yBot - yTop) * sy)
+    };
   }
   function toCssXY(evt) {
     const rect = overlayCanvas.getBoundingClientRect();
@@ -1513,6 +1725,7 @@ function initWorkspace() {
   let workspaceFinishedAt = null;
   let workspaceDuration   = null;
   let workspaceLogged     = false;
+  let ws_silenceAbandon   = false;
 
   function ws_now() { return Date.now(); }
   function ws_currentCanonical() {
@@ -1572,6 +1785,12 @@ function initWorkspace() {
 
   // ===== Research logging (timers + endpoints) =====
   const LS_KEY_UID = "research_user_id";
+  const METRICS_KEY = "if_metrics_opt_in";
+
+  function isMetricsOptIn() {
+    const flag = sessionStorage.getItem(METRICS_KEY) || localStorage.getItem(METRICS_KEY);
+    return flag === "1";
+  }
 
   function getUserId() {
     const v =
@@ -1620,7 +1839,7 @@ function initWorkspace() {
         source:       "analysis",
         note:         "workspace.js post-analysis"
       };
-      if (!payload.canonical_id) return;
+      if (!payload.canonical_id || !isMetricsOptIn()) return;
       await POST_JSON("/api/metrics.log", payload);
     } catch (e) {
       console.warn("[metrics.log] failed:", e);
@@ -1629,7 +1848,7 @@ function initWorkspace() {
 
   async function logUserSession(finalMeta) {
     try {
-      if (!lastCanonicalId) return;
+      if (!lastCanonicalId || !isMetricsOptIn()) return;
       const user_id = getUserId();
       const body = {
         user_id,
@@ -1648,7 +1867,7 @@ function initWorkspace() {
 
   window.addEventListener("beforeunload", () => {
     try {
-      if (!analysisStartAt || lastFinishAt) return;
+      if (!analysisStartAt || lastFinishAt || !isMetricsOptIn()) return;
       const cid = lastCanonicalId || sessionStorage.getItem("uploadedFormId") || "";
       if (!cid) return;
       const body = JSON.stringify({
@@ -1716,13 +1935,48 @@ function initWorkspace() {
     return (s||"").toString().toLowerCase().normalize("NFKD").replace(/[\u0300-\u036f]/g,"");
   }
 
-  async function ensureAnnotations(formId) {
-    if (!cachedAnnotations || cachedAnnotations.__formId !== formId) {
-      const res = await fetch(`/explanations/_annotations/${formId}.json?ts=${Date.now()}`, { cache: "no-store" });
-      if (!res.ok) throw new Error("Annotations not found");
-      cachedAnnotations = await res.json(); cachedAnnotations.__formId = formId;
+  async function ensureAnnotationsReady() {
+    try {
+      const formId = sessionStorage.getItem("uploadedFormId") || currentFormId;
+      const disk   = sessionStorage.getItem("uploadedDiskPath");
+      if (!formId || !disk) return false;
+
+      // If already loaded for this form (and index built), we're done
+      if (cachedAnnotations && cachedAnnotations.__formId === formId && cachedAnnotations.__indexBuilt) {
+        return true;
+      }
+
+      // Try fetch annotations
+      let ok = true;
+      try {
+        const res = await fetch(`/explanations/_annotations/${formId}.json?ts=${Date.now()}`, { cache: "no-store" });
+        if (!res.ok) ok = false;
+        else {
+          cachedAnnotations = await res.json();
+          cachedAnnotations.__formId = formId;
+        }
+      } catch { ok = false; }
+
+      // If missing, run prelabel to generate them, then refetch
+      if (!ok) {
+        await ensurePrelabelAndOverlays({ disk_path: disk }, formId);
+        const res2 = await fetch(`/explanations/_annotations/${formId}.json?ts=${Date.now()}`, { cache: "no-store" });
+        if (!res2.ok) return false;
+        cachedAnnotations = await res2.json();
+        cachedAnnotations.__formId = formId;
+      }
+
+      // Build exact-phrase index once (requires buildLabelIndex defined)
+      if (!cachedAnnotations.__indexBuilt) {
+        cachedAnnotations.__index = buildLabelIndex(cachedAnnotations);
+        cachedAnnotations.__indexBuilt = true;
+      }
+
+      currentFormId = formId; // keep in sync
+      return true;
+    } catch {
+      return false;
     }
-    return cachedAnnotations;
   }
 
     let lastQuery = "";
@@ -1784,9 +2038,13 @@ function initWorkspace() {
     if (searchStatus) searchStatus.textContent = `${searchIndex+1}/${searchMatches.length}`;
 
     // jump to page & highlight
-    currentPage = (m.page||0) + 1;
-    renderPage(currentPage);
-    setTimeout(()=> drawOverlay(currentFormId, currentPage, { page: m.page||0, bbox: m.bbox }), 160);
+    currentPage = (m.page || 0) + 1;
+    await renderPage(currentPage);  // <-- await the commit
+    if (RENDER_SEQ === LAST_COMMIT_SEQ) {
+      await new Promise(r => setTimeout(r, 60)); // tiny settle, like jumpToAnchor
+      drawOverlay(currentFormId, currentPage, { page: m.page || 0, bbox: m.bbox });
+      centerOnAnchor(currentPage, { bbox: m.bbox }); 
+    }
   }
 
   // UI bindings
@@ -1824,32 +2082,145 @@ function initWorkspace() {
     }
   });
 
-  // --- make search work even before Analyze
-  async function ensureAnnotationsReady() {
-    try {
-      if (currentFormId && cachedAnnotations && cachedAnnotations.__formId === currentFormId) return true;
+async function jumpToAnchor(anchor) {
+  if (!anchor) return;
+  currentPage = (anchor.page || 0) + 1;
+  await renderPage(currentPage);                // <-- wait for the newest render to finish
+  if (RENDER_SEQ !== LAST_COMMIT_SEQ) return;   // if another render started, skip
+  await new Promise(r => setTimeout(r, 60));    // tiny settle
+  drawOverlay(currentFormId, currentPage, anchor);
+  centerOnAnchor(currentPage, anchor);
+}
 
-      // try to fetch; if missing, force prelabel (no full analysis UI needed)
-      const formId = sessionStorage.getItem("uploadedFormId") || currentFormId;
-      const disk   = sessionStorage.getItem("uploadedDiskPath");
-      if (!formId || !disk) return false;
-
-      // try fetch first
-      let ok = true;
-      try {
-        const res = await fetch(`/explanations/_annotations/${formId}.json?ts=${Date.now()}`, { cache: "no-store" });
-        if (!res.ok) ok = false; else { cachedAnnotations = await res.json(); cachedAnnotations.__formId = formId; currentFormId = formId; }
-      } catch { ok = false; }
-
-      if (!ok) {
-        // run prelabel to generate annotations, then refetch
-        await ensurePrelabelAndOverlays({ disk_path: disk }, formId);
-        const res2 = await fetch(`/explanations/_annotations/${formId}.json?ts=${Date.now()}`, { cache: "no-store" });
-        if (!res2.ok) return false;
-        cachedAnnotations = await res2.json(); cachedAnnotations.__formId = formId; currentFormId = formId;
-      }
-      return true;
-    } catch { return false; }
+async function jumpToLabelText(text){
+  if (jumping) return;
+  jumping = true;
+  try {
+    const ok = await ensureAnnotationsReady();
+    if (!ok) return;
+    const anchor = findAnchorForLabel(text, cachedAnnotations);
+    await jumpToAnchor(anchor);
+  } finally {
+    jumping = false;
   }
+}
+
+  /* -------------------------------
+   * Check Placer integration
+   * Paste ABOVE the closing "} // end initWorkspace"
+   * ------------------------------- */
+
+  // Live preset state (default to ✓, 16px)
+  let CHECK_PRESET = {
+    glyph: (document.body.dataset.textPreset || "✓"),
+    size:  parseInt(document.body.dataset.textPresetSize || "16", 10) || 16,
+  };
+
+  // Listen for preset changes from the navbar dropdown script
+  document.addEventListener("intelliform:textPreset", (e) => {
+    try {
+      const d = e?.detail || {};
+      if (typeof d.glyph === "string" && d.glyph) CHECK_PRESET.glyph = d.glyph;
+      if (d.size != null && !Number.isNaN(parseInt(d.size,10))) CHECK_PRESET.size = parseInt(d.size,10);
+      // also mirror to dataset so other code can read it if needed
+      document.body.dataset.textPreset = CHECK_PRESET.glyph;
+      document.body.dataset.textPresetSize = String(CHECK_PRESET.size);
+    } catch {}
+  });
+
+  // Helper: set active visual state in the toolbar
+  function setToolbarActive(btnEl){
+    const all = Array.from(document.querySelectorAll("#editToolbar .tool-btn"));
+    all.forEach(b => b.classList.remove("active"));
+    if (btnEl) btnEl.classList.add("active");
+  }
+
+  // Toast helper for tool selection
+  let toastTimeout = null;
+  function showToolToast(msg){
+    if (!toastHost) return;
+    toastHost.textContent = msg;
+    toastHost.classList.add("show");
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => {
+      toastHost.classList.remove("show");
+    }, 2000);
+  }
+
+  // When the user clicks the Check Placer button:
+  //  - route to TEXT tool under the hood
+  //  - keep the check button visually "active"
+  const checkBtn = document.querySelector('#editToolbar .tool-btn[data-tool="check"]');
+  if (checkBtn) {
+    checkBtn.addEventListener("click", (ev) => {
+      const caret = ev.target.closest(".caret");
+      const ddMenu = checkBtn.parentElement?.querySelector(".dropdown-menu");
+
+      // caret click → toggle dropdown, do not change tool
+      if (caret && ddMenu) {
+        ev.preventDefault();
+        ev.stopPropagation();
+        const open = ddMenu.classList.contains("open");
+        document.querySelectorAll("#editToolbar .dropdown-menu.open").forEach(m => m.classList.remove("open"));
+        ddMenu.classList.toggle("open", !open);
+        checkBtn.setAttribute("aria-expanded", String(!open));
+        return;
+      }
+
+      ev.stopPropagation();
+
+      // ensure we are in edit mode
+      if (!editMode) enterEdit();
+
+      // adopt the latest preset from body dataset if present
+      CHECK_PRESET.glyph = (document.body.dataset.textPreset || CHECK_PRESET.glyph || "✓");
+      CHECK_PRESET.size  = parseInt(document.body.dataset.textPresetSize || CHECK_PRESET.size || "16", 10) || 16;
+
+      // Internally work as the TEXT tool
+      currentTool = "text";
+      applyPointerRouting();
+
+      // visually mark the check button as active (not the Text button)
+      setToolbarActive(checkBtn);
+      showToolToast("Check placer activated");
+    });
+  }
+
+  // After a text placement click, if Check Placer is the visually active tool,
+  // replace the new text node content with the preset glyph and size.
+  // We piggyback on the existing pointerdown flow that already spawns the node.
+  overlayCanvas.addEventListener("pointerdown", () => {
+    // Only when we are effectively in text mode AND the check button is the active one
+    const isCheckActive = checkBtn && checkBtn.classList.contains("active");
+    if (!editMode || currentTool !== "text" || !isCheckActive) return;
+
+    // Let the built-in spawnTextNode run first, then patch the newest node
+    setTimeout(() => {
+      try {
+        // find the most recently added .text-annot on the current page
+        const nodes = Array.from(document.querySelectorAll('.text-annot'))
+          .filter(n => (n.dataset.page|0) === (currentPage|0));
+        if (!nodes.length) return;
+        const node = nodes[nodes.length - 1];
+
+        const content = node.querySelector('.ta-content');
+        if (!content) return;
+
+        // apply preset text + font size
+        content.textContent = CHECK_PRESET.glyph || "✓";
+        content.style.fontSize = `${CHECK_PRESET.size || 16}px`;
+
+        // update the backing model so export/save uses the same values
+        const pageNum = Number(node.dataset.page);
+        const ed = EDIT(pageNum);
+        const m = ed.texts.find(t => t.id === node.dataset.key);
+        if (m) {
+          m.text = content.textContent;
+          m.size = CHECK_PRESET.size || 16;
+        }
+      } catch {}
+    }, 0);
+  });
+
 
 } // end initWorkspace

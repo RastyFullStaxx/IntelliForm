@@ -24,10 +24,9 @@
       display:flex; align-items:center; justify-content:space-between;
       gap:12px; height:80px; padding:0 12px;
     }
-    .navbar-left,.navbar-center,.navbar-right{ display:flex; align-items:center; gap:10px; }
-    .navbar-left{ flex:1 1 auto; }
-    .navbar-center{ flex:0 0 auto; }
-    .navbar-right{ flex:0 0 auto; }
+    .navbar-left{ flex:1 1 0; display:flex; align-items:center; gap:10px; }
+    .navbar-center{ flex:1 1 0; display:flex; align-items:center; justify-content:center; gap:10px; }
+    .navbar-right{ flex:1 1 0; display:flex; align-items:center; justify-content:flex-end; gap:10px; }
     .icon-button{ display:inline-flex; align-items:center; justify-content:center; gap:6px; }
     .edit-toolbar{ display:flex; align-items:center; gap:6px; }
     .tool-dropdown{ position:relative; }
@@ -41,7 +40,12 @@
     .dropdown-menu .menu-row{ display:flex; align-items:center; justify-content:space-between; gap:10px; margin:8px 0; }
     .vertical-divider{ opacity:.5; }
     /* keep buttons unselected by default; JS toggles .active */
-    .tool-btn.active{ background:#ffeaa7; }
+    .tool-btn.active{
+      background: var(--brand-navy);
+      color: var(--brand-gold);
+      box-shadow: 0 0 0 2px rgba(245,196,0,.35);
+      transform: scale(1.05);
+    }
   </style>
 </head>
 
@@ -94,6 +98,38 @@
           </div>
         </div>
 
+                <!-- Check Placer (prefilled text) with dropdown -->
+        <div class="tool-dropdown">
+          <button class="icon-button tool-btn" data-tool="check" title="Check Placer" aria-haspopup="true" aria-expanded="false">
+            <i class="bi bi-check2-square"></i><i class="bi bi-caret-down-fill caret" aria-hidden="true"></i>
+          </button>
+          <div class="dropdown-menu" data-for="check" role="menu">
+            <div class="menu-row">
+              <label for="checkGlyph">Glyph</label>
+              <select id="checkGlyph">
+                <option value="✓" selected>✓ (check)</option>
+                <option value="✔">✔ (heavy check)</option>
+                <option value="✗">✗ (cross)</option>
+                <option value="X">X (letter X)</option>
+                <option value="/">/ (slash)</option>
+                <option value="☑">☑ (ballot box with check)</option>
+                <option value="☒">☒ (ballot box with X)</option>
+                <option value="☐">☐ (empty box)</option>
+                <option value="■">■ (filled box)</option>
+                <option value="★">★ (star)</option>
+                <option value="•">• (bullet)</option>
+                <option value="☛">☛ (pointing hand)</option>
+                <option value="➤">➤ (arrow)</option>
+                <option value="⬤">⬤ (dot)</option>
+              </select>
+            </div>
+            <div class="menu-row">
+              <label for="checkFontSize">Size</label>
+              <input id="checkFontSize" type="number" min="10" max="48" step="1" value="16" style="width:72px;">
+            </div>
+          </div>
+        </div>
+
         <!-- Eraser -->
         <button class="icon-button tool-btn" data-tool="erase" title="Erase (E)">
           <i class="bi bi-eraser"></i>
@@ -124,6 +160,13 @@
       <button id="downloadPDF" class="icon-button" aria-label="Download PDF" title="Download">
         <img src="/static/img/round-download.png" alt="Download"/>
       </button>
+      <span class="toolbar-divider">|</span>
+      <button id="btnShowBoxes" class="icon-button nav-chip" type="button" aria-pressed="false" title="Show boxes">
+        <i class="bi bi-bounding-box-circles"></i>
+      </button>
+      <button id="eceScoreBadge" class="icon-button nav-chip nav-chip-save" type="button" title="Save form">
+        Save
+      </button>
     </div>
   </nav>
 
@@ -135,33 +178,40 @@
   </div>
 
   <!-- Tools Sidebar -->
-  <aside id="sidebar">
+  <aside id="sidebar" class="sidebar-collapsed">
     <div class="sidebar-title"><h5>IntelliForm</h5></div>
 
-    <div class="sidebar-tool" id="analyzeTool">
-      <img src="/static/img/icoAnalyze.png" alt="Analyze"/><span class="tool-label">Analyze</span>
-    </div>
+    <div class="sidebar-top">
+      <div class="cta-card search-card" id="searchTool">
+        <div class="cta-icon"><i class="bi bi-search"></i></div>
+        <div class="cta-copy search-copy">
+          <input id="searchInput" type="text" placeholder="Find in form…" />
+          <div class="search-ctrls">
+            <button id="searchPrev" title="Previous"><i class="bi bi-chevron-up"></i></button>
+            <span id="searchStatus">0/0</span>
+            <button id="searchNext" title="Next"><i class="bi bi-chevron-down"></i></button>
+            <button id="searchClear" title="Clear"><i class="bi bi-x"></i></button>
+          </div>
+        </div>
+      </div>
 
-    <div class="sidebar-tool search-inline" id="searchTool">
-      <img src="/static/img/icoSearch.png" alt="Search"/>
-      <input id="searchInput" type="text" placeholder="Find in form…" />
-      <div class="search-ctrls">
-        <button id="searchPrev" title="Previous"><i class="bi bi-chevron-up"></i></button>
-        <span id="searchStatus">0/0</span>
-        <button id="searchNext" title="Next"><i class="bi bi-chevron-down"></i></button>
-        <button id="searchClear" title="Clear"><i class="bi bi-x"></i></button>
+      <div class="cta-card analyze-card" id="analyzeTool" role="button" tabindex="0">
+        <div class="cta-icon"><i class="bi bi-cpu"></i></div>
+        <div class="cta-copy">
+          <div class="cta-title">Analyze form</div>
+          <div class="cta-subtitle">Identify sections & fields</div>
+        </div>
+        <div class="cta-action"><i class="bi bi-play-fill"></i></div>
       </div>
     </div>
 
-    <div id="formNameDisplay" class="text-center my-3"></div>
+    <div class="sidebar-body">
+      <div id="formNameDisplay" class="text-center my-3"></div>
 
-    <div class="analysis-summary p-3 rounded">
-      <div id="summaryList" class="accordion summary-scroll"></div>
-      <div class="mb-2 text-center" id="metricsRow" style="font-size:12px; opacity:.9;"></div>
-    </div>
-
-    <div class="sidebar-footer">
-      <span id="eceScoreBadge" class="badge-pill">Save</span>
+      <div class="analysis-summary p-3 rounded">
+        <div id="summaryList" class="accordion summary-scroll"></div>
+        <div class="mb-2 text-center" id="metricsRow" style="font-size:12px; opacity:.9;"></div>
+      </div>
     </div>
   </aside>
 
