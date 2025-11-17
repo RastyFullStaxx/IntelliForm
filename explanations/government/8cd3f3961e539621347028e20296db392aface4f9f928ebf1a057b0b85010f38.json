@@ -1,0 +1,136 @@
+{
+  "title": "EMPLOYER CONTRIBUTIONS PAYMENT RETURN",
+  "form_id": "employer-contributions-payment-return",
+  "sections": [
+    {
+      "title": "Employer Information",
+      "fields": [
+        {
+          "label": "EMPLOYER NUMBER",
+          "summary": "Enter your employer number."
+        },
+        {
+          "label": "EMPLOYER NAME",
+          "summary": "Enter the name of the employer."
+        },
+        {
+          "label": "ADDRESS",
+          "summary": "Enter the address details."
+        },
+        {
+          "label": "TAX IDENTIFICATION NUMBER (TIN)",
+          "summary": "Enter the TIN."
+        },
+        {
+          "label": "TELEPHONE NO. (AREA CODE+TEL. NO.)",
+          "summary": "Enter the telephone number."
+        },
+        {
+          "label": "MOBILE/CELLPHONE NO.",
+          "summary": "Enter the mobile number."
+        },
+        {
+          "label": "E-MAIL ADDRESS",
+          "summary": "Enter the email address."
+        },
+        {
+          "label": "WEBSITE",
+          "summary": "Enter the website URL."
+        }
+      ]
+    },
+    {
+      "title": "Payment Information",
+      "fields": [
+        {
+          "label": "FORM OF PAYMENT",
+          "summary": "Select the form of payment."
+        },
+        {
+          "label": "CHECK NUMBER",
+          "summary": "Enter the check number."
+        },
+        {
+          "label": "CHECK DATE",
+          "summary": "Enter the date on the check."
+        },
+        {
+          "label": "BANK/BRANCH NAME",
+          "summary": "Enter the bank and branch name."
+        },
+        {
+          "label": "TOTAL AMOUNT PAID",
+          "summary": "Enter the total amount paid."
+        },
+        {
+          "label": "TOTAL AMOUNT PAID IN WORDS",
+          "summary": "Write the total amount in words."
+        },
+        {
+          "label": "TOTAL AMOUNT OF PAYMENT",
+          "summary": "Enter the total amount of payment."
+        },
+        {
+          "label": "TOTAL AMOUNT PAID IN FIGURES",
+          "summary": "Enter the total amount paid in figures."
+        },
+        {
+          "label": "APPLICABLE PERIOD",
+          "summary": "Specify the applicable period."
+        },
+        {
+          "label": "MONTH",
+          "summary": "Select the month."
+        },
+        {
+          "label": "YEAR",
+          "summary": "Enter the year."
+        }
+      ]
+    },
+    {
+      "title": "Certification",
+      "fields": [
+        {
+          "label": "CERTIFIED CORRECT",
+          "summary": "Sign to certify correctness."
+        },
+        {
+          "label": "SIGNATURE",
+          "summary": "Provide your signature."
+        },
+        {
+          "label": "DATE",
+          "summary": "Enter the date of signing."
+        },
+        {
+          "label": "PRINTED NAME",
+          "summary": "Print your name."
+        },
+        {
+          "label": "POSITION TITLE",
+          "summary": "Enter your position title."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 24,
+    "fp": 1,
+    "fn": 0,
+    "precision": 0.96,
+    "recall": 1.0,
+    "f1": 0.98
+  },
+  "canonical_id": "8cd3f3961e539621347028e20296db392aface4f9f928ebf1a057b0b85010f38",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-11-17T14:38:05+00:00",
+  "aliases": [
+    "7746c2f40b1749e698b7c0346b58c100_SSSForms_ER_Contribution_Payment",
+    "7746c2f40b1749e698b7c0346b58c100_SSSForms_ER_Contribution_Payment.pdf",
+    "R-5 Form",
+    "SSS Employer Contributions Payment Return"
+  ]
+}
