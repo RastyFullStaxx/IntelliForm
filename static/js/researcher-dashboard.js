@@ -1,8 +1,12 @@
-// /static/js/researcher-dashboard.js  (Option A: single container, with CRUD)
+// /static/js/researcher-dashboard.js  (Option A: single container, with CRUD + summary)
+const API_BASE = window.INTELLIFORM_API_BASE || "";
+const UI_BASE  = window.INTELLIFORM_UI_BASE  || API_BASE;
+const apiUrl = (p) => `${API_BASE}${p}`;
+const uiUrl  = (p) => `${UI_BASE}${p}`;
 
 document.addEventListener("DOMContentLoaded", () => {
   // Tab buttons (data-tab = live|trained|funsd|user)
-  document.querySelectorAll(".tabs button[data-tab]").forEach(btn => {
+  document.querySelectorAll(".rd-tab[data-tab]").forEach(btn => {
     btn.addEventListener("click", () => setActiveTab(btn.dataset.tab));
   });
 
@@ -27,6 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
 const lastData = { live: [], trained: [], funsd: [], user: [] };  // newest-first per tab
 let editMode = false;
 let lastUndoToken = { tool: null, user: null }; // remember per kind
+const pageState = { live: 1, trained: 1, funsd: 1, user: 1 };
+const PAGE_SIZE = 10;
 
 /* Selection model: row_ids of the rendered (newest-first) rows */
 let selectedIds = new Set();
@@ -37,18 +43,20 @@ function getTargetEl() {
   return document.getElementById("recordData");
 }
 function getActiveTab() {
-  const active = document.querySelector(".tabs button.active[data-tab]");
+  const active = document.querySelector(".rd-tab.active[data-tab]");
   return active ? active.dataset.tab : "live";
 }
 function setActiveTab(tab) {
   // Toggle button states
-  document.querySelectorAll(".tabs button[data-tab]").forEach(b => {
+  document.querySelectorAll(".rd-tab[data-tab]").forEach(b => {
     const isActive = b.dataset.tab === tab;
     b.classList.toggle("active", isActive);
     b.setAttribute("aria-selected", String(isActive));
   });
   // Reset selection when switching tabs
   clearSelection();
+  // Reset pagination for this tab
+  pageState[tab] = 1;
   // Re-render current tab
   renderTab(tab);
 }
@@ -61,42 +69,55 @@ async function renderTab(tab, forceRefetch = false) {
 
   try {
     if (tab === "user") {
-      const rows = await fetchLogs("user", 1000);
+      const rows = (!forceRefetch && lastData.user.length) ? lastData.user : await fetchLogs("user", 1000);
       lastData.user = rows;
-      box.innerHTML = renderUserTable(rows, { withCheckboxes: editMode });
+      const summary = renderUserSummary(rows);
+      const paged = slicePage(rows, tab);
+      box.innerHTML = summary + renderUserTable(paged, { withCheckboxes: editMode }) + renderPagination(tab, rows.length);
       bindCheckboxHandlers();
+      bindPaginationHandlers(tab, rows.length);
       refreshCrudToolbar();
       return;
     }
 
     // Tool logs
-    const all = await fetchLogs("tool", 2000);
+    const all = (!forceRefetch && lastData.live.length && tab === "live")
+      ? lastData.live
+      : await fetchLogs("tool", 2000);
     let filtered = all;
 
     if (tab === "live") {
       filtered = all.filter(r => (r.source || "analysis").toLowerCase() === "analysis");
+      lastData.live = filtered;
     } else if (tab === "trained") {
-      // Load the 20 PH-trained rows we just generated
-      const rows = await fetchStaticRows("ph_trained");
+      const rows = (!forceRefetch && lastData.trained.length) ? lastData.trained : await fetchStaticRows("ph_trained");
       lastData.trained = rows;
-      box.innerHTML = renderToolTable(rows, { withCheckboxes: editMode });
+      const summary = renderToolSummary(rows, { label: "PH Forms" });
+      const paged = slicePage(rows, tab);
+      box.innerHTML = summary + renderToolTable(paged, { withCheckboxes: editMode }) + renderPagination(tab, rows.length);
       bindCheckboxHandlers();
+      bindPaginationHandlers(tab, rows.length);
       refreshCrudToolbar();
       return;
     } else if (tab === "funsd") {
-      // Use our static rows (built from outputs/funsd artifacts)
-      const funsdRows = await fetchFunsdRowsStatic();
+      const funsdRows = (!forceRefetch && lastData.funsd.length) ? lastData.funsd : await fetchFunsdRowsStatic();
       lastData.funsd = funsdRows;
-      box.innerHTML = renderToolTable(funsdRows, { withCheckboxes: editMode });
+      const summary = renderToolSummary(funsdRows, { label: "FUNSD Benchmarks" });
+      const paged = slicePage(funsdRows, tab);
+      box.innerHTML = summary + renderToolTable(paged, { withCheckboxes: editMode }) + renderPagination(tab, funsdRows.length);
       bindCheckboxHandlers();
+      bindPaginationHandlers(tab, funsdRows.length);
       refreshCrudToolbar();
       return;
     }
 
     filtered.sort((a, b) => (toTs(b.ts_utc || b.ts) - toTs(a.ts_utc || a.ts)));
     lastData[tab] = filtered;
-    box.innerHTML = renderToolTable(filtered, { withCheckboxes: editMode });
+    const summary = renderToolSummary(filtered, { label: "Live (beta)" });
+    const paged = slicePage(filtered, tab);
+    box.innerHTML = summary + renderToolTable(paged, { withCheckboxes: editMode }) + renderPagination(tab, filtered.length);
     bindCheckboxHandlers();
+    bindPaginationHandlers(tab, filtered.length);
     refreshCrudToolbar();
   } catch (e) {
     displayError(box, e?.message || "Failed to load logs.");
@@ -105,9 +126,46 @@ async function renderTab(tab, forceRefetch = false) {
   }
 }
 
+function slicePage(rows, tab) {
+  const totalPages = Math.max(1, Math.ceil(rows.length / PAGE_SIZE));
+  const page = Math.max(1, Math.min(pageState[tab] || 1, totalPages));
+  pageState[tab] = page;
+  const start = (page - 1) * PAGE_SIZE;
+  return rows.slice(start, start + PAGE_SIZE);
+}
+
+function renderPagination(tab, total) {
+  if (total <= PAGE_SIZE) return "";
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  const page = Math.max(1, Math.min(pageState[tab] || 1, totalPages));
+  const prevDisabled = page <= 1 ? "disabled" : "";
+  const nextDisabled = page >= totalPages ? "disabled" : "";
+  return `
+    <div class="rd-pagination">
+      <button class="rd-btn ghost" data-page="${page-1}" ${prevDisabled}>Prev</button>
+      <div class="rd-pagination__info">Page ${page} / ${totalPages}</div>
+      <button class="rd-btn ghost" data-page="${page+1}" ${nextDisabled}>Next</button>
+    </div>
+  `;
+}
+
+function bindPaginationHandlers(tab, total) {
+  const pag = getTargetEl().querySelector(".rd-pagination");
+  if (!pag) return;
+  pag.querySelectorAll("button[data-page]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const target = parseInt(btn.getAttribute("data-page"), 10);
+      if (!Number.isFinite(target)) return;
+      const maxPage = Math.max(1, Math.ceil(total / PAGE_SIZE));
+      pageState[tab] = Math.max(1, Math.min(target, maxPage));
+      renderTab(tab, false);
+    });
+  });
+}
+
 /* ============== Fetch ============== */
 async function fetchLogs(kind = "tool", limit = 200) {
-  const url = `/api/research/logs?kind=${encodeURIComponent(kind)}&limit=${limit}&ts=${Date.now()}`;
+  const url = apiUrl(`/api/research/logs?kind=${encodeURIComponent(kind)}&limit=${limit}&ts=${Date.now()}`);
   const res = await fetch(url, { cache: "no-store" });
   if (res.status === 404) {
     // Treat missing endpoint/file as "no data yet" to avoid hard errors in UI
@@ -354,6 +412,77 @@ function renderToolTable(rows, opts = {}) {
   `);
 }
 
+function summarizeTool(rows) {
+  if (!rows || !rows.length) return null;
+  const metrics = rows.map(r => r.metrics || {});
+  const nums = (key) => metrics.map(m => toNum(m[key])).filter((x) => Number.isFinite(x));
+  const avg = (arr) => arr.length ? (arr.reduce((a,b)=>a+b,0) / arr.length) : NaN;
+  const precision = avg(nums("precision"));
+  const recall    = avg(nums("recall"));
+  const f1        = avg(nums("f1"));
+  const latestTs  = Math.max(...rows.map(r => toTs(r.ts_utc || r.ts || 0)));
+
+  // bucket rollup (avg f1 per bucket)
+  const bucketMap = {};
+  rows.forEach(r => {
+    const b = (r.bucket || "Unlabeled").toString();
+    const f = toNum((r.metrics || {}).f1);
+    if (!bucketMap[b]) bucketMap[b] = { sum:0, n:0 };
+    if (Number.isFinite(f)) { bucketMap[b].sum += f; bucketMap[b].n += 1; }
+  });
+  const bucketRows = Object.entries(bucketMap)
+    .map(([name, {sum,n}]) => ({ name, f1: n ? sum/n : NaN }))
+    .filter(x => Number.isFinite(x.f1))
+    .sort((a,b) => b.f1 - a.f1)
+    .slice(0,3);
+
+  return { precision, recall, f1, latestTs, total: rows.length, bucketRows };
+}
+
+function renderToolSummary(rows, opts = {}) {
+  const stats = summarizeTool(rows);
+  const label = opts.label || "Live Metrics";
+  if (!stats) return emptyState("No tool metrics logged yet.");
+
+  const { precision, recall, f1, latestTs, total, bucketRows } = stats;
+  const bucketHtml = bucketRows && bucketRows.length ? bucketRows.map(b => `
+    <div class="rd-chip">
+      <span>${esc(b.name)}</span>
+      <strong>${pct(b.f1)}</strong>
+    </div>`).join("") : `<div class="rd-chip muted">No buckets</div>`;
+
+  return `
+    <div class="rd-summary">
+      <div class="rd-summary__head">
+        <div class="rd-summary__title">${esc(label)}</div>
+        <div class="rd-summary__meta">Latest: ${fmtWhen(latestTs) || "—"} · ${total} runs</div>
+      </div>
+      <div class="rd-summary__grid">
+        <div class="rd-card metric">
+          <div class="kpi">${pct(precision)}</div>
+          <div class="kpi-label">Avg Precision</div>
+        </div>
+        <div class="rd-card metric">
+          <div class="kpi">${pct(recall)}</div>
+          <div class="kpi-label">Avg Recall</div>
+        </div>
+        <div class="rd-card metric">
+          <div class="kpi">${pct(f1)}</div>
+          <div class="kpi-label">Avg F1</div>
+        </div>
+        <div class="rd-card metric">
+          <div class="kpi">${total}</div>
+          <div class="kpi-label">Runs</div>
+        </div>
+      </div>
+      <div class="rd-summary__buckets">
+        <div class="bucket-label">Top buckets</div>
+        <div class="bucket-chips">${bucketHtml}</div>
+      </div>
+    </div>
+  `;
+}
+
 function renderUserTable(rows, opts = {}) {
   const withCk = !!opts.withCheckboxes;
 
@@ -404,6 +533,48 @@ function renderUserTable(rows, opts = {}) {
     </thead>
     <tbody>${body}</tbody>
   `);
+}
+
+function summarizeUser(rows) {
+  if (!rows || !rows.length) return null;
+  const durations = rows.map(r => toInt(r.duration_ms)).filter((d) => Number.isFinite(d));
+  const avgDur = durations.length ? (durations.reduce((a,b)=>a+b,0) / durations.length) : NaN;
+  const totalDur = durations.reduce((a,b)=>a+b,0);
+  const latestTs = Math.max(...rows.map(r => toTs(r.ts_utc || r.ts || 0)));
+  const uniqueUsers = new Set(rows.map(r => (r.user_id || "").toString().trim() || "ANON")).size;
+  return { avgDur, totalDur, latestTs, total: rows.length, uniqueUsers };
+}
+
+function renderUserSummary(rows) {
+  const stats = summarizeUser(rows);
+  if (!stats) return emptyState("No user sessions logged yet.");
+  const { avgDur, totalDur, latestTs, total, uniqueUsers } = stats;
+  return `
+    <div class="rd-summary">
+      <div class="rd-summary__head">
+        <div class="rd-summary__title">User Sessions</div>
+        <div class="rd-summary__meta">Latest: ${fmtWhen(latestTs) || "—"} · ${total} sessions</div>
+      </div>
+      <div class="rd-summary__grid">
+        <div class="rd-card metric">
+          <div class="kpi">${uniqueUsers}</div>
+          <div class="kpi-label">Unique Users</div>
+        </div>
+        <div class="rd-card metric">
+          <div class="kpi">${avgDur ? ms(Math.round(avgDur)) : "—"}</div>
+          <div class="kpi-label">Avg Duration</div>
+        </div>
+        <div class="rd-card metric">
+          <div class="kpi">${ms(totalDur)}</div>
+          <div class="kpi-label">Total Time</div>
+        </div>
+        <div class="rd-card metric">
+          <div class="kpi">${total}</div>
+          <div class="kpi-label">Sessions</div>
+        </div>
+      </div>
+    </div>
+  `;
 }
 
 /* ============== SweetAlert helpers (fallback to native) ============== */
@@ -463,7 +634,7 @@ function fmtWhen(v){ const t=toTs(v); if(!t)return"—"; try{ return new Date(t)
 
 async function fetchAggregate(datasetKey) {
   // datasetKey: "ph_trained" or "funsd"
-  const url = `/static/research_dashboard/${datasetKey}/${datasetKey}_aggregate.json?v=${Date.now()}`;
+  const url = uiUrl(`/static/research_dashboard/${datasetKey}/${datasetKey}_aggregate.json?v=${Date.now()}`);
   const res = await fetch(url, { cache: "no-store" });
   if (!res.ok) throw new Error(`Aggregate not found: ${datasetKey} (${res.status})`);
   return await res.json();
@@ -489,7 +660,7 @@ function aggregateToRows(agg, label = "Summary") {
 
 async function fetchStaticRows(datasetKey) {
   // datasetKey: "ph_trained"
-  const url = `/static/research_dashboard/${datasetKey}/${datasetKey}_rows.json?v=${Date.now()}`;
+  const url = uiUrl(`/static/research_dashboard/${datasetKey}/${datasetKey}_rows.json?v=${Date.now()}`);
   const res = await fetch(url, { cache: "no-store" });
   if (res.status === 404) return [];
   if (!res.ok) throw new Error(`Rows not found: ${datasetKey} (${res.status})`);
@@ -500,7 +671,7 @@ async function fetchStaticRows(datasetKey) {
 }
 
 async function fetchFunsdRowsStatic() {
-  const url = `/static/research_dashboard/funsd/funsd_rows.json?ts=${Date.now()}`;
+  const url = uiUrl(`/static/research_dashboard/funsd/funsd_rows.json?ts=${Date.now()}`);
   const res = await fetch(url, { cache: "no-store" });
   if (res.status === 404) return [];
   if (!res.ok) throw new Error(`Failed to load FUNSD rows (${res.status})`);
