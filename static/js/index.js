@@ -79,11 +79,13 @@ document.addEventListener('DOMContentLoaded', function () {
     uploadedFileName.textContent = name;
     fileDisplayContainer.classList.remove('d-none');
     startBtn.classList.remove('d-none');
+    dropArea?.classList.add('d-none');   // hide drop zone once a file is chosen
   }
 
   function resetUI() {
     fileDisplayContainer.classList.add('d-none');
     startBtn.classList.add('d-none');
+    dropArea?.classList.remove('d-none'); // show drop zone again
     fileInput.value = '';
     selectedFile = null;
   }

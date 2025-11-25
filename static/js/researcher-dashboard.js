@@ -109,6 +109,10 @@ async function renderTab(tab, forceRefetch = false) {
 async function fetchLogs(kind = "tool", limit = 200) {
   const url = `/api/research/logs?kind=${encodeURIComponent(kind)}&limit=${limit}&ts=${Date.now()}`;
   const res = await fetch(url, { cache: "no-store" });
+  if (res.status === 404) {
+    // Treat missing endpoint/file as "no data yet" to avoid hard errors in UI
+    return [];
+  }
   if (!res.ok) throw new Error(`Failed to load ${kind} logs (${res.status})`);
   const data = await res.json();
   const rows = Array.isArray(data.rows) ? data.rows : [];
@@ -487,6 +491,7 @@ async function fetchStaticRows(datasetKey) {
   // datasetKey: "ph_trained"
   const url = `/static/research_dashboard/${datasetKey}/${datasetKey}_rows.json?v=${Date.now()}`;
   const res = await fetch(url, { cache: "no-store" });
+  if (res.status === 404) return [];
   if (!res.ok) throw new Error(`Rows not found: ${datasetKey} (${res.status})`);
   const rows = await res.json();
   // Ensure newest-first
@@ -497,6 +502,7 @@ async function fetchStaticRows(datasetKey) {
 async function fetchFunsdRowsStatic() {
   const url = `/static/research_dashboard/funsd/funsd_rows.json?ts=${Date.now()}`;
   const res = await fetch(url, { cache: "no-store" });
+  if (res.status === 404) return [];
   if (!res.ok) throw new Error(`Failed to load FUNSD rows (${res.status})`);
   const data = await res.json();
   const rows = Array.isArray(data.rows) ? data.rows : [];
