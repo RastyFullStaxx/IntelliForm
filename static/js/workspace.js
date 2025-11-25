@@ -62,7 +62,7 @@ function initWorkspace() {
 
       // best-effort session close log, then reset
       try { ws_sendAbandonBeacon("exit_clicked"); } catch {}
-      resetAndGoHome();
+      await resetAndGoHome({ deleteUpload: true });
     });
 
   // Toolbar
@@ -125,7 +125,7 @@ function initWorkspace() {
         cancelButtonText: "Stay here"
       }).then(r => r.isConfirmed);
 
-      if (startFresh) resetAndGoHome();
+      if (startFresh) await resetAndGoHome({ deleteUpload: true });
 
     } catch (e) {
       console.error("Print failed", e);
@@ -232,7 +232,25 @@ function initWorkspace() {
       }
     } catch (e3) {
       console.error("[viewer] load failed:", e3);
-      alert("Failed to load PDF.");
+      try {
+        const retry = await Swal.fire({
+          icon: "error",
+          title: "Failed to load PDF",
+          text: "Would you like to re-upload the file?",
+          showCancelButton: true,
+          confirmButtonText: "Re-upload",
+          cancelButtonText: "Go home"
+        }).then(r => r.isConfirmed);
+        if (retry) {
+          const pick = await pickAndUploadFile();
+          persistUpload(pick);
+          await openPdf(pick.web_path);
+        } else {
+          window.location.href = "/";
+        }
+      } catch {
+        window.location.href = "/";
+      }
       return;
     }
     // start edit-ready
@@ -1478,7 +1496,24 @@ function findAnchorForLabel(labelRaw, annotations){
         }
 
         // ---- Reset session storage and go back to index (fresh user upload) ----
-        function resetAndGoHome() {
+        async function resetAndGoHome(options) {
+          const opts = options || {};
+          const shouldDelete = !!opts.deleteUpload;
+          const diskPath = shouldDelete ? (sessionStorage.getItem("uploadedDiskPath") || "") : "";
+
+          // Best-effort cleanup of the temporary upload, if requested.
+          if (shouldDelete && diskPath) {
+            try {
+              await fetch("/api/upload.delete", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ disk_path: diskPath })
+              });
+            } catch (e) {
+              console.warn("[workspace] upload delete failed:", e);
+            }
+          }
+
           try {
             // Do NOT clear the research user id – keep the identity across sessions.
             const KEEP = "research_user_id";
@@ -1547,7 +1582,7 @@ function findAnchorForLabel(labelRaw, annotations){
       await logWorkspaceEvent("saved", tConfirm, { render_ms: renderMs });
 
       if (startFresh) {
-        resetAndGoHome();
+        await resetAndGoHome({ deleteUpload: false });
         return;
       }
 

@@ -149,6 +149,15 @@ class EnsureExplainerBody(BaseModel):
     pdf_disk_path: Optional[str] = None
     aliases: Optional[List[str]] = None
 
+class DeleteUploadBody(BaseModel):
+    """
+    Request body for deleting an uploaded PDF.
+
+    Accepts either an absolute disk path under UPLOADS_DIR or a
+    /uploads/... style web path; both are normalized and validated.
+    """
+    disk_path: str
+
 # -----------------------------
 # Small helpers
 # -----------------------------
@@ -509,6 +518,36 @@ async def api_upload(file: UploadFile = File(...)):
         "file_id": stored,
         "path": web_path,
     }
+
+@app.post("/api/upload.delete")
+async def api_upload_delete(body: DeleteUploadBody):
+    """
+    Delete a previously uploaded PDF if it still exists.
+
+    This is used by the workspace when the user abandons a session
+    without saving, so temporary uploads do not accumulate on disk.
+    """
+    raw = (body.disk_path or "").strip()
+    if not raw:
+        raise HTTPException(status_code=400, detail="disk_path is required.")
+
+    # Normalize and ensure it is under /uploads
+    try:
+        disk = _validate_upload_path(raw)
+    except HTTPException as exc:
+        # If the file is already gone, treat as a no-op
+        if exc.status_code == 404:
+            return {"ok": True, "deleted": False, "reason": "already_missing"}
+        raise
+
+    try:
+        os.remove(disk)
+        return {"ok": True, "deleted": True}
+    except FileNotFoundError:
+        # Race: file disappeared between validate + remove
+        return {"ok": True, "deleted": False, "reason": "already_missing"}
+    except Exception as exc:  # pragma: no cover - defensive
+        raise HTTPException(status_code=500, detail=f"Failed to delete file: {exc}")
 
 @app.post("/api/prelabel")
 async def api_prelabel(
