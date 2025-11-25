@@ -4,6 +4,9 @@ window.addEventListener("load", initWorkspace);
 
 function initWorkspace() {
   console.log("workspace.js 2025-10-12 overlay-split: boxesCanvas + drawCanvas, fixed z-index, label-jump");
+  const API_BASE = window.INTELLIFORM_API_BASE || "";
+  const apiUrl = (path) => `${API_BASE}${path}`;
+  const apiFetch = (path, options) => fetch(apiUrl(path), options);
 
   // ---- Session state ----
   const legacyWebRaw = sessionStorage.getItem("uploadedFileWithExtension") || "";
@@ -291,6 +294,11 @@ function initWorkspace() {
     renderPage(currentPage);
     buildThumbnails(pdfDoc);
     syncNavInfo(currentPage);
+    // Mark workspace start once the PDF is ready (used for user/session timing)
+    if (!workspaceShownAt && isMetricsOptIn()) {
+      workspaceShownAt = ws_now();
+      ws_persistInflight();
+    }
   }
 
   // ---- Render gate ----
@@ -647,14 +655,12 @@ function initWorkspace() {
       // Success
       lastFinishAt = nowMs();
       lastDuration = lastFinishAt - analysisStartAt;
-      logUserSession({ status: "success" });
       closeProgressSuccess();
 
     } catch (e) {
       console.error("runAnalysis error:", e);
       lastFinishAt = nowMs();
       lastDuration = lastFinishAt - (analysisStartAt || lastFinishAt);
-      logUserSession({ status: "error", message: e?.message || String(e) });
       closeProgressError(e?.message);
     } finally {
       if (analyzeBtn && !analyzeBtn.classList.contains("dismissed")) {
@@ -779,7 +785,7 @@ function initWorkspace() {
     const r = await fetch(url, { cache: "no-store" }); if (!r.ok) return null;
     const blob = await r.blob(); const base = baseFromPath(url) || "form.pdf";
     const fd = new FormData(); fd.append("file", new File([blob], base, { type: "application/pdf" }));
-    const up = await fetch("/api/upload", { method: "POST", body: fd }); if (!up.ok) return null;
+    const up = await apiFetch("/api/upload", { method: "POST", body: fd }); if (!up.ok) return null;
     const out = await up.json();
     return { web_path: normalizeToWebUrl(out.web_path), disk_path: out.disk_path, form_id: out.canonical_form_id || out.form_id, file_name: base };
   } catch { return null; } }
@@ -806,7 +812,7 @@ function initWorkspace() {
       input.click();
     }).finally(() => setTimeout(() => input.remove(), 0));
     const fd = new FormData(); fd.append("file", file);
-    const up = await fetch("/api/upload", { method: "POST", body: fd });
+    const up = await apiFetch("/api/upload", { method: "POST", body: fd });
     if (!up.ok) throw new Error("upload failed");
     const out = await up.json();
     return { web_path: normalizeToWebUrl(out.web_path), disk_path: out.disk_path, form_id: out.canonical_form_id || out.form_id, file_name: file.name };
@@ -816,7 +822,7 @@ function initWorkspace() {
     const fd = new FormData();
     fd.append("pdf_disk_path", server.disk_path);
     fd.append("form_id", hashId);
-    const r = await fetch("/api/prelabel", { method: "POST", body: fd });
+    const r = await apiFetch("/api/prelabel", { method: "POST", body: fd });
     if (!r.ok) { const t = await r.text().catch(() => ""); throw new Error(t || "Prelabeling failed."); }
     return r.json();
   }
@@ -1468,7 +1474,7 @@ function findAnchorForLabel(labelRaw, annotations){
         // ---- Workspace event logger: duration ends at the user's confirmation moment ----
         async function logWorkspaceEvent(status, finishedAt, extraMeta) {
           try {
-            if (!workspaceShownAt || workspaceLogged) return;
+            if (!isMetricsOptIn() || !workspaceShownAt || workspaceLogged) return;
             const cid = ws_currentCanonical();
             if (!cid) return;
 
@@ -1482,12 +1488,12 @@ function findAnchorForLabel(labelRaw, annotations){
               meta: Object.assign({ status }, extraMeta || {})
             };
 
-            if (navigator.sendBeacon) {
-              const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
-              navigator.sendBeacon("/api/user.log", blob);
-            } else {
-              await POST_JSON("/api/user.log", payload);
-            }
+      if (navigator.sendBeacon) {
+        const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
+        navigator.sendBeacon(apiUrl("/api/user.log"), blob);
+      } else {
+        await POST_JSON("/api/user.log", payload);
+      }
             workspaceLogged = true;
             ws_clearInflight();
           } catch (e) {
@@ -1504,7 +1510,7 @@ function findAnchorForLabel(labelRaw, annotations){
           // Best-effort cleanup of the temporary upload, if requested.
           if (shouldDelete && diskPath) {
             try {
-              await fetch("/api/upload.delete", {
+              await apiFetch("/api/upload.delete", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ disk_path: diskPath })
@@ -1660,7 +1666,7 @@ function findAnchorForLabel(labelRaw, annotations){
     try {
       const digest = await crypto.subtle.digest("SHA-256", bytes);
       const hex = Array.from(new Uint8Array(digest)).map(b=>b.toString(16).padStart(2,"0")).join("");
-      await fetch("/api/edited.register", {
+      await apiFetch("/api/edited.register", {
         method: "POST",
         headers: { "Content-Type":"application/json" },
         body: JSON.stringify({
@@ -1786,7 +1792,7 @@ function findAnchorForLabel(labelRaw, annotations){
   async function ws_tryRecoverAbandoned() {
     try {
       const raw = sessionStorage.getItem(WS_SS_KEY);
-      if (!raw) return;
+      if (!raw || !isMetricsOptIn()) return;
       const rec = JSON.parse(raw);
       if (!rec || !rec.started_at || !rec.canonical_id) { ws_clearInflight(); return; }
 
@@ -1805,7 +1811,7 @@ function findAnchorForLabel(labelRaw, annotations){
 
       if (navigator.sendBeacon) {
         const blob = new Blob([body], { type: "application/json" });
-        navigator.sendBeacon("/api/user.log", blob);
+        navigator.sendBeacon(apiUrl("/api/user.log"), blob);
       } else {
         await POST_JSON("/api/user.log", JSON.parse(body));
       }
@@ -1847,7 +1853,7 @@ function findAnchorForLabel(labelRaw, annotations){
   };
 
   async function POST_JSON(url, obj) {
-    const r = await fetch(url, {
+    const r = await apiFetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(obj || {})
@@ -1915,13 +1921,13 @@ function findAnchorForLabel(labelRaw, annotations){
         meta: { status: "abandoned" }
       });
       const blob = new Blob([body], { type: "application/json" });
-      navigator.sendBeacon && navigator.sendBeacon("/api/user.log", blob);
+      navigator.sendBeacon && navigator.sendBeacon(apiUrl("/api/user.log"), blob);
     } catch {}
   });
 
   function ws_sendAbandonBeacon(tag) {
     try {
-      if (!workspaceShownAt || workspaceLogged) return;
+      if (!isMetricsOptIn() || !workspaceShownAt || workspaceLogged) return;
       const cid = ws_currentCanonical();
       if (!cid) return;
       const finished = ws_now();
@@ -1937,11 +1943,11 @@ function findAnchorForLabel(labelRaw, annotations){
       const body = JSON.stringify(payload);
       if (navigator.sendBeacon) {
         const blob = new Blob([body], { type: "application/json" });
-        navigator.sendBeacon("/api/user.log", blob);
+        navigator.sendBeacon(apiUrl("/api/user.log"), blob);
         workspaceLogged = true;
         ws_clearInflight();
       } else {
-        fetch("/api/user.log", { method: "POST", headers: { "Content-Type": "application/json" }, body }).catch(()=>{});
+        apiFetch("/api/user.log", { method: "POST", headers: { "Content-Type": "application/json" }, body }).catch(()=>{});
         workspaceLogged = true;
         ws_clearInflight();
       }
