@@ -1,0 +1,36 @@
+{
+  "dataset": "FUNSD_test",
+  "generated_at": "2025-10-20 16:10:37",
+  "count": 50,
+  "macro": {
+    "precision": 0.838616832879446,
+    "recall": 0.8319362572206211,
+    "f1": 0.8352631871713172
+  },
+  "micro": {
+    "precision": 0.838616832879446,
+    "recall": 0.8319362572206211,
+    "f1": 0.8352631871713172
+  },
+  "ece": 0.0,
+  "label_histogram": {},
+  "example_overlays": [
+    "outputs/funsd/overlay/nielsr_funsd_test_00000/page-01.png",
+    "outputs/funsd/overlay/nielsr_funsd_test_00001/page-01.png",
+    "outputs/funsd/overlay/nielsr_funsd_test_00002/page-01.png",
+    "outputs/funsd/overlay/nielsr_funsd_test_00003/page-01.png",
+    "outputs/funsd/overlay/nielsr_funsd_test_00004/page-01.png",
+    "outputs/funsd/overlay/nielsr_funsd_test_00005/page-01.png",
+    "outputs/funsd/overlay/nielsr_funsd_test_00006/page-01.png",
+    "outputs/funsd/overlay/nielsr_funsd_test_00007/page-01.png",
+    "outputs/funsd/overlay/nielsr_funsd_test_00008/page-01.png",
+    "outputs/funsd/overlay/nielsr_funsd_test_00009/page-01.png",
+    "outputs/funsd/overlay/nielsr_funsd_test_00010/page-01.png",
+    "outputs/funsd/overlay/nielsr_funsd_test_00011/page-01.png"
+  ],
+  "tweak_debug": {
+    "policy": "nudge",
+    "change_factor": 0.0,
+    "edit_factor": 0.0
+  }
+}

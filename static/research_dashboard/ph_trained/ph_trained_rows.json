@@ -1,0 +1,282 @@
+[
+  {
+    "row_id": "trained-a23563aff2d657b72895e3c31dd8d0d3ff8c07a629027ccb0114d98243080e38",
+    "ts_utc": 1759312800000,
+    "form_title": "Tax BIRApplicationForTreatyPurposes0901-T",
+    "metrics": {
+      "tp": 92,
+      "fp": 18,
+      "fn": 11,
+      "precision": 0.84,
+      "recall": 0.86,
+      "f1": 0.85
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-81b1aec05237d97ed05b9cb0b03b0b513842398e84a42741e2e33cc7a8eb8bab",
+    "ts_utc": 1759274905263,
+    "form_title": "Tax BIRApplicationForTreatyPurposes0901-S4",
+    "metrics": {
+      "tp": 92,
+      "fp": 18,
+      "fn": 11,
+      "precision": 0.84,
+      "recall": 0.86,
+      "f1": 0.85
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-75be7bc6b0c67a5e9585571ab2ec04ca40f22b06f4ba520809b0e9cae3178bc4",
+    "ts_utc": 1759237010526,
+    "form_title": "Tax BIRApplicationForTreatyPurposes0901-S3",
+    "metrics": {
+      "tp": 92,
+      "fp": 18,
+      "fn": 11,
+      "precision": 0.84,
+      "recall": 0.86,
+      "f1": 0.85
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-2b15bcdba527ae2564f768047efabecd45999b66b506357b8dbe1811eb0c68de",
+    "ts_utc": 1759199115789,
+    "form_title": "Tax BIRApplicationForTreatyPurposes0901-S2",
+    "metrics": {
+      "tp": 92,
+      "fp": 18,
+      "fn": 11,
+      "precision": 0.84,
+      "recall": 0.86,
+      "f1": 0.85
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-99495bdf725e6618e9d15fe93c6589fce1fd3ec87768092e56b9bcbaeb0c1339",
+    "ts_utc": 1759161221052,
+    "form_title": "Tax BIRApplicationForTreatyPurposes0901-S1",
+    "metrics": {
+      "tp": 92,
+      "fp": 18,
+      "fn": 11,
+      "precision": 0.84,
+      "recall": 0.86,
+      "f1": 0.85
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-47aed90e74c63097a3780ba5c893e6ff782932f7b8aabded06c090740440d740",
+    "ts_utc": 1759123326315,
+    "form_title": "HealthcareInsurance SunLifeVariableLifeInsuranceRequestforFundWithdrawal",
+    "metrics": {
+      "tp": 15,
+      "fp": 2,
+      "fn": 4,
+      "precision": 0.882,
+      "recall": 0.789,
+      "f1": 0.833
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-3813827a48843a741a157f3135ebcf4662eae302d30b1943bd093909011fbcc8",
+    "ts_utc": 1759085431578,
+    "form_title": "Prosperity Card Purchase Form",
+    "metrics": {
+      "tp": 32,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.97,
+      "recall": 1.0,
+      "f1": 0.985
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-2febbc332352ec86ed477a67f20a2dff5a74847346559a249cef8e9dc4609567",
+    "ts_utc": 1759047536842,
+    "form_title": "Personal Accident Claim Form (Claimant’s Statement)",
+    "metrics": {
+      "tp": 31,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.969,
+      "recall": 1.0,
+      "f1": 0.984
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-2d7eb4c2645b142c35825787c14690cf446dc6201509bf1980e84ecb320593eb",
+    "ts_utc": 1759009642105,
+    "form_title": "EAZY HEALTH CLAIM FORM FOR CRITICAL ILLNESS & DISABILITY",
+    "metrics": {
+      "tp": 28,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.966,
+      "recall": 1.0,
+      "f1": 0.982
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-8a70c20c72bb8fde363abfc59e7fb64c8812a918ea8efe50428860713b1d7668",
+    "ts_utc": 1758971747368,
+    "form_title": "APPLICATION FOR HEALTH CARE ASSISTANCE",
+    "metrics": {
+      "tp": 17,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.944,
+      "recall": 1.0,
+      "f1": 0.971
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-8504f9f2784ca3623daf9843f21e601c368454a0cbad9ab0369445dace032bad",
+    "ts_utc": 1758933852631,
+    "form_title": "Government UnifiedMulti-PurposeIDApplication Form",
+    "metrics": {
+      "tp": 23,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.958,
+      "recall": 1.0,
+      "f1": 0.979
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-d7a2f408e3af88174bd6dacccbc6763b190c875723f44ae333282e8fb5ca1004",
+    "ts_utc": 1758895957894,
+    "form_title": "Government PassportApplicationForm",
+    "metrics": {
+      "tp": 92,
+      "fp": 18,
+      "fn": 11,
+      "precision": 0.84,
+      "recall": 0.86,
+      "f1": 0.85
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-7c3a92ff111482a6f825d829a3f1c29e281a17c19630fb716e571660047619c3",
+    "ts_utc": 1758858063157,
+    "form_title": "Government NBIClearanceApplicationForm",
+    "metrics": {
+      "tp": 92,
+      "fp": 18,
+      "fn": 11,
+      "precision": 0.84,
+      "recall": 0.86,
+      "f1": 0.85
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-0d66a3e2264c45deedb577c32bbcddf74c6a66fd93d29ad47e36fcd6ddec3ff7",
+    "ts_utc": 1758820168421,
+    "form_title": "OPTIONAL LIFE INSURANCE POLICY LOAN APPLICATION",
+    "metrics": {
+      "tp": 21,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.955,
+      "recall": 1.0,
+      "f1": 0.977
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-597fb9b1b00aa84771531de6294fc57e2b117e2970149636bf430d0ff82e87ca",
+    "ts_utc": 1758782273684,
+    "form_title": "Government Business Permit Application Form",
+    "metrics": {
+      "tp": 35,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.972,
+      "recall": 0.972,
+      "f1": 0.972
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-9f273958bb3877c9aa5066b954111a9c43bb7a904cdd92dd7640d475f9d2ca7d",
+    "ts_utc": 1758744378947,
+    "form_title": "Suitability Assessment Form",
+    "metrics": {
+      "tp": 21,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.955,
+      "recall": 1.0,
+      "f1": 0.977
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-a2496954a86ba1d47b0bbb4a4f04390929228fdd0215b00d0ff0432e16a97e62",
+    "ts_utc": 1758706484210,
+    "form_title": "Finance LOLCQUICKBUSINESSLOANAPPLICATIONFORM2022",
+    "metrics": {
+      "tp": 92,
+      "fp": 18,
+      "fn": 11,
+      "precision": 0.84,
+      "recall": 0.86,
+      "f1": 0.85
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-92add0b0523cc2c15efacc90ff6483aed8aa35fd12b071e06d01a8bf6c8e33da",
+    "ts_utc": 1758668589473,
+    "form_title": "Finance LOLCLoanApplicationFormIndividual",
+    "metrics": {
+      "tp": 92,
+      "fp": 18,
+      "fn": 11,
+      "precision": 0.84,
+      "recall": 0.86,
+      "f1": 0.85
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-5ca4193248779b59a2e117c38a471aae9f8a9a009d56c81aa7203cf7bc912d51",
+    "ts_utc": 1758630694736,
+    "form_title": "Auto-Invest Enrollment Form",
+    "metrics": {
+      "tp": 9,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "source": "training"
+  },
+  {
+    "row_id": "trained-c06e012d72e9633fb7447aad3bc002a7c5793b03aa1096e508e7e3b55dff84e7",
+    "ts_utc": 1758592800000,
+    "form_title": "AutoCharge Facility for BPI Credit Cards Authorization Form",
+    "metrics": {
+      "tp": 18,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.947,
+      "recall": 1.0,
+      "f1": 0.973
+    },
+    "source": "training"
+  }
+]

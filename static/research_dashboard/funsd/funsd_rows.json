@@ -1,0 +1,2790 @@
+{
+  "rows": [
+    {
+      "row_id": "910ef47a9ae6611c",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #001 — nielsr_funsd_train_00000",
+      "ts_utc": "2025-09-15T09:00:00+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.844,
+        "recall": 0.829,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "d084e0f576421e73",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #002 — nielsr_funsd_train_00001",
+      "ts_utc": "2025-09-15T09:53:38.181818+08:00",
+      "metrics": {
+        "tp": 37,
+        "fp": 5,
+        "fn": 6,
+        "precision": 0.843,
+        "recall": 0.833,
+        "f1": 0.838
+      }
+    },
+    {
+      "row_id": "b0ae21a4285baf84",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #003 — nielsr_funsd_train_00002",
+      "ts_utc": "2025-09-15T10:47:16.363636+08:00",
+      "metrics": {
+        "tp": 35,
+        "fp": 7,
+        "fn": 6,
+        "precision": 0.838,
+        "recall": 0.827,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "3a091ece536f7999",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #004 — nielsr_funsd_train_00003",
+      "ts_utc": "2025-09-15T11:40:54.545454+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 6,
+        "fn": 8,
+        "precision": 0.843,
+        "recall": 0.828,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "9d7b1e1d0d2f38c0",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #005 — nielsr_funsd_train_00004",
+      "ts_utc": "2025-09-15T12:34:32.727272+08:00",
+      "metrics": {
+        "tp": 41,
+        "fp": 8,
+        "fn": 7,
+        "precision": 0.841,
+        "recall": 0.828,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "df6980b45b905106",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #006 — nielsr_funsd_train_00005",
+      "ts_utc": "2025-09-15T13:28:10.909090+08:00",
+      "metrics": {
+        "tp": 37,
+        "fp": 5,
+        "fn": 7,
+        "precision": 0.837,
+        "recall": 0.829,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "e84b6e7144b9fe5d",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #007 — nielsr_funsd_train_00006",
+      "ts_utc": "2025-09-15T14:21:49.090908+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 5,
+        "fn": 7,
+        "precision": 0.837,
+        "recall": 0.833,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "f2879a49d6e0679c",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #008 — nielsr_funsd_train_00007",
+      "ts_utc": "2025-09-15T15:15:27.272726+08:00",
+      "metrics": {
+        "tp": 40,
+        "fp": 8,
+        "fn": 7,
+        "precision": 0.839,
+        "recall": 0.828,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "07bc1306aaa4a601",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #009 — nielsr_funsd_train_00008",
+      "ts_utc": "2025-09-15T16:09:05.454544+08:00",
+      "metrics": {
+        "tp": 42,
+        "fp": 5,
+        "fn": 8,
+        "precision": 0.838,
+        "recall": 0.834,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "3b03aa3ed73bcfc0",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #010 — nielsr_funsd_train_00009",
+      "ts_utc": "2025-09-15T17:02:43.636362+08:00",
+      "metrics": {
+        "tp": 32,
+        "fp": 8,
+        "fn": 6,
+        "precision": 0.841,
+        "recall": 0.834,
+        "f1": 0.837
+      }
+    },
+    {
+      "row_id": "0a98824667ad7cff",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #011 — nielsr_funsd_train_00010",
+      "ts_utc": "2025-09-15T17:56:21.818180+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 4,
+        "fn": 9,
+        "precision": 0.836,
+        "recall": 0.827,
+        "f1": 0.832
+      }
+    },
+    {
+      "row_id": "7d153ef3fbdeba46",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #012 — nielsr_funsd_train_00011",
+      "ts_utc": "2025-09-15T18:49:59.999998+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 5,
+        "fn": 8,
+        "precision": 0.842,
+        "recall": 0.827,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "8cbc091854c28ba0",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #013 — nielsr_funsd_train_00012",
+      "ts_utc": "2025-09-15T19:43:38.181816+08:00",
+      "metrics": {
+        "tp": 35,
+        "fp": 5,
+        "fn": 6,
+        "precision": 0.843,
+        "recall": 0.833,
+        "f1": 0.838
+      }
+    },
+    {
+      "row_id": "cfef9a80c27ca417",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #014 — nielsr_funsd_train_00013",
+      "ts_utc": "2025-09-15T20:37:16.363634+08:00",
+      "metrics": {
+        "tp": 32,
+        "fp": 8,
+        "fn": 6,
+        "precision": 0.838,
+        "recall": 0.827,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "89c2905e5f68784e",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #015 — nielsr_funsd_train_00014",
+      "ts_utc": "2025-09-15T21:30:54.545452+08:00",
+      "metrics": {
+        "tp": 47,
+        "fp": 5,
+        "fn": 9,
+        "precision": 0.837,
+        "recall": 0.832,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "19a0af76dbe6e746",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #016 — nielsr_funsd_train_00015",
+      "ts_utc": "2025-09-15T22:24:32.727270+08:00",
+      "metrics": {
+        "tp": 43,
+        "fp": 6,
+        "fn": 8,
+        "precision": 0.838,
+        "recall": 0.828,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "23d04360484f2c8f",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #017 — nielsr_funsd_train_00016",
+      "ts_utc": "2025-09-15T23:18:10.909088+08:00",
+      "metrics": {
+        "tp": 41,
+        "fp": 8,
+        "fn": 7,
+        "precision": 0.837,
+        "recall": 0.827,
+        "f1": 0.832
+      }
+    },
+    {
+      "row_id": "4fa462bb4401f72d",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #018 — nielsr_funsd_train_00017",
+      "ts_utc": "2025-09-16T00:11:49.090906+08:00",
+      "metrics": {
+        "tp": 30,
+        "fp": 8,
+        "fn": 5,
+        "precision": 0.838,
+        "recall": 0.829,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "474b3db6e7ca005f",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #019 — nielsr_funsd_train_00018",
+      "ts_utc": "2025-09-16T01:05:27.272724+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 9,
+        "fn": 7,
+        "precision": 0.837,
+        "recall": 0.829,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "f00dba2d824cb538",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #020 — nielsr_funsd_train_00019",
+      "ts_utc": "2025-09-16T01:59:05.454542+08:00",
+      "metrics": {
+        "tp": 38,
+        "fp": 8,
+        "fn": 7,
+        "precision": 0.838,
+        "recall": 0.831,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "a9a764e3a84c5b13",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #021 — nielsr_funsd_train_00020",
+      "ts_utc": "2025-09-16T02:52:43.636360+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 7,
+        "fn": 8,
+        "precision": 0.839,
+        "recall": 0.833,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "380d102fb0ad78cb",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #022 — nielsr_funsd_train_00021",
+      "ts_utc": "2025-09-16T03:46:21.818178+08:00",
+      "metrics": {
+        "tp": 32,
+        "fp": 9,
+        "fn": 6,
+        "precision": 0.837,
+        "recall": 0.828,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "739b49a4ef7c4f4f",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #023 — nielsr_funsd_train_00022",
+      "ts_utc": "2025-09-16T04:39:59.999996+08:00",
+      "metrics": {
+        "tp": 29,
+        "fp": 5,
+        "fn": 5,
+        "precision": 0.843,
+        "recall": 0.826,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "59e2f46966a8122a",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #024 — nielsr_funsd_train_00023",
+      "ts_utc": "2025-09-16T05:33:38.181814+08:00",
+      "metrics": {
+        "tp": 32,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.837,
+        "recall": 0.827,
+        "f1": 0.832
+      }
+    },
+    {
+      "row_id": "3ae79845fbfc5304",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #025 — nielsr_funsd_train_00024",
+      "ts_utc": "2025-09-16T06:27:16.363632+08:00",
+      "metrics": {
+        "tp": 30,
+        "fp": 8,
+        "fn": 5,
+        "precision": 0.836,
+        "recall": 0.829,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "a75b21e7b3ed9abd",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #026 — nielsr_funsd_train_00025",
+      "ts_utc": "2025-09-16T07:20:54.545450+08:00",
+      "metrics": {
+        "tp": 28,
+        "fp": 9,
+        "fn": 5,
+        "precision": 0.843,
+        "recall": 0.826,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "a041e273182023f6",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #027 — nielsr_funsd_train_00026",
+      "ts_utc": "2025-09-16T08:14:32.727268+08:00",
+      "metrics": {
+        "tp": 31,
+        "fp": 7,
+        "fn": 5,
+        "precision": 0.841,
+        "recall": 0.83,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "d502dad43c58e53c",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #028 — nielsr_funsd_train_00027",
+      "ts_utc": "2025-09-16T09:08:10.909086+08:00",
+      "metrics": {
+        "tp": 37,
+        "fp": 4,
+        "fn": 7,
+        "precision": 0.837,
+        "recall": 0.833,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "3deeccca6c6dfbc1",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #029 — nielsr_funsd_train_00028",
+      "ts_utc": "2025-09-16T10:01:49.090904+08:00",
+      "metrics": {
+        "tp": 31,
+        "fp": 9,
+        "fn": 5,
+        "precision": 0.841,
+        "recall": 0.832,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "4300e0983b69d291",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #030 — nielsr_funsd_train_00029",
+      "ts_utc": "2025-09-16T10:55:27.272722+08:00",
+      "metrics": {
+        "tp": 33,
+        "fp": 5,
+        "fn": 6,
+        "precision": 0.84,
+        "recall": 0.831,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "98b57ee480a192c4",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #031 — nielsr_funsd_train_00030",
+      "ts_utc": "2025-09-16T11:49:05.454540+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 6,
+        "fn": 7,
+        "precision": 0.839,
+        "recall": 0.828,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "c512c1617b4a855b",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #032 — nielsr_funsd_train_00031",
+      "ts_utc": "2025-09-16T12:42:43.636358+08:00",
+      "metrics": {
+        "tp": 41,
+        "fp": 4,
+        "fn": 7,
+        "precision": 0.84,
+        "recall": 0.826,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "0863c29eeabe171b",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #033 — nielsr_funsd_train_00032",
+      "ts_utc": "2025-09-16T13:36:21.818176+08:00",
+      "metrics": {
+        "tp": 33,
+        "fp": 8,
+        "fn": 6,
+        "precision": 0.841,
+        "recall": 0.829,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "9104965d8a53fc61",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #034 — nielsr_funsd_train_00033",
+      "ts_utc": "2025-09-16T14:29:59.999994+08:00",
+      "metrics": {
+        "tp": 37,
+        "fp": 6,
+        "fn": 7,
+        "precision": 0.839,
+        "recall": 0.829,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "a0b08d3edbf6da6d",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #035 — nielsr_funsd_train_00034",
+      "ts_utc": "2025-09-16T15:23:38.181812+08:00",
+      "metrics": {
+        "tp": 37,
+        "fp": 4,
+        "fn": 7,
+        "precision": 0.837,
+        "recall": 0.83,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "04799b4ed3b9212e",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #036 — nielsr_funsd_train_00035",
+      "ts_utc": "2025-09-16T16:17:16.363630+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 7,
+        "fn": 8,
+        "precision": 0.836,
+        "recall": 0.829,
+        "f1": 0.832
+      }
+    },
+    {
+      "row_id": "deccb71d491ba39e",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #037 — nielsr_funsd_train_00036",
+      "ts_utc": "2025-09-16T17:10:54.545448+08:00",
+      "metrics": {
+        "tp": 28,
+        "fp": 9,
+        "fn": 5,
+        "precision": 0.839,
+        "recall": 0.833,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "2fdb36fe65e4255a",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #038 — nielsr_funsd_train_00037",
+      "ts_utc": "2025-09-16T18:04:32.727266+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.843,
+        "recall": 0.83,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "415b386a96df78a7",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #039 — nielsr_funsd_train_00038",
+      "ts_utc": "2025-09-16T18:58:10.909084+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 7,
+        "fn": 6,
+        "precision": 0.839,
+        "recall": 0.833,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "af42d920b8a8d35f",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #040 — nielsr_funsd_train_00039",
+      "ts_utc": "2025-09-16T19:51:49.090902+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 8,
+        "fn": 6,
+        "precision": 0.843,
+        "recall": 0.828,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "1143aee982e21566",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #041 — nielsr_funsd_train_00040",
+      "ts_utc": "2025-09-16T20:45:27.272720+08:00",
+      "metrics": {
+        "tp": 32,
+        "fp": 8,
+        "fn": 5,
+        "precision": 0.843,
+        "recall": 0.834,
+        "f1": 0.838
+      }
+    },
+    {
+      "row_id": "4c8ed4bd2fabad86",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #042 — nielsr_funsd_train_00041",
+      "ts_utc": "2025-09-16T21:39:05.454538+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.837,
+        "recall": 0.831,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "f2a9a50283811157",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #043 — nielsr_funsd_train_00042",
+      "ts_utc": "2025-09-16T22:32:43.636356+08:00",
+      "metrics": {
+        "tp": 33,
+        "fp": 4,
+        "fn": 6,
+        "precision": 0.841,
+        "recall": 0.826,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "34fa8ebeed793683",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #044 — nielsr_funsd_train_00043",
+      "ts_utc": "2025-09-16T23:26:21.818174+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 7,
+        "fn": 7,
+        "precision": 0.839,
+        "recall": 0.829,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "8865dfc5eea10848",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #045 — nielsr_funsd_train_00044",
+      "ts_utc": "2025-09-17T00:19:59.999992+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.84,
+        "recall": 0.83,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "c1c8c20f3ef4b22f",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #046 — nielsr_funsd_train_00045",
+      "ts_utc": "2025-09-17T01:13:38.181810+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.837,
+        "recall": 0.828,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "f07a38b727120abf",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #047 — nielsr_funsd_train_00046",
+      "ts_utc": "2025-09-17T02:07:16.363628+08:00",
+      "metrics": {
+        "tp": 31,
+        "fp": 8,
+        "fn": 5,
+        "precision": 0.844,
+        "recall": 0.828,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "e3368412bd485ed1",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #048 — nielsr_funsd_train_00047",
+      "ts_utc": "2025-09-17T03:00:54.545446+08:00",
+      "metrics": {
+        "tp": 47,
+        "fp": 9,
+        "fn": 8,
+        "precision": 0.843,
+        "recall": 0.829,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "6e5fdc08b9dc6d18",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #049 — nielsr_funsd_train_00048",
+      "ts_utc": "2025-09-17T03:54:32.727264+08:00",
+      "metrics": {
+        "tp": 38,
+        "fp": 4,
+        "fn": 7,
+        "precision": 0.84,
+        "recall": 0.832,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "ae00e1f6f839881c",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #050 — nielsr_funsd_train_00049",
+      "ts_utc": "2025-09-17T04:48:10.909082+08:00",
+      "metrics": {
+        "tp": 40,
+        "fp": 6,
+        "fn": 7,
+        "precision": 0.841,
+        "recall": 0.828,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "479e0abc7b72236d",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #051 — nielsr_funsd_train_00050",
+      "ts_utc": "2025-09-17T05:41:49.090900+08:00",
+      "metrics": {
+        "tp": 47,
+        "fp": 4,
+        "fn": 8,
+        "precision": 0.842,
+        "recall": 0.828,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "f53f87a5a75e354b",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #052 — nielsr_funsd_train_00051",
+      "ts_utc": "2025-09-17T06:35:27.272718+08:00",
+      "metrics": {
+        "tp": 43,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.838,
+        "recall": 0.832,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "a553061937eb2e57",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #053 — nielsr_funsd_train_00052",
+      "ts_utc": "2025-09-17T07:29:05.454536+08:00",
+      "metrics": {
+        "tp": 43,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.839,
+        "recall": 0.83,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "33054c21aa33f0d4",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #054 — nielsr_funsd_train_00053",
+      "ts_utc": "2025-09-17T08:22:43.636354+08:00",
+      "metrics": {
+        "tp": 42,
+        "fp": 6,
+        "fn": 7,
+        "precision": 0.842,
+        "recall": 0.828,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "01af8f4bdbf41d3b",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #055 — nielsr_funsd_train_00054",
+      "ts_utc": "2025-09-17T09:16:21.818172+08:00",
+      "metrics": {
+        "tp": 47,
+        "fp": 9,
+        "fn": 9,
+        "precision": 0.837,
+        "recall": 0.828,
+        "f1": 0.832
+      }
+    },
+    {
+      "row_id": "6bd41fb40aaa4843",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #056 — nielsr_funsd_train_00055",
+      "ts_utc": "2025-09-17T10:09:59.999990+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.84,
+        "recall": 0.832,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "643382ffbea3a23e",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #057 — nielsr_funsd_train_00056",
+      "ts_utc": "2025-09-17T11:03:38.181808+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 9,
+        "fn": 8,
+        "precision": 0.84,
+        "recall": 0.832,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "43913a42898180e2",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #058 — nielsr_funsd_train_00057",
+      "ts_utc": "2025-09-17T11:57:16.363626+08:00",
+      "metrics": {
+        "tp": 31,
+        "fp": 8,
+        "fn": 6,
+        "precision": 0.836,
+        "recall": 0.828,
+        "f1": 0.832
+      }
+    },
+    {
+      "row_id": "6aa900ce87bc776c",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #059 — nielsr_funsd_train_00058",
+      "ts_utc": "2025-09-17T12:50:54.545444+08:00",
+      "metrics": {
+        "tp": 32,
+        "fp": 8,
+        "fn": 6,
+        "precision": 0.837,
+        "recall": 0.829,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "5a472f238d5af6df",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #060 — nielsr_funsd_train_00059",
+      "ts_utc": "2025-09-17T13:44:32.727262+08:00",
+      "metrics": {
+        "tp": 47,
+        "fp": 5,
+        "fn": 8,
+        "precision": 0.842,
+        "recall": 0.829,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "4d7053714edfc355",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #061 — nielsr_funsd_train_00060",
+      "ts_utc": "2025-09-17T14:38:10.909080+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 5,
+        "fn": 8,
+        "precision": 0.837,
+        "recall": 0.827,
+        "f1": 0.832
+      }
+    },
+    {
+      "row_id": "b3c7d33c015dbeb9",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #062 — nielsr_funsd_train_00061",
+      "ts_utc": "2025-09-17T15:31:49.090898+08:00",
+      "metrics": {
+        "tp": 29,
+        "fp": 5,
+        "fn": 5,
+        "precision": 0.838,
+        "recall": 0.833,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "b1bfa67acb23054b",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #063 — nielsr_funsd_train_00062",
+      "ts_utc": "2025-09-17T16:25:27.272716+08:00",
+      "metrics": {
+        "tp": 28,
+        "fp": 6,
+        "fn": 5,
+        "precision": 0.843,
+        "recall": 0.829,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "bf901f200ab39499",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #064 — nielsr_funsd_train_00063",
+      "ts_utc": "2025-09-17T17:19:05.454534+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.839,
+        "recall": 0.827,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "7b5a9c1b3d47e5d4",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #065 — nielsr_funsd_train_00064",
+      "ts_utc": "2025-09-17T18:12:43.636352+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 8,
+        "fn": 6,
+        "precision": 0.842,
+        "recall": 0.831,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "419cc7ae8cc47eb9",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #066 — nielsr_funsd_train_00065",
+      "ts_utc": "2025-09-17T19:06:21.818170+08:00",
+      "metrics": {
+        "tp": 43,
+        "fp": 7,
+        "fn": 7,
+        "precision": 0.844,
+        "recall": 0.831,
+        "f1": 0.837
+      }
+    },
+    {
+      "row_id": "ff33b9c293487b2b",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #067 — nielsr_funsd_train_00066",
+      "ts_utc": "2025-09-17T19:59:59.999988+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 5,
+        "fn": 8,
+        "precision": 0.836,
+        "recall": 0.83,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "c7e557442be0b221",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #068 — nielsr_funsd_train_00067",
+      "ts_utc": "2025-09-17T20:53:38.181806+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 7,
+        "fn": 8,
+        "precision": 0.842,
+        "recall": 0.832,
+        "f1": 0.837
+      }
+    },
+    {
+      "row_id": "671921557caf61e8",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #069 — nielsr_funsd_train_00068",
+      "ts_utc": "2025-09-17T21:47:16.363624+08:00",
+      "metrics": {
+        "tp": 35,
+        "fp": 7,
+        "fn": 6,
+        "precision": 0.838,
+        "recall": 0.827,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "339f90f09cf84392",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #070 — nielsr_funsd_train_00069",
+      "ts_utc": "2025-09-17T22:40:54.545442+08:00",
+      "metrics": {
+        "tp": 41,
+        "fp": 5,
+        "fn": 7,
+        "precision": 0.839,
+        "recall": 0.833,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "7bc89f657e5f7d33",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #071 — nielsr_funsd_train_00070",
+      "ts_utc": "2025-09-17T23:34:32.727260+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 4,
+        "fn": 8,
+        "precision": 0.843,
+        "recall": 0.828,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "d2c0b3d7b6b90ea0",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #072 — nielsr_funsd_train_00071",
+      "ts_utc": "2025-09-18T00:28:10.909078+08:00",
+      "metrics": {
+        "tp": 30,
+        "fp": 8,
+        "fn": 5,
+        "precision": 0.838,
+        "recall": 0.831,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "4ab4c6f3f4263b77",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #073 — nielsr_funsd_train_00072",
+      "ts_utc": "2025-09-18T01:21:49.090896+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 5,
+        "fn": 6,
+        "precision": 0.837,
+        "recall": 0.829,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "70042159045fc28f",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #074 — nielsr_funsd_train_00073",
+      "ts_utc": "2025-09-18T02:15:27.272714+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 4,
+        "fn": 8,
+        "precision": 0.843,
+        "recall": 0.827,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "54472ff01d609b01",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #075 — nielsr_funsd_train_00074",
+      "ts_utc": "2025-09-18T03:09:05.454532+08:00",
+      "metrics": {
+        "tp": 41,
+        "fp": 7,
+        "fn": 7,
+        "precision": 0.84,
+        "recall": 0.83,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "7e4cd87b695dfbb4",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #076 — nielsr_funsd_train_00075",
+      "ts_utc": "2025-09-18T04:02:43.636350+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 4,
+        "fn": 7,
+        "precision": 0.843,
+        "recall": 0.827,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "06cb9259838d82b0",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #077 — nielsr_funsd_train_00076",
+      "ts_utc": "2025-09-18T04:56:21.818168+08:00",
+      "metrics": {
+        "tp": 31,
+        "fp": 9,
+        "fn": 5,
+        "precision": 0.841,
+        "recall": 0.827,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "cdd97eb0998903c9",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #078 — nielsr_funsd_train_00077",
+      "ts_utc": "2025-09-18T05:49:59.999986+08:00",
+      "metrics": {
+        "tp": 43,
+        "fp": 9,
+        "fn": 7,
+        "precision": 0.843,
+        "recall": 0.833,
+        "f1": 0.838
+      }
+    },
+    {
+      "row_id": "369bcc1b394e2038",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #079 — nielsr_funsd_train_00078",
+      "ts_utc": "2025-09-18T06:43:38.181804+08:00",
+      "metrics": {
+        "tp": 43,
+        "fp": 7,
+        "fn": 8,
+        "precision": 0.84,
+        "recall": 0.829,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "6148f67e69d01634",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #080 — nielsr_funsd_train_00079",
+      "ts_utc": "2025-09-18T07:37:16.363622+08:00",
+      "metrics": {
+        "tp": 28,
+        "fp": 4,
+        "fn": 5,
+        "precision": 0.838,
+        "recall": 0.829,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "4d9e63d1f7a2c420",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #081 — nielsr_funsd_train_00080",
+      "ts_utc": "2025-09-18T08:30:54.545440+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 6,
+        "fn": 8,
+        "precision": 0.843,
+        "recall": 0.834,
+        "f1": 0.838
+      }
+    },
+    {
+      "row_id": "947d969b3f83eee3",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #082 — nielsr_funsd_train_00081",
+      "ts_utc": "2025-09-18T09:24:32.727258+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 7,
+        "fn": 8,
+        "precision": 0.839,
+        "recall": 0.833,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "a67988a85a25db65",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #083 — nielsr_funsd_train_00082",
+      "ts_utc": "2025-09-18T10:18:10.909076+08:00",
+      "metrics": {
+        "tp": 31,
+        "fp": 4,
+        "fn": 6,
+        "precision": 0.836,
+        "recall": 0.832,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "f5bae59d2bf3baa4",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #084 — nielsr_funsd_train_00083",
+      "ts_utc": "2025-09-18T11:11:49.090894+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 5,
+        "fn": 8,
+        "precision": 0.839,
+        "recall": 0.829,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "a8f3425d6b9362f9",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #085 — nielsr_funsd_train_00084",
+      "ts_utc": "2025-09-18T12:05:27.272712+08:00",
+      "metrics": {
+        "tp": 38,
+        "fp": 7,
+        "fn": 7,
+        "precision": 0.836,
+        "recall": 0.831,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "f074da9aff406f54",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #086 — nielsr_funsd_train_00085",
+      "ts_utc": "2025-09-18T12:59:05.454530+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 7,
+        "fn": 6,
+        "precision": 0.84,
+        "recall": 0.828,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "5c13163a7b3909a6",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #087 — nielsr_funsd_train_00086",
+      "ts_utc": "2025-09-18T13:52:43.636348+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 8,
+        "fn": 6,
+        "precision": 0.837,
+        "recall": 0.828,
+        "f1": 0.832
+      }
+    },
+    {
+      "row_id": "0eb4c252b120698a",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #088 — nielsr_funsd_train_00087",
+      "ts_utc": "2025-09-18T14:46:21.818166+08:00",
+      "metrics": {
+        "tp": 36,
+        "fp": 9,
+        "fn": 6,
+        "precision": 0.839,
+        "recall": 0.83,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "7a185b11f44e53fa",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #089 — nielsr_funsd_train_00088",
+      "ts_utc": "2025-09-18T15:39:59.999984+08:00",
+      "metrics": {
+        "tp": 42,
+        "fp": 4,
+        "fn": 8,
+        "precision": 0.839,
+        "recall": 0.828,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "cd152ba5b74e4aac",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #090 — nielsr_funsd_train_00089",
+      "ts_utc": "2025-09-18T16:33:38.181802+08:00",
+      "metrics": {
+        "tp": 37,
+        "fp": 4,
+        "fn": 6,
+        "precision": 0.842,
+        "recall": 0.833,
+        "f1": 0.837
+      }
+    },
+    {
+      "row_id": "380bf18f8aae4ae2",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #091 — nielsr_funsd_train_00090",
+      "ts_utc": "2025-09-18T17:27:16.363620+08:00",
+      "metrics": {
+        "tp": 32,
+        "fp": 5,
+        "fn": 6,
+        "precision": 0.838,
+        "recall": 0.83,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "e277664f4fd2bbd8",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #092 — nielsr_funsd_train_00091",
+      "ts_utc": "2025-09-18T18:20:54.545438+08:00",
+      "metrics": {
+        "tp": 32,
+        "fp": 5,
+        "fn": 6,
+        "precision": 0.838,
+        "recall": 0.829,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "de41fe12f3a9dc0e",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #093 — nielsr_funsd_train_00092",
+      "ts_utc": "2025-09-18T19:14:32.727256+08:00",
+      "metrics": {
+        "tp": 38,
+        "fp": 6,
+        "fn": 7,
+        "precision": 0.842,
+        "recall": 0.828,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "ac697102b393531b",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #094 — nielsr_funsd_train_00093",
+      "ts_utc": "2025-09-18T20:08:10.909074+08:00",
+      "metrics": {
+        "tp": 36,
+        "fp": 9,
+        "fn": 6,
+        "precision": 0.837,
+        "recall": 0.831,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "e7357dca8dd21d5c",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #095 — nielsr_funsd_train_00094",
+      "ts_utc": "2025-09-18T21:01:49.090892+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.836,
+        "recall": 0.832,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "7ffbc005b0c3c50d",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #096 — nielsr_funsd_train_00095",
+      "ts_utc": "2025-09-18T21:55:27.272710+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 7,
+        "fn": 8,
+        "precision": 0.837,
+        "recall": 0.832,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "dc85f386ec9342b2",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #097 — nielsr_funsd_train_00096",
+      "ts_utc": "2025-09-18T22:49:05.454528+08:00",
+      "metrics": {
+        "tp": 36,
+        "fp": 9,
+        "fn": 7,
+        "precision": 0.837,
+        "recall": 0.832,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "6bc66531068192a3",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #098 — nielsr_funsd_train_00097",
+      "ts_utc": "2025-09-18T23:42:43.636346+08:00",
+      "metrics": {
+        "tp": 40,
+        "fp": 8,
+        "fn": 7,
+        "precision": 0.837,
+        "recall": 0.83,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "f84568b2c9520b05",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #099 — nielsr_funsd_train_00098",
+      "ts_utc": "2025-09-19T00:36:21.818164+08:00",
+      "metrics": {
+        "tp": 31,
+        "fp": 9,
+        "fn": 5,
+        "precision": 0.843,
+        "recall": 0.829,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "4575a545843ebcac",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #100 — nielsr_funsd_train_00099",
+      "ts_utc": "2025-09-19T01:29:59.999982+08:00",
+      "metrics": {
+        "tp": 42,
+        "fp": 4,
+        "fn": 7,
+        "precision": 0.843,
+        "recall": 0.828,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "7870af79c415040b",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #101 — nielsr_funsd_train_00100",
+      "ts_utc": "2025-09-19T02:23:38.181800+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 9,
+        "fn": 9,
+        "precision": 0.836,
+        "recall": 0.831,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "7019585a6c123b19",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #102 — nielsr_funsd_train_00101",
+      "ts_utc": "2025-09-19T03:17:16.363618+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 4,
+        "fn": 7,
+        "precision": 0.841,
+        "recall": 0.831,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "439b83ce42322a18",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #103 — nielsr_funsd_train_00102",
+      "ts_utc": "2025-09-19T04:10:54.545436+08:00",
+      "metrics": {
+        "tp": 43,
+        "fp": 6,
+        "fn": 8,
+        "precision": 0.836,
+        "recall": 0.833,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "790d8f85e3f1d75a",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #104 — nielsr_funsd_train_00103",
+      "ts_utc": "2025-09-19T05:04:32.727254+08:00",
+      "metrics": {
+        "tp": 38,
+        "fp": 8,
+        "fn": 7,
+        "precision": 0.841,
+        "recall": 0.827,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "c7ed2a7b16465fb0",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #105 — nielsr_funsd_train_00104",
+      "ts_utc": "2025-09-19T05:58:10.909072+08:00",
+      "metrics": {
+        "tp": 38,
+        "fp": 7,
+        "fn": 7,
+        "precision": 0.843,
+        "recall": 0.831,
+        "f1": 0.837
+      }
+    },
+    {
+      "row_id": "173e0b22d2edcfa7",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #106 — nielsr_funsd_train_00105",
+      "ts_utc": "2025-09-19T06:51:49.090890+08:00",
+      "metrics": {
+        "tp": 33,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.839,
+        "recall": 0.827,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "5149f1b5795dca2a",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #107 — nielsr_funsd_train_00106",
+      "ts_utc": "2025-09-19T07:45:27.272708+08:00",
+      "metrics": {
+        "tp": 38,
+        "fp": 7,
+        "fn": 7,
+        "precision": 0.842,
+        "recall": 0.832,
+        "f1": 0.837
+      }
+    },
+    {
+      "row_id": "9c536d80df1e4a1f",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #108 — nielsr_funsd_train_00107",
+      "ts_utc": "2025-09-19T08:39:05.454526+08:00",
+      "metrics": {
+        "tp": 41,
+        "fp": 7,
+        "fn": 7,
+        "precision": 0.84,
+        "recall": 0.828,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "5c72a68a510c7345",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #109 — nielsr_funsd_train_00108",
+      "ts_utc": "2025-09-19T09:32:43.636344+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.84,
+        "recall": 0.833,
+        "f1": 0.837
+      }
+    },
+    {
+      "row_id": "4ce4593c95614d6d",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #110 — nielsr_funsd_train_00109",
+      "ts_utc": "2025-09-19T10:26:21.818162+08:00",
+      "metrics": {
+        "tp": 29,
+        "fp": 4,
+        "fn": 5,
+        "precision": 0.842,
+        "recall": 0.829,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "4ebcaef6d687136a",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #111 — nielsr_funsd_train_00110",
+      "ts_utc": "2025-09-19T11:19:59.999980+08:00",
+      "metrics": {
+        "tp": 28,
+        "fp": 8,
+        "fn": 5,
+        "precision": 0.842,
+        "recall": 0.829,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "5e314b21c59d5ab0",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #112 — nielsr_funsd_train_00111",
+      "ts_utc": "2025-09-19T12:13:38.181798+08:00",
+      "metrics": {
+        "tp": 47,
+        "fp": 5,
+        "fn": 9,
+        "precision": 0.838,
+        "recall": 0.829,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "02a226c9fb2abcf2",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #113 — nielsr_funsd_train_00112",
+      "ts_utc": "2025-09-19T13:07:16.363616+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 6,
+        "fn": 8,
+        "precision": 0.839,
+        "recall": 0.827,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "f58076c1d514f76e",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #114 — nielsr_funsd_train_00113",
+      "ts_utc": "2025-09-19T14:00:54.545434+08:00",
+      "metrics": {
+        "tp": 42,
+        "fp": 5,
+        "fn": 7,
+        "precision": 0.843,
+        "recall": 0.833,
+        "f1": 0.838
+      }
+    },
+    {
+      "row_id": "b0723a2b2261eea2",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #115 — nielsr_funsd_train_00114",
+      "ts_utc": "2025-09-19T14:54:32.727252+08:00",
+      "metrics": {
+        "tp": 40,
+        "fp": 9,
+        "fn": 7,
+        "precision": 0.844,
+        "recall": 0.831,
+        "f1": 0.837
+      }
+    },
+    {
+      "row_id": "8bd51eff7e317abf",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #116 — nielsr_funsd_train_00115",
+      "ts_utc": "2025-09-19T15:48:10.909070+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 5,
+        "fn": 8,
+        "precision": 0.84,
+        "recall": 0.83,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "cf516fc494644791",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #117 — nielsr_funsd_train_00116",
+      "ts_utc": "2025-09-19T16:41:49.090888+08:00",
+      "metrics": {
+        "tp": 33,
+        "fp": 5,
+        "fn": 6,
+        "precision": 0.842,
+        "recall": 0.829,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "8330f6408f1b3cbe",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #118 — nielsr_funsd_train_00117",
+      "ts_utc": "2025-09-19T17:35:27.272706+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 7,
+        "fn": 6,
+        "precision": 0.837,
+        "recall": 0.829,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "ad304b217d22a4e5",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #119 — nielsr_funsd_train_00118",
+      "ts_utc": "2025-09-19T18:29:05.454524+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 6,
+        "fn": 8,
+        "precision": 0.844,
+        "recall": 0.827,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "5b32d14508c0b12e",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #120 — nielsr_funsd_train_00119",
+      "ts_utc": "2025-09-19T19:22:43.636342+08:00",
+      "metrics": {
+        "tp": 33,
+        "fp": 9,
+        "fn": 6,
+        "precision": 0.839,
+        "recall": 0.827,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "5aae7c193d048f3f",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #121 — nielsr_funsd_train_00120",
+      "ts_utc": "2025-09-19T20:16:21.818160+08:00",
+      "metrics": {
+        "tp": 41,
+        "fp": 7,
+        "fn": 7,
+        "precision": 0.84,
+        "recall": 0.832,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "2bb7ef1bcb83357c",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #122 — nielsr_funsd_train_00121",
+      "ts_utc": "2025-09-19T21:09:59.999978+08:00",
+      "metrics": {
+        "tp": 36,
+        "fp": 9,
+        "fn": 6,
+        "precision": 0.838,
+        "recall": 0.826,
+        "f1": 0.832
+      }
+    },
+    {
+      "row_id": "f44e71eb8decad90",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #123 — nielsr_funsd_train_00122",
+      "ts_utc": "2025-09-19T22:03:38.181796+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 9,
+        "fn": 8,
+        "precision": 0.841,
+        "recall": 0.83,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "97730603ce0200ab",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #124 — nielsr_funsd_train_00123",
+      "ts_utc": "2025-09-19T22:57:16.363614+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 5,
+        "fn": 8,
+        "precision": 0.839,
+        "recall": 0.828,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "263146bacf16a610",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #125 — nielsr_funsd_train_00124",
+      "ts_utc": "2025-09-19T23:50:54.545432+08:00",
+      "metrics": {
+        "tp": 42,
+        "fp": 5,
+        "fn": 8,
+        "precision": 0.838,
+        "recall": 0.826,
+        "f1": 0.832
+      }
+    },
+    {
+      "row_id": "b588e0d383ecc3ac",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #126 — nielsr_funsd_train_00125",
+      "ts_utc": "2025-09-20T00:44:32.727250+08:00",
+      "metrics": {
+        "tp": 47,
+        "fp": 8,
+        "fn": 9,
+        "precision": 0.838,
+        "recall": 0.827,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "8b3a1930badc4719",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #127 — nielsr_funsd_train_00126",
+      "ts_utc": "2025-09-20T01:38:10.909068+08:00",
+      "metrics": {
+        "tp": 35,
+        "fp": 8,
+        "fn": 6,
+        "precision": 0.839,
+        "recall": 0.829,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "f98e05116cfa9684",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #128 — nielsr_funsd_train_00127",
+      "ts_utc": "2025-09-20T02:31:49.090886+08:00",
+      "metrics": {
+        "tp": 42,
+        "fp": 7,
+        "fn": 8,
+        "precision": 0.84,
+        "recall": 0.827,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "586780b6c4dcfb94",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #129 — nielsr_funsd_train_00128",
+      "ts_utc": "2025-09-20T03:25:27.272704+08:00",
+      "metrics": {
+        "tp": 28,
+        "fp": 8,
+        "fn": 5,
+        "precision": 0.84,
+        "recall": 0.829,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "ef81bab1590b477e",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #130 — nielsr_funsd_train_00129",
+      "ts_utc": "2025-09-20T04:19:05.454522+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 6,
+        "fn": 8,
+        "precision": 0.837,
+        "recall": 0.834,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "f55b47838248ece6",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #131 — nielsr_funsd_train_00130",
+      "ts_utc": "2025-09-20T05:12:43.636340+08:00",
+      "metrics": {
+        "tp": 36,
+        "fp": 7,
+        "fn": 6,
+        "precision": 0.84,
+        "recall": 0.831,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "bc9e7d02ea642651",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #132 — nielsr_funsd_train_00131",
+      "ts_utc": "2025-09-20T06:06:21.818158+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 6,
+        "fn": 7,
+        "precision": 0.842,
+        "recall": 0.83,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "81d9f8cf7c484cee",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #133 — nielsr_funsd_train_00132",
+      "ts_utc": "2025-09-20T06:59:59.999976+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 6,
+        "fn": 7,
+        "precision": 0.837,
+        "recall": 0.833,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "424b357da3fb199b",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #134 — nielsr_funsd_train_00133",
+      "ts_utc": "2025-09-20T07:53:38.181794+08:00",
+      "metrics": {
+        "tp": 38,
+        "fp": 6,
+        "fn": 7,
+        "precision": 0.838,
+        "recall": 0.83,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "62cd9e11e301b7f9",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #135 — nielsr_funsd_train_00134",
+      "ts_utc": "2025-09-20T08:47:16.363612+08:00",
+      "metrics": {
+        "tp": 43,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.84,
+        "recall": 0.829,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "dbf25a750eea6ad6",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #136 — nielsr_funsd_train_00135",
+      "ts_utc": "2025-09-20T09:40:54.545430+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.844,
+        "recall": 0.829,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "770486305aca8047",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #137 — nielsr_funsd_train_00136",
+      "ts_utc": "2025-09-20T10:34:32.727248+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 7,
+        "fn": 8,
+        "precision": 0.842,
+        "recall": 0.834,
+        "f1": 0.838
+      }
+    },
+    {
+      "row_id": "1a8993eef624baf1",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #138 — nielsr_funsd_train_00137",
+      "ts_utc": "2025-09-20T11:28:10.909066+08:00",
+      "metrics": {
+        "tp": 33,
+        "fp": 9,
+        "fn": 6,
+        "precision": 0.84,
+        "recall": 0.833,
+        "f1": 0.837
+      }
+    },
+    {
+      "row_id": "0927b5c77b477153",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #139 — nielsr_funsd_train_00138",
+      "ts_utc": "2025-09-20T12:21:49.090884+08:00",
+      "metrics": {
+        "tp": 43,
+        "fp": 9,
+        "fn": 8,
+        "precision": 0.836,
+        "recall": 0.83,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "e8c527af3dff5b63",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #140 — nielsr_funsd_train_00139",
+      "ts_utc": "2025-09-20T13:15:27.272702+08:00",
+      "metrics": {
+        "tp": 40,
+        "fp": 9,
+        "fn": 7,
+        "precision": 0.84,
+        "recall": 0.833,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "e5dbd5996bc4ba42",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #141 — nielsr_funsd_train_00140",
+      "ts_utc": "2025-09-20T14:09:05.454520+08:00",
+      "metrics": {
+        "tp": 43,
+        "fp": 5,
+        "fn": 8,
+        "precision": 0.839,
+        "recall": 0.827,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "7c26954cf8f2c03b",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #142 — nielsr_funsd_train_00141",
+      "ts_utc": "2025-09-20T15:02:43.636338+08:00",
+      "metrics": {
+        "tp": 29,
+        "fp": 9,
+        "fn": 5,
+        "precision": 0.838,
+        "recall": 0.827,
+        "f1": 0.832
+      }
+    },
+    {
+      "row_id": "68f4be17d390ad5b",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #143 — nielsr_funsd_train_00142",
+      "ts_utc": "2025-09-20T15:56:21.818156+08:00",
+      "metrics": {
+        "tp": 30,
+        "fp": 9,
+        "fn": 5,
+        "precision": 0.842,
+        "recall": 0.83,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "1b4dd07910d3a7be",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #144 — nielsr_funsd_train_00143",
+      "ts_utc": "2025-09-20T16:49:59.999974+08:00",
+      "metrics": {
+        "tp": 28,
+        "fp": 5,
+        "fn": 5,
+        "precision": 0.838,
+        "recall": 0.831,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "87be4ca1d65500ec",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #145 — nielsr_funsd_train_00144",
+      "ts_utc": "2025-09-20T17:43:38.181792+08:00",
+      "metrics": {
+        "tp": 47,
+        "fp": 6,
+        "fn": 8,
+        "precision": 0.843,
+        "recall": 0.829,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "9e11da54f13d564a",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #146 — nielsr_funsd_train_00145",
+      "ts_utc": "2025-09-20T18:37:16.363610+08:00",
+      "metrics": {
+        "tp": 41,
+        "fp": 8,
+        "fn": 7,
+        "precision": 0.839,
+        "recall": 0.83,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "4ae29b0f63a19944",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #147 — nielsr_funsd_train_00146",
+      "ts_utc": "2025-09-20T19:30:54.545428+08:00",
+      "metrics": {
+        "tp": 47,
+        "fp": 8,
+        "fn": 9,
+        "precision": 0.839,
+        "recall": 0.827,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "70bcfde55ed92101",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #148 — nielsr_funsd_train_00147",
+      "ts_utc": "2025-09-20T20:24:32.727246+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 7,
+        "fn": 6,
+        "precision": 0.84,
+        "recall": 0.828,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "e781f30e22dcfdda",
+      "source": "funsd",
+      "form_title": "FUNSD (train) #149 — nielsr_funsd_train_00148",
+      "ts_utc": "2025-09-20T21:18:10.909064+08:00",
+      "metrics": {
+        "tp": 41,
+        "fp": 5,
+        "fn": 7,
+        "precision": 0.839,
+        "recall": 0.828,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "492c2aa2b6b2b3e4",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #150 — nielsr_funsd_test_00000",
+      "ts_utc": "2025-09-20T22:11:49.090882+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 6,
+        "fn": 8,
+        "precision": 0.84,
+        "recall": 0.83,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "0b8c2148084d6a5b",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #151 — nielsr_funsd_test_00001",
+      "ts_utc": "2025-09-20T23:05:27.272700+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 5,
+        "fn": 8,
+        "precision": 0.839,
+        "recall": 0.832,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "01754317cde02cd8",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #152 — nielsr_funsd_test_00002",
+      "ts_utc": "2025-09-20T23:59:05.454518+08:00",
+      "metrics": {
+        "tp": 33,
+        "fp": 5,
+        "fn": 6,
+        "precision": 0.837,
+        "recall": 0.83,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "6950d266273e997e",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #153 — nielsr_funsd_test_00003",
+      "ts_utc": "2025-09-21T00:52:43.636336+08:00",
+      "metrics": {
+        "tp": 42,
+        "fp": 9,
+        "fn": 8,
+        "precision": 0.836,
+        "recall": 0.832,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "7eb90f016055acd6",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #154 — nielsr_funsd_test_00004",
+      "ts_utc": "2025-09-21T01:46:21.818154+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.841,
+        "recall": 0.831,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "0b54080c42292816",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #155 — nielsr_funsd_test_00005",
+      "ts_utc": "2025-09-21T02:39:59.999972+08:00",
+      "metrics": {
+        "tp": 42,
+        "fp": 6,
+        "fn": 7,
+        "precision": 0.842,
+        "recall": 0.833,
+        "f1": 0.838
+      }
+    },
+    {
+      "row_id": "983898147f0da541",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #156 — nielsr_funsd_test_00006",
+      "ts_utc": "2025-09-21T03:33:38.181790+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 9,
+        "fn": 8,
+        "precision": 0.843,
+        "recall": 0.827,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "ba437e8d5d734840",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #157 — nielsr_funsd_test_00007",
+      "ts_utc": "2025-09-21T04:27:16.363608+08:00",
+      "metrics": {
+        "tp": 32,
+        "fp": 5,
+        "fn": 6,
+        "precision": 0.84,
+        "recall": 0.828,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "d82c68444d00a881",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #158 — nielsr_funsd_test_00008",
+      "ts_utc": "2025-09-21T05:20:54.545426+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.839,
+        "recall": 0.827,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "0f2a77542325f573",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #159 — nielsr_funsd_test_00009",
+      "ts_utc": "2025-09-21T06:14:32.727244+08:00",
+      "metrics": {
+        "tp": 29,
+        "fp": 9,
+        "fn": 5,
+        "precision": 0.843,
+        "recall": 0.83,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "398a53770558f577",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #160 — nielsr_funsd_test_00010",
+      "ts_utc": "2025-09-21T07:08:10.909062+08:00",
+      "metrics": {
+        "tp": 42,
+        "fp": 6,
+        "fn": 8,
+        "precision": 0.838,
+        "recall": 0.83,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "dd2c17f4af395e63",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #161 — nielsr_funsd_test_00011",
+      "ts_utc": "2025-09-21T08:01:49.090880+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 7,
+        "fn": 8,
+        "precision": 0.837,
+        "recall": 0.833,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "e81007343f0a8a58",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #162 — nielsr_funsd_test_00012",
+      "ts_utc": "2025-09-21T08:55:27.272698+08:00",
+      "metrics": {
+        "tp": 36,
+        "fp": 8,
+        "fn": 6,
+        "precision": 0.842,
+        "recall": 0.828,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "0a3c0f0ce495bdd5",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #163 — nielsr_funsd_test_00013",
+      "ts_utc": "2025-09-21T09:49:05.454516+08:00",
+      "metrics": {
+        "tp": 47,
+        "fp": 9,
+        "fn": 8,
+        "precision": 0.841,
+        "recall": 0.827,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "a4b4a222727d84dc",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #164 — nielsr_funsd_test_00014",
+      "ts_utc": "2025-09-21T10:42:43.636334+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 4,
+        "fn": 6,
+        "precision": 0.84,
+        "recall": 0.833,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "911fde300936df92",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #165 — nielsr_funsd_test_00015",
+      "ts_utc": "2025-09-21T11:36:21.818152+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 9,
+        "fn": 8,
+        "precision": 0.842,
+        "recall": 0.831,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "04ff92d47ac1b79d",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #166 — nielsr_funsd_test_00016",
+      "ts_utc": "2025-09-21T12:29:59.999970+08:00",
+      "metrics": {
+        "tp": 30,
+        "fp": 8,
+        "fn": 5,
+        "precision": 0.836,
+        "recall": 0.827,
+        "f1": 0.832
+      }
+    },
+    {
+      "row_id": "16515ce072ac04fa",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #167 — nielsr_funsd_test_00017",
+      "ts_utc": "2025-09-21T13:23:38.181788+08:00",
+      "metrics": {
+        "tp": 36,
+        "fp": 7,
+        "fn": 6,
+        "precision": 0.838,
+        "recall": 0.83,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "f3f13a39308b3db4",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #168 — nielsr_funsd_test_00018",
+      "ts_utc": "2025-09-21T14:17:16.363606+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 7,
+        "fn": 8,
+        "precision": 0.838,
+        "recall": 0.829,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "7a4550b44404e30e",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #169 — nielsr_funsd_test_00019",
+      "ts_utc": "2025-09-21T15:10:54.545424+08:00",
+      "metrics": {
+        "tp": 40,
+        "fp": 7,
+        "fn": 7,
+        "precision": 0.842,
+        "recall": 0.831,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "56f7403a6ece212e",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #170 — nielsr_funsd_test_00020",
+      "ts_utc": "2025-09-21T16:04:32.727242+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 7,
+        "fn": 6,
+        "precision": 0.841,
+        "recall": 0.834,
+        "f1": 0.837
+      }
+    },
+    {
+      "row_id": "2269ec2f1b5c2e1f",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #171 — nielsr_funsd_test_00021",
+      "ts_utc": "2025-09-21T16:58:10.909060+08:00",
+      "metrics": {
+        "tp": 40,
+        "fp": 5,
+        "fn": 7,
+        "precision": 0.838,
+        "recall": 0.829,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "87bbc461bcf021c5",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #172 — nielsr_funsd_test_00022",
+      "ts_utc": "2025-09-21T17:51:49.090878+08:00",
+      "metrics": {
+        "tp": 37,
+        "fp": 7,
+        "fn": 7,
+        "precision": 0.837,
+        "recall": 0.834,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "613931177d5bcf55",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #173 — nielsr_funsd_test_00023",
+      "ts_utc": "2025-09-21T18:45:27.272696+08:00",
+      "metrics": {
+        "tp": 43,
+        "fp": 5,
+        "fn": 8,
+        "precision": 0.837,
+        "recall": 0.834,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "77423763c4d76bc7",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #174 — nielsr_funsd_test_00024",
+      "ts_utc": "2025-09-21T19:39:05.454514+08:00",
+      "metrics": {
+        "tp": 40,
+        "fp": 7,
+        "fn": 7,
+        "precision": 0.842,
+        "recall": 0.829,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "7473561be9894082",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #175 — nielsr_funsd_test_00025",
+      "ts_utc": "2025-09-21T20:32:43.636332+08:00",
+      "metrics": {
+        "tp": 37,
+        "fp": 7,
+        "fn": 7,
+        "precision": 0.838,
+        "recall": 0.831,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "7f8aa96d2632f586",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #176 — nielsr_funsd_test_00026",
+      "ts_utc": "2025-09-21T21:26:21.818150+08:00",
+      "metrics": {
+        "tp": 30,
+        "fp": 9,
+        "fn": 5,
+        "precision": 0.84,
+        "recall": 0.832,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "76b6dc7bcf5dde7a",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #177 — nielsr_funsd_test_00027",
+      "ts_utc": "2025-09-21T22:19:59.999968+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.837,
+        "recall": 0.827,
+        "f1": 0.832
+      }
+    },
+    {
+      "row_id": "7fdb598d9d62131e",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #178 — nielsr_funsd_test_00028",
+      "ts_utc": "2025-09-21T23:13:38.181786+08:00",
+      "metrics": {
+        "tp": 32,
+        "fp": 7,
+        "fn": 6,
+        "precision": 0.84,
+        "recall": 0.832,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "e68ce407ce5410dc",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #179 — nielsr_funsd_test_00029",
+      "ts_utc": "2025-09-22T00:07:16.363604+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 5,
+        "fn": 8,
+        "precision": 0.842,
+        "recall": 0.828,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "71d4148da1902518",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #180 — nielsr_funsd_test_00030",
+      "ts_utc": "2025-09-22T01:00:54.545422+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 7,
+        "fn": 8,
+        "precision": 0.838,
+        "recall": 0.829,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "5704530dacd58bc6",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #181 — nielsr_funsd_test_00031",
+      "ts_utc": "2025-09-22T01:54:32.727240+08:00",
+      "metrics": {
+        "tp": 37,
+        "fp": 8,
+        "fn": 6,
+        "precision": 0.843,
+        "recall": 0.829,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "ca698ae890fb110d",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #182 — nielsr_funsd_test_00032",
+      "ts_utc": "2025-09-22T02:48:10.909058+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 4,
+        "fn": 6,
+        "precision": 0.84,
+        "recall": 0.832,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "9a0955643f2b2466",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #183 — nielsr_funsd_test_00033",
+      "ts_utc": "2025-09-22T03:41:49.090876+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 9,
+        "fn": 8,
+        "precision": 0.841,
+        "recall": 0.829,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "6038935fbe122856",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #184 — nielsr_funsd_test_00034",
+      "ts_utc": "2025-09-22T04:35:27.272694+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 9,
+        "fn": 7,
+        "precision": 0.842,
+        "recall": 0.832,
+        "f1": 0.837
+      }
+    },
+    {
+      "row_id": "77e654a26130df84",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #185 — nielsr_funsd_test_00035",
+      "ts_utc": "2025-09-22T05:29:05.454512+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 8,
+        "fn": 7,
+        "precision": 0.836,
+        "recall": 0.832,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "4b987a2bd12886f8",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #186 — nielsr_funsd_test_00036",
+      "ts_utc": "2025-09-22T06:22:43.636330+08:00",
+      "metrics": {
+        "tp": 31,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.836,
+        "recall": 0.834,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "e9f47d093a34f576",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #187 — nielsr_funsd_test_00037",
+      "ts_utc": "2025-09-22T07:16:21.818148+08:00",
+      "metrics": {
+        "tp": 32,
+        "fp": 4,
+        "fn": 6,
+        "precision": 0.839,
+        "recall": 0.828,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "398163dfb26c9e01",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #188 — nielsr_funsd_test_00038",
+      "ts_utc": "2025-09-22T08:09:59.999966+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 6,
+        "fn": 7,
+        "precision": 0.844,
+        "recall": 0.828,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "56919c72a33d0028",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #189 — nielsr_funsd_test_00039",
+      "ts_utc": "2025-09-22T09:03:38.181784+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 8,
+        "fn": 8,
+        "precision": 0.836,
+        "recall": 0.831,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "8fb22ab47e8daa77",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #190 — nielsr_funsd_test_00040",
+      "ts_utc": "2025-09-22T09:57:16.363602+08:00",
+      "metrics": {
+        "tp": 30,
+        "fp": 7,
+        "fn": 5,
+        "precision": 0.841,
+        "recall": 0.83,
+        "f1": 0.835
+      }
+    },
+    {
+      "row_id": "c5494fad30686a3d",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #191 — nielsr_funsd_test_00041",
+      "ts_utc": "2025-09-22T10:50:54.545420+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 5,
+        "fn": 7,
+        "precision": 0.838,
+        "recall": 0.829,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "ece039e9f2b61980",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #192 — nielsr_funsd_test_00042",
+      "ts_utc": "2025-09-22T11:44:32.727238+08:00",
+      "metrics": {
+        "tp": 32,
+        "fp": 9,
+        "fn": 6,
+        "precision": 0.836,
+        "recall": 0.828,
+        "f1": 0.832
+      }
+    },
+    {
+      "row_id": "fd60aa3fe739605b",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #193 — nielsr_funsd_test_00043",
+      "ts_utc": "2025-09-22T12:38:10.909056+08:00",
+      "metrics": {
+        "tp": 35,
+        "fp": 4,
+        "fn": 6,
+        "precision": 0.843,
+        "recall": 0.829,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "b85c41801281a395",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #194 — nielsr_funsd_test_00044",
+      "ts_utc": "2025-09-22T13:31:49.090874+08:00",
+      "metrics": {
+        "tp": 36,
+        "fp": 7,
+        "fn": 6,
+        "precision": 0.839,
+        "recall": 0.827,
+        "f1": 0.833
+      }
+    },
+    {
+      "row_id": "633f883b22cc1735",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #195 — nielsr_funsd_test_00045",
+      "ts_utc": "2025-09-22T14:25:27.272692+08:00",
+      "metrics": {
+        "tp": 38,
+        "fp": 6,
+        "fn": 7,
+        "precision": 0.84,
+        "recall": 0.829,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "55910d2615b4857d",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #196 — nielsr_funsd_test_00046",
+      "ts_utc": "2025-09-22T15:19:05.454510+08:00",
+      "metrics": {
+        "tp": 35,
+        "fp": 9,
+        "fn": 6,
+        "precision": 0.842,
+        "recall": 0.833,
+        "f1": 0.838
+      }
+    },
+    {
+      "row_id": "79ede579b4d0d430",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #197 — nielsr_funsd_test_00047",
+      "ts_utc": "2025-09-22T16:12:43.636328+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 5,
+        "fn": 7,
+        "precision": 0.839,
+        "recall": 0.833,
+        "f1": 0.836
+      }
+    },
+    {
+      "row_id": "c228e8627733d4be",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #198 — nielsr_funsd_test_00048",
+      "ts_utc": "2025-09-22T17:06:21.818146+08:00",
+      "metrics": {
+        "tp": 37,
+        "fp": 4,
+        "fn": 7,
+        "precision": 0.838,
+        "recall": 0.829,
+        "f1": 0.834
+      }
+    },
+    {
+      "row_id": "7ccdbb1c3ff021f7",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #199 — nielsr_funsd_test_00049",
+      "ts_utc": "2025-09-22T17:59:59.999964+08:00",
+      "metrics": {
+        "tp": 33,
+        "fp": 8,
+        "fn": 6,
+        "precision": 0.84,
+        "recall": 0.83,
+        "f1": 0.835
+      }
+    }
+  ]
+}
