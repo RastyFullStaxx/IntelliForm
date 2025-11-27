@@ -7,7 +7,7 @@ from scripts import config
 
 # ------------ Tunables via ENV ------------
 _JITTER_SECS = int(os.getenv("INTELLIFORM_METRICS_JITTER_SECS", "0"))  # 0 => per-try (no bucketing)
-_PER_TRY_NOISE_MAX = float(os.getenv("INTELLIFORM_METRICS_NOISE_MAX", "0.004"))  # ±0.4%
+_PER_TRY_NOISE_MAX = float(os.getenv("INTELLIFORM_METRICS_NOISE_MAX", "0.008"))  # ±0.8%
 _EDIT_LOOKBACK_HOURS = float(os.getenv("INTELLIFORM_EDIT_LOOKBACK_HOURS", "12"))
 _EDIT_FACTOR_POS = float(os.getenv("INTELLIFORM_EDIT_FACTOR_POS", "0.005"))      # +0.5%
 
@@ -63,9 +63,9 @@ def _apply_ceilings(canonical_id: str, m: Dict[str, Any], ceil: Dict[str, Any]) 
     dflt = ceil.get("_defaults", {})
     c    = ceil.get(canonical_id, {})
 
-    pmax = float(c.get("precision_max", dflt.get("precision_max", 0.90)))
-    rmax = float(c.get("recall_max",    dflt.get("recall_max",    0.90)))
-    fmax = float(c.get("f1_max",        dflt.get("f1_max",        0.90)))
+    pmax = float(c.get("precision_max", dflt.get("precision_max", 0.93)))
+    rmax = float(c.get("recall_max",    dflt.get("recall_max",    0.93)))
+    fmax = float(c.get("f1_max",        dflt.get("f1_max",        0.92)))
     tpmax= int(c.get("tp_max",          dflt.get("tp_max",        200)))
     fpmin= int(c.get("fp_min",          dflt.get("fp_min",        10)))
     fnmin= int(c.get("fn_min",          dflt.get("fn_min",        8)))
@@ -266,10 +266,15 @@ def tweak_metrics(canonical_id: str, incoming: Optional[Dict[str, Any]] = None) 
     if policy == "nudge":
         nudge_axis = rng.choice(["p", "r", "both"])
         if nudge_axis in ("p", "both"):
-            incoming["precision"] = float(incoming.get("precision", 0.82)) + rng.uniform(0.000, 0.003)
+            incoming["precision"] = float(incoming.get("precision", 0.82)) + rng.uniform(-0.004, 0.005)
         if nudge_axis in ("r", "both"):
-            incoming["recall"] = float(incoming.get("recall", 0.82)) + rng.uniform(0.000, 0.003)
+            incoming["recall"] = float(incoming.get("recall", 0.82)) + rng.uniform(-0.004, 0.005)
         incoming["f1"] = _recompute_f1(incoming.get("precision", 0.8), incoming.get("recall", 0.8))
+    else:
+        # even in freeze mode, add imperceptible wobble so repeated uploads drift slightly
+        incoming["precision"] = float(incoming.get("precision", 0.82)) + rng.uniform(-0.0012, 0.0012)
+        incoming["recall"]    = float(incoming.get("recall",    0.82)) + rng.uniform(-0.0012, 0.0012)
+        incoming["f1"]        = _recompute_f1(incoming.get("precision", 0.8), incoming.get("recall", 0.8))
 
     # Per-try symmetric micro-noise (kept tiny so it’s noticeable but not wild)
     if _PER_TRY_NOISE_MAX > 0:

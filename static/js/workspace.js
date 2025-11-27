@@ -1615,7 +1615,9 @@ function findAnchorForLabel(labelRaw, annotations){
         // ---- Workspace event logger: duration ends at the user's confirmation moment ----
         async function logWorkspaceEvent(status, finishedAt, extraMeta) {
           try {
-            if (!isMetricsOptIn() || !workspaceShownAt || workspaceLogged) return;
+            if (!isMetricsOptIn() || !workspaceShownAt) return;
+            // Allow final save to log even if we logged earlier events (e.g., print); other events respect the guard.
+            if (status !== "saved" && workspaceLogged) return;
             const cid = ws_currentCanonical();
             if (!cid) return;
 
@@ -1629,14 +1631,16 @@ function findAnchorForLabel(labelRaw, annotations){
               meta: Object.assign({ status }, extraMeta || {})
             };
 
-      if (navigator.sendBeacon) {
-        const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
-        navigator.sendBeacon(apiUrl("/api/user.log"), blob);
-      } else {
-        await POST_JSON("/api/user.log", payload);
-      }
-            workspaceLogged = true;
-            ws_clearInflight();
+            if (navigator.sendBeacon) {
+              const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
+              navigator.sendBeacon(apiUrl("/api/user.log"), blob);
+            } else {
+              await POST_JSON("/api/user.log", payload);
+            }
+            if (status === "saved") {
+              workspaceLogged = true;
+              ws_clearInflight();
+            }
           } catch (e) {
             console.warn("[workspace event log] failed:", e);
           }
@@ -1713,7 +1717,8 @@ function findAnchorForLabel(labelRaw, annotations){
       URL.revokeObjectURL(a.href);
 
       // Success toast
-      await Swal.fire({ icon:"success", title:"Saved", timer:800, showConfirmButton:false });
+      const metricsNote = isMetricsOptIn() ? "<div style='font-size:12px;opacity:.9;'>Your beta metrics were recorded.</div>" : "";
+      await Swal.fire({ icon:"success", title:"Saved", html: metricsNote || undefined, timer:1200, showConfirmButton:false });
 
       // Ask if the user wants to start fresh
       const startFresh = await Swal.fire({
