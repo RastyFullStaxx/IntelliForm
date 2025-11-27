@@ -380,17 +380,17 @@ function renderToolTable(rows, opts = {}) {
 
   const body = safe.map((r, i) => `
     <tr>
-      ${withCk ? `<td class="num" style="text-align:center">
+      ${withCk ? `<td class="num center">
         <input type="checkbox" data-id="${esc(r.id)}" aria-label="Select row ${i+1}"/>
       </td>` : ""}
-      <td class="nowrap">${esc(r.when)}</td>
-      <td>${esc(r.title)}</td>
-      <td class="num">${r.tp}</td>
-      <td class="num">${r.fp}</td>
-      <td class="num">${r.fn}</td>
-      <td class="num">${pct(r.precision)}</td>
-      <td class="num">${pct(r.recall)}</td>
-      <td class="num">${pct(r.f1)}</td>
+      <td class="nowrap center">${esc(r.when)}</td>
+      <td class="center">${esc(r.title)}</td>
+      <td class="num center">${r.tp}</td>
+      <td class="num center">${r.fp}</td>
+      <td class="num center">${r.fn}</td>
+      <td class="num center">${pct(r.precision)}</td>
+      <td class="num center">${pct(r.recall)}</td>
+      <td class="num center">${pct(r.f1)}</td>
     </tr>
   `).join("");
 
@@ -398,14 +398,14 @@ function renderToolTable(rows, opts = {}) {
     <thead>
       <tr>
         ${headLeft}
-        <th>When</th>
-        <th>Title</th>
-        <th>TP</th>
-        <th>FP</th>
-        <th>FN</th>
-        <th>Precision</th>
-        <th>Recall</th>
-        <th>F1</th>
+        <th class="center">When</th>
+        <th class="center">Title</th>
+        <th class="center">TP</th>
+        <th class="center">FP</th>
+        <th class="center">FN</th>
+        <th class="center">Precision</th>
+        <th class="center">Recall</th>
+        <th class="center">F1</th>
       </tr>
     </thead>
     <tbody>${body}</tbody>

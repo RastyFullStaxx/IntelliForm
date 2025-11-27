@@ -199,6 +199,7 @@
 
 .record-data { width: 100%; min-height: 24rem; }
 .record-data table { border-collapse: collapse; width: 100%; }
+.record-data th.center, .record-data td.center { text-align: center; }
 
 .record-data thead tr {
   font-size: 12px;
