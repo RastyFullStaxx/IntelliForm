@@ -1,8 +1,8 @@
-IntelliForm — Metrics Report (070f554dfed7f8ba7694884b7f8b650af7718070e5c7966b6f87267cbac825f2)
+IntelliForm — Metrics Report (bda5c306a96351a554cb654c7227e8b16dc718954a0eb84683ef795e89fadf2c)
 ===============================================================================================
 
 Field Spans (IoU matching):
-  TP/FP/FN : 194/29/26
-  Precision: 0.8700
-  Recall   : 0.8820
-  F1       : 0.8760
+  TP/FP/FN : 20/2/4
+  Precision: 0.9090
+  Recall   : 0.8330
+  F1       : 0.8700
