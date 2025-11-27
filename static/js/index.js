@@ -45,16 +45,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
   betaBtn?.addEventListener('click', async () => {
     try {
+      const existingName = (sessionStorage.getItem(LS_UID) || localStorage.getItem(LS_UID) || "").trim();
       const promptFn = window.promptForResearchUserId || (async () => {
-        const { value } = await Swal.fire({
+        const res = await Swal.fire({
           title: "Enter Your Name",
           input: "text",
           inputLabel: "For beta metrics",
           inputPlaceholder: "TYPE YOUR NAME",
+          inputValue: existingName || "",
           inputAttributes: { autocapitalize: "characters", autocorrect: "off", spellcheck: "false" },
           allowOutsideClick: false,
           confirmButtonText: "Save",
           showCancelButton: true,
+          cancelButtonText: "Cancel",
+          showDenyButton: true,
+          denyButtonText: "Turn off metrics",
+          reverseButtons: true,
           preConfirm: (val) => {
             const v = String(val || "").trim();
             if (!v || v.length < 2) {
@@ -64,10 +70,16 @@ document.addEventListener('DOMContentLoaded', function () {
             return v;
           }
         });
-        return value;
+        if (res.isDismissed) return null;
+        if (res.isDenied) return "__TURN_OFF__";
+        return res.value;
       });
       const id = await promptFn();
-      if (id && id.trim()) {
+      if (id === "__TURN_OFF__") {
+        setMetricsOptIn(false, "");
+        sessionStorage.removeItem(LS_UID);
+        localStorage.removeItem(LS_UID);
+      } else if (id && id.trim()) {
         setMetricsOptIn(true, id.trim());
       }
     } catch (e) {
