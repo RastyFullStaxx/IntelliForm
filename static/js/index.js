@@ -50,16 +50,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const res = await Swal.fire({
           title: "Enter Your Name",
           input: "text",
-          inputLabel: "For beta metrics",
+          inputLabel: "For beta metrics (Example: JUAN DELA CRUZ)",
           inputPlaceholder: "TYPE YOUR NAME",
           inputValue: existingName || "",
           inputAttributes: { autocapitalize: "characters", autocorrect: "off", spellcheck: "false" },
           allowOutsideClick: false,
           confirmButtonText: "Save",
-          showCancelButton: true,
           cancelButtonText: "Cancel",
+          denyButtonText: existingName ? "Clear name" : "Turn off metrics",
+          showCancelButton: true,
           showDenyButton: true,
-          denyButtonText: "Turn off metrics",
           reverseButtons: true,
           preConfirm: (val) => {
             const v = String(val || "").trim();
@@ -269,16 +269,22 @@ document.addEventListener('DOMContentLoaded', function () {
       if (existing && existing.trim()) return existing;
     }
 
-    const { value } = await Swal.fire({
+    const existing = (localStorage.getItem(LS_KEY) || sessionStorage.getItem(LS_KEY) || "").trim();
+    const res = await Swal.fire({
       title: "Enter Your Name (or ID)",
       input: "text",
       inputLabel: "Example: JUAN DELA CRUZ",
       inputPlaceholder: "TYPE YOUR NAME",
+      inputValue: existing,
       inputAttributes: { autocapitalize: "characters", autocorrect: "off", spellcheck: "false" },
       allowOutsideClick: false,
-      allowEscapeKey: false,
+      allowEscapeKey: true,
       confirmButtonText: "Save",
-      showCancelButton: false,
+      cancelButtonText: "Cancel",
+      denyButtonText: existing ? "Clear name" : null,
+      showCancelButton: true,
+      showDenyButton: !!existing,
+      reverseButtons: true,
       preConfirm: (val) => {
         const v = normalizeId(val);
         if (!v || v.length < 2) {
@@ -289,9 +295,20 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
 
-    const normalized = normalizeId(value);
-    localStorage.setItem(LS_KEY, normalized);
-    sessionStorage.setItem(LS_KEY, normalized); // mirror for this tab
+    if (res.isDismissed) return null;
+    if (res.isDenied) {
+      try {
+        localStorage.removeItem(LS_KEY);
+        sessionStorage.removeItem(LS_KEY);
+      } catch {}
+      return "__TURN_OFF__";
+    }
+
+    const normalized = normalizeId(res.value);
+    try {
+      localStorage.setItem(LS_KEY, normalized);
+      sessionStorage.setItem(LS_KEY, normalized); // mirror for this tab
+    } catch {}
     return normalized;
   }
 
