@@ -1,0 +1,184 @@
+{
+  "title": "APPLICATION FOR EXPERIMENTAL USE PERMIT (EUP)",
+  "form_id": "application-for-experimental-use-permit-eup",
+  "sections": [
+    {
+      "title": "APPLICANT INFORMATION",
+      "fields": [
+        {
+          "label": "Business/Company Name",
+          "summary": "Enter the name of the business or company."
+        },
+        {
+          "label": "Business/Company Address",
+          "summary": "Provide the complete address including unit/block/no, street, subdivision/village, barangay, municipality/city, province, country, and zip code."
+        },
+        {
+          "label": "Name of Contact Person",
+          "summary": "Enter the full name of the contact person."
+        },
+        {
+          "label": "Position",
+          "summary": "Specify the position of the contact person."
+        },
+        {
+          "label": "Contact Number(s)",
+          "summary": "Provide the contact number(s) for the contact person."
+        },
+        {
+          "label": "Email Address(es)",
+          "summary": "Enter the email address(es) for the contact person."
+        }
+      ]
+    },
+    {
+      "title": "ORGANIC PRODUCT TRADE/BRAND NAME",
+      "fields": [
+        {
+          "label": "ORGANIC PRODUCT TRADE/BRAND NAME",
+          "summary": "Specify the trade/brand name of the organic product."
+        }
+      ]
+    },
+    {
+      "title": "GUARANTEED ANALYSIS",
+      "fields": [
+        {
+          "label": "GUARANTEED ANALYSIS",
+          "summary": "Provide the guaranteed analysis of the product."
+        }
+      ]
+    },
+    {
+      "title": "NAME OF ACTIVE INGREDIENT AND PERCENT PURITY (For BCA)",
+      "fields": [
+        {
+          "label": "NAME OF ACTIVE INGREDIENT AND PERCENT PURITY",
+          "summary": "Specify the name of the active ingredient and its percent purity."
+        }
+      ]
+    },
+    {
+      "title": "NAME OF MANUFACTURER OF A.I. (For BCA)",
+      "fields": [
+        {
+          "label": "NAME OF MANUFACTURER OF A.I.",
+          "summary": "Enter the name of the manufacturer of the active ingredient."
+        },
+        {
+          "label": "ADDRESS",
+          "summary": "Provide the address of the manufacturer."
+        }
+      ]
+    },
+    {
+      "title": "TEST CROP AND/OR TARGET PEST",
+      "fields": [
+        {
+          "label": "TEST CROP AND/OR TARGET PEST",
+          "summary": "Specify the test crop and/or target pest."
+        }
+      ]
+    },
+    {
+      "title": "TOTAL AREA COVERED",
+      "fields": [
+        {
+          "label": "TOTAL AREA COVERED",
+          "summary": "Indicate the total area covered for the trial."
+        }
+      ]
+    },
+    {
+      "title": "DURATION OF TRIAL",
+      "fields": [
+        {
+          "label": "DURATION OF TRIAL",
+          "summary": "Specify the duration of the trial."
+        }
+      ]
+    },
+    {
+      "title": "TREATMENT AND METHOD OF APPLICATION",
+      "fields": [
+        {
+          "label": "TREATMENT AND METHOD OF APPLICATION",
+          "summary": "Describe the treatment and method of application."
+        }
+      ]
+    },
+    {
+      "title": "TOTAL AMOUNT OF PRODUCT NEEDED FOR THE TRIAL",
+      "fields": [
+        {
+          "label": "TOTAL AMOUNT OF PRODUCT NEEDED FOR THE TRIAL",
+          "summary": "Indicate the total amount of product needed for the trial."
+        }
+      ]
+    },
+    {
+      "title": "LOCATION OF EXPERIMENTAL SITE",
+      "fields": [
+        {
+          "label": "LOCATION OF EXPERIMENTAL SITE",
+          "summary": "Provide the location of the experimental site and attach a location map."
+        }
+      ]
+    },
+    {
+      "title": "NAME OF DA-BAFS OFFICIALLY ACCREDITED ORGANIC AGRICULTURE RESEARCHER (OAR)",
+      "fields": [
+        {
+          "label": "NAME OF DA-BAFS OFFICIALLY ACCREDITED ORGANIC AGRICULTURE RESEARCHER (OAR)",
+          "summary": "Enter the name of the accredited organic agriculture researcher."
+        },
+        {
+          "label": "Official Accreditation Number",
+          "summary": "Provide the official accreditation number."
+        },
+        {
+          "label": "Contact Number(s)",
+          "summary": "Enter the contact number(s) for the OAR."
+        },
+        {
+          "label": "Email Address(es)",
+          "summary": "Provide the email address(es) for the OAR."
+        },
+        {
+          "label": "Address",
+          "summary": "Specify the address of the OAR."
+        }
+      ]
+    },
+    {
+      "title": "Applicant’s Authorized Signature",
+      "fields": [
+        {
+          "label": "Applicant’s Authorized Signature",
+          "summary": "Sign here."
+        },
+        {
+          "label": "Date",
+          "summary": "Enter the date of application."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 24,
+    "fp": 1,
+    "fn": 0,
+    "precision": 0.96,
+    "recall": 1.0,
+    "f1": 0.98
+  },
+  "canonical_id": "34122fe83fd977ae00e3a44e4492b927588d7512da4d348ee0cac5526cf1b1a3",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-11-27T19:14:37+00:00",
+  "aliases": [
+    "c2f82b7b3e6c4655b14d8d5e18a4e40a_04",
+    "c2f82b7b3e6c4655b14d8d5e18a4e40a_04.pdf"
+  ]
+}

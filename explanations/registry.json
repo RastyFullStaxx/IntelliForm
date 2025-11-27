@@ -329,13 +329,43 @@
       ]
     },
     {
-      "form_id": "8cd3f3961e539621347028e20296db392aface4f9f928ebf1a057b0b85010f38",
-      "title": "7746c2f40b1749e698b7c0346b58c100_SSSForms_ER_Contribution_Payment",
-      "path": "explanations/government/8cd3f3961e539621347028e20296db392aface4f9f928ebf1a057b0b85010f38.json",
+      "form_id": "c396696003fdca83a99bd73603098a3f4678fc4df5d109c38ed85a17677f9172",
+      "title": "36fa6539a7a847abba2e0e101be1f041_UNIFIED_BUSINESS_PERMIT_APPLICATION_FORM_2025",
+      "path": "explanations/government/c396696003fdca83a99bd73603098a3f4678fc4df5d109c38ed85a17677f9172.json",
       "bucket": "government",
       "aliases": [
-        "7746c2f40b1749e698b7c0346b58c100_sssforms_er_contribution_payment",
-        "7746c2f40b1749e698b7c0346b58c100_SSSForms_ER_Contribution_Payment.pdf"
+        "36fa6539a7a847abba2e0e101be1f041_unified_business_permit_application_form_2025",
+        "36fa6539a7a847abba2e0e101be1f041_UNIFIED_BUSINESS_PERMIT_APPLICATION_FORM_2025.pdf"
+      ]
+    },
+    {
+      "form_id": "34122fe83fd977ae00e3a44e4492b927588d7512da4d348ee0cac5526cf1b1a3",
+      "title": "c2f82b7b3e6c4655b14d8d5e18a4e40a_04",
+      "path": "explanations/government/34122fe83fd977ae00e3a44e4492b927588d7512da4d348ee0cac5526cf1b1a3.json",
+      "bucket": "government",
+      "aliases": [
+        "c2f82b7b3e6c4655b14d8d5e18a4e40a_04",
+        "c2f82b7b3e6c4655b14d8d5e18a4e40a_04.pdf"
+      ]
+    },
+    {
+      "form_id": "cd29aca0e8361445397b4bac0235bafd0962790730d67bd1c3dcd75abde67963",
+      "title": "abb9d77ea78a4d01a27fded2c2913b04_19-BIR(0901-I)",
+      "path": "explanations/tax/cd29aca0e8361445397b4bac0235bafd0962790730d67bd1c3dcd75abde67963.json",
+      "bucket": "tax",
+      "aliases": [
+        "abb9d77ea78a4d01a27fded2c2913b04_19-bir(0901-i)",
+        "abb9d77ea78a4d01a27fded2c2913b04_19-BIR(0901-I).pdf"
+      ]
+    },
+    {
+      "form_id": "bda5c306a96351a554cb654c7227e8b16dc718954a0eb84683ef795e89fadf2c",
+      "title": "e891c9af40ba4be69b36783bb5361cd4_37-BIR(1945)",
+      "path": "explanations/tax/bda5c306a96351a554cb654c7227e8b16dc718954a0eb84683ef795e89fadf2c.json",
+      "bucket": "tax",
+      "aliases": [
+        "e891c9af40ba4be69b36783bb5361cd4_37-bir(1945)",
+        "e891c9af40ba4be69b36783bb5361cd4_37-BIR(1945).pdf"
       ]
     }
   ]

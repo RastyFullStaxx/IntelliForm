@@ -1,0 +1,192 @@
+{
+  "title": "UNIFIED BUSINESS PERMIT APPLICATION FORM",
+  "form_id": "unified_business_permit_application_form",
+  "sections": [
+    {
+      "title": "BUSINESS INFORMATION AND REGISTRATION",
+      "fields": [
+        {
+          "label": "Taxpayer/Corporate Name",
+          "summary": "Enter the name of the taxpayer or corporation."
+        },
+        {
+          "label": "Trade Name/Franchise (if applicable)",
+          "summary": "Enter the trade name or franchise."
+        },
+        {
+          "label": "DTI TRN or BNN/SEC or CDA Registration Number",
+          "summary": "Provide the registration number."
+        },
+        {
+          "label": "Tax Identification Number (TIN)",
+          "summary": "Enter the TIN."
+        },
+        {
+          "label": "NEW",
+          "summary": "Tick if this is a new application."
+        },
+        {
+          "label": "RENEWAL",
+          "summary": "Tick if this is a renewal."
+        },
+        {
+          "label": "TRANSFER",
+          "summary": "Tick if this is a transfer."
+        },
+        {
+          "label": "AMENDMENT",
+          "summary": "Tick if this is an amendment."
+        },
+        {
+          "label": "Change Name",
+          "summary": "Indicate if there is a change of name."
+        },
+        {
+          "label": "Additional Line of Business",
+          "summary": "Specify any additional line of business."
+        },
+        {
+          "label": "Others (Please specify:)",
+          "summary": "Provide details if applicable."
+        },
+        {
+          "label": "Business Area Total",
+          "summary": "Enter the total business area."
+        },
+        {
+          "label": "Floor Area (sq.m)",
+          "summary": "Enter the floor area in square meters."
+        },
+        {
+          "label": "Do you have tax incentives from any Government Entity?",
+          "summary": "Indicate Yes or No."
+        },
+        {
+          "label": "If Yes (Please select applicable tax incentive/s and attach a copy of your certificate)",
+          "summary": "Select applicable tax incentives."
+        },
+        {
+          "label": "Date registered (mm/dd/yyyy):",
+          "summary": "Enter the registration date."
+        },
+        {
+          "label": "If PEZA, type of incentive:",
+          "summary": "Specify the type of PEZA incentive."
+        },
+        {
+          "label": "If BOI, select one:",
+          "summary": "Select the applicable BOI option."
+        },
+        {
+          "label": "Number or employees residing in Taguig",
+          "summary": "Enter the number of employees in Taguig."
+        },
+        {
+          "label": "Number or employees in establishment",
+          "summary": "Enter the total number of employees."
+        },
+        {
+          "label": "Property owned?",
+          "summary": "Indicate Yes or No."
+        },
+        {
+          "label": "If Yes, PIN or TD Number:",
+          "summary": "Provide the PIN or TD number."
+        }
+      ]
+    },
+    {
+      "title": "BUSINESS CONTACTS",
+      "fields": [
+        {
+          "label": "Office Address",
+          "summary": "Enter the office address."
+        },
+        {
+          "label": "Telephone Number",
+          "summary": "Enter the telephone number."
+        },
+        {
+          "label": "Mobile Number",
+          "summary": "Enter the mobile number."
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter the email address."
+        }
+      ]
+    },
+    {
+      "title": "BUSINESS ACTIVITY",
+      "fields": [
+        {
+          "label": "BUSINESS ACTIVITY",
+          "summary": "Specify the business activity."
+        },
+        {
+          "label": "PHILIPPINE STANDARD INDUSTRIAL CODE (If Applicable)",
+          "summary": "Enter the applicable industrial code."
+        },
+        {
+          "label": "NATURE OF BUSINESS",
+          "summary": "Describe the nature of the business."
+        },
+        {
+          "label": "LINE OF BUSINESS",
+          "summary": "Specify the line of business."
+        }
+      ]
+    },
+    {
+      "title": "Authorized Representative",
+      "fields": [
+        {
+          "label": "SURNAME",
+          "summary": "Enter the surname of the authorized representative."
+        },
+        {
+          "label": "FIRST NAME",
+          "summary": "Enter the first name."
+        },
+        {
+          "label": "MIDDLE NAME",
+          "summary": "Enter the middle name."
+        },
+        {
+          "label": "Position",
+          "summary": "Enter the position of the representative."
+        }
+      ]
+    },
+    {
+      "title": "Signature",
+      "fields": [
+        {
+          "label": "Signature of the Proprietor/Representative over printed name",
+          "summary": "Sign above the printed name."
+        },
+        {
+          "label": "Designation and Date",
+          "summary": "Enter designation and date."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 36,
+    "fp": 1,
+    "fn": 0,
+    "precision": 0.973,
+    "recall": 1.0,
+    "f1": 0.986
+  },
+  "canonical_id": "c396696003fdca83a99bd73603098a3f4678fc4df5d109c38ed85a17677f9172",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-11-27T19:05:24+00:00",
+  "aliases": [
+    "36fa6539a7a847abba2e0e101be1f041_UNIFIED_BUSINESS_PERMIT_APPLICATION_FORM_2025",
+    "36fa6539a7a847abba2e0e101be1f041_UNIFIED_BUSINESS_PERMIT_APPLICATION_FORM_2025.pdf"
+  ]
+}

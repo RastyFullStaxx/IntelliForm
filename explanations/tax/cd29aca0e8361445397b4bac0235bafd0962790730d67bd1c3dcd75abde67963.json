@@ -1,0 +1,136 @@
+{
+  "title": "Application For Relief From Double Taxation on Interest Income",
+  "form_id": "0901-I",
+  "sections": [
+    {
+      "title": "TAX TREATY INFORMATION",
+      "fields": [
+        {
+          "label": "Date of Application",
+          "summary": "Enter the date of application."
+        },
+        {
+          "label": "Philippine Tax Convention with",
+          "summary": "Fill in the country."
+        },
+        {
+          "label": "Preferential tax treaty rate",
+          "summary": "Enter the preferential tax rate."
+        },
+        {
+          "label": "Preferential tax rate",
+          "summary": "Enter percentage."
+        },
+        {
+          "label": "Article Invoked",
+          "summary": "Specify the article."
+        },
+        {
+          "label": "Exemption",
+          "summary": "Indicate if applicable."
+        },
+        {
+          "label": "Government made /Insured/Guaranted Loan?",
+          "summary": "Tick YES or NO."
+        }
+      ]
+    },
+    {
+      "title": "Taxpayer's",
+      "fields": [
+        {
+          "label": "Name",
+          "summary": "Enter taxpayer's name."
+        },
+        {
+          "label": "Foreign Address",
+          "summary": "Fill in foreign address details."
+        },
+        {
+          "label": "Local Address",
+          "summary": "Fill in local address details."
+        },
+        {
+          "label": "Business Phone Number",
+          "summary": "Enter phone number with area/access code."
+        },
+        {
+          "label": "Local Representative in the Philippines, if any:",
+          "summary": "Enter name of local representative."
+        },
+        {
+          "label": "Local Address",
+          "summary": "Fill in local representative's address."
+        },
+        {
+          "label": "Business Phone Number",
+          "summary": "Enter phone number with area/access code."
+        },
+        {
+          "label": "Fax Number",
+          "summary": "Enter fax number."
+        },
+        {
+          "label": "Taxpayer's Identification Number",
+          "summary": "Enter taxpayer's ID number."
+        }
+      ]
+    },
+    {
+      "title": "RECIPIENT OF INCOME",
+      "fields": [
+        {
+          "label": "Permanent Establishment / Fixed Base in the Philippines, if any:",
+          "summary": "Enter name."
+        },
+        {
+          "label": "Local Address",
+          "summary": "Fill in local address details."
+        }
+      ]
+    },
+    {
+      "title": "Taxpayer's",
+      "fields": [
+        {
+          "label": "Name",
+          "summary": "Enter taxpayer's name."
+        },
+        {
+          "label": "Local Address",
+          "summary": "Fill in local address details."
+        },
+        {
+          "label": "Registration with Board of Investments (BOI), if any:",
+          "summary": "Specify registration type."
+        }
+      ]
+    },
+    {
+      "title": "DOCUMENTARY REQUIREMENTS",
+      "fields": [
+        {
+          "label": "REMARKS",
+          "summary": "Provide any remarks."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 15,
+    "fp": 3,
+    "fn": 7,
+    "precision": 0.833,
+    "recall": 0.682,
+    "f1": 0.75
+  },
+  "canonical_id": "cd29aca0e8361445397b4bac0235bafd0962790730d67bd1c3dcd75abde67963",
+  "bucket": "tax",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-11-27T19:25:58+00:00",
+  "aliases": [
+    "abb9d77ea78a4d01a27fded2c2913b04_19-BIR(0901-I)",
+    "abb9d77ea78a4d01a27fded2c2913b04_19-BIR(0901-I).pdf"
+  ]
+}

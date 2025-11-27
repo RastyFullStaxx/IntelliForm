@@ -76,7 +76,7 @@ CORE_ENGINE_KEY: str = (os.getenv("INTELLIFORM_CORE_KEY") or os.getenv("INTELLIF
 CORE_BACKEND: str = (os.getenv("INTELLIFORM_BACKEND") or "oai").strip().lower()
 # Treat these like hyperparameters
 ENGINE_MODEL: str = os.getenv("INTELLIFORM_ENGINE_MODEL", "gpt-4o-mini")
-MAX_TOKENS: int = int(os.getenv("INTELLIFORM_ENGINE_MAXTOK", os.getenv("INTELLIFORM_MAX_TOKENS", "4000")) or 4000)
+MAX_TOKENS: int = int(os.getenv("INTELLIFORM_ENGINE_MAXTOK", os.getenv("INTELLIFORM_MAX_TOKENS", "6000")) or 6000)
 TEMPERATURE: float = float(os.getenv("INTELLIFORM_ENGINE_TEMP", os.getenv("INTELLIFORM_TEMPERATURE", "0.2")) or 0.2)
 
 _LOG_LEVEL = os.getenv("INTELLIFORM_LOG_LEVEL", "INFO").upper()
@@ -595,13 +595,14 @@ You are generating a JSON explainer for a PDF form. Output MUST be valid JSON wi
 
 STRICT RULES:
 - NO hallucinations. If a required label cannot be verified from the page text, set its summary to "N/A" or "—".
+- Use neighboring cues (row/column headers, section titles, nearby descriptors) to keep summaries specific while staying faithful to visible text; do not invent values.
 - Prefer the exact printed label text as it appears on the form for every field label.
   • Trim extra punctuation and trailing colons.
   • Preserve casing & words so our click-to-jump overlay can match reliably.
 - DO NOT merge two distinct printed labels into one field, unless the form itself prints them as a single combined label.
 - Group fields by on-page layout order, scanning left→right, then top→bottom.
-- Include EVERY question/blank on the form that requires a user answer.
-- Keep summaries short, imperative, and specific (what to write/tick).
+- Include EVERY question/blank on the form that requires a user answer AND include header/top banners, corner boxes, and “For Official Use” areas (set summary like “Office use only; leave blank” if applicable).
+- Keep summaries short, imperative, and specific (what to write/tick); ensure the instruction matches the label’s intent (no vague wording).
 - If OCR text is noisy, normalize whitespace and obvious OCR artifacts; still do not invent content.
 - Provide realistic metrics (tp/fp/fn → precision/recall/f1) that reflect your own confidence on THIS document:
   • High confidence on clearly read labels (sharp print, unambiguous layout) → higher precision/recall.
@@ -628,9 +629,9 @@ Context:
 - Title guess: {title_guess}
 
 Tasks:
-1) Read the page text (OCR if needed). Extract all answer-requiring labels.
+1) Read the page text (OCR if needed). Extract all answer-requiring labels, including header/corner boxes and “Official Use Only” rows.
 2) Use exact visible labels (trim punctuation/colons). One printed label → one field.
-3) Group by layout (left→right, top→bottom) into concise sections.
+3) Group by layout (left→right, top→bottom) into concise sections; use nearby headings/row titles to keep summaries context-aware without making up content.
 4) Write short imperative summaries describing what the user should write or tick.
 5) Fill the metadata (canonical_id, bucket, schema_version=1, aliases if applicable).
 6) Produce realistic metrics for THIS file reflecting your own certainty.

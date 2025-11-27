@@ -25,6 +25,9 @@ function initWorkspace() {
   const analyzeBtn = $("analyzeTool");
   const summaryList = $("summaryList");
   const formTitle = $("formNameDisplay");
+  const floatingToggleWrapper = $("floatingToggleWrapper");
+  const faqButton = $("faqButton");
+  const faqPanel = $("faqPanel");
   const metricsRow = $("metricsRow");
   const sidebarTitle = document.querySelector(".sidebar-title h5");
   const pageInfo = $("pageInfo");
@@ -143,6 +146,46 @@ function initWorkspace() {
   }
 
   // ---- Sidebar controls ----
+  // Draggable toggle along the right edge (vertical only)
+  if (floatingToggleWrapper) {
+    let dragStartY = 0;
+    let startTop = 0;
+    let dragging = false;
+    let moved = false;
+    const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
+    const stopDrag = () => {
+      dragging = false;
+      document.removeEventListener("pointermove", onDrag);
+      document.removeEventListener("pointerup", stopDrag);
+      document.removeEventListener("pointercancel", stopDrag);
+    };
+    const onDrag = (e) => {
+      if (!dragging) return;
+      const y = e.clientY ?? (e.touches && e.touches[0]?.clientY) ?? dragStartY;
+      const delta = y - dragStartY;
+      const minTop = 80;
+      const maxTop = Math.max(minTop, window.innerHeight - 180);
+      const nextTop = clamp(startTop + delta, minTop, maxTop);
+      if (Math.abs(delta) > 2) moved = true;
+      floatingToggleWrapper.style.top = `${nextTop}px`;
+    };
+    floatingToggleWrapper.addEventListener("pointerdown", (e) => {
+      dragStartY = e.clientY;
+      startTop = parseFloat(getComputedStyle(floatingToggleWrapper).top || "200");
+      dragging = true;
+      moved = false;
+      document.addEventListener("pointermove", onDrag);
+      document.addEventListener("pointerup", stopDrag);
+      document.addEventListener("pointercancel", stopDrag);
+    });
+    sidebarToggle?.addEventListener("click", (e) => {
+      if (moved) {
+        e.stopImmediatePropagation();
+        moved = false;
+      }
+    });
+  }
+
   if (sidebarToggle && sidebar) {
     sidebarToggle.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -154,6 +197,22 @@ function initWorkspace() {
         sidebar.classList.remove("open");
         sidebarToggle.style.display = "flex";
       }
+    });
+  }
+
+  // ---- FAQ guide ----
+  if (faqButton && faqPanel) {
+    const closeFaq = () => faqPanel.classList.remove("open");
+    faqButton.addEventListener("click", (e) => {
+      e.stopPropagation();
+      faqPanel.classList.toggle("open");
+    });
+    faqPanel.addEventListener("click", (e) => e.stopPropagation());
+    document.addEventListener("click", (e) => {
+      if (!faqPanel.contains(e.target) && !faqButton.contains(e.target)) closeFaq();
+    });
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeFaq();
     });
   }
   const syncThumbToggle = () => {
@@ -686,7 +745,11 @@ function initWorkspace() {
         row.innerHTML = `<span class="summary-label" data-label="${esc(f.label)}">${esc(f.label)}</span>: ${esc(f.summary)}`;
         content.appendChild(row);
       });
-      header.addEventListener("click", () => content.classList.toggle("active"));
+      header.addEventListener("click", () => {
+        content.classList.toggle("active");
+        header.classList.toggle("open", content.classList.contains("active"));
+      });
+      header.classList.toggle("open", content.classList.contains("active"));
       item.appendChild(header); item.appendChild(content);
       summaryList?.appendChild(item);
     });

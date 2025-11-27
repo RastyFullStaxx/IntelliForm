@@ -1,0 +1,139 @@
+{
+  "title": "Application for Certificate of Tax Exemption for Cooperatives",
+  "form_id": "bir_form_1945",
+  "sections": [
+    {
+      "title": "Part I – Background Information",
+      "fields": [
+        {
+          "label": "RDO Filing Reference No/Document Locator",
+          "summary": "Enter the filing reference number."
+        },
+        {
+          "label": "Date of Application",
+          "summary": "Enter the application date in MM/DD/YYYY format."
+        },
+        {
+          "label": "Certificate of Tax Exemption",
+          "summary": "Mark Original or Renewal."
+        },
+        {
+          "label": "Cooperative Identification Number",
+          "summary": "Enter the cooperative identification number."
+        },
+        {
+          "label": "Date of CDA Registration",
+          "summary": "Enter the CDA registration date."
+        },
+        {
+          "label": "Taxpayer Identification Number (TIN)",
+          "summary": "Enter the TIN in the specified format."
+        },
+        {
+          "label": "RDO Code",
+          "summary": "Enter the RDO code."
+        },
+        {
+          "label": "Registered Name",
+          "summary": "Enter the registered name in CAPITAL LETTERS."
+        },
+        {
+          "label": "Registered Address",
+          "summary": "Indicate the complete registered address."
+        },
+        {
+          "label": "Contact Number",
+          "summary": "Enter the landline or cellphone number."
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter the email address."
+        }
+      ]
+    },
+    {
+      "title": "Part II – Business Structure",
+      "fields": [
+        {
+          "label": "Type of Cooperative",
+          "summary": "Specify the type of cooperative."
+        },
+        {
+          "label": "Main Line of Business",
+          "summary": "Enter the main line of business."
+        },
+        {
+          "label": "Extent of Transaction",
+          "summary": "Mark Members Only or Both Members and Non-Members."
+        },
+        {
+          "label": "Accumulated Reserve and Undivided Net Savings",
+          "summary": "Indicate the amount for accumulated reserve."
+        },
+        {
+          "label": "Share Capital Contribution",
+          "summary": "Select P 15,000 or Less per Member or More Than P 15,000 per Member."
+        }
+      ]
+    },
+    {
+      "title": "Part III – Undertakings and Covenant",
+      "fields": [
+        {
+          "label": "Certificate of Good Standing",
+          "summary": "Enter the date issued by CDA."
+        },
+        {
+          "label": "Return of Net Income",
+          "summary": "Confirm that at least 25% of net income is returned to members."
+        },
+        {
+          "label": "Update of BIR Registration",
+          "summary": "Confirm application for BIR registration update."
+        },
+        {
+          "label": "Similar Application",
+          "summary": "Confirm no similar application has been filed."
+        },
+        {
+          "label": "Pending Matters",
+          "summary": "Confirm no pending matters with BIR or other agencies."
+        },
+        {
+          "label": "Declaration",
+          "summary": "Declare the truthfulness of the application."
+        },
+        {
+          "label": "Signature over Printed Name",
+          "summary": "Provide signature and printed name of authorized person."
+        }
+      ]
+    },
+    {
+      "title": "For BIR Use",
+      "fields": [
+        {
+          "label": "Stamp of Receiving Office and Date of Receipt",
+          "summary": "Office use only; leave blank."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 20,
+    "fp": 2,
+    "fn": 4,
+    "precision": 0.909,
+    "recall": 0.833,
+    "f1": 0.87
+  },
+  "canonical_id": "bda5c306a96351a554cb654c7227e8b16dc718954a0eb84683ef795e89fadf2c",
+  "bucket": "tax",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-11-27T19:48:20+00:00",
+  "aliases": [
+    "e891c9af40ba4be69b36783bb5361cd4_37-BIR(1945)",
+    "e891c9af40ba4be69b36783bb5361cd4_37-BIR(1945).pdf"
+  ]
+}

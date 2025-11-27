@@ -160,7 +160,15 @@ body {
 }
 
 /* ===== Sidebar Toggle Button ===== */
-#floatingToggleWrapper{position:fixed; top:200px; right:-10px; z-index:1001}
+#floatingToggleWrapper{
+  position:fixed;
+  top:200px;
+  right:-10px;
+  z-index:1001;
+  touch-action:none;
+  cursor:grab;
+  user-select:none;
+}
 #sidebarToggle{
   background: linear-gradient(135deg,#1f3a64,#2a3e5f,#0d1b2a,#1f3a64);
   background-size:300% 300%; animation: chromaticShift 1s ease-in-out infinite;
@@ -169,7 +177,83 @@ body {
 }
 #sidebarToggle:hover{ box-shadow:0 0 20px #4180c9, 0 0 30px #1f3a64 }
 @keyframes chromaticShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-#sidebarToggle img{width:60px; height:50px}
+#sidebarToggle img{
+  width:60px;
+  height:50px;
+  pointer-events:none; /* treat image as part of handle */
+  user-select:none;
+}
+
+/* ===== FAQ Dock ===== */
+#faqDock{
+  position:fixed;
+  top:90px;
+  left:14px;
+  z-index:1100;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  max-width:340px;
+}
+.faq-button{
+  border:none;
+  border-radius:14px;
+  width:42px;
+  height:42px;
+  background:linear-gradient(135deg,#12335c,#1f4c9a);
+  color:#fff;
+  font-weight:700;
+  font-size:16px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 10px 24px rgba(0,0,0,0.25), inset 0 0 8px rgba(255,255,255,.08);
+  transition:transform .12s ease, box-shadow .2s ease;
+}
+.faq-button:hover{ transform:translateY(-1px); box-shadow:0 12px 28px rgba(0,0,0,0.28), inset 0 0 10px rgba(255,255,255,.1); }
+.faq-button i{ font-size:16px; color:var(--brand-gold,#ffd700); }
+.faq-panel{
+  display:none;
+  background:rgba(10,24,55,0.94);
+  border:1px solid rgba(255,213,74,.35);
+  border-radius:14px;
+  padding:12px 12px 10px;
+  box-shadow:0 16px 32px rgba(0,0,0,0.35);
+  backdrop-filter: blur(6px);
+}
+.faq-heading{
+  color:var(--brand-gold,#ffd700);
+  font-weight:800;
+  font-size:13px;
+  letter-spacing:.2px;
+  margin-bottom:8px;
+}
+.faq-panel.open{ display:block; }
+.faq-row{
+  display:grid;
+  grid-template-columns:140px 1fr;
+  align-items:flex-start;
+  gap:8px 10px;
+  color:#e9efff;
+  font-size:12px;
+  padding:8px 8px;
+  border-radius:10px;
+  background:linear-gradient(90deg,rgba(255,213,74,.06),rgba(255,213,74,.01));
+  margin-bottom:6px;
+}
+.faq-label{
+  color:var(--brand-gold,#ffd700);
+  font-weight:700;
+  font-size:12px;
+  white-space:nowrap;
+}
+.faq-copy{
+  color:#e9efff;
+  font-size:12px;
+  line-height:1.35;
+}
+.faq-row:last-child{ margin-bottom:0; }
 
 /* ===== Tools Sidebar ===== */
 #sidebar{
@@ -434,8 +518,42 @@ body {
   background: linear-gradient(270deg,#1b3a83,#274089,#1b3a83); background-size:400% 400%; animation: headerGradient 10s ease infinite;
   box-shadow:inset 0 0 6px rgba(30,90,200,.3), 0 0 4px rgba(30,90,200,.2); text-shadow:0 0 4px rgba(255,255,255,.25);
 }
-.accordion-content{ background:#152c58; padding:6px 12px; color:white; font-size:12px; display:none; border-radius:12px; margin-bottom:15px }
-.accordion-content.active{ display:block }
+.accordion-content{
+  background:#152c58;
+  padding:0 12px;
+  color:white;
+  font-size:12px;
+  border-radius:12px;
+  margin-bottom:15px;
+  overflow:hidden;
+  max-height:0;
+  opacity:0;
+  transform:translateY(-4px);
+  transition:max-height .28s ease, opacity .22s ease, transform .22s ease, padding .18s ease;
+}
+.accordion-content.active{
+  max-height:1200px;
+  opacity:1;
+  transform:translateY(0);
+  padding:6px 12px 10px;
+}
+.accordion-header::after{
+  content:"";
+  position:absolute;
+  right:12px;
+  top:50%;
+  width:8px;
+  height:8px;
+  border-left:2px solid #fff;
+  border-bottom:2px solid #fff;
+  transform:translateY(-50%) rotate(-45deg);
+  transition:transform .2s ease;
+  opacity:.85;
+}
+.accordion-header.open::after{
+  transform:translateY(-30%) rotate(135deg);
+}
+.accordion-header{ position:relative; }
 .summary-label{ color:#FFD700; font-weight:600; cursor:pointer; text-decoration:underline; }
 .summary-label:focus,.summary-label:hover{ text-decoration:underline; outline:none; }
 
