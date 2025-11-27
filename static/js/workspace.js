@@ -28,8 +28,8 @@ function initWorkspace() {
   const floatingToggleWrapper = $("floatingToggleWrapper");
   const faqButton = $("faqButton");
   const faqPanel = $("faqPanel");
-  const metricsRow = $("metricsRow");
   const sidebarTitle = document.querySelector(".sidebar-title h5");
+  const metricsRow = $("metricsRow");
   const pageInfo = $("pageInfo");
   const zoomInfo = $("zoomInfo");
   const searchTool     = $("searchTool");
@@ -103,9 +103,6 @@ function initWorkspace() {
 
   // Print
   printBtn?.addEventListener("click", async () => {
-    // confirmation moment is the print click
-    const tConfirm = ws_now();
-
     try {
       if (!editMode) enterEdit();
 
@@ -118,9 +115,6 @@ function initWorkspace() {
       const w = window.open(url, "_blank");
       setTimeout(() => { try { w?.print(); } catch {} }, 500);
 
-      // Log completion with finished_at = user click time
-      await logWorkspaceEvent("printed", tConfirm, { render_ms: renderMs });
-
       // Optional follow-up: ask to start fresh after print
       const startFresh = await Swal.fire({
         title: "Start a new session?",
@@ -132,6 +126,30 @@ function initWorkspace() {
       }).then(r => r.isConfirmed);
 
       if (startFresh) await resetAndGoHome({ deleteUpload: true });
+
+      // Non-blocking log for print (does not end the session timer)
+      if (isMetricsOptIn() && workspaceShownAt && !workspaceLogged) {
+        const finished = ws_now();
+        const payload = {
+          user_id: getUserId(),
+          canonical_id: ws_currentCanonical(),
+          method: "intelliform",
+          started_at: workspaceShownAt,
+          finished_at: finished,
+          duration_ms: finished - workspaceShownAt,
+          meta: { status: "printed", render_ms: renderMs }
+        };
+        try {
+          if (navigator.sendBeacon) {
+            const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
+            navigator.sendBeacon(apiUrl("/api/user.log"), blob);
+          } else {
+            await POST_JSON("/api/user.log", payload);
+          }
+        } catch (e) {
+          console.warn("[print log] failed", e);
+        }
+      }
 
     } catch (e) {
       console.error("Print failed", e);
@@ -202,7 +220,25 @@ function initWorkspace() {
 
   // ---- FAQ guide ----
   if (faqButton && faqPanel) {
-    const closeFaq = () => faqPanel.classList.remove("open");
+    const clearGuideHighlights = () => {
+      document.querySelectorAll(".guide-highlight").forEach((el) => el.classList.remove("guide-highlight"));
+      faqPanel.querySelectorAll(".faq-row.active").forEach((r) => r.classList.remove("active"));
+    };
+    const highlightTargets = (selector) => {
+      if (!selector) return;
+      if (!sidebar.classList.contains("open") && sidebarToggle) {
+        sidebar.classList.add("open");
+        sidebarToggle.style.display = "none";
+      }
+      selector.split(",").forEach((sel) => {
+        document.querySelectorAll(sel.trim()).forEach((el) => el.classList.add("guide-highlight"));
+      });
+    };
+
+    const closeFaq = () => {
+      faqPanel.classList.remove("open");
+      clearGuideHighlights();
+    };
     faqButton.addEventListener("click", (e) => {
       e.stopPropagation();
       faqPanel.classList.toggle("open");
@@ -213,6 +249,34 @@ function initWorkspace() {
     });
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape") closeFaq();
+    });
+
+    faqPanel.querySelectorAll(".faq-row").forEach((row) => {
+      row.addEventListener("mouseenter", () => {
+        clearGuideHighlights();
+        const target = row.getAttribute("data-target");
+        highlightTargets(target);
+        row.classList.add("active");
+      });
+      row.addEventListener("mouseleave", () => clearGuideHighlights());
+      row.addEventListener("focus", () => {
+        clearGuideHighlights();
+        highlightTargets(row.getAttribute("data-target"));
+        row.classList.add("active");
+      });
+      row.addEventListener("blur", () => clearGuideHighlights());
+      row.addEventListener("click", (e) => {
+        e.stopPropagation();
+        clearGuideHighlights();
+        const targetSel = row.getAttribute("data-target");
+        highlightTargets(targetSel);
+        // Trigger the first matching control, if any
+        if (targetSel) {
+          const first = document.querySelector(targetSel.split(",")[0].trim());
+          if (first) first.click();
+        }
+        closeFaq();
+      });
     });
   }
   const syncThumbToggle = () => {
@@ -731,14 +795,15 @@ function initWorkspace() {
 
   function renderSummaries(explainer) {
     if (summaryList) summaryList.innerHTML = "";
-    (explainer.sections || []).forEach((sec) => {
+    const sections = explainer.sections || [];
+    sections.forEach((sec, idx) => {
       const item = document.createElement("div");
       item.className = "accordion-item";
       const header = document.createElement("div");
       header.className = "accordion-header";
       header.textContent = sec.title || "";
       const content = document.createElement("div");
-      content.className = "accordion-content active";
+      content.className = "accordion-content" + (idx === 0 ? " active" : "");
       (sec.fields || []).forEach((f) => {
         const row = document.createElement("p");
         row.className = "summary-line";
@@ -746,10 +811,23 @@ function initWorkspace() {
         content.appendChild(row);
       });
       header.addEventListener("click", () => {
-        content.classList.toggle("active");
-        header.classList.toggle("open", content.classList.contains("active"));
+        const isActive = content.classList.contains("active");
+        // close all others
+        summaryList?.querySelectorAll(".accordion-content.active").forEach((c) => {
+          if (c !== content) {
+            c.classList.remove("active");
+            c.previousElementSibling?.classList.remove("open");
+          }
+        });
+        if (isActive) {
+          content.classList.remove("active");
+          header.classList.remove("open");
+        } else {
+          content.classList.add("active");
+          header.classList.add("open");
+        }
       });
-      header.classList.toggle("open", content.classList.contains("active"));
+      header.classList.toggle("open", idx === 0);
       item.appendChild(header); item.appendChild(content);
       summaryList?.appendChild(item);
     });
