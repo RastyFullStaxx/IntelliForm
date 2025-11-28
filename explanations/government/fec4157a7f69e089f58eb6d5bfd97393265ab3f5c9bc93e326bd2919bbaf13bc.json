@@ -1,0 +1,141 @@
+{
+  "title": "CAV APPLICATION FORM",
+  "form_id": "cav-application-form",
+  "sections": [
+    {
+      "title": "CAV APPLICATION FORM",
+      "fields": [
+        {
+          "label": "NAME OF LEARNER",
+          "summary": "Type here"
+        },
+        {
+          "label": "DATE OF BIRTH",
+          "summary": "Click here to enter a date"
+        },
+        {
+          "label": "PLACE OF BIRTH",
+          "summary": "Type here"
+        },
+        {
+          "label": "PRESENT ADDRESS",
+          "summary": "Type here"
+        },
+        {
+          "label": "CONTACT NO.",
+          "summary": "Type here"
+        },
+        {
+          "label": "NAME OF SCHOOL",
+          "summary": "Type here"
+        },
+        {
+          "label": "ADDRESS OF SCHOOL",
+          "summary": "Type here"
+        },
+        {
+          "label": "PURPOSE",
+          "summary": "Please check any of the following"
+        },
+        {
+          "label": "Signature Over Printed Name",
+          "summary": "Applicant/Representative"
+        }
+      ]
+    },
+    {
+      "title": "Requirements",
+      "fields": [
+        {
+          "label": "Graduates",
+          "summary": "N/A"
+        },
+        {
+          "label": "Undergraduates",
+          "summary": "N/A"
+        },
+        {
+          "label": "Public",
+          "summary": "N/A"
+        },
+        {
+          "label": "Private",
+          "summary": "N/A"
+        },
+        {
+          "label": "Student Permanent Record (Form 137)",
+          "summary": "Check if applicable"
+        },
+        {
+          "label": "Diploma",
+          "summary": "Check if applicable"
+        },
+        {
+          "label": "Certificate of Completion/Graduation",
+          "summary": "Check if applicable"
+        },
+        {
+          "label": "Special Order",
+          "summary": "Check if applicable"
+        },
+        {
+          "label": "Certificate of Accreditation (for PAASCU Accredited Schools)",
+          "summary": "Check if applicable"
+        },
+        {
+          "label": "Transmittal",
+          "summary": "Check if applicable"
+        },
+        {
+          "label": "ALS A&E / PEPT",
+          "summary": "Check if applicable"
+        },
+        {
+          "label": "Certification from BEA",
+          "summary": "Check if applicable"
+        },
+        {
+          "label": "Rating",
+          "summary": "Check if applicable"
+        },
+        {
+          "label": "Certification from Division Office",
+          "summary": "Check if applicable"
+        },
+        {
+          "label": "Passport Size Picture (2 pcs.)",
+          "summary": "Check if applicable"
+        },
+        {
+          "label": "Documentary Stamp",
+          "summary": "Check if applicable"
+        },
+        {
+          "label": "Authorization Letter/ SPA/ I.D.",
+          "summary": "N/A"
+        },
+        {
+          "label": "Note",
+          "summary": "If the applicant could not make it personally, a letter authorizing the bearer should be presented to the CAV processor"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 27,
+    "fp": 1,
+    "fn": 0,
+    "precision": 0.964,
+    "recall": 1.0,
+    "f1": 0.982
+  },
+  "canonical_id": "fec4157a7f69e089f58eb6d5bfd97393265ab3f5c9bc93e326bd2919bbaf13bc",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-11-28T17:03:12+00:00",
+  "aliases": [
+    "5fbc772380544c8bb39b7f914e36da68_deped",
+    "5fbc772380544c8bb39b7f914e36da68_deped.pdf"
+  ]
+}

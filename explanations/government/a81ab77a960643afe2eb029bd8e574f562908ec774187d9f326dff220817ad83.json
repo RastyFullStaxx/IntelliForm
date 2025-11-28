@@ -1,0 +1,215 @@
+{
+  "title": "EQUIVALENT RECORD FORM",
+  "form_id": "equivalent-record-form",
+  "sections": [
+    {
+      "title": "Personal Information",
+      "fields": [
+        {
+          "label": "Name",
+          "summary": "Enter surname, given name, and middle initial"
+        },
+        {
+          "label": "Date of Birth",
+          "summary": "Enter full birth date (MM/DD/YYYY)"
+        },
+        {
+          "label": "Gender",
+          "summary": "Select gender"
+        },
+        {
+          "label": "Employee No",
+          "summary": "Enter employee number"
+        },
+        {
+          "label": "Item No",
+          "summary": "Enter item number"
+        }
+      ]
+    },
+    {
+      "title": "Educational Attainment",
+      "fields": [
+        {
+          "label": "SG",
+          "summary": "Enter SG"
+        },
+        {
+          "label": "Authorized Position Title",
+          "summary": "Enter authorized position title"
+        },
+        {
+          "label": "Authorized Annual Salary",
+          "summary": "Enter authorized annual salary"
+        },
+        {
+          "label": "Masters Degree",
+          "summary": "Write in full with specialization"
+        },
+        {
+          "label": "Completed/Units Earned",
+          "summary": "Enter completed units or units earned if not completed"
+        },
+        {
+          "label": "Name of School",
+          "summary": "Enter name of school"
+        },
+        {
+          "label": "Year Completed",
+          "summary": "Enter year completed"
+        },
+        {
+          "label": "Equivalent",
+          "summary": "Enter equivalent"
+        }
+      ]
+    },
+    {
+      "title": "Years of Teaching Experience",
+      "fields": [
+        {
+          "label": "Private",
+          "summary": "Enter years of private teaching experience"
+        },
+        {
+          "label": "Public",
+          "summary": "Enter years of public teaching experience"
+        }
+      ]
+    },
+    {
+      "title": "Trainings Attended",
+      "fields": [
+        {
+          "label": "Title",
+          "summary": "Enter title of training"
+        },
+        {
+          "label": "Inclusive Dates",
+          "summary": "Enter inclusive dates of training"
+        },
+        {
+          "label": "Number of Hours",
+          "summary": "Enter number of hours"
+        },
+        {
+          "label": "Sponsoring Agency",
+          "summary": "Enter sponsoring agency"
+        }
+      ]
+    },
+    {
+      "title": "For Head Teacher Positions and Other Related Teaching Positions",
+      "fields": [
+        {
+          "label": "Years of Experience in Present Position",
+          "summary": "Enter years of experience in present position"
+        }
+      ]
+    },
+    {
+      "title": "Latest Performance Rating",
+      "fields": [
+        {
+          "label": "Latest Performance Rating",
+          "summary": "Enter latest performance rating"
+        }
+      ]
+    },
+    {
+      "title": "Schools Division Action (For Schools Division Evaluator Only)",
+      "fields": [
+        {
+          "label": "Classification",
+          "summary": "Enter classification"
+        },
+        {
+          "label": "Date Processed",
+          "summary": "Enter date processed"
+        },
+        {
+          "label": "Range",
+          "summary": "Enter range"
+        },
+        {
+          "label": "Assignment",
+          "summary": "Enter assignment"
+        },
+        {
+          "label": "Salary Grade",
+          "summary": "Enter salary grade"
+        },
+        {
+          "label": "Salary Schedule",
+          "summary": "Enter salary schedule"
+        },
+        {
+          "label": "REMARKS",
+          "summary": "Enter remarks"
+        },
+        {
+          "label": "Certified Correct",
+          "summary": "Office use only; leave blank"
+        },
+        {
+          "label": "Recommending Approval",
+          "summary": "Office use only; leave blank"
+        }
+      ]
+    },
+    {
+      "title": "DepEd Regional Office Action",
+      "fields": [
+        {
+          "label": "Classification",
+          "summary": "Enter classification"
+        },
+        {
+          "label": "Date Processed",
+          "summary": "Enter date processed"
+        },
+        {
+          "label": "Post Audited Assignment",
+          "summary": "Enter post audited assignment"
+        },
+        {
+          "label": "Salary Grade",
+          "summary": "Enter salary grade"
+        },
+        {
+          "label": "Salary Schedule",
+          "summary": "Enter salary schedule"
+        },
+        {
+          "label": "Remarks",
+          "summary": "Enter remarks"
+        },
+        {
+          "label": "Approved",
+          "summary": "Office use only; leave blank"
+        },
+        {
+          "label": "Evaluator",
+          "summary": "Office use only; leave blank"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 38,
+    "fp": 2,
+    "fn": 0,
+    "precision": 0.95,
+    "recall": 1.0,
+    "f1": 0.974
+  },
+  "canonical_id": "a81ab77a960643afe2eb029bd8e574f562908ec774187d9f326dff220817ad83",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-11-28T17:19:23+00:00",
+  "aliases": [
+    "7a1d1e064f324972b42bace73cfa7d68_02",
+    "7a1d1e064f324972b42bace73cfa7d68_02.pdf"
+  ]
+}

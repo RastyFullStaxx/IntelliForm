@@ -1,0 +1,100 @@
+{
+  "title": "ACCEPTANCE LETTER FOR VOLUNTARY OFFER TO SELL (VOS)",
+  "form_id": "carper-lad-form-20",
+  "sections": [
+    {
+      "title": "Property Information",
+      "fields": [
+        {
+          "label": "Province of",
+          "summary": "Enter the province name"
+        },
+        {
+          "label": "Date",
+          "summary": "Enter the date (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Registered Owner/s",
+          "summary": "Enter the name(s) of the registered owner(s)"
+        },
+        {
+          "label": "OCT/TCT No./s",
+          "summary": "Enter the OCT/TCT number(s)"
+        },
+        {
+          "label": "TD No./s",
+          "summary": "Enter the TD number(s)"
+        },
+        {
+          "label": "Approved Survey No./s",
+          "summary": "Enter the approved survey number(s)"
+        },
+        {
+          "label": "Area per OTC/TCT/TD No. (has.)",
+          "summary": "Enter the area in hectares"
+        },
+        {
+          "label": "Approximate Area Covered (has.)",
+          "summary": "Enter the approximate area covered in hectares"
+        },
+        {
+          "label": "Location (Municipality, Barangay)",
+          "summary": "Enter the location details (municipality and barangay)"
+        }
+      ]
+    },
+    {
+      "title": "Document Submission",
+      "fields": [
+        {
+          "label": "Sketch map of the entire property",
+          "summary": "Submit a sketch map with delineation or shading of the area you intend to retain"
+        },
+        {
+          "label": "List of name/s of nominated child/ren as preferred beneficiary/ies",
+          "summary": "Enter the names of nominated children as preferred beneficiaries"
+        },
+        {
+          "label": "Duly attested list of tenants, lessees, and/or regular farm workers",
+          "summary": "Submit a duly attested list of tenants, lessees, and/or regular farm workers"
+        }
+      ]
+    },
+    {
+      "title": "Acknowledgment",
+      "fields": [
+        {
+          "label": "Received by",
+          "summary": "Enter the name of the person receiving the letter"
+        },
+        {
+          "label": "Date Received",
+          "summary": "Enter the date received (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Witnessed by",
+          "summary": "Enter the names of witnesses"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 15,
+    "fp": 1,
+    "fn": 0,
+    "precision": 0.938,
+    "recall": 1.0,
+    "f1": 0.968
+  },
+  "canonical_id": "d4f5492e2de98198ad3cc51309800cf37473f4c1428e1becd26754ae3edc366a",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-11-28T17:28:10+00:00",
+  "aliases": [
+    "15171eb4022642e7aae2dd79357852f5_22",
+    "15171eb4022642e7aae2dd79357852f5_22.pdf",
+    "CARPER LAD Form No. 20",
+    "CARPER LAD Form No. 20/ Page 1 of 2"
+  ]
+}

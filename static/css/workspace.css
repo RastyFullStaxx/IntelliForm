@@ -270,15 +270,22 @@ body {
 
 /* ===== Tools Sidebar ===== */
 #sidebar{
-  position:fixed; top:80px; right:-370px; width:340px; height:calc(100vh - 80px);
+  position:fixed; top:110px; right:20px; width:360px; max-height:80vh;
   padding:20px 15px 24px; z-index:1000;
   background: radial-gradient(circle at 20% 30%, #1c3a6c, #2e0775 60%);
   background-size:200% 200%; animation: sidebarWaves 3s ease-in-out infinite;
-  box-shadow:-3px 0 10px rgba(0,0,0,0.3); transition:right .3s ease;
-  border-left:2px solid rgba(255,255,255,.05);
+  box-shadow:0 14px 40px rgba(0,0,0,0.35);
+  border:2px solid rgba(255,255,255,.08);
+  border-radius:18px;
   display:flex; flex-direction:column; gap:14px;
+  transform: translateX(130%); opacity:0; pointer-events:none;
+  transition: transform .28s ease, opacity .2s ease;
 }
-#sidebar.open{ right:0 }
+#sidebar.open{
+  transform: translateX(0);
+  opacity:1;
+  pointer-events:auto;
+}
 @keyframes sidebarWaves{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 .sidebar-tool{
   background: linear-gradient(135deg, rgba(255,213,74,.18), rgba(3,26,70,.92));
@@ -291,10 +298,8 @@ body {
 .sidebar-top{
   display:flex;
   flex-direction:column;
-  gap:10px;
-  position: sticky;
-  top: 6px;
-  z-index: 2;
+  gap:8px;
+  margin-top:-16px;
 }
 .sidebar-top .cta-card{ width: 92%; }
 .sidebar-tool:hover{ background: linear-gradient(135deg, rgba(255,213,74,.26), rgba(3,26,70,.96)); transform: translateY(-1px); box-shadow:0 12px 32px rgba(0,0,0,0.28); }
@@ -468,9 +473,9 @@ body {
   text-align:center;
 }
 
-.sidebar-title{ text-align:center; margin-top:1.2rem; margin-bottom:.2rem }
+.sidebar-title{ text-align:center; margin-top:.4rem; margin-bottom:-.3rem }
 .sidebar-title h5{
-  font-size:1.3rem; font-weight:700; color:#fff; letter-spacing:.5px; text-transform:uppercase; margin-top:-12px;
+  font-size:1.3rem; font-weight:700; color:#fff; letter-spacing:.5px; text-transform:uppercase; margin-top:-2px;
   text-shadow:0 0 4px #4180c9, 0 0 8px #1f3a64, 0 0 12px #1f3a64; animation: glowPulse 2s ease-in-out infinite;
 }
 .sidebar-title.collapsed{ display:none; }
@@ -554,7 +559,7 @@ body {
 }
 @keyframes eceGlowGradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 
-.accordion-item{ background:transparent; border:none; margin-bottom:6px }
+.accordion-item{ background:transparent; border:none; margin-bottom:4px }
 .accordion-header{
   color:#fff; padding:8px 10px; font-size:13px; font-weight:700; cursor:pointer; border-radius:20px; margin-bottom:10px; overflow:hidden;
   background: linear-gradient(270deg,#1b3a83,#274089,#1b3a83); background-size:400% 400%; animation: headerGradient 10s ease infinite;
