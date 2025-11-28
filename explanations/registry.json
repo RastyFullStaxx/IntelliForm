@@ -367,6 +367,46 @@
         "e891c9af40ba4be69b36783bb5361cd4_37-bir(1945)",
         "e891c9af40ba4be69b36783bb5361cd4_37-BIR(1945).pdf"
       ]
+    },
+    {
+      "form_id": "6b8306ff2b41ae3c2532b574a95eb3202cbfc3aa359cafa2c6f577364410d4ae",
+      "title": "751d99f82d554390afab92331cc8bec0_18-BIR(0901-D)",
+      "path": "explanations/tax/6b8306ff2b41ae3c2532b574a95eb3202cbfc3aa359cafa2c6f577364410d4ae.json",
+      "bucket": "tax",
+      "aliases": [
+        "751d99f82d554390afab92331cc8bec0_18-bir(0901-d)",
+        "751d99f82d554390afab92331cc8bec0_18-BIR(0901-D).pdf"
+      ]
+    },
+    {
+      "form_id": "fec4157a7f69e089f58eb6d5bfd97393265ab3f5c9bc93e326bd2919bbaf13bc",
+      "title": "5fbc772380544c8bb39b7f914e36da68_deped",
+      "path": "explanations/government/fec4157a7f69e089f58eb6d5bfd97393265ab3f5c9bc93e326bd2919bbaf13bc.json",
+      "bucket": "government",
+      "aliases": [
+        "5fbc772380544c8bb39b7f914e36da68_deped",
+        "5fbc772380544c8bb39b7f914e36da68_deped.pdf"
+      ]
+    },
+    {
+      "form_id": "a81ab77a960643afe2eb029bd8e574f562908ec774187d9f326dff220817ad83",
+      "title": "7a1d1e064f324972b42bace73cfa7d68_02",
+      "path": "explanations/government/a81ab77a960643afe2eb029bd8e574f562908ec774187d9f326dff220817ad83.json",
+      "bucket": "government",
+      "aliases": [
+        "7a1d1e064f324972b42bace73cfa7d68_02",
+        "7a1d1e064f324972b42bace73cfa7d68_02.pdf"
+      ]
+    },
+    {
+      "form_id": "d4f5492e2de98198ad3cc51309800cf37473f4c1428e1becd26754ae3edc366a",
+      "title": "15171eb4022642e7aae2dd79357852f5_22",
+      "path": "explanations/government/d4f5492e2de98198ad3cc51309800cf37473f4c1428e1becd26754ae3edc366a.json",
+      "bucket": "government",
+      "aliases": [
+        "15171eb4022642e7aae2dd79357852f5_22",
+        "15171eb4022642e7aae2dd79357852f5_22.pdf"
+      ]
     }
   ]
 }

@@ -1,51 +1,3 @@
-# scripts/config.py
-"""
-IntelliForm — Config, Paths, Template Hashing, and Prelabeler Orchestration
-===========================================================================
-
-WHAT THIS MODULE DOES
----------------------
-Centralizes:
-- Environment switches (DEV/LIVE), logging level
-- Canonical paths (uploads/, explanations/, _annotations/)
-- Template-based hashing (robust to filled-in form values)
-- Prelabeler launcher (subprocess) and promotion/cleanup policy
-- LLM chat facade (kept vendor-neutral) + prompt builders for Explainers
-
-KEY UPDATES (2025-10-11)
-------------------------
-1) Engine key persistence:
-   - Precedence: ENV > secrets file > inline fallback constant.
-   - Put your key once into `INLINE_FALLBACK_KEY` or create the secrets file:
-       scripts/.secrets/engine.key
-   - On new machines, you won't need to paste it again if the file/inline stays.
-
-2) Ephemeral annotations (optional):
-   - EPHEMERAL_ANNOS toggles whether we keep canonical <HASH>.json on disk.
-   - If True (session/temporary behavior), we still write canonical files so
-     the frontend fetch path stays stable, but we auto-clean files older than
-     ANNO_TTL_SECONDS on import and on each promotion.
-
-3) Explainer prompts:
-   - System & user prompt templates that require:
-       • exact visual labels where possible (for click-to-jump),
-       • no hallucinations (use OCR; say “N/A” or “—” if absent),
-       • don’t merge two distinct labels unless the visual form merges them,
-       • left→right, top→bottom grouping into accordion sections,
-       • realistic per-PDF metrics (precision/recall/F1) that reflect model
-         confidence,
-       • canonical metadata (title, bucket, canonical_id, aliases),
-       • schema matches the UI (title/sections/fields/metrics/...).
-
-IMPORTANT CONVENTIONS
----------------------
-- Frontend saves uploaded PDFs under: uploads/
-- /api/upload returns canonical_template_hash as canonical_form_id (TEMPLATE HASH)
-- Prelabeler writes a per-request temp JSON: explanations/_annotations/<HASH>__temp.json
-- Canonical annotation name: explanations/_annotations/<HASH>.json
-- Explainer JSON (for sidebar) lives under explanations/<bucket>/<HASH>.json
-"""
-
 from __future__ import annotations
 
 import io
@@ -60,7 +12,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Optional, Tuple, List, Any, Union
 
-# ------------------ Environment / Logging ------------------
 
 def _read_bool_env(name: str, default: bool = False) -> bool:
     val = str(os.getenv(name, str(int(default)))).strip().lower()
@@ -69,15 +20,12 @@ def _read_bool_env(name: str, default: bool = False) -> bool:
 DEV_MODE: bool = _read_bool_env("INTELLIFORM_DEV_MODE", True)
 LIVE_MODE: bool = _read_bool_env("INTELLIFORM_LLM_ENABLED", True)
 
-# === Facade knobs (needed by utils/dual_head.py) ===
-# Neutral secret name (no vendor wording)
 CORE_ENGINE_KEY: str = (os.getenv("INTELLIFORM_CORE_KEY") or os.getenv("INTELLIFORM_ENGINE_KEY") or "").strip()
-# Backend selector (kept neutral). Options: "oai" (default), "azure"
 CORE_BACKEND: str = (os.getenv("INTELLIFORM_BACKEND") or "oai").strip().lower()
-# Treat these like hyperparameters
 ENGINE_MODEL: str = os.getenv("INTELLIFORM_ENGINE_MODEL", "gpt-4o-mini")
 MAX_TOKENS: int = int(os.getenv("INTELLIFORM_ENGINE_MAXTOK", os.getenv("INTELLIFORM_MAX_TOKENS", "6000")) or 6000)
 TEMPERATURE: float = float(os.getenv("INTELLIFORM_ENGINE_TEMP", os.getenv("INTELLIFORM_TEMPERATURE", "0.2")) or 0.2)
+ENGINE_KEY_HINT = "env > file > INLINE_FALLBACK_KEY"
 
 _LOG_LEVEL = os.getenv("INTELLIFORM_LOG_LEVEL", "INFO").upper()
 logging.basicConfig(
@@ -86,7 +34,6 @@ logging.basicConfig(
 )
 log = logging.getLogger("intelliform.config")
 
-# === Baseline mode (A/B) switches ===
 BASELINE_MODE: bool = _read_bool_env("INTELLIFORM_BASELINE_MODE", False)
 BASELINE_BACKEND: str = (os.getenv("INTELLIFORM_BASELINE_BACKEND", "llm") or "llm").strip().lower()
 BASELINE_DROP_RATE: float = float(os.getenv("INTELLIFORM_BASELINE_DROP_RATE", "0.35"))
@@ -94,14 +41,11 @@ BASELINE_MISLABEL_RATE: float = float(os.getenv("INTELLIFORM_BASELINE_MISLABEL_R
 BASELINE_VAGUE_RATE: float = float(os.getenv("INTELLIFORM_BASELINE_VAGUE_RATE", "0.60"))
 BASELINE_SEED = (int(os.getenv("INTELLIFORM_BASELINE_SEED", "").strip())
                  if os.getenv("INTELLIFORM_BASELINE_SEED") not in (None, "",) else None)
+BASELINE_HINT = "baseline switch for A/B flow"
 
-# ------------------ Secrets & Key persistence ------------------
 
-# 1) Place a plaintext key here (inline fallback). Safer than envs on throwaway boxes.
-#    Example: INLINE_FALLBACK_KEY = "sk-xxxxx"
-INLINE_FALLBACK_KEY: str = ""  # <== paste once here if you prefer
+INLINE_FALLBACK_KEY: str = ""
 
-# 2) Or put a file at scripts/.secrets/engine.key with your key
 BASE_DIR = Path(__file__).resolve().parent.parent  # project root (scripts/ under root)
 SECRETS_DIR = BASE_DIR / "scripts" / ".secrets"
 ENGINE_KEY_FILE = SECRETS_DIR / "engine.key"
@@ -130,7 +74,6 @@ def _ensure_engine_key():
 
 _ensure_engine_key()
 
-# ------------------ Paths ------------------
 
 UPLOADS_DIR = BASE_DIR / "uploads"                 # Frontend uses uploads/ (not static/uploads/)
 EXPL_DIR = BASE_DIR / "explanations"
@@ -143,10 +86,7 @@ PRELABEL_ENTRY_FILE = UTILS_DIR / "llmv3_infer.py"
 for _p in (UPLOADS_DIR, EXPL_DIR, ANNO_DIR, SECRETS_DIR):
     _p.mkdir(parents=True, exist_ok=True)
 
-# ------------------ Ephemeral annotations (optional) ------------------
 
-# If True: keep canonical files for a short time only (so frontend path is stable)
-# and purge old ones automatically.
 EPHEMERAL_ANNOS: bool = _read_bool_env("INTELLIFORM_EPHEMERAL_ANNOS", True)
 ANNO_TTL_SECONDS: int = int(os.getenv("INTELLIFORM_ANNO_TTL_SECONDS", "7200"))  # 2 hours default
 
@@ -173,15 +113,11 @@ def purge_stale_annotations(now: Optional[float] = None) -> int:
 
 purge_stale_annotations()
 
-# ------------------ Constants ------------------
 
-# Kept for compatibility; no longer used for matching logic.
 DUPLICATE_THRESHOLD: float = float(os.getenv("INTELLIFORM_TSL_THRESHOLD", "0.75"))
 
-# Per-request temp files: <form_id>__temp.json  (form_id is now the TEMPLATE HASH)
 TEMP_ANNOTATION_SUFFIX = "__temp.json"
 
-# ------------------ IDs / Sanitization ------------------
 
 _SANITIZE_RE = re.compile(r"[^A-Za-z0-9._-]+")
 
@@ -193,7 +129,6 @@ def sanitize_form_id(name: str) -> str:
     stem = re.sub(r"-{2,}", "-", stem)
     return stem
 
-# ------------------ Template-based hash ------------------
 
 _WS = re.compile(r"\s+")
 
@@ -295,7 +230,6 @@ def extract_embedded_form_id(pdf_path: Union[str, Path]) -> Optional[str]:
     m = re.search(r"IntelliForm-FormId:([A-Za-z0-9_-]{8,128})", subj)
     return m.group(1) if m else None
 
-# ------------------ Annotation paths ------------------
 
 def temp_annotation_path(form_id: Optional[str] = None) -> Path:
     """
@@ -311,7 +245,6 @@ def canonical_annotation_path(form_id: str) -> Path:
     """form_id is the TEMPLATE HASH."""
     return ANNO_DIR / f"{form_id}.json"
 
-# ------------------ Registry helpers ------------------
 
 def get_registry_path() -> Path:
     return REGISTRY_PATH
@@ -328,7 +261,6 @@ def load_registry() -> Optional[Dict[str, Any]]:
         log.error("Failed to read registry %s: %s", path, e)
         return None
     
-# --- ADD near top-level helpers in scripts/config.py ---
 def quick_text_snippet(pdf_path: str, max_chars: int = 4000) -> str:
     """Extract visible page text via PyMuPDF; return a capped snippet."""
     try:
@@ -392,7 +324,6 @@ Output ONLY the JSON.
 
     return [{"role":"system","content":sys},{"role":"user","content":user}]
 
-# ------------------ Prelabeler launcher ------------------
 
 @dataclass
 class LaunchResult:
@@ -417,14 +348,12 @@ def _run_prelabel_cli(pdf_path: Path, out_json: Path) -> subprocess.CompletedPro
     if DEV_MODE:
         base_args.append("--dev")
 
-    # Try module-first
     cmd_mod = [py, "-m", "utils.llmv3_infer", *base_args]
     log.info("Launching prelabeler (module): %s", " ".join(cmd_mod))
     mod_proc = subprocess.run(cmd_mod, capture_output=True, text=True)
     if mod_proc.returncode == 0:
         return mod_proc
 
-    # Fallback: file path
     cmd_file = [py, str(PRELABEL_ENTRY_FILE), *base_args]
     log.info("Launching prelabeler (file): %s", " ".join(cmd_file))
     file_proc = subprocess.run(cmd_file, capture_output=True, text=True)
@@ -434,7 +363,6 @@ def launch_prelabeler(
     pdf_path: Union[Path, str],
     out_temp: Optional[Union[Path, str]] = None,
     *,
-    # Back-compat params (ignored but accepted)
     form_id: Optional[str] = None,
     out_path: Optional[Union[Path, str]] = None,
     repo_root: Optional[Union[Path, str]] = None,
@@ -454,7 +382,6 @@ def launch_prelabeler(
             return False
         return LaunchResult(False, None, None, stderr=msg, returncode=2)
 
-    # Determine output path
     old_mode = out_path is not None
     out_json: Path = Path(out_path) if old_mode else (Path(out_temp) if out_temp else temp_annotation_path())
     out_json.parent.mkdir(parents=True, exist_ok=True)
@@ -479,7 +406,6 @@ def launch_prelabeler(
 
 launch_prelabeler_compat = launch_prelabeler
 
-# ------------------ (Deprecated) Duplicate matching — now a no-op ------------------
 
 def find_duplicate_annotations(
     temp_anno_path: Union[Path, str],
@@ -528,7 +454,6 @@ def promote_or_reuse_annotation(
     except Exception as e:
         return PromotionResult(False, False, None, 0.0, error=f"Failed to promote temp → canonical: {e}")
 
-# ------------------ High-level pipeline (for API wiring) ------------------
 
 def run_prelabel_pipeline(
     pdf_path: Union[Path, str],
@@ -543,7 +468,6 @@ def run_prelabel_pipeline(
     """
     launch = launch_prelabeler(pdf_path)  # LaunchResult
     if isinstance(launch, bool):
-        # legacy branch (should not be used in new flow)
         fid = form_id or sanitize_form_id(Path(pdf_path).name)
         if not launch:
             return (fid, None, "Prelabeler failed.")
@@ -562,9 +486,6 @@ def run_prelabel_pipeline(
         return (fid, None, promo.error or "Promotion failed.")
     return (fid, promo.canonical_path, None)
 
-# ------------------ LLM Explainer prompts ------------------
-# These builders produce messages for a chat completion that yields the
-# sidebar Explainer JSON. It assumes the render/OCR pipeline provides text.
 
 EXPLAINER_SCHEMA_NOTES = """
 You are generating a JSON explainer for a PDF form. Output MUST be valid JSON with the shape:
@@ -603,6 +524,9 @@ STRICT RULES:
 - Group fields by on-page layout order, scanning left→right, then top→bottom.
 - Include EVERY question/blank on the form that requires a user answer AND include header/top banners, corner boxes, and “For Official Use” areas (set summary like “Office use only; leave blank” if applicable).
 - Keep summaries short, imperative, and specific (what to write/tick); ensure the instruction matches the label’s intent (no vague wording).
+- If the printed field shows placeholder text like "Type here" or "Click here to enter a date", do NOT copy it. Instead, state the expected user input inferred from the label (e.g., "Enter full birth date (MM/DD/YYYY, e.g., 11/28/2025)", "Enter complete present address").
+- Use the form’s title/heading to infer the document’s purpose so instructions feel context-aware (e.g., learner application vs. tax form); still avoid hallucinating unseen fields.
+- For dates or similar formats, ALWAYS include the format and a concrete example in the summary (e.g., “Use MM/DD/YYYY (e.g., 11/28/2025)”).
 - If OCR text is noisy, normalize whitespace and obvious OCR artifacts; still do not invent content.
 - Provide realistic metrics (tp/fp/fn → precision/recall/f1) that reflect your own confidence on THIS document:
   • High confidence on clearly read labels (sharp print, unambiguous layout) → higher precision/recall.
@@ -632,7 +556,7 @@ Tasks:
 1) Read the page text (OCR if needed). Extract all answer-requiring labels, including header/corner boxes and “Official Use Only” rows.
 2) Use exact visible labels (trim punctuation/colons). One printed label → one field.
 3) Group by layout (left→right, top→bottom) into concise sections; use nearby headings/row titles to keep summaries context-aware without making up content.
-4) Write short imperative summaries describing what the user should write or tick.
+4) Write short imperative summaries describing what the user should write or tick; replace placeholder prompts ("Type here", "Click to enter date") with the actual expected input based on the label and form purpose. For ANY date fields, state the format AND an explicit example (e.g., "Use MM/DD/YYYY (e.g., 11/28/2025)").
 5) Fill the metadata (canonical_id, bucket, schema_version=1, aliases if applicable).
 6) Produce realistic metrics for THIS file reflecting your own certainty.
 7) Output ONLY the JSON. No prose.
@@ -659,9 +583,7 @@ def build_explainer_messages(
         {"role": "user", "content": user},
     ]
 
-# ------------------ LLM chat facade ------------------
 
-# --- replace ONLY this function in scripts/config.py ---
 
 def chat_completion(
     model: str,
@@ -679,11 +601,9 @@ def chat_completion(
     """
     key = (api_key or CORE_ENGINE_KEY or "").strip()
     if not key:
-        # Let caller fall back to scaffold rather than exploding here
         return '{"error":"no_engine_key"}'
 
     try:
-        # Optional debug flag: INTELLIFORM_LLM_DEBUG=1
         LLM_DEBUG = str(os.getenv("INTELLIFORM_LLM_DEBUG", "0")).strip().lower() in {"1","true","yes"}
 
         def _dump(tag: str, text: str):
@@ -725,38 +645,26 @@ def chat_completion(
             return '{"error":"unknown_backend"}'
 
     except Exception as e:
-        # Let caller’s try/except decide to scaffold
         return json.dumps({"error":"engine_call_failed","detail":str(e)})
 
-# ------------------ Exports ------------------
 
 __all__ = [
-    # env / knobs
     "DEV_MODE", "LIVE_MODE",
     "CORE_ENGINE_KEY", "ENGINE_MODEL", "MAX_TOKENS", "TEMPERATURE",
     "CORE_BACKEND",
-    # paths
     "BASE_DIR", "UPLOADS_DIR", "EXPL_DIR", "ANNO_DIR", "REGISTRY_PATH", "UTILS_DIR",
-    # ids / hashing
     "sanitize_form_id",
     "template_hash_via_render", "template_hash_via_pypdf_text", "canonical_template_hash",
     "extract_embedded_form_id",
-    # annotation paths
     "canonical_annotation_path", "temp_annotation_path",
-    # registry
     "load_registry", "get_registry_path",
-    # deprecated matching (no-op, kept for compat)
     "find_duplicate_annotations",
-    # prelabel launcher / pipeline
     "launch_prelabeler", "launch_prelabeler_compat",
     "promote_or_reuse_annotation", "run_prelabel_pipeline",
-    # dataclasses
     "LaunchResult", "PromotionResult",
-    # chat
     "chat_completion",
     "EXPLAINER_SYSTEM_PROMPT", "EXPLAINER_USER_PROMPT_TEMPLATE", "EXPLAINER_SCHEMA_NOTES",
     "build_explainer_messages",
-    # ephemeral controls
     "EPHEMERAL_ANNOS", "ANNO_TTL_SECONDS", "purge_stale_annotations",
     "ENGINE_KEY_FILE", "INLINE_FALLBACK_KEY",
     "quick_text_snippet",

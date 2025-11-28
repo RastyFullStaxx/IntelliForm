@@ -1,0 +1,178 @@
+{
+  "title": "BIR Form No. 0901-D",
+  "form_id": "bir_form_0901_d",
+  "sections": [
+    {
+      "title": "TAX TREATY INFORMATION",
+      "fields": [
+        {
+          "label": "Philippines Tax Convention with",
+          "summary": "Fill in the name of the country."
+        },
+        {
+          "label": "Article Invoked",
+          "summary": "Specify the article being invoked."
+        },
+        {
+          "label": "Preferential Tax Rate",
+          "summary": "Enter the applicable tax rate percentage."
+        }
+      ]
+    },
+    {
+      "title": "Part I",
+      "fields": [
+        {
+          "label": "Taxpayer's Name",
+          "summary": "Enter the full name of the taxpayer."
+        },
+        {
+          "label": "Foreign Address",
+          "summary": "Provide the foreign address details."
+        },
+        {
+          "label": "Local Address",
+          "summary": "Provide the local address details."
+        },
+        {
+          "label": "Business Phone Number",
+          "summary": "Enter the business phone number."
+        },
+        {
+          "label": "Local Representative in the Philippines, if any: Name",
+          "summary": "Enter the name of the local representative."
+        },
+        {
+          "label": "Local Address",
+          "summary": "Provide the local address details of the representative."
+        },
+        {
+          "label": "Fax Number",
+          "summary": "Enter the fax number."
+        },
+        {
+          "label": "Taxpayer's Identification Number",
+          "summary": "Enter the taxpayer's identification number."
+        },
+        {
+          "label": "Date of Application",
+          "summary": "Enter the date of application."
+        }
+      ]
+    },
+    {
+      "title": "Part II",
+      "fields": [
+        {
+          "label": "Permanent Establishment / Fixed Base in the Philippines, if any: Name",
+          "summary": "Enter the name of the establishment."
+        },
+        {
+          "label": "Local Address",
+          "summary": "Provide the local address details."
+        }
+      ]
+    },
+    {
+      "title": "Part III",
+      "fields": [
+        {
+          "label": "Taxpayer's Name",
+          "summary": "Enter the full name of the taxpayer."
+        },
+        {
+          "label": "Local Address",
+          "summary": "Provide the local address details."
+        },
+        {
+          "label": "Registration with Board of Investments (BOI), if any:",
+          "summary": "Indicate registration status and specify if preferred, pioneer, or others."
+        },
+        {
+          "label": "Signature of Applicant/Representative over printed name",
+          "summary": "Sign and print your name."
+        },
+        {
+          "label": "Taxpayer's Identification Number",
+          "summary": "Enter the taxpayer's identification number."
+        }
+      ]
+    },
+    {
+      "title": "Part IV",
+      "fields": [
+        {
+          "label": "Date of Dividends Declaration",
+          "summary": "Enter the date of dividend declaration."
+        },
+        {
+          "label": "No. of Shares",
+          "summary": "Enter the number of shares."
+        },
+        {
+          "label": "Type of Shares",
+          "summary": "Specify the type of shares."
+        },
+        {
+          "label": "Date of Record",
+          "summary": "Enter the date of record."
+        },
+        {
+          "label": "Date of Dividend Payment",
+          "summary": "Enter the date of dividend payment."
+        },
+        {
+          "label": "Percentage of Ownership",
+          "summary": "Enter the percentage of ownership."
+        }
+      ]
+    },
+    {
+      "title": "Part V",
+      "fields": [
+        {
+          "label": "Taxpayer's Identification Number",
+          "summary": "Enter the taxpayer's identification number."
+        },
+        {
+          "label": "ITAD Filing Reference No",
+          "summary": "Enter the ITAD filing reference number."
+        },
+        {
+          "label": "Stamp of BIR Receiving Office and Date of Receipt",
+          "summary": "Leave blank for office use only."
+        }
+      ]
+    },
+    {
+      "title": "Part VI",
+      "fields": [
+        {
+          "label": "DOCUMENTARY REQUIREMENTS",
+          "summary": "Provide the required documentary evidence."
+        },
+        {
+          "label": "REMARKS",
+          "summary": "Leave blank for additional remarks."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 24,
+    "fp": 2,
+    "fn": 6,
+    "precision": 0.923,
+    "recall": 0.8,
+    "f1": 0.857
+  },
+  "canonical_id": "6b8306ff2b41ae3c2532b574a95eb3202cbfc3aa359cafa2c6f577364410d4ae",
+  "bucket": "tax",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-11-28T16:36:20+00:00",
+  "aliases": [
+    "751d99f82d554390afab92331cc8bec0_18-BIR(0901-D)",
+    "751d99f82d554390afab92331cc8bec0_18-BIR(0901-D).pdf"
+  ]
+}
