@@ -16,6 +16,7 @@
 *.ps1 text eol=crlf
 # Binary files
 *.woff* binary
+*.pt filter=lfs diff=lfs merge=lfs -text
 saved_models/*.pt filter=lfs diff=lfs merge=lfs -text
 saved_models/**.pt filter=lfs diff=lfs merge=lfs -text
 saved_models/**/*.pt filter=lfs diff=lfs merge=lfs -text
