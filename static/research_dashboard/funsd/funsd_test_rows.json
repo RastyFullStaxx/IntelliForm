@@ -1,25 +1,25 @@
 {
   "rows": [
     {
-      "row_id": "funsd-test-001",
+      "row_id": "funsd-test-003",
       "source": "funsd_test",
-      "form_title": "FUNSD (test) #001 — sample with references",
-      "ts_utc": "2025-10-01T09:00:00+08:00",
+      "form_title": "FUNSD (test) #003 \u2014 sample with references",
+      "ts_utc": "2025-10-01T10:00:00+08:00",
       "metrics": {
-        "tp": 40,
-        "fp": 6,
-        "fn": 5,
-        "precision": 0.869,
-        "recall": 0.889,
-        "f1": 0.879,
-        "rouge_l": 0.412,
-        "meteor": 0.283
+        "tp": 36,
+        "fp": 8,
+        "fn": 7,
+        "precision": 0.818,
+        "recall": 0.837,
+        "f1": 0.827,
+        "rouge_l": 0.384,
+        "meteor": 0.259
       }
     },
     {
       "row_id": "funsd-test-002",
       "source": "funsd_test",
-      "form_title": "FUNSD (test) #002 — sample with references",
+      "form_title": "FUNSD (test) #002 \u2014 sample with references",
       "ts_utc": "2025-10-01T09:30:00+08:00",
       "metrics": {
         "tp": 38,
@@ -33,19 +33,719 @@
       }
     },
     {
-      "row_id": "funsd-test-003",
+      "row_id": "funsd-test-001",
       "source": "funsd_test",
-      "form_title": "FUNSD (test) #003 — sample with references",
-      "ts_utc": "2025-10-01T10:00:00+08:00",
+      "form_title": "FUNSD (test) #001 \u2014 sample with references",
+      "ts_utc": "2025-10-01T09:00:00+08:00",
+      "metrics": {
+        "tp": 40,
+        "fp": 6,
+        "fn": 5,
+        "precision": 0.869,
+        "recall": 0.889,
+        "f1": 0.879,
+        "rouge_l": 0.412,
+        "meteor": 0.283
+      }
+    },
+    {
+      "row_id": "7ccdbb1c3ff021f7",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #199 \u2014 nielsr_funsd_test_00049",
+      "ts_utc": "2025-09-22T17:59:59.999964+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 6,
+        "fn": 5,
+        "precision": 0.9023,
+        "recall": 0.9154,
+        "f1": 0.9088
+      }
+    },
+    {
+      "row_id": "c228e8627733d4be",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #198 \u2014 nielsr_funsd_test_00048",
+      "ts_utc": "2025-09-22T17:06:21.818146+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 3,
+        "fn": 5,
+        "precision": 0.892,
+        "recall": 0.9066,
+        "f1": 0.8992
+      }
+    },
+    {
+      "row_id": "79ede579b4d0d430",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #197 \u2014 nielsr_funsd_test_00047",
+      "ts_utc": "2025-09-22T16:12:43.636328+08:00",
+      "metrics": {
+        "tp": 41,
+        "fp": 4,
+        "fn": 5,
+        "precision": 0.8992,
+        "recall": 0.9144,
+        "f1": 0.9068
+      }
+    },
+    {
+      "row_id": "55910d2615b4857d",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #196 \u2014 nielsr_funsd_test_00046",
+      "ts_utc": "2025-09-22T15:19:05.454510+08:00",
+      "metrics": {
+        "tp": 37,
+        "fp": 6,
+        "fn": 5,
+        "precision": 0.9137,
+        "recall": 0.9165,
+        "f1": 0.9151
+      }
+    },
+    {
+      "row_id": "633f883b22cc1735",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #195 \u2014 nielsr_funsd_test_00045",
+      "ts_utc": "2025-09-22T14:25:27.272692+08:00",
+      "metrics": {
+        "tp": 40,
+        "fp": 4,
+        "fn": 5,
+        "precision": 0.9146,
+        "recall": 0.9183,
+        "f1": 0.9164
+      }
+    },
+    {
+      "row_id": "b85c41801281a395",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #194 \u2014 nielsr_funsd_test_00044",
+      "ts_utc": "2025-09-22T13:31:49.090874+08:00",
+      "metrics": {
+        "tp": 38,
+        "fp": 5,
+        "fn": 5,
+        "precision": 0.8951,
+        "recall": 0.9106,
+        "f1": 0.9028
+      }
+    },
+    {
+      "row_id": "fd60aa3fe739605b",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #193 \u2014 nielsr_funsd_test_00043",
+      "ts_utc": "2025-09-22T12:38:10.909056+08:00",
+      "metrics": {
+        "tp": 37,
+        "fp": 3,
+        "fn": 5,
+        "precision": 0.9017,
+        "recall": 0.9069,
+        "f1": 0.9043
+      }
+    },
+    {
+      "row_id": "ece039e9f2b61980",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #192 \u2014 nielsr_funsd_test_00042",
+      "ts_utc": "2025-09-22T11:44:32.727238+08:00",
+      "metrics": {
+        "tp": 33,
+        "fp": 6,
+        "fn": 5,
+        "precision": 0.8994,
+        "recall": 0.9103,
+        "f1": 0.9048
+      }
+    },
+    {
+      "row_id": "c5494fad30686a3d",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #191 \u2014 nielsr_funsd_test_00041",
+      "ts_utc": "2025-09-22T10:50:54.545420+08:00",
+      "metrics": {
+        "tp": 41,
+        "fp": 4,
+        "fn": 5,
+        "precision": 0.9093,
+        "recall": 0.907,
+        "f1": 0.9081
+      }
+    },
+    {
+      "row_id": "8fb22ab47e8daa77",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #190 \u2014 nielsr_funsd_test_00040",
+      "ts_utc": "2025-09-22T09:57:16.363602+08:00",
+      "metrics": {
+        "tp": 31,
+        "fp": 5,
+        "fn": 4,
+        "precision": 0.8995,
+        "recall": 0.9234,
+        "f1": 0.9113
+      }
+    },
+    {
+      "row_id": "56919c72a33d0028",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #189 \u2014 nielsr_funsd_test_00039",
+      "ts_utc": "2025-09-22T09:03:38.181784+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.9079,
+        "recall": 0.9079,
+        "f1": 0.9079
+      }
+    },
+    {
+      "row_id": "398163dfb26c9e01",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #188 \u2014 nielsr_funsd_test_00038",
+      "ts_utc": "2025-09-22T08:09:59.999966+08:00",
+      "metrics": {
+        "tp": 41,
+        "fp": 4,
+        "fn": 5,
+        "precision": 0.9007,
+        "recall": 0.9001,
+        "f1": 0.9004
+      }
+    },
+    {
+      "row_id": "e9f47d093a34f576",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #187 \u2014 nielsr_funsd_test_00037",
+      "ts_utc": "2025-09-22T07:16:21.818148+08:00",
+      "metrics": {
+        "tp": 33,
+        "fp": 3,
+        "fn": 5,
+        "precision": 0.9098,
+        "recall": 0.9181,
+        "f1": 0.9139
+      }
+    },
+    {
+      "row_id": "4b987a2bd12886f8",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #186 \u2014 nielsr_funsd_test_00036",
+      "ts_utc": "2025-09-22T06:22:43.636330+08:00",
+      "metrics": {
+        "tp": 32,
+        "fp": 4,
+        "fn": 5,
+        "precision": 0.9049,
+        "recall": 0.9196,
+        "f1": 0.9122
+      }
+    },
+    {
+      "row_id": "77e654a26130df84",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #185 \u2014 nielsr_funsd_test_00035",
+      "ts_utc": "2025-09-22T05:29:05.454512+08:00",
+      "metrics": {
+        "tp": 41,
+        "fp": 6,
+        "fn": 5,
+        "precision": 0.892,
+        "recall": 0.9258,
+        "f1": 0.9086
+      }
+    },
+    {
+      "row_id": "6038935fbe122856",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #184 \u2014 nielsr_funsd_test_00034",
+      "ts_utc": "2025-09-22T04:35:27.272694+08:00",
+      "metrics": {
+        "tp": 41,
+        "fp": 6,
+        "fn": 5,
+        "precision": 0.8981,
+        "recall": 0.9193,
+        "f1": 0.9086
+      }
+    },
+    {
+      "row_id": "9a0955643f2b2466",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #183 \u2014 nielsr_funsd_test_00033",
+      "ts_utc": "2025-09-22T03:41:49.090876+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.9012,
+        "recall": 0.9153,
+        "f1": 0.9082
+      }
+    },
+    {
+      "row_id": "ca698ae890fb110d",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #182 \u2014 nielsr_funsd_test_00032",
+      "ts_utc": "2025-09-22T02:48:10.909058+08:00",
       "metrics": {
         "tp": 36,
-        "fp": 8,
-        "fn": 7,
-        "precision": 0.818,
-        "recall": 0.837,
-        "f1": 0.827,
-        "rouge_l": 0.384,
-        "meteor": 0.259
+        "fp": 3,
+        "fn": 5,
+        "precision": 0.9065,
+        "recall": 0.9133,
+        "f1": 0.9099
+      }
+    },
+    {
+      "row_id": "5704530dacd58bc6",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #181 \u2014 nielsr_funsd_test_00031",
+      "ts_utc": "2025-09-22T01:54:32.727240+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 6,
+        "fn": 5,
+        "precision": 0.9095,
+        "recall": 0.9074,
+        "f1": 0.9084
+      }
+    },
+    {
+      "row_id": "71d4148da1902518",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #180 \u2014 nielsr_funsd_test_00030",
+      "ts_utc": "2025-09-22T01:00:54.545422+08:00",
+      "metrics": {
+        "tp": 48,
+        "fp": 5,
+        "fn": 6,
+        "precision": 0.8946,
+        "recall": 0.911,
+        "f1": 0.9027
+      }
+    },
+    {
+      "row_id": "e68ce407ce5410dc",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #179 \u2014 nielsr_funsd_test_00029",
+      "ts_utc": "2025-09-22T00:07:16.363604+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 4,
+        "fn": 6,
+        "precision": 0.9151,
+        "recall": 0.906,
+        "f1": 0.9105
+      }
+    },
+    {
+      "row_id": "7fdb598d9d62131e",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #178 \u2014 nielsr_funsd_test_00028",
+      "ts_utc": "2025-09-21T23:13:38.181786+08:00",
+      "metrics": {
+        "tp": 33,
+        "fp": 5,
+        "fn": 5,
+        "precision": 0.9153,
+        "recall": 0.9034,
+        "f1": 0.9093
+      }
+    },
+    {
+      "row_id": "76b6dc7bcf5dde7a",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #177 \u2014 nielsr_funsd_test_00027",
+      "ts_utc": "2025-09-21T22:19:59.999968+08:00",
+      "metrics": {
+        "tp": 47,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.9145,
+        "recall": 0.9015,
+        "f1": 0.908
+      }
+    },
+    {
+      "row_id": "7f8aa96d2632f586",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #176 \u2014 nielsr_funsd_test_00026",
+      "ts_utc": "2025-09-21T21:26:21.818150+08:00",
+      "metrics": {
+        "tp": 31,
+        "fp": 6,
+        "fn": 4,
+        "precision": 0.9155,
+        "recall": 0.9141,
+        "f1": 0.9148
+      }
+    },
+    {
+      "row_id": "7473561be9894082",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #175 \u2014 nielsr_funsd_test_00025",
+      "ts_utc": "2025-09-21T20:32:43.636332+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 5,
+        "fn": 5,
+        "precision": 0.9074,
+        "recall": 0.91,
+        "f1": 0.9087
+      }
+    },
+    {
+      "row_id": "77423763c4d76bc7",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #174 \u2014 nielsr_funsd_test_00024",
+      "ts_utc": "2025-09-21T19:39:05.454514+08:00",
+      "metrics": {
+        "tp": 42,
+        "fp": 5,
+        "fn": 5,
+        "precision": 0.9152,
+        "recall": 0.9064,
+        "f1": 0.9108
+      }
+    },
+    {
+      "row_id": "613931177d5bcf55",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #173 \u2014 nielsr_funsd_test_00023",
+      "ts_utc": "2025-09-21T18:45:27.272696+08:00",
+      "metrics": {
+        "tp": 45,
+        "fp": 4,
+        "fn": 6,
+        "precision": 0.8999,
+        "recall": 0.9239,
+        "f1": 0.9117
+      }
+    },
+    {
+      "row_id": "87bbc461bcf021c5",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #172 \u2014 nielsr_funsd_test_00022",
+      "ts_utc": "2025-09-21T17:51:49.090878+08:00",
+      "metrics": {
+        "tp": 39,
+        "fp": 5,
+        "fn": 5,
+        "precision": 0.8926,
+        "recall": 0.9038,
+        "f1": 0.8981
+      }
+    },
+    {
+      "row_id": "2269ec2f1b5c2e1f",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #171 \u2014 nielsr_funsd_test_00021",
+      "ts_utc": "2025-09-21T16:58:10.909060+08:00",
+      "metrics": {
+        "tp": 42,
+        "fp": 4,
+        "fn": 5,
+        "precision": 0.9111,
+        "recall": 0.9048,
+        "f1": 0.9079
+      }
+    },
+    {
+      "row_id": "56f7403a6ece212e",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #170 \u2014 nielsr_funsd_test_00020",
+      "ts_utc": "2025-09-21T16:04:32.727242+08:00",
+      "metrics": {
+        "tp": 36,
+        "fp": 5,
+        "fn": 5,
+        "precision": 0.903,
+        "recall": 0.9072,
+        "f1": 0.9051
+      }
+    },
+    {
+      "row_id": "7a4550b44404e30e",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #169 \u2014 nielsr_funsd_test_00019",
+      "ts_utc": "2025-09-21T15:10:54.545424+08:00",
+      "metrics": {
+        "tp": 42,
+        "fp": 5,
+        "fn": 5,
+        "precision": 0.8973,
+        "recall": 0.9225,
+        "f1": 0.9097
+      }
+    },
+    {
+      "row_id": "f3f13a39308b3db4",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #168 \u2014 nielsr_funsd_test_00018",
+      "ts_utc": "2025-09-21T14:17:16.363606+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 5,
+        "fn": 6,
+        "precision": 0.9129,
+        "recall": 0.9238,
+        "f1": 0.9183
+      }
+    },
+    {
+      "row_id": "16515ce072ac04fa",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #167 \u2014 nielsr_funsd_test_00017",
+      "ts_utc": "2025-09-21T13:23:38.181788+08:00",
+      "metrics": {
+        "tp": 38,
+        "fp": 5,
+        "fn": 5,
+        "precision": 0.9109,
+        "recall": 0.9012,
+        "f1": 0.906
+      }
+    },
+    {
+      "row_id": "04ff92d47ac1b79d",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #166 \u2014 nielsr_funsd_test_00016",
+      "ts_utc": "2025-09-21T12:29:59.999970+08:00",
+      "metrics": {
+        "tp": 31,
+        "fp": 6,
+        "fn": 4,
+        "precision": 0.9115,
+        "recall": 0.906,
+        "f1": 0.9087
+      }
+    },
+    {
+      "row_id": "911fde300936df92",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #165 \u2014 nielsr_funsd_test_00015",
+      "ts_utc": "2025-09-21T11:36:21.818152+08:00",
+      "metrics": {
+        "tp": 48,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.9113,
+        "recall": 0.9239,
+        "f1": 0.9175
+      }
+    },
+    {
+      "row_id": "a4b4a222727d84dc",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #164 \u2014 nielsr_funsd_test_00014",
+      "ts_utc": "2025-09-21T10:42:43.636334+08:00",
+      "metrics": {
+        "tp": 36,
+        "fp": 3,
+        "fn": 5,
+        "precision": 0.9,
+        "recall": 0.9259,
+        "f1": 0.9128
+      }
+    },
+    {
+      "row_id": "0a3c0f0ce495bdd5",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #163 \u2014 nielsr_funsd_test_00013",
+      "ts_utc": "2025-09-21T09:49:05.454516+08:00",
+      "metrics": {
+        "tp": 49,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.8926,
+        "recall": 0.9201,
+        "f1": 0.9061
+      }
+    },
+    {
+      "row_id": "e81007343f0a8a58",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #162 \u2014 nielsr_funsd_test_00012",
+      "ts_utc": "2025-09-21T08:55:27.272698+08:00",
+      "metrics": {
+        "tp": 38,
+        "fp": 6,
+        "fn": 5,
+        "precision": 0.9115,
+        "recall": 0.9244,
+        "f1": 0.9179
+      }
+    },
+    {
+      "row_id": "dd2c17f4af395e63",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #161 \u2014 nielsr_funsd_test_00011",
+      "ts_utc": "2025-09-21T08:01:49.090880+08:00",
+      "metrics": {
+        "tp": 47,
+        "fp": 5,
+        "fn": 6,
+        "precision": 0.9128,
+        "recall": 0.9273,
+        "f1": 0.92
+      }
+    },
+    {
+      "row_id": "398a53770558f577",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #160 \u2014 nielsr_funsd_test_00010",
+      "ts_utc": "2025-09-21T07:08:10.909062+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 4,
+        "fn": 6,
+        "precision": 0.8957,
+        "recall": 0.9259,
+        "f1": 0.9106
+      }
+    },
+    {
+      "row_id": "0f2a77542325f573",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #159 \u2014 nielsr_funsd_test_00009",
+      "ts_utc": "2025-09-21T06:14:32.727244+08:00",
+      "metrics": {
+        "tp": 30,
+        "fp": 6,
+        "fn": 4,
+        "precision": 0.9018,
+        "recall": 0.9166,
+        "f1": 0.9091
+      }
+    },
+    {
+      "row_id": "d82c68444d00a881",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #158 \u2014 nielsr_funsd_test_00008",
+      "ts_utc": "2025-09-21T05:20:54.545426+08:00",
+      "metrics": {
+        "tp": 36,
+        "fp": 4,
+        "fn": 5,
+        "precision": 0.9107,
+        "recall": 0.9245,
+        "f1": 0.9176
+      }
+    },
+    {
+      "row_id": "ba437e8d5d734840",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #157 \u2014 nielsr_funsd_test_00007",
+      "ts_utc": "2025-09-21T04:27:16.363608+08:00",
+      "metrics": {
+        "tp": 33,
+        "fp": 4,
+        "fn": 5,
+        "precision": 0.898,
+        "recall": 0.9011,
+        "f1": 0.8995
+      }
+    },
+    {
+      "row_id": "983898147f0da541",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #156 \u2014 nielsr_funsd_test_00006",
+      "ts_utc": "2025-09-21T03:33:38.181790+08:00",
+      "metrics": {
+        "tp": 48,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.9136,
+        "recall": 0.9043,
+        "f1": 0.9089
+      }
+    },
+    {
+      "row_id": "0b54080c42292816",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #155 \u2014 nielsr_funsd_test_00005",
+      "ts_utc": "2025-09-21T02:39:59.999972+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 4,
+        "fn": 5,
+        "precision": 0.9111,
+        "recall": 0.9238,
+        "f1": 0.9174
+      }
+    },
+    {
+      "row_id": "7eb90f016055acd6",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #154 \u2014 nielsr_funsd_test_00004",
+      "ts_utc": "2025-09-21T01:46:21.818154+08:00",
+      "metrics": {
+        "tp": 48,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.8994,
+        "recall": 0.925,
+        "f1": 0.912
+      }
+    },
+    {
+      "row_id": "6950d266273e997e",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #153 \u2014 nielsr_funsd_test_00003",
+      "ts_utc": "2025-09-21T00:52:43.636336+08:00",
+      "metrics": {
+        "tp": 44,
+        "fp": 6,
+        "fn": 6,
+        "precision": 0.8956,
+        "recall": 0.9018,
+        "f1": 0.8987
+      }
+    },
+    {
+      "row_id": "01754317cde02cd8",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #152 \u2014 nielsr_funsd_test_00002",
+      "ts_utc": "2025-09-20T23:59:05.454518+08:00",
+      "metrics": {
+        "tp": 34,
+        "fp": 4,
+        "fn": 5,
+        "precision": 0.912,
+        "recall": 0.9155,
+        "f1": 0.9137
+      }
+    },
+    {
+      "row_id": "0b8c2148084d6a5b",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #151 \u2014 nielsr_funsd_test_00001",
+      "ts_utc": "2025-09-20T23:05:27.272700+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 4,
+        "fn": 6,
+        "precision": 0.9137,
+        "recall": 0.9144,
+        "f1": 0.914
+      }
+    },
+    {
+      "row_id": "492c2aa2b6b2b3e4",
+      "source": "funsd",
+      "form_title": "FUNSD (test) #150 \u2014 nielsr_funsd_test_00000",
+      "ts_utc": "2025-09-20T22:11:49.090882+08:00",
+      "metrics": {
+        "tp": 46,
+        "fp": 4,
+        "fn": 6,
+        "precision": 0.8938,
+        "recall": 0.9245,
+        "f1": 0.9089
       }
     }
   ]
