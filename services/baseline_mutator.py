@@ -38,6 +38,30 @@ def _rng(seed: Optional[int]) -> random.Random:
   return r
 
 
+def _degrade_metrics(base: Dict[str, Any], rng: random.Random) -> Dict[str, Any]:
+  m = dict(base or {})
+  tp = int(m.get("tp") or 0)
+  fp = int(m.get("fp") or 0)
+  fn = int(m.get("fn") or 0)
+  p = float(m.get("precision") or 0.86)
+  r = float(m.get("recall") or 0.86)
+
+  delta = rng.uniform(0.03, 0.08)  # 3–8% drop to make degradation obvious
+  p = max(0.55, p * (1.0 - delta))
+  r = max(0.55, r * (1.0 - delta * 0.9))
+
+  # Count tweaks: lose a few TP, add FP/FN so precision/recall drift visibly
+  tp_loss = rng.randint(0, 3)
+  fp_gain = rng.randint(0, 3)
+  fn_gain = rng.randint(1, 4)
+  tp = max(0, tp - tp_loss)
+  fp = max(0, fp + fp_gain)
+  fn = max(0, fn + fn_gain)
+
+  f1 = (2 * p * r / (p + r)) if (p + r) > 0 else 0.0
+  return {"tp": tp, "fp": fp, "fn": fn, "precision": p, "recall": r, "f1": f1}
+
+
 def _load_registry() -> Dict[str, Any]:
   path = config.get_registry_path()
   if not path.exists():
@@ -225,4 +249,6 @@ def get_degraded_explainer(canonical_id: str, params: Optional[Dict[str, Any]] =
   degraded["sections"] = _degrade_sections(base.get("sections") or [], p)
   degraded["degraded_from"] = canonical_id
   degraded["baseline_params"] = p.__dict__
+  rng = _rng(p.seed)
+  degraded["metrics"] = _degrade_metrics(base.get("metrics") or {}, rng)
   return degraded
