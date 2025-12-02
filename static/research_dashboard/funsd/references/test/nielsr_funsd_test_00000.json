@@ -1,0 +1,9 @@
+{
+  "row_id": "nielsr_funsd_test_00000",
+  "form_title": "Confidential Facsimile Transmission Cover Sheet",
+  "references": [
+    "This fax cover sheet from the Office of the Attorney General, Betty D. Montgomery, identifies the recipient, fax number, sender, and total number of pages. It includes spaces for the date, phone number, and special instructions, noting that it is a confidential transmission.",
+    "A confidentiality notice at the bottom states the message is intended only for the designated recipient, may contain privileged information, and prohibits unauthorized use or disclosure. Contact instructions are provided for misdirected transmissions."
+  ],
+  "notes": "Reference text for ROUGE/METEOR."
+}

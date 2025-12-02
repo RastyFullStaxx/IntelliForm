@@ -1,0 +1,9 @@
+{
+  "row_id": "Banking_CreditCardholdersAutoChargeForm",
+  "form_title": "AutoCharge Facility (ACF) for BPI Credit Cards Authorization Form",
+  "references": [
+    "This form is used by BPI credit cardholders to authorize, update, or cancel automatic charging of their utility bills (e.g., Meralco or Globe) to their BPI credit card. Applicants must provide their full name, card number, expiry date (MM/YY), mobile number, and attach a valid government ID and utility bill before submission.",
+    "Applicants must enter utility account details (account name and number as shown on the billing statement), sign and date the form, and submit it at any BPI branch or through the 24-hour BPI Contact Center. The form includes an official-use section for bank staff to record request type and reference numbers."
+  ],
+  "notes": "Reference text for ROUGE/METEOR."
+}
