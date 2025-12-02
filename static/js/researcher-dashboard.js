@@ -552,11 +552,11 @@ function renderUserTable(rows, opts = {}) {
       ${withCk ? `<td class="num" style="text-align:center">
         <input type="checkbox" data-id="${esc(r.id)}" aria-label="Select row ${i+1}"/>
       </td>` : ""}
-      <td class="nowrap">${esc(r.when)}</td>
-      <td class="nowrap">${esc(r.user)}</td>
-      <td class="nowrap">${esc(r.method)}</td>
-      <td class="nowrap">${esc(r.started_at)}</td>
-      <td class="nowrap">${esc(r.finished_at)}</td>
+      <td class="nowrap center">${esc(r.when)}</td>
+      <td class="nowrap center">${esc(r.user)}</td>
+      <td class="nowrap center">${esc(r.method)}</td>
+      <td class="nowrap center">${esc(r.started_at)}</td>
+      <td class="nowrap center">${esc(r.finished_at)}</td>
       <td class="num">${r.duration_ms != null ? ms(r.duration_ms) : "—"}</td>
     </tr>
   `).join("");

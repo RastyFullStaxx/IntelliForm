@@ -200,6 +200,7 @@
 .record-data { width: 100%; min-height: 24rem; }
 .record-data table { border-collapse: collapse; width: 100%; }
 .record-data th.center, .record-data td.center { text-align: center; }
+.record-data th, .record-data td { text-align: center; }
 
 .record-data thead tr {
   font-size: 12px;
@@ -210,20 +211,20 @@
 }
 .record-data thead th {
   padding: 0.65rem 0.5rem;
-  text-align: left;
+  text-align: center;
   font-weight: 700;
 }
 .record-data tbody td {
   padding: 0.85rem 0.5rem;
   font-size: 15px;
-  text-align: left;
+  text-align: center;
   border-bottom: 1px solid var(--border-2);
   color: var(--fg);
 }
 .record-data tbody tr:nth-child(odd) { background: #f7f9fd; }
 .record-data tbody tr:nth-child(even) { background: #ffffff; }
 .record-data tbody tr:hover { background: #eaf0ff; }
-.record-data td.num { text-align: right; font-variant-numeric: tabular-nums; }
+.record-data td.num { text-align: center; font-variant-numeric: tabular-nums; }
 .record-data td.nowrap { white-space: nowrap; }
 
 .error-container { margin: 5rem auto; max-width: 520px; text-align: center; color: var(--muted); }
