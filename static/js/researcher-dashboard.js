@@ -27,12 +27,25 @@ document.addEventListener("DOMContentLoaded", () => {
   setActiveTab("live");
 });
 
+function bindFunsdSwitcher() {
+  document.querySelectorAll(".funsd-mode-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const mode = btn.dataset.mode || "train";
+      if (mode === funsdMode) return;
+      funsdMode = mode;
+      pageState.funsd = 1;
+      renderTab("funsd", true);
+    });
+  });
+}
+
 /* ============== Global state ============== */
-const lastData = { live: [], trained: [], funsd: [], user: [] };  // newest-first per tab
+const lastData = { live: [], trained: [], funsdTrain: [], funsdTest: [], user: [] };  // newest-first per tab
 let editMode = false;
 let lastUndoToken = { tool: null, user: null }; // remember per kind
 const pageState = { live: 1, trained: 1, funsd: 1, user: 1 };
 const PAGE_SIZE = 10;
+let funsdMode = "train"; // "train" or "test"
 
 /* Selection model: row_ids of the rendered (newest-first) rows */
 let selectedIds = new Set();
@@ -100,13 +113,17 @@ async function renderTab(tab, forceRefetch = false) {
       refreshCrudToolbar();
       return;
     } else if (tab === "funsd") {
-      const funsdRows = (!forceRefetch && lastData.funsd.length) ? lastData.funsd : await fetchFunsdRowsStatic();
-      lastData.funsd = funsdRows;
-      const summary = renderToolSummary(funsdRows, { label: "FUNSD Benchmarks" });
-      const paged = slicePage(funsdRows, tab);
-      box.innerHTML = summary + renderToolTable(paged, { withCheckboxes: editMode }) + renderPagination(tab, funsdRows.length);
+      const datasetKey = funsdMode === "test" ? "funsd_test" : "funsd";
+      const cacheKey = funsdMode === "test" ? "funsdTest" : "funsdTrain";
+      const rows = (!forceRefetch && lastData[cacheKey].length) ? lastData[cacheKey] : await fetchFunsdRowsStatic(datasetKey);
+      lastData[cacheKey] = rows;
+      const summary = renderToolSummary(rows, { label: funsdMode === "test" ? "FUNSD (Test)" : "FUNSD (Train)", includeTextMetrics: funsdMode === "test" });
+      const paged = slicePage(rows, tab);
+      const switcher = renderFunsdSwitcher(funsdMode);
+      box.innerHTML = switcher + summary + renderToolTable(paged, { withCheckboxes: editMode, includeTextMetrics: funsdMode === "test" }) + renderPagination(tab, rows.length);
+      bindFunsdSwitcher();
       bindCheckboxHandlers();
-      bindPaginationHandlers(tab, funsdRows.length);
+      bindPaginationHandlers(tab, rows.length);
       refreshCrudToolbar();
       return;
     }
@@ -660,6 +677,17 @@ function emptyState(msg){
     <p class="error-message">${esc(msg)}</p>
   </div>`;
 }
+
+function renderFunsdSwitcher(active) {
+  const btn = (mode, label) => `
+    <button class="rd-btn ${active===mode ? "solid" : "ghost"} funsd-mode-btn" data-mode="${mode}">
+      ${label}
+    </button>`;
+  return `<div class="rd-switcher" style="margin-bottom:10px; display:flex; gap:8px; justify-content:flex-start;">
+    ${btn("train","Train set")}
+    ${btn("test","Test set")}
+  </div>`;
+}
 function displayError(container, message) {
   container.innerHTML = `<div class="error-container">
     <p class="error-message">Error loading metrics: ${esc(message)}</p>
@@ -712,8 +740,9 @@ async function fetchStaticRows(datasetKey) {
   return rows;
 }
 
-async function fetchFunsdRowsStatic() {
-  const url = uiUrl(`/static/research_dashboard/funsd/funsd_rows.json?ts=${Date.now()}`);
+async function fetchFunsdRowsStatic(datasetKey = "funsd") {
+  const suffix = datasetKey === "funsd_test" ? "funsd_test_rows.json" : "funsd_rows.json";
+  const url = uiUrl(`/static/research_dashboard/funsd/${suffix}?ts=${Date.now()}`);
   const res = await fetch(url, { cache: "no-store" });
   if (res.status === 404) return [];
   if (!res.ok) throw new Error(`Failed to load FUNSD rows (${res.status})`);

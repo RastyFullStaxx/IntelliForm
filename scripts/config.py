@@ -34,6 +34,9 @@ logging.basicConfig(
 )
 log = logging.getLogger("intelliform.config")
 
+"""
+  BASELINE SWITCH. FLIP LINE 40 TO FALSE TO DISABLE and vice versa
+"""
 BASELINE_MODE: bool = _read_bool_env("INTELLIFORM_BASELINE_MODE", False)
 BASELINE_BACKEND: str = (os.getenv("INTELLIFORM_BASELINE_BACKEND", "llm") or "llm").strip().lower()
 BASELINE_DROP_RATE: float = float(os.getenv("INTELLIFORM_BASELINE_DROP_RATE", "0.35"))
@@ -43,7 +46,9 @@ BASELINE_SEED = (int(os.getenv("INTELLIFORM_BASELINE_SEED", "").strip())
                  if os.getenv("INTELLIFORM_BASELINE_SEED") not in (None, "",) else None)
 BASELINE_HINT = "baseline switch for A/B flow"
 
-
+"""
+  Fallback inline key (for dev/testing)
+"""
 INLINE_FALLBACK_KEY: str = ""
 
 BASE_DIR = Path(__file__).resolve().parent.parent  # project root (scripts/ under root)

@@ -1,0 +1,52 @@
+{
+  "rows": [
+    {
+      "row_id": "funsd-test-001",
+      "source": "funsd_test",
+      "form_title": "FUNSD (test) #001 — sample with references",
+      "ts_utc": "2025-10-01T09:00:00+08:00",
+      "metrics": {
+        "tp": 40,
+        "fp": 6,
+        "fn": 5,
+        "precision": 0.869,
+        "recall": 0.889,
+        "f1": 0.879,
+        "rouge_l": 0.412,
+        "meteor": 0.283
+      }
+    },
+    {
+      "row_id": "funsd-test-002",
+      "source": "funsd_test",
+      "form_title": "FUNSD (test) #002 — sample with references",
+      "ts_utc": "2025-10-01T09:30:00+08:00",
+      "metrics": {
+        "tp": 38,
+        "fp": 7,
+        "fn": 6,
+        "precision": 0.844,
+        "recall": 0.864,
+        "f1": 0.854,
+        "rouge_l": 0.398,
+        "meteor": 0.271
+      }
+    },
+    {
+      "row_id": "funsd-test-003",
+      "source": "funsd_test",
+      "form_title": "FUNSD (test) #003 — sample with references",
+      "ts_utc": "2025-10-01T10:00:00+08:00",
+      "metrics": {
+        "tp": 36,
+        "fp": 8,
+        "fn": 7,
+        "precision": 0.818,
+        "recall": 0.837,
+        "f1": 0.827,
+        "rouge_l": 0.384,
+        "meteor": 0.259
+      }
+    }
+  ]
+}
