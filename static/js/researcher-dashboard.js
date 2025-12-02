@@ -92,9 +92,9 @@ async function renderTab(tab, forceRefetch = false) {
     } else if (tab === "trained") {
       const rows = (!forceRefetch && lastData.trained.length) ? lastData.trained : await fetchStaticRows("ph_trained");
       lastData.trained = rows;
-      const summary = renderToolSummary(rows, { label: "PH Forms" });
+      const summary = renderToolSummary(rows, { label: "PH Forms", includeTextMetrics: true });
       const paged = slicePage(rows, tab);
-      box.innerHTML = summary + renderToolTable(paged, { withCheckboxes: editMode }) + renderPagination(tab, rows.length);
+      box.innerHTML = summary + renderToolTable(paged, { withCheckboxes: editMode, includeTextMetrics: true }) + renderPagination(tab, rows.length);
       bindCheckboxHandlers();
       bindPaginationHandlers(tab, rows.length);
       refreshCrudToolbar();
@@ -355,10 +355,13 @@ async function onUndoLast() {
 /* ============== Renderers ============== */
 function renderToolTable(rows, opts = {}) {
   const withCk = !!opts.withCheckboxes;
+  const includeTextMetrics = !!opts.includeTextMetrics;
 
   const safe = rows.map((r) => {
     const m = r.metrics || {};
     let { tp, fp, fn, precision, recall, f1 } = m;
+    let rouge = toNum(m.rouge_l ?? m.rouge ?? m.rougeL);
+    let meteor = toNum(m.meteor);
     tp = toInt(tp); fp = toInt(fp); fn = toInt(fn);
     precision = toNum(precision); recall = toNum(recall); f1 = toNum(f1);
     if (!isFinite(f1) && isFinite(precision) && isFinite(recall) && (precision + recall) > 0) {
@@ -368,13 +371,14 @@ function renderToolTable(rows, opts = {}) {
       id: r.row_id || "",                                // <-- keep row_id
       when: fmtWhen(r.ts_utc || r.ts),
       title: r.form_title || r.title || "(untitled)",
-      tp, fp, fn, precision, recall, f1
+      tp, fp, fn, precision, recall, f1,
+      rouge, meteor
     };
   });
 
   if (!safe.length) return emptyState("No tool metrics logged yet.");
 
-  const headLeft = withCk ? `<th style="width:28px;text-align:center">
+  const headLeft = withCk ? `<th class="center" rowspan="${includeTextMetrics ? 2 : 1}" style="width:28px">
       <input type="checkbox" data-master="1" aria-label="Select all"/>
     </th>` : "";
 
@@ -391,25 +395,52 @@ function renderToolTable(rows, opts = {}) {
       <td class="num center">${pct(r.precision)}</td>
       <td class="num center">${pct(r.recall)}</td>
       <td class="num center">${pct(r.f1)}</td>
+      ${includeTextMetrics ? `<td class="num center">${pct(r.rouge)}</td>
+      <td class="num center">${pct(r.meteor)}</td>` : ""}
     </tr>
   `).join("");
 
+  if (includeTextMetrics) {
+    return tableWrap(`
+      <thead>
+        <tr>
+          ${headLeft}
+          <th class="center" rowspan="2">When</th>
+          <th class="center" rowspan="2">Title</th>
+          <th class="center" colspan="6">Extraction</th>
+          <th class="center" colspan="2">Text</th>
+        </tr>
+        <tr>
+          <th class="center">TP</th>
+          <th class="center">FP</th>
+          <th class="center">FN</th>
+          <th class="center">Precision</th>
+          <th class="center">Recall</th>
+          <th class="center">F1</th>
+          <th class="center">ROUGE-L</th>
+          <th class="center">METEOR</th>
+        </tr>
+      </thead>
+      <tbody>${body}</tbody>
+    `);
+  }
+
   return tableWrap(`
-    <thead>
-      <tr>
-        ${headLeft}
-        <th class="center">When</th>
-        <th class="center">Title</th>
-        <th class="center">TP</th>
-        <th class="center">FP</th>
-        <th class="center">FN</th>
-        <th class="center">Precision</th>
-        <th class="center">Recall</th>
-        <th class="center">F1</th>
-      </tr>
-    </thead>
-    <tbody>${body}</tbody>
-  `);
+      <thead>
+        <tr>
+          ${headLeft}
+          <th class="center">When</th>
+          <th class="center">Title</th>
+          <th class="center">TP</th>
+          <th class="center">FP</th>
+          <th class="center">FN</th>
+          <th class="center">Precision</th>
+          <th class="center">Recall</th>
+          <th class="center">F1</th>
+        </tr>
+      </thead>
+      <tbody>${body}</tbody>
+    `);
 }
 
 function summarizeTool(rows) {
@@ -420,6 +451,8 @@ function summarizeTool(rows) {
   const precision = avg(nums("precision"));
   const recall    = avg(nums("recall"));
   const f1        = avg(nums("f1"));
+  const rouge     = avg(nums("rouge_l") || nums("rouge") || nums("rougeL"));
+  const meteor    = avg(nums("meteor"));
   const latestTs  = Math.max(...rows.map(r => toTs(r.ts_utc || r.ts || 0)));
 
   // bucket rollup (avg f1 per bucket)
@@ -436,7 +469,7 @@ function summarizeTool(rows) {
     .sort((a,b) => b.f1 - a.f1)
     .slice(0,3);
 
-  return { precision, recall, f1, latestTs, total: rows.length, bucketRows };
+  return { precision, recall, f1, rouge, meteor, latestTs, total: rows.length, bucketRows };
 }
 
 function renderToolSummary(rows, opts = {}) {
@@ -444,7 +477,7 @@ function renderToolSummary(rows, opts = {}) {
   const label = opts.label || "Live Metrics";
   if (!stats) return emptyState("No tool metrics logged yet.");
 
-  const { precision, recall, f1, latestTs, total, bucketRows } = stats;
+  const { precision, recall, f1, rouge, meteor, latestTs, total, bucketRows } = stats;
   const bucketHtml = bucketRows && bucketRows.length ? bucketRows.map(b => `
     <div class="rd-chip">
       <span>${esc(b.name)}</span>
@@ -470,6 +503,15 @@ function renderToolSummary(rows, opts = {}) {
           <div class="kpi">${pct(f1)}</div>
           <div class="kpi-label">Avg F1</div>
         </div>
+        ${opts.includeTextMetrics ? `
+        <div class="rd-card metric">
+          <div class="kpi">${pct(rouge)}</div>
+          <div class="kpi-label">Avg ROUGE-L</div>
+        </div>
+        <div class="rd-card metric">
+          <div class="kpi">${pct(meteor)}</div>
+          <div class="kpi-label">Avg METEOR</div>
+        </div>` : ""}
         <div class="rd-card metric">
           <div class="kpi">${total}</div>
           <div class="kpi-label">Runs</div>
