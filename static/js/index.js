@@ -268,28 +268,25 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const existing = (localStorage.getItem(LS_KEY) || sessionStorage.getItem(LS_KEY) || "").trim();
-    const res = await Swal.fire({
+    const res = await BrandDialog.prompt({
       title: "Enter Your Name (or ID)",
-      input: "text",
-      inputLabel: "Example: JUAN DELA CRUZ",
-      inputPlaceholder: "TYPE YOUR NAME",
-      inputValue: existing,
-      inputAttributes: { autocapitalize: "characters", autocorrect: "off", spellcheck: "false" },
-      allowOutsideClick: false,
-      allowEscapeKey: true,
-      confirmButtonText: "Save",
-      cancelButtonText: "Cancel",
-      denyButtonText: existing ? "Clear name" : null,
-      showCancelButton: true,
-      showDenyButton: !!existing,
+      text: "Example: JUAN DELA CRUZ",
+      variant: "info",
+      confirmText: "Save",
+      cancelText: "Cancel",
+      denyText: existing ? "Clear name" : null,
       reverseButtons: true,
-      preConfirm: (val) => {
+      input: {
+        label: "Identify yourself so we can log beta metrics",
+        placeholder: "TYPE YOUR NAME",
+        value: existing,
+        autocomplete: "off",
+        attributes: { autocapitalize: "characters", autocorrect: "off", spellcheck: "false" }
+      },
+      validate: (val) => {
         const v = normalizeId(val);
-        if (!v || v.length < 2) {
-          Swal.showValidationMessage("Please enter at least 2 characters");
-          return false;
-        }
-        return v;
+        if (!v || v.length < 2) return "Please enter at least 2 characters";
+        return "";
       }
     });
 

@@ -215,64 +215,95 @@
     return { close: () => cleanup(root) };
   }
 
-  function progress(opts = {}) {
-    const root = ensureRoot();
-    lockBody(true);
-    const cfg = VARIANTS.info;
-    root.innerHTML = `
-      <div class="bd-layer" role="alert" aria-live="polite">
-        <div class="bd-panel bd-panel--info bd-panel--progress" data-variant="info">
-          <div class="bd-halo" style="background:${cfg.glow};"></div>
-          <div class="bd-badge" style="color:${cfg.accent}">
-            <span class="bd-icon" aria-hidden="true">↻</span>
-            <span class="bd-eyebrow">In progress</span>
-          </div>
-          <div class="bd-title">${esc(opts.title || "Processing…")}</div>
-          <div class="bd-body bd-body--muted" id="bd-progress-sub">${esc(opts.subtitle || opts.text || "")}</div>
-          <div class="bd-progress">
-            <div class="bd-progress__track">
-              <div class="bd-progress__bar" style="width:0%;"></div>
-            </div>
-            <div class="bd-progress__pct" id="bd-progress-pct">0%</div>
-          </div>
-          <div class="bd-actions"></div>
+function progress(opts = {}) {
+  const root = ensureRoot();
+  lockBody(true);
+  const cfg = VARIANTS.info;
+  root.innerHTML = `
+    <div class="bd-layer" role="alert" aria-live="polite">
+      <div class="bd-panel bd-panel--info bd-panel--progress" data-variant="info">
+        <div class="bd-halo" style="background:${cfg.glow};"></div>
+        <div class="bd-badge" style="color:#fff">
+          <span class="bd-icon" aria-hidden="true">
+            <!-- Bootstrap Icons: hourglass-split -->
+            <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+              <path d="M2.5 15.5A.5.5 0 0 1 2 15v-1.5a2.5 2.5 0 0 1 1.757-2.39l2.32-.773a.5.5 0 0 0 .346-.475V7.138a.5.5 0 0 0-.346-.475l-2.32-.773A2.5 2.5 0 0 1 2 3.5V2a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5v1.5a2.5 2.5 0 0 1-1.757 2.39l-2.32.773a.5.5 0 0 0-.346.475v2.724a.5.5 0 0 0 .346.475l2.32.773A2.5 2.5 0 0 1 14 13.5V15a.5.5 0 0 1-.5.5h-11Z"/>
+              <path d="M4 13.5c0-.69.448-1.286 1.106-1.49l1.748-.584c.926-.31.926-1.542 0-1.852l-1.748-.584A1.581 1.581 0 0 1 4 7.5v6Zm8 0v-6c0 .69-.448 1.286-1.106 1.49l-1.748.584c-.926.31-.926 1.542 0 1.852l1.748.584c.658.204 1.106.8 1.106 1.49Z"/>
+            </svg>
+          </span>
+          <span class="bd-eyebrow" style="color:#fff;">IN PROGRESS</span>
         </div>
+        <div class="bd-title">${esc(opts.title || "Processing…")}</div>
+        <div class="bd-body bd-body--muted" id="bd-progress-sub">${esc(opts.subtitle || opts.text || "")}</div>
+        <div class="bd-progress">
+          <div class="bd-progress__track">
+            <div class="bd-progress__bar" style="width:0%;"></div>
+          </div>
+          <div class="bd-progress__pct" id="bd-progress-pct">0%</div>
+        </div>
+        <div class="bd-actions"></div>
       </div>
-    `;
-    const panel = root.querySelector(".bd-panel");
-    const bar = root.querySelector(".bd-progress__bar");
-    const pctEl = root.querySelector("#bd-progress-pct");
-    const subEl = root.querySelector("#bd-progress-sub");
-    const actions = root.querySelector(".bd-actions");
-    requestAnimationFrame(() => panel?.classList.add("bd-panel--in"));
+    </div>
+  `;
+  const panel = root.querySelector(".bd-panel");
+  const bar = root.querySelector(".bd-progress__bar");
+  const pctEl = root.querySelector("#bd-progress-pct");
+  const subEl = root.querySelector("#bd-progress-sub");
+  const actions = root.querySelector(".bd-actions");
+  requestAnimationFrame(() => panel?.classList.add("bd-panel--in"));
 
-    const ctrl = {
-      update(pct, subtitle) {
-        if (Number.isFinite(pct)) {
-          const c = Math.max(0, Math.min(100, pct));
-          if (bar) bar.style.width = `${c}%`;
-          if (pctEl) pctEl.textContent = `${Math.round(c)}%`;
-        }
-        if (subtitle != null && subEl) subEl.textContent = subtitle;
-      },
-      success(text, opts2 = {}) {
-        panel?.classList.remove("bd-panel--danger", "bd-panel--warning");
-        panel?.classList.add("bd-panel--success");
-        if (subEl) subEl.textContent = text || "Done. You can continue.";
-        if (actions && !actions.children.length) {
-          const btn = document.createElement("button");
+  let current = 0;
+  let target = 0;
+  let raf = null;
+  const setUI = (val) => {
+    const clamped = Math.max(0, Math.min(100, val));
+    if (bar) bar.style.width = `${clamped}%`;
+    if (pctEl) pctEl.textContent = `${clamped.toFixed(1)}%`;
+  };
+  const animate = () => {
+    const delta = target - current;
+    if (Math.abs(delta) < 0.1) {
+      current = target;
+      setUI(current);
+      raf = null;
+      return;
+    }
+    const step = Math.max(0.08, Math.abs(delta) * 0.02); // slower, smoother climb
+    current += Math.sign(delta) * step;
+    setUI(current);
+    raf = requestAnimationFrame(animate);
+  };
+  const goTo = (val) => {
+    target = Math.max(0, Math.min(100, val));
+    if (!raf) raf = requestAnimationFrame(animate);
+  };
+  setUI(0);
+
+  const ctrl = {
+    update(pct, subtitle) {
+      if (Number.isFinite(pct)) goTo(pct);
+      if (subtitle != null && subEl) subEl.textContent = subtitle;
+    },
+    success(text, opts2 = {}) {
+      goTo(100);
+      panel?.classList.remove("bd-panel--danger", "bd-panel--warning");
+      panel?.classList.add("bd-panel--success");
+      if (subEl) subEl.textContent = text || "Done. You can continue.";
+      if (actions && !actions.children.length) {
+        const btn = document.createElement("button");
           btn.className = "bd-btn primary";
           btn.textContent = opts2.closeText || "Close";
           btn.addEventListener("click", () => ctrl.close());
           actions.appendChild(btn);
         }
-      },
-      error(text, opts2 = {}) {
-        panel?.classList.remove("bd-panel--success");
-        panel?.classList.add("bd-panel--danger");
-        if (subEl) subEl.textContent = text || "Something went wrong.";
-        if (actions && !actions.children.length) {
-          const btn = document.createElement("button");
+    },
+    error(text, opts2 = {}) {
+      goTo(0);
+      panel?.classList.remove("bd-panel--success");
+      panel?.classList.add("bd-panel--danger");
+      if (subEl) subEl.textContent = text || "Something went wrong.";
+      if (actions && !actions.children.length) {
+        const btn = document.createElement("button");
           btn.className = "bd-btn primary";
           btn.textContent = opts2.closeText || "Close";
           btn.addEventListener("click", () => ctrl.close());
@@ -280,6 +311,8 @@
         }
       },
       close() {
+        if (raf) cancelAnimationFrame(raf);
+        raf = null;
         cleanup(root);
       }
     };

@@ -43,6 +43,45 @@ function initWorkspace() {
   toastHost.className = "tool-toast";
   document.body.appendChild(toastHost);
 
+  const HAS_BRAND_DIALOG = typeof BrandDialog !== "undefined";
+  const showAlert = (opts) => {
+    if (HAS_BRAND_DIALOG) return BrandDialog.alert(opts);
+    alert(`${opts.title || ""}\n\n${opts.text || ""}`);
+  };
+  const showConfirm = async (opts) => {
+    if (HAS_BRAND_DIALOG) return await BrandDialog.confirm(opts);
+    return window.confirm(`${opts.title || "Confirm"}\n\n${opts.text || ""}`);
+  };
+  let progressCtrl = null;
+  function openProgress(title, subtitle){
+    if (HAS_BRAND_DIALOG) {
+      progressCtrl?.close();
+      progressCtrl = BrandDialog.progress({ title, subtitle });
+    } else {
+      progressCtrl = {
+        update(){},
+        success(){},
+        error(){},
+        close(){ progressCtrl = null; }
+      };
+    }
+  }
+  function updateProgress(pct, subtitle){
+    if (progressCtrl && progressCtrl.update) progressCtrl.update(pct, subtitle);
+  }
+  function closeProgressSuccess(){
+    if (progressCtrl && progressCtrl.success) {
+      progressCtrl.success("You can start filling or use the tools on the left.", { closeText: "Close" });
+    }
+  }
+  function closeProgressError(msg){
+    if (progressCtrl && progressCtrl.error) {
+      progressCtrl.error(msg || "Could not analyze this form.");
+    } else {
+      showAlert({ variant: "danger", title: "Analysis failed", text: msg || "Could not analyze this form." });
+    }
+  }
+
 
   // Base canvases coming from HTML
   let pdfCanvas = $("pdfCanvas");
@@ -55,14 +94,13 @@ function initWorkspace() {
     // Exit button → confirm, log, and start fresh
     const exitBtn = document.getElementById("btnExit");
     exitBtn?.addEventListener("click", async () => {
-      const ok = await Swal.fire({
+      const ok = await showConfirm({
         title: "Exit and start over?",
         text: "This will discard the current workspace and return to the home screen.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Exit",
-        cancelButtonText: "Stay"
-      }).then(r => r.isConfirmed);
+        variant: "warning",
+        confirmText: "Exit",
+        cancelText: "Stay"
+      });
 
       if (!ok) return;
 
@@ -116,14 +154,13 @@ function initWorkspace() {
       setTimeout(() => { try { w?.print(); } catch {} }, 500);
 
       // Optional follow-up: ask to start fresh after print
-      const startFresh = await Swal.fire({
+      const startFresh = await showConfirm({
         title: "Start a new session?",
         text: "Return to the home screen to upload a new PDF.",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonText: "Yes, start fresh",
-        cancelButtonText: "Stay here"
-      }).then(r => r.isConfirmed);
+        variant: "question",
+        confirmText: "Yes, start fresh",
+        cancelText: "Stay here"
+      });
 
       if (startFresh) await resetAndGoHome({ deleteUpload: true });
 
@@ -153,7 +190,7 @@ function initWorkspace() {
 
     } catch (e) {
       console.error("Print failed", e);
-      Swal.fire({ icon:"error", title:"Print failed", text: e?.message || "Could not generate PDF for printing." });
+      showAlert({ variant: "danger", title: "Print failed", text: e?.message || "Could not generate PDF for printing." });
     }
   });
 
@@ -359,14 +396,13 @@ function initWorkspace() {
     } catch (e3) {
       console.error("[viewer] load failed:", e3);
       try {
-        const retry = await Swal.fire({
-          icon: "error",
+        const retry = await showConfirm({
+          variant: "danger",
           title: "Failed to load PDF",
           text: "Would you like to re-upload the file?",
-          showCancelButton: true,
-          confirmButtonText: "Re-upload",
-          cancelButtonText: "Go home"
-        }).then(r => r.isConfirmed);
+          confirmText: "Re-upload",
+          cancelText: "Go home"
+        });
         if (retry) {
           const pick = await pickAndUploadFile();
           persistUpload(pick);
@@ -575,118 +611,36 @@ function initWorkspace() {
     setScaleAndRender(scale * factor);
   }, { passive: false });
 
-  // ---------- SweetAlert determinate progress helpers (force-centered) ----------
-  function openProgress(title, subtitle){
-    Swal.fire({
-      title,
-      html: `
-        <div id="ap-wrap" style="max-width:360px; width:90vw; margin:0 auto;">
-          <div id="ap-sub" style="margin:8px 0 12px; font-size:13px; opacity:.85;">
-            ${subtitle || ""}
-          </div>
-
-          <div class="ap-track"
-              style="height:10px; background:#eee; border-radius:6px; overflow:hidden;">
-            <div id="ap-bar" style="height:100%; width:0%"></div>
-          </div>
-
-          <div id="ap-pct" style="margin-top:8px; font-size:12px; opacity:.75;">0%</div>
-        </div>
-      `,
-      showConfirmButton: false,
-      allowOutsideClick: false,
-      didOpen: () => {
-        // Center the whole HTML container (this beats any global CSS)
-        const html = Swal.getHtmlContainer();
-        if (html) {
-          html.style.display = 'flex';
-          html.style.flexDirection = 'column';
-          html.style.alignItems = 'center';
-          html.style.textAlign = 'center';
-          // also make the inner track full width of the wrapper
-          const track = html.querySelector('.ap-track');
-          if (track) { track.style.width = '100%'; }
-        }
-        const bar = html.querySelector('#ap-bar');
-        bar.style.background = 'linear-gradient(90deg, rgba(77,139,255,.95), rgba(77,139,255,.7))';
-        bar.style.transition = 'width .25s ease';
-      }
-    });
-  }
-
-  function closeProgressSuccess(){
-    Swal.update({
-      icon: 'success',
-      title: 'Analysis complete',
-      html: `
-        <div style="max-width:360px; margin:0 auto; text-align:center; font-size:14px; opacity:.9;">
-          You can start filling or use the tools on the left.
-        </div>
-      `,
-      showConfirmButton: true,
-      confirmButtonText: 'Close'
-    });
-    // Ensure centering after update
-    const html = Swal.getHtmlContainer();
-    if (html) {
-      html.style.display = 'flex';
-      html.style.flexDirection = 'column';
-      html.style.alignItems = 'center';
-      html.style.textAlign = 'center';
-    }
-  }
-
-  function updateProgress(pct, subtitle){
-    const box = Swal.getHtmlContainer(); if (!box) return;
-    const bar = box.querySelector('#ap-bar');
-    const pctLbl = box.querySelector('#ap-pct');
-    const sub = box.querySelector('#ap-sub');
-    if (typeof pct === 'number') {
-      const clamped = Math.max(0, Math.min(100, pct));
-      bar.style.width = `${clamped}%`;
-      pctLbl.textContent = `${Math.round(clamped)}%`;
-    }
-    if (subtitle != null) sub.textContent = subtitle;
-  }
-
-  function closeProgressSuccess(){
-    // show an explicit Close button (no timer), keep centered layout
-    Swal.update({
-      icon: 'success',
-      title: 'Analysis complete',
-      html: `
-        <div style="text-align:center; font-size:14px; opacity:.85;">
-          You can start filling or use the tools on the left.
-        </div>
-      `,
-      showConfirmButton: true,
-      confirmButtonText: 'Close'
-    });
-  }
-
-  function closeProgressError(msg){
-    Swal.fire({ icon: 'error', title: 'Analysis failed', text: msg || 'Could not analyze this form.' });
-  }
-
   // Utility to run a step with weight and auto progress update
   async function runStep(label, weight, fn, basePctRef){
     updateProgress(basePctRef.pct, label);
-    try {
-      const out = await fn();
-      const target = basePctRef.pct + weight;
-      const pctEl = Swal.getHtmlContainer()?.querySelector('#ap-pct');
-      const nowPct = pctEl ? parseFloat(pctEl.textContent) || basePctRef.pct : basePctRef.pct;
-
-      if (target - nowPct > 2) {
-        updateProgress(nowPct + Math.min(5, (target - nowPct) * 0.5));
-        await new Promise(r=>setTimeout(r, 120));
+    const start = basePctRef.pct;
+    const target = Math.min(100, start + weight);
+    let active = true;
+    let lastTick = performance.now();
+    // gentle ticking toward the target while the task runs (slower, time-based)
+    const ticker = () => {
+      if (!active) return;
+      const now = performance.now();
+      const dt = now - lastTick;
+      if (dt > 110) {
+        const inc = Math.max(0.15, (target - basePctRef.pct) * 0.04);
+        const next = Math.min(target - 1, basePctRef.pct + inc);
+        if (next > basePctRef.pct) {
+          basePctRef.pct = next;
+          updateProgress(basePctRef.pct, label);
+        }
+        lastTick = now;
       }
-      basePctRef.pct = target;
-      updateProgress(basePctRef.pct, label);
-      return out;
-    } catch (e) {
-      throw e;
-    }
+      requestAnimationFrame(ticker);
+    };
+    requestAnimationFrame(ticker);
+
+    const out = await fn();
+    active = false;
+    basePctRef.pct = target;
+    updateProgress(basePctRef.pct, label);
+    return out;
   }
 
   // ========================
@@ -1503,10 +1457,13 @@ function findAnchorForLabel(labelRaw, annotations){
   });
   clearBtn?.addEventListener("click", async () => {
     if (!editMode) return;
-    const ok = await Swal.fire({
-      title: "Clear this page?", text: "All drawings and inserted text on the current page will be removed.",
-      icon: "warning", showCancelButton: true, confirmButtonText: "Yes, clear page", cancelButtonText: "Cancel"
-    }).then(r=>r.isConfirmed);
+    const ok = await showConfirm({
+      title: "Clear this page?",
+      text: "All drawings and inserted text on the current page will be removed.",
+      variant: "warning",
+      confirmText: "Yes, clear page",
+      cancelText: "Cancel"
+    });
     if (!ok) return;
     pageEdits[currentPage] = { strokes: [], texts: [] };
     [...document.querySelectorAll(".text-annot")].forEach(n => n.remove());
@@ -1686,14 +1643,13 @@ function findAnchorForLabel(labelRaw, annotations){
 
     // ---- Save / Download ----
     async function onSaveClick() {
-    const ok = await Swal.fire({
+    const ok = await showConfirm({
       title: "Save edited PDF?",
       text: "Export and download a copy with your drawings and inserted text.",
-      icon: "question",
-      showCancelButton: true,
-      confirmButtonText: "Save",
-      cancelButtonText: "Cancel"
-    }).then(r=>r.isConfirmed);
+      variant: "question",
+      confirmText: "Save",
+      cancelText: "Cancel"
+    });
     if (!ok) return;
 
     // capture confirmation time BEFORE any rendering/export
@@ -1718,17 +1674,22 @@ function findAnchorForLabel(labelRaw, annotations){
 
       // Success toast
       const metricsNote = isMetricsOptIn() ? "<div style='font-size:12px;opacity:.9;'>Your beta metrics were recorded.</div>" : "";
-      await Swal.fire({ icon:"success", title:"Saved", html: metricsNote || undefined, timer:1200, showConfirmButton:false });
+      await showAlert({
+        variant: "success",
+        title: "Saved",
+        html: metricsNote || undefined,
+        autoCloseMs: 1200,
+        confirmText: "Nice"
+      });
 
       // Ask if the user wants to start fresh
-      const startFresh = await Swal.fire({
+      const startFresh = await showConfirm({
         title: "Start a new session?",
         text: "Return to the home screen to upload a new PDF.",
-        icon: "question",
-        showCancelButton: true,
-        confirmButtonText: "Yes, start fresh",
-        cancelButtonText: "Stay here"
-      }).then(r => r.isConfirmed);
+        variant: "question",
+        confirmText: "Yes, start fresh",
+        cancelText: "Stay here"
+      });
 
       // Log completion with finished_at = user confirmation time (not including export time)
       await logWorkspaceEvent("saved", tConfirm, { render_ms: renderMs });
@@ -1740,7 +1701,7 @@ function findAnchorForLabel(labelRaw, annotations){
 
     } catch (e) {
       console.error("Save failed", e);
-      Swal.fire({ icon:"error", title:"Save failed", text: e?.message || "Could not generate edited PDF." });
+      showAlert({ variant: "danger", title: "Save failed", text: e?.message || "Could not generate edited PDF." });
       // do not log a completion if save failed
       return;
     }

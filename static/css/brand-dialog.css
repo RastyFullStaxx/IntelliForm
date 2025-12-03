@@ -19,8 +19,8 @@ body.bd-dialog-open { overflow: hidden; }
   background:
     radial-gradient(circle at 20% 18%, rgba(62,216,255,0.08), transparent 38%),
     radial-gradient(circle at 80% 26%, rgba(255,213,74,0.10), transparent 36%),
-    rgba(5, 10, 26, 0.72);
-  backdrop-filter: blur(8px);
+    rgba(5, 10, 26, 0.25);
+  backdrop-filter: blur(0.4px);
   z-index: 9999;
   animation: bd-fade 140ms ease;
 }
@@ -79,6 +79,7 @@ body.bd-dialog-open { overflow: hidden; }
   font-weight: 800;
   position: relative;
   z-index: 1;
+  color: #ffffff;
 }
 .bd-panel[data-variant="success"] .bd-badge { background: rgba(62,216,255,0.14); border-color: rgba(62,216,255,0.32); }
 .bd-panel[data-variant="warning"] .bd-badge { background: rgba(255,213,74,0.14); border-color: rgba(255,213,74,0.32); color: #2c1a00; }
@@ -154,16 +155,18 @@ body.bd-dialog-open { overflow: hidden; }
   width: 100%;
   padding: 12px 12px;
   border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.16);
-  background: rgba(255,255,255,0.06);
-  color: #f7fbff;
+  border: 1px solid rgba(255,255,255,0.24);
+  background: rgba(255,255,255,0.08);
+  color: #eaf3ff;
   font-size: 15px;
   font-weight: 700;
+  caret-color: var(--bd-accent-2);
 }
 .bd-input:focus{
-  outline: 2px solid rgba(62,216,255,0.35);
-  box-shadow: 0 0 0 3px rgba(62,216,255,0.2);
+  outline: 2px solid rgba(62,216,255,0.55);
+  box-shadow: 0 0 0 3px rgba(62,216,255,0.28);
 }
+.bd-input::placeholder{ color: rgba(233,243,255,0.82); }
 .bd-input__hint{
   margin: 6px 0 0;
   color: #b9c7ec;
@@ -205,6 +208,22 @@ body.bd-dialog-open { overflow: hidden; }
   background: linear-gradient(90deg, var(--bd-accent-2), var(--bd-accent));
   border-radius: 6px;
   transition: width 180ms ease;
+  position: relative;
+  overflow: hidden;
+  animation: bd-bar-pulse 1.4s ease-in-out infinite, bd-bar-wash 2.2s linear infinite;
+}
+.bd-progress__bar::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg,
+    rgba(255,255,255,0.22) 0%,
+    rgba(255,255,255,0.0) 40%,
+    rgba(255,255,255,0.25) 70%,
+    rgba(255,255,255,0.0) 100%);
+  background-size: 200% 100%;
+  mix-blend-mode: screen;
+  animation: bd-bar-move 1.6s linear infinite;
 }
 .bd-progress__pct{
   min-width: 52px;
@@ -224,6 +243,16 @@ body.bd-dialog-open { overflow: hidden; }
 @keyframes bd-fade { from{opacity:0;} to{opacity:1;} }
 @keyframes bd-timer { from{width:100%;} to{width:0%;} }
 @keyframes bd-spin { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+@keyframes bd-bar-move { from{background-position:0% 0;} to{background-position:200% 0;} }
+@keyframes bd-bar-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(62,216,255,0.35), 0 0 24px rgba(62,216,255,0.28); }
+  50% { box-shadow: 0 0 0 10px rgba(62,216,255,0.08), 0 0 34px rgba(255,213,74,0.35); }
+}
+@keyframes bd-bar-wash {
+  0% { filter: drop-shadow(0 0 6px rgba(62,216,255,0.35)); }
+  50% { filter: drop-shadow(0 0 12px rgba(255,213,74,0.45)); }
+  100% { filter: drop-shadow(0 0 8px rgba(62,216,255,0.4)); }
+}
 
 @media (max-width: 640px) {
   .bd-panel { padding: 16px 14px; }
