@@ -43,6 +43,12 @@ function initWorkspace() {
   toastHost.className = "tool-toast";
   document.body.appendChild(toastHost);
 
+  const tourTrigger = document.createElement("button");
+  tourTrigger.id = "tourTrigger";
+  tourTrigger.type = "button";
+  tourTrigger.innerHTML = `<span class="tour-trigger__icon">★</span> Walkthrough`;
+  document.body.appendChild(tourTrigger);
+
   const setInfoValue = (chip, text) => {
     if (!chip) return;
     const v = chip.querySelector(".info-value, [data-role='value']");
@@ -1489,6 +1495,7 @@ function findAnchorForLabel(labelRaw, annotations){
     pageEdits[currentPage] = { strokes: [], texts: [] };
     [...document.querySelectorAll(".text-annot")].forEach(n => n.remove());
     paintEdits(currentPage);
+    playClearAnimation();
   });
 
   // Smooth drawing
@@ -2497,6 +2504,11 @@ async function jumpToLabelText(text){
       selector: "#faqButton",
       title: "FAQ",
       body: "Open quick tips anytime."
+    },
+    {
+      selector: "#tourTrigger",
+      title: "Walkthrough",
+      body: "Relaunch this tour any time from the bottom-left button."
     }
   ];
 
@@ -2600,6 +2612,7 @@ async function jumpToLabelText(text){
 
       card.querySelector(".tour-next")?.addEventListener("click", (e) => { e.stopPropagation(); next(); });
       card.querySelector(".tour-skip")?.addEventListener("click", (e) => { e.stopPropagation(); endTour(); });
+      // no inline trigger (use bottom-left button instead)
 
       document.body.classList.add("tour-active");
     }
@@ -2625,5 +2638,15 @@ async function jumpToLabelText(text){
   }
 
   setTimeout(startWalkthrough, 800);
+  tourTrigger.addEventListener("click", () => startWalkthrough());
+
+  function playClearAnimation() {
+    const host = document.getElementById("pageLayer") || document.getElementById("pdfContainer");
+    if (!host) return;
+    const overlay = document.createElement("div");
+    overlay.className = "clear-overlay";
+    host.appendChild(overlay);
+    setTimeout(() => overlay.remove(), 900);
+  }
 
 } // end initWorkspace
