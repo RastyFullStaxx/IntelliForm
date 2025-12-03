@@ -47,27 +47,25 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
       const existingName = (sessionStorage.getItem(LS_UID) || localStorage.getItem(LS_UID) || "").trim();
       const promptFn = window.promptForResearchUserId || (async () => {
-        const res = await Swal.fire({
+        const res = await BrandDialog.prompt({
           title: "Enter Your Name",
-          input: "text",
-          inputLabel: "For beta metrics (Example: JUAN DELA CRUZ)",
-          inputPlaceholder: "TYPE YOUR NAME",
-          inputValue: existingName || "",
-          inputAttributes: { autocapitalize: "characters", autocorrect: "off", spellcheck: "false" },
-          allowOutsideClick: false,
-          confirmButtonText: "Save",
-          cancelButtonText: "Cancel",
-          denyButtonText: existingName ? "Clear name" : "Turn off metrics",
-          showCancelButton: true,
-          showDenyButton: true,
+          text: "For beta metrics (Example: JUAN DELA CRUZ)",
+          variant: "info",
+          confirmText: "Save",
+          cancelText: "Cancel",
+          denyText: existingName ? "Clear name" : "Turn off metrics",
           reverseButtons: true,
-          preConfirm: (val) => {
+          input: {
+            label: "For beta metrics",
+            placeholder: "TYPE YOUR NAME",
+            value: existingName || "",
+            autocomplete: "off",
+            attributes: { autocapitalize: "characters", autocorrect: "off", spellcheck: "false" }
+          },
+          validate: (val) => {
             const v = String(val || "").trim();
-            if (!v || v.length < 2) {
-              Swal.showValidationMessage("Please enter at least 2 characters");
-              return false;
-            }
-            return v;
+            if (!v || v.length < 2) return "Please enter at least 2 characters";
+            return "";
           }
         });
         if (res.isDismissed) return null;
@@ -105,19 +103,19 @@ document.addEventListener('DOMContentLoaded', function () {
   function handleFile(file) {
     if (file && file.type === 'application/pdf') {
       selectedFile = file;
-      Swal.fire({
-        icon: 'success',
-        title: 'File ready',
-        text: `“${file.name}” selected.`,
-        timer: 1200,
-        showConfirmButton: false
+      BrandDialog.alert({
+        variant: "success",
+        title: "File ready",
+        text: `"${file.name}" selected.`,
+        confirmText: "Nice",
+        autoCloseMs: 1200
       });
       showUploadedFile(file.name);
     } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Invalid File',
-        text: 'Please upload a valid PDF file.'
+      BrandDialog.alert({
+        variant: "danger",
+        title: "Invalid File",
+        text: "Please upload a valid PDF file."
       });
     }
   }
@@ -153,25 +151,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Delete uploaded file (client-side reset only)
   deleteBtn.addEventListener('click', () => {
-    Swal.fire({
-      title: 'Remove uploaded file?',
-      text: 'This will cancel the selection and allow you to choose another file.',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, remove it',
-      cancelButtonText: 'Cancel',
+    BrandDialog.confirm({
+      title: "Remove uploaded file?",
+      text: "This will cancel the selection and allow you to choose another file.",
+      variant: "warning",
+      confirmText: "Yes, remove it",
+      cancelText: "Cancel",
       reverseButtons: true
-    }).then(result => {
-      if (result.isConfirmed) {
-        resetUI();
-        Swal.fire({
-          icon: 'info',
-          title: 'Selection cleared',
-          text: 'You may now upload another PDF file.',
-          timer: 1500,
-          showConfirmButton: false
-        });
-      }
+    }).then((ok) => {
+      if (!ok) return;
+      resetUI();
+      BrandDialog.alert({
+        variant: "info",
+        title: "Selection cleared",
+        text: "You may now upload another PDF file.",
+        autoCloseMs: 1400,
+        confirmText: "Got it"
+      });
     });
   });
 
@@ -180,13 +176,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const formData = new FormData();
     formData.append('file', file);
 
-    let uploadingAlert;
+    let uploading;
     try {
-      uploadingAlert = Swal.fire({
-        title: 'Uploading...',
-        text: 'Please wait while we upload your document.',
-        allowOutsideClick: false,
-        didOpen: () => Swal.showLoading()
+      uploading = BrandDialog.loading({
+        title: "Uploading…",
+        text: "Please wait while we upload your document."
       });
 
       const res = await fetch('/api/upload', { method: 'POST', body: formData });
@@ -219,25 +213,29 @@ document.addEventListener('DOMContentLoaded', function () {
       sessionStorage.setItem('uploadedFileName', cleanName);        // for title display
       sessionStorage.setItem('uploadedFileWithExtension', webPath); // legacy path
 
-      Swal.close();
+      uploading?.close();
 
       // Navigate to workspace
       window.location.href = '/workspace';
     } catch (err) {
       console.error(err);
-      Swal.fire({ icon: 'error', title: 'Upload Error', text: err.message || 'Something went wrong while uploading.' });
+      BrandDialog.alert({
+        variant: "danger",
+        title: "Upload Error",
+        text: err.message || "Something went wrong while uploading."
+      });
     } finally {
-      if (uploadingAlert) Swal.close();
+      uploading?.close();
     }
   }
 
   // Start Filling Button → ensure we have a user id, then upload
   startBtn.addEventListener('click', async () => {
     if (!selectedFile) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'No file selected',
-        text: 'Please choose a PDF file first.'
+      BrandDialog.alert({
+        variant: "warning",
+        title: "No file selected",
+        text: "Please choose a PDF file first."
       });
       return;
     }

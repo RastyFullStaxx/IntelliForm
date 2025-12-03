@@ -636,33 +636,127 @@ function renderUserSummary(rows) {
   `;
 }
 
-/* ============== SweetAlert helpers (fallback to native) ============== */
-async function swalConfirm(title, text) {
-  if (window.Swal && Swal.fire) {
-    const r = await Swal.fire({
-      icon: "warning",
-      title, text,
-      showCancelButton: true,
-      confirmButtonText: "Delete",
-      cancelButtonText: "Cancel",
-    });
-    return r.isConfirmed;
+/* ============== Branded dialog helpers (no external deps) ============== */
+const RD_DIALOG_VARIANTS = {
+  success: { label: "Success", accent: "var(--accent-2)", glow: "rgba(15,155,255,0.35)", icon: "✓" },
+  warning: { label: "Heads up", accent: "var(--accent)", glow: "rgba(245,200,76,0.35)", icon: "!" },
+  danger:  { label: "Action needed", accent: "#ff7a91", glow: "rgba(255,122,145,0.38)", icon: "⨉" },
+  info:    { label: "Notice", accent: "var(--ink-2)", glow: "rgba(16,42,113,0.32)", icon: "ℹ" }
+};
+
+function rdDialogRoot() {
+  let root = document.getElementById("rd-dialog-root");
+  if (!root) {
+    root = document.createElement("div");
+    root.id = "rd-dialog-root";
+    document.body.appendChild(root);
   }
-  return window.confirm(`${title}\n\n${text}`);
+  return root;
+}
+
+function rdDialogMarkup({ title, text, variant = "info", confirmText = "OK", cancelText, autoCloseMs }) {
+  const cfg = RD_DIALOG_VARIANTS[variant] || RD_DIALOG_VARIANTS.info;
+  const vibe = variant === "success" ? "rd-dialog__panel--success"
+    : variant === "danger" ? "rd-dialog__panel--danger"
+    : variant === "warning" ? "rd-dialog__panel--warning"
+    : "rd-dialog__panel--info";
+
+  return `
+    <div class="rd-dialog-layer" role="dialog" aria-modal="true" aria-label="${esc(title)}">
+      <div class="rd-dialog__panel ${vibe}" data-variant="${variant}">
+        <div class="rd-dialog__halo" style="background:${cfg.glow};"></div>
+        <div class="rd-dialog__badge" style="color:${cfg.accent}">
+          <span class="rd-dialog__icon" aria-hidden="true">${cfg.icon}</span>
+          <span class="rd-dialog__eyebrow">${cfg.label}</span>
+        </div>
+        <div class="rd-dialog__title">${esc(title)}</div>
+        ${text ? `<div class="rd-dialog__body">${esc(text)}</div>` : ""}
+        <div class="rd-dialog__actions">
+          ${cancelText ? `<button class="rd-dialog__btn ghost" data-role="cancel">${esc(cancelText)}</button>` : ""}
+          <button class="rd-dialog__btn primary" data-role="confirm">${esc(confirmText)}</button>
+        </div>
+        ${autoCloseMs ? `<div class="rd-dialog__timer" style="--rd-timer:${autoCloseMs}ms;"></div>` : ""}
+      </div>
+    </div>
+  `;
+}
+
+function rdDialogClose(root, resolve, value, onKey) {
+  if (!root) return;
+  root.innerHTML = "";
+  document.body.classList.remove("rd-dialog-open");
+  document.removeEventListener("keydown", onKey);
+  resolve(value);
+}
+
+function brandDialog(opts = {}) {
+  return new Promise((resolve) => {
+    const root = rdDialogRoot();
+    root.innerHTML = rdDialogMarkup(opts);
+    document.body.classList.add("rd-dialog-open");
+
+    const overlay = root.querySelector(".rd-dialog-layer");
+    const confirmBtn = root.querySelector('[data-role="confirm"]');
+    const cancelBtn = root.querySelector('[data-role="cancel"]');
+    const panel = root.querySelector(".rd-dialog__panel");
+    let closed = false;
+
+    const finish = (val) => {
+      if (closed) return;
+      closed = true;
+      rdDialogClose(root, resolve, val, onKey);
+    };
+    const onKey = (ev) => {
+      if (ev.key === "Escape") { ev.preventDefault(); finish(false); }
+      if (ev.key === "Enter" && document.activeElement === confirmBtn) {
+        ev.preventDefault();
+        finish(true);
+      }
+    };
+
+    document.addEventListener("keydown", onKey);
+    confirmBtn?.focus({ preventScroll: true });
+
+    overlay?.addEventListener("click", (ev) => {
+      if (ev.target === overlay) finish(false);
+    });
+    confirmBtn?.addEventListener("click", () => finish(true));
+    cancelBtn?.addEventListener("click", () => finish(false));
+
+    if (opts.autoCloseMs && Number.isFinite(opts.autoCloseMs)) {
+      setTimeout(() => finish(true), opts.autoCloseMs);
+    }
+
+    // Small entrance nudge
+    requestAnimationFrame(() => { panel?.classList.add("rd-dialog__panel--in"); });
+  });
+}
+
+async function swalConfirm(title, text) {
+  return await brandDialog({
+    title,
+    text,
+    variant: "warning",
+    confirmText: "Delete",
+    cancelText: "Cancel"
+  });
 }
 async function swalOk(title, text) {
-  if (window.Swal && Swal.fire) {
-    await Swal.fire({ icon: "success", title, text, timer: 1200, showConfirmButton: false });
-  } else {
-    alert(`${title}\n\n${text}`);
-  }
+  await brandDialog({
+    title,
+    text,
+    variant: "success",
+    confirmText: "Nice",
+    autoCloseMs: 1400
+  });
 }
 async function swalError(title, text) {
-  if (window.Swal && Swal.fire) {
-    await Swal.fire({ icon: "error", title, text });
-  } else {
-    alert(`${title}\n\n${text}`);
-  }
+  await brandDialog({
+    title,
+    text,
+    variant: "danger",
+    confirmText: "Got it"
+  });
 }
 
 /* ============== DOM helpers & formatters ============== */
