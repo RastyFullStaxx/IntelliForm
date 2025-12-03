@@ -2440,29 +2440,63 @@ async function jumpToLabelText(text){
   // Guided walkthrough (one-time per session) highlighting sidebar + toggle
   const tourSteps = [
     {
-      selector: "#editToolbar",
+      targets: ["#togglePages", "#editToolbar"],
       title: "Left tools",
-      body: "Use the hamburger to toggle page thumbnails and these tools to draw, highlight, checks, text, and erase.",
+      body: "Toggle thumbnails, then draw, highlight, checks, text, or erase here."
     },
     {
       selector: ".navbar-center",
       title: "Page & Zoom",
-      body: "Track where you are in the document and your zoom level here.",
+      body: "See your current page and zoom level."
     },
     {
-      selector: ".navbar-right",
-      title: "Undo → Save",
-      body: "Undo, clear page, exit, print, download, boxes, and Save live in this cluster.",
+      targets: ["#btnUndo", "#btnClear"],
+      title: "Undo & Clear",
+      body: "Undo last action or clear the current page."
+    },
+    {
+      selector: "#btnExit",
+      title: "Exit",
+      body: "Leave this workspace and return home."
+    },
+    {
+      targets: ["#printPDF", "#downloadPDF"],
+      title: "Print & Download",
+      body: "Print your PDF or download it locally."
+    },
+    {
+      selector: "#eceScoreBadge",
+      title: "Save",
+      body: "Save your filled form with detected labels."
     },
     {
       selector: "#sidebarToggle",
       title: "Sidebar toggle",
-      body: "Open the toolbox to run Analyze, see summaries, and search fields.",
+      body: "Open the toolbox for Analyze, Search, and summaries."
+    },
+    {
+      selector: "#sidebar",
+      title: "Toolbox",
+      body: "Use this panel to run Analyze and review outputs.",
+      sidebarOpen: true
+    },
+    {
+      selector: "#analyzeTool",
+      title: "Analyze",
+      body: "Run AI to detect sections and fields.",
+      sidebarOpen: true
+    },
+    {
+      selector: "#searchTool",
+      title: "Search",
+      body: "Find text in the form and jump to matches.",
+      sidebarOpen: true,
+      sidebarCloseAfter: true
     },
     {
       selector: "#faqButton",
-      title: "Quick guide",
-      body: "Use the FAQ button for a quick tour of tools anytime.",
+      title: "FAQ",
+      body: "Open quick tips anytime."
     }
   ];
 
@@ -2471,34 +2505,65 @@ async function jumpToLabelText(text){
     let overlay = null;
     let card = null;
     let arrow = null;
+    let connector = null;
     const highlightClass = "tour-highlight";
 
     function cleanup() {
       overlay?.remove();
       card?.remove();
       arrow?.remove();
+      connector?.remove();
       document.querySelectorAll(`.${highlightClass}`).forEach(el => el.classList.remove(highlightClass));
+      document.body.classList.remove("tour-active");
     }
 
     function placeStep(step) {
       cleanup();
       if (!step) { return; }
-      const el = document.querySelector(step.selector);
-      if (!el) { next(); return; }
+      const targetEls = [
+        ...(step.targets ? step.targets.map(sel => document.querySelector(sel)).filter(Boolean) : []),
+        ...(step.selector ? [document.querySelector(step.selector)].filter(Boolean) : [])
+      ];
+      if (!targetEls.length) { next(); return; }
 
-      el.classList.add(highlightClass);
+      const sidebar = document.getElementById("sidebar");
+      const sidebarToggle = document.getElementById("sidebarToggle");
+      if (step.sidebarOpen && sidebar) {
+        sidebar.classList.add("open");
+        if (sidebarToggle) sidebarToggle.style.display = "none";
+      }
+
+      targetEls.forEach(el => el.classList.add(highlightClass));
+
+      const bounds = targetEls.reduce((acc, el, i) => {
+        const r = el.getBoundingClientRect();
+        if (i === 0) return { top:r.top, left:r.left, right:r.right, bottom:r.bottom };
+        return {
+          top: Math.min(acc.top, r.top),
+          left: Math.min(acc.left, r.left),
+          right: Math.max(acc.right, r.right),
+          bottom: Math.max(acc.bottom, r.bottom)
+        };
+      }, {});
+      bounds.width = bounds.right - bounds.left;
+      bounds.height = bounds.bottom - bounds.top;
 
       overlay = document.createElement("div");
       overlay.className = "tour-overlay";
       overlay.addEventListener("click", () => next());
+      const cx = bounds.left + bounds.width / 2;
+      const cy = bounds.top + window.scrollY + bounds.height / 2;
+      const r = Math.max(bounds.width, bounds.height) / 2 + 120; // larger cutout
+      overlay.style.setProperty("--tour-hole-x", `${cx}px`);
+      overlay.style.setProperty("--tour-hole-y", `${cy}px`);
+      overlay.style.setProperty("--tour-hole-r", `${r}px`);
       document.body.appendChild(overlay);
 
-      const rect = el.getBoundingClientRect();
       arrow = document.createElement("div");
       arrow.className = "tour-arrow";
-      const arrowY = rect.top + window.scrollY + rect.height / 2 - 8;
-      let arrowX = rect.left + rect.width + 14;
-      if (arrowX > window.innerWidth - 40) arrowX = rect.left - 20; // flip to left if near edge
+      const arrowY = bounds.top + window.scrollY + bounds.height / 2 - 8;
+      let arrowX = bounds.left + bounds.width + 14;
+      if (arrowX > window.innerWidth - 40) arrowX = bounds.left - 20; // flip to left if near edge
       arrow.style.top = `${arrowY}px`;
       arrow.style.left = `${arrowX}px`;
       document.body.appendChild(arrow);
@@ -2515,13 +2580,40 @@ async function jumpToLabelText(text){
       `;
       document.body.appendChild(card);
 
+      // Connector from card center to arrow
+      const cardRect = card.getBoundingClientRect();
+      const cardCx = cardRect.left + cardRect.width / 2;
+      const cardCy = cardRect.top + cardRect.height / 2;
+      const arrowCx = arrowX + 8;
+      const arrowCy = arrowY + 8;
+      const dx = arrowCx - cardCx;
+      const dy = arrowCy - cardCy;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      const angle = Math.atan2(dy, dx);
+      connector = document.createElement("div");
+      connector.className = "tour-connector";
+      connector.style.width = `${dist}px`;
+      connector.style.left = `${cardCx}px`;
+      connector.style.top = `${cardCy}px`;
+      connector.style.transform = `translate(0, -1.5px) rotate(${angle}rad)`;
+      document.body.appendChild(connector);
+
       card.querySelector(".tour-next")?.addEventListener("click", (e) => { e.stopPropagation(); next(); });
       card.querySelector(".tour-skip")?.addEventListener("click", (e) => { e.stopPropagation(); endTour(); });
+
+      document.body.classList.add("tour-active");
     }
 
     function next() {
       idx += 1;
       if (idx >= tourSteps.length) { endTour(); return; }
+      const prev = tourSteps[idx - 1];
+      if (prev && prev.sidebarCloseAfter) {
+        const sidebar = document.getElementById("sidebar");
+        const sidebarToggle = document.getElementById("sidebarToggle");
+        if (sidebar) sidebar.classList.remove("open");
+        if (sidebarToggle) sidebarToggle.style.display = "flex";
+      }
       placeStep(tourSteps[idx]);
     }
 
