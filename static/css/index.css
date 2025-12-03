@@ -69,16 +69,10 @@ body.landing-body{
   font-weight:800; letter-spacing:.3px; box-shadow:0 12px 26px rgba(123,91,255,0.28);
 }
 .beta-btn:hover{ filter:brightness(1.05); }
-.beta-status{
-  padding:10px 14px; border-radius:12px;
-  background: rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.12);
-  font-weight:700; color:#f8fbff;
-  transition: all .2s ease;
-}
-.beta-status.active{
-  background: rgba(34,197,94,0.18);
-  border-color: rgba(34,197,94,0.35);
+.beta-btn.active{
+  background: linear-gradient(120deg,#1bd267,#1ba14f);
+  color:#0a1f1f;
+  box-shadow:0 12px 26px rgba(27,209,103,0.32);
 }
 
 .upload-panel{

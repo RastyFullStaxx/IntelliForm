@@ -19,8 +19,9 @@ body.bd-dialog-open { overflow: hidden; }
   background:
     radial-gradient(circle at 20% 18%, rgba(62,216,255,0.08), transparent 38%),
     radial-gradient(circle at 80% 26%, rgba(255,213,74,0.10), transparent 36%),
-    rgba(5, 10, 26, 0.25);
-  backdrop-filter: blur(0.4px);
+    rgba(5, 10, 26, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   z-index: 9999;
   animation: bd-fade 140ms ease;
 }
@@ -112,7 +113,10 @@ body.bd-dialog-open { overflow: hidden; }
   gap: 10px;
   padding-top: 4px;
 }
-.bd-actions.reverse{ flex-direction: row-reverse; }
+.bd-actions.reverse{
+  flex-direction: row-reverse;
+  justify-content: flex-start; /* keep buttons aligned to the right even when reversed */
+}
 .bd-btn{
   appearance: none;
   border: 1px solid rgba(255,255,255,0.16);

@@ -7,19 +7,30 @@ document.addEventListener('DOMContentLoaded', function () {
   const deleteBtn = document.getElementById('deleteFileBtn');
   const startBtn = document.getElementById('startFillingBtn');
   const betaBtn = document.getElementById('betaTesterBtn');
-  const betaStatus = document.getElementById('betaStatus');
   const METRICS_KEY = 'if_metrics_opt_in';
   const LS_UID = 'research_user_id';
 
   let selectedFile = null;
 
-  // Always start the landing page fresh: clear any previously saved tester name/flag
-  try {
-    sessionStorage.removeItem(METRICS_KEY);
-    localStorage.removeItem(METRICS_KEY);
-    sessionStorage.removeItem(LS_UID);
-    localStorage.removeItem(LS_UID);
-  } catch {}
+  const getTesterName = () => {
+    const name = (sessionStorage.getItem(LS_UID) || localStorage.getItem(LS_UID) || "").trim();
+    return name;
+  };
+
+  const isTesterModeOn = () => {
+    const flag = sessionStorage.getItem(METRICS_KEY) || localStorage.getItem(METRICS_KEY);
+    return flag === '1';
+  };
+
+  function updateBetaButtonUI() {
+    if (!betaBtn) return;
+    const active = isTesterModeOn();
+    const icon = active ? '<i class="bi bi-check-circle-fill"></i>' : '<i class="bi bi-stars"></i>';
+    const label = active ? 'Tester Mode Enabled' : 'Beta Tester';
+    betaBtn.innerHTML = `${icon} ${label}`;
+    betaBtn.classList.toggle('active', active);
+    betaBtn.setAttribute('aria-pressed', active ? 'true' : 'false');
+  }
 
   function setMetricsOptIn(on, name) {
     try {
@@ -28,57 +39,93 @@ document.addEventListener('DOMContentLoaded', function () {
       if (on && name) {
         sessionStorage.setItem(LS_UID, name);
         localStorage.setItem(LS_UID, name);
+      } else if (!on) {
+        sessionStorage.removeItem(LS_UID);
+        localStorage.removeItem(LS_UID);
       }
     } catch {}
-    if (betaStatus) {
-      betaStatus.textContent = on && name ? `Metrics on — ${name}` : 'Metrics: off (guest)';
-      betaStatus.classList.toggle('active', !!(on && name));
-    }
+    updateBetaButtonUI();
   }
 
   function ensureMetricsDefault() {
     const hasFlag = sessionStorage.getItem(METRICS_KEY) || localStorage.getItem(METRICS_KEY);
     if (!hasFlag) setMetricsOptIn(false);
+    else updateBetaButtonUI();
   }
 
   ensureMetricsDefault();
 
+  async function promptForTesterName(existingName = "") {
+    const promptFn = window.promptForResearchUserId || (async () => {
+      const res = await BrandDialog.prompt({
+        title: "Add your name",
+        text: "We tag tester feedback to your name so we can follow up if needed.",
+        variant: "info",
+        confirmText: "Save",
+        cancelText: "Cancel",
+        input: {
+          label: "Name for tester mode",
+          placeholder: "TYPE YOUR NAME",
+          value: existingName || "",
+          autocomplete: "off",
+          attributes: { autocapitalize: "words", autocorrect: "off", spellcheck: "false" }
+        },
+        validate: (val) => {
+          const v = String(val || "").trim();
+          if (!v || v.length < 2) return "Please enter at least 2 characters";
+          return "";
+        }
+      });
+      if (res.isDismissed) return null;
+      return res.value;
+    });
+    return await promptFn(existingName);
+  }
+
   betaBtn?.addEventListener('click', async () => {
     try {
-      const existingName = (sessionStorage.getItem(LS_UID) || localStorage.getItem(LS_UID) || "").trim();
-      const promptFn = window.promptForResearchUserId || (async () => {
-        const res = await BrandDialog.prompt({
-          title: "Enter Your Name",
-          text: "For beta metrics (Example: JUAN DELA CRUZ)",
-          variant: "info",
-          confirmText: "Save",
-          cancelText: "Cancel",
-          denyText: existingName ? "Clear name" : "Turn off metrics",
-          reverseButtons: true,
-          input: {
-            label: "For beta metrics",
-            placeholder: "TYPE YOUR NAME",
-            value: existingName || "",
-            autocomplete: "off",
-            attributes: { autocapitalize: "characters", autocorrect: "off", spellcheck: "false" }
-          },
-          validate: (val) => {
-            const v = String(val || "").trim();
-            if (!v || v.length < 2) return "Please enter at least 2 characters";
-            return "";
-          }
+      const currentlyOn = isTesterModeOn();
+      const existingName = getTesterName();
+
+      if (currentlyOn) {
+        const leave = await BrandDialog.confirm({
+          title: "Disable tester mode?",
+          text: `Tester mode is enabled${existingName ? ` for ${existingName}` : ""}. Turn it off and stop sharing usage data?`,
+          variant: "warning",
+          confirmText: "Disable",
+          cancelText: "Stay enrolled",
+          reverseButtons: true
         });
-        if (res.isDismissed) return null;
-        if (res.isDenied) return "__TURN_OFF__";
-        return res.value;
+        if (!leave) return;
+        setMetricsOptIn(false);
+        BrandDialog.alert({
+          variant: "info",
+          title: "Tester mode disabled",
+          text: "Thanks for considering being a beta tester — we hope you'll change your mind soon.",
+          confirmText: "Got it"
+        });
+        return;
+      }
+
+      const consent = await BrandDialog.confirm({
+        title: "Enroll as a beta tester?",
+        text: "If you turn on tester mode, IntelliForm will record your usage to help evaluate and improve the system. Do you consent?",
+        variant: "info",
+        confirmText: "I consent",
+        cancelText: "No thanks",
+        reverseButtons: true
       });
-      const id = await promptFn();
-      if (id === "__TURN_OFF__") {
-        setMetricsOptIn(false, "");
-        sessionStorage.removeItem(LS_UID);
-        localStorage.removeItem(LS_UID);
-      } else if (id && id.trim()) {
+      if (!consent) return;
+
+      const id = await promptForTesterName(existingName);
+      if (id && id.trim()) {
         setMetricsOptIn(true, id.trim());
+        BrandDialog.alert({
+          variant: "success",
+          title: "Tester mode enabled",
+          text: "Thanks for enrolling as a beta tester to help us improve IntelliForm.",
+          confirmText: "Great!"
+        });
       }
     } catch (e) {
       console.warn('Beta opt-in failed', e);

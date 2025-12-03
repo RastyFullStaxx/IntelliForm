@@ -5,7 +5,7 @@
     success: { label: "Success", accent: "var(--bd-accent-2)", glow: "rgba(62,216,255,0.35)", icon: "✓" },
     warning: { label: "Heads up", accent: "var(--bd-accent)", glow: "rgba(255,213,74,0.35)", icon: "!" },
     danger:  { label: "Action needed", accent: "#ff7a91", glow: "rgba(255,122,145,0.42)", icon: "⨉" },
-    info:    { label: "Notice", accent: "var(--bd-navy)", glow: "rgba(3,26,70,0.32)", icon: "ℹ" },
+    info:    { label: "Notice", accent: "#ffffff", glow: "rgba(255,255,255,0.28)", icon: "ℹ" },
     question:{ label: "Confirm", accent: "var(--bd-accent-2)", glow: "rgba(62,216,255,0.3)", icon: "?" }
   };
 
