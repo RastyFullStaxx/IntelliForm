@@ -79,6 +79,9 @@
               <label for="penColor">Color</label>
               <input id="penColor" type="color" value="#111111">
             </div>
+            <div class="menu-row">
+              <button type="button" class="dropdown-reset" id="penReset">Reset to default</button>
+            </div>
           </div>
         </div>
 
@@ -95,6 +98,13 @@
             <div class="menu-row">
               <label for="hlColor">Color</label>
               <input id="hlColor" type="color" value="#ffff00">
+            </div>
+            <div class="menu-row">
+              <label for="hlAlpha">Opacity</label>
+              <input id="hlAlpha" type="range" min="5" max="90" step="5" value="35">
+            </div>
+            <div class="menu-row">
+              <button type="button" class="dropdown-reset" id="hlReset">Reset to default</button>
             </div>
           </div>
         </div>
@@ -128,6 +138,9 @@
               <label for="checkFontSize">Size</label>
               <input id="checkFontSize" type="number" min="10" max="48" step="1" value="16" style="width:72px;">
             </div>
+            <div class="menu-row">
+              <button type="button" class="dropdown-reset" id="checkReset">Reset to default</button>
+            </div>
           </div>
         </div>
 
@@ -140,9 +153,15 @@
 
     <!-- CENTER: page + zoom -->
     <div class="navbar-center">
-      <span id="pageInfo" class="rounded-box dark-box">Page —</span>
+      <span id="pageInfo" class="info-chip">
+        <span class="info-label">Page</span>
+        <span class="info-value" data-role="value">—</span>
+      </span>
       <span class="vertical-divider">|</span>
-      <span id="zoomInfo" class="rounded-box dark-box">100%</span>
+      <span id="zoomInfo" class="info-chip">
+        <span class="info-label">Zoom</span>
+        <span class="info-value" data-role="value">100%</span>
+      </span>
     </div>
 
     <!-- RIGHT: undo/clear/print/download -->

@@ -43,6 +43,13 @@ function initWorkspace() {
   toastHost.className = "tool-toast";
   document.body.appendChild(toastHost);
 
+  const setInfoValue = (chip, text) => {
+    if (!chip) return;
+    const v = chip.querySelector(".info-value, [data-role='value']");
+    if (v) v.textContent = text;
+    else chip.textContent = text;
+  };
+
   const HAS_BRAND_DIALOG = typeof BrandDialog !== "undefined";
   const showAlert = (opts) => {
     if (HAS_BRAND_DIALOG) return BrandDialog.alert(opts);
@@ -348,8 +355,8 @@ function initWorkspace() {
   let scale = 1.5;
   let currentPage = 1;
   const syncNavInfo = (pageNum = currentPage) => {
-    if (pageInfo && pdfDoc) pageInfo.textContent = `Page ${pageNum} / ${pdfDoc.numPages || 1}`;
-    if (zoomInfo) zoomInfo.textContent = `${Math.round(scale * 100)}%`;
+    if (pageInfo && pdfDoc) setInfoValue(pageInfo, `${pageNum} of ${pdfDoc.numPages || 1}`);
+    if (zoomInfo) setInfoValue(zoomInfo, `${Math.round(scale * 100)}%`);
   };
   const markActiveThumbnail = (pageNum) => {
     document.querySelectorAll("#thumbnailSidebar .thumbnail").forEach((thumb) => {
@@ -1197,12 +1204,19 @@ function findAnchorForLabel(labelRaw, annotations){
   // Draw config
   const PEN = { color: "#111111", width: 2.0,  alpha: 1.0 };
   const HL  = { color: "rgba(255,255,0,0.35)", width: 10.0, alpha: 0.35 };
+  const CHECK_DEFAULT = { glyph: "✓", size: 16 };
 
   // UI inputs (optional)
   const penWidthInput = document.getElementById("penWidth");
   const penColorInput = document.getElementById("penColor");
   const hlWidthInput  = document.getElementById("hlWidth");
   const hlColorInput  = document.getElementById("hlColor");
+  const hlAlphaInput  = document.getElementById("hlAlpha");
+  const penResetBtn   = document.getElementById("penReset");
+  const hlResetBtn    = document.getElementById("hlReset");
+  const checkResetBtn = document.getElementById("checkReset");
+  const checkGlyphSel = document.getElementById("checkGlyph");
+  const checkSizeInput= document.getElementById("checkFontSize");
   function currentPen() {
     return {
       color: (penColorInput && penColorInput.value) || PEN.color,
@@ -1212,8 +1226,13 @@ function findAnchorForLabel(labelRaw, annotations){
   }
   function currentHL() {
     const col = (hlColorInput && hlColorInput.value) || "#ffff00";
-    const alpha = 0.35;
-    return { color: rgbaFromHex(col, alpha), width: (hlWidthInput && (+hlWidthInput.value || HL.width)) || HL.width, alpha };
+    const alphaRaw = hlAlphaInput ? (+hlAlphaInput.value || (HL.alpha * 100)) : (HL.alpha * 100);
+    const alpha = Math.min(0.95, Math.max(0.05, alphaRaw / 100));
+    return {
+      color: rgbaFromHex(col, alpha),
+      width: (hlWidthInput && (+hlWidthInput.value || HL.width)) || HL.width,
+      alpha
+    };
   }
   function rgbaFromHex(hex, a) {
     const h = hex.replace("#",""); const r = parseInt(h.slice(0,2),16); const g = parseInt(h.slice(2,4),16); const b = parseInt(h.slice(4,6),16);
@@ -1231,6 +1250,7 @@ function findAnchorForLabel(labelRaw, annotations){
       currentTool = null;
       toolButtons.forEach(b => b.classList.remove("active"));
       applyPointerRouting();
+      showToolToast(`${(name || "Tool")} off`, { tone: "off" });
       return;
     }
     currentTool = name;
@@ -1243,7 +1263,7 @@ function findAnchorForLabel(labelRaw, annotations){
       check: "Check placer",
       erase: "Eraser"
     }[name] || "Tool selected";
-    showToolToast(`${toolName} activated`);
+    showToolToast(`${toolName} activated`, { tone: "on" });
   });
 
   // // pointer routing
@@ -2276,6 +2296,38 @@ async function jumpToLabelText(text){
     } catch {}
   });
 
+  // Reset handlers
+  penResetBtn?.addEventListener("click", () => {
+    if (penWidthInput) penWidthInput.value = String(PEN.width);
+    if (penColorInput) penColorInput.value = "#111111";
+  });
+  hlResetBtn?.addEventListener("click", () => {
+    if (hlWidthInput) hlWidthInput.value = String(HL.width);
+    if (hlColorInput) hlColorInput.value = "#ffff00";
+    if (hlAlphaInput) hlAlphaInput.value = String(Math.round(HL.alpha * 100));
+  });
+  checkResetBtn?.addEventListener("click", () => {
+    if (checkGlyphSel) checkGlyphSel.value = CHECK_DEFAULT.glyph;
+    if (checkSizeInput) checkSizeInput.value = String(CHECK_DEFAULT.size);
+    CHECK_PRESET.glyph = CHECK_DEFAULT.glyph;
+    CHECK_PRESET.size = CHECK_DEFAULT.size;
+    const evt = new CustomEvent("intelliform:textPreset", { detail: { glyph: CHECK_PRESET.glyph, size: CHECK_PRESET.size } });
+    document.dispatchEvent(evt);
+  });
+
+  // Persist check preset when fields change
+  checkGlyphSel?.addEventListener("change", () => {
+    CHECK_PRESET.glyph = checkGlyphSel.value || CHECK_DEFAULT.glyph;
+    document.body.dataset.textPreset = CHECK_PRESET.glyph;
+  });
+  checkSizeInput?.addEventListener("input", () => {
+    const val = parseInt(checkSizeInput.value || CHECK_DEFAULT.size, 10);
+    if (!Number.isNaN(val)) {
+      CHECK_PRESET.size = val;
+      document.body.dataset.textPresetSize = String(val);
+    }
+  });
+
   // Helper: set active visual state in the toolbar
   function setToolbarActive(btnEl){
     const all = Array.from(document.querySelectorAll("#editToolbar .tool-btn"));
@@ -2285,9 +2337,10 @@ async function jumpToLabelText(text){
 
   // Toast helper for tool selection
   let toastTimeout = null;
-  function showToolToast(msg){
+  function showToolToast(msg, opts){
     if (!toastHost) return;
     toastHost.textContent = msg;
+    toastHost.classList.toggle("off", opts?.tone === "off");
     toastHost.classList.add("show");
     clearTimeout(toastTimeout);
     toastTimeout = setTimeout(() => {
@@ -2316,6 +2369,16 @@ async function jumpToLabelText(text){
       }
 
       ev.stopPropagation();
+
+      // Toggle off if already active
+      const alreadyActive = checkBtn.classList.contains("active");
+      if (alreadyActive) {
+        checkBtn.classList.remove("active");
+        currentTool = null;
+        applyPointerRouting();
+        showToolToast("Check placer off", { tone: "off" });
+        return;
+      }
 
       // ensure we are in edit mode
       if (!editMode) enterEdit();

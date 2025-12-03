@@ -97,6 +97,68 @@ body {
 }
 .rounded-box{padding:4px 10px;border-radius:4px;font-weight:600;font-size:14px}
 .dark-box{background-color:#111827;color:#ffffff}
+.navbar-center{
+  display:flex; align-items:center; justify-content:center; gap:12px;
+}
+.info-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:8px 14px;
+  border-radius:12px;
+  background: linear-gradient(135deg, rgba(17,40,88,0.9), rgba(16,77,126,0.78));
+  border:1px solid rgba(255,255,255,0.12);
+  box-shadow:
+    0 10px 28px rgba(0,0,0,0.32),
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    0 0 0 1px rgba(19,198,255,0.22);
+  color:#e8f2ff;
+  font-weight:700;
+  letter-spacing:0.2px;
+  backdrop-filter: blur(6px);
+}
+.info-chip .info-label{
+  text-transform: uppercase;
+  font-size:11px;
+  letter-spacing:0.6px;
+  color: rgba(232,242,255,0.8);
+}
+.info-chip .info-value{
+  font-size:15px;
+  font-weight:800;
+  color:#fff;
+  padding:2px 8px;
+  border-radius:10px;
+  background: rgba(255,255,255,0.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
+}
+.info-chip:hover{
+  box-shadow:
+    0 12px 32px rgba(0,0,0,0.36),
+    inset 0 1px 0 rgba(255,255,255,0.16),
+    0 0 0 1px rgba(255,213,74,0.26),
+    0 0 14px rgba(62,216,255,0.4);
+  transform: translateY(-1px);
+  transition: all .15s ease;
+}
+.dropdown-menu[data-for="check"] select{
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: linear-gradient(135deg, rgba(17,40,88,0.9), rgba(16,77,126,0.7));
+  color: #e8f2ff;
+  font-weight: 700;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 8px 20px rgba(0,0,0,0.25);
+}
+.dropdown-menu[data-for="check"] select option{
+  background: #0f1d3b;
+  color: #e8f2ff;
+}
+.dropdown-menu[data-for="check"] .menu-row label{
+  font-weight: 700;
+  color: #e8f2ff;
+}
 .vertical-divider{font-size:18px;color:#ccc;font-weight:300}
 #togglePages{margin-left:2rem}
 
@@ -130,6 +192,85 @@ body {
 .tool-toast.show{
   opacity: 1;
   transform: translateY(0);
+}
+.tool-toast.off{
+  background: linear-gradient(120deg,#4c0b1d,#6d1b27);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.28), 0 0 0 2px rgba(255,122,145,0.3);
+}
+
+/* Dropdown menus (tools) */
+#editToolbar .dropdown-menu{
+  background: linear-gradient(145deg, rgba(12,26,56,0.96), rgba(19,52,96,0.9));
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 16px 36px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.14);
+  border-radius: 12px;
+  padding: 10px;
+}
+#editToolbar .dropdown-menu .menu-row{
+  display:flex; align-items:center; justify-content:space-between; gap:10px; margin:8px 0;
+}
+#editToolbar .dropdown-menu label{
+  font-weight: 800;
+  color: #e8f2ff;
+  font-size: 13px;
+  letter-spacing: 0.2px;
+}
+#editToolbar .dropdown-menu input,
+#editToolbar .dropdown-menu select{
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  color: #e8f2ff;
+  border-radius: 10px;
+  padding: 6px 10px;
+}
+#editToolbar .dropdown-menu input[type="range"]{
+  padding: 0;
+}
+#editToolbar .dropdown-reset{
+  width: 100%;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: linear-gradient(120deg, rgba(62,216,255,0.35), rgba(123,91,255,0.35));
+  color: #f8fbff;
+  border-radius: 9px;
+  padding: 8px 10px;
+  font-weight: 800;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  box-shadow:
+    0 8px 18px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.18);
+  text-transform: uppercase;
+  background-size: 200% 200%;
+  animation: dropdown-reset-flow 3s ease infinite;
+}
+#editToolbar .dropdown-reset:hover{
+  box-shadow:
+    0 10px 22px rgba(0,0,0,0.26),
+    inset 0 1px 0 rgba(255,255,255,0.24),
+    0 0 0 1px rgba(255,213,74,0.24),
+    0 0 10px rgba(62,216,255,0.3);
+  transform: translateY(-1px) scale(1.005);
+  transition: all .14s ease;
+}
+#editToolbar .dropdown-menu[data-for="check"] select{
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: linear-gradient(135deg, rgba(17,40,88,0.95), rgba(16,77,126,0.78));
+  color: #e8f2ff;
+  font-weight: 700;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 8px 20px rgba(0,0,0,0.25);
+}
+#editToolbar .dropdown-menu[data-for="check"] select option{
+  background: #0f1d3b;
+  color: #e8f2ff;
+}
+
+@keyframes dropdown-reset-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 .tool-btn {
   width:34px; height:34px; border-radius:8px;
