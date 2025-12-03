@@ -331,16 +331,31 @@ body {
   inset:0;
   pointer-events:none;
   background:
-    radial-gradient(circle at 50% 40%, rgba(255,213,74,0.45), rgba(62,216,255,0.18), rgba(3,26,70,0.6)),
-    radial-gradient(circle at 50% 60%, rgba(62,216,255,0.35), rgba(3,26,70,0.0));
+    radial-gradient(circle at 50% 40%, rgba(122,255,245,0.55), rgba(79,193,255,0.32), rgba(5,20,44,0.7)),
+    radial-gradient(circle at 50% 60%, rgba(79,193,255,0.42), rgba(5,20,44,0.0));
   mix-blend-mode: screen;
-  animation: clearPulse 0.9s ease forwards;
+  animation: clearPulse 1s ease forwards;
   border-radius: 8px;
+  overflow: hidden;
+}
+.clear-overlay::after{
+  content:"";
+  position:absolute;
+  inset:-30%;
+  background:
+    repeating-linear-gradient(135deg, rgba(122,255,245,0.35) 0 8px, transparent 8px 18px),
+    repeating-linear-gradient(45deg, rgba(79,193,255,0.3) 0 10px, transparent 10px 22px);
+  mix-blend-mode: screen;
+  animation: dazzleShift 1s linear forwards;
 }
 @keyframes clearPulse{
-  0% { opacity: 1; transform: scale(0.99); }
-  50% { opacity: 0.65; transform: scale(1.02); }
-  100% { opacity: 0; transform: scale(1.05); }
+  0% { opacity: 1; transform: scale(0.98); }
+  45% { opacity: 0.8; transform: scale(1.04); }
+  100% { opacity: 0; transform: scale(1.06); }
+}
+@keyframes dazzleShift{
+  0% { transform: translate(-6%, -6%) rotate(0deg); opacity: 0.9; }
+  100% { transform: translate(10%, 10%) rotate(8deg); opacity: 0; }
 }
 /* Dropdown menus (tools) */
 #editToolbar .dropdown-menu{
