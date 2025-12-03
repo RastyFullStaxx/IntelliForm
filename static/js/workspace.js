@@ -59,6 +59,7 @@ function initWorkspace() {
     if (HAS_BRAND_DIALOG) return await BrandDialog.confirm(opts);
     return window.confirm(`${opts.title || "Confirm"}\n\n${opts.text || ""}`);
   };
+
   let progressCtrl = null;
   function openProgress(title, subtitle){
     if (HAS_BRAND_DIALOG) {
@@ -2300,11 +2301,13 @@ async function jumpToLabelText(text){
   penResetBtn?.addEventListener("click", () => {
     if (penWidthInput) penWidthInput.value = String(PEN.width);
     if (penColorInput) penColorInput.value = "#111111";
+    showToolToast("Pen reset to default", { tone: "on" });
   });
   hlResetBtn?.addEventListener("click", () => {
     if (hlWidthInput) hlWidthInput.value = String(HL.width);
     if (hlColorInput) hlColorInput.value = "#ffff00";
     if (hlAlphaInput) hlAlphaInput.value = String(Math.round(HL.alpha * 100));
+    showToolToast("Highlight reset to default", { tone: "on" });
   });
   checkResetBtn?.addEventListener("click", () => {
     if (checkGlyphSel) checkGlyphSel.value = CHECK_DEFAULT.glyph;
@@ -2313,6 +2316,7 @@ async function jumpToLabelText(text){
     CHECK_PRESET.size = CHECK_DEFAULT.size;
     const evt = new CustomEvent("intelliform:textPreset", { detail: { glyph: CHECK_PRESET.glyph, size: CHECK_PRESET.size } });
     document.dispatchEvent(evt);
+    showToolToast("Check placer reset to default", { tone: "on" });
   });
 
   // Persist check preset when fields change
@@ -2433,5 +2437,101 @@ async function jumpToLabelText(text){
     }, 0);
   });
 
+  // Guided walkthrough (one-time per session) highlighting sidebar + toggle
+  const tourSteps = [
+    {
+      selector: "#editToolbar",
+      title: "Left tools",
+      body: "Use the hamburger to toggle page thumbnails and these tools to draw, highlight, checks, text, and erase.",
+    },
+    {
+      selector: ".navbar-center",
+      title: "Page & Zoom",
+      body: "Track where you are in the document and your zoom level here.",
+    },
+    {
+      selector: ".navbar-right",
+      title: "Undo → Save",
+      body: "Undo, clear page, exit, print, download, boxes, and Save live in this cluster.",
+    },
+    {
+      selector: "#sidebarToggle",
+      title: "Sidebar toggle",
+      body: "Open the toolbox to run Analyze, see summaries, and search fields.",
+    },
+    {
+      selector: "#faqButton",
+      title: "Quick guide",
+      body: "Use the FAQ button for a quick tour of tools anytime.",
+    }
+  ];
+
+  function startWalkthrough() {
+    let idx = 0;
+    let overlay = null;
+    let card = null;
+    let arrow = null;
+    const highlightClass = "tour-highlight";
+
+    function cleanup() {
+      overlay?.remove();
+      card?.remove();
+      arrow?.remove();
+      document.querySelectorAll(`.${highlightClass}`).forEach(el => el.classList.remove(highlightClass));
+    }
+
+    function placeStep(step) {
+      cleanup();
+      if (!step) { return; }
+      const el = document.querySelector(step.selector);
+      if (!el) { next(); return; }
+
+      el.classList.add(highlightClass);
+
+      overlay = document.createElement("div");
+      overlay.className = "tour-overlay";
+      overlay.addEventListener("click", () => next());
+      document.body.appendChild(overlay);
+
+      const rect = el.getBoundingClientRect();
+      arrow = document.createElement("div");
+      arrow.className = "tour-arrow";
+      const arrowY = rect.top + window.scrollY + rect.height / 2 - 8;
+      let arrowX = rect.left + rect.width + 14;
+      if (arrowX > window.innerWidth - 40) arrowX = rect.left - 20; // flip to left if near edge
+      arrow.style.top = `${arrowY}px`;
+      arrow.style.left = `${arrowX}px`;
+      document.body.appendChild(arrow);
+
+      card = document.createElement("div");
+      card.className = "tour-card";
+      card.innerHTML = `
+        <div class="tour-title">${step.title}</div>
+        <div class="tour-body">${step.body}</div>
+        <div class="tour-actions">
+          <button type="button" class="tour-btn tour-skip">Skip</button>
+          <button type="button" class="tour-btn tour-next">${idx === tourSteps.length - 1 ? "Finish" : "Got it"}</button>
+        </div>
+      `;
+      document.body.appendChild(card);
+
+      card.querySelector(".tour-next")?.addEventListener("click", (e) => { e.stopPropagation(); next(); });
+      card.querySelector(".tour-skip")?.addEventListener("click", (e) => { e.stopPropagation(); endTour(); });
+    }
+
+    function next() {
+      idx += 1;
+      if (idx >= tourSteps.length) { endTour(); return; }
+      placeStep(tourSteps[idx]);
+    }
+
+    function endTour() {
+      cleanup();
+    }
+
+    placeStep(tourSteps[idx]);
+  }
+
+  setTimeout(startWalkthrough, 800);
 
 } // end initWorkspace
