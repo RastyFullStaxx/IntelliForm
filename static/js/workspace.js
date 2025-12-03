@@ -2447,68 +2447,69 @@ async function jumpToLabelText(text){
   // Guided walkthrough (one-time per session) highlighting sidebar + toggle
   const tourSteps = [
     {
-      targets: ["#togglePages", "#editToolbar"],
+      targets: ["#navToolCluster"],
       title: "Left tools",
-      body: "Toggle thumbnails, then draw, highlight, checks, text, or erase here."
+      body: "Open thumbnails, then draw, highlight, drop checks, add text, or erase."
     },
     {
-      selector: ".navbar-center",
+      selector: "#navCenterCluster",
       title: "Page & Zoom",
-      body: "See your current page and zoom level."
+      body: "See which page you're on and adjust zoom to fit or get close."
     },
     {
-      targets: ["#btnUndo", "#btnClear"],
+      selector: "#undoClearCluster",
       title: "Undo & Clear",
-      body: "Undo last action or clear the current page."
+      body: "Undo the last mark or clear the current page to reset it."
     },
     {
-      selector: "#btnExit",
+      selector: "#exitCluster",
       title: "Exit",
-      body: "Leave this workspace and return home."
+      body: "Exit this file and head back to upload something new."
     },
     {
-      targets: ["#printPDF", "#downloadPDF"],
+      selector: "#printDownloadCluster",
       title: "Print & Download",
-      body: "Print your PDF or download it locally."
+      body: "Print the PDF or save a copy to your computer."
     },
     {
       selector: "#eceScoreBadge",
       title: "Save",
-      body: "Save your filled form with detected labels."
+      body: "Save your filled form; labels and edits stay with it."
     },
     {
-      selector: "#sidebarToggle",
+      selector: "#sidebarToggleCluster",
       title: "Sidebar toggle",
-      body: "Open the toolbox for Analyze, Search, and summaries."
+      body: "Show the toolbox to analyze, search, and read summaries."
     },
     {
       selector: "#sidebar",
       title: "Toolbox",
-      body: "Use this panel to run Analyze and review outputs.",
-      sidebarOpen: true
+      body: "Run Analyze, skim results, and use tools from this panel.",
+      sidebarOpen: true,
+      anchor: "bottom-left-outside"
     },
     {
       selector: "#analyzeTool",
       title: "Analyze",
-      body: "Run AI to detect sections and fields.",
+      body: "Let AI scan the form for sections, fields, and labels.",
       sidebarOpen: true
     },
     {
       selector: "#searchTool",
       title: "Search",
-      body: "Find text in the form and jump to matches.",
+      body: "Search the PDF and jump straight to each match.",
       sidebarOpen: true,
       sidebarCloseAfter: true
     },
     {
       selector: "#faqButton",
       title: "FAQ",
-      body: "Open quick tips anytime."
+      body: "Need a hint? Open quick tips anytime."
     },
     {
       selector: "#tourTrigger",
       title: "Walkthrough",
-      body: "Relaunch this tour any time from the bottom-left button."
+      body: "Restart this guide later with the Walkthrough button."
     }
   ];
 
@@ -2532,89 +2533,142 @@ async function jumpToLabelText(text){
     function placeStep(step) {
       cleanup();
       if (!step) { return; }
-      const targetEls = [
-        ...(step.targets ? step.targets.map(sel => document.querySelector(sel)).filter(Boolean) : []),
-        ...(step.selector ? [document.querySelector(step.selector)].filter(Boolean) : [])
-      ];
-      if (!targetEls.length) { next(); return; }
-
       const sidebar = document.getElementById("sidebar");
       const sidebarToggle = document.getElementById("sidebarToggle");
+
+      const renderStep = () => {
+        const targetEls = [
+          ...(step.targets ? step.targets.map(sel => document.querySelector(sel)).filter(Boolean) : []),
+          ...(step.selector ? [document.querySelector(step.selector)].filter(Boolean) : [])
+        ];
+        // Retry once if sidebar content might not yet be painted
+        if (!targetEls.length && step.sidebarOpen) {
+          requestAnimationFrame(() => {
+            const retryEls = [
+              ...(step.targets ? step.targets.map(sel => document.querySelector(sel)).filter(Boolean) : []),
+              ...(step.selector ? [document.querySelector(step.selector)].filter(Boolean) : [])
+            ];
+            if (!retryEls.length) { next(); return; }
+            drawStep(retryEls);
+          });
+          return;
+        }
+        if (!targetEls.length) { next(); return; }
+        drawStep(targetEls);
+      };
+
+      const drawStep = (targetEls) => {
+        targetEls.forEach(el => el.classList.add(highlightClass));
+
+        const bounds = targetEls.reduce((acc, el, i) => {
+          const r = el.getBoundingClientRect();
+          if (i === 0) return { top:r.top, left:r.left, right:r.right, bottom:r.bottom };
+          return {
+            top: Math.min(acc.top, r.top),
+            left: Math.min(acc.left, r.left),
+            right: Math.max(acc.right, r.right),
+            bottom: Math.max(acc.bottom, r.bottom)
+          };
+        }, {});
+        bounds.width = bounds.right - bounds.left;
+        bounds.height = bounds.bottom - bounds.top;
+
+        overlay = document.createElement("div");
+        overlay.className = "tour-overlay";
+        overlay.addEventListener("click", () => next());
+        const cx = bounds.left + bounds.width / 2;
+        const cy = bounds.top + window.scrollY + bounds.height / 2;
+        const maxLen = Math.max(bounds.width, bounds.height);
+        const pad =
+          maxLen < 160
+            ? Math.max(18, maxLen * 0.18)   // tighter spotlight for small targets (e.g., Save)
+            : Math.min(120, maxLen * 0.35); // roomy for larger groups
+        const r = maxLen / 2 + pad;
+        overlay.style.setProperty("--tour-hole-x", `${cx}px`);
+        overlay.style.setProperty("--tour-hole-y", `${cy}px`);
+        overlay.style.setProperty("--tour-hole-r", `${r}px`);
+        document.body.appendChild(overlay);
+
+        arrow = document.createElement("div");
+        arrow.className = "tour-arrow";
+        const anchor = step.anchor || "right-center";
+        const baseY = bounds.top + window.scrollY;
+        const anchorPos = (() => {
+          switch (anchor) {
+            case "bottom-left":
+              return { x: bounds.left + 12, y: baseY + bounds.height - 16 };
+            case "bottom-left-outside":
+              return { x: bounds.left - 24, y: baseY + bounds.height - 16 };
+            case "left-center":
+              return { x: bounds.left - 24, y: baseY + bounds.height / 2 - 8 };
+            case "top-right":
+              return { x: bounds.left + bounds.width + 14, y: baseY - 12 };
+            default:
+              return {
+                x: bounds.left + bounds.width + 14,
+                y: baseY + bounds.height / 2 - 8
+              };
+          }
+        })();
+        let arrowX = anchorPos.x;
+        let arrowY = anchorPos.y;
+        if (arrowX > window.innerWidth - 40) arrowX = bounds.left - 20; // flip to left if near edge
+        const margin = 24;
+        const vTop = window.scrollY + margin;
+        const vBot = window.scrollY + window.innerHeight - margin;
+        const vLeft = margin;
+        const vRight = window.innerWidth - margin;
+        arrowX = Math.max(vLeft, Math.min(arrowX, vRight));
+        arrowY = Math.max(vTop, Math.min(arrowY, vBot));
+        arrow.style.top = `${arrowY}px`;
+        arrow.style.left = `${arrowX}px`;
+        document.body.appendChild(arrow);
+
+        card = document.createElement("div");
+        card.className = "tour-card";
+        card.innerHTML = `
+          <div class="tour-title">${step.title}</div>
+          <div class="tour-body">${step.body}</div>
+          <div class="tour-actions">
+            <button type="button" class="tour-btn tour-skip">Skip</button>
+            <button type="button" class="tour-btn tour-next">${idx === tourSteps.length - 1 ? "Finish" : "Got it"}</button>
+          </div>
+        `;
+        document.body.appendChild(card);
+
+        // Connector from card center to arrow
+        const cardRect = card.getBoundingClientRect();
+        const cardCx = cardRect.left + cardRect.width / 2;
+        const cardCy = cardRect.top + cardRect.height / 2;
+        const arrowCx = arrowX + 8;
+        const arrowCy = arrowY + 8;
+        const dx = arrowCx - cardCx;
+        const dy = arrowCy - cardCy;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        const angle = Math.atan2(dy, dx);
+        connector = document.createElement("div");
+        connector.className = "tour-connector";
+        connector.style.width = `${dist}px`;
+        connector.style.left = `${cardCx}px`;
+        connector.style.top = `${cardCy}px`;
+        connector.style.transform = `translate(0, -1.5px) rotate(${angle}rad)`;
+        document.body.appendChild(connector);
+
+        card.querySelector(".tour-next")?.addEventListener("click", (e) => { e.stopPropagation(); next(); });
+        card.querySelector(".tour-skip")?.addEventListener("click", (e) => { e.stopPropagation(); endTour(); });
+        // no inline trigger (use bottom-left button instead)
+
+        document.body.classList.add("tour-active");
+      };
+
       if (step.sidebarOpen && sidebar) {
         sidebar.classList.add("open");
         if (sidebarToggle) sidebarToggle.style.display = "none";
+        // wait a frame so the sidebar is in place before measuring bounds
+        requestAnimationFrame(() => renderStep());
+      } else {
+        renderStep();
       }
-
-      targetEls.forEach(el => el.classList.add(highlightClass));
-
-      const bounds = targetEls.reduce((acc, el, i) => {
-        const r = el.getBoundingClientRect();
-        if (i === 0) return { top:r.top, left:r.left, right:r.right, bottom:r.bottom };
-        return {
-          top: Math.min(acc.top, r.top),
-          left: Math.min(acc.left, r.left),
-          right: Math.max(acc.right, r.right),
-          bottom: Math.max(acc.bottom, r.bottom)
-        };
-      }, {});
-      bounds.width = bounds.right - bounds.left;
-      bounds.height = bounds.bottom - bounds.top;
-
-      overlay = document.createElement("div");
-      overlay.className = "tour-overlay";
-      overlay.addEventListener("click", () => next());
-      const cx = bounds.left + bounds.width / 2;
-      const cy = bounds.top + window.scrollY + bounds.height / 2;
-      const r = Math.max(bounds.width, bounds.height) / 2 + 120; // larger cutout
-      overlay.style.setProperty("--tour-hole-x", `${cx}px`);
-      overlay.style.setProperty("--tour-hole-y", `${cy}px`);
-      overlay.style.setProperty("--tour-hole-r", `${r}px`);
-      document.body.appendChild(overlay);
-
-      arrow = document.createElement("div");
-      arrow.className = "tour-arrow";
-      const arrowY = bounds.top + window.scrollY + bounds.height / 2 - 8;
-      let arrowX = bounds.left + bounds.width + 14;
-      if (arrowX > window.innerWidth - 40) arrowX = bounds.left - 20; // flip to left if near edge
-      arrow.style.top = `${arrowY}px`;
-      arrow.style.left = `${arrowX}px`;
-      document.body.appendChild(arrow);
-
-      card = document.createElement("div");
-      card.className = "tour-card";
-      card.innerHTML = `
-        <div class="tour-title">${step.title}</div>
-        <div class="tour-body">${step.body}</div>
-        <div class="tour-actions">
-          <button type="button" class="tour-btn tour-skip">Skip</button>
-          <button type="button" class="tour-btn tour-next">${idx === tourSteps.length - 1 ? "Finish" : "Got it"}</button>
-        </div>
-      `;
-      document.body.appendChild(card);
-
-      // Connector from card center to arrow
-      const cardRect = card.getBoundingClientRect();
-      const cardCx = cardRect.left + cardRect.width / 2;
-      const cardCy = cardRect.top + cardRect.height / 2;
-      const arrowCx = arrowX + 8;
-      const arrowCy = arrowY + 8;
-      const dx = arrowCx - cardCx;
-      const dy = arrowCy - cardCy;
-      const dist = Math.sqrt(dx*dx + dy*dy);
-      const angle = Math.atan2(dy, dx);
-      connector = document.createElement("div");
-      connector.className = "tour-connector";
-      connector.style.width = `${dist}px`;
-      connector.style.left = `${cardCx}px`;
-      connector.style.top = `${cardCy}px`;
-      connector.style.transform = `translate(0, -1.5px) rotate(${angle}rad)`;
-      document.body.appendChild(connector);
-
-      card.querySelector(".tour-next")?.addEventListener("click", (e) => { e.stopPropagation(); next(); });
-      card.querySelector(".tour-skip")?.addEventListener("click", (e) => { e.stopPropagation(); endTour(); });
-      // no inline trigger (use bottom-left button instead)
-
-      document.body.classList.add("tour-active");
     }
 
     function next() {

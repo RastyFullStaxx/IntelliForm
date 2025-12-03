@@ -55,138 +55,150 @@
   <nav class="workspace-navbar">
     <!-- LEFT: hamburger + tools (left aligned as a single cluster) -->
     <div class="navbar-left">
-      <!-- Hamburger (thumbnails toggle) -->
-      <button id="togglePages" class="icon-button" title="Toggle Thumbnails">☰</button>
+      <div id="navToolCluster" class="nav-tool-cluster">
+        <!-- Hamburger (thumbnails toggle) -->
+        <button id="togglePages" class="icon-button" title="Toggle Thumbnails">☰</button>
 
-      <!-- Tools (no default active) -->
-      <div id="editToolbar" class="edit-toolbar" aria-label="Edit tools">
-        <!-- Text -->
-        <button class="icon-button tool-btn" data-tool="text" title="Text (T)">
-          <i class="bi bi-type"></i>
-        </button>
-
-        <!-- Draw (pen) with dropdown -->
-        <div class="tool-dropdown">
-          <button class="icon-button tool-btn" data-tool="pen" title="Draw (D)" aria-haspopup="true" aria-expanded="false">
-            <i class="bi bi-pencil"></i><i class="bi bi-caret-down-fill caret" aria-hidden="true"></i>
+        <!-- Tools (no default active) -->
+        <div id="editToolbar" class="edit-toolbar" aria-label="Edit tools">
+          <!-- Text -->
+          <button class="icon-button tool-btn" data-tool="text" title="Text (T)">
+            <i class="bi bi-type"></i>
           </button>
-          <div class="dropdown-menu" data-for="pen" role="menu">
-            <div class="menu-row">
-              <label for="penWidth">Thickness</label>
-              <input id="penWidth" type="range" min="1" max="12" step="1" value="2">
-            </div>
-            <div class="menu-row">
-              <label for="penColor">Color</label>
-              <input id="penColor" type="color" value="#111111">
-            </div>
-            <div class="menu-row">
-              <button type="button" class="dropdown-reset" id="penReset">Reset to default</button>
+
+          <!-- Draw (pen) with dropdown -->
+          <div class="tool-dropdown">
+            <button class="icon-button tool-btn" data-tool="pen" title="Draw (D)" aria-haspopup="true" aria-expanded="false">
+              <i class="bi bi-pencil"></i><i class="bi bi-caret-down-fill caret" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown-menu" data-for="pen" role="menu">
+              <div class="menu-row">
+                <label for="penWidth">Thickness</label>
+                <input id="penWidth" type="range" min="1" max="12" step="1" value="2">
+              </div>
+              <div class="menu-row">
+                <label for="penColor">Color</label>
+                <input id="penColor" type="color" value="#111111">
+              </div>
+              <div class="menu-row">
+                <button type="button" class="dropdown-reset" id="penReset">Reset to default</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Highlight with dropdown -->
-        <div class="tool-dropdown">
-          <button class="icon-button tool-btn" data-tool="highlight" title="Highlight (H)" aria-haspopup="true" aria-expanded="false">
-            <i class="bi bi-highlighter"></i><i class="bi bi-caret-down-fill caret" aria-hidden="true"></i>
-          </button>
-          <div class="dropdown-menu" data-for="highlight" role="menu">
-            <div class="menu-row">
-              <label for="hlWidth">Thickness</label>
-              <input id="hlWidth" type="range" min="6" max="24" step="1" value="10">
-            </div>
-            <div class="menu-row">
-              <label for="hlColor">Color</label>
-              <input id="hlColor" type="color" value="#ffff00">
-            </div>
-            <div class="menu-row">
-              <label for="hlAlpha">Opacity</label>
-              <input id="hlAlpha" type="range" min="5" max="90" step="5" value="35">
-            </div>
-            <div class="menu-row">
-              <button type="button" class="dropdown-reset" id="hlReset">Reset to default</button>
+          <!-- Highlight with dropdown -->
+          <div class="tool-dropdown">
+            <button class="icon-button tool-btn" data-tool="highlight" title="Highlight (H)" aria-haspopup="true" aria-expanded="false">
+              <i class="bi bi-highlighter"></i><i class="bi bi-caret-down-fill caret" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown-menu" data-for="highlight" role="menu">
+              <div class="menu-row">
+                <label for="hlWidth">Thickness</label>
+                <input id="hlWidth" type="range" min="6" max="24" step="1" value="10">
+              </div>
+              <div class="menu-row">
+                <label for="hlColor">Color</label>
+                <input id="hlColor" type="color" value="#ffff00">
+              </div>
+              <div class="menu-row">
+                <label for="hlAlpha">Opacity</label>
+                <input id="hlAlpha" type="range" min="5" max="90" step="5" value="35">
+              </div>
+              <div class="menu-row">
+                <button type="button" class="dropdown-reset" id="hlReset">Reset to default</button>
+              </div>
             </div>
           </div>
-        </div>
 
-                <!-- Check Placer (prefilled text) with dropdown -->
-        <div class="tool-dropdown">
-          <button class="icon-button tool-btn" data-tool="check" title="Check Placer" aria-haspopup="true" aria-expanded="false">
-            <i class="bi bi-check2-square"></i><i class="bi bi-caret-down-fill caret" aria-hidden="true"></i>
-          </button>
-          <div class="dropdown-menu" data-for="check" role="menu">
-            <div class="menu-row">
-              <label for="checkGlyph">Glyph</label>
-              <select id="checkGlyph">
-                <option value="✓" selected>✓ (check)</option>
-                <option value="✔">✔ (heavy check)</option>
-                <option value="✗">✗ (cross)</option>
-                <option value="X">X (letter X)</option>
-                <option value="/">/ (slash)</option>
-                <option value="☑">☑ (ballot box with check)</option>
-                <option value="☒">☒ (ballot box with X)</option>
-                <option value="☐">☐ (empty box)</option>
-                <option value="■">■ (filled box)</option>
-                <option value="★">★ (star)</option>
-                <option value="•">• (bullet)</option>
-                <option value="☛">☛ (pointing hand)</option>
-                <option value="➤">➤ (arrow)</option>
-                <option value="⬤">⬤ (dot)</option>
-              </select>
-            </div>
-            <div class="menu-row">
-              <label for="checkFontSize">Size</label>
-              <input id="checkFontSize" type="number" min="10" max="48" step="1" value="16" style="width:72px;">
-            </div>
-            <div class="menu-row">
-              <button type="button" class="dropdown-reset" id="checkReset">Reset to default</button>
+                  <!-- Check Placer (prefilled text) with dropdown -->
+          <div class="tool-dropdown">
+            <button class="icon-button tool-btn" data-tool="check" title="Check Placer" aria-haspopup="true" aria-expanded="false">
+              <i class="bi bi-check2-square"></i><i class="bi bi-caret-down-fill caret" aria-hidden="true"></i>
+            </button>
+            <div class="dropdown-menu" data-for="check" role="menu">
+              <div class="menu-row">
+                <label for="checkGlyph">Glyph</label>
+                <select id="checkGlyph">
+                  <option value="✓" selected>✓ (check)</option>
+                  <option value="✔">✔ (heavy check)</option>
+                  <option value="✗">✗ (cross)</option>
+                  <option value="X">X (letter X)</option>
+                  <option value="/">/ (slash)</option>
+                  <option value="☑">☑ (ballot box with check)</option>
+                  <option value="☒">☒ (ballot box with X)</option>
+                  <option value="☐">☐ (empty box)</option>
+                  <option value="■">■ (filled box)</option>
+                  <option value="★">★ (star)</option>
+                  <option value="•">• (bullet)</option>
+                  <option value="☛">☛ (pointing hand)</option>
+                  <option value="➤">➤ (arrow)</option>
+                  <option value="⬤">⬤ (dot)</option>
+                </select>
+              </div>
+              <div class="menu-row">
+                <label for="checkFontSize">Size</label>
+                <input id="checkFontSize" type="number" min="10" max="48" step="1" value="16" style="width:72px;">
+              </div>
+              <div class="menu-row">
+                <button type="button" class="dropdown-reset" id="checkReset">Reset to default</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Eraser -->
-        <button class="icon-button tool-btn" data-tool="erase" title="Erase (E)">
-          <i class="bi bi-eraser"></i>
-        </button>
+          <!-- Eraser -->
+          <button class="icon-button tool-btn" data-tool="erase" title="Erase (E)">
+            <i class="bi bi-eraser"></i>
+          </button>
+        </div>
       </div>
     </div>
 
     <!-- CENTER: page + zoom -->
     <div class="navbar-center">
-      <span id="pageInfo" class="info-chip">
-        <span class="info-label">Page</span>
-        <span class="info-value" data-role="value">—</span>
-      </span>
-      <span class="vertical-divider">|</span>
-      <span id="zoomInfo" class="info-chip">
-        <span class="info-label">Zoom</span>
-        <span class="info-value" data-role="value">100%</span>
-      </span>
+      <div id="navCenterCluster" class="nav-center-cluster">
+        <span id="pageInfo" class="info-chip">
+          <span class="info-label">Page</span>
+          <span class="info-value" data-role="value">—</span>
+        </span>
+        <span class="vertical-divider">|</span>
+        <span id="zoomInfo" class="info-chip">
+          <span class="info-label">Zoom</span>
+          <span class="info-value" data-role="value">100%</span>
+        </span>
+      </div>
     </div>
 
     <!-- RIGHT: undo/clear/print/download -->
     <div class="navbar-right">
-      <button id="btnUndo" class="icon-button" title="Undo (Ctrl+Z)"><i class="bi bi-arrow-counterclockwise"></i></button>
-      <button id="btnClear" class="icon-button" title="Clear Page"><i class="bi bi-trash"></i></button>
+      <div id="undoClearCluster" class="nav-undo-cluster">
+        <button id="btnUndo" class="icon-button" title="Undo (Ctrl+Z)"><i class="bi bi-arrow-counterclockwise"></i></button>
+        <button id="btnClear" class="icon-button" title="Clear Page"><i class="bi bi-trash"></i></button>
+      </div>
       <span class="toolbar-divider">|</span>
             <!-- EXIT (go back to home / start fresh) -->
-      <button id="btnExit" class="icon-button" aria-label="Exit to Home" title="Exit to Home">
-        <i class="bi bi-box-arrow-right"></i>
-      </button>
+      <div id="exitCluster" class="nav-exit-cluster">
+        <button id="btnExit" class="icon-button" aria-label="Exit to Home" title="Exit to Home">
+          <i class="bi bi-box-arrow-right"></i>
+        </button>
+      </div>
       <span class="toolbar-divider">|</span>
-      <button id="printPDF" class="icon-button" aria-label="Print PDF" title="Print">
-        <img src="/static/img/round-print.png" alt="Print"/>
-      </button>
-      <button id="downloadPDF" class="icon-button" aria-label="Download PDF" title="Download">
-        <img src="/static/img/round-download.png" alt="Download"/>
-      </button>
+      <div id="printDownloadCluster" class="nav-print-cluster">
+        <button id="printPDF" class="icon-button" aria-label="Print PDF" title="Print">
+          <img src="/static/img/round-print.png" alt="Print"/>
+        </button>
+        <button id="downloadPDF" class="icon-button" aria-label="Download PDF" title="Download">
+          <img src="/static/img/round-download.png" alt="Download"/>
+        </button>
+      </div>
       <span class="toolbar-divider">|</span>
       <button id="btnShowBoxes" class="icon-button nav-chip" type="button" aria-pressed="false" title="Show boxes">
         <i class="bi bi-bounding-box-circles"></i>
       </button>
-      <button id="eceScoreBadge" class="icon-button nav-chip nav-chip-save" type="button" title="Save form">
-        Save
-      </button>
+      <div id="saveCluster" class="nav-save-cluster">
+        <button id="eceScoreBadge" class="icon-button nav-chip nav-chip-save" type="button" title="Save form">
+          Save
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -215,8 +227,10 @@
 
   <!-- Sidebar Toggle Icon -->
   <div id="floatingToggleWrapper">
-    <div id="sidebarToggle" title="Toggle Tools">
-      <img src="/static/img/imgMainLogo.png" alt="Toggle Tools" />
+    <div id="sidebarToggleCluster" class="sidebar-toggle-cluster">
+      <div id="sidebarToggle" title="Toggle Tools">
+        <img src="/static/img/imgMainLogo.png" alt="Toggle Tools" />
+      </div>
     </div>
   </div>
 
