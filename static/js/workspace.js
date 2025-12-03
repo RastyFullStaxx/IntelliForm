@@ -32,6 +32,9 @@ function initWorkspace() {
   const metricsRow = $("metricsRow");
   const pageInfo = $("pageInfo");
   const zoomInfo = $("zoomInfo");
+  const pageNavShell = $("pageNavShell");
+  const pagePrevBtn = $("pagePrevBtn");
+  const pageNextBtn = $("pageNextBtn");
   const searchTool     = $("searchTool");
   const searchInput    = $("searchInput");
   const searchNextBtn  = $("searchNext");
@@ -356,6 +359,35 @@ function initWorkspace() {
     if (showBoxes && currentFormId) await drawOverlay(currentFormId, currentPage);
     else boxesCtx.clearRect(0, 0, boxesCanvas.width, boxesCanvas.height);
   });
+  const syncPageNavButtons = () => {
+    if (!pageNavShell || !pdfDoc) return;
+    const total = pdfDoc?.numPages || 1;
+    const show = total > 1;
+    pageNavShell.classList.toggle("is-hidden", !show);
+    pageNavShell.setAttribute("aria-hidden", show ? "false" : "true");
+    if (pagePrevBtn) {
+      const disabled = currentPage <= 1;
+      pagePrevBtn.disabled = disabled;
+      pagePrevBtn.setAttribute("aria-disabled", disabled ? "true" : "false");
+    }
+    if (pageNextBtn) {
+      const disabled = currentPage >= total;
+      pageNextBtn.disabled = disabled;
+      pageNextBtn.setAttribute("aria-disabled", disabled ? "true" : "false");
+    }
+  };
+  pagePrevBtn?.addEventListener("click", () => {
+    if (!pdfDoc || currentPage <= 1) return;
+    currentPage = Math.max(1, currentPage - 1);
+    renderPage(currentPage);
+  });
+  pageNextBtn?.addEventListener("click", () => {
+    if (!pdfDoc) return;
+    const total = pdfDoc.numPages || 1;
+    if (currentPage >= total) return;
+    currentPage = Math.min(total, currentPage + 1);
+    renderPage(currentPage);
+  });
 
   // ---- PDF state ----
   let pdfDoc = null;
@@ -364,6 +396,7 @@ function initWorkspace() {
   const syncNavInfo = (pageNum = currentPage) => {
     if (pageInfo && pdfDoc) setInfoValue(pageInfo, `${pageNum} of ${pdfDoc.numPages || 1}`);
     if (zoomInfo) setInfoValue(zoomInfo, `${Math.round(scale * 100)}%`);
+    syncPageNavButtons();
   };
   const markActiveThumbnail = (pageNum) => {
     document.querySelectorAll("#thumbnailSidebar .thumbnail").forEach((thumb) => {
@@ -1347,19 +1380,19 @@ function findAnchorForLabel(labelRaw, annotations){
     wrap.className = "text-annot";
     wrap.style.cssText = `
       position:absolute; left:${cssX}px; top:${cssY}px; z-index:4;
-      outline:1.5px dashed #1e90ff; outline-offset:2px; border-radius:4px; padding:6px 8px 8px 28px;
-      background:rgba(255,255,255,0.01); user-select:none;`;
+      outline:2.5px dashed #1e90ff; outline-offset:3px; border-radius:6px; padding:8px 10px 10px 34px;
+      box-shadow:0 0 0 1px rgba(30,144,255,.25); background:rgba(255,255,255,0.08); user-select:none;`;
     wrap.dataset.page = String(pageNum);
 
     const handle = document.createElement("div");
     handle.className = "ta-handle";
     handle.title = "Drag";
     handle.style.cssText = `
-      position:absolute; left:4px; top:6px; width:16px; height:20px; cursor:grab; display:grid; gap:2px;
-      grid-template-columns: repeat(2, 4px); grid-auto-rows: 4px;`;
+      position:absolute; left:6px; top:6px; width:20px; height:24px; cursor:grab; display:grid; gap:3px;
+      grid-template-columns: repeat(2, 6px); grid-auto-rows: 6px;`;
     for (let i=0;i<6;i++){
       const dot=document.createElement("div");
-      dot.style.cssText="width:4px;height:4px;border-radius:50%;background:#1e90ff;opacity:.9;";
+      dot.style.cssText="width:6px;height:6px;border-radius:50%;background:#1e90ff;opacity:1;";
       handle.appendChild(dot);
     }
     wrap.appendChild(handle);
