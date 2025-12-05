@@ -26,6 +26,7 @@ function initWorkspace() {
   const summaryList = $("summaryList");
   const formTitle = $("formNameDisplay");
   const floatingToggleWrapper = $("floatingToggleWrapper");
+  const sidebarToggleCluster = $("sidebarToggleCluster");
   const faqButton = $("faqButton");
   const faqPanel = $("faqPanel");
   const sidebarTitle = document.querySelector(".sidebar-title h5");
@@ -217,7 +218,26 @@ function initWorkspace() {
     formTitle.textContent = origName || "Form";
   }
 
+  const setSidebarOpen = (isOpen) => {
+    if (!sidebar) return;
+    const open = !!isOpen;
+    sidebar.classList.toggle("open", open);
+    if (sidebarToggle) {
+      sidebarToggle.setAttribute("data-open", open ? "true" : "false");
+      sidebarToggle.setAttribute("aria-pressed", open ? "true" : "false");
+    }
+    if (sidebarToggleCluster) {
+      sidebarToggleCluster.classList.toggle("is-open", open);
+    }
+  };
+  const toggleSidebarOpen = () => {
+    if (!sidebar) return;
+    setSidebarOpen(!sidebar.classList.contains("open"));
+  };
+  setSidebarOpen(sidebar?.classList.contains("open"));
+
   // ---- Sidebar controls ----
+  let toggleIsDragging = false;
   // Draggable toggle along the right edge (vertical only)
   if (floatingToggleWrapper) {
     let dragStartY = 0;
@@ -227,6 +247,7 @@ function initWorkspace() {
     const clamp = (v, min, max) => Math.min(Math.max(v, min), max);
     const stopDrag = () => {
       dragging = false;
+      toggleIsDragging = false;
       document.removeEventListener("pointermove", onDrag);
       document.removeEventListener("pointerup", stopDrag);
       document.removeEventListener("pointercancel", stopDrag);
@@ -245,6 +266,7 @@ function initWorkspace() {
       dragStartY = e.clientY;
       startTop = parseFloat(getComputedStyle(floatingToggleWrapper).top || "200");
       dragging = true;
+      toggleIsDragging = true;
       moved = false;
       document.addEventListener("pointermove", onDrag);
       document.addEventListener("pointerup", stopDrag);
@@ -258,16 +280,98 @@ function initWorkspace() {
     });
   }
 
+  if (sidebarToggle) {
+    let clickPopTimer = null;
+    const clearClickPop = () => {
+      if (clickPopTimer) {
+        clearTimeout(clickPopTimer);
+        clickPopTimer = null;
+      }
+      sidebarToggle.classList.remove("just-clicked");
+    };
+
+    sidebarToggle.addEventListener("pointerdown", () => {
+      sidebarToggle.classList.add("is-pressing");
+      clearClickPop();
+    });
+    sidebarToggle.addEventListener("pointerup", () => sidebarToggle.classList.remove("is-pressing"));
+    sidebarToggle.addEventListener("pointercancel", () => sidebarToggle.classList.remove("is-pressing"));
+    sidebarToggle.addEventListener("pointerleave", () => sidebarToggle.classList.remove("is-pressing"));
+    sidebarToggle.addEventListener("click", () => {
+      clearClickPop();
+      sidebarToggle.classList.add("just-clicked");
+      clickPopTimer = setTimeout(() => sidebarToggle.classList.remove("just-clicked"), 150);
+    });
+
+    const clampMag = (v, min, max) => Math.min(Math.max(v, min), max);
+    const magnetRadius = 220;
+    const magnetMax = 7;
+    let magnetRAF = null;
+    let magnetTarget = { x: 0, y: 0 };
+    const applyMagnet = () => {
+      sidebarToggle.style.setProperty("--magnet-x", `${magnetTarget.x.toFixed(2)}px`);
+      sidebarToggle.style.setProperty("--magnet-y", `${magnetTarget.y.toFixed(2)}px`);
+      magnetRAF = null;
+    };
+    const queueMagnet = (coords) => {
+      magnetTarget = coords;
+      if (!magnetRAF) magnetRAF = requestAnimationFrame(applyMagnet);
+    };
+    const resetMagnet = () => queueMagnet({ x: 0, y: 0 });
+    const handleMagnet = (e) => {
+      if (sidebarToggle.style.display === "none") {
+        resetMagnet();
+        return;
+      }
+      if (toggleIsDragging) {
+        resetMagnet();
+        return;
+      }
+      if (e.pointerType === "touch") {
+        resetMagnet();
+        return;
+      }
+      const rect = sidebarToggle.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const dx = (e.clientX ?? 0) - cx;
+      const dy = (e.clientY ?? 0) - cy;
+      const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+      if (dist > magnetRadius) {
+        if (magnetTarget.x !== 0 || magnetTarget.y !== 0) resetMagnet();
+        return;
+      }
+      const strength = 1 - dist / magnetRadius;
+      const scale = magnetMax * strength;
+      queueMagnet({
+        x: clampMag((dx / dist) * scale, -magnetMax, magnetMax),
+        y: clampMag((dy / dist) * scale, -magnetMax, magnetMax)
+      });
+    };
+
+    document.addEventListener("pointermove", handleMagnet);
+    sidebarToggle.addEventListener("mouseleave", resetMagnet);
+    sidebarToggle.addEventListener("blur", resetMagnet);
+    window.addEventListener("pointerout", (e) => {
+      if (!e.relatedTarget) resetMagnet();
+    });
+    document.addEventListener("mouseleave", resetMagnet);
+  }
+
   if (sidebarToggle && sidebar) {
     sidebarToggle.addEventListener("click", (e) => {
       e.stopPropagation();
-      sidebar.classList.toggle("open");
-      sidebarToggle.style.display = sidebar.classList.contains("open") ? "none" : "flex";
+      toggleSidebarOpen();
+    });
+    sidebarToggle.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        toggleSidebarOpen();
+      }
     });
     document.addEventListener("click", (e) => {
       if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
-        sidebar.classList.remove("open");
-        sidebarToggle.style.display = "flex";
+        setSidebarOpen(false);
       }
     });
   }
@@ -280,10 +384,7 @@ function initWorkspace() {
     };
     const highlightTargets = (selector) => {
       if (!selector) return;
-      if (!sidebar.classList.contains("open") && sidebarToggle) {
-        sidebar.classList.add("open");
-        sidebarToggle.style.display = "none";
-      }
+      if (!sidebar?.classList.contains("open")) setSidebarOpen(true);
       selector.split(",").forEach((sel) => {
         document.querySelectorAll(sel.trim()).forEach((el) => el.classList.add("guide-highlight"));
       });
@@ -331,6 +432,33 @@ function initWorkspace() {
         }
         closeFaq();
       });
+    });
+
+    // Inject walkthrough trigger into FAQ guide
+    const walkRow = document.createElement("div");
+    walkRow.className = "faq-row";
+    walkRow.setAttribute("data-target", "#tourTrigger");
+    walkRow.innerHTML = `
+      <div class="faq-label">Walkthrough</div>
+      <div class="faq-copy">Replay the guided tour anytime.</div>
+    `;
+    faqPanel.appendChild(walkRow);
+    walkRow.addEventListener("mouseenter", () => {
+      clearGuideHighlights();
+      highlightTargets("#tourTrigger");
+      walkRow.classList.add("active");
+    });
+    walkRow.addEventListener("mouseleave", () => {
+      clearGuideHighlights();
+      walkRow.classList.remove("active");
+    });
+    walkRow.addEventListener("click", (e) => {
+      e.stopPropagation();
+      clearGuideHighlights();
+      highlightTargets("#tourTrigger");
+      const trigger = document.querySelector("#tourTrigger");
+      if (trigger) trigger.click();
+      closeFaq();
     });
   }
   const syncThumbToggle = () => {
@@ -2552,6 +2680,8 @@ async function jumpToLabelText(text){
     let card = null;
     let arrow = null;
     let connector = null;
+    let completionOverlay = null;
+    let completionCard = null;
     const highlightClass = "tour-highlight";
 
     function cleanup() {
@@ -2559,15 +2689,16 @@ async function jumpToLabelText(text){
       card?.remove();
       arrow?.remove();
       connector?.remove();
+      completionOverlay?.remove();
+      completionCard?.remove();
       document.querySelectorAll(`.${highlightClass}`).forEach(el => el.classList.remove(highlightClass));
-      document.body.classList.remove("tour-active");
+      document.body.classList.remove("tour-active", "tour-focus-nav");
     }
 
     function placeStep(step) {
       cleanup();
       if (!step) { return; }
       const sidebar = document.getElementById("sidebar");
-      const sidebarToggle = document.getElementById("sidebarToggle");
 
       const renderStep = () => {
         const targetEls = [
@@ -2695,8 +2826,7 @@ async function jumpToLabelText(text){
       };
 
       if (step.sidebarOpen && sidebar) {
-        sidebar.classList.add("open");
-        if (sidebarToggle) sidebarToggle.style.display = "none";
+        setSidebarOpen(true);
         // wait a frame so the sidebar is in place before measuring bounds
         requestAnimationFrame(() => renderStep());
       } else {
@@ -2704,16 +2834,34 @@ async function jumpToLabelText(text){
       }
     }
 
+    function showCompletion() {
+      cleanup();
+      completionOverlay = document.createElement("div");
+      completionOverlay.className = "tour-overlay";
+      completionOverlay.addEventListener("click", () => endTour());
+
+      completionCard = document.createElement("div");
+      completionCard.className = "tour-card tour-card--final";
+      completionCard.innerHTML = `
+        <div class="tour-complete-icon" aria-hidden="true">✓</div>
+        <div class="tour-title">You're all set up!</div>
+        <div class="tour-body">You’ve seen the essentials. Jump in and start editing.</div>
+        <div class="tour-actions">
+          <button type="button" class="tour-btn tour-next">Done</button>
+        </div>
+      `;
+
+      document.body.appendChild(completionOverlay);
+      document.body.appendChild(completionCard);
+      completionCard.querySelector(".tour-next")?.addEventListener("click", (e) => { e.stopPropagation(); endTour(); });
+      document.body.classList.add("tour-active");
+    }
+
     function next() {
       idx += 1;
-      if (idx >= tourSteps.length) { endTour(); return; }
+      if (idx >= tourSteps.length) { showCompletion(); return; }
       const prev = tourSteps[idx - 1];
-      if (prev && prev.sidebarCloseAfter) {
-        const sidebar = document.getElementById("sidebar");
-        const sidebarToggle = document.getElementById("sidebarToggle");
-        if (sidebar) sidebar.classList.remove("open");
-        if (sidebarToggle) sidebarToggle.style.display = "flex";
-      }
+      if (prev && prev.sidebarCloseAfter) setSidebarOpen(false);
       placeStep(tourSteps[idx]);
     }
 

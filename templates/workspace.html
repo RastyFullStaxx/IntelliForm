@@ -228,9 +228,17 @@
   <!-- Sidebar Toggle Icon -->
   <div id="floatingToggleWrapper">
     <div id="sidebarToggleCluster" class="sidebar-toggle-cluster">
-      <div id="sidebarToggle" title="Toggle Tools">
-        <img src="/static/img/imgMainLogo.png" alt="Toggle Tools" />
+      <div id="sidebarToggle" title="Toggle Tools" aria-label="Toggle Tools" aria-pressed="false" role="button" tabindex="0">
+        <div class="toggle-face" aria-hidden="true">
+          <img class="toggle-logo" src="/static/img/imgMainLogo.png" alt="IntelliForm logo" />
+          <span class="toggle-menu-icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
       </div>
+      <span class="sidebar-open-indicator" aria-hidden="true"></span>
     </div>
   </div>
 
