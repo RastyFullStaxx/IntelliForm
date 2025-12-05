@@ -207,17 +207,24 @@ body {
   letter-spacing: .2px;
   box-shadow: 0 10px 26px rgba(0,0,0,0.28), 0 0 0 2px rgba(255,213,74,0.25);
   opacity: 0;
-  transform: translateY(-6px);
-  transition: opacity .4s ease, transform .4s ease;
+  transform: translateY(-10px) scale(0.94);
+  transform-origin: top left;
+  transition: opacity .26s ease, transform .26s ease;
   pointer-events: none;
 }
 .tool-toast.show{
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
+  animation: toolToastPop 420ms cubic-bezier(0.24, 1.18, 0.32, 1);
 }
 .tool-toast.off{
   background: linear-gradient(120deg,#4c0b1d,#6d1b27);
   box-shadow: 0 10px 22px rgba(0,0,0,0.28), 0 0 0 2px rgba(255,122,145,0.3);
+}
+@keyframes toolToastPop{
+  0% { opacity: 0; transform: translateY(-14px) scale(0.9); }
+  55% { opacity: 1; transform: translateY(3px) scale(1.04); }
+  100%{ opacity: 1; transform: translateY(0) scale(1); }
 }
 
 .tour-overlay{
@@ -236,7 +243,7 @@ body {
   border-radius: 18px;
   background: linear-gradient(130deg, #0b2c66, #0a63c5, #031a46);
   background-size: 240% 240%;
-  animation: tourCardFlow 9s ease infinite, tourCardGlow 4s ease-in-out infinite;
+  animation: tourCardEnter 360ms cubic-bezier(0.2, 1, 0.24, 1) both, tourCardFlow 9s ease infinite, tourCardGlow 4s ease-in-out infinite;
   color: #f8fbff;
   border: 1px solid #1f3f7a;
   box-shadow:
@@ -329,19 +336,42 @@ body {
   position: absolute;
   width: 16px;
   height: 16px;
-  background: linear-gradient(135deg, rgba(255,213,74,0.9), rgba(62,216,255,0.8));
-  box-shadow: 0 8px 18px rgba(0,0,0,0.25), 0 0 12px rgba(255,213,74,0.6);
+  background: linear-gradient(135deg, rgba(255,213,74,0.95), rgba(62,216,255,0.95));
+  box-shadow:
+    0 10px 22px rgba(0,0,0,0.28),
+    0 0 18px rgba(255,213,74,0.75),
+    0 0 22px rgba(62,216,255,0.65);
   transform: rotate(45deg);
   z-index: 1403;
   border-radius: 3px;
+  animation: tourArrowPulse 1.6s ease-in-out infinite, tourArrowGlow 2.4s ease-in-out infinite;
 }
 .tour-connector{
   position: absolute;
   height: 3px;
-  background: linear-gradient(90deg, rgba(255,213,74,0.9), rgba(62,216,255,0.9));
-  box-shadow: 0 0 12px rgba(255,213,74,0.5);
+  background: linear-gradient(90deg, rgba(255,213,74,0.65), rgba(62,216,255,0.85), rgba(255,213,74,0.65));
+  background-size: 200% 100%;
+  box-shadow:
+    0 0 12px rgba(255,213,74,0.4),
+    0 0 18px rgba(62,216,255,0.45);
   transform-origin: 0 50%;
   z-index: 1399;
+  animation: tourConnectorFlow 1.6s ease-in-out infinite, tourConnectorGlow 2.6s ease-in-out infinite;
+  position: absolute;
+  overflow: visible;
+}
+.tour-connector::after{
+  content:"";
+  position:absolute;
+  inset:-6px 0 -6px 0;
+  background: radial-gradient(circle at 10% 50%, rgba(255,213,74,0.55), transparent 45%),
+              radial-gradient(circle at 50% 50%, rgba(62,216,255,0.65), transparent 40%),
+              radial-gradient(circle at 90% 50%, rgba(255,213,74,0.55), transparent 45%);
+  background-size: 140% 140%;
+  mix-blend-mode: screen;
+  opacity: 0.9;
+  animation: tourConnectorSpark 1.8s ease-in-out infinite;
+  pointer-events: none;
 }
 .tour-active #pdfContainer{
   filter: brightness(0.35) blur(3px);
@@ -388,6 +418,36 @@ body {
   0%{ background-position:0% 50%; }
   50%{ background-position:100% 50%; }
   100%{ background-position:0% 50%; }
+}
+@keyframes tourConnectorFlow{
+  0%  { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100%{ background-position: 0% 50%; }
+}
+@keyframes tourConnectorGlow{
+  0%  { box-shadow: 0 0 10px rgba(255,213,74,0.35), 0 0 16px rgba(62,216,255,0.38); }
+  50% { box-shadow: 0 0 16px rgba(255,213,74,0.55), 0 0 26px rgba(62,216,255,0.58); }
+  100%{ box-shadow: 0 0 10px rgba(255,213,74,0.35), 0 0 16px rgba(62,216,255,0.38); }
+}
+@keyframes tourConnectorSpark{
+  0%  { transform: translateX(-6%); opacity: 0.8; }
+  50% { transform: translateX(6%); opacity: 1; }
+  100%{ transform: translateX(-6%); opacity: 0.8; }
+}
+@keyframes tourArrowPulse{
+  0%  { transform: rotate(45deg) scale(0.96); }
+  50% { transform: rotate(45deg) scale(1.08); }
+  100%{ transform: rotate(45deg) scale(0.96); }
+}
+@keyframes tourArrowGlow{
+  0%  { box-shadow: 0 10px 22px rgba(0,0,0,0.28), 0 0 14px rgba(255,213,74,0.6), 0 0 18px rgba(62,216,255,0.55); }
+  50% { box-shadow: 0 12px 26px rgba(0,0,0,0.3), 0 0 22px rgba(255,213,74,0.78), 0 0 28px rgba(62,216,255,0.72); }
+  100%{ box-shadow: 0 10px 22px rgba(0,0,0,0.28), 0 0 14px rgba(255,213,74,0.6), 0 0 18px rgba(62,216,255,0.55); }
+}
+@keyframes tourCardEnter{
+  0%{ opacity:0; transform: translate(-50%, -56%) scale(0.94); }
+  70%{ opacity:1; transform: translate(-50%, -50.5%) scale(1.02); }
+  100%{ opacity:1; transform: translate(-50%, -50%) scale(1); }
 }
 @keyframes tourCardFlow{
   0%{ background-position: 0% 50%; }

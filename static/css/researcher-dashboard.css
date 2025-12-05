@@ -330,14 +330,14 @@ body.rd-dialog-open { overflow: hidden; }
   border: 1px solid rgba(255,255,255,0.12);
   box-shadow: 0 26px 72px rgba(0,24,64,0.55), 0 10px 34px rgba(0,0,0,0.32);
   color: #e9f1ff;
-  transform: translateY(10px);
+  transform: translateY(18px) scale(0.92);
   opacity: 0;
-  transition: transform 220ms ease, opacity 220ms ease, border 220ms ease, box-shadow 220ms ease;
+  transition: border 220ms ease, box-shadow 220ms ease;
+  will-change: transform, opacity;
   overflow: hidden;
 }
 .rd-dialog__panel--in{
-  transform: translateY(0);
-  opacity: 1;
+  animation: rd-dialog-pop 420ms cubic-bezier(0.22, 1.18, 0.32, 1) forwards;
 }
 .rd-dialog__panel--success { border-color: rgba(15,155,255,0.38); box-shadow: 0 26px 72px rgba(15,155,255,0.28), 0 10px 34px rgba(0,24,64,0.38); }
 .rd-dialog__panel--warning { border-color: rgba(245,200,76,0.45); box-shadow: 0 26px 72px rgba(245,200,76,0.26), 0 10px 34px rgba(0,24,64,0.36); }
@@ -454,6 +454,11 @@ body.rd-dialog-open { overflow: hidden; }
 @keyframes rd-dialog-fade {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+@keyframes rd-dialog-pop {
+  0%   { opacity: 0; transform: translateY(20px) scale(0.9); }
+  55%  { opacity: 1; transform: translateY(-6px) scale(1.03); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
 }
 @keyframes rd-dialog-timer {
   from { width: 100%; }
