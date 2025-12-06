@@ -1,0 +1,116 @@
+{
+  "title": "Direct Account Status Report",
+  "form_id": "direct-account-status-report",
+  "canonical_id": "d89c16b1012fe08b3e9e389371b1be1627efac8bb28a7243c868dfa68f0d22d8",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:58:20Z",
+  "sections": [
+    {
+      "title": "Account Information",
+      "fields": [
+        {
+          "label": "Division",
+          "reference": "Enter division name"
+        },
+        {
+          "label": "Account",
+          "reference": "Enter account name"
+        },
+        {
+          "label": "Inventory For",
+          "reference": "Enter state"
+        }
+      ]
+    },
+    {
+      "title": "Direct Account Status Report",
+      "fields": [
+        {
+          "label": "Brand",
+          "reference": "Enter brand name"
+        },
+        {
+          "label": "# of Cartons On Hand",
+          "reference": "Enter number of cartons on hand"
+        },
+        {
+          "label": "Average Weekly Movement",
+          "reference": "Enter average weekly movement"
+        },
+        {
+          "label": "# of Weeks On Hand",
+          "reference": "Enter number of weeks on hand"
+        }
+      ]
+    },
+    {
+      "title": "Notes",
+      "fields": [
+        {
+          "label": "Note",
+          "reference": "Report style inventory only; submit report only if style is still on hand in this account."
+        }
+      ]
+    },
+    {
+      "title": "Action Plan",
+      "fields": [
+        {
+          "label": "Action Plan",
+          "reference": "Enter action plan details"
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Division",
+      "reference": "Enter division name",
+      "section": "Account Information"
+    },
+    {
+      "label": "Account",
+      "reference": "Enter account name",
+      "section": "Account Information"
+    },
+    {
+      "label": "Inventory For",
+      "reference": "Enter state",
+      "section": "Account Information"
+    },
+    {
+      "label": "Brand",
+      "reference": "Enter brand name",
+      "section": "Direct Account Status Report"
+    },
+    {
+      "label": "# of Cartons On Hand",
+      "reference": "Enter number of cartons on hand",
+      "section": "Direct Account Status Report"
+    },
+    {
+      "label": "Average Weekly Movement",
+      "reference": "Enter average weekly movement",
+      "section": "Direct Account Status Report"
+    },
+    {
+      "label": "# of Weeks On Hand",
+      "reference": "Enter number of weeks on hand",
+      "section": "Direct Account Status Report"
+    },
+    {
+      "label": "Note",
+      "reference": "Report style inventory only; submit report only if style is still on hand in this account.",
+      "section": "Notes"
+    },
+    {
+      "label": "Action Plan",
+      "reference": "Enter action plan details",
+      "section": "Action Plan"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00033.pdf"
+}

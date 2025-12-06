@@ -1,0 +1,237 @@
+{
+  "title": "Personal Accident Claim Form (Claimant’s Statement)",
+  "form_id": "personal-accident-claim-form",
+  "canonical_id": "2febbc332352ec86ed477a67f20a2dff5a74847346559a249cef8e9dc4609567",
+  "bucket": "health",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:38:21Z",
+  "sections": [
+    {
+      "title": "Claim Requirements",
+      "fields": [
+        {
+          "label": "Completed Personal Accident Claim Form",
+          "reference": "Submit the completed claim form."
+        },
+        {
+          "label": "Attending Physician’s Statement or Medical Certificate",
+          "reference": "Provide a statement or certificate from the attending physician."
+        },
+        {
+          "label": "Police Investigation Report or Statement of Witness/es",
+          "reference": "Include the police report or witness statements."
+        },
+        {
+          "label": "Valid IDs of the Insured and Beneficiary",
+          "reference": "Submit actual IDs and photocopies; at least one must be government-issued."
+        },
+        {
+          "label": "Birth Certificate",
+          "reference": "Submit the original or certified true copy issued by PSA or Local Civil Registry."
+        },
+        {
+          "label": "Death Certificate with Post-Mortem Examination",
+          "reference": "Submit the original or certified true copy issued by PSA or Local Civil Registry."
+        },
+        {
+          "label": "Photocopy of Contract of Burial and Funeral Services",
+          "reference": "Include a photocopy of the burial and funeral services contract."
+        },
+        {
+          "label": "Official Receipts of Medical Expenses",
+          "reference": "Provide official receipts for medical expenses."
+        },
+        {
+          "label": "Autopsy Report (if available)",
+          "reference": "Include the autopsy report if available."
+        },
+        {
+          "label": "Photocopy of Hospital Records (if available)",
+          "reference": "Submit photocopies of hospital records if available."
+        },
+        {
+          "label": "Marriage Certificate (if applicable)",
+          "reference": "Include the marriage certificate if applicable."
+        },
+        {
+          "label": "Official Receipts of Burial and Funeral Services",
+          "reference": "Submit official receipts for burial and funeral services."
+        },
+        {
+          "label": "Complete Medical Records",
+          "reference": "Show proof that the injured is disabled or totally disabled."
+        },
+        {
+          "label": "Photos of amputated/aﬀected body parts of the Insured",
+          "reference": "Include whole body and close shots of affected body parts."
+        },
+        {
+          "label": "Statement of Account (SOA) with Admission and Discharge Date",
+          "reference": "Provide the statement of account with admission and discharge dates."
+        }
+      ]
+    },
+    {
+      "title": "For Office Use Only",
+      "fields": [
+        {
+          "label": "Claim Reference Number",
+          "reference": "For office use only; leave blank."
+        },
+        {
+          "label": "Policy Number",
+          "reference": "For office use only; leave blank."
+        },
+        {
+          "label": "Date Received",
+          "reference": "For office use only; leave blank."
+        },
+        {
+          "label": "Time Received",
+          "reference": "For office use only; leave blank."
+        },
+        {
+          "label": "Receiving Dept./Office",
+          "reference": "For office use only; leave blank."
+        }
+      ]
+    },
+    {
+      "title": "For Witness Only",
+      "fields": [
+        {
+          "label": "Full Name",
+          "reference": "For office use only; leave blank."
+        },
+        {
+          "label": "Designation/Branch",
+          "reference": "For office use only; leave blank."
+        },
+        {
+          "label": "Date and Signature",
+          "reference": "For office use only; leave blank."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Completed Personal Accident Claim Form",
+      "reference": "Submit the completed claim form.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Attending Physician’s Statement or Medical Certificate",
+      "reference": "Provide a statement or certificate from the attending physician.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Police Investigation Report or Statement of Witness/es",
+      "reference": "Include the police report or witness statements.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Valid IDs of the Insured and Beneficiary",
+      "reference": "Submit actual IDs and photocopies; at least one must be government-issued.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Birth Certificate",
+      "reference": "Submit the original or certified true copy issued by PSA or Local Civil Registry.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Death Certificate with Post-Mortem Examination",
+      "reference": "Submit the original or certified true copy issued by PSA or Local Civil Registry.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Photocopy of Contract of Burial and Funeral Services",
+      "reference": "Include a photocopy of the burial and funeral services contract.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Official Receipts of Medical Expenses",
+      "reference": "Provide official receipts for medical expenses.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Autopsy Report (if available)",
+      "reference": "Include the autopsy report if available.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Photocopy of Hospital Records (if available)",
+      "reference": "Submit photocopies of hospital records if available.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Marriage Certificate (if applicable)",
+      "reference": "Include the marriage certificate if applicable.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Official Receipts of Burial and Funeral Services",
+      "reference": "Submit official receipts for burial and funeral services.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Complete Medical Records",
+      "reference": "Show proof that the injured is disabled or totally disabled.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Photos of amputated/aﬀected body parts of the Insured",
+      "reference": "Include whole body and close shots of affected body parts.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Statement of Account (SOA) with Admission and Discharge Date",
+      "reference": "Provide the statement of account with admission and discharge dates.",
+      "section": "Claim Requirements"
+    },
+    {
+      "label": "Claim Reference Number",
+      "reference": "For office use only; leave blank.",
+      "section": "For Office Use Only"
+    },
+    {
+      "label": "Policy Number",
+      "reference": "For office use only; leave blank.",
+      "section": "For Office Use Only"
+    },
+    {
+      "label": "Date Received",
+      "reference": "For office use only; leave blank.",
+      "section": "For Office Use Only"
+    },
+    {
+      "label": "Time Received",
+      "reference": "For office use only; leave blank.",
+      "section": "For Office Use Only"
+    },
+    {
+      "label": "Receiving Dept./Office",
+      "reference": "For office use only; leave blank.",
+      "section": "For Office Use Only"
+    },
+    {
+      "label": "Full Name",
+      "reference": "For office use only; leave blank.",
+      "section": "For Witness Only"
+    },
+    {
+      "label": "Designation/Branch",
+      "reference": "For office use only; leave blank.",
+      "section": "For Witness Only"
+    },
+    {
+      "label": "Date and Signature",
+      "reference": "For office use only; leave blank.",
+      "section": "For Witness Only"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\HealthcareInsurance_AXAPersonalAccidentClaimForm(Claimant_s Statement).pdf"
+}

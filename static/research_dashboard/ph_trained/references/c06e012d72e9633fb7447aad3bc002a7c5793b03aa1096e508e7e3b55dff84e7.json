@@ -1,0 +1,297 @@
+{
+  "title": "AutoCharge Facility (ACF) for BPI Credit Cards Authorization Form",
+  "form_id": "bpi-autocharged-authorization-form",
+  "canonical_id": "c06e012d72e9633fb7447aad3bc002a7c5793b03aa1096e508e7e3b55dff84e7",
+  "bucket": "banking",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:26:39Z",
+  "sections": [
+    {
+      "title": "IMPORTANT REMINDER",
+      "fields": [
+        {
+          "label": "Accomplish this form and prepare a copy of your valid government-issued ID and your utility bill statement of account.",
+          "reference": "Complete the form and attach a valid ID and utility bill."
+        },
+        {
+          "label": "To submit for enrollment, visit your nearest BPI branch or call our 24-hour BPI Contact Center at (632) 889-10000 for email instructions.",
+          "reference": "Submit at a BPI branch or contact BPI for email instructions."
+        },
+        {
+          "label": "Kindly ensure that the BPI Credit Card you are nominating is active.",
+          "reference": "Make sure the nominated BPI Credit Card is active."
+        }
+      ]
+    },
+    {
+      "title": "CARDHOLDER INFORMATION",
+      "fields": [
+        {
+          "label": "Principal Cardholder’s Name",
+          "reference": "Enter the name of the principal cardholder."
+        },
+        {
+          "label": "Supplementary Cardholder’s Name",
+          "reference": "Enter the name of the supplementary cardholder (if applicable)."
+        },
+        {
+          "label": "Mobile Phone Number",
+          "reference": "Enter the mobile phone number."
+        }
+      ]
+    },
+    {
+      "title": "PURPOSE",
+      "fields": [
+        {
+          "label": "I want to:",
+          "reference": "Select the purpose of the form."
+        },
+        {
+          "label": "Enroll my BPI Credit Card to the BPI AutoCharge Facility",
+          "reference": "Check to enroll the BPI Credit Card."
+        },
+        {
+          "label": "Card Number",
+          "reference": "Enter the card number."
+        },
+        {
+          "label": "Card Expiry (MM/YY)",
+          "reference": "Enter the card expiry date in MM/YY format."
+        },
+        {
+          "label": "Change/Update my nominated credit card and/or card expiry",
+          "reference": "Check to change/update card details."
+        },
+        {
+          "label": "From:",
+          "reference": "Enter the old card expiry date."
+        },
+        {
+          "label": "To:",
+          "reference": "Enter the new card expiry date."
+        },
+        {
+          "label": "Cancel my BPI AutoCharge Facility enrollment",
+          "reference": "Check to cancel enrollment."
+        },
+        {
+          "label": "Card Number",
+          "reference": "Enter the card number for cancellation."
+        },
+        {
+          "label": "Card Expiry (MM/YY)",
+          "reference": "Enter the card expiry date in MM/YY format."
+        }
+      ]
+    },
+    {
+      "title": "UTILITY BILL DETAILS: MERALCO AUTOCHARGE",
+      "fields": [
+        {
+          "label": "Account Name",
+          "reference": "Enter the account name for Meralco."
+        },
+        {
+          "label": "Customer Account Number",
+          "reference": "Enter the 10-digit customer account number from the Meralco billing statement."
+        },
+        {
+          "label": "Account Name",
+          "reference": "Enter the account name for Meralco."
+        },
+        {
+          "label": "Customer Account Number",
+          "reference": "Enter the 10-digit customer account number from the Meralco billing statement."
+        }
+      ]
+    },
+    {
+      "title": "SIGNATURE",
+      "fields": [
+        {
+          "label": "Principal Cardholder’s Name and Signature",
+          "reference": "Sign and print the name of the principal cardholder."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter the date of signing."
+        },
+        {
+          "label": "Supplementary Cardholder’s Name and Signature (if applicable)",
+          "reference": "Sign and print the name of the supplementary cardholder (if applicable)."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter the date of signing."
+        }
+      ]
+    },
+    {
+      "title": "FOR BANK USE ONLY",
+      "fields": [
+        {
+          "label": "Request filed through Contact Center",
+          "reference": "For office use only; leave blank."
+        },
+        {
+          "label": "Request filed through Branch",
+          "reference": "For office use only; leave blank."
+        },
+        {
+          "label": "Service Request No.",
+          "reference": "For office use only; leave blank."
+        },
+        {
+          "label": "DTAS Request No.",
+          "reference": "For office use only; leave blank."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Accomplish this form and prepare a copy of your valid government-issued ID and your utility bill statement of account.",
+      "reference": "Complete the form and attach a valid ID and utility bill.",
+      "section": "IMPORTANT REMINDER"
+    },
+    {
+      "label": "To submit for enrollment, visit your nearest BPI branch or call our 24-hour BPI Contact Center at (632) 889-10000 for email instructions.",
+      "reference": "Submit at a BPI branch or contact BPI for email instructions.",
+      "section": "IMPORTANT REMINDER"
+    },
+    {
+      "label": "Kindly ensure that the BPI Credit Card you are nominating is active.",
+      "reference": "Make sure the nominated BPI Credit Card is active.",
+      "section": "IMPORTANT REMINDER"
+    },
+    {
+      "label": "Principal Cardholder’s Name",
+      "reference": "Enter the name of the principal cardholder.",
+      "section": "CARDHOLDER INFORMATION"
+    },
+    {
+      "label": "Supplementary Cardholder’s Name",
+      "reference": "Enter the name of the supplementary cardholder (if applicable).",
+      "section": "CARDHOLDER INFORMATION"
+    },
+    {
+      "label": "Mobile Phone Number",
+      "reference": "Enter the mobile phone number.",
+      "section": "CARDHOLDER INFORMATION"
+    },
+    {
+      "label": "I want to:",
+      "reference": "Select the purpose of the form.",
+      "section": "PURPOSE"
+    },
+    {
+      "label": "Enroll my BPI Credit Card to the BPI AutoCharge Facility",
+      "reference": "Check to enroll the BPI Credit Card.",
+      "section": "PURPOSE"
+    },
+    {
+      "label": "Card Number",
+      "reference": "Enter the card number.",
+      "section": "PURPOSE"
+    },
+    {
+      "label": "Card Expiry (MM/YY)",
+      "reference": "Enter the card expiry date in MM/YY format.",
+      "section": "PURPOSE"
+    },
+    {
+      "label": "Change/Update my nominated credit card and/or card expiry",
+      "reference": "Check to change/update card details.",
+      "section": "PURPOSE"
+    },
+    {
+      "label": "From:",
+      "reference": "Enter the old card expiry date.",
+      "section": "PURPOSE"
+    },
+    {
+      "label": "To:",
+      "reference": "Enter the new card expiry date.",
+      "section": "PURPOSE"
+    },
+    {
+      "label": "Cancel my BPI AutoCharge Facility enrollment",
+      "reference": "Check to cancel enrollment.",
+      "section": "PURPOSE"
+    },
+    {
+      "label": "Card Number",
+      "reference": "Enter the card number for cancellation.",
+      "section": "PURPOSE"
+    },
+    {
+      "label": "Card Expiry (MM/YY)",
+      "reference": "Enter the card expiry date in MM/YY format.",
+      "section": "PURPOSE"
+    },
+    {
+      "label": "Account Name",
+      "reference": "Enter the account name for Meralco.",
+      "section": "UTILITY BILL DETAILS: MERALCO AUTOCHARGE"
+    },
+    {
+      "label": "Customer Account Number",
+      "reference": "Enter the 10-digit customer account number from the Meralco billing statement.",
+      "section": "UTILITY BILL DETAILS: MERALCO AUTOCHARGE"
+    },
+    {
+      "label": "Account Name",
+      "reference": "Enter the account name for Meralco.",
+      "section": "UTILITY BILL DETAILS: MERALCO AUTOCHARGE"
+    },
+    {
+      "label": "Customer Account Number",
+      "reference": "Enter the 10-digit customer account number from the Meralco billing statement.",
+      "section": "UTILITY BILL DETAILS: MERALCO AUTOCHARGE"
+    },
+    {
+      "label": "Principal Cardholder’s Name and Signature",
+      "reference": "Sign and print the name of the principal cardholder.",
+      "section": "SIGNATURE"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter the date of signing.",
+      "section": "SIGNATURE"
+    },
+    {
+      "label": "Supplementary Cardholder’s Name and Signature (if applicable)",
+      "reference": "Sign and print the name of the supplementary cardholder (if applicable).",
+      "section": "SIGNATURE"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter the date of signing.",
+      "section": "SIGNATURE"
+    },
+    {
+      "label": "Request filed through Contact Center",
+      "reference": "For office use only; leave blank.",
+      "section": "FOR BANK USE ONLY"
+    },
+    {
+      "label": "Request filed through Branch",
+      "reference": "For office use only; leave blank.",
+      "section": "FOR BANK USE ONLY"
+    },
+    {
+      "label": "Service Request No.",
+      "reference": "For office use only; leave blank.",
+      "section": "FOR BANK USE ONLY"
+    },
+    {
+      "label": "DTAS Request No.",
+      "reference": "For office use only; leave blank.",
+      "section": "FOR BANK USE ONLY"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Banking_CreditCardholdersAutoChargeForm.pdf"
+}

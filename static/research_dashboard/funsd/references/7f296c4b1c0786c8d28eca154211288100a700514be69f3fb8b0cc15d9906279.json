@@ -1,0 +1,288 @@
+{
+  "title": "Sample Request Form",
+  "form_id": "sample-request-form",
+  "canonical_id": "7f296c4b1c0786c8d28eca154211288100a700514be69f3fb8b0cc15d9906279",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2024-11-28T00:00:00Z",
+  "updated_at": "2025-12-06T22:00:05Z",
+  "sections": [
+    {
+      "title": "Cigarettes",
+      "fields": [
+        {
+          "label": "Maker",
+          "reference": "Enter the maker's name."
+        },
+        {
+          "label": "Length",
+          "reference": "Enter length in mm (e.g., 99.0 mm)."
+        },
+        {
+          "label": "Filter Length",
+          "reference": "Enter filter length in mm (e.g., 27 mm)."
+        },
+        {
+          "label": "Circumference",
+          "reference": "Enter circumference in mm (e.g., 24.8 mm)."
+        },
+        {
+          "label": "Weight",
+          "reference": "Enter weight in grams per 100 (e.g., 78.0g/100)."
+        },
+        {
+          "label": "Paper",
+          "reference": "Enter paper type (e.g., 25-04-07)."
+        },
+        {
+          "label": "Tip. Paper Por.",
+          "reference": "Enter tip paper porosity (e.g., 430)."
+        },
+        {
+          "label": "Glue Roller",
+          "reference": "Enter glue roller type (e.g., G)."
+        },
+        {
+          "label": "Air Dilution",
+          "reference": "Enter air dilution percentage (e.g., 13.0%)."
+        }
+      ]
+    },
+    {
+      "title": "Filters",
+      "fields": [
+        {
+          "label": "Kind",
+          "reference": "Enter kind (e.g., 3.3/35,000)."
+        },
+        {
+          "label": "Rod Length",
+          "reference": "Enter rod length in mm (e.g., 108 mm)."
+        },
+        {
+          "label": "Pressure Drop",
+          "reference": "Enter pressure drop in mm (e.g., 400 mm)."
+        },
+        {
+          "label": "Circumference",
+          "reference": "Enter circumference in mm (e.g., 24.45 mm)."
+        },
+        {
+          "label": "Weight",
+          "reference": "Enter weight in grams per 100 (e.g., 75.3g/100)."
+        },
+        {
+          "label": "Plast.",
+          "reference": "Enter plastic type (e.g., 78 Kent)."
+        },
+        {
+          "label": "Plug Wrap Por.",
+          "reference": "Enter plug wrap porosity (e.g., 84-52-28)."
+        },
+        {
+          "label": "Plug Wrap Por.",
+          "reference": "Enter plug wrap porosity (e.g., 655 C)."
+        },
+        {
+          "label": "Comb. Wrap",
+          "reference": "Enter combination wrap type."
+        }
+      ]
+    },
+    {
+      "title": "Wrapping",
+      "fields": [
+        {
+          "label": "Labels",
+          "reference": "Enter label color (e.g., White)."
+        },
+        {
+          "label": "Closures",
+          "reference": "Enter closure color (e.g., Blue)."
+        },
+        {
+          "label": "Tear Tape",
+          "reference": "Enter tear tape color (e.g., White)."
+        },
+        {
+          "label": "Cartons",
+          "reference": "Enter carton color (e.g., White)."
+        },
+        {
+          "label": "Markings",
+          "reference": "Enter markings (e.g., Sample No. on each Carton)."
+        }
+      ]
+    },
+    {
+      "title": "Requirements",
+      "fields": [
+        {
+          "label": "Laboratory",
+          "reference": "Enter laboratory requirements (e.g., 1 Tray)."
+        },
+        {
+          "label": "Other",
+          "reference": "Enter any other requirements."
+        }
+      ]
+    },
+    {
+      "title": "Laboratory Analysis",
+      "fields": [
+        {
+          "label": "Laboratory Analysis",
+          "reference": "Enter analysis type (e.g., Mainstream Smoke Analysis)."
+        }
+      ]
+    },
+    {
+      "title": "Special Requirements",
+      "fields": [
+        {
+          "label": "Special Requirements",
+          "reference": "Enter any special requirements."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Maker",
+      "reference": "Enter the maker's name.",
+      "section": "Cigarettes"
+    },
+    {
+      "label": "Length",
+      "reference": "Enter length in mm (e.g., 99.0 mm).",
+      "section": "Cigarettes"
+    },
+    {
+      "label": "Filter Length",
+      "reference": "Enter filter length in mm (e.g., 27 mm).",
+      "section": "Cigarettes"
+    },
+    {
+      "label": "Circumference",
+      "reference": "Enter circumference in mm (e.g., 24.8 mm).",
+      "section": "Cigarettes"
+    },
+    {
+      "label": "Weight",
+      "reference": "Enter weight in grams per 100 (e.g., 78.0g/100).",
+      "section": "Cigarettes"
+    },
+    {
+      "label": "Paper",
+      "reference": "Enter paper type (e.g., 25-04-07).",
+      "section": "Cigarettes"
+    },
+    {
+      "label": "Tip. Paper Por.",
+      "reference": "Enter tip paper porosity (e.g., 430).",
+      "section": "Cigarettes"
+    },
+    {
+      "label": "Glue Roller",
+      "reference": "Enter glue roller type (e.g., G).",
+      "section": "Cigarettes"
+    },
+    {
+      "label": "Air Dilution",
+      "reference": "Enter air dilution percentage (e.g., 13.0%).",
+      "section": "Cigarettes"
+    },
+    {
+      "label": "Kind",
+      "reference": "Enter kind (e.g., 3.3/35,000).",
+      "section": "Filters"
+    },
+    {
+      "label": "Rod Length",
+      "reference": "Enter rod length in mm (e.g., 108 mm).",
+      "section": "Filters"
+    },
+    {
+      "label": "Pressure Drop",
+      "reference": "Enter pressure drop in mm (e.g., 400 mm).",
+      "section": "Filters"
+    },
+    {
+      "label": "Circumference",
+      "reference": "Enter circumference in mm (e.g., 24.45 mm).",
+      "section": "Filters"
+    },
+    {
+      "label": "Weight",
+      "reference": "Enter weight in grams per 100 (e.g., 75.3g/100).",
+      "section": "Filters"
+    },
+    {
+      "label": "Plast.",
+      "reference": "Enter plastic type (e.g., 78 Kent).",
+      "section": "Filters"
+    },
+    {
+      "label": "Plug Wrap Por.",
+      "reference": "Enter plug wrap porosity (e.g., 84-52-28).",
+      "section": "Filters"
+    },
+    {
+      "label": "Plug Wrap Por.",
+      "reference": "Enter plug wrap porosity (e.g., 655 C).",
+      "section": "Filters"
+    },
+    {
+      "label": "Comb. Wrap",
+      "reference": "Enter combination wrap type.",
+      "section": "Filters"
+    },
+    {
+      "label": "Labels",
+      "reference": "Enter label color (e.g., White).",
+      "section": "Wrapping"
+    },
+    {
+      "label": "Closures",
+      "reference": "Enter closure color (e.g., Blue).",
+      "section": "Wrapping"
+    },
+    {
+      "label": "Tear Tape",
+      "reference": "Enter tear tape color (e.g., White).",
+      "section": "Wrapping"
+    },
+    {
+      "label": "Cartons",
+      "reference": "Enter carton color (e.g., White).",
+      "section": "Wrapping"
+    },
+    {
+      "label": "Markings",
+      "reference": "Enter markings (e.g., Sample No. on each Carton).",
+      "section": "Wrapping"
+    },
+    {
+      "label": "Laboratory",
+      "reference": "Enter laboratory requirements (e.g., 1 Tray).",
+      "section": "Requirements"
+    },
+    {
+      "label": "Other",
+      "reference": "Enter any other requirements.",
+      "section": "Requirements"
+    },
+    {
+      "label": "Laboratory Analysis",
+      "reference": "Enter analysis type (e.g., Mainstream Smoke Analysis).",
+      "section": "Laboratory Analysis"
+    },
+    {
+      "label": "Special Requirements",
+      "reference": "Enter any special requirements.",
+      "section": "Special Requirements"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00037.pdf"
+}

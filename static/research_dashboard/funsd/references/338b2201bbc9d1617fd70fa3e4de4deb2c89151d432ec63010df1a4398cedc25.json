@@ -1,0 +1,134 @@
+{
+  "title": "STYLE LOW PRICE - PROGRESS REPORT",
+  "form_id": "style-low-price-progress-report",
+  "canonical_id": "338b2201bbc9d1617fd70fa3e4de4deb2c89151d432ec63010df1a4398cedc25",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:48:11Z",
+  "sections": [
+    {
+      "title": "Submission Information",
+      "fields": [
+        {
+          "label": "TO",
+          "reference": "Enter recipient's name."
+        },
+        {
+          "label": "FROM",
+          "reference": "Enter sender's name."
+        },
+        {
+          "label": "SUBMISSION DATE",
+          "reference": "Select the submission date."
+        }
+      ]
+    },
+    {
+      "title": "Report Details",
+      "fields": [
+        {
+          "label": "SUBJECT",
+          "reference": "Enter the subject of the report."
+        },
+        {
+          "label": "EFFECTIVENESS OF",
+          "reference": "Specify the effectiveness being reported."
+        }
+      ]
+    },
+    {
+      "title": "Direct Accounts and Chains Headquartered Within the Region",
+      "fields": [
+        {
+          "label": "NAME OF ACCOUNT",
+          "reference": "Enter the name of the account."
+        },
+        {
+          "label": "IND/LOR VOLUME",
+          "reference": "Enter the individual or load volume."
+        },
+        {
+          "label": "NO. OF STORES",
+          "reference": "Enter the number of stores."
+        }
+      ]
+    },
+    {
+      "title": "Direct Accounts and Chains Headquartered Outside the Region",
+      "fields": [
+        {
+          "label": "NAME OF ACCOUNT",
+          "reference": "Enter the name of the account."
+        },
+        {
+          "label": "IND/LOR VOLUME",
+          "reference": "Enter the individual or load volume."
+        },
+        {
+          "label": "NO. OF STORES",
+          "reference": "Enter the number of stores."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "TO",
+      "reference": "Enter recipient's name.",
+      "section": "Submission Information"
+    },
+    {
+      "label": "FROM",
+      "reference": "Enter sender's name.",
+      "section": "Submission Information"
+    },
+    {
+      "label": "SUBMISSION DATE",
+      "reference": "Select the submission date.",
+      "section": "Submission Information"
+    },
+    {
+      "label": "SUBJECT",
+      "reference": "Enter the subject of the report.",
+      "section": "Report Details"
+    },
+    {
+      "label": "EFFECTIVENESS OF",
+      "reference": "Specify the effectiveness being reported.",
+      "section": "Report Details"
+    },
+    {
+      "label": "NAME OF ACCOUNT",
+      "reference": "Enter the name of the account.",
+      "section": "Direct Accounts and Chains Headquartered Within the Region"
+    },
+    {
+      "label": "IND/LOR VOLUME",
+      "reference": "Enter the individual or load volume.",
+      "section": "Direct Accounts and Chains Headquartered Within the Region"
+    },
+    {
+      "label": "NO. OF STORES",
+      "reference": "Enter the number of stores.",
+      "section": "Direct Accounts and Chains Headquartered Within the Region"
+    },
+    {
+      "label": "NAME OF ACCOUNT",
+      "reference": "Enter the name of the account.",
+      "section": "Direct Accounts and Chains Headquartered Outside the Region"
+    },
+    {
+      "label": "IND/LOR VOLUME",
+      "reference": "Enter the individual or load volume.",
+      "section": "Direct Accounts and Chains Headquartered Outside the Region"
+    },
+    {
+      "label": "NO. OF STORES",
+      "reference": "Enter the number of stores.",
+      "section": "Direct Accounts and Chains Headquartered Outside the Region"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00006.pdf"
+}

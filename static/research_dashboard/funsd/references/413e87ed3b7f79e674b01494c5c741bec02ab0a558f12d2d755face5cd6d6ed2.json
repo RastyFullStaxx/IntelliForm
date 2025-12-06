@@ -1,0 +1,178 @@
+{
+  "title": "Media Request Form",
+  "form_id": "media-request-form",
+  "canonical_id": "413e87ed3b7f79e674b01494c5c741bec02ab0a558f12d2d755face5cd6d6ed2",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-05T00:00:00Z",
+  "updated_at": "2025-12-06T21:56:31Z",
+  "sections": [
+    {
+      "title": "Request Details",
+      "fields": [
+        {
+          "label": "Brand(s) Applicable",
+          "reference": "Enter applicable brands."
+        },
+        {
+          "label": "Media Type",
+          "reference": "Specify the type of media (e.g., Direct Mail)."
+        },
+        {
+          "label": "Media Name",
+          "reference": "Enter the name of the media."
+        },
+        {
+          "label": "Issue Frequency / Year",
+          "reference": "Indicate how often the media is issued."
+        },
+        {
+          "label": "Space / Color",
+          "reference": "Specify space and color requirements."
+        },
+        {
+          "label": "Coupon Issue Date",
+          "reference": "Enter the coupon issue date (MM/DD/YY, e.g., 04/01/00)."
+        },
+        {
+          "label": "Coupon Expiration Date",
+          "reference": "Enter the coupon expiration date (MM/DD/YY, e.g., 09/30/00)."
+        },
+        {
+          "label": "Circulation (#)",
+          "reference": "Enter the circulation number."
+        },
+        {
+          "label": "Geographical Area(s)",
+          "reference": "List the geographical areas."
+        },
+        {
+          "label": "Coupon Value",
+          "reference": "Enter the coupon value (e.g., $1.50 OFF)."
+        },
+        {
+          "label": "Pack and / or Carton?",
+          "reference": "Specify if it's a pack or carton."
+        },
+        {
+          "label": "Advertising Creative Title",
+          "reference": "Enter the title of the advertising creative."
+        },
+        {
+          "label": "Signature of Initiator",
+          "reference": "Sign here."
+        },
+        {
+          "label": "Date Initiated",
+          "reference": "Enter the date initiated (MM/DD/YY, e.g., 01/21/00)."
+        }
+      ]
+    },
+    {
+      "title": "For Control Use Only",
+      "fields": [
+        {
+          "label": "Code Assigned",
+          "reference": "Enter the assigned code."
+        },
+        {
+          "label": "Job Number",
+          "reference": "Enter the job number."
+        },
+        {
+          "label": "Est. Redemption",
+          "reference": "Enter estimated redemption percentage."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Brand(s) Applicable",
+      "reference": "Enter applicable brands.",
+      "section": "Request Details"
+    },
+    {
+      "label": "Media Type",
+      "reference": "Specify the type of media (e.g., Direct Mail).",
+      "section": "Request Details"
+    },
+    {
+      "label": "Media Name",
+      "reference": "Enter the name of the media.",
+      "section": "Request Details"
+    },
+    {
+      "label": "Issue Frequency / Year",
+      "reference": "Indicate how often the media is issued.",
+      "section": "Request Details"
+    },
+    {
+      "label": "Space / Color",
+      "reference": "Specify space and color requirements.",
+      "section": "Request Details"
+    },
+    {
+      "label": "Coupon Issue Date",
+      "reference": "Enter the coupon issue date (MM/DD/YY, e.g., 04/01/00).",
+      "section": "Request Details"
+    },
+    {
+      "label": "Coupon Expiration Date",
+      "reference": "Enter the coupon expiration date (MM/DD/YY, e.g., 09/30/00).",
+      "section": "Request Details"
+    },
+    {
+      "label": "Circulation (#)",
+      "reference": "Enter the circulation number.",
+      "section": "Request Details"
+    },
+    {
+      "label": "Geographical Area(s)",
+      "reference": "List the geographical areas.",
+      "section": "Request Details"
+    },
+    {
+      "label": "Coupon Value",
+      "reference": "Enter the coupon value (e.g., $1.50 OFF).",
+      "section": "Request Details"
+    },
+    {
+      "label": "Pack and / or Carton?",
+      "reference": "Specify if it's a pack or carton.",
+      "section": "Request Details"
+    },
+    {
+      "label": "Advertising Creative Title",
+      "reference": "Enter the title of the advertising creative.",
+      "section": "Request Details"
+    },
+    {
+      "label": "Signature of Initiator",
+      "reference": "Sign here.",
+      "section": "Request Details"
+    },
+    {
+      "label": "Date Initiated",
+      "reference": "Enter the date initiated (MM/DD/YY, e.g., 01/21/00).",
+      "section": "Request Details"
+    },
+    {
+      "label": "Code Assigned",
+      "reference": "Enter the assigned code.",
+      "section": "For Control Use Only"
+    },
+    {
+      "label": "Job Number",
+      "reference": "Enter the job number.",
+      "section": "For Control Use Only"
+    },
+    {
+      "label": "Est. Redemption",
+      "reference": "Enter estimated redemption percentage.",
+      "section": "For Control Use Only"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00028.pdf"
+}

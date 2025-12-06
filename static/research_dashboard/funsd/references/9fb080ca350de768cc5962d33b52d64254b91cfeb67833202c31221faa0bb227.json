@@ -1,0 +1,84 @@
+{
+  "title": "Maverick Specials - Progress Report",
+  "form_id": "maverick-specials-progress-report",
+  "canonical_id": "9fb080ca350de768cc5962d33b52d64254b91cfeb67833202c31221faa0bb227",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:57:37Z",
+  "sections": [
+    {
+      "title": "Geography",
+      "fields": [
+        {
+          "label": "Region",
+          "reference": "Select FULL or PARTIAL; check FULL if applicable."
+        },
+        {
+          "label": "Division",
+          "reference": "Select FULL or PARTIAL; check FULL if applicable."
+        },
+        {
+          "label": "Division Name",
+          "reference": "Enter the name of the division."
+        }
+      ]
+    },
+    {
+      "title": "Distribution",
+      "fields": [
+        {
+          "label": "Name of Account",
+          "reference": "Enter the name of the account."
+        },
+        {
+          "label": "No. of Stores",
+          "reference": "Enter the number of stores."
+        }
+      ]
+    },
+    {
+      "title": "Submission Date",
+      "fields": [
+        {
+          "label": "Submission Date",
+          "reference": "Select the submission date; check the applicable boxes."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Region",
+      "reference": "Select FULL or PARTIAL; check FULL if applicable.",
+      "section": "Geography"
+    },
+    {
+      "label": "Division",
+      "reference": "Select FULL or PARTIAL; check FULL if applicable.",
+      "section": "Geography"
+    },
+    {
+      "label": "Division Name",
+      "reference": "Enter the name of the division.",
+      "section": "Geography"
+    },
+    {
+      "label": "Name of Account",
+      "reference": "Enter the name of the account.",
+      "section": "Distribution"
+    },
+    {
+      "label": "No. of Stores",
+      "reference": "Enter the number of stores.",
+      "section": "Distribution"
+    },
+    {
+      "label": "Submission Date",
+      "reference": "Select the submission date; check the applicable boxes.",
+      "section": "Submission Date"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00031.pdf"
+}

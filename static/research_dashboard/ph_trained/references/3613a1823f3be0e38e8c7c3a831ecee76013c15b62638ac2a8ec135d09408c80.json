@@ -1,0 +1,260 @@
+{
+  "title": "Variable Life Insurance - Request for Fund Withdrawal",
+  "form_id": "variable-life-insurance-fund-withdrawal",
+  "canonical_id": "3613a1823f3be0e38e8c7c3a831ecee76013c15b62638ac2a8ec135d09408c80",
+  "bucket": "health",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:39:42Z",
+  "sections": [
+    {
+      "title": "General Information",
+      "fields": [
+        {
+          "label": "Policy Owner (Last Name, First Name, M.I.)",
+          "reference": "Enter full name of the policy owner."
+        },
+        {
+          "label": "Policy Number",
+          "reference": "Enter the policy number."
+        },
+        {
+          "label": "Citizenship",
+          "reference": "Enter citizenship."
+        },
+        {
+          "label": "Country/ies of Legal Residence other than the Philippines",
+          "reference": "Enter countries of legal residence."
+        },
+        {
+          "label": "Present Residence Address (No., Street, Municipality/City, Province, Country, Zip Code(P.O. Box is not acceptable)",
+          "reference": "Enter complete present address."
+        },
+        {
+          "label": "Permanent Residence Address (No., Street, Municipality/City, Province, Country, Zip Code(P.O. Box is not acceptable)",
+          "reference": "Enter complete permanent address."
+        },
+        {
+          "label": "Work Address (No., Street, Municipality/City, Province, Country, Zip Code(P.O. Box is not acceptable)",
+          "reference": "Enter complete work address."
+        },
+        {
+          "label": "Home Phone (Country Code, Area Code, Tel. No)",
+          "reference": "Enter home phone number."
+        },
+        {
+          "label": "Work Phone (Country Code, Area Code, Tel. No)",
+          "reference": "Enter work phone number."
+        },
+        {
+          "label": "Mobile Phone (Country Code, Mobile No.)",
+          "reference": "Enter mobile phone number."
+        },
+        {
+          "label": "Email Address",
+          "reference": "Enter email address."
+        },
+        {
+          "label": "Life Insured (Last Name, First Name, M.I.) if different from Policy Owner",
+          "reference": "Enter full name of the life insured."
+        }
+      ]
+    },
+    {
+      "title": "Request Details",
+      "fields": [
+        {
+          "label": "You hereby request for a withdrawal from the Fund Value, in accordance with the Fund Withdrawal provision of your policy, as specified below:",
+          "reference": "N/A"
+        },
+        {
+          "label": "Currency",
+          "reference": "Select currency (US $ or Php)."
+        },
+        {
+          "label": "Amount in words and figures",
+          "reference": "Enter amount in words and figures."
+        },
+        {
+          "label": "Special Instructions (Optional, specify for which Fund and the corresponding amount)",
+          "reference": "Enter any special instructions."
+        }
+      ]
+    },
+    {
+      "title": "Acknowledgement and Agreement",
+      "fields": [
+        {
+          "label": "This section must be signed by the policy owner, assignee and all of the nominated irrevocable beneficiaries and witnessed by an Advisor or Staff of Sun Life of Canada (Philippines), Inc.",
+          "reference": "N/A"
+        },
+        {
+          "label": "Pick up Date",
+          "reference": "Enter pick up date (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "Pick up Time",
+          "reference": "Enter pick up time."
+        },
+        {
+          "label": "Pick up Location",
+          "reference": "Enter pick up location."
+        },
+        {
+          "label": "Received Date",
+          "reference": "Enter received date."
+        }
+      ]
+    },
+    {
+      "title": "For Company Use Only",
+      "fields": [
+        {
+          "label": "Doc No.:",
+          "reference": "For office use only; leave blank."
+        },
+        {
+          "label": "Page No.:",
+          "reference": "For office use only; leave blank."
+        },
+        {
+          "label": "Book No.:",
+          "reference": "For office use only; leave blank."
+        },
+        {
+          "label": "Series of",
+          "reference": "For office use only; leave blank."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Policy Owner (Last Name, First Name, M.I.)",
+      "reference": "Enter full name of the policy owner.",
+      "section": "General Information"
+    },
+    {
+      "label": "Policy Number",
+      "reference": "Enter the policy number.",
+      "section": "General Information"
+    },
+    {
+      "label": "Citizenship",
+      "reference": "Enter citizenship.",
+      "section": "General Information"
+    },
+    {
+      "label": "Country/ies of Legal Residence other than the Philippines",
+      "reference": "Enter countries of legal residence.",
+      "section": "General Information"
+    },
+    {
+      "label": "Present Residence Address (No., Street, Municipality/City, Province, Country, Zip Code(P.O. Box is not acceptable)",
+      "reference": "Enter complete present address.",
+      "section": "General Information"
+    },
+    {
+      "label": "Permanent Residence Address (No., Street, Municipality/City, Province, Country, Zip Code(P.O. Box is not acceptable)",
+      "reference": "Enter complete permanent address.",
+      "section": "General Information"
+    },
+    {
+      "label": "Work Address (No., Street, Municipality/City, Province, Country, Zip Code(P.O. Box is not acceptable)",
+      "reference": "Enter complete work address.",
+      "section": "General Information"
+    },
+    {
+      "label": "Home Phone (Country Code, Area Code, Tel. No)",
+      "reference": "Enter home phone number.",
+      "section": "General Information"
+    },
+    {
+      "label": "Work Phone (Country Code, Area Code, Tel. No)",
+      "reference": "Enter work phone number.",
+      "section": "General Information"
+    },
+    {
+      "label": "Mobile Phone (Country Code, Mobile No.)",
+      "reference": "Enter mobile phone number.",
+      "section": "General Information"
+    },
+    {
+      "label": "Email Address",
+      "reference": "Enter email address.",
+      "section": "General Information"
+    },
+    {
+      "label": "Life Insured (Last Name, First Name, M.I.) if different from Policy Owner",
+      "reference": "Enter full name of the life insured.",
+      "section": "General Information"
+    },
+    {
+      "label": "You hereby request for a withdrawal from the Fund Value, in accordance with the Fund Withdrawal provision of your policy, as specified below:",
+      "reference": "N/A",
+      "section": "Request Details"
+    },
+    {
+      "label": "Currency",
+      "reference": "Select currency (US $ or Php).",
+      "section": "Request Details"
+    },
+    {
+      "label": "Amount in words and figures",
+      "reference": "Enter amount in words and figures.",
+      "section": "Request Details"
+    },
+    {
+      "label": "Special Instructions (Optional, specify for which Fund and the corresponding amount)",
+      "reference": "Enter any special instructions.",
+      "section": "Request Details"
+    },
+    {
+      "label": "This section must be signed by the policy owner, assignee and all of the nominated irrevocable beneficiaries and witnessed by an Advisor or Staff of Sun Life of Canada (Philippines), Inc.",
+      "reference": "N/A",
+      "section": "Acknowledgement and Agreement"
+    },
+    {
+      "label": "Pick up Date",
+      "reference": "Enter pick up date (MM/DD/YYYY, e.g., 11/28/2025).",
+      "section": "Acknowledgement and Agreement"
+    },
+    {
+      "label": "Pick up Time",
+      "reference": "Enter pick up time.",
+      "section": "Acknowledgement and Agreement"
+    },
+    {
+      "label": "Pick up Location",
+      "reference": "Enter pick up location.",
+      "section": "Acknowledgement and Agreement"
+    },
+    {
+      "label": "Received Date",
+      "reference": "Enter received date.",
+      "section": "Acknowledgement and Agreement"
+    },
+    {
+      "label": "Doc No.:",
+      "reference": "For office use only; leave blank.",
+      "section": "For Company Use Only"
+    },
+    {
+      "label": "Page No.:",
+      "reference": "For office use only; leave blank.",
+      "section": "For Company Use Only"
+    },
+    {
+      "label": "Book No.:",
+      "reference": "For office use only; leave blank.",
+      "section": "For Company Use Only"
+    },
+    {
+      "label": "Series of",
+      "reference": "For office use only; leave blank.",
+      "section": "For Company Use Only"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\HealthcareInsurance_SunLifeVariableLifeInsuranceRequestforFundWithdrawal.pdf"
+}

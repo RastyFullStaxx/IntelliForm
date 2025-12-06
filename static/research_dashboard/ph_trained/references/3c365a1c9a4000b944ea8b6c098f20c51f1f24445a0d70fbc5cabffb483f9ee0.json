@@ -1,0 +1,437 @@
+{
+  "title": "Application for Treaty Purposes",
+  "form_id": "0901-S3",
+  "canonical_id": "3c365a1c9a4000b944ea8b6c098f20c51f1f24445a0d70fbc5cabffb483f9ee0",
+  "bucket": "ph-supplemental",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:43:48Z",
+  "sections": [
+    {
+      "title": "Part I – Legal Basis of Claim for Relief",
+      "fields": [
+        {
+          "label": "Article",
+          "reference": "Enter Article 1A of the Tax Treaty between the Philippines and"
+        },
+        {
+          "label": "Tax Treatment Under the Treaty",
+          "reference": "Check applicable box: Exempt from Income Tax or Subject to Preferential Rate"
+        },
+        {
+          "label": "2A Tax Rate",
+          "reference": "Enter tax rate percentage (%)"
+        }
+      ]
+    },
+    {
+      "title": "Part II – Identification of Income Recipient",
+      "fields": [
+        {
+          "label": "Name of Income Recipient",
+          "reference": "Enter full name"
+        },
+        {
+          "label": "Local Taxpayer Identification Number (TIN)",
+          "reference": "Enter TIN in format: XXX-XXX-XXX"
+        },
+        {
+          "label": "RDO Code",
+          "reference": "Enter RDO Code"
+        },
+        {
+          "label": "Foreign TIN",
+          "reference": "Enter Foreign TIN in format: XXX-XXX-XXX"
+        },
+        {
+          "label": "Date of Birth (MM/DD/YYYY)",
+          "reference": "Enter birth date (e.g., 01/01/1990)"
+        },
+        {
+          "label": "Citizenship",
+          "reference": "Enter citizenship"
+        },
+        {
+          "label": "Contact Number (Landline/Mobile No.)",
+          "reference": "Enter contact number"
+        },
+        {
+          "label": "Email Address",
+          "reference": "Enter email address"
+        },
+        {
+          "label": "Place of Domicile before entry into the Philippines",
+          "reference": "Enter place of domicile"
+        },
+        {
+          "label": "Country where the recipient is taxable as resident and where he/she is to pay tax",
+          "reference": "Enter country name"
+        }
+      ]
+    },
+    {
+      "title": "Part III – Details of Income Payor",
+      "fields": [
+        {
+          "label": "School or place of business in the Philippines where the recipient teaches, studies or is trained",
+          "reference": "Enter name of school or business"
+        },
+        {
+          "label": "Taxpayer Identification Number (TIN)",
+          "reference": "Enter TIN in format: XXX-XXX-XXX"
+        },
+        {
+          "label": "RDO Code",
+          "reference": "Enter RDO Code"
+        },
+        {
+          "label": "Registered Address",
+          "reference": "Enter registered address"
+        },
+        {
+          "label": "ZIP Code",
+          "reference": "Enter ZIP Code"
+        },
+        {
+          "label": "Contact Number (Landline/Mobile No.)",
+          "reference": "Enter contact number"
+        },
+        {
+          "label": "Email Address",
+          "reference": "Enter email address"
+        }
+      ]
+    },
+    {
+      "title": "Part IV – Details of Income and Withholding Tax",
+      "fields": [
+        {
+          "label": "Kind of Income",
+          "reference": "Check applicable box: Remuneration, Grants, Allowances, Others (specify)"
+        },
+        {
+          "label": "Description of Service Rendered",
+          "reference": "Enter description"
+        },
+        {
+          "label": "Date of Contract (MM/DD/YYYY)",
+          "reference": "Enter contract date (e.g., 01/01/2021)"
+        },
+        {
+          "label": "Contract Period",
+          "reference": "Enter contract period"
+        },
+        {
+          "label": "Amount of Remuneration (per month/year)",
+          "reference": "Enter amount"
+        },
+        {
+          "label": "Method of Payment",
+          "reference": "Enter payment method"
+        },
+        {
+          "label": "Date of Payment (MM/DD/YYYY)",
+          "reference": "Enter payment date (e.g., 01/01/2021)"
+        },
+        {
+          "label": "Other remuneration, etc., paid by other persons for personal services, etc., performed in the Philippines",
+          "reference": "Enter details"
+        },
+        {
+          "label": "Amount of Withholding Tax Paid, if any",
+          "reference": "Enter amount"
+        },
+        {
+          "label": "Date of Payment (MM/DD/YYYY)",
+          "reference": "Enter payment date (e.g., 01/01/2021)"
+        }
+      ]
+    },
+    {
+      "title": "Part V – Authorized Representative in the Philippines",
+      "fields": [
+        {
+          "label": "Registered Name",
+          "reference": "Enter full name (Last Name, First Name, Middle Name for Individual OR Registered Name for Non-Individual)"
+        },
+        {
+          "label": "Taxpayer Identification Number (TIN)",
+          "reference": "Enter TIN in format: XXX-XXX-XXX"
+        },
+        {
+          "label": "RDO Code",
+          "reference": "Enter RDO Code"
+        },
+        {
+          "label": "Registered Address",
+          "reference": "Enter registered address"
+        },
+        {
+          "label": "ZIP Code",
+          "reference": "Enter ZIP Code"
+        },
+        {
+          "label": "Contact Number (Landline/Cellphone No.)",
+          "reference": "Enter contact number"
+        },
+        {
+          "label": "Email Address",
+          "reference": "Enter email address"
+        }
+      ]
+    },
+    {
+      "title": "Part VI – Certification",
+      "fields": [
+        {
+          "label": "Signature over Printed Name of the Beneficial Owner/Authorized Representative/Tax Agent",
+          "reference": "Sign here"
+        },
+        {
+          "label": "Tax Agent Accreditation/Attorney’s Roll Number, if applicable",
+          "reference": "Enter number"
+        },
+        {
+          "label": "Date of Issue (MM/DD/YYYY)",
+          "reference": "Enter date (e.g., 01/01/2021)"
+        },
+        {
+          "label": "Date of Expiry (MM/DD/YYYY)",
+          "reference": "Enter date (e.g., 01/01/2021)"
+        },
+        {
+          "label": "ITAD Filing Reference No.",
+          "reference": "Enter reference number"
+        }
+      ]
+    },
+    {
+      "title": "For BIR Use Only",
+      "fields": [
+        {
+          "label": "Stamp of BIR Receiving Office and Date of Receipt",
+          "reference": "For office use only; leave blank"
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Article",
+      "reference": "Enter Article 1A of the Tax Treaty between the Philippines and",
+      "section": "Part I – Legal Basis of Claim for Relief"
+    },
+    {
+      "label": "Tax Treatment Under the Treaty",
+      "reference": "Check applicable box: Exempt from Income Tax or Subject to Preferential Rate",
+      "section": "Part I – Legal Basis of Claim for Relief"
+    },
+    {
+      "label": "2A Tax Rate",
+      "reference": "Enter tax rate percentage (%)",
+      "section": "Part I – Legal Basis of Claim for Relief"
+    },
+    {
+      "label": "Name of Income Recipient",
+      "reference": "Enter full name",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Local Taxpayer Identification Number (TIN)",
+      "reference": "Enter TIN in format: XXX-XXX-XXX",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "RDO Code",
+      "reference": "Enter RDO Code",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Foreign TIN",
+      "reference": "Enter Foreign TIN in format: XXX-XXX-XXX",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Date of Birth (MM/DD/YYYY)",
+      "reference": "Enter birth date (e.g., 01/01/1990)",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Citizenship",
+      "reference": "Enter citizenship",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Contact Number (Landline/Mobile No.)",
+      "reference": "Enter contact number",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Email Address",
+      "reference": "Enter email address",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Place of Domicile before entry into the Philippines",
+      "reference": "Enter place of domicile",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Country where the recipient is taxable as resident and where he/she is to pay tax",
+      "reference": "Enter country name",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "School or place of business in the Philippines where the recipient teaches, studies or is trained",
+      "reference": "Enter name of school or business",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "Taxpayer Identification Number (TIN)",
+      "reference": "Enter TIN in format: XXX-XXX-XXX",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "RDO Code",
+      "reference": "Enter RDO Code",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "Registered Address",
+      "reference": "Enter registered address",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "ZIP Code",
+      "reference": "Enter ZIP Code",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "Contact Number (Landline/Mobile No.)",
+      "reference": "Enter contact number",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "Email Address",
+      "reference": "Enter email address",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "Kind of Income",
+      "reference": "Check applicable box: Remuneration, Grants, Allowances, Others (specify)",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Description of Service Rendered",
+      "reference": "Enter description",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Date of Contract (MM/DD/YYYY)",
+      "reference": "Enter contract date (e.g., 01/01/2021)",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Contract Period",
+      "reference": "Enter contract period",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Amount of Remuneration (per month/year)",
+      "reference": "Enter amount",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Method of Payment",
+      "reference": "Enter payment method",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Date of Payment (MM/DD/YYYY)",
+      "reference": "Enter payment date (e.g., 01/01/2021)",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Other remuneration, etc., paid by other persons for personal services, etc., performed in the Philippines",
+      "reference": "Enter details",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Amount of Withholding Tax Paid, if any",
+      "reference": "Enter amount",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Date of Payment (MM/DD/YYYY)",
+      "reference": "Enter payment date (e.g., 01/01/2021)",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Registered Name",
+      "reference": "Enter full name (Last Name, First Name, Middle Name for Individual OR Registered Name for Non-Individual)",
+      "section": "Part V – Authorized Representative in the Philippines"
+    },
+    {
+      "label": "Taxpayer Identification Number (TIN)",
+      "reference": "Enter TIN in format: XXX-XXX-XXX",
+      "section": "Part V – Authorized Representative in the Philippines"
+    },
+    {
+      "label": "RDO Code",
+      "reference": "Enter RDO Code",
+      "section": "Part V – Authorized Representative in the Philippines"
+    },
+    {
+      "label": "Registered Address",
+      "reference": "Enter registered address",
+      "section": "Part V – Authorized Representative in the Philippines"
+    },
+    {
+      "label": "ZIP Code",
+      "reference": "Enter ZIP Code",
+      "section": "Part V – Authorized Representative in the Philippines"
+    },
+    {
+      "label": "Contact Number (Landline/Cellphone No.)",
+      "reference": "Enter contact number",
+      "section": "Part V – Authorized Representative in the Philippines"
+    },
+    {
+      "label": "Email Address",
+      "reference": "Enter email address",
+      "section": "Part V – Authorized Representative in the Philippines"
+    },
+    {
+      "label": "Signature over Printed Name of the Beneficial Owner/Authorized Representative/Tax Agent",
+      "reference": "Sign here",
+      "section": "Part VI – Certification"
+    },
+    {
+      "label": "Tax Agent Accreditation/Attorney’s Roll Number, if applicable",
+      "reference": "Enter number",
+      "section": "Part VI – Certification"
+    },
+    {
+      "label": "Date of Issue (MM/DD/YYYY)",
+      "reference": "Enter date (e.g., 01/01/2021)",
+      "section": "Part VI – Certification"
+    },
+    {
+      "label": "Date of Expiry (MM/DD/YYYY)",
+      "reference": "Enter date (e.g., 01/01/2021)",
+      "section": "Part VI – Certification"
+    },
+    {
+      "label": "ITAD Filing Reference No.",
+      "reference": "Enter reference number",
+      "section": "Part VI – Certification"
+    },
+    {
+      "label": "Stamp of BIR Receiving Office and Date of Receipt",
+      "reference": "For office use only; leave blank",
+      "section": "For BIR Use Only"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Tax_BIRApplicationForTreatyPurposes0901-S3.pdf"
+}

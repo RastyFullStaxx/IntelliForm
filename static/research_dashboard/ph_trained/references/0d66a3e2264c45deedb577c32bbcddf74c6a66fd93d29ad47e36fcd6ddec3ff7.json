@@ -1,0 +1,346 @@
+{
+  "title": "OPTIONAL LIFE INSURANCE POLICY LOAN APPLICATION",
+  "form_id": "optional-life-insurance-policy-loan-application",
+  "canonical_id": "0d66a3e2264c45deedb577c32bbcddf74c6a66fd93d29ad47e36fcd6ddec3ff7",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2024-05-10T00:00:00Z",
+  "updated_at": "2025-12-06T21:34:07Z",
+  "sections": [
+    {
+      "title": "Applicant Information",
+      "fields": [
+        {
+          "label": "Name of Applicant",
+          "reference": "Enter full name."
+        },
+        {
+          "label": "Last Name",
+          "reference": "Enter last name."
+        },
+        {
+          "label": "First Name",
+          "reference": "Enter first name."
+        },
+        {
+          "label": "Middle Name",
+          "reference": "Enter middle name."
+        },
+        {
+          "label": "Birth Date",
+          "reference": "Enter birth date (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "GSIS ID No.",
+          "reference": "Provide any of the ID numbers."
+        },
+        {
+          "label": "Gender",
+          "reference": "Select gender."
+        },
+        {
+          "label": "BP No.",
+          "reference": "Enter BP number."
+        },
+        {
+          "label": "E-Card/UMID Card No.",
+          "reference": "Enter E-Card/UMID Card number."
+        },
+        {
+          "label": "E-Card/UMID Bank Account No.",
+          "reference": "Enter E-Card/UMID Bank Account number."
+        },
+        {
+          "label": "Mailing/Residential Address",
+          "reference": "Enter complete mailing/residential address."
+        },
+        {
+          "label": "Present Office",
+          "reference": "Enter current office."
+        },
+        {
+          "label": "Telephone No.",
+          "reference": "Enter telephone number."
+        },
+        {
+          "label": "Mobile Phone No.",
+          "reference": "Enter mobile phone number."
+        },
+        {
+          "label": "Email Address",
+          "reference": "Enter email address."
+        }
+      ]
+    },
+    {
+      "title": "For DEPED Personnel",
+      "fields": [
+        {
+          "label": "Division No.",
+          "reference": "Enter division number."
+        },
+        {
+          "label": "Station No.",
+          "reference": "Enter station number."
+        },
+        {
+          "label": "Employee No.",
+          "reference": "Enter employee number."
+        }
+      ]
+    },
+    {
+      "title": "Loan Type",
+      "fields": [
+        {
+          "label": "TYPE OF LOAN",
+          "reference": "Select loan type: New or Renewal."
+        }
+      ]
+    },
+    {
+      "title": "Payment Scheme",
+      "fields": [
+        {
+          "label": "Undertake to pay the loan with the payment scheme selected below",
+          "reference": "Choose payment scheme."
+        },
+        {
+          "label": "Monthly payments through salary deduction",
+          "reference": "Enter amount per month."
+        },
+        {
+          "label": "Payment of principal and interest upon maturity",
+          "reference": "Select this option if applicable."
+        }
+      ]
+    },
+    {
+      "title": "Terms and Conditions",
+      "fields": [
+        {
+          "label": "Amount of the Loan",
+          "reference": "The amount shall be as approved by GSIS."
+        },
+        {
+          "label": "Application of the Loan Proceeds",
+          "reference": "Authorize GSIS to deduct any outstanding obligations."
+        },
+        {
+          "label": "Change of Payment Term",
+          "reference": "Notify GSIS to change payment mode."
+        },
+        {
+          "label": "Due Date of First Monthly and Succeeding Monthly Installments",
+          "reference": "Payments due on or before the 10th of the month."
+        },
+        {
+          "label": "Interest Rate",
+          "reference": "Loan incurs interest at 8% per annum."
+        },
+        {
+          "label": "Maturity of the Loan",
+          "reference": "Loan matures upon retirement or other specified events."
+        },
+        {
+          "label": "Loan Pre-termination",
+          "reference": "May pre-terminate loan by paying full outstanding balance."
+        },
+        {
+          "label": "Loan Cancellation",
+          "reference": "Cancel loan by paying full outstanding balance."
+        },
+        {
+          "label": "Authority to Apply Payment",
+          "reference": "GSIS can collect from benefits due."
+        },
+        {
+          "label": "Issue NO.",
+          "reference": "N/A"
+        },
+        {
+          "label": "Rev. No.",
+          "reference": "N/A"
+        },
+        {
+          "label": "Date Signed",
+          "reference": "Enter date signed."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Name of Applicant",
+      "reference": "Enter full name.",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "Last Name",
+      "reference": "Enter last name.",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "First Name",
+      "reference": "Enter first name.",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "Middle Name",
+      "reference": "Enter middle name.",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "Birth Date",
+      "reference": "Enter birth date (MM/DD/YYYY, e.g., 11/28/2025).",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "GSIS ID No.",
+      "reference": "Provide any of the ID numbers.",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "Gender",
+      "reference": "Select gender.",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "BP No.",
+      "reference": "Enter BP number.",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "E-Card/UMID Card No.",
+      "reference": "Enter E-Card/UMID Card number.",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "E-Card/UMID Bank Account No.",
+      "reference": "Enter E-Card/UMID Bank Account number.",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "Mailing/Residential Address",
+      "reference": "Enter complete mailing/residential address.",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "Present Office",
+      "reference": "Enter current office.",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "Telephone No.",
+      "reference": "Enter telephone number.",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "Mobile Phone No.",
+      "reference": "Enter mobile phone number.",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "Email Address",
+      "reference": "Enter email address.",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "Division No.",
+      "reference": "Enter division number.",
+      "section": "For DEPED Personnel"
+    },
+    {
+      "label": "Station No.",
+      "reference": "Enter station number.",
+      "section": "For DEPED Personnel"
+    },
+    {
+      "label": "Employee No.",
+      "reference": "Enter employee number.",
+      "section": "For DEPED Personnel"
+    },
+    {
+      "label": "TYPE OF LOAN",
+      "reference": "Select loan type: New or Renewal.",
+      "section": "Loan Type"
+    },
+    {
+      "label": "Undertake to pay the loan with the payment scheme selected below",
+      "reference": "Choose payment scheme.",
+      "section": "Payment Scheme"
+    },
+    {
+      "label": "Monthly payments through salary deduction",
+      "reference": "Enter amount per month.",
+      "section": "Payment Scheme"
+    },
+    {
+      "label": "Payment of principal and interest upon maturity",
+      "reference": "Select this option if applicable.",
+      "section": "Payment Scheme"
+    },
+    {
+      "label": "Amount of the Loan",
+      "reference": "The amount shall be as approved by GSIS.",
+      "section": "Terms and Conditions"
+    },
+    {
+      "label": "Application of the Loan Proceeds",
+      "reference": "Authorize GSIS to deduct any outstanding obligations.",
+      "section": "Terms and Conditions"
+    },
+    {
+      "label": "Change of Payment Term",
+      "reference": "Notify GSIS to change payment mode.",
+      "section": "Terms and Conditions"
+    },
+    {
+      "label": "Due Date of First Monthly and Succeeding Monthly Installments",
+      "reference": "Payments due on or before the 10th of the month.",
+      "section": "Terms and Conditions"
+    },
+    {
+      "label": "Interest Rate",
+      "reference": "Loan incurs interest at 8% per annum.",
+      "section": "Terms and Conditions"
+    },
+    {
+      "label": "Maturity of the Loan",
+      "reference": "Loan matures upon retirement or other specified events.",
+      "section": "Terms and Conditions"
+    },
+    {
+      "label": "Loan Pre-termination",
+      "reference": "May pre-terminate loan by paying full outstanding balance.",
+      "section": "Terms and Conditions"
+    },
+    {
+      "label": "Loan Cancellation",
+      "reference": "Cancel loan by paying full outstanding balance.",
+      "section": "Terms and Conditions"
+    },
+    {
+      "label": "Authority to Apply Payment",
+      "reference": "GSIS can collect from benefits due.",
+      "section": "Terms and Conditions"
+    },
+    {
+      "label": "Issue NO.",
+      "reference": "N/A",
+      "section": "Terms and Conditions"
+    },
+    {
+      "label": "Rev. No.",
+      "reference": "N/A",
+      "section": "Terms and Conditions"
+    },
+    {
+      "label": "Date Signed",
+      "reference": "Enter date signed.",
+      "section": "Terms and Conditions"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Government_GSIS Loan Application Form.pdf"
+}

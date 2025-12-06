@@ -1,0 +1,106 @@
+{
+  "title": "Decision Tree Estimation of Toxic Risk",
+  "form_id": "decision-tree-toxic-risk",
+  "canonical_id": "4ec359f82b33bd27feecb808d87c7a1189c71ac80987738388b72bf6b2ad8a22",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:59:23Z",
+  "sections": [
+    {
+      "title": "Compound Information",
+      "fields": [
+        {
+          "label": "Name",
+          "reference": "Enter the names of the authors."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter the date (MM/DD/YYYY, e.g., 08/14/1990)."
+        },
+        {
+          "label": "Compound Name",
+          "reference": "Enter the name of the compound."
+        },
+        {
+          "label": "Structure",
+          "reference": "Provide the chemical structure."
+        },
+        {
+          "label": "Estimated Toxicity Class",
+          "reference": "Enter the estimated toxicity class."
+        },
+        {
+          "label": "Lorillard Compound Code Number",
+          "reference": "Enter the Lorillard compound code number."
+        },
+        {
+          "label": "Comments",
+          "reference": "Provide any additional comments."
+        }
+      ]
+    },
+    {
+      "title": "Signatures",
+      "fields": [
+        {
+          "label": "Signature of Author",
+          "reference": "Sign here."
+        },
+        {
+          "label": "Signature of Co-Author",
+          "reference": "Sign here."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Name",
+      "reference": "Enter the names of the authors.",
+      "section": "Compound Information"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter the date (MM/DD/YYYY, e.g., 08/14/1990).",
+      "section": "Compound Information"
+    },
+    {
+      "label": "Compound Name",
+      "reference": "Enter the name of the compound.",
+      "section": "Compound Information"
+    },
+    {
+      "label": "Structure",
+      "reference": "Provide the chemical structure.",
+      "section": "Compound Information"
+    },
+    {
+      "label": "Estimated Toxicity Class",
+      "reference": "Enter the estimated toxicity class.",
+      "section": "Compound Information"
+    },
+    {
+      "label": "Lorillard Compound Code Number",
+      "reference": "Enter the Lorillard compound code number.",
+      "section": "Compound Information"
+    },
+    {
+      "label": "Comments",
+      "reference": "Provide any additional comments.",
+      "section": "Compound Information"
+    },
+    {
+      "label": "Signature of Author",
+      "reference": "Sign here.",
+      "section": "Signatures"
+    },
+    {
+      "label": "Signature of Co-Author",
+      "reference": "Sign here.",
+      "section": "Signatures"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00036.pdf"
+}

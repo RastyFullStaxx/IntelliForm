@@ -1,0 +1,151 @@
+{
+  "title": "Auto-Invest Enrollment Form",
+  "form_id": "auto-invest-enrollment-form",
+  "canonical_id": "5ca4193248779b59a2e117c38a471aae9f8a9a009d56c81aa7203cf7bc912d51",
+  "bucket": "finance",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:27:06Z",
+  "sections": [
+    {
+      "title": "Account Information",
+      "fields": [
+        {
+          "label": "MF Account Number",
+          "reference": "Enter your mutual fund account number (e.g. 01234567CF01)"
+        },
+        {
+          "label": "MF Account Type",
+          "reference": "Select one: Individual/Individual ITF, Joint AND/Joint AND ITF, Joint OR/Joint OR ITF"
+        },
+        {
+          "label": "MF Account Name",
+          "reference": "Enter the full name associated with the account"
+        }
+      ]
+    },
+    {
+      "title": "Auto-Invest Enrollment Information",
+      "fields": [
+        {
+          "label": "Bank Details",
+          "reference": "Provide details of your bank account for deductions"
+        },
+        {
+          "label": "Bank Name",
+          "reference": "Enter the name of the bank"
+        },
+        {
+          "label": "Bank Branch",
+          "reference": "Enter the branch of the bank"
+        },
+        {
+          "label": "Bank Account Number",
+          "reference": "Enter your bank account number"
+        },
+        {
+          "label": "Account Type",
+          "reference": "Select account type: Savings or Current"
+        },
+        {
+          "label": "Schedule of Investment",
+          "reference": "Specify how often you want to invest: Monthly or Quarterly"
+        },
+        {
+          "label": "Frequency",
+          "reference": "Select how often to invest: Monthly or Quarterly"
+        },
+        {
+          "label": "Schedule",
+          "reference": "Select the specific schedule: Every 5th or Every 20th"
+        },
+        {
+          "label": "Select Fund/s to Enroll",
+          "reference": "Choose the fund(s) you wish to invest in"
+        },
+        {
+          "label": "Select Sales Load",
+          "reference": "Choose your sales load option: Front-End or Back-End"
+        },
+        {
+          "label": "Indicate Investment Amount",
+          "reference": "Enter the amount you wish to invest"
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "MF Account Number",
+      "reference": "Enter your mutual fund account number (e.g. 01234567CF01)",
+      "section": "Account Information"
+    },
+    {
+      "label": "MF Account Type",
+      "reference": "Select one: Individual/Individual ITF, Joint AND/Joint AND ITF, Joint OR/Joint OR ITF",
+      "section": "Account Information"
+    },
+    {
+      "label": "MF Account Name",
+      "reference": "Enter the full name associated with the account",
+      "section": "Account Information"
+    },
+    {
+      "label": "Bank Details",
+      "reference": "Provide details of your bank account for deductions",
+      "section": "Auto-Invest Enrollment Information"
+    },
+    {
+      "label": "Bank Name",
+      "reference": "Enter the name of the bank",
+      "section": "Auto-Invest Enrollment Information"
+    },
+    {
+      "label": "Bank Branch",
+      "reference": "Enter the branch of the bank",
+      "section": "Auto-Invest Enrollment Information"
+    },
+    {
+      "label": "Bank Account Number",
+      "reference": "Enter your bank account number",
+      "section": "Auto-Invest Enrollment Information"
+    },
+    {
+      "label": "Account Type",
+      "reference": "Select account type: Savings or Current",
+      "section": "Auto-Invest Enrollment Information"
+    },
+    {
+      "label": "Schedule of Investment",
+      "reference": "Specify how often you want to invest: Monthly or Quarterly",
+      "section": "Auto-Invest Enrollment Information"
+    },
+    {
+      "label": "Frequency",
+      "reference": "Select how often to invest: Monthly or Quarterly",
+      "section": "Auto-Invest Enrollment Information"
+    },
+    {
+      "label": "Schedule",
+      "reference": "Select the specific schedule: Every 5th or Every 20th",
+      "section": "Auto-Invest Enrollment Information"
+    },
+    {
+      "label": "Select Fund/s to Enroll",
+      "reference": "Choose the fund(s) you wish to invest in",
+      "section": "Auto-Invest Enrollment Information"
+    },
+    {
+      "label": "Select Sales Load",
+      "reference": "Choose your sales load option: Front-End or Back-End",
+      "section": "Auto-Invest Enrollment Information"
+    },
+    {
+      "label": "Indicate Investment Amount",
+      "reference": "Enter the amount you wish to invest",
+      "section": "Auto-Invest Enrollment Information"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Finance_Auto-InvestEnrollmentForm.pdf"
+}

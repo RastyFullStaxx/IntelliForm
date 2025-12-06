@@ -1,0 +1,331 @@
+{
+  "title": "Cigarette Report Form",
+  "form_id": "cigarette-report-form",
+  "canonical_id": "2db6a0811b79de6b58410f692749a1ea95ab9a66e7eb533cb20ebe9dd63c9eba",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:56:01Z",
+  "sections": [
+    {
+      "title": "Cigarette Information",
+      "fields": [
+        {
+          "label": "Year",
+          "reference": "Enter the year"
+        },
+        {
+          "label": "No. Per Pack",
+          "reference": "Enter the number of cigarettes per pack"
+        },
+        {
+          "label": "Brand Name",
+          "reference": "Enter the brand name"
+        },
+        {
+          "label": "Var. Desc",
+          "reference": "Enter the variety description"
+        },
+        {
+          "label": "Variety Unit Sales",
+          "reference": "Enter the variety unit sales"
+        },
+        {
+          "label": "Variety Dollar Sales",
+          "reference": "Enter the variety dollar sales"
+        },
+        {
+          "label": "Cig. Length",
+          "reference": "Enter the cigarette length"
+        },
+        {
+          "label": "Filter Length",
+          "reference": "Enter the filter length"
+        },
+        {
+          "label": "Filter Type",
+          "reference": "Enter the filter type"
+        },
+        {
+          "label": "Flavoring",
+          "reference": "Specify if flavored"
+        },
+        {
+          "label": "Overwrap",
+          "reference": "Specify the overwrap type"
+        },
+        {
+          "label": "Pack Type",
+          "reference": "Enter the pack type"
+        },
+        {
+          "label": "1st Manufact. Date",
+          "reference": "Enter the first manufacture date (MM/DD/YYYY)"
+        },
+        {
+          "label": "1st Sales Date",
+          "reference": "Enter the first sales date (MM/DD/YYYY)"
+        },
+        {
+          "label": "Last Sold Date",
+          "reference": "Enter the last sold date (MM/DD/YYYY)"
+        },
+        {
+          "label": "Yearly Summary",
+          "reference": "Provide a summary for the year"
+        },
+        {
+          "label": "Tar",
+          "reference": "Enter the tar content"
+        },
+        {
+          "label": "Nicotine",
+          "reference": "Enter the nicotine content"
+        },
+        {
+          "label": "Carbon Mono",
+          "reference": "Enter the carbon monoxide content"
+        }
+      ]
+    },
+    {
+      "title": "Advertising Expenditures",
+      "fields": [
+        {
+          "label": "Cat-A-Expenses",
+          "reference": "Enter expenses for category A"
+        },
+        {
+          "label": "Cat-B-Expenses",
+          "reference": "Enter expenses for category B"
+        },
+        {
+          "label": "Cat-C-Expenses",
+          "reference": "Enter expenses for category C"
+        },
+        {
+          "label": "Cat-D-Expenses",
+          "reference": "Enter expenses for category D"
+        },
+        {
+          "label": "Cat-E-Expenses",
+          "reference": "Enter expenses for category E"
+        },
+        {
+          "label": "Cat-F-Expenses",
+          "reference": "Enter expenses for category F"
+        },
+        {
+          "label": "Cat-G-Expenses",
+          "reference": "Enter expenses for category G"
+        },
+        {
+          "label": "Cat-H-Expenses",
+          "reference": "Enter expenses for category H"
+        },
+        {
+          "label": "Cat-I-Expenses",
+          "reference": "Enter expenses for category I"
+        },
+        {
+          "label": "Cat-J-Expenses",
+          "reference": "Enter expenses for category J"
+        },
+        {
+          "label": "Cat-K-Expenses",
+          "reference": "Enter expenses for category K"
+        },
+        {
+          "label": "Cat-L-Expenses",
+          "reference": "Enter expenses for category L"
+        },
+        {
+          "label": "Cat-M-Expenses",
+          "reference": "Enter expenses for category M"
+        },
+        {
+          "label": "Cat-N-Expenses",
+          "reference": "Enter expenses for category N"
+        },
+        {
+          "label": "Total Advertising Expenditures",
+          "reference": "Enter total advertising expenditures"
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Year",
+      "reference": "Enter the year",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "No. Per Pack",
+      "reference": "Enter the number of cigarettes per pack",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Brand Name",
+      "reference": "Enter the brand name",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Var. Desc",
+      "reference": "Enter the variety description",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Variety Unit Sales",
+      "reference": "Enter the variety unit sales",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Variety Dollar Sales",
+      "reference": "Enter the variety dollar sales",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Cig. Length",
+      "reference": "Enter the cigarette length",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Filter Length",
+      "reference": "Enter the filter length",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Filter Type",
+      "reference": "Enter the filter type",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Flavoring",
+      "reference": "Specify if flavored",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Overwrap",
+      "reference": "Specify the overwrap type",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Pack Type",
+      "reference": "Enter the pack type",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "1st Manufact. Date",
+      "reference": "Enter the first manufacture date (MM/DD/YYYY)",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "1st Sales Date",
+      "reference": "Enter the first sales date (MM/DD/YYYY)",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Last Sold Date",
+      "reference": "Enter the last sold date (MM/DD/YYYY)",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Yearly Summary",
+      "reference": "Provide a summary for the year",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Tar",
+      "reference": "Enter the tar content",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Nicotine",
+      "reference": "Enter the nicotine content",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Carbon Mono",
+      "reference": "Enter the carbon monoxide content",
+      "section": "Cigarette Information"
+    },
+    {
+      "label": "Cat-A-Expenses",
+      "reference": "Enter expenses for category A",
+      "section": "Advertising Expenditures"
+    },
+    {
+      "label": "Cat-B-Expenses",
+      "reference": "Enter expenses for category B",
+      "section": "Advertising Expenditures"
+    },
+    {
+      "label": "Cat-C-Expenses",
+      "reference": "Enter expenses for category C",
+      "section": "Advertising Expenditures"
+    },
+    {
+      "label": "Cat-D-Expenses",
+      "reference": "Enter expenses for category D",
+      "section": "Advertising Expenditures"
+    },
+    {
+      "label": "Cat-E-Expenses",
+      "reference": "Enter expenses for category E",
+      "section": "Advertising Expenditures"
+    },
+    {
+      "label": "Cat-F-Expenses",
+      "reference": "Enter expenses for category F",
+      "section": "Advertising Expenditures"
+    },
+    {
+      "label": "Cat-G-Expenses",
+      "reference": "Enter expenses for category G",
+      "section": "Advertising Expenditures"
+    },
+    {
+      "label": "Cat-H-Expenses",
+      "reference": "Enter expenses for category H",
+      "section": "Advertising Expenditures"
+    },
+    {
+      "label": "Cat-I-Expenses",
+      "reference": "Enter expenses for category I",
+      "section": "Advertising Expenditures"
+    },
+    {
+      "label": "Cat-J-Expenses",
+      "reference": "Enter expenses for category J",
+      "section": "Advertising Expenditures"
+    },
+    {
+      "label": "Cat-K-Expenses",
+      "reference": "Enter expenses for category K",
+      "section": "Advertising Expenditures"
+    },
+    {
+      "label": "Cat-L-Expenses",
+      "reference": "Enter expenses for category L",
+      "section": "Advertising Expenditures"
+    },
+    {
+      "label": "Cat-M-Expenses",
+      "reference": "Enter expenses for category M",
+      "section": "Advertising Expenditures"
+    },
+    {
+      "label": "Cat-N-Expenses",
+      "reference": "Enter expenses for category N",
+      "section": "Advertising Expenditures"
+    },
+    {
+      "label": "Total Advertising Expenditures",
+      "reference": "Enter total advertising expenditures",
+      "section": "Advertising Expenditures"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00027.pdf"
+}

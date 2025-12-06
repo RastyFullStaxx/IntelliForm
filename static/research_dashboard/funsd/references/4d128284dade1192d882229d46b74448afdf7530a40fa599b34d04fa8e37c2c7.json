@@ -1,0 +1,116 @@
+{
+  "title": "1997 Special Event Request Form",
+  "form_id": "special-event-request-form",
+  "canonical_id": "4d128284dade1192d882229d46b74448afdf7530a40fa599b34d04fa8e37c2c7",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:49:06Z",
+  "sections": [
+    {
+      "title": "Event Details",
+      "fields": [
+        {
+          "label": "Name of Event",
+          "reference": "Enter the name of the event."
+        },
+        {
+          "label": "Date of Event",
+          "reference": "Enter the date of the event (MM/DD/YY, e.g., 03/18/97)."
+        }
+      ]
+    },
+    {
+      "title": "Samples / Items Required",
+      "fields": [
+        {
+          "label": "Samples / Items Required",
+          "reference": "List the samples or items required."
+        },
+        {
+          "label": "# Cases",
+          "reference": "Enter the number of cases required for each item."
+        },
+        {
+          "label": "Items",
+          "reference": "List the items needed."
+        },
+        {
+          "label": "Quantity Required",
+          "reference": "Enter the quantity required for each item."
+        }
+      ]
+    },
+    {
+      "title": "Shipping Information",
+      "fields": [
+        {
+          "label": "Ship To",
+          "reference": "Enter the shipping information."
+        },
+        {
+          "label": "Customer Shipping Number",
+          "reference": "Enter the customer shipping number."
+        }
+      ]
+    },
+    {
+      "title": "NYO Only",
+      "fields": [
+        {
+          "label": "Date Forwarded to Promotion Services",
+          "reference": "Enter the date forwarded to promotion services (MM/DD/YY, e.g., 02/06/97)."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Name of Event",
+      "reference": "Enter the name of the event.",
+      "section": "Event Details"
+    },
+    {
+      "label": "Date of Event",
+      "reference": "Enter the date of the event (MM/DD/YY, e.g., 03/18/97).",
+      "section": "Event Details"
+    },
+    {
+      "label": "Samples / Items Required",
+      "reference": "List the samples or items required.",
+      "section": "Samples / Items Required"
+    },
+    {
+      "label": "# Cases",
+      "reference": "Enter the number of cases required for each item.",
+      "section": "Samples / Items Required"
+    },
+    {
+      "label": "Items",
+      "reference": "List the items needed.",
+      "section": "Samples / Items Required"
+    },
+    {
+      "label": "Quantity Required",
+      "reference": "Enter the quantity required for each item.",
+      "section": "Samples / Items Required"
+    },
+    {
+      "label": "Ship To",
+      "reference": "Enter the shipping information.",
+      "section": "Shipping Information"
+    },
+    {
+      "label": "Customer Shipping Number",
+      "reference": "Enter the customer shipping number.",
+      "section": "Shipping Information"
+    },
+    {
+      "label": "Date Forwarded to Promotion Services",
+      "reference": "Enter the date forwarded to promotion services (MM/DD/YY, e.g., 02/06/97).",
+      "section": "NYO Only"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00008.pdf"
+}

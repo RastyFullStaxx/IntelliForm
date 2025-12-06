@@ -1,0 +1,125 @@
+{
+  "title": "Competitive Product Introduction Progress Report",
+  "form_id": "competitive-product-introduction-progress-report",
+  "canonical_id": "b028876864fd9ccc4d115de55aec74e7ae018dab2c94302c9319ce4195147206",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:47:43Z",
+  "sections": [
+    {
+      "title": "Report Information",
+      "fields": [
+        {
+          "label": "TO",
+          "reference": "Enter recipient's name."
+        },
+        {
+          "label": "FROM",
+          "reference": "Enter sender's name."
+        },
+        {
+          "label": "DATE",
+          "reference": "Enter date (MM/DD/YY, e.g., 12/10/96)."
+        },
+        {
+          "label": "REPORTING PERIODS",
+          "reference": "Indicate reporting months (AUG, SEPT, OCT, NOV)."
+        },
+        {
+          "label": "TEST MARKET GEOGRAPHY",
+          "reference": "Specify market geography."
+        },
+        {
+          "label": "PRICE POINT",
+          "reference": "Enter price point (e.g., FULL $11.89, P/N $)."
+        }
+      ]
+    },
+    {
+      "title": "Sales Force Involvement",
+      "fields": [
+        {
+          "label": "SALES FORCE INVOLVEMENT",
+          "reference": "Describe merchandising efforts."
+        }
+      ]
+    },
+    {
+      "title": "Distributor Involvement",
+      "fields": [
+        {
+          "label": "DISTRIBUTOR INVOLVEMENT",
+          "reference": "Detail distributor involvement."
+        }
+      ]
+    },
+    {
+      "title": "Merchandising Allowance",
+      "fields": [
+        {
+          "label": "CHAINS - ACCEPTANCE/MERCHANDISING ALLOWANCE",
+          "reference": "Describe chain acceptance."
+        },
+        {
+          "label": "INDEPENDENTS - ACCEPTANCE/MERCHANDISING ALLOWANCE",
+          "reference": "Describe independent acceptance."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "TO",
+      "reference": "Enter recipient's name.",
+      "section": "Report Information"
+    },
+    {
+      "label": "FROM",
+      "reference": "Enter sender's name.",
+      "section": "Report Information"
+    },
+    {
+      "label": "DATE",
+      "reference": "Enter date (MM/DD/YY, e.g., 12/10/96).",
+      "section": "Report Information"
+    },
+    {
+      "label": "REPORTING PERIODS",
+      "reference": "Indicate reporting months (AUG, SEPT, OCT, NOV).",
+      "section": "Report Information"
+    },
+    {
+      "label": "TEST MARKET GEOGRAPHY",
+      "reference": "Specify market geography.",
+      "section": "Report Information"
+    },
+    {
+      "label": "PRICE POINT",
+      "reference": "Enter price point (e.g., FULL $11.89, P/N $).",
+      "section": "Report Information"
+    },
+    {
+      "label": "SALES FORCE INVOLVEMENT",
+      "reference": "Describe merchandising efforts.",
+      "section": "Sales Force Involvement"
+    },
+    {
+      "label": "DISTRIBUTOR INVOLVEMENT",
+      "reference": "Detail distributor involvement.",
+      "section": "Distributor Involvement"
+    },
+    {
+      "label": "CHAINS - ACCEPTANCE/MERCHANDISING ALLOWANCE",
+      "reference": "Describe chain acceptance.",
+      "section": "Merchandising Allowance"
+    },
+    {
+      "label": "INDEPENDENTS - ACCEPTANCE/MERCHANDISING ALLOWANCE",
+      "reference": "Describe independent acceptance.",
+      "section": "Merchandising Allowance"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00005.pdf"
+}

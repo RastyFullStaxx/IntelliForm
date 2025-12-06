@@ -1,0 +1,247 @@
+{
+  "title": "47th TCRC Registration Form",
+  "form_id": "47th-tcrc-registration-form",
+  "canonical_id": "4b1fa64f6025549646388cafc35bc62a5f02e8b83a6a0b2c42e0bbb3a0ecefe5",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:02:15Z",
+  "sections": [
+    {
+      "title": "Personal Information",
+      "fields": [
+        {
+          "label": "Name",
+          "reference": "Enter your title, first, middle, and last name."
+        },
+        {
+          "label": "Institution",
+          "reference": "Enter the name of your institution."
+        },
+        {
+          "label": "Address",
+          "reference": "Enter your street address, P.O. Box, city, state, ZIP code, and country."
+        },
+        {
+          "label": "Telephone",
+          "reference": "Enter your telephone number."
+        },
+        {
+          "label": "FAX #",
+          "reference": "Enter your fax number."
+        },
+        {
+          "label": "Name of guest",
+          "reference": "Enter the name of your guest."
+        }
+      ]
+    },
+    {
+      "title": "Meals and Tours",
+      "fields": [
+        {
+          "label": "Continental Breakfast on Tuesday",
+          "reference": "Check if you will attend."
+        },
+        {
+          "label": "Breakfast on Wednesday",
+          "reference": "Check if you will attend."
+        },
+        {
+          "label": "Fall Foliage Tour on Tuesday",
+          "reference": "Check if you will attend."
+        },
+        {
+          "label": "Craftsman Village Tour on Wednesday",
+          "reference": "Check if you will attend."
+        }
+      ]
+    },
+    {
+      "title": "Registration Fees",
+      "fields": [
+        {
+          "label": "Advance Registration Fee: (prior to September 1)",
+          "reference": "Enter $135.00."
+        },
+        {
+          "label": "Late Registration Fee: (after September 1)",
+          "reference": "Enter $150.00."
+        },
+        {
+          "label": "Extra banquet tickets @ $40.00",
+          "reference": "Enter the number of extra tickets needed."
+        },
+        {
+          "label": "Ground Transportation (round trip)",
+          "reference": "Enter $30.00."
+        },
+        {
+          "label": "TOTAL",
+          "reference": "Calculate and enter the total amount."
+        }
+      ]
+    },
+    {
+      "title": "Transportation",
+      "fields": [
+        {
+          "label": "No. in Party",
+          "reference": "Enter the number of people in your party."
+        },
+        {
+          "label": "DATE",
+          "reference": "Enter the date of arrival."
+        },
+        {
+          "label": "TIME",
+          "reference": "Enter the time of arrival."
+        },
+        {
+          "label": "CARRIER",
+          "reference": "Enter the name of the carrier."
+        },
+        {
+          "label": "FLIGHT #",
+          "reference": "Enter your flight number."
+        },
+        {
+          "label": "Arrival",
+          "reference": "Enter arrival details."
+        },
+        {
+          "label": "Departure",
+          "reference": "Enter departure details."
+        }
+      ]
+    },
+    {
+      "title": "Submission Instructions",
+      "fields": [
+        {
+          "label": "Mail to:",
+          "reference": "Send this registration form with payment to the specified address."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Name",
+      "reference": "Enter your title, first, middle, and last name.",
+      "section": "Personal Information"
+    },
+    {
+      "label": "Institution",
+      "reference": "Enter the name of your institution.",
+      "section": "Personal Information"
+    },
+    {
+      "label": "Address",
+      "reference": "Enter your street address, P.O. Box, city, state, ZIP code, and country.",
+      "section": "Personal Information"
+    },
+    {
+      "label": "Telephone",
+      "reference": "Enter your telephone number.",
+      "section": "Personal Information"
+    },
+    {
+      "label": "FAX #",
+      "reference": "Enter your fax number.",
+      "section": "Personal Information"
+    },
+    {
+      "label": "Name of guest",
+      "reference": "Enter the name of your guest.",
+      "section": "Personal Information"
+    },
+    {
+      "label": "Continental Breakfast on Tuesday",
+      "reference": "Check if you will attend.",
+      "section": "Meals and Tours"
+    },
+    {
+      "label": "Breakfast on Wednesday",
+      "reference": "Check if you will attend.",
+      "section": "Meals and Tours"
+    },
+    {
+      "label": "Fall Foliage Tour on Tuesday",
+      "reference": "Check if you will attend.",
+      "section": "Meals and Tours"
+    },
+    {
+      "label": "Craftsman Village Tour on Wednesday",
+      "reference": "Check if you will attend.",
+      "section": "Meals and Tours"
+    },
+    {
+      "label": "Advance Registration Fee: (prior to September 1)",
+      "reference": "Enter $135.00.",
+      "section": "Registration Fees"
+    },
+    {
+      "label": "Late Registration Fee: (after September 1)",
+      "reference": "Enter $150.00.",
+      "section": "Registration Fees"
+    },
+    {
+      "label": "Extra banquet tickets @ $40.00",
+      "reference": "Enter the number of extra tickets needed.",
+      "section": "Registration Fees"
+    },
+    {
+      "label": "Ground Transportation (round trip)",
+      "reference": "Enter $30.00.",
+      "section": "Registration Fees"
+    },
+    {
+      "label": "TOTAL",
+      "reference": "Calculate and enter the total amount.",
+      "section": "Registration Fees"
+    },
+    {
+      "label": "No. in Party",
+      "reference": "Enter the number of people in your party.",
+      "section": "Transportation"
+    },
+    {
+      "label": "DATE",
+      "reference": "Enter the date of arrival.",
+      "section": "Transportation"
+    },
+    {
+      "label": "TIME",
+      "reference": "Enter the time of arrival.",
+      "section": "Transportation"
+    },
+    {
+      "label": "CARRIER",
+      "reference": "Enter the name of the carrier.",
+      "section": "Transportation"
+    },
+    {
+      "label": "FLIGHT #",
+      "reference": "Enter your flight number.",
+      "section": "Transportation"
+    },
+    {
+      "label": "Arrival",
+      "reference": "Enter arrival details.",
+      "section": "Transportation"
+    },
+    {
+      "label": "Departure",
+      "reference": "Enter departure details.",
+      "section": "Transportation"
+    },
+    {
+      "label": "Mail to:",
+      "reference": "Send this registration form with payment to the specified address.",
+      "section": "Submission Instructions"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00041.pdf"
+}

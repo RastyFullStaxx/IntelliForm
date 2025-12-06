@@ -1,0 +1,189 @@
+{
+  "title": "REPORT OF CORPORATE TREASURER",
+  "form_id": "report-of-corporate-treasurer",
+  "canonical_id": "8e964bc718120169c9354f786fccc9d9612b4fb8e1716c76498ffa4482b0ea9e",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:14:36Z",
+  "sections": [
+    {
+      "title": "Treasurer Information",
+      "fields": [
+        {
+          "label": "Name of Treasurer",
+          "reference": "Enter full name of the treasurer."
+        },
+        {
+          "label": "Name of Corporation",
+          "reference": "Enter the full name of the corporation."
+        },
+        {
+          "label": "Address of Corporation",
+          "reference": "Enter complete address (Street, City, State, ZIP)."
+        }
+      ]
+    },
+    {
+      "title": "Question Information",
+      "fields": [
+        {
+          "label": "Question No.",
+          "reference": "Enter question number."
+        },
+        {
+          "label": "relating to",
+          "reference": "Describe the question briefly."
+        },
+        {
+          "label": "submitted to the voters on",
+          "reference": "Enter election date (MM/DD/YYYY, e.g., 11/03/1992)."
+        }
+      ]
+    },
+    {
+      "title": "Reporting Period",
+      "fields": [
+        {
+          "label": "Fill in Dates",
+          "reference": "Enter reporting period beginning and ending dates (MM/DD/YYYY, e.g., 10/16/1992 to 11/05/1992)."
+        }
+      ]
+    },
+    {
+      "title": "Signature",
+      "fields": [
+        {
+          "label": "Treasurer Signature",
+          "reference": "Signature of the treasurer."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter date of signing (MM/DD/YYYY, e.g., 03/30/1993)."
+        }
+      ]
+    },
+    {
+      "title": "Expenditures or Disbursements",
+      "fields": [
+        {
+          "label": "Date Paid",
+          "reference": "Enter date of payment (MM/DD/YYYY, e.g., 10/26/1992)."
+        },
+        {
+          "label": "To Whom Paid",
+          "reference": "Enter name of recipient."
+        },
+        {
+          "label": "Address",
+          "reference": "Enter complete address of recipient."
+        },
+        {
+          "label": "Purpose",
+          "reference": "Enter purpose of payment."
+        },
+        {
+          "label": "Amount or Value",
+          "reference": "Enter amount paid."
+        }
+      ]
+    },
+    {
+      "title": "Total Expenditures",
+      "fields": [
+        {
+          "label": "Total Expenditures or Disbursements on this Report",
+          "reference": "Enter total amount."
+        },
+        {
+          "label": "Total Expenditures or Disbursements Previously Reported",
+          "reference": "Enter previously reported total."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Name of Treasurer",
+      "reference": "Enter full name of the treasurer.",
+      "section": "Treasurer Information"
+    },
+    {
+      "label": "Name of Corporation",
+      "reference": "Enter the full name of the corporation.",
+      "section": "Treasurer Information"
+    },
+    {
+      "label": "Address of Corporation",
+      "reference": "Enter complete address (Street, City, State, ZIP).",
+      "section": "Treasurer Information"
+    },
+    {
+      "label": "Question No.",
+      "reference": "Enter question number.",
+      "section": "Question Information"
+    },
+    {
+      "label": "relating to",
+      "reference": "Describe the question briefly.",
+      "section": "Question Information"
+    },
+    {
+      "label": "submitted to the voters on",
+      "reference": "Enter election date (MM/DD/YYYY, e.g., 11/03/1992).",
+      "section": "Question Information"
+    },
+    {
+      "label": "Fill in Dates",
+      "reference": "Enter reporting period beginning and ending dates (MM/DD/YYYY, e.g., 10/16/1992 to 11/05/1992).",
+      "section": "Reporting Period"
+    },
+    {
+      "label": "Treasurer Signature",
+      "reference": "Signature of the treasurer.",
+      "section": "Signature"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter date of signing (MM/DD/YYYY, e.g., 03/30/1993).",
+      "section": "Signature"
+    },
+    {
+      "label": "Date Paid",
+      "reference": "Enter date of payment (MM/DD/YYYY, e.g., 10/26/1992).",
+      "section": "Expenditures or Disbursements"
+    },
+    {
+      "label": "To Whom Paid",
+      "reference": "Enter name of recipient.",
+      "section": "Expenditures or Disbursements"
+    },
+    {
+      "label": "Address",
+      "reference": "Enter complete address of recipient.",
+      "section": "Expenditures or Disbursements"
+    },
+    {
+      "label": "Purpose",
+      "reference": "Enter purpose of payment.",
+      "section": "Expenditures or Disbursements"
+    },
+    {
+      "label": "Amount or Value",
+      "reference": "Enter amount paid.",
+      "section": "Expenditures or Disbursements"
+    },
+    {
+      "label": "Total Expenditures or Disbursements on this Report",
+      "reference": "Enter total amount.",
+      "section": "Total Expenditures"
+    },
+    {
+      "label": "Total Expenditures or Disbursements Previously Reported",
+      "reference": "Enter previously reported total.",
+      "section": "Total Expenditures"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00047.pdf"
+}

@@ -1,0 +1,265 @@
+{
+  "title": "Eazy Health Claim Form for Critical Illness & Disability",
+  "form_id": "eazy-health-claim-form",
+  "canonical_id": "957ce719d2ee82d86d0b2bb33d6edfcd59ee5fde755eaec15ac222053c3ebabc",
+  "bucket": "health",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:37:43Z",
+  "sections": [
+    {
+      "title": "Information on the Insured",
+      "fields": [
+        {
+          "label": "Full Name",
+          "reference": "Enter full name"
+        },
+        {
+          "label": "Date of birth",
+          "reference": "Enter full birth date (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Nationality",
+          "reference": "Enter nationality"
+        },
+        {
+          "label": "Occupation",
+          "reference": "Enter occupation"
+        },
+        {
+          "label": "Address",
+          "reference": "Enter complete present address"
+        },
+        {
+          "label": "Contact nos.",
+          "reference": "Enter contact numbers"
+        },
+        {
+          "label": "E-mail address",
+          "reference": "Enter email address"
+        }
+      ]
+    },
+    {
+      "title": "Details of the Accident",
+      "fields": [
+        {
+          "label": "Date of accident",
+          "reference": "Enter date of accident (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Place of accident",
+          "reference": "Enter place of accident"
+        },
+        {
+          "label": "Cause of accident (please provide details)",
+          "reference": "Describe cause of accident"
+        },
+        {
+          "label": "Describe the extent of the injury/ies in detail",
+          "reference": "Detail extent of injuries"
+        },
+        {
+          "label": "Diagnosis of the Attending Physician",
+          "reference": "Enter diagnosis from physician"
+        },
+        {
+          "label": "Date of return or expected return to work",
+          "reference": "Enter expected return date (MM/DD/YYYY, e.g., 11/28/2025)"
+        }
+      ]
+    },
+    {
+      "title": "Details of the Illness",
+      "fields": [
+        {
+          "label": "Describe the nature and symptoms of your illness/disease",
+          "reference": "Describe illness and symptoms"
+        },
+        {
+          "label": "Date the symptoms first occurred",
+          "reference": "Enter date symptoms first occurred (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Have you recovered from your illness/disease?",
+          "reference": "Indicate recovery status (Yes/No)"
+        },
+        {
+          "label": "What is your present health condition?",
+          "reference": "Describe current health condition"
+        },
+        {
+          "label": "Have you had this condition or a similar one previously? Please provide details.",
+          "reference": "Detail previous conditions if any"
+        }
+      ]
+    },
+    {
+      "title": "Activities of Daily Living (ADLs)",
+      "fields": [
+        {
+          "label": "Ability to feed oneself",
+          "reference": "Indicate ability to feed oneself"
+        },
+        {
+          "label": "Ability to get in and out of bed",
+          "reference": "Indicate ability to get in/out of bed"
+        },
+        {
+          "label": "Ability to move from room to room",
+          "reference": "Indicate ability to move indoors"
+        },
+        {
+          "label": "Ability to attend to own toilet needs",
+          "reference": "Indicate ability to manage toilet needs"
+        },
+        {
+          "label": "Ability to wash and bathe oneself",
+          "reference": "Indicate ability to wash/bathe"
+        },
+        {
+          "label": "Ability to dress oneself",
+          "reference": "Indicate ability to dress"
+        }
+      ]
+    },
+    {
+      "title": "For Official Use Only",
+      "fields": [
+        {
+          "label": "For office use only",
+          "reference": "Office use only; leave blank"
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Full Name",
+      "reference": "Enter full name",
+      "section": "Information on the Insured"
+    },
+    {
+      "label": "Date of birth",
+      "reference": "Enter full birth date (MM/DD/YYYY, e.g., 11/28/2025)",
+      "section": "Information on the Insured"
+    },
+    {
+      "label": "Nationality",
+      "reference": "Enter nationality",
+      "section": "Information on the Insured"
+    },
+    {
+      "label": "Occupation",
+      "reference": "Enter occupation",
+      "section": "Information on the Insured"
+    },
+    {
+      "label": "Address",
+      "reference": "Enter complete present address",
+      "section": "Information on the Insured"
+    },
+    {
+      "label": "Contact nos.",
+      "reference": "Enter contact numbers",
+      "section": "Information on the Insured"
+    },
+    {
+      "label": "E-mail address",
+      "reference": "Enter email address",
+      "section": "Information on the Insured"
+    },
+    {
+      "label": "Date of accident",
+      "reference": "Enter date of accident (MM/DD/YYYY, e.g., 11/28/2025)",
+      "section": "Details of the Accident"
+    },
+    {
+      "label": "Place of accident",
+      "reference": "Enter place of accident",
+      "section": "Details of the Accident"
+    },
+    {
+      "label": "Cause of accident (please provide details)",
+      "reference": "Describe cause of accident",
+      "section": "Details of the Accident"
+    },
+    {
+      "label": "Describe the extent of the injury/ies in detail",
+      "reference": "Detail extent of injuries",
+      "section": "Details of the Accident"
+    },
+    {
+      "label": "Diagnosis of the Attending Physician",
+      "reference": "Enter diagnosis from physician",
+      "section": "Details of the Accident"
+    },
+    {
+      "label": "Date of return or expected return to work",
+      "reference": "Enter expected return date (MM/DD/YYYY, e.g., 11/28/2025)",
+      "section": "Details of the Accident"
+    },
+    {
+      "label": "Describe the nature and symptoms of your illness/disease",
+      "reference": "Describe illness and symptoms",
+      "section": "Details of the Illness"
+    },
+    {
+      "label": "Date the symptoms first occurred",
+      "reference": "Enter date symptoms first occurred (MM/DD/YYYY, e.g., 11/28/2025)",
+      "section": "Details of the Illness"
+    },
+    {
+      "label": "Have you recovered from your illness/disease?",
+      "reference": "Indicate recovery status (Yes/No)",
+      "section": "Details of the Illness"
+    },
+    {
+      "label": "What is your present health condition?",
+      "reference": "Describe current health condition",
+      "section": "Details of the Illness"
+    },
+    {
+      "label": "Have you had this condition or a similar one previously? Please provide details.",
+      "reference": "Detail previous conditions if any",
+      "section": "Details of the Illness"
+    },
+    {
+      "label": "Ability to feed oneself",
+      "reference": "Indicate ability to feed oneself",
+      "section": "Activities of Daily Living (ADLs)"
+    },
+    {
+      "label": "Ability to get in and out of bed",
+      "reference": "Indicate ability to get in/out of bed",
+      "section": "Activities of Daily Living (ADLs)"
+    },
+    {
+      "label": "Ability to move from room to room",
+      "reference": "Indicate ability to move indoors",
+      "section": "Activities of Daily Living (ADLs)"
+    },
+    {
+      "label": "Ability to attend to own toilet needs",
+      "reference": "Indicate ability to manage toilet needs",
+      "section": "Activities of Daily Living (ADLs)"
+    },
+    {
+      "label": "Ability to wash and bathe oneself",
+      "reference": "Indicate ability to wash/bathe",
+      "section": "Activities of Daily Living (ADLs)"
+    },
+    {
+      "label": "Ability to dress oneself",
+      "reference": "Indicate ability to dress",
+      "section": "Activities of Daily Living (ADLs)"
+    },
+    {
+      "label": "For office use only",
+      "reference": "Office use only; leave blank",
+      "section": "For Official Use Only"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\HealthcareInsurance_AllianzPNBLifeIHPeAZyHealthClaimForm.pdf"
+}

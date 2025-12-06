@@ -1,0 +1,332 @@
+{
+  "title": "Suitability Assessment Form",
+  "form_id": "suitability-assessment-form",
+  "canonical_id": "897a6087afcc3f5773cc014d19ec5850813b1960f5d36f7390aebc2f2e7cbeb5",
+  "bucket": "finance",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:31:47Z",
+  "sections": [
+    {
+      "title": "PART I – CLIENT INFORMATION",
+      "fields": [
+        {
+          "label": "Client Name (Last Name, First Name, Middle Name if individual)",
+          "reference": "Enter full client name."
+        },
+        {
+          "label": "RM No.",
+          "reference": "Enter Relationship Manager number."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter date (MM/DD/YYYY, e.g., 10/01/2023)."
+        },
+        {
+          "label": "Is the client a registered Qualified Individual/Institutional Buyer (QIB) under Philippine Securities Regulation Code (or equivalent status in other jurisdictions)?",
+          "reference": "Select Yes or No."
+        },
+        {
+          "label": "If not registered, does the client meet the qualifications of a Qualified Individual/Institutional Buyer (QIB) under Rule 10.1(l) of the Philippine Securities Regulation Code?",
+          "reference": "Select Yes or No."
+        }
+      ]
+    },
+    {
+      "title": "PART II – CLIENT SUITABILITY ASSESSMENT (CSA)",
+      "fields": [
+        {
+          "label": "What is your INVESTMENT OBJECTIVE?",
+          "reference": "Select one: Emergency Fund/Operational Fund, Sustenance fund, Saving for future expenditure, Wealth enhancement."
+        },
+        {
+          "label": "What is your LIQUIDITY REQUIREMENT?",
+          "reference": "Select one: Might require withdrawal anytime, within 1 year, within 1-5 years, after 5 years."
+        },
+        {
+          "label": "What is your RISK TOLERANCE?",
+          "reference": "Select one: Principal to be safe and insured, minimal loss for modest returns, moderate loss for moderate returns, substantial loss for higher returns."
+        },
+        {
+          "label": "What is your INVESTMENT HORIZON?",
+          "reference": "Select one: Less than 30 days, 30 days to less than 1 year, 1 year to less than 5 years, 5 years and above."
+        },
+        {
+          "label": "What is the level of your INVESTMENT KNOWLEDGE?",
+          "reference": "Select one: Savings, Savings and Time Deposits/SDA, Savings and Time Deposits/SDA with Bonds, Savings and Time Deposits/SDA with various investment types."
+        },
+        {
+          "label": "What is the extent of your INVESTMENT EXPERIENCE?",
+          "reference": "Select one: Savings, Savings and Time Deposits/SDA, Savings and Time Deposits/SDA with Bonds, Savings and Time Deposits/SDA with various investment types."
+        },
+        {
+          "label": "What type of investment are you INTERESTED in?",
+          "reference": "Select one: Savings, Savings and Time Deposits/SDA, Savings and Time Deposits/SDA with Bonds, Savings and Time Deposits/SDA with various investment types."
+        },
+        {
+          "label": "SAF Score:",
+          "reference": "Enter SAF score."
+        },
+        {
+          "label": "SAF Profile:",
+          "reference": "Select one: Risk Averse, Conservative, Moderate, Aggressive."
+        },
+        {
+          "label": "Final Resulting Profile:",
+          "reference": "Select one: Risk Averse, Conservative, Moderate, Aggressive."
+        }
+      ]
+    },
+    {
+      "title": "PART III – DISCLOSURES",
+      "fields": [
+        {
+          "label": "At any time, clients may give instruction for TBG to invest in any one or more of the investment/trust products below the resulting personal investment risk profile.",
+          "reference": "N/A"
+        },
+        {
+          "label": "The client acknowledges that Suitability Assessment is done individually or on a per client basis and shall be reviewed every three (3) years unless there is a change in the personal/financial circumstance or preference within the 3-year period.",
+          "reference": "N/A"
+        }
+      ]
+    },
+    {
+      "title": "PART IV – ACKNOWLEDGEMENT",
+      "fields": [
+        {
+          "label": "I attest to the truth and correctness of my given personal/business information.",
+          "reference": "N/A"
+        },
+        {
+          "label": "Client’s Signature over Printed Name",
+          "reference": "Sign and print name."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter date (MM/DD/YYYY, e.g., 10/01/2023)."
+        },
+        {
+          "label": "Conducted by:",
+          "reference": "N/A"
+        },
+        {
+          "label": "Reviewed by:",
+          "reference": "N/A"
+        },
+        {
+          "label": "Account Manager’s Signature over Printed Name",
+          "reference": "Sign and print name."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter date (MM/DD/YYYY, e.g., 10/01/2023)."
+        },
+        {
+          "label": "Supervising Officer’s Signature over Printed Name",
+          "reference": "Sign and print name."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter date (MM/DD/YYYY, e.g., 10/01/2023)."
+        },
+        {
+          "label": "CO-TRUSTOR CONFORME",
+          "reference": "N/A"
+        },
+        {
+          "label": "Co-Trustor’s Signature over Printed Name/Date",
+          "reference": "Sign and print name with date."
+        },
+        {
+          "label": "REFERRER INFORMATION",
+          "reference": "N/A"
+        },
+        {
+          "label": "Branch Code",
+          "reference": "Enter branch code."
+        },
+        {
+          "label": "Branch Name:",
+          "reference": "Enter branch name."
+        },
+        {
+          "label": "Other Bank Units",
+          "reference": "N/A"
+        },
+        {
+          "label": "Subsidiaries/Affiliates",
+          "reference": "N/A"
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Client Name (Last Name, First Name, Middle Name if individual)",
+      "reference": "Enter full client name.",
+      "section": "PART I – CLIENT INFORMATION"
+    },
+    {
+      "label": "RM No.",
+      "reference": "Enter Relationship Manager number.",
+      "section": "PART I – CLIENT INFORMATION"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter date (MM/DD/YYYY, e.g., 10/01/2023).",
+      "section": "PART I – CLIENT INFORMATION"
+    },
+    {
+      "label": "Is the client a registered Qualified Individual/Institutional Buyer (QIB) under Philippine Securities Regulation Code (or equivalent status in other jurisdictions)?",
+      "reference": "Select Yes or No.",
+      "section": "PART I – CLIENT INFORMATION"
+    },
+    {
+      "label": "If not registered, does the client meet the qualifications of a Qualified Individual/Institutional Buyer (QIB) under Rule 10.1(l) of the Philippine Securities Regulation Code?",
+      "reference": "Select Yes or No.",
+      "section": "PART I – CLIENT INFORMATION"
+    },
+    {
+      "label": "What is your INVESTMENT OBJECTIVE?",
+      "reference": "Select one: Emergency Fund/Operational Fund, Sustenance fund, Saving for future expenditure, Wealth enhancement.",
+      "section": "PART II – CLIENT SUITABILITY ASSESSMENT (CSA)"
+    },
+    {
+      "label": "What is your LIQUIDITY REQUIREMENT?",
+      "reference": "Select one: Might require withdrawal anytime, within 1 year, within 1-5 years, after 5 years.",
+      "section": "PART II – CLIENT SUITABILITY ASSESSMENT (CSA)"
+    },
+    {
+      "label": "What is your RISK TOLERANCE?",
+      "reference": "Select one: Principal to be safe and insured, minimal loss for modest returns, moderate loss for moderate returns, substantial loss for higher returns.",
+      "section": "PART II – CLIENT SUITABILITY ASSESSMENT (CSA)"
+    },
+    {
+      "label": "What is your INVESTMENT HORIZON?",
+      "reference": "Select one: Less than 30 days, 30 days to less than 1 year, 1 year to less than 5 years, 5 years and above.",
+      "section": "PART II – CLIENT SUITABILITY ASSESSMENT (CSA)"
+    },
+    {
+      "label": "What is the level of your INVESTMENT KNOWLEDGE?",
+      "reference": "Select one: Savings, Savings and Time Deposits/SDA, Savings and Time Deposits/SDA with Bonds, Savings and Time Deposits/SDA with various investment types.",
+      "section": "PART II – CLIENT SUITABILITY ASSESSMENT (CSA)"
+    },
+    {
+      "label": "What is the extent of your INVESTMENT EXPERIENCE?",
+      "reference": "Select one: Savings, Savings and Time Deposits/SDA, Savings and Time Deposits/SDA with Bonds, Savings and Time Deposits/SDA with various investment types.",
+      "section": "PART II – CLIENT SUITABILITY ASSESSMENT (CSA)"
+    },
+    {
+      "label": "What type of investment are you INTERESTED in?",
+      "reference": "Select one: Savings, Savings and Time Deposits/SDA, Savings and Time Deposits/SDA with Bonds, Savings and Time Deposits/SDA with various investment types.",
+      "section": "PART II – CLIENT SUITABILITY ASSESSMENT (CSA)"
+    },
+    {
+      "label": "SAF Score:",
+      "reference": "Enter SAF score.",
+      "section": "PART II – CLIENT SUITABILITY ASSESSMENT (CSA)"
+    },
+    {
+      "label": "SAF Profile:",
+      "reference": "Select one: Risk Averse, Conservative, Moderate, Aggressive.",
+      "section": "PART II – CLIENT SUITABILITY ASSESSMENT (CSA)"
+    },
+    {
+      "label": "Final Resulting Profile:",
+      "reference": "Select one: Risk Averse, Conservative, Moderate, Aggressive.",
+      "section": "PART II – CLIENT SUITABILITY ASSESSMENT (CSA)"
+    },
+    {
+      "label": "At any time, clients may give instruction for TBG to invest in any one or more of the investment/trust products below the resulting personal investment risk profile.",
+      "reference": "N/A",
+      "section": "PART III – DISCLOSURES"
+    },
+    {
+      "label": "The client acknowledges that Suitability Assessment is done individually or on a per client basis and shall be reviewed every three (3) years unless there is a change in the personal/financial circumstance or preference within the 3-year period.",
+      "reference": "N/A",
+      "section": "PART III – DISCLOSURES"
+    },
+    {
+      "label": "I attest to the truth and correctness of my given personal/business information.",
+      "reference": "N/A",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "Client’s Signature over Printed Name",
+      "reference": "Sign and print name.",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter date (MM/DD/YYYY, e.g., 10/01/2023).",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "Conducted by:",
+      "reference": "N/A",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "Reviewed by:",
+      "reference": "N/A",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "Account Manager’s Signature over Printed Name",
+      "reference": "Sign and print name.",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter date (MM/DD/YYYY, e.g., 10/01/2023).",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "Supervising Officer’s Signature over Printed Name",
+      "reference": "Sign and print name.",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter date (MM/DD/YYYY, e.g., 10/01/2023).",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "CO-TRUSTOR CONFORME",
+      "reference": "N/A",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "Co-Trustor’s Signature over Printed Name/Date",
+      "reference": "Sign and print name with date.",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "REFERRER INFORMATION",
+      "reference": "N/A",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "Branch Code",
+      "reference": "Enter branch code.",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "Branch Name:",
+      "reference": "Enter branch name.",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "Other Bank Units",
+      "reference": "N/A",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    },
+    {
+      "label": "Subsidiaries/Affiliates",
+      "reference": "N/A",
+      "section": "PART IV – ACKNOWLEDGEMENT"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Finance_SuitabilityAssessmentForm.pdf"
+}

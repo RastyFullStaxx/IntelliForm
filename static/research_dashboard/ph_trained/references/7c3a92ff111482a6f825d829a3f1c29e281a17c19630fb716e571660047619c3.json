@@ -1,0 +1,418 @@
+{
+  "title": "NBI Clearance Application Form",
+  "form_id": "nbi-clearance-application",
+  "canonical_id": "7c3a92ff111482a6f825d829a3f1c29e281a17c19630fb716e571660047619c3",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:35:02Z",
+  "sections": [
+    {
+      "title": "Applicant Information",
+      "fields": [
+        {
+          "label": "ID PRESENTED",
+          "reference": "Indicate ID Number"
+        },
+        {
+          "label": "SEX",
+          "reference": "Select gender"
+        },
+        {
+          "label": "CIVIL STATUS",
+          "reference": "Select civil status"
+        },
+        {
+          "label": "CITIZENSHIP",
+          "reference": "Specify citizenship"
+        },
+        {
+          "label": "PURPOSE",
+          "reference": "State purpose of application"
+        },
+        {
+          "label": "LAST NAME",
+          "reference": "Enter last name"
+        },
+        {
+          "label": "HUSBAND’S SURNAME FOR MARRIED WOMAN",
+          "reference": "Enter husband's surname"
+        },
+        {
+          "label": "FIRST NAME",
+          "reference": "Enter first name"
+        },
+        {
+          "label": "MIDDLE NAME",
+          "reference": "Enter middle name"
+        },
+        {
+          "label": "NICKNAME",
+          "reference": "Enter nickname"
+        },
+        {
+          "label": "OTHER NAME / AKA",
+          "reference": "Enter other names or aliases"
+        },
+        {
+          "label": "PRESENT ADDRESS",
+          "reference": "Enter complete present address"
+        },
+        {
+          "label": "DATE OF BIRTH",
+          "reference": "Use MM/DD/YYYY (e.g., 11/28/2025)"
+        },
+        {
+          "label": "PLACE OF BIRTH",
+          "reference": "Indicate town/city, province"
+        },
+        {
+          "label": "HIGHEST EDUCATIONAL ATTAINMENT",
+          "reference": "Specify highest educational level"
+        },
+        {
+          "label": "OCCUPATION",
+          "reference": "Enter current occupation"
+        },
+        {
+          "label": "CONTACT NUMBER / S",
+          "reference": "Enter contact number(s)"
+        },
+        {
+          "label": "e-MAIL ADDRESS",
+          "reference": "Enter email address"
+        }
+      ]
+    },
+    {
+      "title": "Physical Characteristics",
+      "fields": [
+        {
+          "label": "HEIGHT",
+          "reference": "Enter height in feet and centimeters (e.g., 5 ft OR 150 cm)"
+        },
+        {
+          "label": "WEIGHT",
+          "reference": "Enter weight in pounds and kilograms (e.g., 150 lbs OR 68 Kg)"
+        },
+        {
+          "label": "SCARS / MARKS / PECULIARITIES",
+          "reference": "Describe any scars or marks"
+        },
+        {
+          "label": "COMPLEXION",
+          "reference": "Describe complexion"
+        },
+        {
+          "label": "RELIGION",
+          "reference": "Specify religion"
+        }
+      ]
+    },
+    {
+      "title": "Family Information",
+      "fields": [
+        {
+          "label": "NAME OF Husband or Wife",
+          "reference": "Enter name of spouse"
+        },
+        {
+          "label": "PLACE OF BIRTH",
+          "reference": "Indicate town/city, province"
+        },
+        {
+          "label": "NAME OF FATHER",
+          "reference": "Enter father's name"
+        },
+        {
+          "label": "PLACE OF BIRTH",
+          "reference": "Indicate town/city, province"
+        },
+        {
+          "label": "NAME OF MOTHER (Maiden Name)",
+          "reference": "Enter mother's maiden name"
+        },
+        {
+          "label": "PLACE OF BIRTH",
+          "reference": "Indicate town/city, province"
+        }
+      ]
+    },
+    {
+      "title": "Alien Information",
+      "fields": [
+        {
+          "label": "APPLICANT IS ALIEN",
+          "reference": "Check if applicable and fill up below"
+        },
+        {
+          "label": "PASSPORT or ACR NAME",
+          "reference": "Enter passport or ACR name"
+        },
+        {
+          "label": "ADDRESS ABROAD",
+          "reference": "Enter address abroad"
+        },
+        {
+          "label": "PASSPORT NUMBER",
+          "reference": "Enter passport number"
+        },
+        {
+          "label": "DATE ISSUED",
+          "reference": "Use MM/DD/YYYY (e.g., 11/28/2025)"
+        },
+        {
+          "label": "PLACE ISSUED",
+          "reference": "Enter place of issue"
+        },
+        {
+          "label": "ACR NUMBER",
+          "reference": "Enter ACR number"
+        },
+        {
+          "label": "DATE ISSUED",
+          "reference": "Use MM/DD/YYYY (e.g., 11/28/2025)"
+        },
+        {
+          "label": "PLACE ISSUED",
+          "reference": "Enter place of issue"
+        }
+      ]
+    },
+    {
+      "title": "Official Use",
+      "fields": [
+        {
+          "label": "FOR NBI USE ONLY",
+          "reference": "Office use only; leave blank"
+        },
+        {
+          "label": "REMARKS",
+          "reference": "Office use only; leave blank"
+        },
+        {
+          "label": "R/C",
+          "reference": "Office use only; leave blank"
+        },
+        {
+          "label": "Q/C",
+          "reference": "Office use only; leave blank"
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "ID PRESENTED",
+      "reference": "Indicate ID Number",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "SEX",
+      "reference": "Select gender",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "CIVIL STATUS",
+      "reference": "Select civil status",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "CITIZENSHIP",
+      "reference": "Specify citizenship",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "PURPOSE",
+      "reference": "State purpose of application",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "LAST NAME",
+      "reference": "Enter last name",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "HUSBAND’S SURNAME FOR MARRIED WOMAN",
+      "reference": "Enter husband's surname",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "FIRST NAME",
+      "reference": "Enter first name",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "MIDDLE NAME",
+      "reference": "Enter middle name",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "NICKNAME",
+      "reference": "Enter nickname",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "OTHER NAME / AKA",
+      "reference": "Enter other names or aliases",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "PRESENT ADDRESS",
+      "reference": "Enter complete present address",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "DATE OF BIRTH",
+      "reference": "Use MM/DD/YYYY (e.g., 11/28/2025)",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "PLACE OF BIRTH",
+      "reference": "Indicate town/city, province",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "HIGHEST EDUCATIONAL ATTAINMENT",
+      "reference": "Specify highest educational level",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "OCCUPATION",
+      "reference": "Enter current occupation",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "CONTACT NUMBER / S",
+      "reference": "Enter contact number(s)",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "e-MAIL ADDRESS",
+      "reference": "Enter email address",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "HEIGHT",
+      "reference": "Enter height in feet and centimeters (e.g., 5 ft OR 150 cm)",
+      "section": "Physical Characteristics"
+    },
+    {
+      "label": "WEIGHT",
+      "reference": "Enter weight in pounds and kilograms (e.g., 150 lbs OR 68 Kg)",
+      "section": "Physical Characteristics"
+    },
+    {
+      "label": "SCARS / MARKS / PECULIARITIES",
+      "reference": "Describe any scars or marks",
+      "section": "Physical Characteristics"
+    },
+    {
+      "label": "COMPLEXION",
+      "reference": "Describe complexion",
+      "section": "Physical Characteristics"
+    },
+    {
+      "label": "RELIGION",
+      "reference": "Specify religion",
+      "section": "Physical Characteristics"
+    },
+    {
+      "label": "NAME OF Husband or Wife",
+      "reference": "Enter name of spouse",
+      "section": "Family Information"
+    },
+    {
+      "label": "PLACE OF BIRTH",
+      "reference": "Indicate town/city, province",
+      "section": "Family Information"
+    },
+    {
+      "label": "NAME OF FATHER",
+      "reference": "Enter father's name",
+      "section": "Family Information"
+    },
+    {
+      "label": "PLACE OF BIRTH",
+      "reference": "Indicate town/city, province",
+      "section": "Family Information"
+    },
+    {
+      "label": "NAME OF MOTHER (Maiden Name)",
+      "reference": "Enter mother's maiden name",
+      "section": "Family Information"
+    },
+    {
+      "label": "PLACE OF BIRTH",
+      "reference": "Indicate town/city, province",
+      "section": "Family Information"
+    },
+    {
+      "label": "APPLICANT IS ALIEN",
+      "reference": "Check if applicable and fill up below",
+      "section": "Alien Information"
+    },
+    {
+      "label": "PASSPORT or ACR NAME",
+      "reference": "Enter passport or ACR name",
+      "section": "Alien Information"
+    },
+    {
+      "label": "ADDRESS ABROAD",
+      "reference": "Enter address abroad",
+      "section": "Alien Information"
+    },
+    {
+      "label": "PASSPORT NUMBER",
+      "reference": "Enter passport number",
+      "section": "Alien Information"
+    },
+    {
+      "label": "DATE ISSUED",
+      "reference": "Use MM/DD/YYYY (e.g., 11/28/2025)",
+      "section": "Alien Information"
+    },
+    {
+      "label": "PLACE ISSUED",
+      "reference": "Enter place of issue",
+      "section": "Alien Information"
+    },
+    {
+      "label": "ACR NUMBER",
+      "reference": "Enter ACR number",
+      "section": "Alien Information"
+    },
+    {
+      "label": "DATE ISSUED",
+      "reference": "Use MM/DD/YYYY (e.g., 11/28/2025)",
+      "section": "Alien Information"
+    },
+    {
+      "label": "PLACE ISSUED",
+      "reference": "Enter place of issue",
+      "section": "Alien Information"
+    },
+    {
+      "label": "FOR NBI USE ONLY",
+      "reference": "Office use only; leave blank",
+      "section": "Official Use"
+    },
+    {
+      "label": "REMARKS",
+      "reference": "Office use only; leave blank",
+      "section": "Official Use"
+    },
+    {
+      "label": "R/C",
+      "reference": "Office use only; leave blank",
+      "section": "Official Use"
+    },
+    {
+      "label": "Q/C",
+      "reference": "Office use only; leave blank",
+      "section": "Official Use"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Government_NBIClearanceApplicationForm.pdf"
+}

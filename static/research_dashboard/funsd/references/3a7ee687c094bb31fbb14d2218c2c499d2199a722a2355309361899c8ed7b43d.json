@@ -1,0 +1,161 @@
+{
+  "title": "Magazine Insertion Order",
+  "form_id": "magazine-insertion-order",
+  "canonical_id": "3a7ee687c094bb31fbb14d2218c2c499d2199a722a2355309361899c8ed7b43d",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:15:37Z",
+  "sections": [
+    {
+      "title": "Order Details",
+      "fields": [
+        {
+          "label": "To",
+          "reference": "Enter recipient details including name and address."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter the date of the order (MM/DD/YYYY, e.g., 03/17/1995)."
+        },
+        {
+          "label": "Advertiser",
+          "reference": "Enter the name of the advertiser."
+        },
+        {
+          "label": "Product",
+          "reference": "Enter the product name."
+        }
+      ]
+    },
+    {
+      "title": "Advertisement Compliance",
+      "fields": [
+        {
+          "label": "AD#",
+          "reference": "Enter the advertisement number."
+        },
+        {
+          "label": "Caption",
+          "reference": "Enter the caption for the advertisement."
+        },
+        {
+          "label": "Space",
+          "reference": "Enter the space allocated for the advertisement."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter the date for the advertisement."
+        }
+      ]
+    },
+    {
+      "title": "Important Instructions",
+      "fields": [
+        {
+          "label": "A",
+          "reference": "Check material carefully against proof."
+        },
+        {
+          "label": "B",
+          "reference": "Inspect repro material immediately."
+        },
+        {
+          "label": "C",
+          "reference": "Poor printing will not be paid for."
+        },
+        {
+          "label": "D",
+          "reference": "Advise us at once if instructions are not clear."
+        },
+        {
+          "label": "E",
+          "reference": "Under no circumstances are you to space out our advertisement without specific instructions from us."
+        }
+      ]
+    },
+    {
+      "title": "Space Billing Instructions",
+      "fields": [
+        {
+          "label": "Space Billing Instructions",
+          "reference": "This space is being ordered by: Enter details."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "To",
+      "reference": "Enter recipient details including name and address.",
+      "section": "Order Details"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter the date of the order (MM/DD/YYYY, e.g., 03/17/1995).",
+      "section": "Order Details"
+    },
+    {
+      "label": "Advertiser",
+      "reference": "Enter the name of the advertiser.",
+      "section": "Order Details"
+    },
+    {
+      "label": "Product",
+      "reference": "Enter the product name.",
+      "section": "Order Details"
+    },
+    {
+      "label": "AD#",
+      "reference": "Enter the advertisement number.",
+      "section": "Advertisement Compliance"
+    },
+    {
+      "label": "Caption",
+      "reference": "Enter the caption for the advertisement.",
+      "section": "Advertisement Compliance"
+    },
+    {
+      "label": "Space",
+      "reference": "Enter the space allocated for the advertisement.",
+      "section": "Advertisement Compliance"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter the date for the advertisement.",
+      "section": "Advertisement Compliance"
+    },
+    {
+      "label": "A",
+      "reference": "Check material carefully against proof.",
+      "section": "Important Instructions"
+    },
+    {
+      "label": "B",
+      "reference": "Inspect repro material immediately.",
+      "section": "Important Instructions"
+    },
+    {
+      "label": "C",
+      "reference": "Poor printing will not be paid for.",
+      "section": "Important Instructions"
+    },
+    {
+      "label": "D",
+      "reference": "Advise us at once if instructions are not clear.",
+      "section": "Important Instructions"
+    },
+    {
+      "label": "E",
+      "reference": "Under no circumstances are you to space out our advertisement without specific instructions from us.",
+      "section": "Important Instructions"
+    },
+    {
+      "label": "Space Billing Instructions",
+      "reference": "This space is being ordered by: Enter details.",
+      "section": "Space Billing Instructions"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00049.pdf"
+}

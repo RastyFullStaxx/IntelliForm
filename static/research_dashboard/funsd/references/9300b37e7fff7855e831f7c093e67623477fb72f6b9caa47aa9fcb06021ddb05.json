@@ -1,0 +1,52 @@
+{
+  "title": "Telecopy Information",
+  "form_id": "telecopy-information",
+  "canonical_id": "9300b37e7fff7855e831f7c093e67623477fb72f6b9caa47aa9fcb06021ddb05",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:59:04Z",
+  "sections": [
+    {
+      "title": "Recipient Information",
+      "fields": [
+        {
+          "label": "Name",
+          "reference": "Enter the recipient's full name."
+        },
+        {
+          "label": "FAX NO.",
+          "reference": "Enter the recipient's fax number."
+        }
+      ]
+    },
+    {
+      "title": "Original to Follow",
+      "fields": [
+        {
+          "label": "Original to follow in mail",
+          "reference": "Check 'Yes' or 'No'."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Name",
+      "reference": "Enter the recipient's full name.",
+      "section": "Recipient Information"
+    },
+    {
+      "label": "FAX NO.",
+      "reference": "Enter the recipient's fax number.",
+      "section": "Recipient Information"
+    },
+    {
+      "label": "Original to follow in mail",
+      "reference": "Check 'Yes' or 'No'.",
+      "section": "Original to Follow"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00035.pdf"
+}

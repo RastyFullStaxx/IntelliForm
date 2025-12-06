@@ -1,0 +1,134 @@
+{
+  "title": "Case Form",
+  "form_id": "case-form",
+  "canonical_id": "f551a52bf02a3ef15fd316fc584545bd3863013731a9d8c79f8fc82861572bdf",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-03T00:00:00Z",
+  "updated_at": "2025-12-06T21:49:46Z",
+  "sections": [
+    {
+      "title": "Case Information",
+      "fields": [
+        {
+          "label": "Case Name",
+          "reference": "Enter the full case name."
+        },
+        {
+          "label": "Court",
+          "reference": "Enter the name of the court."
+        },
+        {
+          "label": "Lorillard Entities",
+          "reference": "Enter the name of the Lorillard entity."
+        },
+        {
+          "label": "Date Filed",
+          "reference": "Enter the date filed (MM/DD/YYYY, e.g., 08/03/1998)."
+        },
+        {
+          "label": "Date Served",
+          "reference": "Enter the date served (MM/DD/YYYY, e.g., 08/03/1998)."
+        },
+        {
+          "label": "Case Type",
+          "reference": "Enter the type of case."
+        }
+      ]
+    },
+    {
+      "title": "Plaintiff's Counsel",
+      "fields": [
+        {
+          "label": "Counsel",
+          "reference": "Enter the names of the plaintiff's counsel."
+        },
+        {
+          "label": "Address",
+          "reference": "Enter the full address of the counsel."
+        },
+        {
+          "label": "Phone",
+          "reference": "Enter the phone number of the counsel."
+        }
+      ]
+    },
+    {
+      "title": "Judge Information",
+      "fields": [
+        {
+          "label": "Judge",
+          "reference": "Enter the name of the judge."
+        }
+      ]
+    },
+    {
+      "title": "Trial Information",
+      "fields": [
+        {
+          "label": "Trial Date",
+          "reference": "Enter the trial date (MM/DD/YYYY, e.g., 08/03/1998)."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Case Name",
+      "reference": "Enter the full case name.",
+      "section": "Case Information"
+    },
+    {
+      "label": "Court",
+      "reference": "Enter the name of the court.",
+      "section": "Case Information"
+    },
+    {
+      "label": "Lorillard Entities",
+      "reference": "Enter the name of the Lorillard entity.",
+      "section": "Case Information"
+    },
+    {
+      "label": "Date Filed",
+      "reference": "Enter the date filed (MM/DD/YYYY, e.g., 08/03/1998).",
+      "section": "Case Information"
+    },
+    {
+      "label": "Date Served",
+      "reference": "Enter the date served (MM/DD/YYYY, e.g., 08/03/1998).",
+      "section": "Case Information"
+    },
+    {
+      "label": "Case Type",
+      "reference": "Enter the type of case.",
+      "section": "Case Information"
+    },
+    {
+      "label": "Counsel",
+      "reference": "Enter the names of the plaintiff's counsel.",
+      "section": "Plaintiff's Counsel"
+    },
+    {
+      "label": "Address",
+      "reference": "Enter the full address of the counsel.",
+      "section": "Plaintiff's Counsel"
+    },
+    {
+      "label": "Phone",
+      "reference": "Enter the phone number of the counsel.",
+      "section": "Plaintiff's Counsel"
+    },
+    {
+      "label": "Judge",
+      "reference": "Enter the name of the judge.",
+      "section": "Judge Information"
+    },
+    {
+      "label": "Trial Date",
+      "reference": "Enter the trial date (MM/DD/YYYY, e.g., 08/03/1998).",
+      "section": "Trial Information"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00010.pdf"
+}

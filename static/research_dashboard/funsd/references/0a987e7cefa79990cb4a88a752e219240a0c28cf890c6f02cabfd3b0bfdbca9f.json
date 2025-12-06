@@ -1,0 +1,102 @@
+{
+  "title": "Newport Lights Heavy Up Progress Report",
+  "form_id": "newport-lights-progress-report",
+  "canonical_id": "0a987e7cefa79990cb4a88a752e219240a0c28cf890c6f02cabfd3b0bfdbca9f",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:57:56Z",
+  "sections": [
+    {
+      "title": "Submission Information",
+      "fields": [
+        {
+          "label": "TO",
+          "reference": "Enter recipient's name."
+        },
+        {
+          "label": "FROM",
+          "reference": "Enter sender's name."
+        },
+        {
+          "label": "SUBMISSION DATE",
+          "reference": "Enter submission date (e.g., MM/DD)."
+        }
+      ]
+    },
+    {
+      "title": "Effectiveness of Distribution Allowance",
+      "fields": [
+        {
+          "label": "DIRECT ACCOUNT/WHOLESALERS",
+          "reference": "Provide details on effectiveness."
+        },
+        {
+          "label": "DIRECT ACCOUNT CHAINS",
+          "reference": "Provide details on effectiveness."
+        },
+        {
+          "label": "NON-DIRECT ACCOUNT CHAINS",
+          "reference": "Provide details on effectiveness."
+        },
+        {
+          "label": "EFFECTIVENESS OF THE RETAIL (1.00 OFF CARTON) DISTRIBUTION ALLOWANCE",
+          "reference": "Provide details on effectiveness."
+        }
+      ]
+    },
+    {
+      "title": "Promotional Activity",
+      "fields": [
+        {
+          "label": "40c OFF PACK - GENERAL MARKET",
+          "reference": "Provide details on promotional activity."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "TO",
+      "reference": "Enter recipient's name.",
+      "section": "Submission Information"
+    },
+    {
+      "label": "FROM",
+      "reference": "Enter sender's name.",
+      "section": "Submission Information"
+    },
+    {
+      "label": "SUBMISSION DATE",
+      "reference": "Enter submission date (e.g., MM/DD).",
+      "section": "Submission Information"
+    },
+    {
+      "label": "DIRECT ACCOUNT/WHOLESALERS",
+      "reference": "Provide details on effectiveness.",
+      "section": "Effectiveness of Distribution Allowance"
+    },
+    {
+      "label": "DIRECT ACCOUNT CHAINS",
+      "reference": "Provide details on effectiveness.",
+      "section": "Effectiveness of Distribution Allowance"
+    },
+    {
+      "label": "NON-DIRECT ACCOUNT CHAINS",
+      "reference": "Provide details on effectiveness.",
+      "section": "Effectiveness of Distribution Allowance"
+    },
+    {
+      "label": "EFFECTIVENESS OF THE RETAIL (1.00 OFF CARTON) DISTRIBUTION ALLOWANCE",
+      "reference": "Provide details on effectiveness.",
+      "section": "Effectiveness of Distribution Allowance"
+    },
+    {
+      "label": "40c OFF PACK - GENERAL MARKET",
+      "reference": "Provide details on promotional activity.",
+      "section": "Promotional Activity"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00032.pdf"
+}

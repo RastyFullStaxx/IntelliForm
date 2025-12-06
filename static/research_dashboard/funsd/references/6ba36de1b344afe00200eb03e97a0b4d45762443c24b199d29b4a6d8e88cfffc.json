@@ -1,0 +1,139 @@
+{
+  "title": "Competitive Product Introduction Progress Report",
+  "form_id": "competitive-product-introduction-progress-report",
+  "canonical_id": "6ba36de1b344afe00200eb03e97a0b4d45762443c24b199d29b4a6d8e88cfffc",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-04T00:00:00Z",
+  "updated_at": "2025-12-06T21:46:33Z",
+  "sections": [
+    {
+      "title": "Report Information",
+      "fields": [
+        {
+          "label": "TO",
+          "reference": "Enter recipient's name."
+        },
+        {
+          "label": "FROM",
+          "reference": "Enter sender's name."
+        },
+        {
+          "label": "DATE",
+          "reference": "Enter date (DD-MMM-YY, e.g., 02-Dec-97)."
+        },
+        {
+          "label": "REPORTING PERIODS",
+          "reference": "Indicate reporting months (e.g., Oct, Nov, Dec, Jan)."
+        }
+      ]
+    },
+    {
+      "title": "Market Information",
+      "fields": [
+        {
+          "label": "TEST MARKET GEOGRAPHY",
+          "reference": "Enter test market divisions."
+        },
+        {
+          "label": "PRICE POINT",
+          "reference": "Enter distributor's cost per carton."
+        }
+      ]
+    },
+    {
+      "title": "Sales Force Involvement",
+      "fields": [
+        {
+          "label": "SALES FORCE INVOLVEMENT",
+          "reference": "Describe sales force activities."
+        }
+      ]
+    },
+    {
+      "title": "Distribution and Merchandising",
+      "fields": [
+        {
+          "label": "DISTRIBUTORS - ACCEPTANCE/INTRO TERMS/INTRO DEALS/INVOLVEMENT",
+          "reference": "Describe distributor acceptance and terms."
+        },
+        {
+          "label": "CHAINS - ACCEPTANCE/MERCHANDISING",
+          "reference": "Describe chain acceptance and merchandising."
+        },
+        {
+          "label": "INDEPENDENTS - ACCEPTANCE/MERCHANDISING",
+          "reference": "Describe independent acceptance and merchandising."
+        }
+      ]
+    },
+    {
+      "title": "Advertising Effectiveness",
+      "fields": [
+        {
+          "label": "ADVERTISING - EFFECTIVENESS OF P.O.S.",
+          "reference": "Describe effectiveness of point of sale advertising."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "TO",
+      "reference": "Enter recipient's name.",
+      "section": "Report Information"
+    },
+    {
+      "label": "FROM",
+      "reference": "Enter sender's name.",
+      "section": "Report Information"
+    },
+    {
+      "label": "DATE",
+      "reference": "Enter date (DD-MMM-YY, e.g., 02-Dec-97).",
+      "section": "Report Information"
+    },
+    {
+      "label": "REPORTING PERIODS",
+      "reference": "Indicate reporting months (e.g., Oct, Nov, Dec, Jan).",
+      "section": "Report Information"
+    },
+    {
+      "label": "TEST MARKET GEOGRAPHY",
+      "reference": "Enter test market divisions.",
+      "section": "Market Information"
+    },
+    {
+      "label": "PRICE POINT",
+      "reference": "Enter distributor's cost per carton.",
+      "section": "Market Information"
+    },
+    {
+      "label": "SALES FORCE INVOLVEMENT",
+      "reference": "Describe sales force activities.",
+      "section": "Sales Force Involvement"
+    },
+    {
+      "label": "DISTRIBUTORS - ACCEPTANCE/INTRO TERMS/INTRO DEALS/INVOLVEMENT",
+      "reference": "Describe distributor acceptance and terms.",
+      "section": "Distribution and Merchandising"
+    },
+    {
+      "label": "CHAINS - ACCEPTANCE/MERCHANDISING",
+      "reference": "Describe chain acceptance and merchandising.",
+      "section": "Distribution and Merchandising"
+    },
+    {
+      "label": "INDEPENDENTS - ACCEPTANCE/MERCHANDISING",
+      "reference": "Describe independent acceptance and merchandising.",
+      "section": "Distribution and Merchandising"
+    },
+    {
+      "label": "ADVERTISING - EFFECTIVENESS OF P.O.S.",
+      "reference": "Describe effectiveness of point of sale advertising.",
+      "section": "Advertising Effectiveness"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00002.pdf"
+}

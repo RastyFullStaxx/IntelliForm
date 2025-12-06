@@ -1,0 +1,188 @@
+{
+  "title": "APPLICATION FOR HEALTH CARE ASSISTANCE",
+  "form_id": "healthcare-vfp-application-form",
+  "canonical_id": "8a70c20c72bb8fde363abfc59e7fb64c8812a918ea8efe50428860713b1d7668",
+  "bucket": "health",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:37:02Z",
+  "sections": [
+    {
+      "title": "Applicant Information",
+      "fields": [
+        {
+          "label": "NAME OF APPLICANT",
+          "reference": "Enter full name (Last Name, First Name, Middle Name)"
+        },
+        {
+          "label": "ADDRESS",
+          "reference": "Enter complete address (Street, Town City, Province, ZIP CODE)"
+        },
+        {
+          "label": "RELATIONSHIP OF APPLICANT TO THE VFP MEMBER",
+          "reference": "Specify relationship to VFP member"
+        },
+        {
+          "label": "CELL PHONE/ TELEPHONE NUMBER",
+          "reference": "Enter contact number"
+        }
+      ]
+    },
+    {
+      "title": "VFP Member Information",
+      "fields": [
+        {
+          "label": "NAME OF VFP MEMBER",
+          "reference": "Enter full name (Last Name, First Name, Middle Name)"
+        },
+        {
+          "label": "Name of Hospital",
+          "reference": "Enter name of hospital"
+        },
+        {
+          "label": "Date of confinement",
+          "reference": "Use MM/DD/YYYY (e.g., 11/28/2025)"
+        },
+        {
+          "label": "Date of birth",
+          "reference": "Use MM/DD/YYYY (e.g., 11/28/2025)"
+        },
+        {
+          "label": "Veterans Post",
+          "reference": "Enter Veterans Post"
+        },
+        {
+          "label": "Membership Status",
+          "reference": "Specify membership status"
+        },
+        {
+          "label": "Veterans District",
+          "reference": "Enter Veterans District"
+        },
+        {
+          "label": "Veterans Region",
+          "reference": "Enter Veterans Region"
+        },
+        {
+          "label": "VFP Membership ID card No.",
+          "reference": "Enter VFP Membership ID card number"
+        },
+        {
+          "label": "AFP Retirement ID No.",
+          "reference": "Enter AFP Retirement ID number"
+        }
+      ]
+    },
+    {
+      "title": "Certification and Signature",
+      "fields": [
+        {
+          "label": "Signature",
+          "reference": "Applicant's signature"
+        },
+        {
+          "label": "Valid ID with No.",
+          "reference": "Enter valid ID number"
+        }
+      ]
+    },
+    {
+      "title": "Endorsement",
+      "fields": [
+        {
+          "label": "Signature of over Printed Name of Charter/Affiliate/Post President",
+          "reference": "Signature of endorsing official"
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "NAME OF APPLICANT",
+      "reference": "Enter full name (Last Name, First Name, Middle Name)",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "ADDRESS",
+      "reference": "Enter complete address (Street, Town City, Province, ZIP CODE)",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "RELATIONSHIP OF APPLICANT TO THE VFP MEMBER",
+      "reference": "Specify relationship to VFP member",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "CELL PHONE/ TELEPHONE NUMBER",
+      "reference": "Enter contact number",
+      "section": "Applicant Information"
+    },
+    {
+      "label": "NAME OF VFP MEMBER",
+      "reference": "Enter full name (Last Name, First Name, Middle Name)",
+      "section": "VFP Member Information"
+    },
+    {
+      "label": "Name of Hospital",
+      "reference": "Enter name of hospital",
+      "section": "VFP Member Information"
+    },
+    {
+      "label": "Date of confinement",
+      "reference": "Use MM/DD/YYYY (e.g., 11/28/2025)",
+      "section": "VFP Member Information"
+    },
+    {
+      "label": "Date of birth",
+      "reference": "Use MM/DD/YYYY (e.g., 11/28/2025)",
+      "section": "VFP Member Information"
+    },
+    {
+      "label": "Veterans Post",
+      "reference": "Enter Veterans Post",
+      "section": "VFP Member Information"
+    },
+    {
+      "label": "Membership Status",
+      "reference": "Specify membership status",
+      "section": "VFP Member Information"
+    },
+    {
+      "label": "Veterans District",
+      "reference": "Enter Veterans District",
+      "section": "VFP Member Information"
+    },
+    {
+      "label": "Veterans Region",
+      "reference": "Enter Veterans Region",
+      "section": "VFP Member Information"
+    },
+    {
+      "label": "VFP Membership ID card No.",
+      "reference": "Enter VFP Membership ID card number",
+      "section": "VFP Member Information"
+    },
+    {
+      "label": "AFP Retirement ID No.",
+      "reference": "Enter AFP Retirement ID number",
+      "section": "VFP Member Information"
+    },
+    {
+      "label": "Signature",
+      "reference": "Applicant's signature",
+      "section": "Certification and Signature"
+    },
+    {
+      "label": "Valid ID with No.",
+      "reference": "Enter valid ID number",
+      "section": "Certification and Signature"
+    },
+    {
+      "label": "Signature of over Printed Name of Charter/Affiliate/Post President",
+      "reference": "Signature of endorsing official",
+      "section": "Endorsement"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Healthcare_VFPHealthcareApplicationForm.pdf"
+}

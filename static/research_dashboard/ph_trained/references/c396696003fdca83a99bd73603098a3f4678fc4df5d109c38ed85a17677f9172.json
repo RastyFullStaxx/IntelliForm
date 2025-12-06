@@ -1,0 +1,805 @@
+{
+  "title": "Unified Business Permit Application Form",
+  "form_id": "unified-business-permit-application-form",
+  "canonical_id": "c396696003fdca83a99bd73603098a3f4678fc4df5d109c38ed85a17677f9172",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:33:18Z",
+  "sections": [
+    {
+      "title": "Business Information and Registration",
+      "fields": [
+        {
+          "label": "New",
+          "reference": "Check if applying for a new permit."
+        },
+        {
+          "label": "Renewal",
+          "reference": "Check if renewing an existing permit."
+        },
+        {
+          "label": "Transfer",
+          "reference": "Check if transferring the permit."
+        },
+        {
+          "label": "Amendment",
+          "reference": "Check if making amendments to the permit."
+        },
+        {
+          "label": "Change Address",
+          "reference": "Specify new address if applicable."
+        },
+        {
+          "label": "Change Area",
+          "reference": "Specify new area if applicable."
+        },
+        {
+          "label": "Change Name",
+          "reference": "Specify new name if applicable."
+        },
+        {
+          "label": "Additional Line of Business",
+          "reference": "Specify any additional business activities."
+        },
+        {
+          "label": "Please choose one",
+          "reference": "Select the type of business structure."
+        },
+        {
+          "label": "Sole Proprietorship",
+          "reference": "Check if sole proprietorship."
+        },
+        {
+          "label": "One Person Corporation",
+          "reference": "Check if one person corporation."
+        },
+        {
+          "label": "Partnership",
+          "reference": "Check if partnership."
+        },
+        {
+          "label": "Cooperative",
+          "reference": "Check if cooperative."
+        },
+        {
+          "label": "Corporation",
+          "reference": "Check if corporation."
+        },
+        {
+          "label": "Male",
+          "reference": "Check if male."
+        },
+        {
+          "label": "Female",
+          "reference": "Check if female."
+        },
+        {
+          "label": "DTI TRN or BNN/SEC or CDA Registration Number",
+          "reference": "Enter registration number."
+        },
+        {
+          "label": "Date Issued",
+          "reference": "Enter date issued (MM/DD/YYYY)."
+        },
+        {
+          "label": "Tax Identification Number (TIN)",
+          "reference": "Enter TIN."
+        },
+        {
+          "label": "Taxpayer/Corporate Name",
+          "reference": "Enter full taxpayer or corporate name."
+        },
+        {
+          "label": "Trade Name/Franchise",
+          "reference": "Enter trade name or franchise if applicable."
+        },
+        {
+          "label": "Office Address",
+          "reference": "Enter complete office address."
+        },
+        {
+          "label": "Unit No",
+          "reference": "Enter unit number."
+        },
+        {
+          "label": "House/Floor No",
+          "reference": "Enter house or floor number."
+        },
+        {
+          "label": "Name of Building",
+          "reference": "Enter name of building."
+        },
+        {
+          "label": "Street",
+          "reference": "Enter street name."
+        },
+        {
+          "label": "Barangay",
+          "reference": "Enter barangay."
+        },
+        {
+          "label": "City",
+          "reference": "Enter city."
+        },
+        {
+          "label": "ZIP Code",
+          "reference": "Enter ZIP code."
+        },
+        {
+          "label": "Property owned?",
+          "reference": "Check if property is owned."
+        },
+        {
+          "label": "If Yes, PIN or TD Number",
+          "reference": "Enter PIN or TD number if applicable."
+        },
+        {
+          "label": "If No, term of lease",
+          "reference": "Enter lease term (MM/DD/YYYY)."
+        },
+        {
+          "label": "Number of employees in establishment",
+          "reference": "Enter total number of employees."
+        },
+        {
+          "label": "Number of employees residing in Taguig",
+          "reference": "Enter number of employees living in Taguig."
+        },
+        {
+          "label": "Delivery Vehicles",
+          "reference": "Check applicable vehicle types."
+        },
+        {
+          "label": "Van/Truck",
+          "reference": "Check if using van or truck."
+        },
+        {
+          "label": "Motorcycle",
+          "reference": "Check if using motorcycle."
+        },
+        {
+          "label": "Other",
+          "reference": "Specify other vehicle types."
+        }
+      ]
+    },
+    {
+      "title": "Business Contacts",
+      "fields": [
+        {
+          "label": "Authorized Representative",
+          "reference": "Enter name of authorized representative."
+        },
+        {
+          "label": "Position",
+          "reference": "Enter position of authorized representative."
+        },
+        {
+          "label": "Telephone Number",
+          "reference": "Enter telephone number."
+        },
+        {
+          "label": "Mobile Number",
+          "reference": "Enter mobile number."
+        },
+        {
+          "label": "Designated Safety Officer",
+          "reference": "Enter name of safety officer."
+        },
+        {
+          "label": "Telephone Number",
+          "reference": "Enter telephone number of safety officer."
+        },
+        {
+          "label": "Mobile Number",
+          "reference": "Enter mobile number of safety officer."
+        },
+        {
+          "label": "Email Address",
+          "reference": "Enter email address of safety officer."
+        }
+      ]
+    },
+    {
+      "title": "Business Activity",
+      "fields": [
+        {
+          "label": "Office Classification",
+          "reference": "Check applicable classification."
+        },
+        {
+          "label": "Main/Principal/Head Office",
+          "reference": "Check if main office."
+        },
+        {
+          "label": "Branch",
+          "reference": "Check if branch."
+        },
+        {
+          "label": "Administrative Office",
+          "reference": "Check if administrative office."
+        },
+        {
+          "label": "Sales Office",
+          "reference": "Check if sales office."
+        },
+        {
+          "label": "Showroom",
+          "reference": "Check if showroom."
+        },
+        {
+          "label": "Virtual Office",
+          "reference": "Check if virtual office."
+        },
+        {
+          "label": "Warehouse",
+          "reference": "Check if warehouse."
+        },
+        {
+          "label": "Do you have tax incentives from any Government Entity?",
+          "reference": "Check yes or no."
+        },
+        {
+          "label": "Yes",
+          "reference": "Check if yes."
+        },
+        {
+          "label": "No",
+          "reference": "Check if no."
+        },
+        {
+          "label": "If Yes",
+          "reference": "Select applicable tax incentives."
+        },
+        {
+          "label": "BOI",
+          "reference": "Check if BOI."
+        },
+        {
+          "label": "Pioneer",
+          "reference": "Check if pioneer."
+        },
+        {
+          "label": "Non-pioneer",
+          "reference": "Check if non-pioneer."
+        },
+        {
+          "label": "PEZA",
+          "reference": "Check if PEZA."
+        },
+        {
+          "label": "Cooperative",
+          "reference": "Check if cooperative."
+        },
+        {
+          "label": "Inventor",
+          "reference": "Check if inventor."
+        },
+        {
+          "label": "Regional Operating Headquarters",
+          "reference": "Check if regional operating headquarters."
+        },
+        {
+          "label": "Regional or Area Headquarters",
+          "reference": "Check if regional or area headquarters."
+        },
+        {
+          "label": "Representative Office",
+          "reference": "Check if representative office."
+        },
+        {
+          "label": "Date registered",
+          "reference": "Enter registration date (MM/DD/YYYY)."
+        },
+        {
+          "label": "Line of Business",
+          "reference": "Specify line of business."
+        },
+        {
+          "label": "Nature of Business",
+          "reference": "Specify nature of business."
+        },
+        {
+          "label": "Philippine Standard Industrial Code",
+          "reference": "Enter applicable code."
+        },
+        {
+          "label": "No. of Units",
+          "reference": "Enter number of units."
+        },
+        {
+          "label": "Capitalization or Preceding Calendar Year Gross Sales/Receipts",
+          "reference": "Enter capitalization or gross sales."
+        }
+      ]
+    },
+    {
+      "title": "Other Business Activity",
+      "fields": [
+        {
+          "label": "Please check one",
+          "reference": "Check applicable business activities."
+        },
+        {
+          "label": "Designated Smoking and Vaping Area",
+          "reference": "Check if applicable."
+        },
+        {
+          "label": "Retail Cigarette",
+          "reference": "Check if applicable."
+        },
+        {
+          "label": "Retail Softdrinks",
+          "reference": "Check if applicable."
+        },
+        {
+          "label": "License to Sell Liquor",
+          "reference": "Check if applicable."
+        },
+        {
+          "label": "License to Serve Liquor till 10:00pm",
+          "reference": "Check if applicable."
+        },
+        {
+          "label": "License to Serve Liquor till 2:00am",
+          "reference": "Check if applicable."
+        },
+        {
+          "label": "Qualification Fee",
+          "reference": "Check if applicable."
+        },
+        {
+          "label": "Accreditation Fee",
+          "reference": "Check if applicable."
+        }
+      ]
+    },
+    {
+      "title": "Declaration",
+      "fields": [
+        {
+          "label": "I DECLARE AND AFFIRM",
+          "reference": "Acknowledge that all information is true."
+        },
+        {
+          "label": "Signature of the Proprietor/Representative over printed name",
+          "reference": "Sign and print name."
+        },
+        {
+          "label": "Designation and Date",
+          "reference": "Enter designation and date."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "New",
+      "reference": "Check if applying for a new permit.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Renewal",
+      "reference": "Check if renewing an existing permit.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Transfer",
+      "reference": "Check if transferring the permit.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Amendment",
+      "reference": "Check if making amendments to the permit.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Change Address",
+      "reference": "Specify new address if applicable.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Change Area",
+      "reference": "Specify new area if applicable.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Change Name",
+      "reference": "Specify new name if applicable.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Additional Line of Business",
+      "reference": "Specify any additional business activities.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Please choose one",
+      "reference": "Select the type of business structure.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Sole Proprietorship",
+      "reference": "Check if sole proprietorship.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "One Person Corporation",
+      "reference": "Check if one person corporation.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Partnership",
+      "reference": "Check if partnership.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Cooperative",
+      "reference": "Check if cooperative.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Corporation",
+      "reference": "Check if corporation.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Male",
+      "reference": "Check if male.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Female",
+      "reference": "Check if female.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "DTI TRN or BNN/SEC or CDA Registration Number",
+      "reference": "Enter registration number.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Date Issued",
+      "reference": "Enter date issued (MM/DD/YYYY).",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Tax Identification Number (TIN)",
+      "reference": "Enter TIN.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Taxpayer/Corporate Name",
+      "reference": "Enter full taxpayer or corporate name.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Trade Name/Franchise",
+      "reference": "Enter trade name or franchise if applicable.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Office Address",
+      "reference": "Enter complete office address.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Unit No",
+      "reference": "Enter unit number.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "House/Floor No",
+      "reference": "Enter house or floor number.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Name of Building",
+      "reference": "Enter name of building.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Street",
+      "reference": "Enter street name.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Barangay",
+      "reference": "Enter barangay.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "City",
+      "reference": "Enter city.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "ZIP Code",
+      "reference": "Enter ZIP code.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Property owned?",
+      "reference": "Check if property is owned.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "If Yes, PIN or TD Number",
+      "reference": "Enter PIN or TD number if applicable.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "If No, term of lease",
+      "reference": "Enter lease term (MM/DD/YYYY).",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Number of employees in establishment",
+      "reference": "Enter total number of employees.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Number of employees residing in Taguig",
+      "reference": "Enter number of employees living in Taguig.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Delivery Vehicles",
+      "reference": "Check applicable vehicle types.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Van/Truck",
+      "reference": "Check if using van or truck.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Motorcycle",
+      "reference": "Check if using motorcycle.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Other",
+      "reference": "Specify other vehicle types.",
+      "section": "Business Information and Registration"
+    },
+    {
+      "label": "Authorized Representative",
+      "reference": "Enter name of authorized representative.",
+      "section": "Business Contacts"
+    },
+    {
+      "label": "Position",
+      "reference": "Enter position of authorized representative.",
+      "section": "Business Contacts"
+    },
+    {
+      "label": "Telephone Number",
+      "reference": "Enter telephone number.",
+      "section": "Business Contacts"
+    },
+    {
+      "label": "Mobile Number",
+      "reference": "Enter mobile number.",
+      "section": "Business Contacts"
+    },
+    {
+      "label": "Designated Safety Officer",
+      "reference": "Enter name of safety officer.",
+      "section": "Business Contacts"
+    },
+    {
+      "label": "Telephone Number",
+      "reference": "Enter telephone number of safety officer.",
+      "section": "Business Contacts"
+    },
+    {
+      "label": "Mobile Number",
+      "reference": "Enter mobile number of safety officer.",
+      "section": "Business Contacts"
+    },
+    {
+      "label": "Email Address",
+      "reference": "Enter email address of safety officer.",
+      "section": "Business Contacts"
+    },
+    {
+      "label": "Office Classification",
+      "reference": "Check applicable classification.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Main/Principal/Head Office",
+      "reference": "Check if main office.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Branch",
+      "reference": "Check if branch.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Administrative Office",
+      "reference": "Check if administrative office.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Sales Office",
+      "reference": "Check if sales office.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Showroom",
+      "reference": "Check if showroom.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Virtual Office",
+      "reference": "Check if virtual office.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Warehouse",
+      "reference": "Check if warehouse.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Do you have tax incentives from any Government Entity?",
+      "reference": "Check yes or no.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Yes",
+      "reference": "Check if yes.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "No",
+      "reference": "Check if no.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "If Yes",
+      "reference": "Select applicable tax incentives.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "BOI",
+      "reference": "Check if BOI.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Pioneer",
+      "reference": "Check if pioneer.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Non-pioneer",
+      "reference": "Check if non-pioneer.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "PEZA",
+      "reference": "Check if PEZA.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Cooperative",
+      "reference": "Check if cooperative.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Inventor",
+      "reference": "Check if inventor.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Regional Operating Headquarters",
+      "reference": "Check if regional operating headquarters.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Regional or Area Headquarters",
+      "reference": "Check if regional or area headquarters.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Representative Office",
+      "reference": "Check if representative office.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Date registered",
+      "reference": "Enter registration date (MM/DD/YYYY).",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Line of Business",
+      "reference": "Specify line of business.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Nature of Business",
+      "reference": "Specify nature of business.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Philippine Standard Industrial Code",
+      "reference": "Enter applicable code.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "No. of Units",
+      "reference": "Enter number of units.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Capitalization or Preceding Calendar Year Gross Sales/Receipts",
+      "reference": "Enter capitalization or gross sales.",
+      "section": "Business Activity"
+    },
+    {
+      "label": "Please check one",
+      "reference": "Check applicable business activities.",
+      "section": "Other Business Activity"
+    },
+    {
+      "label": "Designated Smoking and Vaping Area",
+      "reference": "Check if applicable.",
+      "section": "Other Business Activity"
+    },
+    {
+      "label": "Retail Cigarette",
+      "reference": "Check if applicable.",
+      "section": "Other Business Activity"
+    },
+    {
+      "label": "Retail Softdrinks",
+      "reference": "Check if applicable.",
+      "section": "Other Business Activity"
+    },
+    {
+      "label": "License to Sell Liquor",
+      "reference": "Check if applicable.",
+      "section": "Other Business Activity"
+    },
+    {
+      "label": "License to Serve Liquor till 10:00pm",
+      "reference": "Check if applicable.",
+      "section": "Other Business Activity"
+    },
+    {
+      "label": "License to Serve Liquor till 2:00am",
+      "reference": "Check if applicable.",
+      "section": "Other Business Activity"
+    },
+    {
+      "label": "Qualification Fee",
+      "reference": "Check if applicable.",
+      "section": "Other Business Activity"
+    },
+    {
+      "label": "Accreditation Fee",
+      "reference": "Check if applicable.",
+      "section": "Other Business Activity"
+    },
+    {
+      "label": "I DECLARE AND AFFIRM",
+      "reference": "Acknowledge that all information is true.",
+      "section": "Declaration"
+    },
+    {
+      "label": "Signature of the Proprietor/Representative over printed name",
+      "reference": "Sign and print name.",
+      "section": "Declaration"
+    },
+    {
+      "label": "Designation and Date",
+      "reference": "Enter designation and date.",
+      "section": "Declaration"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Government_BusinessPermitApplicationForm.pdf"
+}

@@ -1,0 +1,468 @@
+{
+  "title": "Application for Treaty Purposes",
+  "form_id": "0901-T",
+  "canonical_id": "706fa7449dde29fcccffa882057534f3578c268a1b223221331993fb26365214",
+  "bucket": "ph-supplemental",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:12:00Z",
+  "sections": [
+    {
+      "title": "Part I – Legal Basis of Claim for Relief",
+      "fields": [
+        {
+          "label": "Article",
+          "reference": "Enter the article number of the Tax Treaty between the Philippines and the other country."
+        },
+        {
+          "label": "Tax Treatment Under the Treaty",
+          "reference": "Select either 'Exempt from Income Tax' or 'Subject to Preferential Rate' and specify the tax rate if applicable."
+        }
+      ]
+    },
+    {
+      "title": "Part II – Identification of Income Recipient",
+      "fields": [
+        {
+          "label": "Name of Income Recipient",
+          "reference": "Enter the full name of the income recipient."
+        },
+        {
+          "label": "Local Taxpayer Identification Number (TIN)",
+          "reference": "Enter the local TIN."
+        },
+        {
+          "label": "RDO Code",
+          "reference": "Enter the RDO code."
+        },
+        {
+          "label": "Foreign TIN",
+          "reference": "Enter the foreign TIN."
+        },
+        {
+          "label": "Date of Establishment",
+          "reference": "Enter the date of establishment (MM/DD/YYYY, e.g., 01/01/2020)."
+        },
+        {
+          "label": "Contact Number (Landline/Mobile No.)",
+          "reference": "Enter the contact number."
+        },
+        {
+          "label": "Email Address",
+          "reference": "Enter the email address."
+        },
+        {
+          "label": "Country where the recipient is taxable as resident and where it is to pay tax",
+          "reference": "Enter the country."
+        },
+        {
+          "label": "With permanent establishment (PE) in the Philippines?",
+          "reference": "Select 'Yes' or 'No'."
+        },
+        {
+          "label": "With license to do business in the Philippines?",
+          "reference": "Select 'Yes' or 'No'."
+        },
+        {
+          "label": "Taxpayer Identification Number of the PE",
+          "reference": "Enter the TIN of the PE."
+        },
+        {
+          "label": "RDO Code",
+          "reference": "Enter the RDO code."
+        },
+        {
+          "label": "Address of the PE",
+          "reference": "Enter the address of the PE."
+        },
+        {
+          "label": "ZIP Code",
+          "reference": "Enter the ZIP code."
+        },
+        {
+          "label": "Details of Business",
+          "reference": "Provide details about the business."
+        }
+      ]
+    },
+    {
+      "title": "Part III – Details of Income Payor",
+      "fields": [
+        {
+          "label": "Registered Name",
+          "reference": "Enter the registered name (Last Name, First Name, Middle Name for Individual OR Registered Name for Non-Individual)."
+        },
+        {
+          "label": "Taxpayer Identification Number (TIN)",
+          "reference": "Enter the TIN."
+        },
+        {
+          "label": "RDO Code",
+          "reference": "Enter the RDO code."
+        },
+        {
+          "label": "Registered Address",
+          "reference": "Enter the registered address."
+        },
+        {
+          "label": "ZIP Code",
+          "reference": "Enter the ZIP code."
+        },
+        {
+          "label": "Contact Number (Landline/Mobile No.)",
+          "reference": "Enter the contact number."
+        },
+        {
+          "label": "Email Address",
+          "reference": "Enter the email address."
+        },
+        {
+          "label": "Details of Business",
+          "reference": "Provide details about the business."
+        },
+        {
+          "label": "Registered with the Bureau of Investments (BOI)?",
+          "reference": "Select 'Yes' or 'No'."
+        },
+        {
+          "label": "Engaged in preferred pioneer areas of investment?",
+          "reference": "Select 'Yes' or 'No'."
+        },
+        {
+          "label": "Related to the income recipient?",
+          "reference": "Select 'Yes' or 'No'."
+        },
+        {
+          "label": "If yes, describe the nature of relationship",
+          "reference": "Provide a description if applicable."
+        }
+      ]
+    },
+    {
+      "title": "Part IV – Details of Income and Withholding Tax",
+      "fields": [
+        {
+          "label": "Kind of Income",
+          "reference": "Enter the kind of income."
+        },
+        {
+          "label": "Description",
+          "reference": "Provide a description of the income."
+        },
+        {
+          "label": "Amount of Income",
+          "reference": "Enter the amount of income."
+        },
+        {
+          "label": "Is the income effectively connected with the PE in the Philippines?",
+          "reference": "Select 'Yes' or 'No'."
+        },
+        {
+          "label": "Amount of Withholding Tax Paid, if any",
+          "reference": "Enter the amount of withholding tax paid."
+        },
+        {
+          "label": "Date of Payment",
+          "reference": "Enter the date of payment (MM/DD/YYYY, e.g., 01/01/2020)."
+        }
+      ]
+    },
+    {
+      "title": "Part V – Authorized Representative in the Philippines",
+      "fields": [
+        {
+          "label": "Registered Name",
+          "reference": "Enter the registered name of the authorized representative."
+        },
+        {
+          "label": "Taxpayer Identification Number (TIN)",
+          "reference": "Enter the TIN."
+        },
+        {
+          "label": "RDO Code",
+          "reference": "Enter the RDO code."
+        },
+        {
+          "label": "Registered Address",
+          "reference": "Enter the registered address."
+        },
+        {
+          "label": "ZIP Code",
+          "reference": "Enter the ZIP code."
+        },
+        {
+          "label": "Contact Number (Landline/Cellphone No.)",
+          "reference": "Enter the contact number."
+        },
+        {
+          "label": "Email Address",
+          "reference": "Enter the email address."
+        }
+      ]
+    },
+    {
+      "title": "Part VI – Certification",
+      "fields": [
+        {
+          "label": "Signature over Printed Name of the Beneficial Owner/Authorized Representative/Tax Agent",
+          "reference": "Sign and print the name."
+        },
+        {
+          "label": "Tax Agent Accreditation/Attorney’s Roll Number, if applicable",
+          "reference": "Enter the accreditation or roll number."
+        },
+        {
+          "label": "Date of Issue",
+          "reference": "Enter the date of issue (MM/DD/YYYY, e.g., 01/01/2020)."
+        },
+        {
+          "label": "Date of Expiry",
+          "reference": "Enter the date of expiry (MM/DD/YYYY, e.g., 01/01/2025)."
+        },
+        {
+          "label": "ITAD Filing Reference No",
+          "reference": "Enter the filing reference number."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Article",
+      "reference": "Enter the article number of the Tax Treaty between the Philippines and the other country.",
+      "section": "Part I – Legal Basis of Claim for Relief"
+    },
+    {
+      "label": "Tax Treatment Under the Treaty",
+      "reference": "Select either 'Exempt from Income Tax' or 'Subject to Preferential Rate' and specify the tax rate if applicable.",
+      "section": "Part I – Legal Basis of Claim for Relief"
+    },
+    {
+      "label": "Name of Income Recipient",
+      "reference": "Enter the full name of the income recipient.",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Local Taxpayer Identification Number (TIN)",
+      "reference": "Enter the local TIN.",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "RDO Code",
+      "reference": "Enter the RDO code.",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Foreign TIN",
+      "reference": "Enter the foreign TIN.",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Date of Establishment",
+      "reference": "Enter the date of establishment (MM/DD/YYYY, e.g., 01/01/2020).",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Contact Number (Landline/Mobile No.)",
+      "reference": "Enter the contact number.",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Email Address",
+      "reference": "Enter the email address.",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Country where the recipient is taxable as resident and where it is to pay tax",
+      "reference": "Enter the country.",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "With permanent establishment (PE) in the Philippines?",
+      "reference": "Select 'Yes' or 'No'.",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "With license to do business in the Philippines?",
+      "reference": "Select 'Yes' or 'No'.",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Taxpayer Identification Number of the PE",
+      "reference": "Enter the TIN of the PE.",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "RDO Code",
+      "reference": "Enter the RDO code.",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Address of the PE",
+      "reference": "Enter the address of the PE.",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "ZIP Code",
+      "reference": "Enter the ZIP code.",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Details of Business",
+      "reference": "Provide details about the business.",
+      "section": "Part II – Identification of Income Recipient"
+    },
+    {
+      "label": "Registered Name",
+      "reference": "Enter the registered name (Last Name, First Name, Middle Name for Individual OR Registered Name for Non-Individual).",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "Taxpayer Identification Number (TIN)",
+      "reference": "Enter the TIN.",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "RDO Code",
+      "reference": "Enter the RDO code.",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "Registered Address",
+      "reference": "Enter the registered address.",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "ZIP Code",
+      "reference": "Enter the ZIP code.",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "Contact Number (Landline/Mobile No.)",
+      "reference": "Enter the contact number.",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "Email Address",
+      "reference": "Enter the email address.",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "Details of Business",
+      "reference": "Provide details about the business.",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "Registered with the Bureau of Investments (BOI)?",
+      "reference": "Select 'Yes' or 'No'.",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "Engaged in preferred pioneer areas of investment?",
+      "reference": "Select 'Yes' or 'No'.",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "Related to the income recipient?",
+      "reference": "Select 'Yes' or 'No'.",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "If yes, describe the nature of relationship",
+      "reference": "Provide a description if applicable.",
+      "section": "Part III – Details of Income Payor"
+    },
+    {
+      "label": "Kind of Income",
+      "reference": "Enter the kind of income.",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Description",
+      "reference": "Provide a description of the income.",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Amount of Income",
+      "reference": "Enter the amount of income.",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Is the income effectively connected with the PE in the Philippines?",
+      "reference": "Select 'Yes' or 'No'.",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Amount of Withholding Tax Paid, if any",
+      "reference": "Enter the amount of withholding tax paid.",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Date of Payment",
+      "reference": "Enter the date of payment (MM/DD/YYYY, e.g., 01/01/2020).",
+      "section": "Part IV – Details of Income and Withholding Tax"
+    },
+    {
+      "label": "Registered Name",
+      "reference": "Enter the registered name of the authorized representative.",
+      "section": "Part V – Authorized Representative in the Philippines"
+    },
+    {
+      "label": "Taxpayer Identification Number (TIN)",
+      "reference": "Enter the TIN.",
+      "section": "Part V – Authorized Representative in the Philippines"
+    },
+    {
+      "label": "RDO Code",
+      "reference": "Enter the RDO code.",
+      "section": "Part V – Authorized Representative in the Philippines"
+    },
+    {
+      "label": "Registered Address",
+      "reference": "Enter the registered address.",
+      "section": "Part V – Authorized Representative in the Philippines"
+    },
+    {
+      "label": "ZIP Code",
+      "reference": "Enter the ZIP code.",
+      "section": "Part V – Authorized Representative in the Philippines"
+    },
+    {
+      "label": "Contact Number (Landline/Cellphone No.)",
+      "reference": "Enter the contact number.",
+      "section": "Part V – Authorized Representative in the Philippines"
+    },
+    {
+      "label": "Email Address",
+      "reference": "Enter the email address.",
+      "section": "Part V – Authorized Representative in the Philippines"
+    },
+    {
+      "label": "Signature over Printed Name of the Beneficial Owner/Authorized Representative/Tax Agent",
+      "reference": "Sign and print the name.",
+      "section": "Part VI – Certification"
+    },
+    {
+      "label": "Tax Agent Accreditation/Attorney’s Roll Number, if applicable",
+      "reference": "Enter the accreditation or roll number.",
+      "section": "Part VI – Certification"
+    },
+    {
+      "label": "Date of Issue",
+      "reference": "Enter the date of issue (MM/DD/YYYY, e.g., 01/01/2020).",
+      "section": "Part VI – Certification"
+    },
+    {
+      "label": "Date of Expiry",
+      "reference": "Enter the date of expiry (MM/DD/YYYY, e.g., 01/01/2025).",
+      "section": "Part VI – Certification"
+    },
+    {
+      "label": "ITAD Filing Reference No",
+      "reference": "Enter the filing reference number.",
+      "section": "Part VI – Certification"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Tax_BIRApplicationForTreatyPurposes0901-T.pdf"
+}

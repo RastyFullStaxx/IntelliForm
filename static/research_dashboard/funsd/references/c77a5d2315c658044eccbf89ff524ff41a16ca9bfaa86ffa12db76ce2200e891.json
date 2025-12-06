@@ -1,0 +1,175 @@
+{
+  "title": "Maverick Specials Menthol - Progress Report",
+  "form_id": "maverick-specials-menthol-progress-report",
+  "canonical_id": "c77a5d2315c658044eccbf89ff524ff41a16ca9bfaa86ffa12db76ce2200e891",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:48:47Z",
+  "sections": [
+    {
+      "title": "Submission Information",
+      "fields": [
+        {
+          "label": "TO",
+          "reference": "Enter recipient's name."
+        },
+        {
+          "label": "FROM",
+          "reference": "Enter sender's name."
+        },
+        {
+          "label": "SUBMISSION DATE",
+          "reference": "Enter submission date (MM/DD)."
+        }
+      ]
+    },
+    {
+      "title": "Report Details",
+      "fields": [
+        {
+          "label": "SUBJECT",
+          "reference": "Maverick Specials Menthol - Progress Report"
+        },
+        {
+          "label": "REGION",
+          "reference": "Select FULL or PARTIAL."
+        },
+        {
+          "label": "DIVISION",
+          "reference": "Select FULL or PARTIAL."
+        }
+      ]
+    },
+    {
+      "title": "Division Names",
+      "fields": [
+        {
+          "label": "DIVISION NAME",
+          "reference": "Enter division name."
+        },
+        {
+          "label": "DIVISION NAME",
+          "reference": "Enter division name."
+        },
+        {
+          "label": "DIVISION NAME",
+          "reference": "Enter division name."
+        }
+      ]
+    },
+    {
+      "title": "Distribution",
+      "fields": [
+        {
+          "label": "NAME OF ACCOUNT",
+          "reference": "Enter account name."
+        },
+        {
+          "label": "IND/LOR VOLUME",
+          "reference": "Enter volume."
+        },
+        {
+          "label": "NO. OF STORES",
+          "reference": "Enter number of stores."
+        }
+      ]
+    },
+    {
+      "title": "Direct Accounts and Chains Headquartered Outside the Region",
+      "fields": [
+        {
+          "label": "NAME OF ACCOUNT",
+          "reference": "Enter account name."
+        },
+        {
+          "label": "IND/LOR VOLUME",
+          "reference": "Enter volume."
+        },
+        {
+          "label": "NO. OF STORES",
+          "reference": "Enter number of stores."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "TO",
+      "reference": "Enter recipient's name.",
+      "section": "Submission Information"
+    },
+    {
+      "label": "FROM",
+      "reference": "Enter sender's name.",
+      "section": "Submission Information"
+    },
+    {
+      "label": "SUBMISSION DATE",
+      "reference": "Enter submission date (MM/DD).",
+      "section": "Submission Information"
+    },
+    {
+      "label": "SUBJECT",
+      "reference": "Maverick Specials Menthol - Progress Report",
+      "section": "Report Details"
+    },
+    {
+      "label": "REGION",
+      "reference": "Select FULL or PARTIAL.",
+      "section": "Report Details"
+    },
+    {
+      "label": "DIVISION",
+      "reference": "Select FULL or PARTIAL.",
+      "section": "Report Details"
+    },
+    {
+      "label": "DIVISION NAME",
+      "reference": "Enter division name.",
+      "section": "Division Names"
+    },
+    {
+      "label": "DIVISION NAME",
+      "reference": "Enter division name.",
+      "section": "Division Names"
+    },
+    {
+      "label": "DIVISION NAME",
+      "reference": "Enter division name.",
+      "section": "Division Names"
+    },
+    {
+      "label": "NAME OF ACCOUNT",
+      "reference": "Enter account name.",
+      "section": "Distribution"
+    },
+    {
+      "label": "IND/LOR VOLUME",
+      "reference": "Enter volume.",
+      "section": "Distribution"
+    },
+    {
+      "label": "NO. OF STORES",
+      "reference": "Enter number of stores.",
+      "section": "Distribution"
+    },
+    {
+      "label": "NAME OF ACCOUNT",
+      "reference": "Enter account name.",
+      "section": "Direct Accounts and Chains Headquartered Outside the Region"
+    },
+    {
+      "label": "IND/LOR VOLUME",
+      "reference": "Enter volume.",
+      "section": "Direct Accounts and Chains Headquartered Outside the Region"
+    },
+    {
+      "label": "NO. OF STORES",
+      "reference": "Enter number of stores.",
+      "section": "Direct Accounts and Chains Headquartered Outside the Region"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00007.pdf"
+}

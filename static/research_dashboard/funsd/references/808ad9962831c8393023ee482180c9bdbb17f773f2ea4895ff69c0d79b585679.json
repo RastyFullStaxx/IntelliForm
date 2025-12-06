@@ -1,0 +1,143 @@
+{
+  "title": "New Competitive Products",
+  "form_id": "new-competitive-products",
+  "canonical_id": "808ad9962831c8393023ee482180c9bdbb17f773f2ea4895ff69c0d79b585679",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:50:50Z",
+  "sections": [
+    {
+      "title": "Report Information",
+      "fields": [
+        {
+          "label": "Reported By",
+          "reference": "Enter the name and title of the person reporting."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter the date (MM/DD/YY, e.g., 08/10/90)."
+        },
+        {
+          "label": "Time",
+          "reference": "Enter the time of the report."
+        },
+        {
+          "label": "Source of Information",
+          "reference": "Enter the source of the information."
+        }
+      ]
+    },
+    {
+      "title": "Product Details",
+      "fields": [
+        {
+          "label": "Manufacturer",
+          "reference": "Enter the manufacturer's name."
+        },
+        {
+          "label": "Brand Name",
+          "reference": "Enter the brand name of the product."
+        },
+        {
+          "label": "Type of Product",
+          "reference": "Enter the type of product."
+        },
+        {
+          "label": "Size or Sizes",
+          "reference": "Enter the size or sizes of the product."
+        },
+        {
+          "label": "List Price",
+          "reference": "Enter the list price of the product."
+        },
+        {
+          "label": "Extent of Distribution",
+          "reference": "Enter the extent of distribution."
+        }
+      ]
+    },
+    {
+      "title": "Other Information",
+      "fields": [
+        {
+          "label": "Other Information",
+          "reference": "See attached information sheet."
+        }
+      ]
+    },
+    {
+      "title": "CC",
+      "fields": [
+        {
+          "label": "CC",
+          "reference": "List the names of individuals to be copied on this report."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Reported By",
+      "reference": "Enter the name and title of the person reporting.",
+      "section": "Report Information"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter the date (MM/DD/YY, e.g., 08/10/90).",
+      "section": "Report Information"
+    },
+    {
+      "label": "Time",
+      "reference": "Enter the time of the report.",
+      "section": "Report Information"
+    },
+    {
+      "label": "Source of Information",
+      "reference": "Enter the source of the information.",
+      "section": "Report Information"
+    },
+    {
+      "label": "Manufacturer",
+      "reference": "Enter the manufacturer's name.",
+      "section": "Product Details"
+    },
+    {
+      "label": "Brand Name",
+      "reference": "Enter the brand name of the product.",
+      "section": "Product Details"
+    },
+    {
+      "label": "Type of Product",
+      "reference": "Enter the type of product.",
+      "section": "Product Details"
+    },
+    {
+      "label": "Size or Sizes",
+      "reference": "Enter the size or sizes of the product.",
+      "section": "Product Details"
+    },
+    {
+      "label": "List Price",
+      "reference": "Enter the list price of the product.",
+      "section": "Product Details"
+    },
+    {
+      "label": "Extent of Distribution",
+      "reference": "Enter the extent of distribution.",
+      "section": "Product Details"
+    },
+    {
+      "label": "Other Information",
+      "reference": "See attached information sheet.",
+      "section": "Other Information"
+    },
+    {
+      "label": "CC",
+      "reference": "List the names of individuals to be copied on this report.",
+      "section": "CC"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00013.pdf"
+}

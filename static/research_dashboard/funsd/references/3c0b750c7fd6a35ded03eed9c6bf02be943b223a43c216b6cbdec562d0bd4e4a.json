@@ -1,0 +1,218 @@
+{
+  "title": "Coupon Code Registration Form",
+  "form_id": "coupon-code-registration-form",
+  "canonical_id": "3c0b750c7fd6a35ded03eed9c6bf02be943b223a43c216b6cbdec562d0bd4e4a",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:54:10Z",
+  "sections": [
+    {
+      "title": "Form Details",
+      "fields": [
+        {
+          "label": "TO",
+          "reference": "Enter recipient's name."
+        },
+        {
+          "label": "FROM",
+          "reference": "Enter sender's name."
+        },
+        {
+          "label": "CC",
+          "reference": "Enter names of additional recipients."
+        },
+        {
+          "label": "BRAND(S) APPLICABLE",
+          "reference": "Enter applicable brand name."
+        },
+        {
+          "label": "MEDIA TYPE",
+          "reference": "Enter type of media."
+        },
+        {
+          "label": "MEDIA NAME",
+          "reference": "Enter name of the media."
+        },
+        {
+          "label": "ISSUE FREQUENCY/YEAR",
+          "reference": "Enter frequency of issues per year."
+        },
+        {
+          "label": "SPACE/COLOR",
+          "reference": "Enter space and color details."
+        },
+        {
+          "label": "COUPON ISSUE DATE",
+          "reference": "Use MM/DD/YY (e.g., 10/04/99)."
+        },
+        {
+          "label": "COUPON EXPIRATION DATE",
+          "reference": "Use MM/DD/YY (e.g., 03/31/00)."
+        },
+        {
+          "label": "CIRCULATION (#)",
+          "reference": "Enter circulation number."
+        },
+        {
+          "label": "CIRCULATION DATES",
+          "reference": "Enter circulation dates."
+        },
+        {
+          "label": "GEOGRAPHICAL AREA(S)",
+          "reference": "Enter geographical areas."
+        },
+        {
+          "label": "COUPON VALUE",
+          "reference": "Enter coupon value (e.g., $1.00 OFF PACK)."
+        },
+        {
+          "label": "PACK/CARTON",
+          "reference": "Enter pack/carton type."
+        },
+        {
+          "label": "ADVERTISING CREATIVE TITLE",
+          "reference": "Enter title of the advertising creative."
+        },
+        {
+          "label": "SIGNATURE OF INITIATOR",
+          "reference": "Enter signature of the initiator."
+        },
+        {
+          "label": "DATE INITIATED",
+          "reference": "Use MM/DD/YY (e.g., 04/14/99)."
+        },
+        {
+          "label": "REQUIREMENTS",
+          "reference": "Enter requirements."
+        },
+        {
+          "label": "CODE ASSIGNED",
+          "reference": "Enter assigned code."
+        },
+        {
+          "label": "JOB #",
+          "reference": "Enter job number."
+        },
+        {
+          "label": "EST. REDEMPTION",
+          "reference": "Enter estimated redemption."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "TO",
+      "reference": "Enter recipient's name.",
+      "section": "Form Details"
+    },
+    {
+      "label": "FROM",
+      "reference": "Enter sender's name.",
+      "section": "Form Details"
+    },
+    {
+      "label": "CC",
+      "reference": "Enter names of additional recipients.",
+      "section": "Form Details"
+    },
+    {
+      "label": "BRAND(S) APPLICABLE",
+      "reference": "Enter applicable brand name.",
+      "section": "Form Details"
+    },
+    {
+      "label": "MEDIA TYPE",
+      "reference": "Enter type of media.",
+      "section": "Form Details"
+    },
+    {
+      "label": "MEDIA NAME",
+      "reference": "Enter name of the media.",
+      "section": "Form Details"
+    },
+    {
+      "label": "ISSUE FREQUENCY/YEAR",
+      "reference": "Enter frequency of issues per year.",
+      "section": "Form Details"
+    },
+    {
+      "label": "SPACE/COLOR",
+      "reference": "Enter space and color details.",
+      "section": "Form Details"
+    },
+    {
+      "label": "COUPON ISSUE DATE",
+      "reference": "Use MM/DD/YY (e.g., 10/04/99).",
+      "section": "Form Details"
+    },
+    {
+      "label": "COUPON EXPIRATION DATE",
+      "reference": "Use MM/DD/YY (e.g., 03/31/00).",
+      "section": "Form Details"
+    },
+    {
+      "label": "CIRCULATION (#)",
+      "reference": "Enter circulation number.",
+      "section": "Form Details"
+    },
+    {
+      "label": "CIRCULATION DATES",
+      "reference": "Enter circulation dates.",
+      "section": "Form Details"
+    },
+    {
+      "label": "GEOGRAPHICAL AREA(S)",
+      "reference": "Enter geographical areas.",
+      "section": "Form Details"
+    },
+    {
+      "label": "COUPON VALUE",
+      "reference": "Enter coupon value (e.g., $1.00 OFF PACK).",
+      "section": "Form Details"
+    },
+    {
+      "label": "PACK/CARTON",
+      "reference": "Enter pack/carton type.",
+      "section": "Form Details"
+    },
+    {
+      "label": "ADVERTISING CREATIVE TITLE",
+      "reference": "Enter title of the advertising creative.",
+      "section": "Form Details"
+    },
+    {
+      "label": "SIGNATURE OF INITIATOR",
+      "reference": "Enter signature of the initiator.",
+      "section": "Form Details"
+    },
+    {
+      "label": "DATE INITIATED",
+      "reference": "Use MM/DD/YY (e.g., 04/14/99).",
+      "section": "Form Details"
+    },
+    {
+      "label": "REQUIREMENTS",
+      "reference": "Enter requirements.",
+      "section": "Form Details"
+    },
+    {
+      "label": "CODE ASSIGNED",
+      "reference": "Enter assigned code.",
+      "section": "Form Details"
+    },
+    {
+      "label": "JOB #",
+      "reference": "Enter job number.",
+      "section": "Form Details"
+    },
+    {
+      "label": "EST. REDEMPTION",
+      "reference": "Enter estimated redemption.",
+      "section": "Form Details"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00023.pdf"
+}

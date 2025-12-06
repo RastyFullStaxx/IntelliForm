@@ -1,0 +1,188 @@
+{
+  "title": "Creative Input Document",
+  "form_id": "creative-input-document",
+  "canonical_id": "b30a9dacebf7cc1cc12c5584e656448a9f5261e20e20fb82f46474cb49fba9e3",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-03T00:00:00Z",
+  "updated_at": "2025-12-06T21:57:01Z",
+  "sections": [
+    {
+      "title": "Specifics",
+      "fields": [
+        {
+          "label": "Date/Time",
+          "reference": "Enter date and time (MM/DD/YY HH:MM AM/PM, e.g., 10/30/98 1:46 PM)"
+        },
+        {
+          "label": "Client Name",
+          "reference": "Enter the client's name"
+        },
+        {
+          "label": "Prepared By",
+          "reference": "Enter your name"
+        },
+        {
+          "label": "Matter Number",
+          "reference": "Enter the matter number"
+        },
+        {
+          "label": "Milestone Presentation Date",
+          "reference": "Enter the presentation date (MM/DD/YYYY, e.g., 10/30/1998)"
+        },
+        {
+          "label": "Project Title",
+          "reference": "Enter the project title"
+        },
+        {
+          "label": "Estimated Creative Budget",
+          "reference": "Enter the estimated budget"
+        },
+        {
+          "label": "Est. Production Budget",
+          "reference": "Enter the estimated production budget"
+        },
+        {
+          "label": "Concept",
+          "reference": "Enter the concept"
+        },
+        {
+          "label": "Execution",
+          "reference": "Enter the execution details"
+        },
+        {
+          "label": "Media",
+          "reference": "Enter the media details"
+        }
+      ]
+    },
+    {
+      "title": "Objective",
+      "fields": [
+        {
+          "label": "Why are we advertising?",
+          "reference": "Select the objectives (e.g., Retention, Acquisition, Loyalty, etc.)"
+        }
+      ]
+    },
+    {
+      "title": "Target",
+      "fields": [
+        {
+          "label": "To whom are we talking?",
+          "reference": "Describe the primary target and any secondary target"
+        }
+      ]
+    },
+    {
+      "title": "Communication Platform",
+      "fields": [
+        {
+          "label": "What is the single most important message/idea we are trying to communicate?",
+          "reference": "Describe the unique selling position"
+        },
+        {
+          "label": "What is the key benefit to the target?",
+          "reference": "Describe the benefit for the reader"
+        },
+        {
+          "label": "Is there an offer/call to action?",
+          "reference": "Describe the offer to persuade action"
+        },
+        {
+          "label": "What would we like our target to think?",
+          "reference": "Describe the intended perception after exposure"
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Date/Time",
+      "reference": "Enter date and time (MM/DD/YY HH:MM AM/PM, e.g., 10/30/98 1:46 PM)",
+      "section": "Specifics"
+    },
+    {
+      "label": "Client Name",
+      "reference": "Enter the client's name",
+      "section": "Specifics"
+    },
+    {
+      "label": "Prepared By",
+      "reference": "Enter your name",
+      "section": "Specifics"
+    },
+    {
+      "label": "Matter Number",
+      "reference": "Enter the matter number",
+      "section": "Specifics"
+    },
+    {
+      "label": "Milestone Presentation Date",
+      "reference": "Enter the presentation date (MM/DD/YYYY, e.g., 10/30/1998)",
+      "section": "Specifics"
+    },
+    {
+      "label": "Project Title",
+      "reference": "Enter the project title",
+      "section": "Specifics"
+    },
+    {
+      "label": "Estimated Creative Budget",
+      "reference": "Enter the estimated budget",
+      "section": "Specifics"
+    },
+    {
+      "label": "Est. Production Budget",
+      "reference": "Enter the estimated production budget",
+      "section": "Specifics"
+    },
+    {
+      "label": "Concept",
+      "reference": "Enter the concept",
+      "section": "Specifics"
+    },
+    {
+      "label": "Execution",
+      "reference": "Enter the execution details",
+      "section": "Specifics"
+    },
+    {
+      "label": "Media",
+      "reference": "Enter the media details",
+      "section": "Specifics"
+    },
+    {
+      "label": "Why are we advertising?",
+      "reference": "Select the objectives (e.g., Retention, Acquisition, Loyalty, etc.)",
+      "section": "Objective"
+    },
+    {
+      "label": "To whom are we talking?",
+      "reference": "Describe the primary target and any secondary target",
+      "section": "Target"
+    },
+    {
+      "label": "What is the single most important message/idea we are trying to communicate?",
+      "reference": "Describe the unique selling position",
+      "section": "Communication Platform"
+    },
+    {
+      "label": "What is the key benefit to the target?",
+      "reference": "Describe the benefit for the reader",
+      "section": "Communication Platform"
+    },
+    {
+      "label": "Is there an offer/call to action?",
+      "reference": "Describe the offer to persuade action",
+      "section": "Communication Platform"
+    },
+    {
+      "label": "What would we like our target to think?",
+      "reference": "Describe the intended perception after exposure",
+      "section": "Communication Platform"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00029.pdf"
+}

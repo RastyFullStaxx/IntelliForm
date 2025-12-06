@@ -1,0 +1,115 @@
+{
+  "title": "Triumph Disaster Check Study",
+  "form_id": "triumph-disaster-check-study",
+  "canonical_id": "b402589c829887d4ee6a58b62557f0699ef2ae9d219311abdfd8b02b20b94cfb",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-17T00:00:00Z",
+  "updated_at": "2025-12-06T22:13:57Z",
+  "sections": [
+    {
+      "title": "Key Criteria For Analysis",
+      "fields": [
+        {
+          "label": "Triumph switchers asked why no longer smoking Triumph",
+          "reference": "Provide reasons for switching from Triumph."
+        },
+        {
+          "label": "Present smokers of Triumph asked reasons for switching to Triumph",
+          "reference": "List reasons for switching to Triumph."
+        },
+        {
+          "label": "Mentions of \"harshness\"",
+          "reference": "Indicate if \"harshness\" is mentioned."
+        }
+      ]
+    },
+    {
+      "title": "Research Limitations",
+      "fields": [
+        {
+          "label": "Cost Estimate",
+          "reference": "Enter estimated cost (e.g., $2,250)."
+        },
+        {
+          "label": "Final Report",
+          "reference": "Indicate if final report is required (yes/no)."
+        },
+        {
+          "label": "Prepared by",
+          "reference": "Enter name of preparer."
+        },
+        {
+          "label": "Approved by",
+          "reference": "Enter name of approver."
+        },
+        {
+          "label": "Marketing Research Director",
+          "reference": "Enter name of marketing research director."
+        },
+        {
+          "label": "Product Manager",
+          "reference": "Enter name of product manager."
+        },
+        {
+          "label": "Group Product Manager",
+          "reference": "Enter name of group product manager."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Triumph switchers asked why no longer smoking Triumph",
+      "reference": "Provide reasons for switching from Triumph.",
+      "section": "Key Criteria For Analysis"
+    },
+    {
+      "label": "Present smokers of Triumph asked reasons for switching to Triumph",
+      "reference": "List reasons for switching to Triumph.",
+      "section": "Key Criteria For Analysis"
+    },
+    {
+      "label": "Mentions of \"harshness\"",
+      "reference": "Indicate if \"harshness\" is mentioned.",
+      "section": "Key Criteria For Analysis"
+    },
+    {
+      "label": "Cost Estimate",
+      "reference": "Enter estimated cost (e.g., $2,250).",
+      "section": "Research Limitations"
+    },
+    {
+      "label": "Final Report",
+      "reference": "Indicate if final report is required (yes/no).",
+      "section": "Research Limitations"
+    },
+    {
+      "label": "Prepared by",
+      "reference": "Enter name of preparer.",
+      "section": "Research Limitations"
+    },
+    {
+      "label": "Approved by",
+      "reference": "Enter name of approver.",
+      "section": "Research Limitations"
+    },
+    {
+      "label": "Marketing Research Director",
+      "reference": "Enter name of marketing research director.",
+      "section": "Research Limitations"
+    },
+    {
+      "label": "Product Manager",
+      "reference": "Enter name of product manager.",
+      "section": "Research Limitations"
+    },
+    {
+      "label": "Group Product Manager",
+      "reference": "Enter name of group product manager.",
+      "section": "Research Limitations"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00046.pdf"
+}

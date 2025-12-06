@@ -1,0 +1,79 @@
+{
+  "title": "OLD GOLD - LIGHT BOX 100'S PROGRESS REPORT",
+  "form_id": "old-gold-light-box-progress-report",
+  "canonical_id": "d654f17320ebc580bf4f849dabce5a9769e2ad127aba0cf87eb3c9557fbe2c1d",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:52:57Z",
+  "sections": [
+    {
+      "title": "Geography",
+      "fields": [
+        {
+          "label": "Region",
+          "reference": "Select FULL or PARTIAL; if PARTIAL, continue with DIVISION(S) scope."
+        },
+        {
+          "label": "Division",
+          "reference": "Select FULL or PARTIAL for each division."
+        },
+        {
+          "label": "Division Name",
+          "reference": "Enter names of divisions: Detroit North, Detroit South, Detroit East, Detroit West, Grand Rapids, Flint."
+        }
+      ]
+    },
+    {
+      "title": "Distribution",
+      "fields": [
+        {
+          "label": "Name of Account",
+          "reference": "Enter the name of the account."
+        },
+        {
+          "label": "Ind/Lor Volume",
+          "reference": "Enter the Ind/Lor volume."
+        },
+        {
+          "label": "Number of Stores",
+          "reference": "Enter the number of stores."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Region",
+      "reference": "Select FULL or PARTIAL; if PARTIAL, continue with DIVISION(S) scope.",
+      "section": "Geography"
+    },
+    {
+      "label": "Division",
+      "reference": "Select FULL or PARTIAL for each division.",
+      "section": "Geography"
+    },
+    {
+      "label": "Division Name",
+      "reference": "Enter names of divisions: Detroit North, Detroit South, Detroit East, Detroit West, Grand Rapids, Flint.",
+      "section": "Geography"
+    },
+    {
+      "label": "Name of Account",
+      "reference": "Enter the name of the account.",
+      "section": "Distribution"
+    },
+    {
+      "label": "Ind/Lor Volume",
+      "reference": "Enter the Ind/Lor volume.",
+      "section": "Distribution"
+    },
+    {
+      "label": "Number of Stores",
+      "reference": "Enter the number of stores.",
+      "section": "Distribution"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00020.pdf"
+}

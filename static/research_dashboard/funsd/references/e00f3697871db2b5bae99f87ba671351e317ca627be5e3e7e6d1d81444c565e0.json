@@ -1,0 +1,116 @@
+{
+  "title": "Registration Form",
+  "form_id": "registration-form",
+  "canonical_id": "e00f3697871db2b5bae99f87ba671351e317ca627be5e3e7e6d1d81444c565e0",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:55:03Z",
+  "sections": [
+    {
+      "title": "Personal Information",
+      "fields": [
+        {
+          "label": "NAME",
+          "reference": "Enter full name."
+        },
+        {
+          "label": "TITLE",
+          "reference": "Enter job title."
+        },
+        {
+          "label": "COMPANY",
+          "reference": "Enter company name."
+        },
+        {
+          "label": "ADDRESS",
+          "reference": "Enter complete address."
+        },
+        {
+          "label": "PHONE",
+          "reference": "Enter phone number."
+        }
+      ]
+    },
+    {
+      "title": "Accommodation Preference",
+      "fields": [
+        {
+          "label": "CHECK ONE",
+          "reference": "Select preference for accommodation."
+        }
+      ]
+    },
+    {
+      "title": "Travel Information",
+      "fields": [
+        {
+          "label": "ARRIVAL DATE AND TIME",
+          "reference": "Enter arrival date and time (MM/DD/YY HH:MM AM/PM, e.g., 02/18/80 7:00 PM)."
+        },
+        {
+          "label": "DEPARTURE DATE AND TIME",
+          "reference": "Enter departure date and time (MM/DD/YY HH:MM AM/PM, e.g., 02/21/80 4:00 PM)."
+        }
+      ]
+    },
+    {
+      "title": "Autobiographical Sketch",
+      "fields": [
+        {
+          "label": "Please attach",
+          "reference": "Attach a brief autobiographical sketch (50 words or so)."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "NAME",
+      "reference": "Enter full name.",
+      "section": "Personal Information"
+    },
+    {
+      "label": "TITLE",
+      "reference": "Enter job title.",
+      "section": "Personal Information"
+    },
+    {
+      "label": "COMPANY",
+      "reference": "Enter company name.",
+      "section": "Personal Information"
+    },
+    {
+      "label": "ADDRESS",
+      "reference": "Enter complete address.",
+      "section": "Personal Information"
+    },
+    {
+      "label": "PHONE",
+      "reference": "Enter phone number.",
+      "section": "Personal Information"
+    },
+    {
+      "label": "CHECK ONE",
+      "reference": "Select preference for accommodation.",
+      "section": "Accommodation Preference"
+    },
+    {
+      "label": "ARRIVAL DATE AND TIME",
+      "reference": "Enter arrival date and time (MM/DD/YY HH:MM AM/PM, e.g., 02/18/80 7:00 PM).",
+      "section": "Travel Information"
+    },
+    {
+      "label": "DEPARTURE DATE AND TIME",
+      "reference": "Enter departure date and time (MM/DD/YY HH:MM AM/PM, e.g., 02/21/80 4:00 PM).",
+      "section": "Travel Information"
+    },
+    {
+      "label": "Please attach",
+      "reference": "Attach a brief autobiographical sketch (50 words or so).",
+      "section": "Autobiographical Sketch"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00025.pdf"
+}

@@ -1,0 +1,224 @@
+{
+  "title": "Prosperity Card Purchase Form",
+  "form_id": "prosperity-card-purchase-form",
+  "canonical_id": "1b5425cbf588c82fd29c3d5ee2fa8722844a65a17cdca4bf89e93397450db01d",
+  "bucket": "health",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:38:57Z",
+  "sections": [
+    {
+      "title": "General Information",
+      "fields": [
+        {
+          "label": "Name of Buyer",
+          "reference": "Enter last name, first name, and middle name."
+        },
+        {
+          "label": "Permanent Home Address",
+          "reference": "Enter full address (No., Street, Village/Subdivision, Barangay, City/Municipality, Province/State, Country; P.O. Box is not acceptable)."
+        },
+        {
+          "label": "Zip Code",
+          "reference": "Enter zip code."
+        },
+        {
+          "label": "Contact Number",
+          "reference": "Enter contact number with country code (e.g., +639123456789)."
+        },
+        {
+          "label": "Birthdate",
+          "reference": "Enter birthdate (e.g., 08-AUG-2008)."
+        },
+        {
+          "label": "Citizenship/Nationality",
+          "reference": "Enter citizenship or nationality."
+        },
+        {
+          "label": "Birthplace",
+          "reference": "Enter birthplace (City/Province/State and Country)."
+        },
+        {
+          "label": "E-mail Address",
+          "reference": "Enter email address."
+        },
+        {
+          "label": "Name of Employer/Business",
+          "reference": "Enter name of employer or business."
+        },
+        {
+          "label": "Nature of Work/Business",
+          "reference": "Enter nature of work or business."
+        },
+        {
+          "label": "SSS No., GSIS No. or Philippine Tax Identification No. (TIN)",
+          "reference": "Enter SSS No., GSIS No., or TIN."
+        },
+        {
+          "label": "Source of Funds",
+          "reference": "Select source of funds and specify if 'Other'."
+        }
+      ]
+    },
+    {
+      "title": "Card Details",
+      "fields": [
+        {
+          "label": "Denomination",
+          "reference": "Enter denomination (e.g., Php 5,000, Php 1,000, Other)."
+        },
+        {
+          "label": "Quantity",
+          "reference": "Enter quantity for each denomination."
+        },
+        {
+          "label": "Total",
+          "reference": "Enter total amount in PHP."
+        }
+      ]
+    },
+    {
+      "title": "Compliance with the Anti-Money Laundering Act (AMLA)",
+      "fields": [
+        {
+          "label": "Is there any Third Party/Beneficial Owner, other than the buyer:",
+          "reference": "Indicate Yes or No."
+        },
+        {
+          "label": "a) who funds the purchase",
+          "reference": "Indicate Yes or No."
+        },
+        {
+          "label": "b) on whose behalf the purchase is being made",
+          "reference": "Indicate Yes or No."
+        }
+      ]
+    },
+    {
+      "title": "Terms and Conditions",
+      "fields": [
+        {
+          "label": "Printed Name and Signature of Buyer",
+          "reference": "Sign and print your name."
+        },
+        {
+          "label": "Date of Signing",
+          "reference": "Enter date of signing (e.g., 08-AUG-2008)."
+        },
+        {
+          "label": "For Office Use Only",
+          "reference": "Office use only; leave blank."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Name of Buyer",
+      "reference": "Enter last name, first name, and middle name.",
+      "section": "General Information"
+    },
+    {
+      "label": "Permanent Home Address",
+      "reference": "Enter full address (No., Street, Village/Subdivision, Barangay, City/Municipality, Province/State, Country; P.O. Box is not acceptable).",
+      "section": "General Information"
+    },
+    {
+      "label": "Zip Code",
+      "reference": "Enter zip code.",
+      "section": "General Information"
+    },
+    {
+      "label": "Contact Number",
+      "reference": "Enter contact number with country code (e.g., +639123456789).",
+      "section": "General Information"
+    },
+    {
+      "label": "Birthdate",
+      "reference": "Enter birthdate (e.g., 08-AUG-2008).",
+      "section": "General Information"
+    },
+    {
+      "label": "Citizenship/Nationality",
+      "reference": "Enter citizenship or nationality.",
+      "section": "General Information"
+    },
+    {
+      "label": "Birthplace",
+      "reference": "Enter birthplace (City/Province/State and Country).",
+      "section": "General Information"
+    },
+    {
+      "label": "E-mail Address",
+      "reference": "Enter email address.",
+      "section": "General Information"
+    },
+    {
+      "label": "Name of Employer/Business",
+      "reference": "Enter name of employer or business.",
+      "section": "General Information"
+    },
+    {
+      "label": "Nature of Work/Business",
+      "reference": "Enter nature of work or business.",
+      "section": "General Information"
+    },
+    {
+      "label": "SSS No., GSIS No. or Philippine Tax Identification No. (TIN)",
+      "reference": "Enter SSS No., GSIS No., or TIN.",
+      "section": "General Information"
+    },
+    {
+      "label": "Source of Funds",
+      "reference": "Select source of funds and specify if 'Other'.",
+      "section": "General Information"
+    },
+    {
+      "label": "Denomination",
+      "reference": "Enter denomination (e.g., Php 5,000, Php 1,000, Other).",
+      "section": "Card Details"
+    },
+    {
+      "label": "Quantity",
+      "reference": "Enter quantity for each denomination.",
+      "section": "Card Details"
+    },
+    {
+      "label": "Total",
+      "reference": "Enter total amount in PHP.",
+      "section": "Card Details"
+    },
+    {
+      "label": "Is there any Third Party/Beneficial Owner, other than the buyer:",
+      "reference": "Indicate Yes or No.",
+      "section": "Compliance with the Anti-Money Laundering Act (AMLA)"
+    },
+    {
+      "label": "a) who funds the purchase",
+      "reference": "Indicate Yes or No.",
+      "section": "Compliance with the Anti-Money Laundering Act (AMLA)"
+    },
+    {
+      "label": "b) on whose behalf the purchase is being made",
+      "reference": "Indicate Yes or No.",
+      "section": "Compliance with the Anti-Money Laundering Act (AMLA)"
+    },
+    {
+      "label": "Printed Name and Signature of Buyer",
+      "reference": "Sign and print your name.",
+      "section": "Terms and Conditions"
+    },
+    {
+      "label": "Date of Signing",
+      "reference": "Enter date of signing (e.g., 08-AUG-2008).",
+      "section": "Terms and Conditions"
+    },
+    {
+      "label": "For Office Use Only",
+      "reference": "Office use only; leave blank.",
+      "section": "Terms and Conditions"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\HealthcareInsurance_SunLifeProsperityCardPurchaseForm.pdf"
+}

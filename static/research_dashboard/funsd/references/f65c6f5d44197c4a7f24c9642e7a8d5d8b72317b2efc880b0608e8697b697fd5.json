@@ -1,0 +1,151 @@
+{
+  "title": "Records Retention Schedule Reconciliation",
+  "form_id": "records-retention-schedule-reconciliation",
+  "canonical_id": "f65c6f5d44197c4a7f24c9642e7a8d5d8b72317b2efc880b0608e8697b697fd5",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:58:51Z",
+  "sections": [
+    {
+      "title": "Department Information",
+      "fields": [
+        {
+          "label": "Department Name",
+          "reference": "Enter the name of the department."
+        },
+        {
+          "label": "Cost Center Number",
+          "reference": "Enter the cost center number."
+        }
+      ]
+    },
+    {
+      "title": "Index Binder Information",
+      "fields": [
+        {
+          "label": "Index Binders Consolidated By",
+          "reference": "Enter name; leave blank if not applicable."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter date (MM/DD/YYYY, e.g., 02/15/1990)."
+        },
+        {
+          "label": "Index Binder Re-Labeled By",
+          "reference": "Enter name."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter date (MM/DD/YYYY, e.g., 02/15/1990)."
+        },
+        {
+          "label": "Retention & Recommendation File Reorganized and Re-Labeled By",
+          "reference": "Enter name; leave blank if not applicable."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter date (MM/DD/YYYY, e.g., 02/15/1990)."
+        },
+        {
+          "label": "Records Retention Schedule Placed in Index Binder and in File By",
+          "reference": "Enter name."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter date (MM/DD/YYYY, e.g., 04/18/1990)."
+        },
+        {
+          "label": "Boxes Created for Hard Copy Permanent Retention Records By",
+          "reference": "Enter name; leave blank if not applicable."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter date (MM/DD/YYYY, e.g., 02/15/1990)."
+        },
+        {
+          "label": "Records Transfer Inventory Forms Updated By",
+          "reference": "Enter name."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter date (MM/DD/YYYY, e.g., 07/25/1990)."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "Department Name",
+      "reference": "Enter the name of the department.",
+      "section": "Department Information"
+    },
+    {
+      "label": "Cost Center Number",
+      "reference": "Enter the cost center number.",
+      "section": "Department Information"
+    },
+    {
+      "label": "Index Binders Consolidated By",
+      "reference": "Enter name; leave blank if not applicable.",
+      "section": "Index Binder Information"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter date (MM/DD/YYYY, e.g., 02/15/1990).",
+      "section": "Index Binder Information"
+    },
+    {
+      "label": "Index Binder Re-Labeled By",
+      "reference": "Enter name.",
+      "section": "Index Binder Information"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter date (MM/DD/YYYY, e.g., 02/15/1990).",
+      "section": "Index Binder Information"
+    },
+    {
+      "label": "Retention & Recommendation File Reorganized and Re-Labeled By",
+      "reference": "Enter name; leave blank if not applicable.",
+      "section": "Index Binder Information"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter date (MM/DD/YYYY, e.g., 02/15/1990).",
+      "section": "Index Binder Information"
+    },
+    {
+      "label": "Records Retention Schedule Placed in Index Binder and in File By",
+      "reference": "Enter name.",
+      "section": "Index Binder Information"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter date (MM/DD/YYYY, e.g., 04/18/1990).",
+      "section": "Index Binder Information"
+    },
+    {
+      "label": "Boxes Created for Hard Copy Permanent Retention Records By",
+      "reference": "Enter name; leave blank if not applicable.",
+      "section": "Index Binder Information"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter date (MM/DD/YYYY, e.g., 02/15/1990).",
+      "section": "Index Binder Information"
+    },
+    {
+      "label": "Records Transfer Inventory Forms Updated By",
+      "reference": "Enter name.",
+      "section": "Index Binder Information"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter date (MM/DD/YYYY, e.g., 07/25/1990).",
+      "section": "Index Binder Information"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00034.pdf"
+}

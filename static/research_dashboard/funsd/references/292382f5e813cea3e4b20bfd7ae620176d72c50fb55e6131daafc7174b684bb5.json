@@ -1,0 +1,256 @@
+{
+  "title": "Proposal",
+  "form_id": "proposal",
+  "canonical_id": "292382f5e813cea3e4b20bfd7ae620176d72c50fb55e6131daafc7174b684bb5",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-05T00:00:00Z",
+  "updated_at": "2025-12-06T22:04:10Z",
+  "sections": [
+    {
+      "title": "Customer Information",
+      "fields": [
+        {
+          "label": "TO",
+          "reference": "Enter recipient's name or company."
+        },
+        {
+          "label": "ADDRESS",
+          "reference": "Enter street address."
+        },
+        {
+          "label": "CITY",
+          "reference": "Enter city."
+        },
+        {
+          "label": "STATE",
+          "reference": "Enter state."
+        }
+      ]
+    },
+    {
+      "title": "Proposal Details",
+      "fields": [
+        {
+          "label": "FOR",
+          "reference": "Enter item description."
+        },
+        {
+          "label": "DATE",
+          "reference": "Enter date (MM/DD/YYYY, e.g., 10/16/1987)."
+        },
+        {
+          "label": "Attn.",
+          "reference": "Enter attention name."
+        },
+        {
+          "label": "ITEM",
+          "reference": "Enter item name."
+        },
+        {
+          "label": "SIZE",
+          "reference": "Enter size dimensions."
+        },
+        {
+          "label": "MATERIAL",
+          "reference": "Select material type."
+        },
+        {
+          "label": "COLORS",
+          "reference": "Specify color options."
+        },
+        {
+          "label": "HOLES",
+          "reference": "Indicate if holes are required."
+        },
+        {
+          "label": "EDGES",
+          "reference": "Select edge type."
+        },
+        {
+          "label": "STAMP FRAME",
+          "reference": "Select stamp frame options."
+        },
+        {
+          "label": "PACKING",
+          "reference": "Specify packing details."
+        },
+        {
+          "label": "OTHER",
+          "reference": "Provide additional information."
+        },
+        {
+          "label": "QUANTITIES",
+          "reference": "Enter quantity."
+        },
+        {
+          "label": "PRICE",
+          "reference": "Enter price per item."
+        }
+      ]
+    },
+    {
+      "title": "Billing Information",
+      "fields": [
+        {
+          "label": "BILL AS MANUFACTURE",
+          "reference": "Check if billing as manufacturer."
+        },
+        {
+          "label": "BILL AS SHIP FOR",
+          "reference": "Check if billing as shipper."
+        },
+        {
+          "label": "WAREHOUSING",
+          "reference": "Specify warehousing options."
+        },
+        {
+          "label": "DROP SHIPPING",
+          "reference": "Specify drop shipping details."
+        }
+      ]
+    },
+    {
+      "title": "Conditions",
+      "fields": [
+        {
+          "label": "CONDITIONS",
+          "reference": "Review pricing and conditions."
+        }
+      ]
+    },
+    {
+      "title": "Terms",
+      "fields": [
+        {
+          "label": "TERMS",
+          "reference": "Specify payment terms."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "TO",
+      "reference": "Enter recipient's name or company.",
+      "section": "Customer Information"
+    },
+    {
+      "label": "ADDRESS",
+      "reference": "Enter street address.",
+      "section": "Customer Information"
+    },
+    {
+      "label": "CITY",
+      "reference": "Enter city.",
+      "section": "Customer Information"
+    },
+    {
+      "label": "STATE",
+      "reference": "Enter state.",
+      "section": "Customer Information"
+    },
+    {
+      "label": "FOR",
+      "reference": "Enter item description.",
+      "section": "Proposal Details"
+    },
+    {
+      "label": "DATE",
+      "reference": "Enter date (MM/DD/YYYY, e.g., 10/16/1987).",
+      "section": "Proposal Details"
+    },
+    {
+      "label": "Attn.",
+      "reference": "Enter attention name.",
+      "section": "Proposal Details"
+    },
+    {
+      "label": "ITEM",
+      "reference": "Enter item name.",
+      "section": "Proposal Details"
+    },
+    {
+      "label": "SIZE",
+      "reference": "Enter size dimensions.",
+      "section": "Proposal Details"
+    },
+    {
+      "label": "MATERIAL",
+      "reference": "Select material type.",
+      "section": "Proposal Details"
+    },
+    {
+      "label": "COLORS",
+      "reference": "Specify color options.",
+      "section": "Proposal Details"
+    },
+    {
+      "label": "HOLES",
+      "reference": "Indicate if holes are required.",
+      "section": "Proposal Details"
+    },
+    {
+      "label": "EDGES",
+      "reference": "Select edge type.",
+      "section": "Proposal Details"
+    },
+    {
+      "label": "STAMP FRAME",
+      "reference": "Select stamp frame options.",
+      "section": "Proposal Details"
+    },
+    {
+      "label": "PACKING",
+      "reference": "Specify packing details.",
+      "section": "Proposal Details"
+    },
+    {
+      "label": "OTHER",
+      "reference": "Provide additional information.",
+      "section": "Proposal Details"
+    },
+    {
+      "label": "QUANTITIES",
+      "reference": "Enter quantity.",
+      "section": "Proposal Details"
+    },
+    {
+      "label": "PRICE",
+      "reference": "Enter price per item.",
+      "section": "Proposal Details"
+    },
+    {
+      "label": "BILL AS MANUFACTURE",
+      "reference": "Check if billing as manufacturer.",
+      "section": "Billing Information"
+    },
+    {
+      "label": "BILL AS SHIP FOR",
+      "reference": "Check if billing as shipper.",
+      "section": "Billing Information"
+    },
+    {
+      "label": "WAREHOUSING",
+      "reference": "Specify warehousing options.",
+      "section": "Billing Information"
+    },
+    {
+      "label": "DROP SHIPPING",
+      "reference": "Specify drop shipping details.",
+      "section": "Billing Information"
+    },
+    {
+      "label": "CONDITIONS",
+      "reference": "Review pricing and conditions.",
+      "section": "Conditions"
+    },
+    {
+      "label": "TERMS",
+      "reference": "Specify payment terms.",
+      "section": "Terms"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00044.pdf"
+}

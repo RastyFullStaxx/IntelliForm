@@ -1,0 +1,172 @@
+{
+  "title": "Compound Physical Parameters",
+  "form_id": "compound-physical-parameters",
+  "canonical_id": "0a2bf35e996cdf755927473c0f4ec1c222f6da9ca3b13104296acfd0b7afe6a4",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:02:47Z",
+  "sections": [
+    {
+      "title": "Physical State",
+      "fields": [
+        {
+          "label": "UPC File Number",
+          "reference": "Enter UPC file number (e.g., A221)"
+        },
+        {
+          "label": "Lot Number",
+          "reference": "Enter lot number"
+        }
+      ]
+    },
+    {
+      "title": "Specific Gravity",
+      "fields": [
+        {
+          "label": "Specific Gravity",
+          "reference": "Not Determined"
+        }
+      ]
+    },
+    {
+      "title": "Solubility",
+      "fields": [
+        {
+          "label": "Mutagenicity Solvents",
+          "reference": "A221 is soluble in EtOH at 0.2 g/mL, with stirring, at room temperature."
+        },
+        {
+          "label": "Oil",
+          "reference": "A221 forms a solution in corn oil at 0.5 g/0.5 mL, with stirring at room temperature."
+        }
+      ]
+    },
+    {
+      "title": "Acute Cardiovascular",
+      "fields": [
+        {
+          "label": "Acute Cardiovascular",
+          "reference": "A221 is insoluble for this procedure."
+        }
+      ]
+    },
+    {
+      "title": "Storage Recommendations",
+      "fields": [
+        {
+          "label": "Storage Recommendations",
+          "reference": "Refrigerate in an amber glass bottle at no more than 8°C."
+        }
+      ]
+    },
+    {
+      "title": "Compound Signified To",
+      "fields": [
+        {
+          "label": "Heat",
+          "reference": "Check if applicable"
+        },
+        {
+          "label": "Moisture",
+          "reference": "Check if applicable"
+        },
+        {
+          "label": "Other",
+          "reference": "Check if applicable"
+        }
+      ]
+    },
+    {
+      "title": "Safety Comments (Suggested Handling Procedure)",
+      "fields": [
+        {
+          "label": "Safety Comments",
+          "reference": "N/A"
+        }
+      ]
+    },
+    {
+      "title": "Signature",
+      "fields": [
+        {
+          "label": "Signature",
+          "reference": "Enter signature"
+        },
+        {
+          "label": "Date",
+          "reference": "Enter date (e.g., MM/DD/YYYY)"
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "UPC File Number",
+      "reference": "Enter UPC file number (e.g., A221)",
+      "section": "Physical State"
+    },
+    {
+      "label": "Lot Number",
+      "reference": "Enter lot number",
+      "section": "Physical State"
+    },
+    {
+      "label": "Specific Gravity",
+      "reference": "Not Determined",
+      "section": "Specific Gravity"
+    },
+    {
+      "label": "Mutagenicity Solvents",
+      "reference": "A221 is soluble in EtOH at 0.2 g/mL, with stirring, at room temperature.",
+      "section": "Solubility"
+    },
+    {
+      "label": "Oil",
+      "reference": "A221 forms a solution in corn oil at 0.5 g/0.5 mL, with stirring at room temperature.",
+      "section": "Solubility"
+    },
+    {
+      "label": "Acute Cardiovascular",
+      "reference": "A221 is insoluble for this procedure.",
+      "section": "Acute Cardiovascular"
+    },
+    {
+      "label": "Storage Recommendations",
+      "reference": "Refrigerate in an amber glass bottle at no more than 8°C.",
+      "section": "Storage Recommendations"
+    },
+    {
+      "label": "Heat",
+      "reference": "Check if applicable",
+      "section": "Compound Signified To"
+    },
+    {
+      "label": "Moisture",
+      "reference": "Check if applicable",
+      "section": "Compound Signified To"
+    },
+    {
+      "label": "Other",
+      "reference": "Check if applicable",
+      "section": "Compound Signified To"
+    },
+    {
+      "label": "Safety Comments",
+      "reference": "N/A",
+      "section": "Safety Comments (Suggested Handling Procedure)"
+    },
+    {
+      "label": "Signature",
+      "reference": "Enter signature",
+      "section": "Signature"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter date (e.g., MM/DD/YYYY)",
+      "section": "Signature"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00042.pdf"
+}

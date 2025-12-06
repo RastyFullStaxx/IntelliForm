@@ -1,0 +1,101 @@
+{
+  "title": "CASE FORM",
+  "form_id": "case-form",
+  "canonical_id": "180f2c2c8ef15bb9cb8bdab8401d24f507c8b91fc1dcb554439115596291dfc3",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-04T00:00:00Z",
+  "updated_at": "2025-12-06T21:49:26Z",
+  "sections": [
+    {
+      "title": "Case Information",
+      "fields": [
+        {
+          "label": "CASE NAME",
+          "reference": "Enter the names of the parties involved in the case."
+        },
+        {
+          "label": "COURT",
+          "reference": "Specify the court where the case is filed."
+        },
+        {
+          "label": "LORILLARD ENTITIES",
+          "reference": "Indicate the entities involved in the case."
+        },
+        {
+          "label": "DATE FILED",
+          "reference": "Enter the date the case was filed (MM/DD/YYYY, e.g., 07/23/1998)."
+        },
+        {
+          "label": "DATE SERVED",
+          "reference": "Enter the date the case was served (MM/DD/YYYY, e.g., 08/03/1998)."
+        },
+        {
+          "label": "CASE TYPE",
+          "reference": "Specify the type of case."
+        },
+        {
+          "label": "PLAINTIFF'S COUNSEL",
+          "reference": "Enter the name and contact information of the plaintiff's counsel."
+        },
+        {
+          "label": "JUDGE",
+          "reference": "Enter the name of the judge assigned to the case."
+        },
+        {
+          "label": "TRIAL DATE",
+          "reference": "Enter the scheduled trial date (MM/DD/YYYY, e.g., 11/28/2025)."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "CASE NAME",
+      "reference": "Enter the names of the parties involved in the case.",
+      "section": "Case Information"
+    },
+    {
+      "label": "COURT",
+      "reference": "Specify the court where the case is filed.",
+      "section": "Case Information"
+    },
+    {
+      "label": "LORILLARD ENTITIES",
+      "reference": "Indicate the entities involved in the case.",
+      "section": "Case Information"
+    },
+    {
+      "label": "DATE FILED",
+      "reference": "Enter the date the case was filed (MM/DD/YYYY, e.g., 07/23/1998).",
+      "section": "Case Information"
+    },
+    {
+      "label": "DATE SERVED",
+      "reference": "Enter the date the case was served (MM/DD/YYYY, e.g., 08/03/1998).",
+      "section": "Case Information"
+    },
+    {
+      "label": "CASE TYPE",
+      "reference": "Specify the type of case.",
+      "section": "Case Information"
+    },
+    {
+      "label": "PLAINTIFF'S COUNSEL",
+      "reference": "Enter the name and contact information of the plaintiff's counsel.",
+      "section": "Case Information"
+    },
+    {
+      "label": "JUDGE",
+      "reference": "Enter the name of the judge assigned to the case.",
+      "section": "Case Information"
+    },
+    {
+      "label": "TRIAL DATE",
+      "reference": "Enter the scheduled trial date (MM/DD/YYYY, e.g., 11/28/2025).",
+      "section": "Case Information"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00009.pdf"
+}

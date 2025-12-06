@@ -1,0 +1,110 @@
+{
+  "title": "Fax Transmission",
+  "form_id": "fax-transmission",
+  "canonical_id": "b5df3b82c363cfcfc6bb94059298dfc6741ba89f05bcc9c1708d8a42d8c14a4a",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T21:51:11Z",
+  "sections": [
+    {
+      "title": "Fax Details",
+      "fields": [
+        {
+          "label": "DATE",
+          "reference": "Enter the date of the fax (e.g., January 11, 1999)"
+        },
+        {
+          "label": "CLIENT NO.",
+          "reference": "Enter the client number (e.g., L8557.002)"
+        },
+        {
+          "label": "MESSAGE TO",
+          "reference": "Enter the name of the recipient (e.g., Dewey Tedder)"
+        },
+        {
+          "label": "COMPANY",
+          "reference": "Enter the company name (e.g., Lorillard Tobacco Company)"
+        },
+        {
+          "label": "FAX NUMBER",
+          "reference": "Enter the fax number (e.g., 336/373-6917)"
+        },
+        {
+          "label": "PHONE",
+          "reference": "Enter the phone number (e.g., 336/373-6750)"
+        },
+        {
+          "label": "FROM",
+          "reference": "Enter the sender's name(s) (e.g., Andy Zausner and Rob Mangas)"
+        },
+        {
+          "label": "PAGES (including Cover Sheet)",
+          "reference": "Enter the total number of pages (e.g., 2)"
+        },
+        {
+          "label": "HARD COPY TO FOLLOW",
+          "reference": "Indicate if a hard copy will follow (YES or NO)"
+        },
+        {
+          "label": "MESSAGE",
+          "reference": "Enter the message content (e.g., The following is for your review.)"
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "DATE",
+      "reference": "Enter the date of the fax (e.g., January 11, 1999)",
+      "section": "Fax Details"
+    },
+    {
+      "label": "CLIENT NO.",
+      "reference": "Enter the client number (e.g., L8557.002)",
+      "section": "Fax Details"
+    },
+    {
+      "label": "MESSAGE TO",
+      "reference": "Enter the name of the recipient (e.g., Dewey Tedder)",
+      "section": "Fax Details"
+    },
+    {
+      "label": "COMPANY",
+      "reference": "Enter the company name (e.g., Lorillard Tobacco Company)",
+      "section": "Fax Details"
+    },
+    {
+      "label": "FAX NUMBER",
+      "reference": "Enter the fax number (e.g., 336/373-6917)",
+      "section": "Fax Details"
+    },
+    {
+      "label": "PHONE",
+      "reference": "Enter the phone number (e.g., 336/373-6750)",
+      "section": "Fax Details"
+    },
+    {
+      "label": "FROM",
+      "reference": "Enter the sender's name(s) (e.g., Andy Zausner and Rob Mangas)",
+      "section": "Fax Details"
+    },
+    {
+      "label": "PAGES (including Cover Sheet)",
+      "reference": "Enter the total number of pages (e.g., 2)",
+      "section": "Fax Details"
+    },
+    {
+      "label": "HARD COPY TO FOLLOW",
+      "reference": "Indicate if a hard copy will follow (YES or NO)",
+      "section": "Fax Details"
+    },
+    {
+      "label": "MESSAGE",
+      "reference": "Enter the message content (e.g., The following is for your review.)",
+      "section": "Fax Details"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00014.pdf"
+}

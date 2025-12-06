@@ -1,0 +1,178 @@
+{
+  "title": "Test Article Receipt",
+  "form_id": "test-article-receipt",
+  "canonical_id": "727a7bdfa38ffaf980cbeae7304d940ce405a5931e761a9e329aeca1a929f6ce",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:01:07Z",
+  "sections": [
+    {
+      "title": "Test Article Information",
+      "fields": [
+        {
+          "label": "TA #",
+          "reference": "Enter test article number."
+        },
+        {
+          "label": "Sponsor's Name",
+          "reference": "Enter sponsor's name."
+        },
+        {
+          "label": "Test Article Identification",
+          "reference": "Enter test article identification."
+        },
+        {
+          "label": "Lot #",
+          "reference": "Enter lot number."
+        },
+        {
+          "label": "Condition of Shipment",
+          "reference": "Select condition: Good, Broken, Leaked."
+        },
+        {
+          "label": "Shipped Via",
+          "reference": "Enter shipping method."
+        },
+        {
+          "label": "Physical Description",
+          "reference": "Enter physical description of the article."
+        },
+        {
+          "label": "No. of Containers",
+          "reference": "Enter number of containers."
+        },
+        {
+          "label": "Gross Weight",
+          "reference": "Enter gross weight."
+        },
+        {
+          "label": "Net Weight (if provided)",
+          "reference": "Enter net weight if provided."
+        },
+        {
+          "label": "Expiration Date",
+          "reference": "Enter expiration date (MM/DD/YYYY, e.g., 03/01/1990)."
+        },
+        {
+          "label": "Special Handling Requirements",
+          "reference": "Enter any special handling requirements."
+        }
+      ]
+    },
+    {
+      "title": "Signatures",
+      "fields": [
+        {
+          "label": "Received By",
+          "reference": "Enter name of person receiving the article."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter date received (MM/DD/YYYY, e.g., 03/01/1990)."
+        },
+        {
+          "label": "Study Director/Department",
+          "reference": "Enter study director or department name."
+        },
+        {
+          "label": "Signature of Department Consignee",
+          "reference": "Enter signature of department consignee."
+        },
+        {
+          "label": "Date",
+          "reference": "Enter date (MM/DD/YYYY, e.g., 03/04/1990)."
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "label": "TA #",
+      "reference": "Enter test article number.",
+      "section": "Test Article Information"
+    },
+    {
+      "label": "Sponsor's Name",
+      "reference": "Enter sponsor's name.",
+      "section": "Test Article Information"
+    },
+    {
+      "label": "Test Article Identification",
+      "reference": "Enter test article identification.",
+      "section": "Test Article Information"
+    },
+    {
+      "label": "Lot #",
+      "reference": "Enter lot number.",
+      "section": "Test Article Information"
+    },
+    {
+      "label": "Condition of Shipment",
+      "reference": "Select condition: Good, Broken, Leaked.",
+      "section": "Test Article Information"
+    },
+    {
+      "label": "Shipped Via",
+      "reference": "Enter shipping method.",
+      "section": "Test Article Information"
+    },
+    {
+      "label": "Physical Description",
+      "reference": "Enter physical description of the article.",
+      "section": "Test Article Information"
+    },
+    {
+      "label": "No. of Containers",
+      "reference": "Enter number of containers.",
+      "section": "Test Article Information"
+    },
+    {
+      "label": "Gross Weight",
+      "reference": "Enter gross weight.",
+      "section": "Test Article Information"
+    },
+    {
+      "label": "Net Weight (if provided)",
+      "reference": "Enter net weight if provided.",
+      "section": "Test Article Information"
+    },
+    {
+      "label": "Expiration Date",
+      "reference": "Enter expiration date (MM/DD/YYYY, e.g., 03/01/1990).",
+      "section": "Test Article Information"
+    },
+    {
+      "label": "Special Handling Requirements",
+      "reference": "Enter any special handling requirements.",
+      "section": "Test Article Information"
+    },
+    {
+      "label": "Received By",
+      "reference": "Enter name of person receiving the article.",
+      "section": "Signatures"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter date received (MM/DD/YYYY, e.g., 03/01/1990).",
+      "section": "Signatures"
+    },
+    {
+      "label": "Study Director/Department",
+      "reference": "Enter study director or department name.",
+      "section": "Signatures"
+    },
+    {
+      "label": "Signature of Department Consignee",
+      "reference": "Enter signature of department consignee.",
+      "section": "Signatures"
+    },
+    {
+      "label": "Date",
+      "reference": "Enter date (MM/DD/YYYY, e.g., 03/04/1990).",
+      "section": "Signatures"
+    }
+  ],
+  "notes": "reference_explainer_v1",
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00039.pdf"
+}
