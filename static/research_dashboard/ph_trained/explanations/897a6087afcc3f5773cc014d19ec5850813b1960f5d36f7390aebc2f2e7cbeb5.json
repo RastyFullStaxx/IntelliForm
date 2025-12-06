@@ -1,0 +1,168 @@
+{
+  "title": "Suitability Assessment Form",
+  "form_id": "suitability-assessment-form",
+  "sections": [
+    {
+      "title": "PART I – CLIENT INFORMATION",
+      "fields": [
+        {
+          "label": "Client Name (Last Name, First Name, Middle Name if individual)",
+          "summary": "Enter full name of the client."
+        },
+        {
+          "label": "RM No.",
+          "summary": "Enter Relationship Manager number."
+        },
+        {
+          "label": "Date",
+          "summary": "Use MM/DD/YYYY (e.g., 11/28/2025)."
+        },
+        {
+          "label": "Is the client a registered Qualified Individual/Institutional Buyer (QIB) under Philippine Securities Regulation Code (or equivalent status in other jurisdictions)?",
+          "summary": "Select Yes or No."
+        },
+        {
+          "label": "If not registered, does the client meet the qualifications of a Qualified Individual/Institutional Buyer (QIB) under Rule 10.1(l) of the Philippine Securities Regulation Code?",
+          "summary": "Select Yes or No."
+        }
+      ]
+    },
+    {
+      "title": "PART II – CLIENT SUITABILITY ASSESSMENT (CSA)",
+      "fields": [
+        {
+          "label": "What is your INVESTMENT OBJECTIVE?",
+          "summary": "Select one option that best describes your investment objective."
+        },
+        {
+          "label": "What is your LIQUIDITY REQUIREMENT?",
+          "summary": "Select one option that best describes your liquidity requirement."
+        },
+        {
+          "label": "What is your RISK TOLERANCE?",
+          "summary": "Select one option that best describes your risk tolerance."
+        },
+        {
+          "label": "What is your INVESTMENT HORIZON?",
+          "summary": "Select one option that best describes your investment horizon."
+        },
+        {
+          "label": "What is the level of your INVESTMENT KNOWLEDGE?",
+          "summary": "Select one option that best describes your investment knowledge."
+        },
+        {
+          "label": "What is the extent of your INVESTMENT EXPERIENCE?",
+          "summary": "Select one option that best describes your investment experience."
+        },
+        {
+          "label": "What type of investment are you INTERESTED in?",
+          "summary": "Select one option that best describes your investment interest."
+        },
+        {
+          "label": "SAF Score",
+          "summary": "Enter your SAF score."
+        },
+        {
+          "label": "SAF Profile",
+          "summary": "Select your SAF profile."
+        },
+        {
+          "label": "Final Resulting Profile:",
+          "summary": "Select your final resulting profile."
+        }
+      ]
+    },
+    {
+      "title": "PART III – DISCLOSURES",
+      "fields": [
+        {
+          "label": "At any time, clients may give instruction for TBG to invest in any one or more of the investment/trust products below the resulting personal investment risk profile.",
+          "summary": "N/A"
+        },
+        {
+          "label": "The client acknowledges that Suitability Assessment is done individually or on a per client basis and shall be reviewed every three (3) years unless there is a change in the personal/financial circumstance or preference within the 3-year period.",
+          "summary": "N/A"
+        }
+      ]
+    },
+    {
+      "title": "PART IV – ACKNOWLEDGEMENT",
+      "fields": [
+        {
+          "label": "I attest to the truth and correctness of my given personal/business information.",
+          "summary": "N/A"
+        },
+        {
+          "label": "Client’s Signature over Printed Name",
+          "summary": "Sign and print your name."
+        },
+        {
+          "label": "Date",
+          "summary": "Use MM/DD/YYYY (e.g., 11/28/2025)."
+        },
+        {
+          "label": "Conducted by:",
+          "summary": "N/A"
+        },
+        {
+          "label": "Reviewed by:",
+          "summary": "N/A"
+        },
+        {
+          "label": "Account Manager’s Signature over Printed Name",
+          "summary": "Sign and print name of the account manager."
+        },
+        {
+          "label": "Supervising Officer’s Signature over Printed Name",
+          "summary": "Sign and print name of the supervising officer."
+        }
+      ]
+    },
+    {
+      "title": "CO-TRUSTOR CONFORME",
+      "fields": [
+        {
+          "label": "Co-Trustor’s Signature over Printed Name/Date",
+          "summary": "Sign and print name with date."
+        }
+      ]
+    },
+    {
+      "title": "REFERRER INFORMATION",
+      "fields": [
+        {
+          "label": "Branch Code",
+          "summary": "Enter branch code."
+        },
+        {
+          "label": "Branch Name",
+          "summary": "Enter branch name."
+        },
+        {
+          "label": "Other Bank Units",
+          "summary": "N/A"
+        },
+        {
+          "label": "Subsidiaries/Affiliates",
+          "summary": "N/A"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 35,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "897a6087afcc3f5773cc014d19ec5850813b1960f5d36f7390aebc2f2e7cbeb5",
+  "bucket": "finance",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T23:23:44Z",
+  "aliases": [],
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Finance_SuitabilityAssessmentForm.pdf",
+  "fields": []
+}

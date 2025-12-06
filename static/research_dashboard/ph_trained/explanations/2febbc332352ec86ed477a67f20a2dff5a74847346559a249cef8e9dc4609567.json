@@ -1,0 +1,271 @@
+{
+  "title": "Personal Accident Claim Form (Claimant’s Statement)",
+  "form_id": "personal-accident-claim-form",
+  "sections": [
+    {
+      "title": "Claim Requirements",
+      "fields": [
+        {
+          "label": "Completed Personal Accident Claim Form",
+          "summary": "Submit the completed claim form."
+        },
+        {
+          "label": "Attending Physician’s Statement or Medical Certificate",
+          "summary": "Provide statement or certificate from the attending physician."
+        },
+        {
+          "label": "Police Investigation Report or Statement of Witness/es",
+          "summary": "Include report or statement from police or witnesses."
+        },
+        {
+          "label": "Valid IDs of the Insured and Beneficiary",
+          "summary": "Present actual IDs and submit photocopies; at least one must be government-issued."
+        },
+        {
+          "label": "Birth Certificate",
+          "summary": "Submit the birth certificate issued by PSA or Local Civil Registry."
+        },
+        {
+          "label": "Death Certificate with Post-Mortem Examination",
+          "summary": "Provide death certificate issued by PSA or Local Civil Registry."
+        },
+        {
+          "label": "Official Receipts of Medical Expenses",
+          "summary": "Submit receipts for medical expenses incurred."
+        },
+        {
+          "label": "Photocopy of Hospital Records (if available)",
+          "summary": "Include photocopies of hospital records if available."
+        },
+        {
+          "label": "Marriage Certificate (if applicable)",
+          "summary": "Provide marriage certificate if applicable."
+        },
+        {
+          "label": "Official Receipts of Burial and Funeral Services",
+          "summary": "Submit receipts for burial and funeral services if claiming under accidental burial expense coverage."
+        },
+        {
+          "label": "Photocopy of Contract of Burial and Funeral Services",
+          "summary": "Include photocopy of the burial and funeral services contract."
+        },
+        {
+          "label": "Autopsy Report (if available)",
+          "summary": "Provide autopsy report if available."
+        },
+        {
+          "label": "Complete Medical Records",
+          "summary": "Submit complete medical records showing proof of disability."
+        },
+        {
+          "label": "Photos of amputated/aﬀected body parts of the Insured",
+          "summary": "Include photos of affected body parts, both whole body and close-up shots."
+        },
+        {
+          "label": "Statement of Account (SOA) with Admission and Discharge Date",
+          "summary": "Provide statement of account with admission and discharge dates."
+        }
+      ]
+    },
+    {
+      "title": "Insured’s Information",
+      "fields": [
+        {
+          "label": "Full Name of Insured (Last Name, First Name, Middle Name)",
+          "summary": "Enter the full name of the insured."
+        },
+        {
+          "label": "Date of Birth (MM/DD/YYYY)",
+          "summary": "Enter the date of birth in MM/DD/YYYY format (e.g., 11/28/2025)."
+        },
+        {
+          "label": "Place of Birth",
+          "summary": "Enter the place of birth."
+        },
+        {
+          "label": "Nationality",
+          "summary": "Enter nationality."
+        },
+        {
+          "label": "Sex",
+          "summary": "Select gender: Male or Female."
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter email address."
+        },
+        {
+          "label": "Mobile No.",
+          "summary": "Enter mobile number."
+        },
+        {
+          "label": "Home Phone No. (Optional)",
+          "summary": "Enter home phone number if applicable."
+        },
+        {
+          "label": "Residence/Present Address",
+          "summary": "Enter complete present address."
+        },
+        {
+          "label": "Is the Insured a US citizen or US Tax resident?",
+          "summary": "Indicate Yes or No."
+        },
+        {
+          "label": "Is the Insured or their immediate family/close associate a Politically Exposed Person (PEP)?",
+          "summary": "Indicate Yes or No."
+        }
+      ]
+    },
+    {
+      "title": "Claimant’s Information",
+      "fields": [
+        {
+          "label": "Full Name of Claimant (Last Name, First Name, Middle Name)",
+          "summary": "Enter the full name of the claimant."
+        },
+        {
+          "label": "Date of Birth (MM/DD/YYYY)",
+          "summary": "Enter the date of birth in MM/DD/YYYY format (e.g., 11/28/2025)."
+        },
+        {
+          "label": "Place of Birth",
+          "summary": "Enter the place of birth."
+        },
+        {
+          "label": "Nationality",
+          "summary": "Enter nationality."
+        },
+        {
+          "label": "Sex",
+          "summary": "Select gender: Male or Female."
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter email address."
+        },
+        {
+          "label": "Mobile No.",
+          "summary": "Enter mobile number."
+        },
+        {
+          "label": "Home Phone No. (Optional)",
+          "summary": "Enter home phone number if applicable."
+        },
+        {
+          "label": "Residence/Present Address",
+          "summary": "Enter complete present address."
+        },
+        {
+          "label": "Nature of Work",
+          "summary": "Enter nature of work including employer/business and position title."
+        }
+      ]
+    },
+    {
+      "title": "Claim Details",
+      "fields": [
+        {
+          "label": "Briefly discuss how the accident/illness occurred/happened",
+          "summary": "Provide a brief description of the accident or illness."
+        },
+        {
+          "label": "Was the Insured confined?",
+          "summary": "Indicate Yes or No."
+        },
+        {
+          "label": "Date of Confinement (MM/DD/YYYY)",
+          "summary": "Enter date of confinement in MM/DD/YYYY format (e.g., 11/28/2025)."
+        },
+        {
+          "label": "Name of the Hospital",
+          "summary": "Enter the name of the hospital."
+        },
+        {
+          "label": "Clinic/Hospital Address",
+          "summary": "Enter the address of the clinic or hospital."
+        },
+        {
+          "label": "Name of Physician",
+          "summary": "Enter the name of the physician."
+        },
+        {
+          "label": "Clinic/Hospital Phone No.",
+          "summary": "Enter the phone number of the clinic or hospital."
+        }
+      ]
+    },
+    {
+      "title": "Payment Instructions",
+      "fields": [
+        {
+          "label": "Account Number of Payee",
+          "summary": "Enter the account number for fund transfer."
+        },
+        {
+          "label": "Bank Name",
+          "summary": "Enter the name of the bank."
+        },
+        {
+          "label": "Branch Address",
+          "summary": "Enter the branch address."
+        },
+        {
+          "label": "Account Type",
+          "summary": "Select account type: Peso or Dollar."
+        },
+        {
+          "label": "Account Name of Payee",
+          "summary": "Enter the account name of the payee."
+        },
+        {
+          "label": "Date of Accident/Illness (MM/DD/YYYY)",
+          "summary": "Enter the date of accident or illness in MM/DD/YYYY format (e.g., 11/28/2025)."
+        },
+        {
+          "label": "Place of Accident/Illness",
+          "summary": "Enter the place where the accident or illness occurred."
+        },
+        {
+          "label": "Nature of the injury/illness of the Insured",
+          "summary": "Describe the nature of the injury or illness."
+        }
+      ]
+    },
+    {
+      "title": "Declarations",
+      "fields": [
+        {
+          "label": "Signature over printed name of Policy Owner",
+          "summary": "Sign and print the name of the policy owner."
+        },
+        {
+          "label": "Signature over printed name of Insured (if minor, Legal Guardian)",
+          "summary": "Sign and print the name of the insured or legal guardian if minor."
+        },
+        {
+          "label": "Date and Signature",
+          "summary": "Enter the date and sign."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 30,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "2febbc332352ec86ed477a67f20a2dff5a74847346559a249cef8e9dc4609567",
+  "bucket": "health",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T23:19:00Z",
+  "aliases": [
+    "personal_accident_claim_form",
+    "claimants_statement"
+  ],
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\HealthcareInsurance_AXAPersonalAccidentClaimForm(Claimant_s Statement).pdf",
+  "fields": []
+}

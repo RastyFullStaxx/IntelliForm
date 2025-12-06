@@ -1,0 +1,88 @@
+{
+  "title": "nielsr funsd test 00002",
+  "form_id": "nielsr-funsd-test-00002",
+  "sections": [
+    {
+      "title": "Advertising Effectiveness",
+      "fields": [
+        {
+          "label": "ADVERTISING - EFFECTIVENESS OF P.O.S.",
+          "summary": "Enter effectiveness rating for point of sale advertising."
+        }
+      ]
+    },
+    {
+      "title": "Chains and Independents",
+      "fields": [
+        {
+          "label": "CHAINS - ACCEPTANCE/MERCHANDISING",
+          "summary": "Enter acceptance and merchandising details for chains."
+        },
+        {
+          "label": "INDEPENDENTS - ACCEPTANCE/MERCHANDISING",
+          "summary": "Enter acceptance and merchandising details for independents."
+        }
+      ]
+    },
+    {
+      "title": "Distribution and Sales",
+      "fields": [
+        {
+          "label": "DISTRIBUTORS - ACCEPTANCE/INTRO TERMS/INTRO DEALS/INVOLVEMENT",
+          "summary": "Enter details on distributor acceptance and terms."
+        },
+        {
+          "label": "SALES FORCE INVOLVEMENT",
+          "summary": "Enter details on sales force involvement."
+        }
+      ]
+    },
+    {
+      "title": "Market Information",
+      "fields": [
+        {
+          "label": "TEST MARKET GEOGRAPHY",
+          "summary": "Enter the geography of the test market."
+        },
+        {
+          "label": "PRICE POINT",
+          "summary": "Enter the price point for the product."
+        },
+        {
+          "label": "REPORTING PERIODS",
+          "summary": "Enter the reporting periods for the data."
+        },
+        {
+          "label": "DATE",
+          "summary": "Enter the date (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "FROM",
+          "summary": "Enter the starting point for the report."
+        },
+        {
+          "label": "TO",
+          "summary": "Enter the ending point for the report."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 10,
+    "fp": 1,
+    "fn": 0,
+    "precision": 0.909,
+    "recall": 1.0,
+    "f1": 0.952
+  },
+  "canonical_id": "6ba36de1b344afe00200eb03e97a0b4d45762443c24b199d29b4a6d8e88cfffc",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:43:16Z",
+  "aliases": [
+    "nielsr_funsd_test_00002"
+  ],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00002.pdf",
+  "fields": []
+}

@@ -1,0 +1,55 @@
+{
+  "title": "nielsr funsd test 00049",
+  "form_id": "nielsr-funsd-test-00049",
+  "sections": [
+    {
+      "title": "Advertiser Information",
+      "fields": [
+        {
+          "label": "AD#",
+          "summary": "Enter the advertisement number."
+        },
+        {
+          "label": "Advertiser",
+          "summary": "Enter the name of the advertiser."
+        },
+        {
+          "label": "Date",
+          "summary": "Enter the date (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "Product",
+          "summary": "Enter the product name."
+        },
+        {
+          "label": "Space",
+          "summary": "Enter the space details."
+        },
+        {
+          "label": "Space Billing Instructions",
+          "summary": "Provide billing instructions for the space."
+        },
+        {
+          "label": "Caption",
+          "summary": "Enter the caption for the advertisement."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 7,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "3a7ee687c094bb31fbb14d2218c2c499d2199a722a2355309361899c8ed7b43d",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:52:31Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00049.pdf",
+  "fields": []
+}

@@ -1,0 +1,138 @@
+{
+  "title": "EAZY HEALTH CLAIM FORM FOR CRITICAL ILLNESS & DISABILITY",
+  "form_id": "eazy-health-claim-form",
+  "sections": [
+    {
+      "title": "INFORMATION ON THE INSURED",
+      "fields": [
+        {
+          "label": "Full Name",
+          "summary": "Enter full name of the insured."
+        },
+        {
+          "label": "Date of birth",
+          "summary": "Enter birth date (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "Nationality",
+          "summary": "Enter nationality."
+        },
+        {
+          "label": "Occupation",
+          "summary": "Enter occupation."
+        },
+        {
+          "label": "Address",
+          "summary": "Enter complete present address."
+        },
+        {
+          "label": "Contact nos.",
+          "summary": "Enter contact numbers."
+        },
+        {
+          "label": "E-mail address",
+          "summary": "Enter email address."
+        }
+      ]
+    },
+    {
+      "title": "DETAILS OF THE ACCIDENT",
+      "fields": [
+        {
+          "label": "Date of accident",
+          "summary": "Enter date of accident (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "Place of accident",
+          "summary": "Enter place of accident."
+        },
+        {
+          "label": "Cause of accident (please provide details)",
+          "summary": "Provide details of the cause of the accident."
+        }
+      ]
+    },
+    {
+      "title": "DETAILS OF THE ILLNESS",
+      "fields": [
+        {
+          "label": "Describe the nature and symptoms of your illness/disease",
+          "summary": "Provide details on the nature and symptoms."
+        },
+        {
+          "label": "Date the symptoms first occurred",
+          "summary": "Enter date symptoms first occurred (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "Have you recovered from your illness/disease?",
+          "summary": "Indicate if you have recovered."
+        },
+        {
+          "label": "What is your present health condition?",
+          "summary": "Describe present health condition."
+        },
+        {
+          "label": "Have you had this condition or a similar one previously? Please provide details.",
+          "summary": "Indicate if you had a similar condition and provide details."
+        },
+        {
+          "label": "Diagnosis of the Attending Physician",
+          "summary": "Enter diagnosis from attending physician."
+        },
+        {
+          "label": "Date of return or expected return to work",
+          "summary": "Enter expected return date (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "Describe the extent of the injury/ies in detail",
+          "summary": "Provide detailed description of injuries."
+        }
+      ]
+    },
+    {
+      "title": "ACTIVITIES OF DAILY LIVING (ADLS)",
+      "fields": [
+        {
+          "label": "Ability to feed oneself",
+          "summary": "Indicate ability to feed oneself."
+        },
+        {
+          "label": "Ability to get in and out of bed",
+          "summary": "Indicate ability to get in and out of bed."
+        },
+        {
+          "label": "Ability to move from room to room",
+          "summary": "Indicate ability to move from room to room."
+        },
+        {
+          "label": "Ability to attend to own toilet needs",
+          "summary": "Indicate ability to attend to toilet needs."
+        },
+        {
+          "label": "Ability to wash and bathe oneself",
+          "summary": "Indicate ability to wash and bathe oneself."
+        },
+        {
+          "label": "Ability to dress oneself",
+          "summary": "Indicate ability to dress oneself."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 24,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "957ce719d2ee82d86d0b2bb33d6edfcd59ee5fde755eaec15ac222053c3ebabc",
+  "bucket": "health",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T23:25:25Z",
+  "aliases": [],
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\HealthcareInsurance_AllianzPNBLifeIHPeAZyHealthClaimForm.pdf",
+  "fields": []
+}

@@ -1,0 +1,72 @@
+{
+  "title": "nielsr funsd test 00005",
+  "form_id": "nielsr-funsd-test-00005",
+  "sections": [
+    {
+      "title": "Acceptance and Merchandising Allowance",
+      "fields": [
+        {
+          "label": "CHAINS - ACCEPTANCE/MERCHANDISING ALLOWANCE",
+          "summary": "Enter details for chains' acceptance/merchandising allowance."
+        },
+        {
+          "label": "INDEPENDENTS - ACCEPTANCE/MERCHANDISING ALLOWANCE",
+          "summary": "Enter details for independents' acceptance/merchandising allowance."
+        }
+      ]
+    },
+    {
+      "title": "General Information",
+      "fields": [
+        {
+          "label": "DATE",
+          "summary": "Use MM/DD/YYYY (e.g., 11/28/2025)"
+        },
+        {
+          "label": "FROM",
+          "summary": "Enter the starting point or sender's information."
+        },
+        {
+          "label": "TO",
+          "summary": "Enter the recipient's information."
+        },
+        {
+          "label": "PRICE POINT",
+          "summary": "Enter the price point."
+        },
+        {
+          "label": "TEST MARKET GEOGRAPHY",
+          "summary": "Specify the geography for the test market."
+        },
+        {
+          "label": "REPORTING PERIODS",
+          "summary": "Define the reporting periods."
+        },
+        {
+          "label": "DISTRIBUTOR INVOLVEMENT",
+          "summary": "Detail the distributor's involvement."
+        },
+        {
+          "label": "SALES FORCE INVOLVEMENT",
+          "summary": "Describe the sales force's involvement."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 8,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "b028876864fd9ccc4d115de55aec74e7ae018dab2c94302c9319ce4195147206",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:43:47Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00005.pdf",
+  "fields": []
+}

@@ -1,0 +1,263 @@
+{
+  "title": "Application for Treaty Purposes",
+  "form_id": "application-for-treaty-purposes",
+  "sections": [
+    {
+      "title": "Part I – Legal Basis of Claim for Relief",
+      "fields": [
+        {
+          "label": "Article",
+          "summary": "Enter article number of the Tax Treaty."
+        },
+        {
+          "label": "Tax Treatment Under the Treaty",
+          "summary": "Select tax treatment: Exempt from Income Tax or Subject to Preferential Rate."
+        },
+        {
+          "label": "Tax Rate",
+          "summary": "Enter applicable tax rate percentage."
+        }
+      ]
+    },
+    {
+      "title": "Part II – Identification of Income Recipient",
+      "fields": [
+        {
+          "label": "Name of Income Recipient",
+          "summary": "Enter full name of the income recipient."
+        },
+        {
+          "label": "Local Taxpayer Identification Number (TIN)",
+          "summary": "Enter local TIN."
+        },
+        {
+          "label": "RDO Code",
+          "summary": "Enter RDO code."
+        },
+        {
+          "label": "Foreign TIN",
+          "summary": "Enter foreign TIN."
+        },
+        {
+          "label": "Place of Residence in the Philippines",
+          "summary": "Enter complete address in the Philippines."
+        },
+        {
+          "label": "ZIP Code",
+          "summary": "Enter ZIP code."
+        },
+        {
+          "label": "Date of Birth (MM/DD/YYYY)",
+          "summary": "Enter birth date in MM/DD/YYYY format (e.g., 11/28/2025)."
+        },
+        {
+          "label": "Citizenship",
+          "summary": "Enter citizenship."
+        },
+        {
+          "label": "Contact Number (Landline/Mobile No.)",
+          "summary": "Enter contact number."
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter email address."
+        },
+        {
+          "label": "Country where the recipient is taxable as resident and where he/she is to pay tax",
+          "summary": "Enter country of tax residency."
+        },
+        {
+          "label": "Date of Arrival in the Philippines (MM/DD/YYYY)",
+          "summary": "Enter arrival date in MM/DD/YYYY format (e.g., 11/28/2025)."
+        },
+        {
+          "label": "Date of Final Departure from the Philippines (MM/DD/YYYY)",
+          "summary": "Enter departure date in MM/DD/YYYY format (e.g., 11/28/2025)."
+        }
+      ]
+    },
+    {
+      "title": "Part III – Details of Income Payor / Foreign Employer",
+      "fields": [
+        {
+          "label": "Registered Name (Last Name, First Name, Middle Name for Individual OR Registered Name for Non-Individual)",
+          "summary": "Enter full name or registered name."
+        },
+        {
+          "label": "Local Taxpayer Identification Number (TIN)",
+          "summary": "Enter local TIN."
+        },
+        {
+          "label": "RDO Code",
+          "summary": "Enter RDO code."
+        },
+        {
+          "label": "Foreign TIN",
+          "summary": "Enter foreign TIN."
+        },
+        {
+          "label": "Country of Residence",
+          "summary": "Enter country of residence."
+        },
+        {
+          "label": "Complete Address in the Country of Residence",
+          "summary": "Enter complete address in the country of residence."
+        },
+        {
+          "label": "Contact Number (Landline/Mobile No.)",
+          "summary": "Enter contact number."
+        },
+        {
+          "label": "Does the income payor have a Permanent Establishment (PE) in the Philippines?",
+          "summary": "Select Yes or No."
+        },
+        {
+          "label": "If yes, does the PE have a license to do business in the Philippines?",
+          "summary": "Select Yes or No."
+        },
+        {
+          "label": "Taxpayer Identification Number of the PE",
+          "summary": "Enter TIN of the PE."
+        },
+        {
+          "label": "RDO Code",
+          "summary": "Enter RDO code."
+        },
+        {
+          "label": "Address of the PE",
+          "summary": "Enter complete address of the PE."
+        },
+        {
+          "label": "ZIP Code",
+          "summary": "Enter ZIP code."
+        }
+      ]
+    },
+    {
+      "title": "Part IV – Details of Income and Withholding Tax",
+      "fields": [
+        {
+          "label": "Description of Service Rendered",
+          "summary": "Enter description of services provided."
+        },
+        {
+          "label": "Date of Contract (MM/DD/YYYY)",
+          "summary": "Enter contract date in MM/DD/YYYY format (e.g., 11/28/2025)."
+        },
+        {
+          "label": "Duration of Employment",
+          "summary": "Enter duration of employment."
+        },
+        {
+          "label": "Days of Physical Presence in the Philippines",
+          "summary": "Enter number of days present in the Philippines."
+        },
+        {
+          "label": "Amount of Remuneration (per month/year)",
+          "summary": "Enter remuneration amount."
+        },
+        {
+          "label": "Method of Payment",
+          "summary": "Enter method of payment."
+        },
+        {
+          "label": "Date of Payment (MM/DD/YYYY)",
+          "summary": "Enter payment date in MM/DD/YYYY format (e.g., 11/28/2025)."
+        },
+        {
+          "label": "Who actually claimed a deduction for the remuneration?",
+          "summary": "Select Foreign Employer, PE in the Philippines, or Philippine Taxpayer."
+        },
+        {
+          "label": "Other remuneration, etc., paid by other persons for personal services, etc., performed in the Philippines",
+          "summary": "Enter details of other remuneration."
+        },
+        {
+          "label": "Amount of Withholding Tax Paid, if any",
+          "summary": "Enter amount of withholding tax paid."
+        },
+        {
+          "label": "Date of Payment (MM/DD/YYYY)",
+          "summary": "Enter payment date in MM/DD/YYYY format (e.g., 11/28/2025)."
+        }
+      ]
+    },
+    {
+      "title": "Part V – Authorized Representative in the Philippines (attach proof of authorization)",
+      "fields": [
+        {
+          "label": "Registered Name (Last Name, First Name, Middle Name for Individual OR Registered Name for Non-Individual)",
+          "summary": "Enter full name or registered name."
+        },
+        {
+          "label": "Taxpayer Identification Number (TIN)",
+          "summary": "Enter TIN."
+        },
+        {
+          "label": "RDO Code",
+          "summary": "Enter RDO code."
+        },
+        {
+          "label": "Registered Address",
+          "summary": "Enter complete registered address."
+        },
+        {
+          "label": "ZIP Code",
+          "summary": "Enter ZIP code."
+        },
+        {
+          "label": "Contact Number (Landline/Cellphone No.)",
+          "summary": "Enter contact number."
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter email address."
+        }
+      ]
+    },
+    {
+      "title": "Part VI – Certification",
+      "fields": [
+        {
+          "label": "Signature over Printed Name of the Beneficial Owner/Authorized Representative/Tax Agent",
+          "summary": "Sign and print name."
+        },
+        {
+          "label": "Tax Agent Accreditation/Attorney’s Roll Number, if applicable",
+          "summary": "Enter accreditation or roll number."
+        },
+        {
+          "label": "Date of Issue (MM/DD/YYYY)",
+          "summary": "Enter issue date in MM/DD/YYYY format (e.g., 11/28/2025)."
+        },
+        {
+          "label": "Date of Expiry (MM/DD/YYYY)",
+          "summary": "Enter expiry date in MM/DD/YYYY format (e.g., 11/28/2025)."
+        },
+        {
+          "label": "ITAD Filing Reference No.",
+          "summary": "Enter ITAD filing reference number."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 40,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "476abe18d6172cfc096135ada8b30afcdcbf6f8b7b2eba014f81d9a852ee0e37",
+  "bucket": "ph-supplemental",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T23:20:36Z",
+  "aliases": [
+    "BIR Form No. 0901-S2",
+    "Application for Treaty Purposes"
+  ],
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Tax_BIRApplicationForTreatyPurposes0901-S2.pdf",
+  "fields": []
+}

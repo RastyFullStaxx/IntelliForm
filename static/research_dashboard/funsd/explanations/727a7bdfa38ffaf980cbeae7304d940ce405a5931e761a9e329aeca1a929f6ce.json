@@ -1,0 +1,91 @@
+{
+  "title": "nielsr funsd test 00039",
+  "form_id": "nielsr-funsd-test-00039",
+  "sections": [
+    {
+      "title": "Shipment Details",
+      "fields": [
+        {
+          "label": "Condition of Shipment",
+          "summary": "Specify the condition of the shipment."
+        },
+        {
+          "label": "Date",
+          "summary": "Enter the shipment date (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "Expiration Date",
+          "summary": "Enter the expiration date (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "Gross Weight",
+          "summary": "Enter the gross weight in pounds."
+        },
+        {
+          "label": "Lot #",
+          "summary": "Enter the lot number."
+        },
+        {
+          "label": "Net Weight (if provided)",
+          "summary": "Enter the net weight in pounds if applicable."
+        },
+        {
+          "label": "No. of Containers",
+          "summary": "Enter the number of containers."
+        },
+        {
+          "label": "Physical Description",
+          "summary": "Provide a physical description of the shipment."
+        },
+        {
+          "label": "Received By",
+          "summary": "Enter the name of the person receiving the shipment."
+        },
+        {
+          "label": "Shipped Via",
+          "summary": "Specify the shipping method used."
+        },
+        {
+          "label": "Signature of Department Consignee",
+          "summary": "Sign to confirm receipt of the shipment."
+        },
+        {
+          "label": "Special Handling Requirements",
+          "summary": "Specify any special handling requirements."
+        },
+        {
+          "label": "Sponsor's Name",
+          "summary": "Enter the name of the sponsor."
+        },
+        {
+          "label": "Study Director/Department",
+          "summary": "Enter the name of the study director or department."
+        },
+        {
+          "label": "TA #",
+          "summary": "Enter the TA number."
+        },
+        {
+          "label": "Test Article Identification",
+          "summary": "Provide identification for the test article."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "727a7bdfa38ffaf980cbeae7304d940ce405a5931e761a9e329aeca1a929f6ce",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:50:19Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00039.pdf",
+  "fields": []
+}

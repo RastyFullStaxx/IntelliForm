@@ -1,0 +1,91 @@
+{
+  "title": "nielsr funsd test 00048",
+  "form_id": "nielsr-funsd-test-00048",
+  "sections": [
+    {
+      "title": "Claim Information",
+      "fields": [
+        {
+          "label": "Account #",
+          "summary": "Enter account number"
+        },
+        {
+          "label": "Address",
+          "summary": "Enter complete present address"
+        },
+        {
+          "label": "Attorneys for Claimant",
+          "summary": "Enter names of attorneys representing the claimant"
+        },
+        {
+          "label": "Certified",
+          "summary": "Indicate if the document is certified"
+        },
+        {
+          "label": "Comments",
+          "summary": "Provide any additional comments"
+        },
+        {
+          "label": "Court or Jurisdiction",
+          "summary": "Specify the court or jurisdiction"
+        },
+        {
+          "label": "Date",
+          "summary": "Enter date (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Date Received",
+          "summary": "Enter date received (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Mail",
+          "summary": "Indicate if sent by mail"
+        },
+        {
+          "label": "Original",
+          "summary": "Specify if this is the original document"
+        },
+        {
+          "label": "Personal Service",
+          "summary": "Indicate if served personally"
+        },
+        {
+          "label": "Phone",
+          "summary": "Enter phone number"
+        },
+        {
+          "label": "RE",
+          "summary": "Enter reference or subject"
+        },
+        {
+          "label": "Return Date",
+          "summary": "Enter return date (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Title of Action",
+          "summary": "Enter title of the action"
+        },
+        {
+          "label": "To",
+          "summary": "Specify recipient"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 14,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "785ae579790b99439c96b4e9945d5764d4d4f6f06df8ae317c4409249a171a86",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:52:21Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00048.pdf",
+  "fields": []
+}

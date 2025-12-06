@@ -1,0 +1,558 @@
+{
+  "title": "Tricycle & Quick Business Loan Application",
+  "form_id": "tricycle_quick_business_loan_application",
+  "sections": [
+    {
+      "title": "PERSONAL AND BUSINESS INFORMATION",
+      "fields": [
+        {
+          "label": "Branch",
+          "summary": "Enter branch name"
+        },
+        {
+          "label": "Name of AO",
+          "summary": "Enter name of Account Officer"
+        },
+        {
+          "label": "Borrower TIN",
+          "summary": "Enter Tax Identification Number"
+        },
+        {
+          "label": "Name of Applicant",
+          "summary": "Enter full name (Family, First, Middle)"
+        },
+        {
+          "label": "Date of Birth",
+          "summary": "Enter birth date (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Age",
+          "summary": "Enter age"
+        },
+        {
+          "label": "Contact No./s",
+          "summary": "Enter contact number(s)"
+        },
+        {
+          "label": "Place of Birth",
+          "summary": "Enter place of birth"
+        },
+        {
+          "label": "Nickname",
+          "summary": "Enter nickname"
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter email address"
+        },
+        {
+          "label": "Complete Mothers maiden Name",
+          "summary": "Enter mother's maiden name"
+        },
+        {
+          "label": "Type of ID",
+          "summary": "Enter type of identification"
+        },
+        {
+          "label": "I.D. No.",
+          "summary": "Enter ID number"
+        },
+        {
+          "label": "Educational attainment",
+          "summary": "Select educational attainment level"
+        },
+        {
+          "label": "Present Address",
+          "summary": "Enter complete present address"
+        },
+        {
+          "label": "Length of Stay",
+          "summary": "Enter length of stay at present address"
+        },
+        {
+          "label": "Permanent Address",
+          "summary": "Enter complete permanent address"
+        },
+        {
+          "label": "Length of Stay",
+          "summary": "Enter length of stay at permanent address"
+        },
+        {
+          "label": "Business/ Employment Address",
+          "summary": "Enter business or employment address"
+        },
+        {
+          "label": "Length of Stay",
+          "summary": "Enter length of stay at business/employment address"
+        },
+        {
+          "label": "Business Name/ Company Name",
+          "summary": "Enter business or company name"
+        },
+        {
+          "label": "Years in Business/ Years Employed",
+          "summary": "Enter years in business or employed"
+        },
+        {
+          "label": "House",
+          "summary": "Select housing status (Owned, Rented, Mortgage, Living with family)"
+        },
+        {
+          "label": "Civil Status",
+          "summary": "Select civil status (Married, Separated, Widowed, Single, Common Law)"
+        },
+        {
+          "label": "Gender",
+          "summary": "Select gender (Male, Female)"
+        },
+        {
+          "label": "Number of Dependents",
+          "summary": "Enter number of dependents"
+        },
+        {
+          "label": "Name of Spouse",
+          "summary": "Enter spouse's name"
+        },
+        {
+          "label": "Occupation",
+          "summary": "Enter occupation"
+        },
+        {
+          "label": "No. of Years",
+          "summary": "Enter number of years in occupation"
+        },
+        {
+          "label": "Date of Birth",
+          "summary": "Enter spouse's birth date (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Age",
+          "summary": "Enter spouse's age"
+        },
+        {
+          "label": "Contact No./s",
+          "summary": "Enter spouse's contact number(s)"
+        },
+        {
+          "label": "Place of Birth",
+          "summary": "Enter spouse's place of birth"
+        },
+        {
+          "label": "Nickname",
+          "summary": "Enter spouse's nickname"
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter spouse's email address"
+        },
+        {
+          "label": "Type of ID",
+          "summary": "Enter spouse's type of identification"
+        },
+        {
+          "label": "I.D. No.",
+          "summary": "Enter spouse's ID number"
+        },
+        {
+          "label": "Educational attainment",
+          "summary": "Select spouse's educational attainment level"
+        }
+      ]
+    },
+    {
+      "title": "PROJECT INVENTORY",
+      "fields": []
+    },
+    {
+      "title": "BUSINESS & HOUSEHOLD INCOME/ EXPENSES",
+      "fields": [
+        {
+          "label": "Amount",
+          "summary": "Enter amount for productive stocks"
+        },
+        {
+          "label": "Income",
+          "summary": "Enter total income"
+        },
+        {
+          "label": "Expenses",
+          "summary": "Enter total expenses"
+        },
+        {
+          "label": "Net Income",
+          "summary": "Enter net income"
+        },
+        {
+          "label": "Total Amount",
+          "summary": "Enter total amount (₱)"
+        },
+        {
+          "label": "Amount Applied",
+          "summary": "Enter amount applied for (₱)"
+        },
+        {
+          "label": "Term of Loan",
+          "summary": "Enter loan term"
+        },
+        {
+          "label": "Loan Purpose",
+          "summary": "Enter purpose of the loan"
+        }
+      ]
+    },
+    {
+      "title": "HOUSEHOLD COMPOSITION",
+      "fields": [
+        {
+          "label": "Household member",
+          "summary": "Enter household member details"
+        },
+        {
+          "label": "Dependents",
+          "summary": "Enter dependents' details"
+        },
+        {
+          "label": "Age",
+          "summary": "Enter age of dependents"
+        },
+        {
+          "label": "Relationship",
+          "summary": "Enter relationship to applicant"
+        },
+        {
+          "label": "Work",
+          "summary": "Enter work details"
+        },
+        {
+          "label": "Reg. Income",
+          "summary": "Enter regular income"
+        },
+        {
+          "label": "School/ Business/ Employment",
+          "summary": "Enter school/business/employment details"
+        }
+      ]
+    },
+    {
+      "title": "LOANS WITH OTHER BANKS, MFI'S AND OTHER LENDING INSTITUTIONS",
+      "fields": [
+        {
+          "label": "Creditor",
+          "summary": "Enter creditor name"
+        },
+        {
+          "label": "Loan Amount",
+          "summary": "Enter loan amount"
+        },
+        {
+          "label": "Outstanding Balance",
+          "summary": "Enter outstanding balance"
+        },
+        {
+          "label": "Term",
+          "summary": "Enter loan term"
+        },
+        {
+          "label": "Maturity Date",
+          "summary": "Enter maturity date"
+        },
+        {
+          "label": "Installment/Frequency",
+          "summary": "Select installment frequency (Daily, Weekly, Semi, Monthly)"
+        }
+      ]
+    },
+    {
+      "title": "SAVINGS INFORMATION",
+      "fields": [
+        {
+          "label": "Banks/ MFI's",
+          "summary": "Enter bank or MFI name"
+        },
+        {
+          "label": "Type of Accounts",
+          "summary": "Enter type of accounts"
+        },
+        {
+          "label": "Since When?",
+          "summary": "Enter date account opened"
+        },
+        {
+          "label": "Approximate Balance",
+          "summary": "Enter approximate balance"
+        }
+      ]
+    },
+    {
+      "title": "CASHFLOW ANALYSIS",
+      "fields": [
+        {
+          "label": "I- INCOME FROM BUSINESS & HOUSE HOLD",
+          "summary": "Enter income details"
+        },
+        {
+          "label": "WEEKLY",
+          "summary": "Enter weekly income"
+        },
+        {
+          "label": "Business No. 1 (Net income)",
+          "summary": "Enter net income for Business No. 1"
+        },
+        {
+          "label": "Php",
+          "summary": "Enter amount in PHP"
+        },
+        {
+          "label": "Business No. 2 (Net Income)",
+          "summary": "Enter net income for Business No. 2"
+        },
+        {
+          "label": "Income from Other Sources",
+          "summary": "Enter income from other sources"
+        },
+        {
+          "label": "Income from Husband",
+          "summary": "Enter income from husband"
+        },
+        {
+          "label": "Padala/ Remittances",
+          "summary": "Enter remittances"
+        },
+        {
+          "label": "TOTAL INCOME",
+          "summary": "Enter total income"
+        },
+        {
+          "label": "II-BASIC NECESSITIES/ EXPENSES",
+          "summary": "Enter basic necessities and expenses"
+        },
+        {
+          "label": "Utilities (Water & Elec. Bill)",
+          "summary": "Enter utility expenses"
+        },
+        {
+          "label": "Rental Expense",
+          "summary": "Enter rental expense"
+        },
+        {
+          "label": "Food",
+          "summary": "Enter food expenses"
+        },
+        {
+          "label": "Transportation",
+          "summary": "Enter transportation expenses"
+        },
+        {
+          "label": "Medical",
+          "summary": "Enter medical expenses"
+        },
+        {
+          "label": "Clothing",
+          "summary": "Enter clothing expenses"
+        },
+        {
+          "label": "School Allowance",
+          "summary": "Enter school allowance"
+        },
+        {
+          "label": "School Tuition/ Miscellaneous Fees",
+          "summary": "Enter school tuition/miscellaneous fees"
+        },
+        {
+          "label": "SUB-TOTAL",
+          "summary": "Enter subtotal of basic necessities/expenses"
+        },
+        {
+          "label": "III-PAYMENT OF LOAN/ S",
+          "summary": "Enter loan payment details"
+        },
+        {
+          "label": "Loan from MFI'S",
+          "summary": "Enter loan amount from MFIs"
+        },
+        {
+          "label": "Other Loans",
+          "summary": "Enter other loan amounts"
+        },
+        {
+          "label": "SUB TOTAL",
+          "summary": "Enter subtotal of loan payments"
+        },
+        {
+          "label": "IV-DISCRETIONARY EXPENSES",
+          "summary": "Enter discretionary expenses"
+        },
+        {
+          "label": "Snack/s",
+          "summary": "Enter snack expenses"
+        },
+        {
+          "label": "Load/ Internet",
+          "summary": "Enter load/internet expenses"
+        },
+        {
+          "label": "SUB TOTAL",
+          "summary": "Enter subtotal of discretionary expenses"
+        },
+        {
+          "label": "TOTAL EXPENSES",
+          "summary": "Enter total expenses"
+        },
+        {
+          "label": "NET DISPOSABLE INCOME",
+          "summary": "Enter net disposable income"
+        }
+      ]
+    },
+    {
+      "title": "AUTHORIZATION",
+      "fields": [
+        {
+          "label": "Signature of Applicant",
+          "summary": "Sign here"
+        },
+        {
+          "label": "Signature of Spouse",
+          "summary": "Sign here"
+        },
+        {
+          "label": "Date",
+          "summary": "Enter date (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Date",
+          "summary": "Enter date (MM/DD/YYYY, e.g., 11/28/2025)"
+        }
+      ]
+    },
+    {
+      "title": "BORROWER'S RISK RATING QUALITY",
+      "fields": [
+        {
+          "label": "DSCR",
+          "summary": "Enter Debt Service Coverage Ratio"
+        },
+        {
+          "label": "WEEKLY/MONTHLY NET INCOME",
+          "summary": "Enter weekly/monthly net income"
+        },
+        {
+          "label": "AMORTIZATION",
+          "summary": "Enter amortization"
+        },
+        {
+          "label": "LOAN AMOUNT",
+          "summary": "Enter loan amount"
+        },
+        {
+          "label": "TERM",
+          "summary": "Enter loan term"
+        }
+      ]
+    },
+    {
+      "title": "ACCOUNT OFFICER'S RECOMMENDATION",
+      "fields": [
+        {
+          "label": "Name & Signature of AO",
+          "summary": "Enter name and signature of Account Officer"
+        },
+        {
+          "label": "Amount",
+          "summary": "Enter recommended amount"
+        },
+        {
+          "label": "Date",
+          "summary": "Enter date (MM/DD/YYYY, e.g., 11/28/2025)"
+        }
+      ]
+    },
+    {
+      "title": "ASSET / SECURITY COVER",
+      "fields": [
+        {
+          "label": "ASSET TYPE",
+          "summary": "Enter asset type"
+        },
+        {
+          "label": "MARKET VALUE",
+          "summary": "Enter market value"
+        },
+        {
+          "label": "TOTAL EXEPOSURE %",
+          "summary": "Enter total exposure percentage"
+        }
+      ]
+    },
+    {
+      "title": "CATOGARY",
+      "fields": [
+        {
+          "label": "SECURED",
+          "summary": "Select if secured"
+        },
+        {
+          "label": "SAFE KEEPING",
+          "summary": "Select if safe keeping"
+        },
+        {
+          "label": "UNSECURED",
+          "summary": "Select if unsecured"
+        }
+      ]
+    },
+    {
+      "title": "RECOMMENDATION AND APPROVAL",
+      "fields": [
+        {
+          "label": "Name & Signature of Recommended by",
+          "summary": "Enter name and signature of recommended by"
+        },
+        {
+          "label": "Amount",
+          "summary": "Enter amount"
+        },
+        {
+          "label": "Date",
+          "summary": "Enter date (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Name & Signature of Approval Authority",
+          "summary": "Enter name and signature of approval authority"
+        },
+        {
+          "label": "Amount",
+          "summary": "Enter amount"
+        },
+        {
+          "label": "Date",
+          "summary": "Enter date (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Does the applicant pass all criteria?",
+          "summary": "Tick Yes or No"
+        },
+        {
+          "label": "If NO, reasons why rejected",
+          "summary": "Enter reasons for rejection"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 80,
+    "fp": 5,
+    "fn": 2,
+    "precision": 0.941,
+    "recall": 0.976,
+    "f1": 0.958
+  },
+  "canonical_id": "4792b4282b37710590d51a45ab82acf2066ef6516f06190652049940c6f1c569",
+  "bucket": "finance",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T23:21:31Z",
+  "aliases": [],
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Finance_LOLCQUICKBUSINESSLOANAPPLICATIONFORM2022.pdf",
+  "fields": []
+}

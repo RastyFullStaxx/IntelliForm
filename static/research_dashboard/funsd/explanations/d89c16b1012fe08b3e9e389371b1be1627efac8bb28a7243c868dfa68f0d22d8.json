@@ -1,0 +1,63 @@
+{
+  "title": "nielsr funsd test 00033",
+  "form_id": "nielsr-funsd-test-00033",
+  "sections": [
+    {
+      "title": "Inventory Details",
+      "fields": [
+        {
+          "label": "# of Cartons On Hand",
+          "summary": "Enter the number of cartons currently on hand."
+        },
+        {
+          "label": "# of Weeks On Hand",
+          "summary": "Enter the number of weeks the inventory will last."
+        },
+        {
+          "label": "Account",
+          "summary": "Enter the account name or number."
+        },
+        {
+          "label": "Action Plan",
+          "summary": "Describe the action plan for inventory management."
+        },
+        {
+          "label": "Average Weekly Movement",
+          "summary": "Enter the average number of items sold per week."
+        },
+        {
+          "label": "Brand",
+          "summary": "Enter the brand name of the products."
+        },
+        {
+          "label": "Division",
+          "summary": "Enter the division associated with the inventory."
+        },
+        {
+          "label": "Inventory For",
+          "summary": "Specify the purpose or type of inventory."
+        },
+        {
+          "label": "Note",
+          "summary": "Add any additional notes or comments."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 9,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "d89c16b1012fe08b3e9e389371b1be1627efac8bb28a7243c868dfa68f0d22d8",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:49:12Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00033.pdf",
+  "fields": []
+}

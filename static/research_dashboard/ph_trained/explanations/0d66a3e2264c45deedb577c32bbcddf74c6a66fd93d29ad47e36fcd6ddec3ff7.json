@@ -1,0 +1,183 @@
+{
+  "title": "OPTIONAL LIFE INSURANCE POLICY LOAN APPLICATION",
+  "form_id": "optional-life-insurance-policy-loan-application",
+  "sections": [
+    {
+      "title": "Applicant Information",
+      "fields": [
+        {
+          "label": "Name of Applicant",
+          "summary": "Enter full name of applicant."
+        },
+        {
+          "label": "Birth Date",
+          "summary": "Enter birth date (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "Last Name",
+          "summary": "Enter last name."
+        },
+        {
+          "label": "First Name",
+          "summary": "Enter first name."
+        },
+        {
+          "label": "Middle Name",
+          "summary": "Enter middle name."
+        },
+        {
+          "label": "GSIS ID No.",
+          "summary": "Enter GSIS ID number."
+        },
+        {
+          "label": "Gender",
+          "summary": "Select gender."
+        },
+        {
+          "label": "BP No.",
+          "summary": "Enter BP number."
+        },
+        {
+          "label": "E-Card/UMID Card No.",
+          "summary": "Enter E-Card/UMID card number."
+        },
+        {
+          "label": "E-Card/UMID Bank Account No.",
+          "summary": "Enter E-Card/UMID bank account number."
+        },
+        {
+          "label": "Mailing/Residential Address",
+          "summary": "Enter complete mailing/residential address."
+        },
+        {
+          "label": "Present Office",
+          "summary": "Enter present office."
+        },
+        {
+          "label": "Telephone No.",
+          "summary": "Enter telephone number."
+        },
+        {
+          "label": "Mobile Phone No.",
+          "summary": "Enter mobile phone number."
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter email address."
+        }
+      ]
+    },
+    {
+      "title": "For DEPED Personnel",
+      "fields": [
+        {
+          "label": "Division No.",
+          "summary": "Enter division number."
+        },
+        {
+          "label": "Station No.",
+          "summary": "Enter station number."
+        },
+        {
+          "label": "Employee No.",
+          "summary": "Enter employee number."
+        }
+      ]
+    },
+    {
+      "title": "Loan Information",
+      "fields": [
+        {
+          "label": "TYPE OF LOAN",
+          "summary": "Select loan type: New or Renewal."
+        },
+        {
+          "label": "Amount of the Loan",
+          "summary": "Enter amount of the loan."
+        },
+        {
+          "label": "Application of the Loan Proceeds",
+          "summary": "Authorize GSIS to deduct any outstanding obligations."
+        },
+        {
+          "label": "Change of Payment Term",
+          "summary": "Indicate option to change payment term."
+        },
+        {
+          "label": "Due Date of First Monthly and Succeeding Monthly Installments",
+          "summary": "Payments due on or before the 10th of the month."
+        },
+        {
+          "label": "Interest Rate",
+          "summary": "Loan incurs interest at 8% per annum."
+        },
+        {
+          "label": "Maturity of the Loan",
+          "summary": "Loan matures upon retirement, separation, or death."
+        },
+        {
+          "label": "Loan Pre-termination",
+          "summary": "Indicate option for loan pre-termination."
+        },
+        {
+          "label": "Loan Cancellation",
+          "summary": "Indicate option for loan cancellation."
+        },
+        {
+          "label": "Authority to Apply Payment",
+          "summary": "Authorize GSIS to collect from benefits due."
+        }
+      ]
+    },
+    {
+      "title": "Payment Scheme",
+      "fields": [
+        {
+          "label": "Undertake to pay the loan with the payment scheme selected below",
+          "summary": "Select payment scheme: Monthly payments or Payment upon maturity."
+        },
+        {
+          "label": "Monthly payments through salary deduction",
+          "summary": "Enter monthly payment amount."
+        },
+        {
+          "label": "Payment of principal and interest upon maturity",
+          "summary": "Select this option if applicable."
+        }
+      ]
+    },
+    {
+      "title": "Consent and Signature",
+      "fields": [
+        {
+          "label": "SIGNATURE OF MEMBER/BORRWER",
+          "summary": "Sign here."
+        },
+        {
+          "label": "TIN",
+          "summary": "Enter Tax Identification Number."
+        },
+        {
+          "label": "DATE SIGNED",
+          "summary": "Enter date signed (MM/DD/YYYY, e.g., 11/28/2025)."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 30,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "0d66a3e2264c45deedb577c32bbcddf74c6a66fd93d29ad47e36fcd6ddec3ff7",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2024-05-10T00:00:00Z",
+  "updated_at": "2025-12-06T23:17:48Z",
+  "aliases": [],
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Government_GSIS Loan Application Form.pdf",
+  "fields": []
+}

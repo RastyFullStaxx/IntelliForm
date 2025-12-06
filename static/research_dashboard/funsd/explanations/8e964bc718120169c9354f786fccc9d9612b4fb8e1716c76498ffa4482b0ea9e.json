@@ -1,0 +1,112 @@
+{
+  "title": "nielsr funsd test 00047",
+  "form_id": "nielsr-funsd-test-00047",
+  "sections": [
+    {
+      "title": "Corporation Information",
+      "fields": [
+        {
+          "label": "Name of Corporation",
+          "summary": "Enter the full name of the corporation."
+        },
+        {
+          "label": "Address of Corporation",
+          "summary": "Enter the complete address of the corporation."
+        },
+        {
+          "label": "Name of Treasurer",
+          "summary": "Enter the full name of the treasurer."
+        },
+        {
+          "label": "Address",
+          "summary": "Enter the address of the treasurer."
+        }
+      ]
+    },
+    {
+      "title": "Financial Information",
+      "fields": [
+        {
+          "label": "Total Expenditures or Disbursements Previously Reported",
+          "summary": "Enter the total amount previously reported."
+        },
+        {
+          "label": "Total Expenditures or Disbursements on this Report",
+          "summary": "Enter the total expenditures or disbursements for this report."
+        },
+        {
+          "label": "Amount or Value",
+          "summary": "Enter the amount or value related to the report."
+        }
+      ]
+    },
+    {
+      "title": "Payment Details",
+      "fields": [
+        {
+          "label": "To Whom Paid",
+          "summary": "Enter the name of the recipient."
+        },
+        {
+          "label": "Date Paid",
+          "summary": "Enter the date of payment (MM/DD/YYYY, e.g., 11/28/2025)."
+        }
+      ]
+    },
+    {
+      "title": "Purpose and Questions",
+      "fields": [
+        {
+          "label": "Purpose",
+          "summary": "Enter the purpose of the expenditures."
+        },
+        {
+          "label": "Question No.",
+          "summary": "Enter the question number related to the report."
+        },
+        {
+          "label": "relating to",
+          "summary": "Specify what the report is relating to."
+        },
+        {
+          "label": "submitted to the voters on",
+          "summary": "Enter the date submitted to voters (MM/DD/YYYY, e.g., 11/28/2025)."
+        }
+      ]
+    },
+    {
+      "title": "Signature",
+      "fields": [
+        {
+          "label": "Treasurer Signature",
+          "summary": "Sign here to validate the report."
+        }
+      ]
+    },
+    {
+      "title": "Fill in Dates",
+      "fields": [
+        {
+          "label": "Fill in Dates",
+          "summary": "Provide all relevant dates for the report."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "8e964bc718120169c9354f786fccc9d9612b4fb8e1716c76498ffa4482b0ea9e",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:52:08Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00047.pdf",
+  "fields": []
+}

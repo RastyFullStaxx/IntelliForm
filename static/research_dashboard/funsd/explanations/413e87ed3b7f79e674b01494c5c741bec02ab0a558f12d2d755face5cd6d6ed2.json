@@ -1,0 +1,95 @@
+{
+  "title": "nielsr funsd test 00028",
+  "form_id": "nielsr-funsd-test-00028",
+  "sections": [
+    {
+      "title": "Advertising Information",
+      "fields": [
+        {
+          "label": "Advertising Creative Title",
+          "summary": "Enter the title of the advertising creative."
+        },
+        {
+          "label": "Brand(s) Applicable",
+          "summary": "List the applicable brands."
+        },
+        {
+          "label": "Circulation (#)",
+          "summary": "Enter the circulation number."
+        },
+        {
+          "label": "Code Assigned",
+          "summary": "Enter the assigned code."
+        },
+        {
+          "label": "Coupon Expiration Date",
+          "summary": "Use MM/DD/YYYY (e.g., 12/31/2025)."
+        },
+        {
+          "label": "Coupon Issue Date",
+          "summary": "Use MM/DD/YYYY (e.g., 01/01/2025)."
+        },
+        {
+          "label": "Coupon Value",
+          "summary": "Enter the value of the coupon."
+        },
+        {
+          "label": "Date Initiated",
+          "summary": "Use MM/DD/YYYY (e.g., 01/01/2025)."
+        },
+        {
+          "label": "Est. Redemption",
+          "summary": "Enter the estimated redemption."
+        },
+        {
+          "label": "Geographical Area(s)",
+          "summary": "Specify the geographical areas."
+        },
+        {
+          "label": "Issue Frequency / Year",
+          "summary": "Enter the frequency of issues per year."
+        },
+        {
+          "label": "Job Number",
+          "summary": "Enter the job number."
+        },
+        {
+          "label": "Media Name",
+          "summary": "Enter the name of the media."
+        },
+        {
+          "label": "Media Type",
+          "summary": "Specify the type of media."
+        },
+        {
+          "label": "Pack and / or Carton?",
+          "summary": "Indicate if it's a pack or carton."
+        },
+        {
+          "label": "Signature of Initiator",
+          "summary": "Provide the signature of the initiator."
+        },
+        {
+          "label": "Space / Color",
+          "summary": "Specify the space or color."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 15,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "413e87ed3b7f79e674b01494c5c741bec02ab0a558f12d2d755face5cd6d6ed2",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:48:18Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00028.pdf",
+  "fields": []
+}

@@ -1,0 +1,63 @@
+{
+  "title": "nielsr funsd test 00009",
+  "form_id": "nielsr-funsd-test-00009",
+  "sections": [
+    {
+      "title": "Case Information",
+      "fields": [
+        {
+          "label": "CASE NAME",
+          "summary": "Enter the name of the case."
+        },
+        {
+          "label": "CASE TYPE",
+          "summary": "Specify the type of case."
+        },
+        {
+          "label": "COURT",
+          "summary": "Indicate the court handling the case."
+        },
+        {
+          "label": "DATE FILED",
+          "summary": "Enter the date filed (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "DATE SERVED",
+          "summary": "Enter the date served (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "JUDGE",
+          "summary": "Enter the name of the judge."
+        },
+        {
+          "label": "LORILLARD ENTITIES",
+          "summary": "List the Lorillard entities involved."
+        },
+        {
+          "label": "PLAINTIFF'S COUNSEL",
+          "summary": "Enter the name of the plaintiff's counsel."
+        },
+        {
+          "label": "TRIAL DATE",
+          "summary": "Enter the trial date (MM/DD/YYYY, e.g., 11/28/2025)."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 9,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "180f2c2c8ef15bb9cb8bdab8401d24f507c8b91fc1dcb554439115596291dfc3",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:44:30Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00009.pdf",
+  "fields": []
+}

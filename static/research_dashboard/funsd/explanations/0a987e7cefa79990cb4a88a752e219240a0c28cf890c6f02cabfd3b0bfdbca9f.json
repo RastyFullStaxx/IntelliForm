@@ -1,0 +1,59 @@
+{
+  "title": "nielsr funsd test 00032",
+  "form_id": "nielsr-funsd-test-00032",
+  "sections": [
+    {
+      "title": "General Market",
+      "fields": [
+        {
+          "label": "40c OFF PACK - GENERAL MARKET",
+          "summary": "Enter the amount for 40c off pack."
+        },
+        {
+          "label": "DIRECT ACCOUNT CHAINS",
+          "summary": "List the direct account chains."
+        },
+        {
+          "label": "DIRECT ACCOUNT/WHOLESALERS",
+          "summary": "List the direct accounts or wholesalers."
+        },
+        {
+          "label": "EFFECTIVENESS OF THE RETAIL (1.00 OFF CARTON) DISTRIBUTION ALLOWANCE",
+          "summary": "Evaluate the effectiveness of the retail distribution allowance."
+        },
+        {
+          "label": "FROM",
+          "summary": "Enter the starting date (MM/DD/YYYY)."
+        },
+        {
+          "label": "NON-DIRECT ACCOUNT CHAINS",
+          "summary": "List the non-direct account chains."
+        },
+        {
+          "label": "SUBMISSION DATE",
+          "summary": "Enter the submission date (MM/DD/YYYY)."
+        },
+        {
+          "label": "TO",
+          "summary": "Enter the ending date (MM/DD/YYYY)."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 8,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "0a987e7cefa79990cb4a88a752e219240a0c28cf890c6f02cabfd3b0bfdbca9f",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:49:02Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00032.pdf",
+  "fields": []
+}

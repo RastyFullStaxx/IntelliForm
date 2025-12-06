@@ -1,0 +1,218 @@
+{
+  "title": "Unified Business Permit Application Form",
+  "form_id": "unified-business-permit-application-form",
+  "sections": [
+    {
+      "title": "Business Information and Registration",
+      "fields": [
+        {
+          "label": "Taxpayer/Corporate Name",
+          "summary": "Enter the full name of the taxpayer or corporation."
+        },
+        {
+          "label": "Trade Name/Franchise",
+          "summary": "Enter the trade name or franchise if applicable."
+        },
+        {
+          "label": "DTI TRN or BNN/SEC or CDA Registration Number",
+          "summary": "Enter the registration number."
+        },
+        {
+          "label": "Tax Identification Number (TIN)",
+          "summary": "Enter the TIN."
+        },
+        {
+          "label": "New",
+          "summary": "Tick if this is a new application."
+        },
+        {
+          "label": "Renewal",
+          "summary": "Tick if this is a renewal application."
+        },
+        {
+          "label": "Transfer",
+          "summary": "Tick if this is a transfer application."
+        },
+        {
+          "label": "Amendment",
+          "summary": "Tick if this is an amendment application."
+        },
+        {
+          "label": "Change Name",
+          "summary": "Tick if you are changing the name."
+        },
+        {
+          "label": "Additional Line of Business",
+          "summary": "Tick if adding an additional line of business."
+        },
+        {
+          "label": "Others (Please specify)",
+          "summary": "Specify any other changes."
+        },
+        {
+          "label": "Office Address",
+          "summary": "Enter the complete office address."
+        },
+        {
+          "label": "City",
+          "summary": "Enter the city."
+        },
+        {
+          "label": "Barangay",
+          "summary": "Enter the barangay."
+        },
+        {
+          "label": "Street",
+          "summary": "Enter the street name."
+        },
+        {
+          "label": "ZIP Code",
+          "summary": "Enter the ZIP code."
+        },
+        {
+          "label": "Unit No",
+          "summary": "Enter the unit number."
+        },
+        {
+          "label": "House/Floor No",
+          "summary": "Enter the house or floor number."
+        },
+        {
+          "label": "Name of Building",
+          "summary": "Enter the name of the building."
+        },
+        {
+          "label": "Business Area Total",
+          "summary": "Enter the total business area."
+        },
+        {
+          "label": "Floor Area (sq.m)",
+          "summary": "Enter the floor area in square meters."
+        },
+        {
+          "label": "Property owned?",
+          "summary": "Tick Yes or No."
+        },
+        {
+          "label": "If Yes, PIN or TD Number",
+          "summary": "Enter the PIN or TD number if property is owned."
+        },
+        {
+          "label": "Do you have tax incentives from any Government Entity?",
+          "summary": "Tick Yes or No."
+        },
+        {
+          "label": "If Yes",
+          "summary": "Select applicable tax incentive/s and attach a copy of your certificate."
+        },
+        {
+          "label": "Date registered",
+          "summary": "Enter the registration date (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "Designation and Date",
+          "summary": "Enter your designation and the date."
+        }
+      ]
+    },
+    {
+      "title": "Business Contacts",
+      "fields": [
+        {
+          "label": "Authorized Representative",
+          "summary": "Enter the name of the authorized representative."
+        },
+        {
+          "label": "Designated Safety Officer",
+          "summary": "Enter the name of the designated safety officer."
+        },
+        {
+          "label": "Telephone Number",
+          "summary": "Enter the telephone number."
+        },
+        {
+          "label": "Mobile Number",
+          "summary": "Enter the mobile number."
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter the email address."
+        }
+      ]
+    },
+    {
+      "title": "Business Activity",
+      "fields": [
+        {
+          "label": "Nature of Business",
+          "summary": "Enter the nature of the business."
+        },
+        {
+          "label": "Line of Business",
+          "summary": "Enter the line of business."
+        },
+        {
+          "label": "Philippine Standard Industrial Code",
+          "summary": "Enter the Philippine Standard Industrial Code if applicable."
+        },
+        {
+          "label": "No. of Units",
+          "summary": "Enter the number of units."
+        },
+        {
+          "label": "Capitalization or Preceding Calendar Year Gross Sales/Receipts",
+          "summary": "Enter the capitalization or gross sales/receipts."
+        }
+      ]
+    },
+    {
+      "title": "Delivery Options",
+      "fields": [
+        {
+          "label": "Delivery Options",
+          "summary": "Choose between Pick-Up or Courier."
+        }
+      ]
+    },
+    {
+      "title": "Payment Options",
+      "fields": [
+        {
+          "label": "Mode of Payment",
+          "summary": "Choose between ANNUAL, BI-ANNUAL, or QUARTERLY."
+        },
+        {
+          "label": "Payment Options",
+          "summary": "Choose between eWallet, Card, or Cash/Check."
+        }
+      ]
+    },
+    {
+      "title": "Signature",
+      "fields": [
+        {
+          "label": "Signature of the Proprietor/Representative over printed name",
+          "summary": "Sign above your printed name."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 50,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "c396696003fdca83a99bd73603098a3f4678fc4df5d109c38ed85a17677f9172",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T23:26:43Z",
+  "aliases": [
+    "unified_business_permit_application_form.pdf"
+  ],
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Government_BusinessPermitApplicationForm.pdf",
+  "fields": []
+}

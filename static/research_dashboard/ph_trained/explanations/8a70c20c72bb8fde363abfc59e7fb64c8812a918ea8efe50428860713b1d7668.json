@@ -1,0 +1,110 @@
+{
+  "title": "APPLICATION FOR HEALTH CARE ASSISTANCE",
+  "form_id": "application-for-health-care-assistance",
+  "sections": [
+    {
+      "title": "Applicant Information",
+      "fields": [
+        {
+          "label": "NAME OF APPLICANT",
+          "summary": "Enter full name (Last Name, First Name, Middle Name)"
+        },
+        {
+          "label": "ADDRESS",
+          "summary": "Enter complete present address (Street, Town City, Province, ZIP CODE)"
+        },
+        {
+          "label": "RELATIONSHIP OF APPLICANT TO THE VFP MEMBER",
+          "summary": "Specify relationship to VFP member"
+        },
+        {
+          "label": "CELL PHONE/ TELEPHONE NUMBER",
+          "summary": "Enter contact number"
+        }
+      ]
+    },
+    {
+      "title": "VFP Member Information",
+      "fields": [
+        {
+          "label": "NAME OF VFP MEMBER",
+          "summary": "Enter full name of VFP member (Last Name, First Name, Middle Name)"
+        },
+        {
+          "label": "VFP Membership ID card No.",
+          "summary": "Enter VFP Membership ID card number"
+        },
+        {
+          "label": "AFP Retirement ID No.",
+          "summary": "Enter AFP Retirement ID number"
+        }
+      ]
+    },
+    {
+      "title": "Health Care Details",
+      "fields": [
+        {
+          "label": "Name of Hospital",
+          "summary": "Enter name of hospital"
+        },
+        {
+          "label": "Date of confinement",
+          "summary": "Enter date of confinement (Use MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Date of birth",
+          "summary": "Enter birth date (Use MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Membership Status",
+          "summary": "Specify membership status"
+        },
+        {
+          "label": "Veterans Post",
+          "summary": "Enter Veterans Post"
+        },
+        {
+          "label": "Veterans District",
+          "summary": "Enter Veterans District"
+        },
+        {
+          "label": "Veterans Region",
+          "summary": "Enter Veterans Region"
+        }
+      ]
+    },
+    {
+      "title": "Certification and Signature",
+      "fields": [
+        {
+          "label": "Signature",
+          "summary": "Sign here"
+        },
+        {
+          "label": "Valid ID with No.",
+          "summary": "Enter valid ID number"
+        },
+        {
+          "label": "Signature of over Printed Name of Charter/Affiliate/Post President",
+          "summary": "For official use only; leave blank"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 14,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "8a70c20c72bb8fde363abfc59e7fb64c8812a918ea8efe50428860713b1d7668",
+  "bucket": "health",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T23:24:03Z",
+  "aliases": [],
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Healthcare_VFPHealthcareApplicationForm.pdf",
+  "fields": []
+}

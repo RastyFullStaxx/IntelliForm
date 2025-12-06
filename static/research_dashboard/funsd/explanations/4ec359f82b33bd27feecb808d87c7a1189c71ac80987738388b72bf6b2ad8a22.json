@@ -1,0 +1,78 @@
+{
+  "title": "nielsr funsd test 00036",
+  "form_id": "nielsr-funsd-test-00036",
+  "sections": [
+    {
+      "title": "Compound Information",
+      "fields": [
+        {
+          "label": "Compound Name",
+          "summary": "Enter the name of the compound."
+        },
+        {
+          "label": "Lorillard Compound Code Number",
+          "summary": "Enter the Lorillard compound code number."
+        },
+        {
+          "label": "Estimated Toxicity Class",
+          "summary": "Enter the estimated toxicity class."
+        },
+        {
+          "label": "Structure",
+          "summary": "Provide the structure of the compound."
+        }
+      ]
+    },
+    {
+      "title": "Author Information",
+      "fields": [
+        {
+          "label": "Name",
+          "summary": "Enter the author's name."
+        },
+        {
+          "label": "Signature of Author",
+          "summary": "Sign here to confirm authorship."
+        },
+        {
+          "label": "Signature of Co-Author",
+          "summary": "Sign here if there is a co-author."
+        }
+      ]
+    },
+    {
+      "title": "Comments",
+      "fields": [
+        {
+          "label": "Comments",
+          "summary": "Provide any additional comments."
+        }
+      ]
+    },
+    {
+      "title": "Date Information",
+      "fields": [
+        {
+          "label": "Date",
+          "summary": "Enter the date (MM/DD/YYYY, e.g., 11/28/2025)."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 8,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "4ec359f82b33bd27feecb808d87c7a1189c71ac80987738388b72bf6b2ad8a22",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:49:42Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00036.pdf",
+  "fields": []
+}

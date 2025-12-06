@@ -1,0 +1,63 @@
+{
+  "title": "nielsr funsd test 00034",
+  "form_id": "nielsr-funsd-test-00034",
+  "sections": [
+    {
+      "title": "Records Management",
+      "fields": [
+        {
+          "label": "Boxes Created for Hard Copy Permanent Retention Records By",
+          "summary": "Enter name of person responsible for creating boxes."
+        },
+        {
+          "label": "Cost Center Number",
+          "summary": "Enter the cost center number."
+        },
+        {
+          "label": "Date",
+          "summary": "Use MM/DD/YYYY (e.g., 11/28/2025)."
+        },
+        {
+          "label": "Department Name",
+          "summary": "Enter the name of the department."
+        },
+        {
+          "label": "Index Binder Re-Labeled By",
+          "summary": "Enter name of person who re-labeled the index binder."
+        },
+        {
+          "label": "Index Binders Consolidated By",
+          "summary": "Enter name of person who consolidated the index binders."
+        },
+        {
+          "label": "Records Retention Schedule Placed in Index Binder and in File By",
+          "summary": "Enter name of person who placed the records retention schedule."
+        },
+        {
+          "label": "Records Transfer Inventory Forms Updated By",
+          "summary": "Enter name of person who updated the records transfer inventory forms."
+        },
+        {
+          "label": "Retention & Recommendation File Reorganized and Re-Labeled By",
+          "summary": "Enter name of person who reorganized and re-labeled the retention file."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 9,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "f65c6f5d44197c4a7f24c9642e7a8d5d8b72317b2efc880b0608e8697b697fd5",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:49:24Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00034.pdf",
+  "fields": []
+}

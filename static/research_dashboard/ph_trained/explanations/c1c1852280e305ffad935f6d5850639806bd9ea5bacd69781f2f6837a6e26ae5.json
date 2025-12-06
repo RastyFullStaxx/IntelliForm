@@ -1,0 +1,193 @@
+{
+  "title": "Passport Application Form",
+  "form_id": "passport-application-form",
+  "sections": [
+    {
+      "title": "Applicant Information",
+      "fields": [
+        {
+          "label": "LAST NAME / APELYIDO",
+          "summary": "Enter your last name."
+        },
+        {
+          "label": "FIRST NAME / PANGALAN (JR. / II / III)",
+          "summary": "Enter your first name and any suffix."
+        },
+        {
+          "label": "MIDDLE NAME / GITNANG PANGALAN",
+          "summary": "Enter your middle name."
+        },
+        {
+          "label": "PLACE OF BIRTH / POOK NG KAPANGANAKAN",
+          "summary": "Enter your place of birth."
+        },
+        {
+          "label": "DATE OF BIRTH / PETSA NG KAPANGANAKAN",
+          "summary": "Enter your birth date (e.g., March 8, 2010)."
+        },
+        {
+          "label": "GENDER / KASARIAN",
+          "summary": "Select your gender (☐MALE or ☐FEMALE)."
+        },
+        {
+          "label": "Civil Status",
+          "summary": "Select your civil status (☐Single, ☐Married, ☐Widow/er, ☐Legally Separated, ☐Annulled)."
+        },
+        {
+          "label": "Citizenship Acquired By",
+          "summary": "Select how you acquired citizenship (☐Birth, ☐Election, ☐Marriage, ☐Naturalization, ☐R.A. 9225, ☐Others)."
+        }
+      ]
+    },
+    {
+      "title": "Family Information",
+      "fields": [
+        {
+          "label": "Name of Wife / Husband",
+          "summary": "Enter the name of your spouse."
+        },
+        {
+          "label": "Citizenship",
+          "summary": "Enter the citizenship of your spouse."
+        },
+        {
+          "label": "Name of Father",
+          "summary": "Enter your father's name."
+        },
+        {
+          "label": "Citizenship",
+          "summary": "Enter your father's citizenship."
+        },
+        {
+          "label": "Maiden / Single name of Mother",
+          "summary": "Enter your mother's maiden name."
+        },
+        {
+          "label": "Citizenship",
+          "summary": "Enter your mother's citizenship."
+        }
+      ]
+    },
+    {
+      "title": "Travel Companion Information",
+      "fields": [
+        {
+          "label": "Name of minor's travelling companion",
+          "summary": "Enter the name of the minor's travelling companion."
+        },
+        {
+          "label": "Companion's relationship",
+          "summary": "Enter the relationship to the minor."
+        },
+        {
+          "label": "Contact Number",
+          "summary": "Enter the contact number of the companion."
+        }
+      ]
+    },
+    {
+      "title": "Contact Information",
+      "fields": [
+        {
+          "label": "Complete Address",
+          "summary": "Enter your complete address."
+        },
+        {
+          "label": "Tel. No.",
+          "summary": "Enter your telephone number."
+        },
+        {
+          "label": "Mobile No.",
+          "summary": "Enter your mobile number."
+        },
+        {
+          "label": "E-mail Address",
+          "summary": "Enter your email address."
+        },
+        {
+          "label": "Present Occupation",
+          "summary": "Enter your current occupation."
+        },
+        {
+          "label": "Work Address",
+          "summary": "Enter your work address."
+        }
+      ]
+    },
+    {
+      "title": "Passport Information",
+      "fields": [
+        {
+          "label": "Are you a holder of a foreign passport?",
+          "summary": "Select Yes or No."
+        },
+        {
+          "label": "If Yes, from what country?",
+          "summary": "Enter the country of the foreign passport."
+        },
+        {
+          "label": "Have you ever been issued a Philippine Passport?",
+          "summary": "Select Yes or No."
+        },
+        {
+          "label": "If Yes, latest Passport Number?",
+          "summary": "Enter your latest passport number."
+        },
+        {
+          "label": "Date of issue",
+          "summary": "Enter the date of issue."
+        },
+        {
+          "label": "Place of issue",
+          "summary": "Enter the place of issue."
+        }
+      ]
+    },
+    {
+      "title": "Organ Donation",
+      "fields": [
+        {
+          "label": "In case of death, I hereby donate",
+          "summary": "Select organ/tissue donation options."
+        }
+      ]
+    },
+    {
+      "title": "Acknowledgment",
+      "fields": [
+        {
+          "label": "Please immediately notify my family at mobile/tel. no.",
+          "summary": "Enter the mobile or telephone number for notification."
+        }
+      ]
+    },
+    {
+      "title": "For Administrative Use Only",
+      "fields": [
+        {
+          "label": "FOR ADMINISTRATIVE USE ONLY",
+          "summary": "Office use only; leave blank."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 30,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "c1c1852280e305ffad935f6d5850639806bd9ea5bacd69781f2f6837a6e26ae5",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T23:26:15Z",
+  "aliases": [
+    "DFA-OCA-PDO-02",
+    "passport_application_form"
+  ],
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Government_PassportApplicationForm.pdf",
+  "fields": []
+}

@@ -1,0 +1,110 @@
+{
+  "title": "nielsr funsd test 00043",
+  "form_id": "nielsr-funsd-test-00043",
+  "sections": [
+    {
+      "title": "Investigation Details",
+      "fields": [
+        {
+          "label": "Accepted for Investigation",
+          "summary": "Indicate if the case is accepted for investigation."
+        },
+        {
+          "label": "Action Taken or Reason for Rejection",
+          "summary": "Describe the action taken or reason for rejection."
+        },
+        {
+          "label": "Brand/Assembly/Material Affected",
+          "summary": "Specify the brand, assembly, or material affected."
+        },
+        {
+          "label": "Date",
+          "summary": "Enter the date of the report (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "Date Prepared",
+          "summary": "Enter the date prepared (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "Department Name and Location",
+          "summary": "Provide the department name and location."
+        },
+        {
+          "label": "Final Disposition",
+          "summary": "State the final disposition of the case."
+        }
+      ]
+    },
+    {
+      "title": "Material Information",
+      "fields": [
+        {
+          "label": "Glass Mat",
+          "summary": "Provide details about the glass mat."
+        },
+        {
+          "label": "Slit Glass Mat",
+          "summary": "Provide details about the slit glass mat."
+        }
+      ]
+    },
+    {
+      "title": "Originator Information",
+      "fields": [
+        {
+          "label": "ORIGINATOR Name",
+          "summary": "Enter the name of the originator."
+        },
+        {
+          "label": "Position",
+          "summary": "Enter the position of the originator."
+        },
+        {
+          "label": "Telephone No.",
+          "summary": "Enter the telephone number."
+        },
+        {
+          "label": "Title",
+          "summary": "Enter the title of the originator."
+        }
+      ]
+    },
+    {
+      "title": "Proposed Changes",
+      "fields": [
+        {
+          "label": "Proposed Effective Date",
+          "summary": "Enter the proposed effective date (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "Proposed Solution",
+          "summary": "Describe the proposed solution."
+        },
+        {
+          "label": "Signature",
+          "summary": "Provide the signature of the originator."
+        },
+        {
+          "label": "Type of Change",
+          "summary": "Specify the type of change."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 14,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "faf2930d7f31e583a1d3339b82f8a58e91561d442ea3136a73062f11eadaaf24",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:51:12Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00043.pdf",
+  "fields": []
+}

@@ -1,0 +1,126 @@
+{
+  "title": "nielsr funsd test 00023",
+  "form_id": "nielsr-funsd-test-00023",
+  "sections": [
+    {
+      "title": "Advertising Information",
+      "fields": [
+        {
+          "label": "ADVERTISING CREATIVE TITLE",
+          "summary": "Enter the title of the advertising creative."
+        },
+        {
+          "label": "BRAND(S) APPLICABLE",
+          "summary": "List applicable brands."
+        },
+        {
+          "label": "MEDIA NAME",
+          "summary": "Enter the name of the media."
+        },
+        {
+          "label": "MEDIA TYPE",
+          "summary": "Specify the type of media."
+        },
+        {
+          "label": "CIRCULATION (#)",
+          "summary": "Enter the circulation number."
+        },
+        {
+          "label": "CIRCULATION DATES",
+          "summary": "Provide the circulation dates."
+        },
+        {
+          "label": "ISSUE FREQUENCY/YEAR",
+          "summary": "Indicate the frequency of issues per year."
+        },
+        {
+          "label": "GEOGRAPHICAL AREA(S)",
+          "summary": "Specify the geographical areas."
+        },
+        {
+          "label": "CODE ASSIGNED",
+          "summary": "Enter the assigned code."
+        }
+      ]
+    },
+    {
+      "title": "Coupon Information",
+      "fields": [
+        {
+          "label": "COUPON ISSUE DATE",
+          "summary": "Enter the coupon issue date (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "COUPON EXPIRATION DATE",
+          "summary": "Enter the coupon expiration date (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "COUPON VALUE",
+          "summary": "Specify the coupon value."
+        }
+      ]
+    },
+    {
+      "title": "Job Information",
+      "fields": [
+        {
+          "label": "JOB #",
+          "summary": "Enter the job number."
+        },
+        {
+          "label": "DATE INITIATED",
+          "summary": "Enter the date initiated (MM/DD/YYYY, e.g., 11/28/2025)."
+        },
+        {
+          "label": "EST. REDEMPTION",
+          "summary": "Provide the estimated redemption."
+        }
+      ]
+    },
+    {
+      "title": "Additional Information",
+      "fields": [
+        {
+          "label": "FROM",
+          "summary": "Enter the sender's information."
+        },
+        {
+          "label": "TO",
+          "summary": "Enter the recipient's information."
+        },
+        {
+          "label": "SPACE/COLOR",
+          "summary": "Specify the space or color requirements."
+        },
+        {
+          "label": "PACK/CARTON",
+          "summary": "Indicate the pack or carton details."
+        },
+        {
+          "label": "REQUIREMENTS",
+          "summary": "List any specific requirements."
+        },
+        {
+          "label": "SIGNATURE OF INITIATOR",
+          "summary": "Provide the signature of the initiator."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 20,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "3c0b750c7fd6a35ded03eed9c6bf02be943b223a43c216b6cbdec562d0bd4e4a",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:47:04Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00023.pdf",
+  "fields": []
+}

@@ -1,0 +1,77 @@
+{
+  "title": "nielsr funsd test 00046",
+  "form_id": "nielsr-funsd-test-00046",
+  "sections": [
+    {
+      "title": "Approval and Management",
+      "fields": [
+        {
+          "label": "Approved by",
+          "summary": "Enter name of approver"
+        },
+        {
+          "label": "Group Product Manager",
+          "summary": "Enter name of Group Product Manager"
+        },
+        {
+          "label": "Marketing Research Director",
+          "summary": "Enter name of Marketing Research Director"
+        },
+        {
+          "label": "Prepared by",
+          "summary": "Enter name of preparer"
+        },
+        {
+          "label": "Product Manager",
+          "summary": "Enter name of Product Manager"
+        }
+      ]
+    },
+    {
+      "title": "Cost and Reports",
+      "fields": [
+        {
+          "label": "Cost Estimate",
+          "summary": "Enter estimated cost"
+        },
+        {
+          "label": "Final Report",
+          "summary": "Enter details of final report"
+        }
+      ]
+    },
+    {
+      "title": "Research Insights",
+      "fields": [
+        {
+          "label": "Mentions of harshness",
+          "summary": "Summarize mentions of harshness"
+        },
+        {
+          "label": "Present smokers of Triumph asked reasons for switching to Triumph",
+          "summary": "List reasons provided by present smokers"
+        },
+        {
+          "label": "Triumph switchers asked why no longer smoking Triumph",
+          "summary": "List reasons provided by switchers"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 8,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "b402589c829887d4ee6a58b62557f0699ef2ae9d219311abdfd8b02b20b94cfb",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:51:53Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00046.pdf",
+  "fields": []
+}

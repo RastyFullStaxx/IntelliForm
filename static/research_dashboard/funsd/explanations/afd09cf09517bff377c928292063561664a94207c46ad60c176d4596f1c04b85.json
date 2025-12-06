@@ -1,0 +1,65 @@
+{
+  "title": "nielsr funsd test 00003",
+  "form_id": "nielsr-funsd-test-00003",
+  "sections": [
+    {
+      "title": "Evaluation",
+      "fields": [
+        {
+          "label": "Acceptance/Response",
+          "summary": "Enter acceptance or response details."
+        },
+        {
+          "label": "Area",
+          "summary": "Specify the area related to the evaluation."
+        },
+        {
+          "label": "From",
+          "summary": "Enter the starting point or source."
+        },
+        {
+          "label": "Hardware Evaluation/Effectiveness",
+          "summary": "Assess hardware effectiveness."
+        },
+        {
+          "label": "Independents",
+          "summary": "List independent evaluations."
+        },
+        {
+          "label": "Permanent Advertising Evaluation/Effectiveness/Acceptance",
+          "summary": "Evaluate effectiveness and acceptance of permanent advertising."
+        },
+        {
+          "label": "Region",
+          "summary": "Specify the region for evaluation."
+        },
+        {
+          "label": "Submission for",
+          "summary": "Indicate the purpose of submission."
+        },
+        {
+          "label": "To",
+          "summary": "Enter the destination or recipient."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 9,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "afd09cf09517bff377c928292063561664a94207c46ad60c176d4596f1c04b85",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:43:27Z",
+  "aliases": [
+    "nielsr_funsd_test_00003"
+  ],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00003.pdf",
+  "fields": []
+}

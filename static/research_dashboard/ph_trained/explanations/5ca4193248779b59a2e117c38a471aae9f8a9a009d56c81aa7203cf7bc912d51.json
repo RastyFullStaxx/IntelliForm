@@ -1,0 +1,93 @@
+{
+  "title": "Auto-Invest Enrollment Form",
+  "form_id": "auto-invest-enrollment",
+  "sections": [
+    {
+      "title": "Account Information",
+      "fields": [
+        {
+          "label": "MF Account Number",
+          "summary": "Enter your mutual fund account number (e.g. 01234567CF01)"
+        },
+        {
+          "label": "MF Account Type",
+          "summary": "Select your account type: Individual/Individual ITF, Joint AND/Joint AND ITF, Joint OR/Joint OR ITF"
+        },
+        {
+          "label": "MF Account Name",
+          "summary": "Enter the full account name (Last Name, First Name, Middle Name)"
+        }
+      ]
+    },
+    {
+      "title": "Bank Details",
+      "fields": [
+        {
+          "label": "Bank Name",
+          "summary": "Enter the name of your bank"
+        },
+        {
+          "label": "Bank Branch",
+          "summary": "Enter the branch of your bank"
+        },
+        {
+          "label": "Bank Account Number",
+          "summary": "Enter your bank account number"
+        },
+        {
+          "label": "Account Type",
+          "summary": "Specify the type of your bank account"
+        }
+      ]
+    },
+    {
+      "title": "Schedule of Investment",
+      "fields": [
+        {
+          "label": "Frequency",
+          "summary": "Select the frequency of your investments (e.g., Monthly, Quarterly)"
+        },
+        {
+          "label": "Schedule",
+          "summary": "Enter the schedule for your investments"
+        }
+      ]
+    },
+    {
+      "title": "Auto-Invest Enrollment Information",
+      "fields": [
+        {
+          "label": "Select Fund/s to Enroll",
+          "summary": "Choose the funds you wish to enroll in"
+        },
+        {
+          "label": "Select Sales Load",
+          "summary": "Indicate your preferred sales load option"
+        },
+        {
+          "label": "Indicate Investment Amount",
+          "summary": "Enter the amount you wish to invest"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 20,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "5ca4193248779b59a2e117c38a471aae9f8a9a009d56c81aa7203cf7bc912d51",
+  "bucket": "finance",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T23:22:19Z",
+  "aliases": [
+    "auto_invest_enrollment_form.pdf",
+    "MAIE0524F1"
+  ],
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Finance_Auto-InvestEnrollmentForm.pdf",
+  "fields": []
+}

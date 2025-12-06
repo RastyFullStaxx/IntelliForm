@@ -1,0 +1,117 @@
+{
+  "title": "nielsr funsd test 00044",
+  "form_id": "nielsr-funsd-test-00044",
+  "sections": [
+    {
+      "title": "Billing Information",
+      "fields": [
+        {
+          "label": "BILL AS MANUFACTURE",
+          "summary": "Enter manufacturer details"
+        },
+        {
+          "label": "BILL AS SHIP FOR",
+          "summary": "Enter shipping details"
+        },
+        {
+          "label": "ADDRESS",
+          "summary": "Enter complete address"
+        },
+        {
+          "label": "CITY",
+          "summary": "Enter city name"
+        },
+        {
+          "label": "STATE",
+          "summary": "Enter state abbreviation"
+        },
+        {
+          "label": "DATE",
+          "summary": "Enter date (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "TERMS",
+          "summary": "Specify payment terms"
+        }
+      ]
+    },
+    {
+      "title": "Order Details",
+      "fields": [
+        {
+          "label": "ITEM",
+          "summary": "Enter item description"
+        },
+        {
+          "label": "QUANTITIES",
+          "summary": "Enter quantities ordered"
+        },
+        {
+          "label": "PRICE",
+          "summary": "Enter price per item"
+        },
+        {
+          "label": "SIZE",
+          "summary": "Specify size of items"
+        },
+        {
+          "label": "COLORS",
+          "summary": "Specify colors of items"
+        },
+        {
+          "label": "MATERIAL",
+          "summary": "Specify material type"
+        },
+        {
+          "label": "EDGES",
+          "summary": "Specify edge type"
+        },
+        {
+          "label": "HOLES",
+          "summary": "Specify hole details"
+        },
+        {
+          "label": "PACKING",
+          "summary": "Specify packing requirements"
+        },
+        {
+          "label": "DROP SHIPPING",
+          "summary": "Indicate if drop shipping is required"
+        },
+        {
+          "label": "WAREHOUSING",
+          "summary": "Indicate warehousing needs"
+        },
+        {
+          "label": "CONDITIONS",
+          "summary": "Specify any conditions"
+        }
+      ]
+    },
+    {
+      "title": "For Official Use",
+      "fields": [
+        {
+          "label": "STAMP FRAME",
+          "summary": "Office use only; leave blank"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 12,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "292382f5e813cea3e4b20bfd7ae620176d72c50fb55e6131daafc7174b684bb5",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:51:24Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00044.pdf",
+  "fields": []
+}

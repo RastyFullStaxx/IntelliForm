@@ -1,0 +1,247 @@
+{
+  "title": "Application for Treaty Purposes",
+  "form_id": "application-for-treaty-purposes",
+  "sections": [
+    {
+      "title": "Part I – Legal Basis of Claim for Relief",
+      "fields": [
+        {
+          "label": "Article",
+          "summary": "Enter the article number of the Tax Treaty."
+        },
+        {
+          "label": "Tax Treatment Under the Treaty",
+          "summary": "Select the applicable tax treatment: Exempt from Income Tax or Subject to Preferential Rate."
+        },
+        {
+          "label": "Tax Rate",
+          "summary": "Enter the applicable tax rate as a percentage."
+        }
+      ]
+    },
+    {
+      "title": "Part II – Identification of Income Recipient",
+      "fields": [
+        {
+          "label": "Name of Income Recipient",
+          "summary": "Enter the full name of the income recipient."
+        },
+        {
+          "label": "Local Taxpayer Identification Number (TIN)",
+          "summary": "Enter the local TIN."
+        },
+        {
+          "label": "RDO Code",
+          "summary": "Enter the RDO code."
+        },
+        {
+          "label": "Foreign TIN",
+          "summary": "Enter the foreign TIN."
+        },
+        {
+          "label": "Date of Establishment",
+          "summary": "Enter the date of establishment (MM/DD/YYYY)."
+        },
+        {
+          "label": "Contact Number (Landline/Mobile No.)",
+          "summary": "Enter the contact number."
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter the email address."
+        },
+        {
+          "label": "Country where the recipient is taxable as resident and where it is to pay tax",
+          "summary": "Enter the country of tax residency."
+        },
+        {
+          "label": "With permanent establishment (PE) in the Philippines?",
+          "summary": "Select Yes or No."
+        },
+        {
+          "label": "With license to do business in the Philippines?",
+          "summary": "Select Yes or No."
+        },
+        {
+          "label": "Taxpayer Identification Number of the PE",
+          "summary": "Enter the TIN of the PE."
+        },
+        {
+          "label": "RDO Code",
+          "summary": "Enter the RDO code for the PE."
+        },
+        {
+          "label": "Address of the PE",
+          "summary": "Enter the complete address of the PE."
+        },
+        {
+          "label": "ZIP Code",
+          "summary": "Enter the ZIP code."
+        },
+        {
+          "label": "Details of Business",
+          "summary": "Provide details of the business."
+        }
+      ]
+    },
+    {
+      "title": "Part III – Details of Income Payor",
+      "fields": [
+        {
+          "label": "Registered Name",
+          "summary": "Enter the registered name of the income payor."
+        },
+        {
+          "label": "Taxpayer Identification Number (TIN)",
+          "summary": "Enter the TIN of the income payor."
+        },
+        {
+          "label": "RDO Code",
+          "summary": "Enter the RDO code."
+        },
+        {
+          "label": "Registered Address",
+          "summary": "Enter the registered address."
+        },
+        {
+          "label": "ZIP Code",
+          "summary": "Enter the ZIP code."
+        },
+        {
+          "label": "Contact Number (Landline/Mobile No.)",
+          "summary": "Enter the contact number."
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter the email address."
+        },
+        {
+          "label": "Details of Business",
+          "summary": "Provide details of the business."
+        },
+        {
+          "label": "Registered with the Bureau of Investments (BOI)?",
+          "summary": "Select Yes or No."
+        },
+        {
+          "label": "Engaged in preferred pioneer areas of investment?",
+          "summary": "Select Yes or No."
+        },
+        {
+          "label": "Related to the income recipient?",
+          "summary": "Select Yes or No."
+        },
+        {
+          "label": "If yes, describe the nature of relationship",
+          "summary": "Describe the relationship if applicable."
+        }
+      ]
+    },
+    {
+      "title": "Part IV – Details of Income and Withholding Tax",
+      "fields": [
+        {
+          "label": "Kind of Income",
+          "summary": "Enter the kind of income."
+        },
+        {
+          "label": "Description",
+          "summary": "Provide a description of the income."
+        },
+        {
+          "label": "Amount of Income",
+          "summary": "Enter the amount of income."
+        },
+        {
+          "label": "Is the income effectively connected with the PE in the Philippines?",
+          "summary": "Select Yes or No."
+        },
+        {
+          "label": "Amount of Withholding Tax Paid, if any",
+          "summary": "Enter the amount of withholding tax paid."
+        },
+        {
+          "label": "Date of Payment",
+          "summary": "Enter the date of payment (MM/DD/YYYY)."
+        }
+      ]
+    },
+    {
+      "title": "Part V – Authorized Representative in the Philippines",
+      "fields": [
+        {
+          "label": "Registered Name",
+          "summary": "Enter the registered name of the authorized representative."
+        },
+        {
+          "label": "Taxpayer Identification Number (TIN)",
+          "summary": "Enter the TIN of the authorized representative."
+        },
+        {
+          "label": "RDO Code",
+          "summary": "Enter the RDO code."
+        },
+        {
+          "label": "Registered Address",
+          "summary": "Enter the registered address."
+        },
+        {
+          "label": "ZIP Code",
+          "summary": "Enter the ZIP code."
+        },
+        {
+          "label": "Contact Number (Landline/Cellphone No.)",
+          "summary": "Enter the contact number."
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter the email address."
+        }
+      ]
+    },
+    {
+      "title": "Part VI – Certification",
+      "fields": [
+        {
+          "label": "Signature over Printed Name of the Beneficial Owner/Authorized Representative/Tax Agent",
+          "summary": "Sign and print the name."
+        },
+        {
+          "label": "Tax Agent Accreditation/Attorney’s Roll Number, if applicable",
+          "summary": "Enter the tax agent accreditation or attorney's roll number if applicable."
+        },
+        {
+          "label": "Date of Issue",
+          "summary": "Enter the date of issue (MM/DD/YYYY)."
+        },
+        {
+          "label": "Date of Expiry",
+          "summary": "Enter the date of expiry (MM/DD/YYYY)."
+        },
+        {
+          "label": "ITAD Filing Reference No",
+          "summary": "Enter the ITAD filing reference number."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 54,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "706fa7449dde29fcccffa882057534f3578c268a1b223221331993fb26365214",
+  "bucket": "ph-supplemental",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T23:22:53Z",
+  "aliases": [
+    "BIR Form 0901-T",
+    "Application for Treaty Purposes Form"
+  ],
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Tax_BIRApplicationForTreatyPurposes0901-T.pdf",
+  "fields": []
+}

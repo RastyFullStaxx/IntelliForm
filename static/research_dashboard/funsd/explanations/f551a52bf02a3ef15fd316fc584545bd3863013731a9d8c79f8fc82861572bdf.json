@@ -1,0 +1,81 @@
+{
+  "title": "nielsr funsd test 00010",
+  "form_id": "nielsr-funsd-test-00010",
+  "sections": [
+    {
+      "title": "Case Information",
+      "fields": [
+        {
+          "label": "Case Name",
+          "summary": "Enter the full name of the case."
+        },
+        {
+          "label": "Case Type",
+          "summary": "Specify the type of case."
+        },
+        {
+          "label": "Court",
+          "summary": "Enter the name of the court."
+        },
+        {
+          "label": "Judge",
+          "summary": "Enter the name of the judge."
+        },
+        {
+          "label": "Date Filed",
+          "summary": "Use MM/DD/YYYY (e.g., 11/28/2025)."
+        },
+        {
+          "label": "Date Served",
+          "summary": "Use MM/DD/YYYY (e.g., 11/28/2025)."
+        },
+        {
+          "label": "Trial Date",
+          "summary": "Use MM/DD/YYYY (e.g., 11/28/2025)."
+        }
+      ]
+    },
+    {
+      "title": "Contact Information",
+      "fields": [
+        {
+          "label": "Counsel",
+          "summary": "Enter the name of the counsel."
+        },
+        {
+          "label": "Phone",
+          "summary": "Enter a contact phone number."
+        },
+        {
+          "label": "Address",
+          "summary": "Enter the complete address."
+        }
+      ]
+    },
+    {
+      "title": "Entities",
+      "fields": [
+        {
+          "label": "Lorillard Entities",
+          "summary": "List any Lorillard entities involved."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 10,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "f551a52bf02a3ef15fd316fc584545bd3863013731a9d8c79f8fc82861572bdf",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:44:42Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00010.pdf",
+  "fields": []
+}

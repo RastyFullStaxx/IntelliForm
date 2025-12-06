@@ -1,0 +1,123 @@
+{
+  "title": "nielsr funsd test 00037",
+  "form_id": "nielsr-funsd-test-00037",
+  "sections": [
+    {
+      "title": "General Information",
+      "fields": [
+        {
+          "label": "Air Dilution",
+          "summary": "Enter air dilution percentage."
+        },
+        {
+          "label": "Cartons",
+          "summary": "Specify the number of cartons."
+        },
+        {
+          "label": "Circumference",
+          "summary": "Enter circumference measurement."
+        },
+        {
+          "label": "Closures",
+          "summary": "List types of closures used."
+        },
+        {
+          "label": "Comb. Wrap",
+          "summary": "Indicate combination wrap type."
+        },
+        {
+          "label": "Filter Length",
+          "summary": "Provide filter length measurement."
+        },
+        {
+          "label": "Glue Roller",
+          "summary": "Specify glue roller type."
+        },
+        {
+          "label": "Kind",
+          "summary": "Enter kind of product."
+        },
+        {
+          "label": "Labels",
+          "summary": "List labels used."
+        },
+        {
+          "label": "Laboratory",
+          "summary": "Enter laboratory name."
+        },
+        {
+          "label": "Laboratory Analysis",
+          "summary": "Provide details of laboratory analysis."
+        },
+        {
+          "label": "Length",
+          "summary": "Enter length measurement."
+        },
+        {
+          "label": "Maker",
+          "summary": "Specify the maker's name."
+        },
+        {
+          "label": "Markings",
+          "summary": "Describe any markings."
+        },
+        {
+          "label": "Other",
+          "summary": "Provide any other relevant information."
+        },
+        {
+          "label": "Paper",
+          "summary": "Specify type of paper used."
+        },
+        {
+          "label": "Plast.",
+          "summary": "Indicate type of plastic used."
+        },
+        {
+          "label": "Plug Wrap Por.",
+          "summary": "Enter plug wrap percentage."
+        },
+        {
+          "label": "Pressure Drop",
+          "summary": "Provide pressure drop measurement."
+        },
+        {
+          "label": "Rod Length",
+          "summary": "Enter rod length measurement."
+        },
+        {
+          "label": "Special Requirements",
+          "summary": "List any special requirements."
+        },
+        {
+          "label": "Tear Tape",
+          "summary": "Specify tear tape type."
+        },
+        {
+          "label": "Tip. Paper Por.",
+          "summary": "Enter tip paper percentage."
+        },
+        {
+          "label": "Weight",
+          "summary": "Provide weight measurement."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 21,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "7f296c4b1c0786c8d28eca154211288100a700514be69f3fb8b0cc15d9906279",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:49:56Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00037.pdf",
+  "fields": []
+}

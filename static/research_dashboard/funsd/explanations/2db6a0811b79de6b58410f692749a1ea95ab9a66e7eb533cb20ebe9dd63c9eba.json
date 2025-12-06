@@ -1,0 +1,174 @@
+{
+  "title": "nielsr funsd test 00027",
+  "form_id": "nielsr-funsd-test-00027",
+  "sections": [
+    {
+      "title": "Manufacture and Sales Information",
+      "fields": [
+        {
+          "label": "1st Manufact. Date",
+          "summary": "Enter the first manufacturing date (MM/DD/YYYY, e.g., 01/15/2020)"
+        },
+        {
+          "label": "1st Sales Date",
+          "summary": "Enter the first sales date (MM/DD/YYYY, e.g., 01/15/2020)"
+        },
+        {
+          "label": "Brand Name",
+          "summary": "Enter the brand name of the product"
+        },
+        {
+          "label": "Last Sold Date",
+          "summary": "Enter the last sold date (MM/DD/YYYY, e.g., 01/15/2020)"
+        }
+      ]
+    },
+    {
+      "title": "Product Specifications",
+      "fields": [
+        {
+          "label": "Cig. Length",
+          "summary": "Enter the length of the cigarette in mm"
+        },
+        {
+          "label": "Filter Length",
+          "summary": "Enter the length of the filter in mm"
+        },
+        {
+          "label": "Filter Type",
+          "summary": "Specify the type of filter used"
+        },
+        {
+          "label": "Flavoring",
+          "summary": "Indicate if flavoring is used (Yes/No)"
+        },
+        {
+          "label": "Nicotine",
+          "summary": "Enter the nicotine content in mg"
+        },
+        {
+          "label": "No. Per Pack",
+          "summary": "Enter the number of cigarettes per pack"
+        },
+        {
+          "label": "Overwrap",
+          "summary": "Specify the type of overwrap used"
+        },
+        {
+          "label": "Pack Type",
+          "summary": "Enter the type of packaging used"
+        },
+        {
+          "label": "Tar",
+          "summary": "Enter the tar content in mg"
+        }
+      ]
+    },
+    {
+      "title": "Expenses and Sales",
+      "fields": [
+        {
+          "label": "Total Advertising Expenditures",
+          "summary": "Enter total advertising expenditures in dollars"
+        },
+        {
+          "label": "Year",
+          "summary": "Enter the year of the report"
+        },
+        {
+          "label": "Yearly Summary",
+          "summary": "Provide a summary of yearly sales and expenses"
+        },
+        {
+          "label": "Var. Desc",
+          "summary": "Enter the description of the variety"
+        },
+        {
+          "label": "Variety Dollar Sales",
+          "summary": "Enter the dollar sales for the variety"
+        },
+        {
+          "label": "Variety Unit Sales",
+          "summary": "Enter the unit sales for the variety"
+        }
+      ]
+    },
+    {
+      "title": "Category Expenses",
+      "fields": [
+        {
+          "label": "Cat-A-Expenses",
+          "summary": "Enter expenses for Category A"
+        },
+        {
+          "label": "Cat-B-Expenses",
+          "summary": "Enter expenses for Category B"
+        },
+        {
+          "label": "Cat-C-Expenses",
+          "summary": "Enter expenses for Category C"
+        },
+        {
+          "label": "Cat-D-Expenses",
+          "summary": "Enter expenses for Category D"
+        },
+        {
+          "label": "Cat-E-Expenses",
+          "summary": "Enter expenses for Category E"
+        },
+        {
+          "label": "Cat-F-Expenses",
+          "summary": "Enter expenses for Category F"
+        },
+        {
+          "label": "Cat-G-Expenses",
+          "summary": "Enter expenses for Category G"
+        },
+        {
+          "label": "Cat-H-Expenses",
+          "summary": "Enter expenses for Category H"
+        },
+        {
+          "label": "Cat-I-Expenses",
+          "summary": "Enter expenses for Category I"
+        },
+        {
+          "label": "Cat-J-Expenses",
+          "summary": "Enter expenses for Category J"
+        },
+        {
+          "label": "Cat-K-Expenses",
+          "summary": "Enter expenses for Category K"
+        },
+        {
+          "label": "Cat-L-Expenses",
+          "summary": "Enter expenses for Category L"
+        },
+        {
+          "label": "Cat-M-Expenses",
+          "summary": "Enter expenses for Category M"
+        },
+        {
+          "label": "Cat-N-Expenses",
+          "summary": "Enter expenses for Category N"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 30,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "2db6a0811b79de6b58410f692749a1ea95ab9a66e7eb533cb20ebe9dd63c9eba",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:48:01Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00027.pdf",
+  "fields": []
+}

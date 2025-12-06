@@ -1,0 +1,155 @@
+{
+  "title": "Variable Life Insurance - Request for Fund Withdrawal",
+  "form_id": "variable-life-insurance-fund-withdrawal",
+  "sections": [
+    {
+      "title": "General Information",
+      "fields": [
+        {
+          "label": "Currency",
+          "summary": "Select the currency for the withdrawal (US $ or Php)"
+        },
+        {
+          "label": "Amount in words and figures",
+          "summary": "Enter the withdrawal amount in both words and figures"
+        },
+        {
+          "label": "Special Instructions (Optional, specify for which Fund and the corresponding amount)",
+          "summary": "Provide any special instructions for the withdrawal"
+        }
+      ]
+    },
+    {
+      "title": "Request Details",
+      "fields": [
+        {
+          "label": "Pick up Date",
+          "summary": "Enter the date for pick up (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Pick up Time",
+          "summary": "Enter the time for pick up (e.g., 10:00 AM)"
+        },
+        {
+          "label": "Pick up Location",
+          "summary": "Enter the location for pick up"
+        },
+        {
+          "label": "Received Date",
+          "summary": "Enter the date received (MM/DD/YYYY, e.g., 11/28/2025)"
+        }
+      ]
+    },
+    {
+      "title": "For Company Use Only",
+      "fields": [
+        {
+          "label": "Policy Owner (Last Name, First Name, M.I.)",
+          "summary": "Enter the full name of the policy owner"
+        },
+        {
+          "label": "Citizenship",
+          "summary": "Enter the citizenship of the policy owner"
+        },
+        {
+          "label": "Policy Number",
+          "summary": "Enter the policy number"
+        },
+        {
+          "label": "Country/ies of Legal Residence other than the Philippines",
+          "summary": "List any countries of legal residence"
+        },
+        {
+          "label": "Email Address",
+          "summary": "Enter the email address of the policy owner"
+        },
+        {
+          "label": "Home Phone (Country Code, Area Code, Tel. No)",
+          "summary": "Enter the home phone number with country and area codes"
+        },
+        {
+          "label": "Work Phone (Country Code, Area Code, Tel. No)",
+          "summary": "Enter the work phone number with country and area codes"
+        },
+        {
+          "label": "Present Residence Address (No., Street, Municipality/City, Province, Country, Zip Code(P.O. Box is not acceptable)",
+          "summary": "Enter the complete present residence address"
+        },
+        {
+          "label": "Permanent Residence Address (No., Street, Municipality/City, Province, Country, Zip Code(P.O. Box is not acceptable)",
+          "summary": "Enter the complete permanent residence address"
+        },
+        {
+          "label": "Mobile Phone (Country Code, Mobile No.)",
+          "summary": "Enter the mobile phone number with country code"
+        },
+        {
+          "label": "Work Address (No., Street, Municipality/City, Province, Country, Zip Code(P.O. Box is not acceptable)",
+          "summary": "Enter the complete work address"
+        },
+        {
+          "label": "Life Insured (Last Name, First Name, M.I.) if different from Policy Owner",
+          "summary": "Enter the full name of the life insured if different"
+        }
+      ]
+    },
+    {
+      "title": "Acknowledgement and Agreement",
+      "fields": [
+        {
+          "label": "This section must be signed by the policy owner, assignee and all of the nominated irrevocable beneficiaries and witnessed by an Advisor or Staff of Sun Life of Canada (Philippines), Inc.",
+          "summary": "Ensure all required signatures are obtained"
+        }
+      ]
+    },
+    {
+      "title": "Notarization",
+      "fields": [
+        {
+          "label": "Signature of Policy Owner",
+          "summary": "Sign here"
+        },
+        {
+          "label": "Signature of Witness",
+          "summary": "Witness signature required"
+        },
+        {
+          "label": "Date of Signing",
+          "summary": "Enter the date signed (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Address of Witness (no.,street,municipality,city/province,country,zip code)",
+          "summary": "Enter the complete address of the witness"
+        }
+      ]
+    },
+    {
+      "title": "Special Instruction",
+      "fields": [
+        {
+          "label": "Indicate how you would want to receive the proceeds.",
+          "summary": "Choose the method of receiving proceeds (e.g., deposit to local bank, currency conversion)"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 20,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "3613a1823f3be0e38e8c7c3a831ecee76013c15b62638ac2a8ec135d09408c80",
+  "bucket": "health",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T23:19:25Z",
+  "aliases": [
+    "VUL Fund Withdrawal Request",
+    "Variable Life Fund Withdrawal"
+  ],
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\HealthcareInsurance_SunLifeVariableLifeInsuranceRequestforFundWithdrawal.pdf",
+  "fields": []
+}

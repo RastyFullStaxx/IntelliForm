@@ -1,0 +1,471 @@
+{
+  "title": "LOLC Bank Philippines Inc Loan Application Form (Individual)",
+  "form_id": "lolc_loan_application_individual",
+  "sections": [
+    {
+      "title": "PERSONAL INFORMATION",
+      "fields": [
+        {
+          "label": "Name of Applicant",
+          "summary": "Enter full name (Last Name, First Name, Middle Name)"
+        },
+        {
+          "label": "Date of Birth",
+          "summary": "Enter birth date (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Age",
+          "summary": "Enter age"
+        },
+        {
+          "label": "Place of Birth",
+          "summary": "Enter place of birth"
+        },
+        {
+          "label": "Nickname",
+          "summary": "Enter nickname"
+        },
+        {
+          "label": "Mother’s Maiden Name",
+          "summary": "Enter mother's maiden name"
+        },
+        {
+          "label": "TIN No.",
+          "summary": "Enter Tax Identification Number"
+        },
+        {
+          "label": "SSS / GSIS No.",
+          "summary": "Enter SSS or GSIS number"
+        },
+        {
+          "label": "Contact Number/s",
+          "summary": "Enter contact number(s)"
+        },
+        {
+          "label": "Email / Facebook account",
+          "summary": "Enter email or Facebook account"
+        },
+        {
+          "label": "Highest Educational Attainment",
+          "summary": "Select highest educational attainment (Elementary, Secondary, Tertiary, Others)"
+        },
+        {
+          "label": "Present/Home Address",
+          "summary": "Enter complete present address"
+        },
+        {
+          "label": "Length of Stay",
+          "summary": "Enter length of stay at present address"
+        },
+        {
+          "label": "Permanent Address",
+          "summary": "Enter complete permanent address"
+        },
+        {
+          "label": "Length of Stay",
+          "summary": "Enter length of stay at permanent address"
+        },
+        {
+          "label": "Business / Employers Address",
+          "summary": "Enter complete business or employer's address"
+        },
+        {
+          "label": "Length of Stay",
+          "summary": "Enter length of stay at business address"
+        },
+        {
+          "label": "Business Name / Company Name",
+          "summary": "Enter business or company name"
+        },
+        {
+          "label": "Yrs.in Business or Yrs. Employed",
+          "summary": "Enter years in business or years employed"
+        },
+        {
+          "label": "House",
+          "summary": "Select house status (Owned, Rented, Mortgaged, Living with family members)"
+        },
+        {
+          "label": "Civil Status",
+          "summary": "Select civil status (Married, Separated, Widowed, Single, Common Law)"
+        },
+        {
+          "label": "Gender",
+          "summary": "Select gender (Male, Female)"
+        },
+        {
+          "label": "Name of Spouse",
+          "summary": "Enter spouse's name"
+        },
+        {
+          "label": "Age",
+          "summary": "Enter spouse's age"
+        },
+        {
+          "label": "Nickname",
+          "summary": "Enter spouse's nickname"
+        },
+        {
+          "label": "Date of Birth",
+          "summary": "Enter spouse's birth date (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Place of Birth",
+          "summary": "Enter spouse's place of birth"
+        },
+        {
+          "label": "TIN No.",
+          "summary": "Enter spouse's Tax Identification Number"
+        },
+        {
+          "label": "SSS/GSIS No",
+          "summary": "Enter spouse's SSS or GSIS number"
+        },
+        {
+          "label": "Highest Educational Attainment",
+          "summary": "Select spouse's highest educational attainment (Elementary, Secondary, Tertiary, Others)"
+        },
+        {
+          "label": "Contact Number/s",
+          "summary": "Enter spouse's contact number(s)"
+        },
+        {
+          "label": "No. of dependents",
+          "summary": "Enter number of dependents"
+        },
+        {
+          "label": "Occupation",
+          "summary": "Enter occupation"
+        },
+        {
+          "label": "Yrs.in Service /Employed",
+          "summary": "Enter years in service or employed"
+        }
+      ]
+    },
+    {
+      "title": "SOURCES OF INCOME",
+      "fields": [
+        {
+          "label": "SOURCES OF INCOME",
+          "summary": "List all sources of income including main and other businesses, pension, etc."
+        },
+        {
+          "label": "# of yrs.in service",
+          "summary": "Enter number of years in service"
+        },
+        {
+          "label": "# of Paid Employees",
+          "summary": "Enter number of paid employees"
+        },
+        {
+          "label": "Estimated Monthly Gross Sales",
+          "summary": "Enter estimated monthly gross sales"
+        },
+        {
+          "label": "Estimated Monthly Gross Expenses",
+          "summary": "Enter estimated monthly gross expenses"
+        },
+        {
+          "label": "Estimated Net Income",
+          "summary": "Enter estimated net income"
+        },
+        {
+          "label": "Main",
+          "summary": "Enter details for main source of income"
+        },
+        {
+          "label": "Secondary",
+          "summary": "Enter details for secondary source of income"
+        },
+        {
+          "label": "Who looks after the business when you’re sick or away?",
+          "summary": "Enter name of person who looks after the business"
+        },
+        {
+          "label": "Who among the family members usually assist the applicant in running the business?",
+          "summary": "Enter names of family members assisting in business"
+        },
+        {
+          "label": "INCOME FROM SALARIES",
+          "summary": "List income from salaries of household members"
+        },
+        {
+          "label": "Household Member 1",
+          "summary": "Enter details for household member 1"
+        },
+        {
+          "label": "Household Member 2",
+          "summary": "Enter details for household member 2"
+        },
+        {
+          "label": "Household Member 3",
+          "summary": "Enter details for household member 3"
+        },
+        {
+          "label": "OTHER SOURCES OF INCOME",
+          "summary": "List other sources of income"
+        },
+        {
+          "label": "Regular Monthly Average Amount",
+          "summary": "Enter average amount for regular income sources"
+        },
+        {
+          "label": "Weekly",
+          "summary": "Enter weekly income amount"
+        },
+        {
+          "label": "Semi Monthly",
+          "summary": "Enter semi-monthly income amount"
+        },
+        {
+          "label": "Monthly",
+          "summary": "Enter monthly income amount"
+        },
+        {
+          "label": "Irregular",
+          "summary": "Enter irregular income amount"
+        },
+        {
+          "label": "Remittances from Abroad",
+          "summary": "Enter details for remittances from abroad"
+        },
+        {
+          "label": "Pension",
+          "summary": "Enter pension details"
+        },
+        {
+          "label": "Other",
+          "summary": "Enter details for other income sources"
+        }
+      ]
+    },
+    {
+      "title": "BUSINESS AND HOUSEHOLD EXPENSES",
+      "fields": [
+        {
+          "label": "Description",
+          "summary": "Enter description of expenses"
+        },
+        {
+          "label": "Monthly Total Business Expenses",
+          "summary": "Enter total monthly business expenses"
+        },
+        {
+          "label": "Monthly Total Household Expenses",
+          "summary": "Enter total monthly household expenses"
+        },
+        {
+          "label": "Total",
+          "summary": "Enter total expenses"
+        },
+        {
+          "label": "Salaries",
+          "summary": "Enter total salaries expense"
+        },
+        {
+          "label": "Food",
+          "summary": "Enter total food expense"
+        },
+        {
+          "label": "Utilities",
+          "summary": "Enter total utilities expense"
+        },
+        {
+          "label": "Education",
+          "summary": "Enter total education expense"
+        },
+        {
+          "label": "Others",
+          "summary": "Enter details for other expenses"
+        },
+        {
+          "label": "TOTAL",
+          "summary": "Enter total of all expenses"
+        }
+      ]
+    },
+    {
+      "title": "LOAN INFORMATION",
+      "fields": [
+        {
+          "label": "What is the maximum installment you can easily pay?",
+          "summary": "Enter maximum installment amount (Php)"
+        },
+        {
+          "label": "How frequent?",
+          "summary": "Select payment frequency (Weekly, Semi-Monthly, Monthly, Others)"
+        },
+        {
+          "label": "Amount Requested",
+          "summary": "Enter amount requested for the loan"
+        },
+        {
+          "label": "Term of Loan",
+          "summary": "Enter term of the loan"
+        }
+      ]
+    },
+    {
+      "title": "LOAN PURPOSE",
+      "fields": [
+        {
+          "label": "REGULAR LOANS",
+          "summary": "Select purpose for regular loans (Kabuhayan Loan, Unlad Loan, Sikap Loan, Other Micro Enterprise Loan)"
+        },
+        {
+          "label": "Kabuhayan Loan",
+          "summary": "Select for Kabuhayan Loan"
+        },
+        {
+          "label": "Karunungan Education Loan",
+          "summary": "Select for Karunungan Education Loan"
+        },
+        {
+          "label": "Konsumer Loan",
+          "summary": "Select for Konsumer Loan"
+        },
+        {
+          "label": "Car Loan",
+          "summary": "Select for Car Loan"
+        },
+        {
+          "label": "Appliance Loan",
+          "summary": "Select for Appliance Loan"
+        },
+        {
+          "label": "Salary Loan",
+          "summary": "Select for Salary Loan"
+        },
+        {
+          "label": "Housing Loan",
+          "summary": "Select for Housing Loan"
+        },
+        {
+          "label": "SPECIALIZED LOAN",
+          "summary": "Select purpose for specialized loans (Agri-Tao, Microfinance Loan)"
+        },
+        {
+          "label": "Agri-Tao",
+          "summary": "Select for Agri-Tao loan"
+        },
+        {
+          "label": "Microfinance Loan",
+          "summary": "Select for Microfinance Loan"
+        }
+      ]
+    },
+    {
+      "title": "CREDIT INFORMATION",
+      "fields": [
+        {
+          "label": "Credit Sources",
+          "summary": "Enter name and address of credit sources"
+        },
+        {
+          "label": "Loan Amount",
+          "summary": "Enter loan amount from credit sources"
+        },
+        {
+          "label": "Outstanding Balance",
+          "summary": "Enter outstanding balance from credit sources"
+        },
+        {
+          "label": "Term",
+          "summary": "Enter term from credit sources"
+        },
+        {
+          "label": "Maturity Date",
+          "summary": "Enter maturity date (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Installment / Frequency",
+          "summary": "Enter installment frequency (Weekly, Bi-Monthly, Monthly)"
+        }
+      ]
+    },
+    {
+      "title": "CONSENT",
+      "fields": [
+        {
+          "label": "Signature of applicant",
+          "summary": "Sign here"
+        },
+        {
+          "label": "Signature of spouse",
+          "summary": "Sign here"
+        },
+        {
+          "label": "Date",
+          "summary": "Enter date of signing (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Date",
+          "summary": "Enter date of signing (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Does the applicant pass all eligibility criteria?",
+          "summary": "Select Yes or No"
+        },
+        {
+          "label": "If NO, reason why rejected",
+          "summary": "Enter reason for rejection"
+        },
+        {
+          "label": "Signature over printed name of witness/s",
+          "summary": "Sign here"
+        },
+        {
+          "label": "Date",
+          "summary": "Enter date of signing (MM/DD/YYYY, e.g., 11/28/2025)"
+        }
+      ]
+    },
+    {
+      "title": "DIRECTIONAL MAP",
+      "fields": [
+        {
+          "label": "BUSINESS/ PROJECT LOCATION",
+          "summary": "Enter business or project location"
+        },
+        {
+          "label": "HOME ADDRESS",
+          "summary": "Enter home address"
+        }
+      ]
+    },
+    {
+      "title": "REFERRALS",
+      "fields": [
+        {
+          "label": "NAME",
+          "summary": "Enter name of referral"
+        },
+        {
+          "label": "COMPLETE ADDRESS",
+          "summary": "Enter complete address of referral"
+        },
+        {
+          "label": "CONTACT NO. / EMAIL ADDRESS",
+          "summary": "Enter contact number or email address of referral"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 66,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "92add0b0523cc2c15efacc90ff6483aed8aa35fd12b071e06d01a8bf6c8e33da",
+  "bucket": "finance",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T23:25:02Z",
+  "aliases": [],
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Finance_LOLCLoanApplicationFormIndividual.pdf",
+  "fields": []
+}

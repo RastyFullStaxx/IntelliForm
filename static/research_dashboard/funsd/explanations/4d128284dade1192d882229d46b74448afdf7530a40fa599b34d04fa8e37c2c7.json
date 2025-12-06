@@ -1,0 +1,63 @@
+{
+  "title": "nielsr funsd test 00008",
+  "form_id": "nielsr-funsd-test-00008",
+  "sections": [
+    {
+      "title": "Event Details",
+      "fields": [
+        {
+          "label": "Date of Event",
+          "summary": "Enter the date of the event (MM/DD/YYYY, e.g., 11/28/2025)"
+        },
+        {
+          "label": "Name of Event",
+          "summary": "Enter the name of the event"
+        },
+        {
+          "label": "Quantity Required",
+          "summary": "Enter the quantity required"
+        },
+        {
+          "label": "Items",
+          "summary": "List the items"
+        },
+        {
+          "label": "Samples / Items Required",
+          "summary": "Specify samples or items required"
+        },
+        {
+          "label": "Customer Shipping Number",
+          "summary": "Enter the customer shipping number"
+        },
+        {
+          "label": "Ship To",
+          "summary": "Enter the shipping address"
+        },
+        {
+          "label": "# Cases",
+          "summary": "Enter the number of cases"
+        },
+        {
+          "label": "Date Forwarded to Promotion Services",
+          "summary": "Enter the date forwarded to promotion services (MM/DD/YYYY, e.g., 11/28/2025)"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 9,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "4d128284dade1192d882229d46b74448afdf7530a40fa599b34d04fa8e37c2c7",
+  "bucket": "funsd-test",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T22:44:19Z",
+  "aliases": [],
+  "source_pdf": "data\\funsd\\pdfs\\test\\nielsr_funsd_test_00008.pdf",
+  "fields": []
+}
