@@ -80,6 +80,7 @@ from services.log_sink import (
     _read_jsonl_all,          # NEW
     latest_tool_row_for,      # NEW
 )
+from shutil import copy2
 
 # -----------------------------
 # Paths & mounts
@@ -104,6 +105,12 @@ OUT_PRELABELED = OUT_ROOT / "llmgnnenhancedembeddings"
 
 OUT_BASELINE    = OUT_ROOT / "baseline"   # ephemeral degraded explainers
 OUT_BASELINE.mkdir(parents=True, exist_ok=True)
+
+# Pre-baked explainer locations (for reuse; avoid regenerating known datasets)
+PREBAKED_LOOKUP = [
+    BASE_DIR / "static" / "research_dashboard" / "funsd" / "explanations",
+    BASE_DIR / "static" / "research_dashboard" / "ph_trained" / "explanations",
+]
 
 for p in (STATIC_DIR, OUT_ROOT, OUT_OVERLAYS, OUT_GNN, OUT_PRELABELED):
     p.mkdir(parents=True, exist_ok=True)
@@ -435,6 +442,10 @@ def _fallback_generate_explainer(
 def _safe_generate_explainer(
     *, pdf_path: str, bucket: str, form_id: str, human_title: str, out_dir: str
 ) -> str:
+    # Reuse pre-baked explainer if present (copied into canonical location)
+    reused = _maybe_reuse_prebaked_explainer(form_id)
+    if reused:
+        return str(reused)
     if _primary_generate_explainer is not None:
         try:
             return _primary_generate_explainer(
@@ -457,6 +468,33 @@ def _safe_generate_explainer(
 # -----------------------------
 # Routes
 # -----------------------------
+def _maybe_reuse_prebaked_explainer(form_id: str) -> Optional[Path]:
+    """
+    Look for a pre-generated explainer in static research dashboard folders.
+    If found, copy it into the canonical explanations/<bucket>/<hash>.json and return the new path.
+    """
+    for root in PREBAKED_LOOKUP:
+        cand = root / f"{form_id}.json"
+        if cand.exists():
+            try:
+                data = json.loads(cand.read_text(encoding="utf-8"))
+            except Exception:
+                data = {}
+            bucket = (data.get("bucket") or "").strip().lower() or "training"
+            dst_dir = EXPL_DIR / bucket
+            dst_dir.mkdir(parents=True, exist_ok=True)
+            dst = dst_dir / f"{form_id}.json"
+            try:
+                copy2(cand, dst)
+            except Exception:
+                # fallback: write text
+                dst.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+            # ensure registry has it
+            rel_path = os.path.relpath(dst, BASE_DIR).replace("\\", "/")
+            reg_upsert(str(REG_PATH), form_id=form_id, title=(data.get("title") or form_id), rel_path=rel_path, bucket=bucket)
+            return dst
+    return None
+
 @app.get("/api/health")
 def api_health():
     return {
@@ -705,6 +743,20 @@ async def api_explainer_legacy(
     out_dir = EXPL_DIR / bucket
     out_dir.mkdir(parents=True, exist_ok=True)
 
+    # Reuse pre-baked explainer if available for this hash
+    reused = _maybe_reuse_prebaked_explainer(form_id)
+    if reused:
+        rel_path = os.path.relpath(reused, BASE_DIR).replace("\\", "/")
+        reg_upsert(str(REG_PATH), form_id=form_id, title=human_title, rel_path=rel_path, bucket=bucket)
+        return {
+            "ok": True,
+            "path": rel_path,
+            "form_id": form_id,
+            "title": human_title,
+            "mode": ("pipeline" if config.LIVE_MODE else "static"),
+            "reused": True,
+        }
+
     expl_path = _safe_generate_explainer(
         pdf_path=pdf_disk_path,
         bucket=bucket,
@@ -766,6 +818,21 @@ async def api_explainer_ensure(body: EnsureExplainerBody):
     bucket = _sanitize_bucket(body.bucket)
     title = (body.human_title or h).strip()
     pdf_disk_path = (body.pdf_disk_path or "").strip()
+
+    # Reuse pre-baked explainer if present
+    reused = _maybe_reuse_prebaked_explainer(h)
+    if reused:
+        rel_path = os.path.relpath(reused, BASE_DIR).replace("\\", "/")
+        reg_upsert(str(REG_PATH), form_id=h, title=title, rel_path=rel_path, bucket=bucket, aliases=(body.aliases or []))
+        return {
+            "ok": True,
+            "form_id": h,
+            "title": title,
+            "path": rel_path,
+            "bucket": bucket,
+            "already_exists": True,
+            "reused": True,
+        }
 
     existing = reg_find(str(REG_PATH), h)
     if existing:

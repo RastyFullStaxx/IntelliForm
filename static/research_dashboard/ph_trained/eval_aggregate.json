@@ -1,0 +1,11 @@
+{
+  "count": 20,
+  "macro": {
+    "rouge_l": 0.6974,
+    "meteor": 0.699,
+    "precision": 0.9828,
+    "recall": 0.9845,
+    "f1": 0.9836
+  },
+  "generated_at": "2025-12-07T00:48:47Z"
+}

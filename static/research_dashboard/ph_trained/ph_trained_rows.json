@@ -4,12 +4,14 @@
     "ts_utc": 1759312800000,
     "form_title": "Tax BIRApplicationForTreatyPurposes0901-T",
     "metrics": {
-      "tp": 92,
-      "fp": 18,
-      "fn": 11,
-      "precision": 0.8987,
-      "recall": 0.896,
-      "f1": 0.8973
+      "tp": 27,
+      "fp": 2,
+      "fn": 3,
+      "precision": 0.931,
+      "recall": 0.9,
+      "f1": 0.9153,
+      "rouge_l": 0.65,
+      "meteor": 0.62
     },
     "source": "training"
   },
@@ -18,12 +20,14 @@
     "ts_utc": 1759274905263,
     "form_title": "Tax BIRApplicationForTreatyPurposes0901-S4",
     "metrics": {
-      "tp": 92,
-      "fp": 18,
-      "fn": 11,
-      "precision": 0.9104,
-      "recall": 0.8929,
-      "f1": 0.9016
+      "tp": 37,
+      "fp": 5,
+      "fn": 5,
+      "precision": 0.881,
+      "recall": 0.881,
+      "f1": 0.881,
+      "rouge_l": 0.673,
+      "meteor": 0.653
     },
     "source": "training"
   },
@@ -32,12 +36,14 @@
     "ts_utc": 1759237010526,
     "form_title": "Tax BIRApplicationForTreatyPurposes0901-S3",
     "metrics": {
-      "tp": 92,
-      "fp": 18,
-      "fn": 11,
-      "precision": 0.9063,
-      "recall": 0.9046,
-      "f1": 0.9055
+      "tp": 46,
+      "fp": 8,
+      "fn": 9,
+      "precision": 0.8519,
+      "recall": 0.8364,
+      "f1": 0.844,
+      "rouge_l": 0.696,
+      "meteor": 0.686
     },
     "source": "training"
   },
@@ -46,12 +52,14 @@
     "ts_utc": 1759199115789,
     "form_title": "Tax BIRApplicationForTreatyPurposes0901-S2",
     "metrics": {
-      "tp": 92,
-      "fp": 18,
-      "fn": 11,
-      "precision": 0.8891,
-      "recall": 0.9103,
-      "f1": 0.8996
+      "tp": 28,
+      "fp": 1,
+      "fn": 2,
+      "precision": 0.9655,
+      "recall": 0.9333,
+      "f1": 0.9492,
+      "rouge_l": 0.755,
+      "meteor": 0.755
     },
     "source": "training"
   },
@@ -60,12 +68,14 @@
     "ts_utc": 1759161221052,
     "form_title": "Tax BIRApplicationForTreatyPurposes0901-S1",
     "metrics": {
-      "tp": 92,
-      "fp": 18,
-      "fn": 11,
-      "precision": 0.8883,
-      "recall": 0.9073,
-      "f1": 0.8977
+      "tp": 37,
+      "fp": 4,
+      "fn": 5,
+      "precision": 0.9024,
+      "recall": 0.881,
+      "f1": 0.8916,
+      "rouge_l": 0.778,
+      "meteor": 0.748
     },
     "source": "training"
   },
@@ -74,12 +84,14 @@
     "ts_utc": 1759123326315,
     "form_title": "HealthcareInsurance SunLifeVariableLifeInsuranceRequestforFundWithdrawal",
     "metrics": {
-      "tp": 15,
-      "fp": 2,
-      "fn": 4,
-      "precision": 0.8895,
-      "recall": 0.8936,
-      "f1": 0.8916
+      "tp": 47,
+      "fp": 7,
+      "fn": 8,
+      "precision": 0.8704,
+      "recall": 0.8545,
+      "f1": 0.8624,
+      "rouge_l": 0.626,
+      "meteor": 0.606
     },
     "source": "training"
   },
@@ -88,12 +100,14 @@
     "ts_utc": 1759085431578,
     "form_title": "Prosperity Card Purchase Form",
     "metrics": {
-      "tp": 32,
+      "tp": 28,
       "fp": 1,
-      "fn": 0,
-      "precision": 0.9023,
-      "recall": 0.9231,
-      "f1": 0.9126
+      "fn": 2,
+      "precision": 0.9655,
+      "recall": 0.9333,
+      "f1": 0.9492,
+      "rouge_l": 0.685,
+      "meteor": 0.675
     },
     "source": "training"
   },
@@ -102,12 +116,14 @@
     "ts_utc": 1759047536842,
     "form_title": "Personal Accident Claim Form (Claimant\u2019s Statement)",
     "metrics": {
-      "tp": 31,
-      "fp": 1,
-      "fn": 0,
-      "precision": 0.8915,
-      "recall": 0.8989,
-      "f1": 0.8952
+      "tp": 49,
+      "fp": 4,
+      "fn": 5,
+      "precision": 0.9245,
+      "recall": 0.9074,
+      "f1": 0.9159,
+      "rouge_l": 0.708,
+      "meteor": 0.708
     },
     "source": "training"
   },
@@ -116,12 +132,14 @@
     "ts_utc": 1759009642105,
     "form_title": "EAZY HEALTH CLAIM FORM FOR CRITICAL ILLNESS & DISABILITY",
     "metrics": {
-      "tp": 28,
-      "fp": 1,
-      "fn": 0,
-      "precision": 0.9096,
-      "recall": 0.9279,
-      "f1": 0.9187
+      "tp": 50,
+      "fp": 4,
+      "fn": 5,
+      "precision": 0.9259,
+      "recall": 0.9091,
+      "f1": 0.9174,
+      "rouge_l": 0.731,
+      "meteor": 0.701
     },
     "source": "training"
   },
@@ -130,12 +148,14 @@
     "ts_utc": 1758971747368,
     "form_title": "APPLICATION FOR HEALTH CARE ASSISTANCE",
     "metrics": {
-      "tp": 17,
-      "fp": 1,
-      "fn": 0,
-      "precision": 0.9078,
-      "recall": 0.9059,
-      "f1": 0.9068
+      "tp": 15,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.8824,
+      "recall": 0.8824,
+      "f1": 0.8824,
+      "rouge_l": 0.79,
+      "meteor": 0.77
     },
     "source": "training"
   },
@@ -144,12 +164,14 @@
     "ts_utc": 1758933852631,
     "form_title": "Government UnifiedMulti-PurposeIDApplication Form",
     "metrics": {
-      "tp": 23,
-      "fp": 1,
-      "fn": 0,
-      "precision": 0.9221,
-      "recall": 0.8919,
-      "f1": 0.9068
+      "tp": 35,
+      "fp": 6,
+      "fn": 7,
+      "precision": 0.8537,
+      "recall": 0.8333,
+      "f1": 0.8434,
+      "rouge_l": 0.638,
+      "meteor": 0.628
     },
     "source": "training"
   },
@@ -158,12 +180,14 @@
     "ts_utc": 1758895957894,
     "form_title": "Government PassportApplicationForm",
     "metrics": {
-      "tp": 92,
-      "fp": 18,
-      "fn": 11,
-      "precision": 0.9179,
-      "recall": 0.9016,
-      "f1": 0.9097
+      "tp": 52,
+      "fp": 3,
+      "fn": 3,
+      "precision": 0.9455,
+      "recall": 0.9455,
+      "f1": 0.9455,
+      "rouge_l": 0.661,
+      "meteor": 0.661
     },
     "source": "training"
   },
@@ -172,12 +196,14 @@
     "ts_utc": 1758858063157,
     "form_title": "Government NBIClearanceApplicationForm",
     "metrics": {
-      "tp": 92,
-      "fp": 18,
-      "fn": 11,
-      "precision": 0.8922,
+      "tp": 34,
+      "fp": 4,
+      "fn": 4,
+      "precision": 0.8947,
       "recall": 0.8947,
-      "f1": 0.8935
+      "f1": 0.8947,
+      "rouge_l": 0.72,
+      "meteor": 0.69
     },
     "source": "training"
   },
@@ -186,12 +212,14 @@
     "ts_utc": 1758820168421,
     "form_title": "OPTIONAL LIFE INSURANCE POLICY LOAN APPLICATION",
     "metrics": {
-      "tp": 21,
-      "fp": 1,
-      "fn": 0,
-      "precision": 0.8981,
-      "recall": 0.9226,
-      "f1": 0.9102
+      "tp": 29,
+      "fp": 4,
+      "fn": 5,
+      "precision": 0.8788,
+      "recall": 0.8529,
+      "f1": 0.8657,
+      "rouge_l": 0.743,
+      "meteor": 0.723
     },
     "source": "training"
   },
@@ -200,12 +228,14 @@
     "ts_utc": 1758782273684,
     "form_title": "Government Business Permit Application Form",
     "metrics": {
-      "tp": 35,
-      "fp": 1,
-      "fn": 1,
-      "precision": 0.8935,
-      "recall": 0.9133,
-      "f1": 0.9033
+      "tp": 52,
+      "fp": 2,
+      "fn": 3,
+      "precision": 0.963,
+      "recall": 0.9455,
+      "f1": 0.9541,
+      "rouge_l": 0.766,
+      "meteor": 0.756
     },
     "source": "training"
   },
@@ -214,12 +244,14 @@
     "ts_utc": 1758744378947,
     "form_title": "Suitability Assessment Form",
     "metrics": {
-      "tp": 21,
-      "fp": 1,
-      "fn": 0,
-      "precision": 0.91,
-      "recall": 0.9049,
-      "f1": 0.9074
+      "tp": 27,
+      "fp": 2,
+      "fn": 3,
+      "precision": 0.931,
+      "recall": 0.9,
+      "f1": 0.9153,
+      "rouge_l": 0.65,
+      "meteor": 0.65
     },
     "source": "training"
   },
@@ -228,12 +260,14 @@
     "ts_utc": 1758706484210,
     "form_title": "Finance LOLCQUICKBUSINESSLOANAPPLICATIONFORM2022",
     "metrics": {
-      "tp": 92,
-      "fp": 18,
-      "fn": 11,
-      "precision": 0.9067,
-      "recall": 0.8925,
-      "f1": 0.8996
+      "tp": 38,
+      "fp": 3,
+      "fn": 4,
+      "precision": 0.9268,
+      "recall": 0.9048,
+      "f1": 0.9157,
+      "rouge_l": 0.673,
+      "meteor": 0.643
     },
     "source": "training"
   },
@@ -242,12 +276,14 @@
     "ts_utc": 1758668589473,
     "form_title": "Finance LOLCLoanApplicationFormIndividual",
     "metrics": {
-      "tp": 92,
-      "fp": 18,
-      "fn": 11,
-      "precision": 0.8891,
-      "recall": 0.8982,
-      "f1": 0.8937
+      "tp": 88,
+      "fp": 11,
+      "fn": 13,
+      "precision": 0.8889,
+      "recall": 0.8713,
+      "f1": 0.88,
+      "rouge_l": 0.696,
+      "meteor": 0.676
     },
     "source": "training"
   },
@@ -256,12 +292,14 @@
     "ts_utc": 1758630694736,
     "form_title": "Auto-Invest Enrollment Form",
     "metrics": {
-      "tp": 9,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.9115,
-      "recall": 0.9071,
-      "f1": 0.9093
+      "tp": 10,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.8333,
+      "recall": 0.8333,
+      "f1": 0.8333,
+      "rouge_l": 0.755,
+      "meteor": 0.745
     },
     "source": "training"
   },
@@ -270,12 +308,14 @@
     "ts_utc": 1758592800000,
     "form_title": "AutoCharge Facility for BPI Credit Cards Authorization Form",
     "metrics": {
-      "tp": 18,
+      "tp": 24,
       "fp": 1,
-      "fn": 0,
-      "precision": 0.8983,
-      "recall": 0.9134,
-      "f1": 0.9058
+      "fn": 1,
+      "precision": 0.96,
+      "recall": 0.96,
+      "f1": 0.96,
+      "rouge_l": 0.778,
+      "meteor": 0.778
     },
     "source": "training"
   }
