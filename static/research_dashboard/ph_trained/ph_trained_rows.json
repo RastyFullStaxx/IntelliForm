@@ -1,322 +1,342 @@
 [
   {
-    "row_id": "trained-a23563aff2d657b72895e3c31dd8d0d3ff8c07a629027ccb0114d98243080e38",
-    "ts_utc": 1759312800000,
-    "form_title": "Tax BIRApplicationForTreatyPurposes0901-T",
+    "row_id": "0d66a3e2264c45deedb577c32bbcddf74c6a66fd93d29ad47e36fcd6ddec3ff7",
+    "canonical_id": "0d66a3e2264c45deedb577c32bbcddf74c6a66fd93d29ad47e36fcd6ddec3ff7",
+    "form_title": "OPTIONAL LIFE INSURANCE POLICY LOAN APPLICATION",
+    "bucket": "government",
+    "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 27,
-      "fp": 2,
-      "fn": 3,
-      "precision": 0.931,
-      "recall": 0.9,
-      "f1": 0.9153,
-      "rouge_l": 0.65,
-      "meteor": 0.62
-    },
-    "source": "training"
+      "tp": 30,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.7658,
+      "meteor": 0.7413
+    }
   },
   {
-    "row_id": "trained-81b1aec05237d97ed05b9cb0b03b0b513842398e84a42741e2e33cc7a8eb8bab",
-    "ts_utc": 1759274905263,
-    "form_title": "Tax BIRApplicationForTreatyPurposes0901-S4",
-    "metrics": {
-      "tp": 37,
-      "fp": 5,
-      "fn": 5,
-      "precision": 0.881,
-      "recall": 0.881,
-      "f1": 0.881,
-      "rouge_l": 0.673,
-      "meteor": 0.653
-    },
-    "source": "training"
-  },
-  {
-    "row_id": "trained-75be7bc6b0c67a5e9585571ab2ec04ca40f22b06f4ba520809b0e9cae3178bc4",
-    "ts_utc": 1759237010526,
-    "form_title": "Tax BIRApplicationForTreatyPurposes0901-S3",
-    "metrics": {
-      "tp": 46,
-      "fp": 8,
-      "fn": 9,
-      "precision": 0.8519,
-      "recall": 0.8364,
-      "f1": 0.844,
-      "rouge_l": 0.696,
-      "meteor": 0.686
-    },
-    "source": "training"
-  },
-  {
-    "row_id": "trained-2b15bcdba527ae2564f768047efabecd45999b66b506357b8dbe1811eb0c68de",
-    "ts_utc": 1759199115789,
-    "form_title": "Tax BIRApplicationForTreatyPurposes0901-S2",
-    "metrics": {
-      "tp": 28,
-      "fp": 1,
-      "fn": 2,
-      "precision": 0.9655,
-      "recall": 0.9333,
-      "f1": 0.9492,
-      "rouge_l": 0.755,
-      "meteor": 0.755
-    },
-    "source": "training"
-  },
-  {
-    "row_id": "trained-99495bdf725e6618e9d15fe93c6589fce1fd3ec87768092e56b9bcbaeb0c1339",
-    "ts_utc": 1759161221052,
-    "form_title": "Tax BIRApplicationForTreatyPurposes0901-S1",
-    "metrics": {
-      "tp": 37,
-      "fp": 4,
-      "fn": 5,
-      "precision": 0.9024,
-      "recall": 0.881,
-      "f1": 0.8916,
-      "rouge_l": 0.778,
-      "meteor": 0.748
-    },
-    "source": "training"
-  },
-  {
-    "row_id": "trained-47aed90e74c63097a3780ba5c893e6ff782932f7b8aabded06c090740440d740",
-    "ts_utc": 1759123326315,
-    "form_title": "HealthcareInsurance SunLifeVariableLifeInsuranceRequestforFundWithdrawal",
-    "metrics": {
-      "tp": 47,
-      "fp": 7,
-      "fn": 8,
-      "precision": 0.8704,
-      "recall": 0.8545,
-      "f1": 0.8624,
-      "rouge_l": 0.626,
-      "meteor": 0.606
-    },
-    "source": "training"
-  },
-  {
-    "row_id": "trained-3813827a48843a741a157f3135ebcf4662eae302d30b1943bd093909011fbcc8",
-    "ts_utc": 1759085431578,
+    "row_id": "1b5425cbf588c82fd29c3d5ee2fa8722844a65a17cdca4bf89e93397450db01d",
+    "canonical_id": "1b5425cbf588c82fd29c3d5ee2fa8722844a65a17cdca4bf89e93397450db01d",
     "form_title": "Prosperity Card Purchase Form",
+    "bucket": "health",
+    "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 28,
-      "fp": 1,
-      "fn": 2,
-      "precision": 0.9655,
-      "recall": 0.9333,
-      "f1": 0.9492,
-      "rouge_l": 0.685,
-      "meteor": 0.675
-    },
-    "source": "training"
+      "tp": 30,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.4919,
+      "meteor": 0.4945
+    }
   },
   {
-    "row_id": "trained-2febbc332352ec86ed477a67f20a2dff5a74847346559a249cef8e9dc4609567",
-    "ts_utc": 1759047536842,
+    "row_id": "2febbc332352ec86ed477a67f20a2dff5a74847346559a249cef8e9dc4609567",
+    "canonical_id": "2febbc332352ec86ed477a67f20a2dff5a74847346559a249cef8e9dc4609567",
     "form_title": "Personal Accident Claim Form (Claimant\u2019s Statement)",
+    "bucket": "health",
+    "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 49,
-      "fp": 4,
-      "fn": 5,
-      "precision": 0.9245,
-      "recall": 0.9074,
-      "f1": 0.9159,
-      "rouge_l": 0.708,
-      "meteor": 0.708
-    },
-    "source": "training"
+      "tp": 30,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.64,
+      "meteor": 0.6357
+    }
   },
   {
-    "row_id": "trained-2d7eb4c2645b142c35825787c14690cf446dc6201509bf1980e84ecb320593eb",
-    "ts_utc": 1759009642105,
-    "form_title": "EAZY HEALTH CLAIM FORM FOR CRITICAL ILLNESS & DISABILITY",
+    "row_id": "3613a1823f3be0e38e8c7c3a831ecee76013c15b62638ac2a8ec135d09408c80",
+    "canonical_id": "3613a1823f3be0e38e8c7c3a831ecee76013c15b62638ac2a8ec135d09408c80",
+    "form_title": "Variable Life Insurance - Request for Fund Withdrawal",
+    "bucket": "health",
+    "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 50,
-      "fp": 4,
-      "fn": 5,
-      "precision": 0.9259,
-      "recall": 0.9091,
-      "f1": 0.9174,
-      "rouge_l": 0.731,
-      "meteor": 0.701
-    },
-    "source": "training"
+      "tp": 20,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.5176,
+      "meteor": 0.6192
+    }
   },
   {
-    "row_id": "trained-8a70c20c72bb8fde363abfc59e7fb64c8812a918ea8efe50428860713b1d7668",
-    "ts_utc": 1758971747368,
-    "form_title": "APPLICATION FOR HEALTH CARE ASSISTANCE",
-    "metrics": {
-      "tp": 15,
-      "fp": 2,
-      "fn": 2,
-      "precision": 0.8824,
-      "recall": 0.8824,
-      "f1": 0.8824,
-      "rouge_l": 0.79,
-      "meteor": 0.77
-    },
-    "source": "training"
-  },
-  {
-    "row_id": "trained-8504f9f2784ca3623daf9843f21e601c368454a0cbad9ab0369445dace032bad",
-    "ts_utc": 1758933852631,
-    "form_title": "Government UnifiedMulti-PurposeIDApplication Form",
-    "metrics": {
-      "tp": 35,
-      "fp": 6,
-      "fn": 7,
-      "precision": 0.8537,
-      "recall": 0.8333,
-      "f1": 0.8434,
-      "rouge_l": 0.638,
-      "meteor": 0.628
-    },
-    "source": "training"
-  },
-  {
-    "row_id": "trained-d7a2f408e3af88174bd6dacccbc6763b190c875723f44ae333282e8fb5ca1004",
-    "ts_utc": 1758895957894,
-    "form_title": "Government PassportApplicationForm",
-    "metrics": {
-      "tp": 52,
-      "fp": 3,
-      "fn": 3,
-      "precision": 0.9455,
-      "recall": 0.9455,
-      "f1": 0.9455,
-      "rouge_l": 0.661,
-      "meteor": 0.661
-    },
-    "source": "training"
-  },
-  {
-    "row_id": "trained-7c3a92ff111482a6f825d829a3f1c29e281a17c19630fb716e571660047619c3",
-    "ts_utc": 1758858063157,
-    "form_title": "Government NBIClearanceApplicationForm",
+    "row_id": "3c365a1c9a4000b944ea8b6c098f20c51f1f24445a0d70fbc5cabffb483f9ee0",
+    "canonical_id": "3c365a1c9a4000b944ea8b6c098f20c51f1f24445a0d70fbc5cabffb483f9ee0",
+    "form_title": "Application for Treaty Purposes",
+    "bucket": "ph-supplemental",
+    "ts_utc": 1765070772435,
     "metrics": {
       "tp": 34,
-      "fp": 4,
-      "fn": 4,
-      "precision": 0.8947,
-      "recall": 0.8947,
-      "f1": 0.8947,
-      "rouge_l": 0.72,
-      "meteor": 0.69
-    },
-    "source": "training"
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.4976,
+      "meteor": 0.6107
+    }
   },
   {
-    "row_id": "trained-0d66a3e2264c45deedb577c32bbcddf74c6a66fd93d29ad47e36fcd6ddec3ff7",
-    "ts_utc": 1758820168421,
-    "form_title": "OPTIONAL LIFE INSURANCE POLICY LOAN APPLICATION",
+    "row_id": "476abe18d6172cfc096135ada8b30afcdcbf6f8b7b2eba014f81d9a852ee0e37",
+    "canonical_id": "476abe18d6172cfc096135ada8b30afcdcbf6f8b7b2eba014f81d9a852ee0e37",
+    "form_title": "Application for Treaty Purposes",
+    "bucket": "ph-supplemental",
+    "ts_utc": 1765070772435,
+    "metrics": {
+      "tp": 40,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.6812,
+      "meteor": 0.6623
+    }
+  },
+  {
+    "row_id": "4792b4282b37710590d51a45ab82acf2066ef6516f06190652049940c6f1c569",
+    "canonical_id": "4792b4282b37710590d51a45ab82acf2066ef6516f06190652049940c6f1c569",
+    "form_title": "Tricycle & Quick Business Loan Application",
+    "bucket": "finance",
+    "ts_utc": 1765070772435,
+    "metrics": {
+      "tp": 80,
+      "fp": 5,
+      "fn": 2,
+      "precision": 0.941,
+      "recall": 0.976,
+      "f1": 0.958,
+      "rouge_l": 0.8956,
+      "meteor": 0.8425
+    }
+  },
+  {
+    "row_id": "4fb62e27185804a63d5489808a2348e32dbc0c618bd9a6774ccab6a62ddf39c5",
+    "canonical_id": "4fb62e27185804a63d5489808a2348e32dbc0c618bd9a6774ccab6a62ddf39c5",
+    "form_title": "Application for Treaty Purposes",
+    "bucket": "ph-supplemental",
+    "ts_utc": 1765070772435,
+    "metrics": {
+      "tp": 50,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.8234,
+      "meteor": 0.8147
+    }
+  },
+  {
+    "row_id": "5ca4193248779b59a2e117c38a471aae9f8a9a009d56c81aa7203cf7bc912d51",
+    "canonical_id": "5ca4193248779b59a2e117c38a471aae9f8a9a009d56c81aa7203cf7bc912d51",
+    "form_title": "Auto-Invest Enrollment Form",
+    "bucket": "finance",
+    "ts_utc": 1765070772435,
+    "metrics": {
+      "tp": 20,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.6264,
+      "meteor": 0.6395
+    }
+  },
+  {
+    "row_id": "706fa7449dde29fcccffa882057534f3578c268a1b223221331993fb26365214",
+    "canonical_id": "706fa7449dde29fcccffa882057534f3578c268a1b223221331993fb26365214",
+    "form_title": "Application for Treaty Purposes",
+    "bucket": "ph-supplemental",
+    "ts_utc": 1765070772435,
+    "metrics": {
+      "tp": 54,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.773,
+      "meteor": 0.7437
+    }
+  },
+  {
+    "row_id": "7c3a92ff111482a6f825d829a3f1c29e281a17c19630fb716e571660047619c3",
+    "canonical_id": "7c3a92ff111482a6f825d829a3f1c29e281a17c19630fb716e571660047619c3",
+    "form_title": "NBI Clearance Application Form",
+    "bucket": "government",
+    "ts_utc": 1765070772435,
     "metrics": {
       "tp": 29,
-      "fp": 4,
-      "fn": 5,
-      "precision": 0.8788,
-      "recall": 0.8529,
-      "f1": 0.8657,
-      "rouge_l": 0.743,
-      "meteor": 0.723
-    },
-    "source": "training"
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.8061,
+      "meteor": 0.7954
+    }
   },
   {
-    "row_id": "trained-597fb9b1b00aa84771531de6294fc57e2b117e2970149636bf430d0ff82e87ca",
-    "ts_utc": 1758782273684,
-    "form_title": "Government Business Permit Application Form",
-    "metrics": {
-      "tp": 52,
-      "fp": 2,
-      "fn": 3,
-      "precision": 0.963,
-      "recall": 0.9455,
-      "f1": 0.9541,
-      "rouge_l": 0.766,
-      "meteor": 0.756
-    },
-    "source": "training"
-  },
-  {
-    "row_id": "trained-9f273958bb3877c9aa5066b954111a9c43bb7a904cdd92dd7640d475f9d2ca7d",
-    "ts_utc": 1758744378947,
+    "row_id": "897a6087afcc3f5773cc014d19ec5850813b1960f5d36f7390aebc2f2e7cbeb5",
+    "canonical_id": "897a6087afcc3f5773cc014d19ec5850813b1960f5d36f7390aebc2f2e7cbeb5",
     "form_title": "Suitability Assessment Form",
+    "bucket": "finance",
+    "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 27,
-      "fp": 2,
-      "fn": 3,
-      "precision": 0.931,
-      "recall": 0.9,
-      "f1": 0.9153,
-      "rouge_l": 0.65,
-      "meteor": 0.65
-    },
-    "source": "training"
+      "tp": 35,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.6061,
+      "meteor": 0.5976
+    }
   },
   {
-    "row_id": "trained-a2496954a86ba1d47b0bbb4a4f04390929228fdd0215b00d0ff0432e16a97e62",
-    "ts_utc": 1758706484210,
-    "form_title": "Finance LOLCQUICKBUSINESSLOANAPPLICATIONFORM2022",
+    "row_id": "8a70c20c72bb8fde363abfc59e7fb64c8812a918ea8efe50428860713b1d7668",
+    "canonical_id": "8a70c20c72bb8fde363abfc59e7fb64c8812a918ea8efe50428860713b1d7668",
+    "form_title": "APPLICATION FOR HEALTH CARE ASSISTANCE",
+    "bucket": "health",
+    "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 38,
-      "fp": 3,
-      "fn": 4,
-      "precision": 0.9268,
-      "recall": 0.9048,
-      "f1": 0.9157,
-      "rouge_l": 0.673,
-      "meteor": 0.643
-    },
-    "source": "training"
+      "tp": 14,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.7855,
+      "meteor": 0.7628
+    }
   },
   {
-    "row_id": "trained-92add0b0523cc2c15efacc90ff6483aed8aa35fd12b071e06d01a8bf6c8e33da",
-    "ts_utc": 1758668589473,
-    "form_title": "Finance LOLCLoanApplicationFormIndividual",
+    "row_id": "92add0b0523cc2c15efacc90ff6483aed8aa35fd12b071e06d01a8bf6c8e33da",
+    "canonical_id": "92add0b0523cc2c15efacc90ff6483aed8aa35fd12b071e06d01a8bf6c8e33da",
+    "form_title": "LOLC Bank Philippines Inc Loan Application Form (Individual)",
+    "bucket": "finance",
+    "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 88,
-      "fp": 11,
-      "fn": 13,
-      "precision": 0.8889,
-      "recall": 0.8713,
-      "f1": 0.88,
-      "rouge_l": 0.696,
-      "meteor": 0.676
-    },
-    "source": "training"
+      "tp": 66,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.5067,
+      "meteor": 0.5429
+    }
   },
   {
-    "row_id": "trained-5ca4193248779b59a2e117c38a471aae9f8a9a009d56c81aa7203cf7bc912d51",
-    "ts_utc": 1758630694736,
-    "form_title": "Auto-Invest Enrollment Form",
-    "metrics": {
-      "tp": 10,
-      "fp": 2,
-      "fn": 2,
-      "precision": 0.8333,
-      "recall": 0.8333,
-      "f1": 0.8333,
-      "rouge_l": 0.755,
-      "meteor": 0.745
-    },
-    "source": "training"
-  },
-  {
-    "row_id": "trained-c06e012d72e9633fb7447aad3bc002a7c5793b03aa1096e508e7e3b55dff84e7",
-    "ts_utc": 1758592800000,
-    "form_title": "AutoCharge Facility for BPI Credit Cards Authorization Form",
+    "row_id": "957ce719d2ee82d86d0b2bb33d6edfcd59ee5fde755eaec15ac222053c3ebabc",
+    "canonical_id": "957ce719d2ee82d86d0b2bb33d6edfcd59ee5fde755eaec15ac222053c3ebabc",
+    "form_title": "Eazy Health Claim Form for Critical Illness & Disability",
+    "bucket": "health",
+    "ts_utc": 1765070772435,
     "metrics": {
       "tp": 24,
-      "fp": 1,
-      "fn": 1,
-      "precision": 0.96,
-      "recall": 0.96,
-      "f1": 0.96,
-      "rouge_l": 0.778,
-      "meteor": 0.778
-    },
-    "source": "training"
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.592,
+      "meteor": 0.6044
+    }
+  },
+  {
+    "row_id": "c06e012d72e9633fb7447aad3bc002a7c5793b03aa1096e508e7e3b55dff84e7",
+    "canonical_id": "c06e012d72e9633fb7447aad3bc002a7c5793b03aa1096e508e7e3b55dff84e7",
+    "form_title": "AutoCharge Facility (ACF) for BPI Credit Cards Authorization Form",
+    "bucket": "banking",
+    "ts_utc": 1765070772435,
+    "metrics": {
+      "tp": 20,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.8144,
+      "meteor": 0.8006
+    }
+  },
+  {
+    "row_id": "c1c1852280e305ffad935f6d5850639806bd9ea5bacd69781f2f6837a6e26ae5",
+    "canonical_id": "c1c1852280e305ffad935f6d5850639806bd9ea5bacd69781f2f6837a6e26ae5",
+    "form_title": "Passport Application Form",
+    "bucket": "government",
+    "ts_utc": 1765070772435,
+    "metrics": {
+      "tp": 30,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.835,
+      "meteor": 0.8024
+    }
+  },
+  {
+    "row_id": "c396696003fdca83a99bd73603098a3f4678fc4df5d109c38ed85a17677f9172",
+    "canonical_id": "c396696003fdca83a99bd73603098a3f4678fc4df5d109c38ed85a17677f9172",
+    "form_title": "Unified Business Permit Application Form",
+    "bucket": "government",
+    "ts_utc": 1765070772435,
+    "metrics": {
+      "tp": 50,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.5891,
+      "meteor": 0.636
+    }
+  },
+  {
+    "row_id": "e6871e86993c819a631fdf891b87c0456e996e63712eb74651bdc5e77f94be45",
+    "canonical_id": "e6871e86993c819a631fdf891b87c0456e996e63712eb74651bdc5e77f94be45",
+    "form_title": "Unified Multi-Purpose ID (UMID) Card Application Form",
+    "bucket": "government",
+    "ts_utc": 1765070772435,
+    "metrics": {
+      "tp": 20,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.846,
+      "meteor": 0.8194
+    }
+  },
+  {
+    "row_id": "f6ae09b2421c6668541cb6abe6c2faeb572a29b736faeff495796a2a8fa225d6",
+    "canonical_id": "f6ae09b2421c6668541cb6abe6c2faeb572a29b736faeff495796a2a8fa225d6",
+    "form_title": "Application for Treaty Purposes",
+    "bucket": "ph-supplemental",
+    "ts_utc": 1765070772435,
+    "metrics": {
+      "tp": 34,
+      "fp": 0,
+      "fn": 0,
+      "precision": 0.985,
+      "recall": 0.985,
+      "f1": 0.985,
+      "rouge_l": 0.8554,
+      "meteor": 0.8135
+    }
   }
 ]
