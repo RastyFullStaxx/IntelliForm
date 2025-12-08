@@ -7,12 +7,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 13,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 26,
+        "fp": 1,
+        "fn": 1,
+        "precision": 0.963,
+        "recall": 0.963,
+        "f1": 0.963,
         "rouge_l": 0.1333,
         "meteor": 0.1642
       }
@@ -24,12 +24,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 8,
+        "tp": 15,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 1,
+        "precision": 1.0,
+        "recall": 0.9375,
+        "f1": 0.9677,
         "rouge_l": 0.1375,
         "meteor": 0.1455
       }
@@ -41,12 +41,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 12,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 29,
+        "fp": 1,
+        "fn": 3,
+        "precision": 0.9667,
+        "recall": 0.9062,
+        "f1": 0.9355,
         "rouge_l": 0.579,
         "meteor": 0.5543
       }
@@ -58,12 +58,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 9,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 16,
+        "fp": 1,
+        "fn": 2,
+        "precision": 0.9412,
+        "recall": 0.8889,
+        "f1": 0.9143,
         "rouge_l": 0.6867,
         "meteor": 0.5923
       }
@@ -75,12 +75,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 7,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 14,
+        "fp": 1,
+        "fn": 2,
+        "precision": 0.9333,
+        "recall": 0.875,
+        "f1": 0.9032,
         "rouge_l": 0.8349,
         "meteor": 0.7854
       }
@@ -92,12 +92,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 12,
+        "tp": 43,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 1,
+        "precision": 1.0,
+        "recall": 0.9773,
+        "f1": 0.9885,
         "rouge_l": 0.3527,
         "meteor": 0.3531
       }
@@ -109,12 +109,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 30,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 67,
+        "fp": 2,
+        "fn": 1,
+        "precision": 0.971,
+        "recall": 0.9853,
+        "f1": 0.9781,
         "rouge_l": 0.7872,
         "meteor": 0.8628
       }
@@ -126,12 +126,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 7,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 21,
+        "fp": 1,
+        "fn": 1,
+        "precision": 0.9545,
+        "recall": 0.9545,
+        "f1": 0.9545,
         "rouge_l": 0.5355,
         "meteor": 0.5427
       }
@@ -143,12 +143,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 7,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 17,
+        "fp": 1,
+        "fn": 1,
+        "precision": 0.9444,
+        "recall": 0.9444,
+        "f1": 0.9444,
         "rouge_l": 0.7208,
         "meteor": 0.6929
       }
@@ -160,12 +160,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 20,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 39,
+        "fp": 1,
+        "fn": 5,
+        "precision": 0.975,
+        "recall": 0.8864,
+        "f1": 0.9286,
         "rouge_l": 0.5042,
         "meteor": 0.5308
       }
@@ -177,12 +177,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 15,
+        "tp": 32,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 6,
+        "precision": 1.0,
+        "recall": 0.8421,
+        "f1": 0.9143,
         "rouge_l": 0.547,
         "meteor": 0.5172
       }
@@ -194,12 +194,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 21,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 45,
+        "fp": 1,
+        "fn": 1,
+        "precision": 0.9783,
+        "recall": 0.9783,
+        "f1": 0.9783,
         "rouge_l": 0.672,
         "meteor": 0.658
       }
@@ -211,12 +211,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 9,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 25,
+        "fp": 1,
+        "fn": 1,
+        "precision": 0.9615,
+        "recall": 0.9615,
+        "f1": 0.9615,
         "rouge_l": 0.7561,
         "meteor": 0.6709
       }
@@ -228,12 +228,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 8,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 17,
+        "fp": 1,
+        "fn": 1,
+        "precision": 0.9444,
+        "recall": 0.9444,
+        "f1": 0.9444,
         "rouge_l": 0.6824,
         "meteor": 0.6929
       }
@@ -245,12 +245,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 11,
+        "tp": 18,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 2,
+        "precision": 1.0,
+        "recall": 0.9,
+        "f1": 0.9474,
         "rouge_l": 0.5757,
         "meteor": 0.5839
       }
@@ -262,12 +262,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 6,
+        "tp": 11,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 1,
+        "precision": 1.0,
+        "recall": 0.9167,
+        "f1": 0.9565,
         "rouge_l": 0.6384,
         "meteor": 0.5978
       }
@@ -279,12 +279,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 10,
+        "tp": 19,
         "fp": 1,
-        "fn": 0,
-        "precision": 0.909,
-        "recall": 1.0,
-        "f1": 0.952,
+        "fn": 3,
+        "precision": 0.95,
+        "recall": 0.8636,
+        "f1": 0.9048,
         "rouge_l": 0.3645,
         "meteor": 0.4159
       }
@@ -296,12 +296,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 6,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 11,
+        "fp": 1,
+        "fn": 1,
+        "precision": 0.9167,
+        "recall": 0.9167,
+        "f1": 0.9167,
         "rouge_l": 0.6786,
         "meteor": 0.5789
       }
@@ -313,12 +313,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 15,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 33,
+        "fp": 2,
+        "fn": 1,
+        "precision": 0.9429,
+        "recall": 0.9706,
+        "f1": 0.9565,
         "rouge_l": 0.5175,
         "meteor": 0.5585
       }
@@ -330,12 +330,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 14,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 30,
+        "fp": 1,
+        "fn": 2,
+        "precision": 0.9677,
+        "recall": 0.9375,
+        "f1": 0.9524,
         "rouge_l": 0.3911,
         "meteor": 0.3666
       }
@@ -347,12 +347,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 21,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 63,
+        "fp": 1,
+        "fn": 5,
+        "precision": 0.9844,
+        "recall": 0.9265,
+        "f1": 0.9545,
         "rouge_l": 0.3631,
         "meteor": 0.323
       }
@@ -364,12 +364,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 11,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 21,
+        "fp": 1,
+        "fn": 3,
+        "precision": 0.9545,
+        "recall": 0.875,
+        "f1": 0.913,
         "rouge_l": 0.6949,
         "meteor": 0.671
       }
@@ -381,12 +381,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 15,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 27,
+        "fp": 1,
+        "fn": 5,
+        "precision": 0.9643,
+        "recall": 0.8438,
+        "f1": 0.9,
         "rouge_l": 0.5032,
         "meteor": 0.5682
       }
@@ -398,12 +398,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 3,
+        "tp": 5,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 1,
+        "precision": 1.0,
+        "recall": 0.8333,
+        "f1": 0.9091,
         "rouge_l": 0.3333,
         "meteor": 0.2639
       }
@@ -415,12 +415,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 6,
-        "fp": 0,
+        "tp": 18,
+        "fp": 1,
         "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "precision": 0.9474,
+        "recall": 1.0,
+        "f1": 0.973,
         "rouge_l": 0.478,
         "meteor": 0.4799
       }
@@ -432,12 +432,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 12,
+        "tp": 23,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 1,
+        "precision": 1.0,
+        "recall": 0.9583,
+        "f1": 0.9787,
         "rouge_l": 0.5961,
         "meteor": 0.5268
       }
@@ -449,12 +449,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 8,
+        "tp": 15,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 1,
+        "precision": 1.0,
+        "recall": 0.9375,
+        "f1": 0.9677,
         "rouge_l": 0.5007,
         "meteor": 0.5373
       }
@@ -466,12 +466,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 9,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 18,
+        "fp": 1,
+        "fn": 2,
+        "precision": 0.9474,
+        "recall": 0.9,
+        "f1": 0.9231,
         "rouge_l": 0.5856,
         "meteor": 0.5061
       }
@@ -483,12 +483,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 10,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 19,
+        "fp": 1,
+        "fn": 3,
+        "precision": 0.95,
+        "recall": 0.8636,
+        "f1": 0.9048,
         "rouge_l": 0.5645,
         "meteor": 0.5343
       }
@@ -500,12 +500,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 9,
+        "tp": 17,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 1,
+        "precision": 1.0,
+        "recall": 0.9444,
+        "f1": 0.9714,
         "rouge_l": 0.2578,
         "meteor": 0.2653
       }
@@ -517,12 +517,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 8,
+        "tp": 25,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 1,
+        "precision": 1.0,
+        "recall": 0.9615,
+        "f1": 0.9804,
         "rouge_l": 0.2508,
         "meteor": 0.2761
       }
@@ -534,12 +534,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 12,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 32,
+        "fp": 1,
+        "fn": 2,
+        "precision": 0.9697,
+        "recall": 0.9412,
+        "f1": 0.9552,
         "rouge_l": 0.5012,
         "meteor": 0.5743
       }
@@ -551,12 +551,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 8,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 18,
+        "fp": 1,
+        "fn": 2,
+        "precision": 0.9474,
+        "recall": 0.9,
+        "f1": 0.9231,
         "rouge_l": 0.6184,
         "meteor": 0.5688
       }
@@ -568,12 +568,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 8,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 18,
+        "fp": 1,
+        "fn": 2,
+        "precision": 0.9474,
+        "recall": 0.9,
+        "f1": 0.9231,
         "rouge_l": 0.5357,
         "meteor": 0.407
       }
@@ -585,12 +585,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 8,
+        "tp": 12,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 2,
+        "precision": 1.0,
+        "recall": 0.8571,
+        "f1": 0.9231,
         "rouge_l": 0.5807,
         "meteor": 0.5314
       }
@@ -602,12 +602,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 10,
+        "tp": 25,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 1,
+        "precision": 1.0,
+        "recall": 0.9615,
+        "f1": 0.9804,
         "rouge_l": 0.2575,
         "meteor": 0.3395
       }
@@ -619,12 +619,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 6,
-        "fp": 0,
+        "tp": 12,
+        "fp": 1,
         "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "precision": 0.9231,
+        "recall": 1.0,
+        "f1": 0.96,
         "rouge_l": 0.3883,
         "meteor": 0.3036
       }
@@ -636,12 +636,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 15,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 34,
+        "fp": 2,
+        "fn": 2,
+        "precision": 0.9444,
+        "recall": 0.9444,
+        "f1": 0.9444,
         "rouge_l": 0.4696,
         "meteor": 0.4638
       }
@@ -653,12 +653,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 7,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 18,
+        "fp": 1,
+        "fn": 2,
+        "precision": 0.9474,
+        "recall": 0.9,
+        "f1": 0.9231,
         "rouge_l": 0.6563,
         "meteor": 0.6307
       }
@@ -670,12 +670,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 6,
+        "tp": 18,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 2,
+        "precision": 1.0,
+        "recall": 0.9,
+        "f1": 0.9474,
         "rouge_l": 0.3626,
         "meteor": 0.3648
       }
@@ -687,12 +687,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 9,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 15,
+        "fp": 1,
+        "fn": 3,
+        "precision": 0.9375,
+        "recall": 0.8333,
+        "f1": 0.8824,
         "rouge_l": 0.3984,
         "meteor": 0.5051
       }
@@ -704,12 +704,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 20,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 31,
+        "fp": 1,
+        "fn": 1,
+        "precision": 0.9688,
+        "recall": 0.9688,
+        "f1": 0.9688,
         "rouge_l": 0.2041,
         "meteor": 0.2047
       }
@@ -721,12 +721,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 8,
-        "fp": 0,
+        "tp": 18,
+        "fp": 1,
         "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "precision": 0.9474,
+        "recall": 1.0,
+        "f1": 0.973,
         "rouge_l": 0.4647,
         "meteor": 0.467
       }
@@ -738,12 +738,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 10,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 19,
+        "fp": 1,
+        "fn": 1,
+        "precision": 0.95,
+        "recall": 0.95,
+        "f1": 0.95,
         "rouge_l": 0.7321,
         "meteor": 0.7415
       }
@@ -755,12 +755,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 10,
+        "tp": 20,
         "fp": 1,
-        "fn": 0,
-        "precision": 0.909,
-        "recall": 1.0,
-        "f1": 0.952,
+        "fn": 2,
+        "precision": 0.9524,
+        "recall": 0.9091,
+        "f1": 0.9302,
         "rouge_l": 0.3863,
         "meteor": 0.3937
       }
@@ -772,12 +772,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 10,
+        "tp": 19,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 3,
+        "precision": 1.0,
+        "recall": 0.8636,
+        "f1": 0.9268,
         "rouge_l": 0.4484,
         "meteor": 0.4249
       }
@@ -789,12 +789,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 9,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 24,
+        "fp": 1,
+        "fn": 4,
+        "precision": 0.96,
+        "recall": 0.8571,
+        "f1": 0.9057,
         "rouge_l": 0.3191,
         "meteor": 0.3681
       }
@@ -806,12 +806,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 14,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 31,
+        "fp": 2,
+        "fn": 1,
+        "precision": 0.9394,
+        "recall": 0.9688,
+        "f1": 0.9538,
         "rouge_l": 0.6416,
         "meteor": 0.6461
       }
@@ -823,12 +823,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 13,
-        "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "tp": 27,
+        "fp": 2,
+        "fn": 1,
+        "precision": 0.931,
+        "recall": 0.9643,
+        "f1": 0.9474,
         "rouge_l": 0.4083,
         "meteor": 0.3807
       }
@@ -840,12 +840,12 @@
       "bucket": "funsd-test",
       "ts_utc": 1765068526180,
       "metrics": {
-        "tp": 8,
+        "tp": 21,
         "fp": 0,
-        "fn": 0,
-        "precision": 0.985,
-        "recall": 0.985,
-        "f1": 0.985,
+        "fn": 1,
+        "precision": 1.0,
+        "recall": 0.9545,
+        "f1": 0.9767,
         "rouge_l": 0.686,
         "meteor": 0.6069
       }

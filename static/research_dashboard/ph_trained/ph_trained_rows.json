@@ -6,12 +6,12 @@
     "bucket": "government",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 30,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 67,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.9853,
+      "recall": 0.9853,
+      "f1": 0.9853,
       "rouge_l": 0.7658,
       "meteor": 0.7413
     }
@@ -23,12 +23,12 @@
     "bucket": "health",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 30,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 40,
+      "fp": 1,
+      "fn": 2,
+      "precision": 0.9756,
+      "recall": 0.9524,
+      "f1": 0.9639,
       "rouge_l": 0.4919,
       "meteor": 0.4945
     }
@@ -40,12 +40,12 @@
     "bucket": "health",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 30,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 42,
+      "fp": 2,
+      "fn": 4,
+      "precision": 0.9545,
+      "recall": 0.913,
+      "f1": 0.9333,
       "rouge_l": 0.64,
       "meteor": 0.6357
     }
@@ -57,12 +57,12 @@
     "bucket": "health",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 20,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 44,
+      "fp": 3,
+      "fn": 6,
+      "precision": 0.9362,
+      "recall": 0.88,
+      "f1": 0.9072,
       "rouge_l": 0.5176,
       "meteor": 0.6192
     }
@@ -74,12 +74,12 @@
     "bucket": "ph-supplemental",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 34,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 73,
+      "fp": 1,
+      "fn": 13,
+      "precision": 0.9865,
+      "recall": 0.8488,
+      "f1": 0.9125,
       "rouge_l": 0.4976,
       "meteor": 0.6107
     }
@@ -91,12 +91,12 @@
     "bucket": "ph-supplemental",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 40,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 105,
+      "fp": 1,
+      "fn": 3,
+      "precision": 0.9906,
+      "recall": 0.9722,
+      "f1": 0.9813,
       "rouge_l": 0.6812,
       "meteor": 0.6623
     }
@@ -108,12 +108,12 @@
     "bucket": "finance",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 80,
+      "tp": 172,
       "fp": 5,
-      "fn": 2,
-      "precision": 0.941,
-      "recall": 0.976,
-      "f1": 0.958,
+      "fn": 4,
+      "precision": 0.9718,
+      "recall": 0.9773,
+      "f1": 0.9745,
       "rouge_l": 0.8956,
       "meteor": 0.8425
     }
@@ -125,12 +125,12 @@
     "bucket": "ph-supplemental",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 50,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 95,
+      "fp": 5,
+      "fn": 5,
+      "precision": 0.95,
+      "recall": 0.95,
+      "f1": 0.95,
       "rouge_l": 0.8234,
       "meteor": 0.8147
     }
@@ -142,12 +142,12 @@
     "bucket": "finance",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 20,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 26,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.9286,
+      "recall": 0.9286,
+      "f1": 0.9286,
       "rouge_l": 0.6264,
       "meteor": 0.6395
     }
@@ -159,12 +159,12 @@
     "bucket": "ph-supplemental",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 54,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 83,
+      "fp": 2,
+      "fn": 11,
+      "precision": 0.9765,
+      "recall": 0.883,
+      "f1": 0.9274,
       "rouge_l": 0.773,
       "meteor": 0.7437
     }
@@ -176,12 +176,12 @@
     "bucket": "government",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 29,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 71,
+      "fp": 1,
+      "fn": 13,
+      "precision": 0.9861,
+      "recall": 0.8452,
+      "f1": 0.9103,
       "rouge_l": 0.8061,
       "meteor": 0.7954
     }
@@ -193,12 +193,12 @@
     "bucket": "finance",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 35,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 64,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.9697,
+      "recall": 0.9697,
+      "f1": 0.9697,
       "rouge_l": 0.6061,
       "meteor": 0.5976
     }
@@ -210,12 +210,12 @@
     "bucket": "health",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 14,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 33,
+      "fp": 2,
+      "fn": 1,
+      "precision": 0.9429,
+      "recall": 0.9706,
+      "f1": 0.9565,
       "rouge_l": 0.7855,
       "meteor": 0.7628
     }
@@ -227,12 +227,12 @@
     "bucket": "finance",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 66,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 163,
+      "fp": 11,
+      "fn": 9,
+      "precision": 0.9368,
+      "recall": 0.9477,
+      "f1": 0.9422,
       "rouge_l": 0.5067,
       "meteor": 0.5429
     }
@@ -244,12 +244,12 @@
     "bucket": "health",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 24,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 46,
+      "fp": 1,
+      "fn": 4,
+      "precision": 0.9787,
+      "recall": 0.92,
+      "f1": 0.9485,
       "rouge_l": 0.592,
       "meteor": 0.6044
     }
@@ -261,12 +261,12 @@
     "bucket": "banking",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 20,
+      "tp": 49,
       "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "fn": 7,
+      "precision": 1.0,
+      "recall": 0.875,
+      "f1": 0.9333,
       "rouge_l": 0.8144,
       "meteor": 0.8006
     }
@@ -278,12 +278,12 @@
     "bucket": "government",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 30,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 53,
+      "fp": 2,
+      "fn": 9,
+      "precision": 0.9636,
+      "recall": 0.8548,
+      "f1": 0.906,
       "rouge_l": 0.835,
       "meteor": 0.8024
     }
@@ -295,12 +295,12 @@
     "bucket": "government",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 50,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 165,
+      "fp": 8,
+      "fn": 5,
+      "precision": 0.9538,
+      "recall": 0.9706,
+      "f1": 0.9621,
       "rouge_l": 0.5891,
       "meteor": 0.636
     }
@@ -312,12 +312,12 @@
     "bucket": "government",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 20,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 51,
+      "fp": 4,
+      "fn": 1,
+      "precision": 0.9273,
+      "recall": 0.9808,
+      "f1": 0.9533,
       "rouge_l": 0.846,
       "meteor": 0.8194
     }
@@ -329,12 +329,12 @@
     "bucket": "ph-supplemental",
     "ts_utc": 1765070772435,
     "metrics": {
-      "tp": 34,
-      "fp": 0,
-      "fn": 0,
-      "precision": 0.985,
-      "recall": 0.985,
-      "f1": 0.985,
+      "tp": 84,
+      "fp": 2,
+      "fn": 4,
+      "precision": 0.9767,
+      "recall": 0.9545,
+      "f1": 0.9655,
       "rouge_l": 0.8554,
       "meteor": 0.8135
     }
