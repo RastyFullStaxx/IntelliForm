@@ -16,7 +16,7 @@
         },
         {
           "label": "Date",
-          "reference": "Enter the date (MM/DD/YY, e.g., 12/13/89)."
+          "reference": "Enter the date (MM/DD/YY)."
         },
         {
           "label": "RE",
@@ -53,7 +53,7 @@
         },
         {
           "label": "Return Date",
-          "reference": "Enter the return date (e.g., Monday next 20 days from date of service)."
+          "reference": "Enter the return date."
         },
         {
           "label": "Comments",
@@ -83,11 +83,11 @@
       "fields": [
         {
           "label": "Date Received",
-          "reference": "Enter the date received (MM/DD/YY, e.g., 12/14/89)."
+          "reference": "Enter the date received (MM/DD/YY)."
         },
         {
-          "label": "Original",
-          "reference": "For office use only; leave blank."
+          "label": "Signed",
+          "reference": "Enter the signature."
         }
       ]
     }
@@ -140,7 +140,7 @@
     },
     {
       "label": "Return Date",
-      "reference": "Enter the return date (e.g., Monday next 20 days from date of service).",
+      "reference": "Enter the return date.",
       "section": "Service Details"
     },
     {
@@ -165,12 +165,12 @@
     },
     {
       "label": "Date Received",
-      "reference": "Enter the date received (MM/DD/YY, e.g., 12/14/89).",
+      "reference": "Enter the date received (MM/DD/YY).",
       "section": "For Official Use Only"
     },
     {
-      "label": "Original",
-      "reference": "For office use only; leave blank.",
+      "label": "Signed",
+      "reference": "Enter the signature.",
       "section": "For Official Use Only"
     }
   ],

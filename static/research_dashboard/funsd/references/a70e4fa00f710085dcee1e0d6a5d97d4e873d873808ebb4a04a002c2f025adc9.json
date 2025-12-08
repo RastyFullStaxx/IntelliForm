@@ -20,7 +20,7 @@
         },
         {
           "label": "DATE",
-          "reference": "Enter date (MM/DD/YYYY, e.g., 01/31/1997)."
+          "reference": "Enter date (MM/DD/YYYY)."
         },
         {
           "label": "TELECOPY NO",
@@ -68,7 +68,7 @@
     },
     {
       "label": "DATE",
-      "reference": "Enter date (MM/DD/YYYY, e.g., 01/31/1997).",
+      "reference": "Enter date (MM/DD/YYYY).",
       "section": "Fax Information"
     },
     {

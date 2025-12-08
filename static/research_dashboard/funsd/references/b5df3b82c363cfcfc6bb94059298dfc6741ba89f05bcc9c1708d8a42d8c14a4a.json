@@ -12,35 +12,35 @@
       "fields": [
         {
           "label": "DATE",
-          "reference": "Enter the date of the fax (e.g., January 11, 1999)"
+          "reference": "Enter the date of the fax"
         },
         {
           "label": "CLIENT NO.",
-          "reference": "Enter the client number (e.g., L8557.002)"
+          "reference": "Enter the client number"
         },
         {
           "label": "MESSAGE TO",
-          "reference": "Enter the name of the recipient (e.g., Dewey Tedder)"
+          "reference": "Enter the name of the recipient"
         },
         {
           "label": "COMPANY",
-          "reference": "Enter the company name (e.g., Lorillard Tobacco Company)"
+          "reference": "Enter the company name"
         },
         {
           "label": "FAX NUMBER",
-          "reference": "Enter the fax number (e.g., 336/373-6917)"
+          "reference": "Enter the fax number"
         },
         {
           "label": "PHONE",
-          "reference": "Enter the phone number (e.g., 336/373-6750)"
+          "reference": "Enter the phone number"
         },
         {
           "label": "FROM",
-          "reference": "Enter the sender's name(s) (e.g., Andy Zausner and Rob Mangas)"
+          "reference": "Enter the sender's name(s)"
         },
         {
           "label": "PAGES (including Cover Sheet)",
-          "reference": "Enter the total number of pages (e.g., 2)"
+          "reference": "Enter the total number of pages"
         },
         {
           "label": "HARD COPY TO FOLLOW",
@@ -48,7 +48,7 @@
         },
         {
           "label": "MESSAGE",
-          "reference": "Enter the message content (e.g., The following is for your review.)"
+          "reference": "Enter the message content"
         }
       ]
     }
@@ -56,42 +56,42 @@
   "fields": [
     {
       "label": "DATE",
-      "reference": "Enter the date of the fax (e.g., January 11, 1999)",
+      "reference": "Enter the date of the fax",
       "section": "Fax Details"
     },
     {
       "label": "CLIENT NO.",
-      "reference": "Enter the client number (e.g., L8557.002)",
+      "reference": "Enter the client number",
       "section": "Fax Details"
     },
     {
       "label": "MESSAGE TO",
-      "reference": "Enter the name of the recipient (e.g., Dewey Tedder)",
+      "reference": "Enter the name of the recipient",
       "section": "Fax Details"
     },
     {
       "label": "COMPANY",
-      "reference": "Enter the company name (e.g., Lorillard Tobacco Company)",
+      "reference": "Enter the company name",
       "section": "Fax Details"
     },
     {
       "label": "FAX NUMBER",
-      "reference": "Enter the fax number (e.g., 336/373-6917)",
+      "reference": "Enter the fax number",
       "section": "Fax Details"
     },
     {
       "label": "PHONE",
-      "reference": "Enter the phone number (e.g., 336/373-6750)",
+      "reference": "Enter the phone number",
       "section": "Fax Details"
     },
     {
       "label": "FROM",
-      "reference": "Enter the sender's name(s) (e.g., Andy Zausner and Rob Mangas)",
+      "reference": "Enter the sender's name(s)",
       "section": "Fax Details"
     },
     {
       "label": "PAGES (including Cover Sheet)",
-      "reference": "Enter the total number of pages (e.g., 2)",
+      "reference": "Enter the total number of pages",
       "section": "Fax Details"
     },
     {
@@ -101,7 +101,7 @@
     },
     {
       "label": "MESSAGE",
-      "reference": "Enter the message content (e.g., The following is for your review.)",
+      "reference": "Enter the message content",
       "section": "Fax Details"
     }
   ],

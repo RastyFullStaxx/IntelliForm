@@ -29,7 +29,7 @@
       "fields": [
         {
           "label": "Cost Estimate",
-          "reference": "Enter estimated cost (e.g., $2,250)."
+          "reference": "Enter estimated cost."
         },
         {
           "label": "Final Report",
@@ -76,7 +76,7 @@
     },
     {
       "label": "Cost Estimate",
-      "reference": "Enter estimated cost (e.g., $2,250).",
+      "reference": "Enter estimated cost.",
       "section": "Research Limitations"
     },
     {

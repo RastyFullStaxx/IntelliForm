@@ -19,10 +19,6 @@
           "reference": "Enter sender's name"
         },
         {
-          "label": "To",
-          "reference": "Enter recipient's name"
-        },
-        {
           "label": "Re",
           "reference": "Enter subject or reference"
         },
@@ -60,15 +56,6 @@
           "reference": "Enter recipient's fax number"
         }
       ]
-    },
-    {
-      "title": "Urgent Notice",
-      "fields": [
-        {
-          "label": "Urgent! Deliver Immediately.",
-          "reference": "N/A"
-        }
-      ]
     }
   ],
   "fields": [
@@ -80,11 +67,6 @@
     {
       "label": "From",
       "reference": "Enter sender's name",
-      "section": "Cover Information"
-    },
-    {
-      "label": "To",
-      "reference": "Enter recipient's name",
       "section": "Cover Information"
     },
     {
@@ -126,11 +108,6 @@
       "label": "Fax No.",
       "reference": "Enter recipient's fax number",
       "section": "Recipient Information"
-    },
-    {
-      "label": "Urgent! Deliver Immediately.",
-      "reference": "N/A",
-      "section": "Urgent Notice"
     }
   ],
   "notes": "reference_explainer_v1",

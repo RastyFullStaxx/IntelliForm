@@ -17,6 +17,10 @@
         {
           "label": "Lot Number",
           "reference": "Enter lot number"
+        },
+        {
+          "label": "pH",
+          "reference": "Enter pH value"
         }
       ]
     },
@@ -25,7 +29,7 @@
       "fields": [
         {
           "label": "Specific Gravity",
-          "reference": "Not Determined"
+          "reference": "Enter specific gravity"
         }
       ]
     },
@@ -34,11 +38,11 @@
       "fields": [
         {
           "label": "Mutagenicity Solvents",
-          "reference": "A221 is soluble in EtOH at 0.2 g/mL, with stirring, at room temperature."
+          "reference": "Describe solubility for mutagenicity testing."
         },
         {
-          "label": "Oil",
-          "reference": "A221 forms a solution in corn oil at 0.5 g/0.5 mL, with stirring at room temperature."
+          "label": "Oral",
+          "reference": "Describe solubility for oral administration."
         }
       ]
     },
@@ -47,7 +51,7 @@
       "fields": [
         {
           "label": "Acute Cardiovascular",
-          "reference": "A221 is insoluble for this procedure."
+          "reference": "Describe solubility for cardiovascular testing."
         }
       ]
     },
@@ -56,7 +60,7 @@
       "fields": [
         {
           "label": "Storage Recommendations",
-          "reference": "Refrigerate in an amber glass bottle at no more than 8°C."
+          "reference": "Enter storage instructions."
         }
       ]
     },
@@ -82,7 +86,7 @@
       "fields": [
         {
           "label": "Safety Comments",
-          "reference": "N/A"
+          "reference": "Enter suggested handling procedures"
         }
       ]
     },
@@ -118,22 +122,22 @@
     },
     {
       "label": "Mutagenicity Solvents",
-      "reference": "A221 is soluble in EtOH at 0.2 g/mL, with stirring, at room temperature.",
+      "reference": "Describe solubility for mutagenicity testing.",
       "section": "Solubility"
     },
     {
-      "label": "Oil",
-      "reference": "A221 forms a solution in corn oil at 0.5 g/0.5 mL, with stirring at room temperature.",
+      "label": "Oral",
+      "reference": "Describe solubility for oral administration.",
       "section": "Solubility"
     },
     {
       "label": "Acute Cardiovascular",
-      "reference": "A221 is insoluble for this procedure.",
+      "reference": "Describe solubility for cardiovascular testing.",
       "section": "Acute Cardiovascular"
     },
     {
       "label": "Storage Recommendations",
-      "reference": "Refrigerate in an amber glass bottle at no more than 8°C.",
+      "reference": "Enter storage instructions.",
       "section": "Storage Recommendations"
     },
     {
@@ -153,7 +157,7 @@
     },
     {
       "label": "Safety Comments",
-      "reference": "N/A",
+      "reference": "Enter storage instructions",
       "section": "Safety Comments (Suggested Handling Procedure)"
     },
     {

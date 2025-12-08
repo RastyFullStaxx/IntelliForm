@@ -12,7 +12,7 @@
       "fields": [
         {
           "label": "Date",
-          "reference": "Enter the date (e.g., September 22, 1997)"
+          "reference": "Enter the date"
         },
         {
           "label": "To",
@@ -28,7 +28,7 @@
         },
         {
           "label": "Fax Number",
-          "reference": "Enter the fax number (e.g., (910) 335-7707)"
+          "reference": "Enter the fax number"
         },
         {
           "label": "Pages (including cover page)",
@@ -40,7 +40,7 @@
   "fields": [
     {
       "label": "Date",
-      "reference": "Enter the date (e.g., September 22, 1997)",
+      "reference": "Enter the date",
       "section": "Fax Information"
     },
     {
@@ -60,7 +60,7 @@
     },
     {
       "label": "Fax Number",
-      "reference": "Enter the fax number (e.g., (910) 335-7707)",
+      "reference": "Enter the fax number",
       "section": "Fax Information"
     },
     {

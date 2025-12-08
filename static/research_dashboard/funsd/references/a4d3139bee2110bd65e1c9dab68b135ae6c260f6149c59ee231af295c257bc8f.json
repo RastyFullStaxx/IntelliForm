@@ -16,7 +16,7 @@
         },
         {
           "label": "Date",
-          "reference": "Enter the date (MM/DD/YYYY, e.g., 11/11/1997)."
+          "reference": "Enter the date (MM/DD/YYYY)."
         }
       ]
     },
@@ -94,7 +94,7 @@
     },
     {
       "label": "Date",
-      "reference": "Enter the date (MM/DD/YYYY, e.g., 11/11/1997).",
+      "reference": "Enter the date (MM/DD/YYYY).",
       "section": "Recipient Information"
     },
     {

@@ -16,15 +16,15 @@
         },
         {
           "label": "STUDY NUMBER",
-          "reference": "Enter the study number (e.g., I-7016.401)."
+          "reference": "Enter the study number."
         },
         {
           "label": "INITIATION DATE",
-          "reference": "Enter the initiation date (MM/DD/YYYY, e.g., 10/27/1986)."
+          "reference": "Enter the initiation date (MM/DD/YYYY)."
         },
         {
           "label": "DATE OF FINAL REPORT",
-          "reference": "Enter the date of the final report (MM/DD/YYYY, e.g., 02/26/1987)."
+          "reference": "Enter the date of the final report (MM/DD/YYYY)."
         },
         {
           "label": "PART OF FINAL REPORT TO BE AMENDED (EXACT LOCATION)",
@@ -49,11 +49,11 @@
         },
         {
           "label": "DATE",
-          "reference": "Enter the approval date (MM/DD/YYYY, e.g., 08/07/1987)."
+          "reference": "Enter the approval date (MM/DD/YYYY)."
         },
         {
           "label": "DATE",
-          "reference": "Enter the date (MM/DD/YYYY, e.g., 08/14/1987)."
+          "reference": "Enter the date (MM/DD/YYYY)."
         }
       ]
     }
@@ -66,17 +66,17 @@
     },
     {
       "label": "STUDY NUMBER",
-      "reference": "Enter the study number (e.g., I-7016.401).",
+      "reference": "Enter the study number.",
       "section": "Study Information"
     },
     {
       "label": "INITIATION DATE",
-      "reference": "Enter the initiation date (MM/DD/YYYY, e.g., 10/27/1986).",
+      "reference": "Enter the initiation date (MM/DD/YYYY).",
       "section": "Study Information"
     },
     {
       "label": "DATE OF FINAL REPORT",
-      "reference": "Enter the date of the final report (MM/DD/YYYY, e.g., 02/26/1987).",
+      "reference": "Enter the date of the final report (MM/DD/YYYY).",
       "section": "Study Information"
     },
     {
@@ -101,12 +101,12 @@
     },
     {
       "label": "DATE",
-      "reference": "Enter the approval date (MM/DD/YYYY, e.g., 08/07/1987).",
+      "reference": "Enter the approval date (MM/DD/YYYY).",
       "section": "Approvals"
     },
     {
       "label": "DATE",
-      "reference": "Enter the date (MM/DD/YYYY, e.g., 08/14/1987).",
+      "reference": "Enter the date (MM/DD/YYYY).",
       "section": "Approvals"
     }
   ],

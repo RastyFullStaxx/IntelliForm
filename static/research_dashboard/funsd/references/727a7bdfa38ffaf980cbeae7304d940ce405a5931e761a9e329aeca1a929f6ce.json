@@ -52,7 +52,7 @@
         },
         {
           "label": "Expiration Date",
-          "reference": "Enter expiration date (MM/DD/YYYY, e.g., 03/01/1990)."
+          "reference": "Enter expiration date (MM/DD/YYYY)."
         },
         {
           "label": "Special Handling Requirements",
@@ -69,7 +69,7 @@
         },
         {
           "label": "Date",
-          "reference": "Enter date received (MM/DD/YYYY, e.g., 03/01/1990)."
+          "reference": "Enter date received (MM/DD/YYYY)."
         },
         {
           "label": "Study Director/Department",
@@ -81,7 +81,7 @@
         },
         {
           "label": "Date",
-          "reference": "Enter date (MM/DD/YYYY, e.g., 03/04/1990)."
+          "reference": "Enter date (MM/DD/YYYY)."
         }
       ]
     }
@@ -139,7 +139,7 @@
     },
     {
       "label": "Expiration Date",
-      "reference": "Enter expiration date (MM/DD/YYYY, e.g., 03/01/1990).",
+      "reference": "Enter expiration date (MM/DD/YYYY).",
       "section": "Test Article Information"
     },
     {
@@ -154,7 +154,7 @@
     },
     {
       "label": "Date",
-      "reference": "Enter date received (MM/DD/YYYY, e.g., 03/01/1990).",
+      "reference": "Enter date received (MM/DD/YYYY).",
       "section": "Signatures"
     },
     {
@@ -169,7 +169,7 @@
     },
     {
       "label": "Date",
-      "reference": "Enter date (MM/DD/YYYY, e.g., 03/04/1990).",
+      "reference": "Enter date (MM/DD/YYYY).",
       "section": "Signatures"
     }
   ],

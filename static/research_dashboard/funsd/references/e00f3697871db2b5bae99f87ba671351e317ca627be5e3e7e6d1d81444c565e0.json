@@ -46,11 +46,11 @@
       "fields": [
         {
           "label": "ARRIVAL DATE AND TIME",
-          "reference": "Enter arrival date and time (MM/DD/YY HH:MM AM/PM, e.g., 02/18/80 7:00 PM)."
+          "reference": "Enter arrival date and time (MM/DD/YY HH:MM AM/PM)."
         },
         {
           "label": "DEPARTURE DATE AND TIME",
-          "reference": "Enter departure date and time (MM/DD/YY HH:MM AM/PM, e.g., 02/21/80 4:00 PM)."
+          "reference": "Enter departure date and time (MM/DD/YY HH:MM AM/PM)."
         }
       ]
     },
@@ -59,7 +59,7 @@
       "fields": [
         {
           "label": "Please attach",
-          "reference": "Attach a brief autobiographical sketch (50 words or so)."
+          "reference": "Attach a brief autobiographical sketch."
         }
       ]
     }
@@ -97,17 +97,17 @@
     },
     {
       "label": "ARRIVAL DATE AND TIME",
-      "reference": "Enter arrival date and time (MM/DD/YY HH:MM AM/PM, e.g., 02/18/80 7:00 PM).",
+      "reference": "Enter arrival date and time (MM/DD/YY HH:MM AM/PM).",
       "section": "Travel Information"
     },
     {
       "label": "DEPARTURE DATE AND TIME",
-      "reference": "Enter departure date and time (MM/DD/YY HH:MM AM/PM, e.g., 02/21/80 4:00 PM).",
+      "reference": "Enter departure date and time (MM/DD/YY HH:MM AM/PM).",
       "section": "Travel Information"
     },
     {
       "label": "Please attach",
-      "reference": "Attach a brief autobiographical sketch (50 words or so).",
+      "reference": "Attach a brief autobiographical sketch.",
       "section": "Autobiographical Sketch"
     }
   ],

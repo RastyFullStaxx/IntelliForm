@@ -11,12 +11,29 @@
       "title": "Request Details",
       "fields": [
         {
+          "title": "Submission Information",
+          "fields": [
+            {
+              "label": "FROM",
+              "reference": "Enter sender's name."
+            },
+            {
+              "label": "TO",
+              "reference": "Enter recipient's name."
+            },
+            {
+              "label": "CC",
+              "reference": "Enter names of additional recipients."
+            }
+          ]
+        },
+        {
           "label": "Brand(s) Applicable",
           "reference": "Enter applicable brands."
         },
         {
           "label": "Media Type",
-          "reference": "Specify the type of media (e.g., Direct Mail)."
+          "reference": "Specify the type of media."
         },
         {
           "label": "Media Name",
@@ -32,11 +49,11 @@
         },
         {
           "label": "Coupon Issue Date",
-          "reference": "Enter the coupon issue date (MM/DD/YY, e.g., 04/01/00)."
+          "reference": "Enter the coupon issue date (MM/DD/YY)."
         },
         {
           "label": "Coupon Expiration Date",
-          "reference": "Enter the coupon expiration date (MM/DD/YY, e.g., 09/30/00)."
+          "reference": "Enter the coupon expiration date (MM/DD/YY)."
         },
         {
           "label": "Circulation (#)",
@@ -48,7 +65,7 @@
         },
         {
           "label": "Coupon Value",
-          "reference": "Enter the coupon value (e.g., $1.50 OFF)."
+          "reference": "Enter the coupon value."
         },
         {
           "label": "Pack and / or Carton?",
@@ -64,7 +81,7 @@
         },
         {
           "label": "Date Initiated",
-          "reference": "Enter the date initiated (MM/DD/YY, e.g., 01/21/00)."
+          "reference": "Enter the date initiated (MM/DD/YY)."
         }
       ]
     },
@@ -87,6 +104,21 @@
     }
   ],
   "fields": [
+    {
+      "label": "FROM",
+      "reference": "Enter sender's name.",
+      "section": "Submission Information"
+    },
+    {
+      "label": "TO",
+      "reference": "Enter recipient's name.",
+      "section": "Submission Information"
+    },
+    {
+      "label": "CC",
+      "reference": "Enter names of additional recipients.",
+      "section": "Submission Information"
+    },
     {
       "label": "Brand(s) Applicable",
       "reference": "Enter applicable brands.",
@@ -114,12 +146,12 @@
     },
     {
       "label": "Coupon Issue Date",
-      "reference": "Enter the coupon issue date (MM/DD/YY, e.g., 04/01/00).",
+      "reference": "Enter the coupon issue date (MM/DD/YY).",
       "section": "Request Details"
     },
     {
       "label": "Coupon Expiration Date",
-      "reference": "Enter the coupon expiration date (MM/DD/YY, e.g., 09/30/00).",
+      "reference": "Enter the coupon expiration date (MM/DD/YY).",
       "section": "Request Details"
     },
     {
@@ -134,7 +166,7 @@
     },
     {
       "label": "Coupon Value",
-      "reference": "Enter the coupon value (e.g., $1.50 OFF).",
+      "reference": "Enter the coupon value.",
       "section": "Request Details"
     },
     {
@@ -154,7 +186,7 @@
     },
     {
       "label": "Date Initiated",
-      "reference": "Enter the date initiated (MM/DD/YY, e.g., 01/21/00).",
+      "reference": "Enter the date initiated (MM/DD/YY).",
       "section": "Request Details"
     },
     {

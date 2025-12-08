@@ -23,20 +23,8 @@
           "reference": "Enter report subject."
         },
         {
-          "label": "MAY",
-          "reference": "Enter date (MM/DD) for May."
-        },
-        {
-          "label": "JUN",
-          "reference": "Enter date (MM/DD) for June."
-        },
-        {
-          "label": "AUG",
-          "reference": "Enter date (MM/DD) for August."
-        },
-        {
-          "label": "SEP",
-          "reference": "Enter date (MM/DD) for September."
+          "label": "SUBMISSION DATE",
+          "reference": "Enter date (MM/DD)."
         }
       ]
     },
@@ -101,23 +89,8 @@
       "section": "Report Details"
     },
     {
-      "label": "MAY",
-      "reference": "Enter date (MM/DD) for May.",
-      "section": "Report Details"
-    },
-    {
-      "label": "JUN",
-      "reference": "Enter date (MM/DD) for June.",
-      "section": "Report Details"
-    },
-    {
-      "label": "AUG",
-      "reference": "Enter date (MM/DD) for August.",
-      "section": "Report Details"
-    },
-    {
-      "label": "SEP",
-      "reference": "Enter date (MM/DD) for September.",
+      "label": "SUBMISSION DATE",
+      "reference": "Enter date (MM/DD).",
       "section": "Report Details"
     },
     {

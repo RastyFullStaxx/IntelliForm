@@ -12,27 +12,27 @@
       "fields": [
         {
           "label": "DATE",
-          "reference": "Enter the date (e.g., June 4, 1997)"
+          "reference": "Enter the date"
         },
         {
           "label": "TO",
-          "reference": "Enter recipient names (e.g., Dr. Spears/A.J. Stevens/R. Milstein)"
+          "reference": "Enter recipient names"
         },
         {
           "label": "FROM",
-          "reference": "Enter sender's name (e.g., Barry Hirsch)"
+          "reference": "Enter sender's name"
         },
         {
           "label": "TOTAL NUMBER OF PAGES INCLUDING THIS COVER SHEET",
-          "reference": "Enter total number of pages (e.g., 6)"
+          "reference": "Enter total number of pages"
         },
         {
           "label": "IF YOU DO NOT RECEIVE ALL THE PAGES, PLEASE CALL",
-          "reference": "Enter contact name and phone number (e.g., Carol Doktorski at (212) 545-2934)"
+          "reference": "Enter contact name and phone number"
         },
         {
           "label": "OUR FAX NUMBER IS",
-          "reference": "Enter fax number (e.g., (212) 935-6801)"
+          "reference": "Enter fax number"
         }
       ]
     }
@@ -40,32 +40,32 @@
   "fields": [
     {
       "label": "DATE",
-      "reference": "Enter the date (e.g., June 4, 1997)",
+      "reference": "Enter the date",
       "section": "Fax Information"
     },
     {
       "label": "TO",
-      "reference": "Enter recipient names (e.g., Dr. Spears/A.J. Stevens/R. Milstein)",
+      "reference": "Enter recipient names",
       "section": "Fax Information"
     },
     {
       "label": "FROM",
-      "reference": "Enter sender's name (e.g., Barry Hirsch)",
+      "reference": "Enter sender's name",
       "section": "Fax Information"
     },
     {
       "label": "TOTAL NUMBER OF PAGES INCLUDING THIS COVER SHEET",
-      "reference": "Enter total number of pages (e.g., 6)",
+      "reference": "Enter total number of pages",
       "section": "Fax Information"
     },
     {
       "label": "IF YOU DO NOT RECEIVE ALL THE PAGES, PLEASE CALL",
-      "reference": "Enter contact name and phone number (e.g., Carol Doktorski at (212) 545-2934)",
+      "reference": "Enter contact name and phone number",
       "section": "Fax Information"
     },
     {
       "label": "OUR FAX NUMBER IS",
-      "reference": "Enter fax number (e.g., (212) 935-6801)",
+      "reference": "Enter fax number",
       "section": "Fax Information"
     }
   ],

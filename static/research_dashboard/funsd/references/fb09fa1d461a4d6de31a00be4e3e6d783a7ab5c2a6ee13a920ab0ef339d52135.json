@@ -24,7 +24,7 @@
         },
         {
           "label": "Date",
-          "reference": "Enter the date (MM/DD/YYYY, e.g., 05/01/2000)."
+          "reference": "Enter the date (MM/DD/YYYY)."
         },
         {
           "label": "CC",
@@ -67,15 +67,6 @@
           "reference": "Enter any additional comments."
         }
       ]
-    },
-    {
-      "title": "Confidentiality Note",
-      "fields": [
-        {
-          "label": "Confidentiality Note",
-          "reference": "This fax may contain privileged information."
-        }
-      ]
     }
   ],
   "fields": [
@@ -96,7 +87,7 @@
     },
     {
       "label": "Date",
-      "reference": "Enter the date (MM/DD/YYYY, e.g., 05/01/2000).",
+      "reference": "Enter the date (MM/DD/YYYY).",
       "section": "Fax Information"
     },
     {
@@ -148,11 +139,6 @@
       "label": "Comments",
       "reference": "Enter any additional comments.",
       "section": "Fax Information"
-    },
-    {
-      "label": "Confidentiality Note",
-      "reference": "This fax may contain privileged information.",
-      "section": "Confidentiality Note"
     }
   ],
   "notes": "reference_explainer_v1",

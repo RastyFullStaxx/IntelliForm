@@ -12,7 +12,7 @@
       "fields": [
         {
           "label": "Date/Time",
-          "reference": "Enter date and time (MM/DD/YY HH:MM AM/PM, e.g., 10/30/98 1:46 PM)"
+          "reference": "Enter date and time (MM/DD/YY HH:MM AM/PM)"
         },
         {
           "label": "Client Name",
@@ -28,7 +28,7 @@
         },
         {
           "label": "Milestone Presentation Date",
-          "reference": "Enter the presentation date (MM/DD/YYYY, e.g., 10/30/1998)"
+          "reference": "Enter the presentation date (MM/DD/YYYY)"
         },
         {
           "label": "Project Title",
@@ -99,7 +99,7 @@
   "fields": [
     {
       "label": "Date/Time",
-      "reference": "Enter date and time (MM/DD/YY HH:MM AM/PM, e.g., 10/30/98 1:46 PM)",
+      "reference": "Enter date and time (MM/DD/YY HH:MM AM/PM)",
       "section": "Specifics"
     },
     {
@@ -119,7 +119,7 @@
     },
     {
       "label": "Milestone Presentation Date",
-      "reference": "Enter the presentation date (MM/DD/YYYY, e.g., 10/30/1998)",
+      "reference": "Enter the presentation date (MM/DD/YYYY)",
       "section": "Specifics"
     },
     {

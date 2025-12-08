@@ -24,7 +24,7 @@
         },
         {
           "label": "Date",
-          "reference": "Enter the date (MM/DD/YY, e.g., 12/10/98)."
+          "reference": "Enter the date (MM/DD/YY)."
         },
         {
           "label": "Number of Pages Including Cover Sheet",
@@ -37,15 +37,6 @@
         {
           "label": "Special Instructions",
           "reference": "Provide any special instructions for the recipient."
-        }
-      ]
-    },
-    {
-      "title": "Note",
-      "fields": [
-        {
-          "label": "Note",
-          "reference": "This message is confidential; do not distribute."
         }
       ]
     }
@@ -85,11 +76,6 @@
       "label": "Special Instructions",
       "reference": "Provide any special instructions for the recipient.",
       "section": "Transmission Information"
-    },
-    {
-      "label": "Note",
-      "reference": "This message is confidential; do not distribute.",
-      "section": "Note"
     }
   ],
   "notes": "reference_explainer_v1",

@@ -7,6 +7,27 @@
   "created_at": "2023-10-01T00:00:00Z",
   "updated_at": "2025-12-06T21:49:06Z",
   "sections": [
+     {
+      "title": "Header Information",
+      "fields": [
+        {
+          "label": "TO",
+          "reference": "Enter recipient's name."
+        },
+        {
+          "label": "FROM",
+          "reference": "Enter sender's name."
+        },
+        {
+          "label": "DIV. NAME/NO:",
+          "reference": "Enter the division name and number."
+        },
+        {
+          "label": "DATE TO NYO:",
+          "reference": "Enter date (e.g., MM/DD/YY)."
+        }
+      ]
+    },
     {
       "title": "Event Details",
       "fields": [
@@ -65,6 +86,26 @@
     }
   ],
   "fields": [
+    {
+      "label": "TO",
+      "reference": "Enter recipient's name.",
+      "section": "Header Information"
+    },
+    {
+      "label": "FROM",
+      "reference": "Enter sender's name.",
+      "section": "Header Information"
+    },
+    {
+      "label": "DIV. NAME/NO:",
+      "reference": "Enter the division name and number.",
+      "section": "Header Information"
+    },
+    {
+      "label": "DATE TO NYO:",
+      "reference": "Enter date (e.g., MM/DD/YY).",
+      "section": "Header Information"
+    },
     {
       "label": "Name of Event",
       "reference": "Enter the name of the event.",

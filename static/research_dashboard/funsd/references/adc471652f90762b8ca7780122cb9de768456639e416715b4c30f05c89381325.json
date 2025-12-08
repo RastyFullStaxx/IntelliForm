@@ -16,7 +16,7 @@
         },
         {
           "label": "Date",
-          "reference": "Enter date (MM/DD/YYYY, e.g., 11/12/1999)."
+          "reference": "Enter date (MM/DD/YYYY)."
         },
         {
           "label": "Number of Pages (this page included)",
@@ -29,6 +29,10 @@
         {
           "label": "Sender Fax Number",
           "reference": "Enter sender's fax number."
+        },
+        {
+          "label": "Reference",
+          "reference": "Enter reference number."
         }
       ]
     },
@@ -61,16 +65,7 @@
           "reference": "Enter any additional message."
         }
       ]
-    },
-    {
-      "title": "Confidentiality Note",
-      "fields": [
-        {
-          "label": "Confidentiality Note",
-          "reference": "For office use only; leave blank."
-        }
-      ]
-    }
+    } 
   ],
   "fields": [
     {
@@ -80,7 +75,7 @@
     },
     {
       "label": "Date",
-      "reference": "Enter date (MM/DD/YYYY, e.g., 11/12/1999).",
+      "reference": "Enter date (MM/DD/YYYY).",
       "section": "Sender Information"
     },
     {
@@ -96,6 +91,11 @@
     {
       "label": "Sender Fax Number",
       "reference": "Enter sender's fax number.",
+      "section": "Sender Information"
+    },
+    {
+      "label": "Reference",
+      "reference": "Enter reference number.",
       "section": "Sender Information"
     },
     {
@@ -122,11 +122,6 @@
       "label": "Message",
       "reference": "Enter any additional message.",
       "section": "Message"
-    },
-    {
-      "label": "Confidentiality Note",
-      "reference": "For office use only; leave blank.",
-      "section": "Confidentiality Note"
     }
   ],
   "notes": "reference_explainer_v1",

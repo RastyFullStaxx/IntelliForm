@@ -37,7 +37,7 @@
         },
         {
           "label": "submitted to the voters on",
-          "reference": "Enter election date (MM/DD/YYYY, e.g., 11/03/1992)."
+          "reference": "Enter election date (MM/DD/YYYY)."
         }
       ]
     },
@@ -46,7 +46,7 @@
       "fields": [
         {
           "label": "Fill in Dates",
-          "reference": "Enter reporting period beginning and ending dates (MM/DD/YYYY, e.g., 10/16/1992 to 11/05/1992)."
+          "reference": "Enter reporting period beginning and ending dates (MM/DD/YYYY)."
         }
       ]
     },
@@ -59,7 +59,7 @@
         },
         {
           "label": "Date",
-          "reference": "Enter date of signing (MM/DD/YYYY, e.g., 03/30/1993)."
+          "reference": "Enter date of signing (MM/DD/YYYY)."
         }
       ]
     },
@@ -68,7 +68,7 @@
       "fields": [
         {
           "label": "Date Paid",
-          "reference": "Enter date of payment (MM/DD/YYYY, e.g., 10/26/1992)."
+          "reference": "Enter date of payment (MM/DD/YYYY)."
         },
         {
           "label": "To Whom Paid",
@@ -130,12 +130,12 @@
     },
     {
       "label": "submitted to the voters on",
-      "reference": "Enter election date (MM/DD/YYYY, e.g., 11/03/1992).",
+      "reference": "Enter election date (MM/DD/YYYY).",
       "section": "Question Information"
     },
     {
       "label": "Fill in Dates",
-      "reference": "Enter reporting period beginning and ending dates (MM/DD/YYYY, e.g., 10/16/1992 to 11/05/1992).",
+      "reference": "Enter reporting period beginning and ending dates (MM/DD/YYYY).",
       "section": "Reporting Period"
     },
     {
@@ -145,12 +145,12 @@
     },
     {
       "label": "Date",
-      "reference": "Enter date of signing (MM/DD/YYYY, e.g., 03/30/1993).",
+      "reference": "Enter date of signing (MM/DD/YYYY).",
       "section": "Signature"
     },
     {
       "label": "Date Paid",
-      "reference": "Enter date of payment (MM/DD/YYYY, e.g., 10/26/1992).",
+      "reference": "Enter date of payment (MM/DD/YYYY).",
       "section": "Expenditures or Disbursements"
     },
     {

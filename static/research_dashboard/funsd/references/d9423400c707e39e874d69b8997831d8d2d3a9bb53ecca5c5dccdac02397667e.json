@@ -16,7 +16,7 @@
         },
         {
           "label": "Title",
-          "reference": "Enter title (e.g., Associate Professor)."
+          "reference": "Enter title."
         },
         {
           "label": "Telephone #/Fax #",
@@ -40,8 +40,8 @@
       "title": "Project Title",
       "fields": [
         {
-          "label": "Mechanisms of Chronic Ozone Exposure: Role of Inflammation",
-          "reference": "N/A"
+          "label": "Project Title",
+          "reference": "Enter project title."
         }
       ]
     },
@@ -50,7 +50,7 @@
       "fields": [
         {
           "label": "Key Words",
-          "reference": "Provide three key words (e.g., Ozone, Inflammation, Mast Cell)."
+          "reference": "Provide three key words."
         }
       ]
     },
@@ -100,66 +100,6 @@
           "reference": "Enter start and end dates (MM/DD/YY) and total cost."
         }
       ]
-    },
-    {
-      "title": "Preliminary Studies",
-      "fields": [
-        {
-          "label": "1. Feasibility of Proposed Research",
-          "reference": "N/A"
-        },
-        {
-          "label": "2. Qualifications of Investigator",
-          "reference": "N/A"
-        }
-      ]
-    },
-    {
-      "title": "Experimental Plan",
-      "fields": [
-        {
-          "label": "1. Design",
-          "reference": "N/A"
-        },
-        {
-          "label": "2. Methods",
-          "reference": "N/A"
-        },
-        {
-          "label": "3. Analysis of Data",
-          "reference": "N/A"
-        },
-        {
-          "label": "4. Interpretation of Results",
-          "reference": "N/A"
-        },
-        {
-          "label": "5. Future Investigation",
-          "reference": "N/A"
-        },
-        {
-          "label": "6. Literature Cited",
-          "reference": "N/A"
-        }
-      ]
-    },
-    {
-      "title": "Available Facilities and Resources",
-      "fields": [
-        {
-          "label": "Facilities and Resources",
-          "reference": "N/A"
-        }
-      ]
-    },
-    {
-      "title": "Other Support",
-      "fields": [
-        {
-          "label": "Other Support",
-          "reference": "N/A"
-        }
-      ]
     }
   ],
   "fields": [
@@ -170,7 +110,7 @@
     },
     {
       "label": "Title",
-      "reference": "Enter title (e.g., Associate Professor).",
+      "reference": "Enter title.",
       "section": "Principal Investigator"
     },
     {
@@ -194,13 +134,13 @@
       "section": "Principal Investigator"
     },
     {
-      "label": "Mechanisms of Chronic Ozone Exposure: Role of Inflammation",
-      "reference": "N/A",
+      "label": "Project Title",
+      "reference": "Enter project title.",
       "section": "Project Title"
     },
     {
       "label": "Key Words",
-      "reference": "Provide three key words (e.g., Ozone, Inflammation, Mast Cell).",
+      "reference": "Provide three key words.",
       "section": "Key Words"
     },
     {
@@ -242,56 +182,6 @@
       "label": "3rd 12 Month Period if required",
       "reference": "Enter start and end dates (MM/DD/YY) and total cost.",
       "section": "Inclusive Dates and Total Costs"
-    },
-    {
-      "label": "1. Feasibility of Proposed Research",
-      "reference": "N/A",
-      "section": "Preliminary Studies"
-    },
-    {
-      "label": "2. Qualifications of Investigator",
-      "reference": "N/A",
-      "section": "Preliminary Studies"
-    },
-    {
-      "label": "1. Design",
-      "reference": "N/A",
-      "section": "Experimental Plan"
-    },
-    {
-      "label": "2. Methods",
-      "reference": "N/A",
-      "section": "Experimental Plan"
-    },
-    {
-      "label": "3. Analysis of Data",
-      "reference": "N/A",
-      "section": "Experimental Plan"
-    },
-    {
-      "label": "4. Interpretation of Results",
-      "reference": "N/A",
-      "section": "Experimental Plan"
-    },
-    {
-      "label": "5. Future Investigation",
-      "reference": "N/A",
-      "section": "Experimental Plan"
-    },
-    {
-      "label": "6. Literature Cited",
-      "reference": "N/A",
-      "section": "Experimental Plan"
-    },
-    {
-      "label": "Facilities and Resources",
-      "reference": "N/A",
-      "section": "Available Facilities and Resources"
-    },
-    {
-      "label": "Other Support",
-      "reference": "N/A",
-      "section": "Other Support"
     }
   ],
   "notes": "reference_explainer_v1",

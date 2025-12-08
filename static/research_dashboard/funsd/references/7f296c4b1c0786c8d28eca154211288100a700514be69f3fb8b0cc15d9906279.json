@@ -8,6 +8,44 @@
   "updated_at": "2025-12-06T22:00:05Z",
   "sections": [
     {
+      "title": "Form Information",
+      "fields": [
+        {
+          "label": "Date",
+          "reference": "Enter the date (MM/DD/YY)."
+        },
+        {
+          "label": "Sample No.",
+          "reference": "Enter the sample number."
+        },
+        {
+          "label": "Type of Cigarette",
+          "reference": "Enter the cigarette type."
+        },
+        {
+          "label": "Batch Size",
+          "reference": "Enter the batch size."
+        }
+      ]
+    },
+    {
+      "title": "Request Details",
+      "fields": [
+        {
+          "label": "Original Request Made By",
+          "reference": "Enter the name of the requester."
+        },
+        {
+          "label": "Purpose of Sample",
+          "reference": "Enter the purpose."
+        },
+        {
+          "label": "Sample Specidications Written by",
+          "reference": "Enter the author of the specifications."
+        }
+      ]
+    },
+    {
       "title": "Cigarettes",
       "fields": [
         {
@@ -147,6 +185,41 @@
     }
   ],
   "fields": [
+    {
+      "label": "Date",
+      "reference": "Enter the date (MM/DD/YY).",
+      "section": "Form Information"
+    },
+    {
+      "label": "Sample No.",
+      "reference": "Enter the sample number.",
+      "section": "Form Information"
+    },
+    {
+      "label": "Type of Cigarette",
+      "reference": "Enter the cigarette type.",
+      "section": "Form Information"
+    },
+    {
+      "label": "Batch Size",
+      "reference": "Enter the batch size.",
+      "section": "Form Information"
+    },
+    {
+      "label": "Original Request Made By",
+      "reference": "Enter the name of the requester.",
+      "section": "Request Details"
+    },
+    {
+      "label": "Purpose of Sample",
+      "reference": "Enter the purpose.",
+      "section": "Request Details"
+    },
+    {
+      "label": "Sample Specidications Written by",
+      "reference": "Enter the author of the specifications.",
+      "section": "Request Details"
+    },
     {
       "label": "Maker",
       "reference": "Enter the maker's name.",

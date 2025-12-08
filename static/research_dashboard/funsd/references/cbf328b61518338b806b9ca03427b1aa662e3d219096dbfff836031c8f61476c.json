@@ -13,10 +13,6 @@
         {
           "label": "VENDOR",
           "reference": "Enter vendor name and address."
-        },
-        {
-          "label": "FOR PURCHASING DEPARTMENT USE ONLY",
-          "reference": "N/A"
         }
       ]
     },
@@ -42,7 +38,7 @@
       "fields": [
         {
           "label": "DATE",
-          "reference": "Enter date (MM/DD/YYYY, e.g., 04/19/1988)."
+          "reference": "Enter date (MM/DD/YYYY)."
         },
         {
           "label": "ORDER NO.",
@@ -80,7 +76,7 @@
       "fields": [
         {
           "label": "FOLLOW UP DATE",
-          "reference": "Enter follow-up date (MM/DD/YYYY, e.g., 04/19/1988)."
+          "reference": "Enter follow-up date (MM/DD/YYYY)."
         },
         {
           "label": "REQUISITION NO.",
@@ -116,11 +112,6 @@
       "section": "Vendor Information"
     },
     {
-      "label": "FOR PURCHASING DEPARTMENT USE ONLY",
-      "reference": "N/A",
-      "section": "Vendor Information"
-    },
-    {
       "label": "TERMS",
       "reference": "Specify payment terms.",
       "section": "Terms and Shipping"
@@ -137,7 +128,7 @@
     },
     {
       "label": "DATE",
-      "reference": "Enter date (MM/DD/YYYY, e.g., 04/19/1988).",
+      "reference": "Enter date (MM/DD/YYYY).",
       "section": "Order Details"
     },
     {
@@ -172,7 +163,7 @@
     },
     {
       "label": "FOLLOW UP DATE",
-      "reference": "Enter follow-up date (MM/DD/YYYY, e.g., 04/19/1988).",
+      "reference": "Enter follow-up date (MM/DD/YYYY).",
       "section": "Follow Up and Approval"
     },
     {

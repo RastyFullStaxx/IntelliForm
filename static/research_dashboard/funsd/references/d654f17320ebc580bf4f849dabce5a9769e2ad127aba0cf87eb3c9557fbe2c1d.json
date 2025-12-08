@@ -8,6 +8,27 @@
   "updated_at": "2025-12-06T21:52:57Z",
   "sections": [
     {
+      "title": "Submission Information",
+      "fields": [
+        {
+          "label": "TO",
+          "reference": "Enter recipient's name."
+        },
+        {
+          "label": "FROM",
+          "reference": "Enter sender's name."
+        },
+        {
+          "label": "SUBMISSION DATE",
+          "reference": "Enter submission date."
+        },
+        {
+          "label": "SUBJECT",
+          "reference": "Enter submission subject."
+        }
+      ]
+    },
+    {
       "title": "Geography",
       "fields": [
         {
@@ -20,7 +41,7 @@
         },
         {
           "label": "Division Name",
-          "reference": "Enter names of divisions: Detroit North, Detroit South, Detroit East, Detroit West, Grand Rapids, Flint."
+          "reference": "Enter names of divisions."
         }
       ]
     },
@@ -43,6 +64,26 @@
     }
   ],
   "fields": [
+    {
+      "label": "TO",
+      "reference": "Enter recipient's name.",
+      "section": "Submission Information"
+    },
+    {
+      "label": "FROM",
+      "reference": "Enter sender's name.",
+      "section": "Submission Information"
+    },
+    {
+      "label": "SUBMISSION DATE",
+      "reference": "Enter submission date.",
+      "section": "Submission Information"
+    },
+    {
+      "label": "SUBJECT",
+      "reference": "Enter submission subject.",
+      "section": "Submission Information"
+    },
     {
       "label": "Region",
       "reference": "Select FULL or PARTIAL; if PARTIAL, continue with DIVISION(S) scope.",

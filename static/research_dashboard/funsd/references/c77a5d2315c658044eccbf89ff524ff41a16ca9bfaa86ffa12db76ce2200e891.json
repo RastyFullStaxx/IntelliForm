@@ -29,7 +29,7 @@
       "fields": [
         {
           "label": "SUBJECT",
-          "reference": "Maverick Specials Menthol - Progress Report"
+          "reference": "Enter subject."
         },
         {
           "label": "REGION",
@@ -44,14 +44,6 @@
     {
       "title": "Division Names",
       "fields": [
-        {
-          "label": "DIVISION NAME",
-          "reference": "Enter division name."
-        },
-        {
-          "label": "DIVISION NAME",
-          "reference": "Enter division name."
-        },
         {
           "label": "DIVISION NAME",
           "reference": "Enter division name."
@@ -111,7 +103,7 @@
     },
     {
       "label": "SUBJECT",
-      "reference": "Maverick Specials Menthol - Progress Report",
+      "reference": "Enter subject.",
       "section": "Report Details"
     },
     {
@@ -123,16 +115,6 @@
       "label": "DIVISION",
       "reference": "Select FULL or PARTIAL.",
       "section": "Report Details"
-    },
-    {
-      "label": "DIVISION NAME",
-      "reference": "Enter division name.",
-      "section": "Division Names"
-    },
-    {
-      "label": "DIVISION NAME",
-      "reference": "Enter division name.",
-      "section": "Division Names"
     },
     {
       "label": "DIVISION NAME",

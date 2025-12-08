@@ -12,7 +12,7 @@
       "fields": [
         {
           "label": "DATE",
-          "reference": "Enter the date of the fax (MM/DD/YYYY, e.g., 02/25/1998)"
+          "reference": "Enter the date of the fax (MM/DD/YYYY)"
         },
         {
           "label": "CLIENT NO.",
@@ -60,7 +60,7 @@
   "fields": [
     {
       "label": "DATE",
-      "reference": "Enter the date of the fax (MM/DD/YYYY, e.g., 02/25/1998)",
+      "reference": "Enter the date of the fax (MM/DD/YYYY)",
       "section": "Fax Details"
     },
     {

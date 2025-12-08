@@ -20,7 +20,7 @@
         },
         {
           "label": "Date Prepared",
-          "reference": "Enter the date prepared (MM-DD-YY, e.g., 08-17-88)."
+          "reference": "Enter the date prepared (MM-DD-YY)."
         },
         {
           "label": "Telephone No.",
@@ -49,12 +49,8 @@
       "title": "Description of Problem",
       "fields": [
         {
-          "label": "Glass Mat",
-          "reference": "Describe the problem with the glass mat."
-        },
-        {
-          "label": "Slit Glass Mat",
-          "reference": "Describe the problem with the slit glass mat."
+          "label": "Description of Problem",
+          "reference": "Describe the problem."
         }
       ]
     },
@@ -101,7 +97,7 @@
         },
         {
           "label": "Proposed Effective Date",
-          "reference": "Enter the proposed effective date (MM/DD/YY, e.g., 09/08/88)."
+          "reference": "Enter the proposed effective date (MM/DD/YY)."
         }
       ]
     }
@@ -119,7 +115,7 @@
     },
     {
       "label": "Date Prepared",
-      "reference": "Enter the date prepared (MM-DD-YY, e.g., 08-17-88).",
+      "reference": "Enter the date prepared (MM-DD-YY).",
       "section": "Originator Information"
     },
     {
@@ -143,13 +139,8 @@
       "section": "Department and Change Information"
     },
     {
-      "label": "Glass Mat",
-      "reference": "Describe the problem with the glass mat.",
-      "section": "Description of Problem"
-    },
-    {
-      "label": "Slit Glass Mat",
-      "reference": "Describe the problem with the slit glass mat.",
+      "label": "Description of Problem",
+      "reference": "Describe the problem.",
       "section": "Description of Problem"
     },
     {
@@ -189,7 +180,7 @@
     },
     {
       "label": "Proposed Effective Date",
-      "reference": "Enter the proposed effective date (MM/DD/YY, e.g., 09/08/88).",
+      "reference": "Enter the proposed effective date (MM/DD/YY).",
       "section": "Final Disposition"
     }
   ],

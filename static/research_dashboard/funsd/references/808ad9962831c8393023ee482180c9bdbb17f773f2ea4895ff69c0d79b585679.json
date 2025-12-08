@@ -16,7 +16,7 @@
         },
         {
           "label": "Date",
-          "reference": "Enter the date (MM/DD/YY, e.g., 08/10/90)."
+          "reference": "Enter the date (MM/DD/YY)."
         },
         {
           "label": "Time",
@@ -84,7 +84,7 @@
     },
     {
       "label": "Date",
-      "reference": "Enter the date (MM/DD/YY, e.g., 08/10/90).",
+      "reference": "Enter the date (MM/DD/YY).",
       "section": "Report Information"
     },
     {

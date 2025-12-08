@@ -21,6 +21,10 @@
         {
           "label": "Inventory For",
           "reference": "Enter state"
+        },
+        {
+          "label": "Dates",
+          "reference": "Enter date"
         }
       ]
     },
@@ -42,15 +46,6 @@
         {
           "label": "# of Weeks On Hand",
           "reference": "Enter number of weeks on hand"
-        }
-      ]
-    },
-    {
-      "title": "Notes",
-      "fields": [
-        {
-          "label": "Note",
-          "reference": "Report style inventory only; submit report only if style is still on hand in this account."
         }
       ]
     },
@@ -81,6 +76,11 @@
       "section": "Account Information"
     },
     {
+      "label": "Dates",
+      "reference": "Enter date",
+      "section": "Account Information"
+    },
+    {
       "label": "Brand",
       "reference": "Enter brand name",
       "section": "Direct Account Status Report"
@@ -99,11 +99,6 @@
       "label": "# of Weeks On Hand",
       "reference": "Enter number of weeks on hand",
       "section": "Direct Account Status Report"
-    },
-    {
-      "label": "Note",
-      "reference": "Report style inventory only; submit report only if style is still on hand in this account.",
-      "section": "Notes"
     },
     {
       "label": "Action Plan",

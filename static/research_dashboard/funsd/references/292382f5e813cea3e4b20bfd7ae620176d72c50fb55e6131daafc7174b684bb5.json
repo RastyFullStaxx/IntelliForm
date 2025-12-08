@@ -37,7 +37,7 @@
         },
         {
           "label": "DATE",
-          "reference": "Enter date (MM/DD/YYYY, e.g., 10/16/1987)."
+          "reference": "Enter date (MM/DD/YYYY)."
         },
         {
           "label": "Attn.",
@@ -109,24 +109,6 @@
           "reference": "Specify drop shipping details."
         }
       ]
-    },
-    {
-      "title": "Conditions",
-      "fields": [
-        {
-          "label": "CONDITIONS",
-          "reference": "Review pricing and conditions."
-        }
-      ]
-    },
-    {
-      "title": "Terms",
-      "fields": [
-        {
-          "label": "TERMS",
-          "reference": "Specify payment terms."
-        }
-      ]
     }
   ],
   "fields": [
@@ -157,7 +139,7 @@
     },
     {
       "label": "DATE",
-      "reference": "Enter date (MM/DD/YYYY, e.g., 10/16/1987).",
+      "reference": "Enter date (MM/DD/YYYY).",
       "section": "Proposal Details"
     },
     {
@@ -239,16 +221,6 @@
       "label": "DROP SHIPPING",
       "reference": "Specify drop shipping details.",
       "section": "Billing Information"
-    },
-    {
-      "label": "CONDITIONS",
-      "reference": "Review pricing and conditions.",
-      "section": "Conditions"
-    },
-    {
-      "label": "TERMS",
-      "reference": "Specify payment terms.",
-      "section": "Terms"
     }
   ],
   "notes": "reference_explainer_v1",

@@ -24,11 +24,11 @@
         },
         {
           "label": "Date Filed",
-          "reference": "Enter the date filed (MM/DD/YYYY, e.g., 08/03/1998)."
+          "reference": "Enter the date filed (MM/DD/YYYY)."
         },
         {
           "label": "Date Served",
-          "reference": "Enter the date served (MM/DD/YYYY, e.g., 08/03/1998)."
+          "reference": "Enter the date served (MM/DD/YYYY)."
         },
         {
           "label": "Case Type",
@@ -67,7 +67,7 @@
       "fields": [
         {
           "label": "Trial Date",
-          "reference": "Enter the trial date (MM/DD/YYYY, e.g., 08/03/1998)."
+          "reference": "Enter the trial date (MM/DD/YYYY)."
         }
       ]
     }
@@ -90,12 +90,12 @@
     },
     {
       "label": "Date Filed",
-      "reference": "Enter the date filed (MM/DD/YYYY, e.g., 08/03/1998).",
+      "reference": "Enter the date filed (MM/DD/YYYY).",
       "section": "Case Information"
     },
     {
       "label": "Date Served",
-      "reference": "Enter the date served (MM/DD/YYYY, e.g., 08/03/1998).",
+      "reference": "Enter the date served (MM/DD/YYYY).",
       "section": "Case Information"
     },
     {
@@ -125,7 +125,7 @@
     },
     {
       "label": "Trial Date",
-      "reference": "Enter the trial date (MM/DD/YYYY, e.g., 08/03/1998).",
+      "reference": "Enter the trial date (MM/DD/YYYY).",
       "section": "Trial Information"
     }
   ],

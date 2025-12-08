@@ -50,31 +50,6 @@
       ]
     },
     {
-      "title": "Important Instructions",
-      "fields": [
-        {
-          "label": "A",
-          "reference": "Check material carefully against proof."
-        },
-        {
-          "label": "B",
-          "reference": "Inspect repro material immediately."
-        },
-        {
-          "label": "C",
-          "reference": "Poor printing will not be paid for."
-        },
-        {
-          "label": "D",
-          "reference": "Advise us at once if instructions are not clear."
-        },
-        {
-          "label": "E",
-          "reference": "Under no circumstances are you to space out our advertisement without specific instructions from us."
-        }
-      ]
-    },
-    {
       "title": "Space Billing Instructions",
       "fields": [
         {
@@ -124,31 +99,6 @@
       "label": "Date",
       "reference": "Enter the date for the advertisement.",
       "section": "Advertisement Compliance"
-    },
-    {
-      "label": "A",
-      "reference": "Check material carefully against proof.",
-      "section": "Important Instructions"
-    },
-    {
-      "label": "B",
-      "reference": "Inspect repro material immediately.",
-      "section": "Important Instructions"
-    },
-    {
-      "label": "C",
-      "reference": "Poor printing will not be paid for.",
-      "section": "Important Instructions"
-    },
-    {
-      "label": "D",
-      "reference": "Advise us at once if instructions are not clear.",
-      "section": "Important Instructions"
-    },
-    {
-      "label": "E",
-      "reference": "Under no circumstances are you to space out our advertisement without specific instructions from us.",
-      "section": "Important Instructions"
     },
     {
       "label": "Space Billing Instructions",

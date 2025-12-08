@@ -20,7 +20,19 @@
         },
         {
           "label": "DATE",
-          "reference": "Enter date (MM/DD/YY, e.g., 12/10/96)."
+          "reference": "Enter date (MM/DD/YY)."
+        },
+        {
+          "label": "MANUFACTURER",
+          "reference": "Enter the manufacturer name."
+        },
+        {
+          "label": "BRAND",
+          "reference": "Enter the brand name."
+        },
+        {
+          "label": "TYPE OF PACKINGS",
+          "reference": "Enter the packing types."
         },
         {
           "label": "REPORTING PERIODS",
@@ -32,7 +44,7 @@
         },
         {
           "label": "PRICE POINT",
-          "reference": "Enter price point (e.g., FULL $11.89, P/N $)."
+          "reference": "Enter price point."
         }
       ]
     },
@@ -82,6 +94,21 @@
     {
       "label": "DATE",
       "reference": "Enter date (MM/DD/YY, e.g., 12/10/96).",
+      "section": "Report Information"
+    },
+    {
+      "label": "MANUFACTURER",
+      "reference": "Enter the manufacturer name.",
+      "section": "Report Information"
+    },
+    {
+      "label": "BRAND",
+      "reference": "Enter the brand name.",
+      "section": "Report Information"
+    },
+    {
+      "label": "TYPE OF PACKINGS",
+      "reference": "Enter the packing types.",
       "section": "Report Information"
     },
     {
