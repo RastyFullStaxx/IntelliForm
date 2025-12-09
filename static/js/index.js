@@ -7,8 +7,30 @@ document.addEventListener('DOMContentLoaded', function () {
   const deleteBtn = document.getElementById('deleteFileBtn');
   const startBtn = document.getElementById('startFillingBtn');
   const betaBtn = document.getElementById('betaTesterBtn');
+  const modeBtn = document.getElementById('modeSwitchBtn');
   const METRICS_KEY = 'if_metrics_opt_in';
   const LS_UID = 'research_user_id';
+  const MODE_KEY = 'if_mode_choice';
+  const MODES = {
+    intelliform: {
+      label: 'IntelliForm Mode',
+      sub: 'LLMv3 + GNN · boosted grouping',
+      icon: 'bi-layers-fill',
+      dialog: {
+        title: 'Switch to IntelliForm mode?',
+        text: 'IntelliForm mode uses LLMv3 together with our GNN architecture for better grouping, cleaner labels, and smarter routing.'
+      }
+    },
+    baseline: {
+      label: 'Baseline Mode',
+      sub: 'LLMv3 only · degraded quality',
+      icon: 'bi-exclamation-triangle-fill',
+      dialog: {
+        title: 'Switch to Baseline mode?',
+        text: 'Baseline mode forces the system to use only LLMv3 without the GNN assist. Expect missing labels, loose grouping, and overall poorer performance.'
+      }
+    }
+  };
 
   let selectedFile = null;
 
@@ -54,6 +76,41 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   ensureMetricsDefault();
+
+  // Mode switcher (Baseline vs IntelliForm)
+  const getSavedMode = () => {
+    const val = sessionStorage.getItem(MODE_KEY) || localStorage.getItem(MODE_KEY);
+    return (val === 'baseline' || val === 'intelliform') ? val : 'intelliform';
+  };
+
+  const setSavedMode = (mode) => {
+    try {
+      sessionStorage.setItem(MODE_KEY, mode);
+      localStorage.setItem(MODE_KEY, mode);
+    } catch {}
+  };
+
+  function renderMode(mode) {
+    if (!modeBtn) return;
+    const def = MODES[mode] || MODES.intelliform;
+    modeBtn.classList.toggle('baseline', mode === 'baseline');
+    modeBtn.classList.toggle('intelliform', mode !== 'baseline');
+    const iconEl = modeBtn.querySelector('.mode-icon');
+    if (iconEl) iconEl.className = `bi ${def.icon} mode-icon`;
+    const labelEl = modeBtn.querySelector('.mode-label');
+    if (labelEl) labelEl.textContent = def.label;
+    const subEl = modeBtn.querySelector('.mode-sub');
+    if (subEl) subEl.textContent = def.sub;
+    document.body.dataset.mode = mode;
+  }
+
+  function initMode() {
+    const current = getSavedMode();
+    setSavedMode(current);
+    renderMode(current);
+  }
+
+  initMode();
 
   async function promptForTesterName(existingName = "") {
     const promptFn = window.promptForResearchUserId || (async () => {
@@ -130,6 +187,35 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch (e) {
       console.warn('Beta opt-in failed', e);
     }
+  });
+
+  modeBtn?.addEventListener('click', async () => {
+    const current = getSavedMode();
+    const next = current === 'intelliform' ? 'baseline' : 'intelliform';
+    const def = MODES[next] || MODES.intelliform;
+
+    const ok = await BrandDialog.confirm({
+      title: def.dialog.title,
+      text: `${def.dialog.text} Continue?`,
+      variant: next === 'baseline' ? 'warning' : 'success',
+      confirmText: next === 'baseline' ? 'Use baseline' : 'Use IntelliForm',
+      cancelText: 'Stay on current',
+      reverseButtons: true
+    });
+    if (!ok) return;
+
+    setSavedMode(next);
+    renderMode(next);
+
+    BrandDialog.alert({
+      title: `${def.label} enabled`,
+      text: next === 'baseline'
+        ? 'Running with LLMv3 only. Expect degraded summaries and mis-grouped fields.'
+        : 'Running with LLMv3 + GNN. You should see tighter grouping and better labels.',
+      variant: next === 'baseline' ? 'warning' : 'success',
+      confirmText: 'Got it',
+      autoCloseMs: 2200
+    });
   });
 
   function showUploadedFile(name) {

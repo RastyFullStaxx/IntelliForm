@@ -152,3 +152,67 @@ body.landing-body{
   gap:10px;
   align-items:center;
 }
+
+.mode-fab{
+  position:fixed;
+  left:24px;
+  bottom:24px;
+  z-index:2000;
+  display:flex;
+  align-items:center;
+}
+.mode-btn{
+  position:relative;
+  display:flex; align-items:center; gap:10px;
+  padding:12px 14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,0.2);
+  background: linear-gradient(135deg, rgba(62,216,255,0.22), rgba(123,91,255,0.3));
+  color:#f8fbff;
+  box-shadow:0 14px 30px rgba(0,0,0,0.35), 0 0 18px rgba(62,216,255,0.25);
+  backdrop-filter: blur(10px);
+  transition: transform .15s ease, box-shadow .2s ease, filter .15s ease;
+  overflow:hidden;
+}
+.mode-btn:hover{
+  transform: translateY(-2px);
+  box-shadow:0 16px 34px rgba(0,0,0,0.4), 0 0 22px rgba(62,216,255,0.35);
+  filter:brightness(1.05);
+}
+.mode-btn:active{ transform: translateY(0); }
+.mode-btn::before{
+  content:"";
+  position:absolute;
+  inset:-8px;
+  border-radius:18px;
+  background: radial-gradient(circle at 20% 20%, rgba(62,216,255,0.2), transparent 55%),
+              radial-gradient(circle at 80% 80%, rgba(123,91,255,0.2), transparent 50%);
+  opacity:0;
+  transition: opacity .2s ease;
+  z-index:-1;
+}
+.mode-btn:hover::before{ opacity:1; }
+.mode-btn.intelliform{
+  background: linear-gradient(135deg, #1bd2a0, #00a4ff);
+  box-shadow:0 14px 32px rgba(0,164,255,0.28);
+}
+.mode-btn.baseline{
+  background: linear-gradient(135deg, #ff8c42, #ff3b5f);
+  box-shadow:0 14px 32px rgba(255,59,95,0.32);
+}
+.mode-icon-wrap{
+  width:38px; height:38px; border-radius:12px;
+  background: rgba(255,255,255,0.12);
+  display:flex; align-items:center; justify-content:center;
+  font-size:18px;
+}
+.mode-btn.baseline .mode-icon-wrap{ background: rgba(255,255,255,0.16); }
+.mode-text{ display:flex; flex-direction:column; align-items:flex-start; line-height:1.2; }
+.mode-label{ font-weight:800; letter-spacing:.1px; }
+.mode-sub{ font-size:11px; opacity:.9; }
+
+@media (max-width: 720px){
+  .mode-fab{ left:16px; bottom:16px; }
+  .mode-btn{ padding:10px 12px; }
+  .mode-sub{ font-size:10px; }
+}
