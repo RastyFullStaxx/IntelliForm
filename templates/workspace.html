@@ -8,12 +8,13 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
 <link rel="icon" href="/static/img/imgMainLogo.png" type="image/png">
 <link rel="apple-touch-icon" href="/static/img/imgMainLogo.png">
   <link rel="shortcut icon" href="/static/img/imgMainLogo.png" type="image/png">
   <!-- CSS -->
-  <link rel="stylesheet" href="/static/css/workspace.css" />
+  <link rel="stylesheet" href="/static/css/workspace.css?v=20251125d" />
   <link rel="stylesheet" href="/static/css/brand-dialog.css?v=20251125b" />
 
   <!-- Bootstrap Icons (only the icon font; no Bootstrap CSS required) -->
@@ -202,6 +203,18 @@
     </div>
   </nav>
 
+  <!-- Status chip (bottom-right) -->
+  <div id="metaStatusDock" class="meta-status-dock" aria-live="polite">
+    <div id="metaModeLine" class="meta-line">
+      <span id="metaModeText">IntelliForm :Model</span>
+      <i class="bi bi-layers-fill"></i>
+    </div>
+    <div id="metaUserLine" class="meta-line d-none">
+      <span id="metaUserText">Guest :User</span>
+      <i class="bi bi-person-check-fill"></i>
+    </div>
+  </div>
+
   <!-- Quick FAQ / Guide -->
   <div id="faqDock" aria-live="polite">
     <button id="faqButton" type="button" class="faq-button" aria-label="Tools guide" title="Tools guide">
@@ -314,7 +327,7 @@
   <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
   <!-- App JS -->
-  <script src="/static/js/workspace.js?v=20251125b"></script>
+  <script src="/static/js/workspace.js?v=20251125d"></script>
 
   <!-- Tiny helper so the pen/highlight dropdowns open/close nicely -->
   <script>

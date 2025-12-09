@@ -163,6 +163,39 @@ body {
   transform: translateY(-1px);
   transition: all .15s ease;
 }
+
+/* ===== Meta Status ===== */
+.meta-status-dock{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:1100;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:2px;
+  color: rgba(240,244,255,0.75);
+  font-family:'Manrope', 'Inter', sans-serif;
+  font-weight:500;
+  font-size:13px;
+  text-shadow:none;
+}
+.meta-line{
+  line-height:1.2;
+  text-align:right;
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:6px;
+}
+.meta-line.d-none{ display:none; }
+.meta-line i{
+  font-size:14px;
+  color: rgba(240,244,255,0.65);
+}
+@media (max-width: 920px){
+  .meta-status-dock{ right:12px; bottom:12px; }
+}
 .dropdown-menu[data-for="check"] select{
   width: 100%;
   padding: 8px 10px;

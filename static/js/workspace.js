@@ -29,6 +29,11 @@ function initWorkspace() {
   const sidebarToggleCluster = $("sidebarToggleCluster");
   const faqButton = $("faqButton");
   const faqPanel = $("faqPanel");
+  const metaDock = document.getElementById("metaStatusDock");
+  const metaModeLine = document.getElementById("metaModeLine");
+  const metaModeText = document.getElementById("metaModeText");
+  const metaUserLine = document.getElementById("metaUserLine");
+  const metaUserText = document.getElementById("metaUserText");
   const sidebarTitle = document.querySelector(".sidebar-title h5");
   const metricsRow = $("metricsRow");
   const pageInfo = $("pageInfo");
@@ -99,7 +104,6 @@ function initWorkspace() {
       showAlert({ variant: "danger", title: "Analysis failed", text: msg || "Could not analyze this form." });
     }
   }
-
 
   // Base canvases coming from HTML
   let pdfCanvas = $("pdfCanvas");
@@ -2123,6 +2127,12 @@ function findAnchorForLabel(labelRaw, annotations){
   // ===== Research logging (timers + endpoints) =====
   const LS_KEY_UID = "research_user_id";
   const METRICS_KEY = "if_metrics_opt_in";
+  const MODE_KEY = "if_mode_choice";
+
+  const MODE_META = {
+    intelliform: { label: "IntelliForm", desc: "LLMv3 + GNN", icon: "bi-layers-fill" },
+    baseline: { label: "Baseline", desc: "LLMv3 only", icon: "bi-exclamation-triangle-fill" }
+  };
 
   function isMetricsOptIn() {
     const flag = sessionStorage.getItem(METRICS_KEY) || localStorage.getItem(METRICS_KEY);
@@ -2137,6 +2147,37 @@ function findAnchorForLabel(labelRaw, annotations){
     const s = (v ?? "").toString().trim();
     return s || "ANON";
   }
+
+  function getModeChoice() {
+    const m = sessionStorage.getItem(MODE_KEY) || localStorage.getItem(MODE_KEY) || "intelliform";
+    return (m === "baseline") ? "baseline" : "intelliform";
+  }
+
+  function renderMetaStatus() {
+    if (!metaDock) return;
+    const mode = getModeChoice();
+    const enrolled = isMetricsOptIn();
+    const tester = getUserId();
+    const modeDef = MODE_META[mode] || MODE_META.intelliform;
+
+    metaDock.dataset.mode = mode;
+
+    const modelText = `${modeDef.label} :Model`;
+    if (metaModeText) metaModeText.textContent = modelText;
+
+    const showTester = enrolled && tester !== "ANON";
+    if (metaUserLine) {
+      if (showTester) {
+        if (metaUserText) metaUserText.textContent = `${tester} :User`;
+        metaUserLine.classList.remove("d-none");
+      } else {
+        metaUserLine.classList.add("d-none");
+      }
+    }
+  }
+
+  // Initialize meta status once constants are ready
+  renderMetaStatus();
 
   // Optional helper so index page (or anywhere) can set it:
   window.setResearchUserId = function(name){
