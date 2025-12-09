@@ -783,6 +783,9 @@ async def api_explainer_legacy(
             OUT_BASELINE.mkdir(parents=True, exist_ok=True)
             baseline_path = OUT_BASELINE / f"{form_id}.json"
             baseline_path.write_text(json.dumps(degraded, ensure_ascii=False, indent=2), encoding="utf-8")
+            # persist canonical so we can reuse it even while serving degraded output
+            rel_path = os.path.relpath(expl_path, BASE_DIR).replace("\\", "/")
+            reg_upsert(str(REG_PATH), form_id=form_id, title=human_title, rel_path=rel_path, bucket=bucket)
             # optional cleanup
             try:
                 _purge_old_baseline(3600)
@@ -935,7 +938,15 @@ async def api_explainer_ensure(body: EnsureExplainerBody):
             except Exception:
                 pass
             rel_baseline = os.path.relpath(baseline_path, BASE_DIR).replace("\\", "/")
-            # Do NOT upsert registry for baseline; keep canonical pristine
+            # Persist canonical so we can reuse it even while serving degraded output
+            reg_upsert(
+                str(REG_PATH),
+                form_id=h,
+                title=title,
+                rel_path=rel_path,
+                bucket=bucket,
+                aliases=(body.aliases or []),
+            )
             return {
                 "ok": True,
                 "form_id": h,
