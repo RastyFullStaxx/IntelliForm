@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const startBtn = document.getElementById('startFillingBtn');
   const betaBtn = document.getElementById('betaTesterBtn');
   const modeBtn = document.getElementById('modeSwitchBtn');
+  const lottieOverlay = document.getElementById('uploadLottieOverlay');
+  const lottieCanvas = document.getElementById('uploadLottieCanvas');
+  const LOTTIE_SRC = 'https://lottie.host/d84b7346-4ae4-474c-952c-e6fc61b63c44/PlF7Tm4ByD.lottie';
+  let dotLottiePlayer = null;
   const METRICS_KEY = 'if_metrics_opt_in';
   const LS_UID = 'research_user_id';
   const MODE_KEY = 'if_mode_choice';
@@ -348,8 +352,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
       uploading?.close();
 
-      // Navigate to workspace
-      window.location.href = '/workspace';
+      // Show Lottie transition then navigate
+      showUploadLottieAndGo();
     } catch (err) {
       console.error(err);
       BrandDialog.alert({
@@ -381,6 +385,47 @@ document.addEventListener('DOMContentLoaded', function () {
 
     uploadAndNavigate(selectedFile);
   });
+
+  function showUploadLottieAndGo() {
+    if (lottieOverlay) lottieOverlay.classList.remove('d-none');
+    let navigated = false;
+    const go = () => {
+      if (navigated) return;
+      navigated = true;
+      window.location.href = '/workspace';
+    };
+
+    const initDotLottie = async () => {
+      if (dotLottiePlayer) return dotLottiePlayer;
+      if (!lottieCanvas) return null;
+      try {
+        const { DotLottie } = await import('https://cdn.jsdelivr.net/npm/@lottiefiles/dotlottie-web/+esm');
+        dotLottiePlayer = new DotLottie({
+          autoplay: true,
+          loop: false,
+          canvas: lottieCanvas,
+          src: LOTTIE_SRC
+        });
+        return dotLottiePlayer;
+      } catch (err) {
+        console.warn('Failed to init DotLottie', err);
+        return null;
+      }
+    };
+
+    initDotLottie().then((player) => {
+      if (!player) return;
+      try {
+        player.addEventListener?.('complete', go, { once: true });
+        player.play?.();
+      } catch (err) {
+        console.warn('DotLottie playback error', err);
+      }
+    });
+
+    // safety fallback in case complete event doesn't fire
+    setTimeout(go, 5000);
+  }
 });
 
 

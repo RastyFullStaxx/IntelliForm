@@ -19,14 +19,14 @@
 <link rel="shortcut icon" href="/static/img/imgMainLogo.png" type="image/png">
 
   <!-- Custom CSS -->
-  <link rel="stylesheet" href="/static/css/index.css?v=20251125d" />
+  <link rel="stylesheet" href="/static/css/index.css?v=20251125o" />
   <link rel="stylesheet" href="/static/css/brand-dialog.css?v=20251125b" />
   <!-- Bootstrap JS (bundle) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   <!-- Branded dialogs -->
   <script src="/static/js/brand-dialog.js?v=20251125b" defer></script>
   <!-- Main Logic -->
-  <script src="/static/js/index.js?v=20251125c" defer></script>
+  <script src="/static/js/index.js?v=20251125n" defer></script>
 </head>
 
 <body class="landing-body">
@@ -88,6 +88,15 @@
           <span class="mode-sub">LLMv3 + GNN · boosted grouping</span>
         </span>
       </button>
+    </div>
+  </div>
+
+  <!-- Lottie overlay -->
+  <div id="uploadLottieOverlay" class="lottie-overlay d-none" aria-live="polite">
+    <div class="lottie-card">
+      <div class="lottie-frame">
+        <canvas id="uploadLottieCanvas" width="300" height="300"></canvas>
+      </div>
     </div>
   </div>
 </body>

@@ -210,6 +210,61 @@ body.landing-body{
   animation: gradientFlow 7s ease infinite;
   box-shadow:0 14px 32px rgba(255,59,95,0.32);
 }
+.lottie-overlay{
+  position:fixed;
+  inset:0;
+  background: linear-gradient(-45deg,
+    #031a46,
+    #1e224d,
+    #3c1a5b,
+    #1b4c63,
+    #2d1e64,
+    #17373f,
+    #4e3a74,
+    #174472
+  );
+  backdrop-filter:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:4000;
+}
+.lottie-card{
+  background:transparent;
+  border:none;
+  border-radius:0;
+  padding:0;
+  box-shadow:none;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  color:#1a1a1a;
+  font-weight:700;
+  letter-spacing:.2px;
+  width:100%;
+  height:100%;
+}
+.lottie-frame{
+  background:transparent;
+  padding:0;
+  border-radius:0;
+  box-shadow:none;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.lottie-frame canvas{
+  width:300px;
+  height:300px;
+  max-width:90vw;
+  max-height:90vh;
+  display:block;
+}
+.lottie-card{
+  gap:18px;
+}
 .mode-icon-wrap{
   width:38px; height:38px; border-radius:12px;
   background: rgba(255,255,255,0.12);
