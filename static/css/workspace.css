@@ -169,7 +169,7 @@ body {
   position:fixed;
   right:18px;
   bottom:18px;
-  z-index:1100;
+  z-index:900; /* stay above canvas but behind sidebar/toggle */
   display:flex;
   flex-direction:column;
   align-items:flex-end;
@@ -1350,7 +1350,7 @@ body {
   align-items:center;
   justify-content:space-between;
   pointer-events:none;   /* allow canvas interactions; buttons stay clickable */
-  z-index:1001;
+  z-index:850; /* behind sidebar + toggle */
 }
 .page-nav-shell.is-hidden{ display:none; }
 .page-nav-btn{

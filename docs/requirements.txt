@@ -30,7 +30,7 @@ scipy
 # Utilities and tooling
 requests
 tqdm
+openai
 
 # Optional: only needed for some research scripts
 # (safe to install; skip if you want minimal runtime)
-
