@@ -1,0 +1,36 @@
+# IntelliForm Python dependencies (Python 3.10–3.11)
+# Install with: pip install -r docs/requirements.txt
+
+fastapi
+uvicorn
+pydantic
+jinja2
+python-multipart
+
+# Core ML / NLP
+torch
+transformers
+datasets
+numpy
+pandas
+
+# PDF and image processing
+pdfplumber
+pypdf
+pymupdf
+pillow
+imagehash
+
+# Metrics and evaluation
+scikit-learn
+rouge-score
+nltk
+scipy
+
+# Utilities and tooling
+requests
+tqdm
+
+# Optional: only needed for some research scripts
+# (safe to install; skip if you want minimal runtime)
+

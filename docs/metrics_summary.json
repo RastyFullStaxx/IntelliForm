@@ -1,0 +1,3267 @@
+{
+  "generated_at": "2025-12-09T15:06:23+00:00",
+  "ph_forms": {
+    "summary": {
+      "count": 20,
+      "totals": {
+        "tp": 1526,
+        "fp": 56,
+        "fn": 106
+      },
+      "macro": {
+        "f1": 0.94557,
+        "meteor": 0.86369,
+        "precision": 0.96456,
+        "recall": 0.928975,
+        "rouge_l": 0.841655
+      },
+      "iou": 0.904028
+    },
+    "forms": [
+      {
+        "form_no": 1,
+        "title": "OPTIONAL LIFE INSURANCE POLICY LOAN APPLICATION",
+        "bucket": "government",
+        "metrics": {
+          "tp": 67,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.9853,
+          "recall": 0.9853,
+          "f1": 0.9853,
+          "rouge_l": 0.8388,
+          "meteor": 0.8655,
+          "iou": 0.971014
+        }
+      },
+      {
+        "form_no": 2,
+        "title": "Prosperity Card Purchase Form",
+        "bucket": "health",
+        "metrics": {
+          "tp": 40,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.9756,
+          "recall": 0.9524,
+          "f1": 0.9639,
+          "rouge_l": 0.8345,
+          "meteor": 0.8586,
+          "iou": 0.930233
+        }
+      },
+      {
+        "form_no": 3,
+        "title": "Personal Accident Claim Form (Claimant\u2019s Statement)",
+        "bucket": "health",
+        "metrics": {
+          "tp": 42,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.9545,
+          "recall": 0.913,
+          "f1": 0.9333,
+          "rouge_l": 0.7733,
+          "meteor": 0.7966,
+          "iou": 0.875
+        }
+      },
+      {
+        "form_no": 4,
+        "title": "Variable Life Insurance - Request for Fund Withdrawal",
+        "bucket": "health",
+        "metrics": {
+          "tp": 44,
+          "fp": 3,
+          "fn": 6,
+          "precision": 0.9362,
+          "recall": 0.88,
+          "f1": 0.9072,
+          "rouge_l": 0.8307,
+          "meteor": 0.8638,
+          "iou": 0.830189
+        }
+      },
+      {
+        "form_no": 5,
+        "title": "Application for Treaty Purposes",
+        "bucket": "ph-supplemental",
+        "metrics": {
+          "tp": 73,
+          "fp": 1,
+          "fn": 13,
+          "precision": 0.9865,
+          "recall": 0.8488,
+          "f1": 0.9125,
+          "rouge_l": 0.8221,
+          "meteor": 0.8384,
+          "iou": 0.83908
+        }
+      },
+      {
+        "form_no": 6,
+        "title": "Application for Treaty Purposes",
+        "bucket": "ph-supplemental",
+        "metrics": {
+          "tp": 105,
+          "fp": 1,
+          "fn": 3,
+          "precision": 0.9906,
+          "recall": 0.9722,
+          "f1": 0.9813,
+          "rouge_l": 0.8436,
+          "meteor": 0.911,
+          "iou": 0.963303
+        }
+      },
+      {
+        "form_no": 7,
+        "title": "Tricycle & Quick Business Loan Application",
+        "bucket": "finance",
+        "metrics": {
+          "tp": 172,
+          "fp": 5,
+          "fn": 4,
+          "precision": 0.9718,
+          "recall": 0.9773,
+          "f1": 0.9745,
+          "rouge_l": 0.8956,
+          "meteor": 0.8804,
+          "iou": 0.950276
+        }
+      },
+      {
+        "form_no": 8,
+        "title": "Application for Treaty Purposes",
+        "bucket": "ph-supplemental",
+        "metrics": {
+          "tp": 95,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.95,
+          "recall": 0.95,
+          "f1": 0.95,
+          "rouge_l": 0.8812,
+          "meteor": 0.9359,
+          "iou": 0.904762
+        }
+      },
+      {
+        "form_no": 9,
+        "title": "Auto-Invest Enrollment Form",
+        "bucket": "finance",
+        "metrics": {
+          "tp": 26,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.9286,
+          "recall": 0.9286,
+          "f1": 0.9286,
+          "rouge_l": 0.8289,
+          "meteor": 0.8495,
+          "iou": 0.866667
+        }
+      },
+      {
+        "form_no": 10,
+        "title": "Application for Treaty Purposes",
+        "bucket": "ph-supplemental",
+        "metrics": {
+          "tp": 83,
+          "fp": 2,
+          "fn": 11,
+          "precision": 0.9765,
+          "recall": 0.883,
+          "f1": 0.9274,
+          "rouge_l": 0.8423,
+          "meteor": 0.8712,
+          "iou": 0.864583
+        }
+      },
+      {
+        "form_no": 11,
+        "title": "NBI Clearance Application Form",
+        "bucket": "government",
+        "metrics": {
+          "tp": 71,
+          "fp": 1,
+          "fn": 13,
+          "precision": 0.9861,
+          "recall": 0.8452,
+          "f1": 0.9103,
+          "rouge_l": 0.9082,
+          "meteor": 0.8959,
+          "iou": 0.835294
+        }
+      },
+      {
+        "form_no": 12,
+        "title": "Suitability Assessment Form",
+        "bucket": "finance",
+        "metrics": {
+          "tp": 64,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.9697,
+          "recall": 0.9697,
+          "f1": 0.9697,
+          "rouge_l": 0.8334,
+          "meteor": 0.8567,
+          "iou": 0.941176
+        }
+      },
+      {
+        "form_no": 13,
+        "title": "APPLICATION FOR HEALTH CARE ASSISTANCE",
+        "bucket": "health",
+        "metrics": {
+          "tp": 33,
+          "fp": 2,
+          "fn": 1,
+          "precision": 0.9429,
+          "recall": 0.9706,
+          "f1": 0.9565,
+          "rouge_l": 0.877,
+          "meteor": 0.8829,
+          "iou": 0.916667
+        }
+      },
+      {
+        "form_no": 14,
+        "title": "LOLC Bank Philippines Inc Loan Application Form (Individual)",
+        "bucket": "finance",
+        "metrics": {
+          "tp": 163,
+          "fp": 11,
+          "fn": 9,
+          "precision": 0.9368,
+          "recall": 0.9477,
+          "f1": 0.9422,
+          "rouge_l": 0.8296,
+          "meteor": 0.8506,
+          "iou": 0.89071
+        }
+      },
+      {
+        "form_no": 15,
+        "title": "Eazy Health Claim Form for Critical Illness & Disability",
+        "bucket": "health",
+        "metrics": {
+          "tp": 46,
+          "fp": 1,
+          "fn": 4,
+          "precision": 0.9787,
+          "recall": 0.92,
+          "f1": 0.9485,
+          "rouge_l": 0.8387,
+          "meteor": 0.8654,
+          "iou": 0.901961
+        }
+      },
+      {
+        "form_no": 16,
+        "title": "AutoCharge Facility (ACF) for BPI Credit Cards Authorization Form",
+        "bucket": "banking",
+        "metrics": {
+          "tp": 49,
+          "fp": 0,
+          "fn": 7,
+          "precision": 1.0,
+          "recall": 0.875,
+          "f1": 0.9333,
+          "rouge_l": 0.8411,
+          "meteor": 0.88,
+          "iou": 0.875
+        }
+      },
+      {
+        "form_no": 17,
+        "title": "Passport Application Form",
+        "bucket": "government",
+        "metrics": {
+          "tp": 53,
+          "fp": 2,
+          "fn": 9,
+          "precision": 0.9636,
+          "recall": 0.8548,
+          "f1": 0.906,
+          "rouge_l": 0.896,
+          "meteor": 0.9032,
+          "iou": 0.828125
+        }
+      },
+      {
+        "form_no": 18,
+        "title": "Unified Business Permit Application Form",
+        "bucket": "government",
+        "metrics": {
+          "tp": 165,
+          "fp": 8,
+          "fn": 5,
+          "precision": 0.9538,
+          "recall": 0.9706,
+          "f1": 0.9621,
+          "rouge_l": 0.6994,
+          "meteor": 0.7203,
+          "iou": 0.926966
+        }
+      },
+      {
+        "form_no": 19,
+        "title": "Unified Multi-Purpose ID (UMID) Card Application Form",
+        "bucket": "government",
+        "metrics": {
+          "tp": 51,
+          "fp": 4,
+          "fn": 1,
+          "precision": 0.9273,
+          "recall": 0.9808,
+          "f1": 0.9533,
+          "rouge_l": 0.8633,
+          "meteor": 0.8808,
+          "iou": 0.910714
+        }
+      },
+      {
+        "form_no": 20,
+        "title": "Application for Treaty Purposes",
+        "bucket": "ph-supplemental",
+        "metrics": {
+          "tp": 84,
+          "fp": 2,
+          "fn": 4,
+          "precision": 0.9767,
+          "recall": 0.9545,
+          "f1": 0.9655,
+          "rouge_l": 0.8554,
+          "meteor": 0.8671,
+          "iou": 0.933333
+        }
+      }
+    ]
+  },
+  "funsd_test": {
+    "summary": {
+      "count": 50,
+      "totals": {
+        "tp": 1191,
+        "fp": 40,
+        "fn": 92
+      },
+      "macro": {
+        "f1": 0.943618,
+        "meteor": 0.833858,
+        "precision": 0.96649,
+        "recall": 0.92335,
+        "rouge_l": 0.816608
+      },
+      "iou": 0.900227
+    },
+    "forms": [
+      {
+        "form_no": 1,
+        "title": "Compound Physical Parameters",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 26,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.963,
+          "recall": 0.963,
+          "f1": 0.963,
+          "rouge_l": 0.7965,
+          "meteor": 0.7968,
+          "iou": 0.928571
+        }
+      },
+      {
+        "form_no": 2,
+        "title": "Newport Lights Heavy Up Progress Report",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 15,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.9375,
+          "f1": 0.9677,
+          "rouge_l": 0.787,
+          "meteor": 0.7814,
+          "iou": 0.9375
+        }
+      },
+      {
+        "form_no": 3,
+        "title": "Travel Information Sheet",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 29,
+          "fp": 1,
+          "fn": 3,
+          "precision": 0.9667,
+          "recall": 0.9062,
+          "f1": 0.9355,
+          "rouge_l": 0.8415,
+          "meteor": 0.8699,
+          "iou": 0.878788
+        }
+      },
+      {
+        "form_no": 4,
+        "title": "CASE FORM",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 16,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.9412,
+          "recall": 0.8889,
+          "f1": 0.9143,
+          "rouge_l": 0.8238,
+          "meteor": 0.8411,
+          "iou": 0.842105
+        }
+      },
+      {
+        "form_no": 5,
+        "title": "Cover Page",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 14,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.9333,
+          "recall": 0.875,
+          "f1": 0.9032,
+          "rouge_l": 0.8359,
+          "meteor": 0.8608,
+          "iou": 0.823529
+        }
+      },
+      {
+        "form_no": 6,
+        "title": "Proposal",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 43,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.9773,
+          "f1": 0.9885,
+          "rouge_l": 0.8087,
+          "meteor": 0.8166,
+          "iou": 0.977273
+        }
+      },
+      {
+        "form_no": 7,
+        "title": "Cigarette Report Form",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 67,
+          "fp": 2,
+          "fn": 1,
+          "precision": 0.971,
+          "recall": 0.9853,
+          "f1": 0.9781,
+          "rouge_l": 0.842,
+          "meteor": 0.8948,
+          "iou": 0.957143
+        }
+      },
+      {
+        "form_no": 8,
+        "title": "STYLE LOW PRICE - PROGRESS REPORT",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 21,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.9545,
+          "recall": 0.9545,
+          "f1": 0.9545,
+          "rouge_l": 0.8038,
+          "meteor": 0.8087,
+          "iou": 0.913043
+        }
+      },
+      {
+        "form_no": 9,
+        "title": "Magazine Insertion Order",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 17,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.9444,
+          "recall": 0.9444,
+          "f1": 0.9444,
+          "rouge_l": 0.8318,
+          "meteor": 0.8542,
+          "iou": 0.894737
+        }
+      },
+      {
+        "form_no": 10,
+        "title": "Coupon Code Registration Form",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 39,
+          "fp": 1,
+          "fn": 5,
+          "precision": 0.975,
+          "recall": 0.8864,
+          "f1": 0.9286,
+          "rouge_l": 0.8398,
+          "meteor": 0.8671,
+          "iou": 0.866667
+        }
+      },
+      {
+        "form_no": 11,
+        "title": "Media Request Form",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 32,
+          "fp": 0,
+          "fn": 6,
+          "precision": 1.0,
+          "recall": 0.8421,
+          "f1": 0.9143,
+          "rouge_l": 0.833,
+          "meteor": 0.8562,
+          "iou": 0.842105
+        }
+      },
+      {
+        "form_no": 12,
+        "title": "47th TCRC Registration Form",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 45,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.9783,
+          "recall": 0.9783,
+          "f1": 0.9783,
+          "rouge_l": 0.8271,
+          "meteor": 0.8465,
+          "iou": 0.957447
+        }
+      },
+      {
+        "form_no": 13,
+        "title": "1997 Special Event Request Form",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 25,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.9615,
+          "recall": 0.9615,
+          "f1": 0.9615,
+          "rouge_l": 0.7698,
+          "meteor": 0.7909,
+          "iou": 0.925926
+        }
+      },
+      {
+        "form_no": 14,
+        "title": "Decision Tree Estimation of Toxic Risk",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 17,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.9444,
+          "recall": 0.9444,
+          "f1": 0.9444,
+          "rouge_l": 0.83,
+          "meteor": 0.8512,
+          "iou": 0.894737
+        }
+      },
+      {
+        "form_no": 15,
+        "title": "Facsimile Cover Sheet",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 18,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.9,
+          "f1": 0.9474,
+          "rouge_l": 0.8329,
+          "meteor": 0.856,
+          "iou": 0.9
+        }
+      },
+      {
+        "form_no": 16,
+        "title": "Fax Cover Sheet",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 11,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.9167,
+          "f1": 0.9565,
+          "rouge_l": 0.81,
+          "meteor": 0.8188,
+          "iou": 0.916667
+        }
+      },
+      {
+        "form_no": 17,
+        "title": "Competitive Product Introduction Progress Report",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 19,
+          "fp": 1,
+          "fn": 3,
+          "precision": 0.95,
+          "recall": 0.8636,
+          "f1": 0.9048,
+          "rouge_l": 0.8101,
+          "meteor": 0.8189,
+          "iou": 0.826087
+        }
+      },
+      {
+        "form_no": 18,
+        "title": "Fax Cover Sheet",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 11,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.9167,
+          "recall": 0.9167,
+          "f1": 0.9167,
+          "rouge_l": 0.8333,
+          "meteor": 0.8567,
+          "iou": 0.846154
+        }
+      },
+      {
+        "form_no": 19,
+        "title": "Test Article Receipt",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 33,
+          "fp": 2,
+          "fn": 1,
+          "precision": 0.9429,
+          "recall": 0.9706,
+          "f1": 0.9565,
+          "rouge_l": 0.8264,
+          "meteor": 0.8454,
+          "iou": 0.916667
+        }
+      },
+      {
+        "form_no": 20,
+        "title": "Notice of Service of Process",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 30,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.9677,
+          "recall": 0.9375,
+          "f1": 0.9524,
+          "rouge_l": 0.8193,
+          "meteor": 0.8338,
+          "iou": 0.909091
+        }
+      },
+      {
+        "form_no": 21,
+        "title": "Sample Request Form",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 63,
+          "fp": 1,
+          "fn": 5,
+          "precision": 0.9844,
+          "recall": 0.9265,
+          "f1": 0.9545,
+          "rouge_l": 0.7457,
+          "meteor": 0.7518,
+          "iou": 0.913043
+        }
+      },
+      {
+        "form_no": 22,
+        "title": "New Competitive Products",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 21,
+          "fp": 1,
+          "fn": 3,
+          "precision": 0.9545,
+          "recall": 0.875,
+          "f1": 0.913,
+          "rouge_l": 0.8346,
+          "meteor": 0.8588,
+          "iou": 0.84
+        }
+      },
+      {
+        "form_no": 23,
+        "title": "REPORT OF CORPORATE TREASURER",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 27,
+          "fp": 1,
+          "fn": 5,
+          "precision": 0.9643,
+          "recall": 0.8438,
+          "f1": 0.9,
+          "rouge_l": 0.8134,
+          "meteor": 0.8242,
+          "iou": 0.818182
+        }
+      },
+      {
+        "form_no": 24,
+        "title": "Telecopy Information",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 5,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.8333,
+          "f1": 0.9091,
+          "rouge_l": 0.7978,
+          "meteor": 0.7989,
+          "iou": 0.833333
+        }
+      },
+      {
+        "form_no": 25,
+        "title": "Maverick Specials - Progress Report",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 18,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.9474,
+          "recall": 1.0,
+          "f1": 0.973,
+          "rouge_l": 0.7411,
+          "meteor": 0.7443,
+          "iou": 0.947368
+        }
+      },
+      {
+        "form_no": 26,
+        "title": "Fax Transmittal",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 23,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.9583,
+          "f1": 0.9787,
+          "rouge_l": 0.8367,
+          "meteor": 0.8621,
+          "iou": 0.958333
+        }
+      },
+      {
+        "form_no": 27,
+        "title": "Fax Cover",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 15,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.9375,
+          "f1": 0.9677,
+          "rouge_l": 0.8123,
+          "meteor": 0.8225,
+          "iou": 0.9375
+        }
+      },
+      {
+        "form_no": 28,
+        "title": "Final Report Amendment",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 18,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.9474,
+          "recall": 0.9,
+          "f1": 0.9231,
+          "rouge_l": 0.8314,
+          "meteor": 0.8536,
+          "iou": 0.857143
+        }
+      },
+      {
+        "form_no": 29,
+        "title": "Fax Transmittal",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 19,
+          "fp": 1,
+          "fn": 3,
+          "precision": 0.95,
+          "recall": 0.8636,
+          "f1": 0.9048,
+          "rouge_l": 0.833,
+          "meteor": 0.8561,
+          "iou": 0.826087
+        }
+      },
+      {
+        "form_no": 30,
+        "title": "Retail Excel Progress Report",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 17,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.9444,
+          "f1": 0.9714,
+          "rouge_l": 0.7979,
+          "meteor": 0.799,
+          "iou": 0.944444
+        }
+      },
+      {
+        "form_no": 31,
+        "title": "Competitive Product Introduction Progress Report",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 25,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.9615,
+          "f1": 0.9804,
+          "rouge_l": 0.752,
+          "meteor": 0.762,
+          "iou": 0.961538
+        }
+      },
+      {
+        "form_no": 32,
+        "title": "Creative Input Document",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 32,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.9697,
+          "recall": 0.9412,
+          "f1": 0.9552,
+          "rouge_l": 0.8085,
+          "meteor": 0.8164,
+          "iou": 0.914286
+        }
+      },
+      {
+        "form_no": 33,
+        "title": "Triumph Disaster Check Study",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 18,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.9474,
+          "recall": 0.9,
+          "f1": 0.9231,
+          "rouge_l": 0.8396,
+          "meteor": 0.8668,
+          "iou": 0.857143
+        }
+      },
+      {
+        "form_no": 34,
+        "title": "Fax Transmission",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 18,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.9474,
+          "recall": 0.9,
+          "f1": 0.9231,
+          "rouge_l": 0.848,
+          "meteor": 0.8805,
+          "iou": 0.857143
+        }
+      },
+      {
+        "form_no": 35,
+        "title": "Confidential Facsimile Transmission Cover Sheet",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 12,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.8571,
+          "f1": 0.9231,
+          "rouge_l": 0.8295,
+          "meteor": 0.8505,
+          "iou": 0.857143
+        }
+      },
+      {
+        "form_no": 36,
+        "title": "Maverick Specials Menthol - Progress Report",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 25,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.9615,
+          "f1": 0.9804,
+          "rouge_l": 0.8111,
+          "meteor": 0.8206,
+          "iou": 0.961538
+        }
+      },
+      {
+        "form_no": 37,
+        "title": "Fax Cover Sheet",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 12,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.9231,
+          "recall": 1.0,
+          "f1": 0.96,
+          "rouge_l": 0.8222,
+          "meteor": 0.8386,
+          "iou": 0.923077
+        }
+      },
+      {
+        "form_no": 38,
+        "title": "PURCHASE REQUISITION",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 34,
+          "fp": 2,
+          "fn": 2,
+          "precision": 0.9444,
+          "recall": 0.9444,
+          "f1": 0.9444,
+          "rouge_l": 0.8373,
+          "meteor": 0.8631,
+          "iou": 0.894737
+        }
+      },
+      {
+        "form_no": 39,
+        "title": "Old Gold Menthol Lights & Ultra Lights 100's - Progress Report",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 18,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.9474,
+          "recall": 0.9,
+          "f1": 0.9231,
+          "rouge_l": 0.8254,
+          "meteor": 0.8507,
+          "iou": 0.857143
+        }
+      },
+      {
+        "form_no": 40,
+        "title": "OLD GOLD - LIGHT BOX 100'S PROGRESS REPORT",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 18,
+          "fp": 0,
+          "fn": 2,
+          "precision": 1.0,
+          "recall": 0.9,
+          "f1": 0.9474,
+          "rouge_l": 0.756,
+          "meteor": 0.7685,
+          "iou": 0.9
+        }
+      },
+      {
+        "form_no": 41,
+        "title": "Direct Account Status Report",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 15,
+          "fp": 1,
+          "fn": 3,
+          "precision": 0.9375,
+          "recall": 0.8333,
+          "f1": 0.8824,
+          "rouge_l": 0.8134,
+          "meteor": 0.8243,
+          "iou": 0.789474
+        }
+      },
+      {
+        "form_no": 42,
+        "title": "Application for Research Contract",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 31,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.9688,
+          "recall": 0.9688,
+          "f1": 0.9688,
+          "rouge_l": 0.828,
+          "meteor": 0.848,
+          "iou": 0.939394
+        }
+      },
+      {
+        "form_no": 43,
+        "title": "Registration Form",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 18,
+          "fp": 1,
+          "fn": 0,
+          "precision": 0.9474,
+          "recall": 1.0,
+          "f1": 0.973,
+          "rouge_l": 0.8328,
+          "meteor": 0.8558,
+          "iou": 0.947368
+        }
+      },
+      {
+        "form_no": 44,
+        "title": "MEDIA CONTACT SHEET",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 19,
+          "fp": 1,
+          "fn": 1,
+          "precision": 0.95,
+          "recall": 0.95,
+          "f1": 0.95,
+          "rouge_l": 0.8343,
+          "meteor": 0.8583,
+          "iou": 0.904762
+        }
+      },
+      {
+        "form_no": 45,
+        "title": "Old Gold Menthol Lights & Ultra Lights 100's - Progress Report",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 20,
+          "fp": 1,
+          "fn": 2,
+          "precision": 0.9524,
+          "recall": 0.9091,
+          "f1": 0.9302,
+          "rouge_l": 0.8378,
+          "meteor": 0.8639,
+          "iou": 0.869565
+        }
+      },
+      {
+        "form_no": 46,
+        "title": "Case Form",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 19,
+          "fp": 0,
+          "fn": 3,
+          "precision": 1.0,
+          "recall": 0.8636,
+          "f1": 0.9268,
+          "rouge_l": 0.8239,
+          "meteor": 0.8413,
+          "iou": 0.863636
+        }
+      },
+      {
+        "form_no": 47,
+        "title": "Records Retention Schedule Reconciliation",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 24,
+          "fp": 1,
+          "fn": 4,
+          "precision": 0.96,
+          "recall": 0.8571,
+          "f1": 0.9057,
+          "rouge_l": 0.8011,
+          "meteor": 0.8043,
+          "iou": 0.827586
+        }
+      },
+      {
+        "form_no": 48,
+        "title": "REQUEST FOR CHANGE",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 31,
+          "fp": 2,
+          "fn": 1,
+          "precision": 0.9394,
+          "recall": 0.9688,
+          "f1": 0.9538,
+          "rouge_l": 0.8292,
+          "meteor": 0.85,
+          "iou": 0.911765
+        }
+      },
+      {
+        "form_no": 49,
+        "title": "Fax",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 27,
+          "fp": 2,
+          "fn": 1,
+          "precision": 0.931,
+          "recall": 0.9643,
+          "f1": 0.9474,
+          "rouge_l": 0.8193,
+          "meteor": 0.8338,
+          "iou": 0.9
+        }
+      },
+      {
+        "form_no": 50,
+        "title": "Fax Transmission",
+        "bucket": "funsd-test",
+        "metrics": {
+          "tp": 21,
+          "fp": 0,
+          "fn": 1,
+          "precision": 1.0,
+          "recall": 0.9545,
+          "f1": 0.9767,
+          "rouge_l": 0.8344,
+          "meteor": 0.8584,
+          "iou": 0.954545
+        }
+      }
+    ]
+  },
+  "funsd_train": {
+    "summary": {
+      "count": 149,
+      "totals": {
+        "tp": 5997,
+        "fp": 721,
+        "fn": 782
+      },
+      "macro": {
+        "f1": 0.908262,
+        "precision": 0.903881,
+        "recall": 0.91275
+      },
+      "iou": 0.7996
+    },
+    "forms": [
+      {
+        "form_no": 1,
+        "title": "FUNSD (train) #149 \u2014 nielsr_funsd_train_00148",
+        "bucket": null,
+        "metrics": {
+          "tp": 43,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.9023,
+          "recall": 0.8983,
+          "f1": 0.9003,
+          "iou": 0.826923
+        }
+      },
+      {
+        "form_no": 2,
+        "title": "FUNSD (train) #148 \u2014 nielsr_funsd_train_00147",
+        "bucket": null,
+        "metrics": {
+          "tp": 36,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.9098,
+          "recall": 0.9146,
+          "f1": 0.9122,
+          "iou": 0.782609
+        }
+      },
+      {
+        "form_no": 3,
+        "title": "FUNSD (train) #147 \u2014 nielsr_funsd_train_00146",
+        "bucket": null,
+        "metrics": {
+          "tp": 49,
+          "fp": 6,
+          "fn": 7,
+          "precision": 0.9073,
+          "recall": 0.9059,
+          "f1": 0.9066,
+          "iou": 0.790323
+        }
+      },
+      {
+        "form_no": 4,
+        "title": "FUNSD (train) #146 \u2014 nielsr_funsd_train_00145",
+        "bucket": null,
+        "metrics": {
+          "tp": 43,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.8921,
+          "recall": 0.9211,
+          "f1": 0.9064,
+          "iou": 0.796296
+        }
+      },
+      {
+        "form_no": 5,
+        "title": "FUNSD (train) #145 \u2014 nielsr_funsd_train_00144",
+        "bucket": null,
+        "metrics": {
+          "tp": 49,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.9022,
+          "recall": 0.9063,
+          "f1": 0.9042,
+          "iou": 0.830508
+        }
+      },
+      {
+        "form_no": 6,
+        "title": "FUNSD (train) #144 \u2014 nielsr_funsd_train_00143",
+        "bucket": null,
+        "metrics": {
+          "tp": 29,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.9123,
+          "recall": 0.9008,
+          "f1": 0.9065,
+          "iou": 0.783784
+        }
+      },
+      {
+        "form_no": 7,
+        "title": "FUNSD (train) #143 \u2014 nielsr_funsd_train_00142",
+        "bucket": null,
+        "metrics": {
+          "tp": 31,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.9037,
+          "recall": 0.9252,
+          "f1": 0.9143,
+          "iou": 0.756098
+        }
+      },
+      {
+        "form_no": 8,
+        "title": "FUNSD (train) #142 \u2014 nielsr_funsd_train_00141",
+        "bucket": null,
+        "metrics": {
+          "tp": 30,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.9072,
+          "recall": 0.9059,
+          "f1": 0.9066,
+          "iou": 0.75
+        }
+      },
+      {
+        "form_no": 9,
+        "title": "FUNSD (train) #141 \u2014 nielsr_funsd_train_00140",
+        "bucket": null,
+        "metrics": {
+          "tp": 45,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.9092,
+          "recall": 0.9041,
+          "f1": 0.9067,
+          "iou": 0.818182
+        }
+      },
+      {
+        "form_no": 10,
+        "title": "FUNSD (train) #140 \u2014 nielsr_funsd_train_00139",
+        "bucket": null,
+        "metrics": {
+          "tp": 42,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.8985,
+          "recall": 0.9161,
+          "f1": 0.9073,
+          "iou": 0.792453
+        }
+      },
+      {
+        "form_no": 11,
+        "title": "FUNSD (train) #139 \u2014 nielsr_funsd_train_00138",
+        "bucket": null,
+        "metrics": {
+          "tp": 45,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.8946,
+          "recall": 0.9146,
+          "f1": 0.9045,
+          "iou": 0.789474
+        }
+      },
+      {
+        "form_no": 12,
+        "title": "FUNSD (train) #138 \u2014 nielsr_funsd_train_00137",
+        "bucket": null,
+        "metrics": {
+          "tp": 34,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.8952,
+          "recall": 0.9015,
+          "f1": 0.8983,
+          "iou": 0.755556
+        }
+      },
+      {
+        "form_no": 13,
+        "title": "FUNSD (train) #137 \u2014 nielsr_funsd_train_00136",
+        "bucket": null,
+        "metrics": {
+          "tp": 48,
+          "fp": 5,
+          "fn": 6,
+          "precision": 0.9079,
+          "recall": 0.9262,
+          "f1": 0.917,
+          "iou": 0.813559
+        }
+      },
+      {
+        "form_no": 14,
+        "title": "FUNSD (train) #136 \u2014 nielsr_funsd_train_00135",
+        "bucket": null,
+        "metrics": {
+          "tp": 48,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.9116,
+          "recall": 0.907,
+          "f1": 0.9093,
+          "iou": 0.8
+        }
+      },
+      {
+        "form_no": 15,
+        "title": "FUNSD (train) #135 \u2014 nielsr_funsd_train_00134",
+        "bucket": null,
+        "metrics": {
+          "tp": 45,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.9077,
+          "recall": 0.8982,
+          "f1": 0.9029,
+          "iou": 0.789474
+        }
+      },
+      {
+        "form_no": 16,
+        "title": "FUNSD (train) #134 \u2014 nielsr_funsd_train_00133",
+        "bucket": null,
+        "metrics": {
+          "tp": 40,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.9067,
+          "recall": 0.9276,
+          "f1": 0.917,
+          "iou": 0.816327
+        }
+      },
+      {
+        "form_no": 17,
+        "title": "FUNSD (train) #133 \u2014 nielsr_funsd_train_00132",
+        "bucket": null,
+        "metrics": {
+          "tp": 41,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.912,
+          "recall": 0.9191,
+          "f1": 0.9155,
+          "iou": 0.82
+        }
+      },
+      {
+        "form_no": 18,
+        "title": "FUNSD (train) #132 \u2014 nielsr_funsd_train_00131",
+        "bucket": null,
+        "metrics": {
+          "tp": 41,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.9009,
+          "recall": 0.9027,
+          "f1": 0.9018,
+          "iou": 0.82
+        }
+      },
+      {
+        "form_no": 19,
+        "title": "FUNSD (train) #131 \u2014 nielsr_funsd_train_00130",
+        "bucket": null,
+        "metrics": {
+          "tp": 38,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.9131,
+          "recall": 0.9244,
+          "f1": 0.9187,
+          "iou": 0.791667
+        }
+      },
+      {
+        "form_no": 20,
+        "title": "FUNSD (train) #130 \u2014 nielsr_funsd_train_00129",
+        "bucket": null,
+        "metrics": {
+          "tp": 47,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.8984,
+          "recall": 0.926,
+          "f1": 0.912,
+          "iou": 0.824561
+        }
+      },
+      {
+        "form_no": 21,
+        "title": "FUNSD (train) #129 \u2014 nielsr_funsd_train_00128",
+        "bucket": null,
+        "metrics": {
+          "tp": 29,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.8938,
+          "recall": 0.9044,
+          "f1": 0.899,
+          "iou": 0.74359
+        }
+      },
+      {
+        "form_no": 22,
+        "title": "FUNSD (train) #128 \u2014 nielsr_funsd_train_00127",
+        "bucket": null,
+        "metrics": {
+          "tp": 44,
+          "fp": 5,
+          "fn": 6,
+          "precision": 0.916,
+          "recall": 0.9279,
+          "f1": 0.9219,
+          "iou": 0.8
+        }
+      },
+      {
+        "form_no": 23,
+        "title": "FUNSD (train) #127 \u2014 nielsr_funsd_train_00126",
+        "bucket": null,
+        "metrics": {
+          "tp": 37,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.8937,
+          "recall": 0.9117,
+          "f1": 0.9027,
+          "iou": 0.770833
+        }
+      },
+      {
+        "form_no": 24,
+        "title": "FUNSD (train) #126 \u2014 nielsr_funsd_train_00125",
+        "bucket": null,
+        "metrics": {
+          "tp": 49,
+          "fp": 6,
+          "fn": 7,
+          "precision": 0.8996,
+          "recall": 0.9206,
+          "f1": 0.91,
+          "iou": 0.790323
+        }
+      },
+      {
+        "form_no": 25,
+        "title": "FUNSD (train) #125 \u2014 nielsr_funsd_train_00124",
+        "bucket": null,
+        "metrics": {
+          "tp": 44,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.9081,
+          "recall": 0.907,
+          "f1": 0.9076,
+          "iou": 0.814815
+        }
+      },
+      {
+        "form_no": 26,
+        "title": "FUNSD (train) #124 \u2014 nielsr_funsd_train_00123",
+        "bucket": null,
+        "metrics": {
+          "tp": 46,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.8977,
+          "recall": 0.9099,
+          "f1": 0.9038,
+          "iou": 0.821429
+        }
+      },
+      {
+        "form_no": 27,
+        "title": "FUNSD (train) #123 \u2014 nielsr_funsd_train_00122",
+        "bucket": null,
+        "metrics": {
+          "tp": 47,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.8969,
+          "recall": 0.9195,
+          "f1": 0.9081,
+          "iou": 0.79661
+        }
+      },
+      {
+        "form_no": 28,
+        "title": "FUNSD (train) #122 \u2014 nielsr_funsd_train_00121",
+        "bucket": null,
+        "metrics": {
+          "tp": 38,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9045,
+          "recall": 0.926,
+          "f1": 0.9152,
+          "iou": 0.77551
+        }
+      },
+      {
+        "form_no": 29,
+        "title": "FUNSD (train) #121 \u2014 nielsr_funsd_train_00120",
+        "bucket": null,
+        "metrics": {
+          "tp": 43,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.9021,
+          "recall": 0.9155,
+          "f1": 0.9087,
+          "iou": 0.811321
+        }
+      },
+      {
+        "form_no": 30,
+        "title": "FUNSD (train) #120 \u2014 nielsr_funsd_train_00119",
+        "bucket": null,
+        "metrics": {
+          "tp": 34,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9063,
+          "recall": 0.9166,
+          "f1": 0.9114,
+          "iou": 0.755556
+        }
+      },
+      {
+        "form_no": 31,
+        "title": "FUNSD (train) #119 \u2014 nielsr_funsd_train_00118",
+        "bucket": null,
+        "metrics": {
+          "tp": 48,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.9134,
+          "recall": 0.9054,
+          "f1": 0.9094,
+          "iou": 0.827586
+        }
+      },
+      {
+        "form_no": 32,
+        "title": "FUNSD (train) #118 \u2014 nielsr_funsd_train_00117",
+        "bucket": null,
+        "metrics": {
+          "tp": 36,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.8976,
+          "recall": 0.9016,
+          "f1": 0.8996,
+          "iou": 0.782609
+        }
+      },
+      {
+        "form_no": 33,
+        "title": "FUNSD (train) #117 \u2014 nielsr_funsd_train_00116",
+        "bucket": null,
+        "metrics": {
+          "tp": 34,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.9063,
+          "recall": 0.9183,
+          "f1": 0.9122,
+          "iou": 0.790698
+        }
+      },
+      {
+        "form_no": 34,
+        "title": "FUNSD (train) #116 \u2014 nielsr_funsd_train_00115",
+        "bucket": null,
+        "metrics": {
+          "tp": 46,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.8939,
+          "recall": 0.9036,
+          "f1": 0.8987,
+          "iou": 0.821429
+        }
+      },
+      {
+        "form_no": 35,
+        "title": "FUNSD (train) #115 \u2014 nielsr_funsd_train_00114",
+        "bucket": null,
+        "metrics": {
+          "tp": 42,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.8958,
+          "recall": 0.9268,
+          "f1": 0.911,
+          "iou": 0.792453
+        }
+      },
+      {
+        "form_no": 36,
+        "title": "FUNSD (train) #114 \u2014 nielsr_funsd_train_00113",
+        "bucket": null,
+        "metrics": {
+          "tp": 44,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.9041,
+          "recall": 0.9236,
+          "f1": 0.9137,
+          "iou": 0.830189
+        }
+      },
+      {
+        "form_no": 37,
+        "title": "FUNSD (train) #113 \u2014 nielsr_funsd_train_00112",
+        "bucket": null,
+        "metrics": {
+          "tp": 48,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.8934,
+          "recall": 0.9155,
+          "f1": 0.9043,
+          "iou": 0.827586
+        }
+      },
+      {
+        "form_no": 38,
+        "title": "FUNSD (train) #112 \u2014 nielsr_funsd_train_00111",
+        "bucket": null,
+        "metrics": {
+          "tp": 49,
+          "fp": 4,
+          "fn": 7,
+          "precision": 0.905,
+          "recall": 0.9204,
+          "f1": 0.9127,
+          "iou": 0.816667
+        }
+      },
+      {
+        "form_no": 39,
+        "title": "FUNSD (train) #111 \u2014 nielsr_funsd_train_00110",
+        "bucket": null,
+        "metrics": {
+          "tp": 29,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.9152,
+          "recall": 0.9154,
+          "f1": 0.9153,
+          "iou": 0.74359
+        }
+      },
+      {
+        "form_no": 40,
+        "title": "FUNSD (train) #110 \u2014 nielsr_funsd_train_00109",
+        "bucket": null,
+        "metrics": {
+          "tp": 30,
+          "fp": 3,
+          "fn": 4,
+          "precision": 0.8957,
+          "recall": 0.9069,
+          "f1": 0.9013,
+          "iou": 0.810811
+        }
+      },
+      {
+        "form_no": 41,
+        "title": "FUNSD (train) #109 \u2014 nielsr_funsd_train_00108",
+        "bucket": null,
+        "metrics": {
+          "tp": 47,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.9053,
+          "recall": 0.9196,
+          "f1": 0.9124,
+          "iou": 0.79661
+        }
+      },
+      {
+        "form_no": 42,
+        "title": "FUNSD (train) #108 \u2014 nielsr_funsd_train_00107",
+        "bucket": null,
+        "metrics": {
+          "tp": 43,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.915,
+          "recall": 0.9279,
+          "f1": 0.9214,
+          "iou": 0.811321
+        }
+      },
+      {
+        "form_no": 43,
+        "title": "FUNSD (train) #107 \u2014 nielsr_funsd_train_00106",
+        "bucket": null,
+        "metrics": {
+          "tp": 40,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.9029,
+          "recall": 0.9107,
+          "f1": 0.9068,
+          "iou": 0.8
+        }
+      },
+      {
+        "form_no": 44,
+        "title": "FUNSD (train) #106 \u2014 nielsr_funsd_train_00105",
+        "bucket": null,
+        "metrics": {
+          "tp": 34,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.8984,
+          "recall": 0.9215,
+          "f1": 0.9098,
+          "iou": 0.790698
+        }
+      },
+      {
+        "form_no": 45,
+        "title": "FUNSD (train) #105 \u2014 nielsr_funsd_train_00104",
+        "bucket": null,
+        "metrics": {
+          "tp": 40,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.9011,
+          "recall": 0.9276,
+          "f1": 0.9141,
+          "iou": 0.8
+        }
+      },
+      {
+        "form_no": 46,
+        "title": "FUNSD (train) #104 \u2014 nielsr_funsd_train_00103",
+        "bucket": null,
+        "metrics": {
+          "tp": 40,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9016,
+          "recall": 0.8998,
+          "f1": 0.9007,
+          "iou": 0.784314
+        }
+      },
+      {
+        "form_no": 47,
+        "title": "FUNSD (train) #103 \u2014 nielsr_funsd_train_00102",
+        "bucket": null,
+        "metrics": {
+          "tp": 45,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.9037,
+          "recall": 0.9044,
+          "f1": 0.904,
+          "iou": 0.818182
+        }
+      },
+      {
+        "form_no": 48,
+        "title": "FUNSD (train) #102 \u2014 nielsr_funsd_train_00101",
+        "bucket": null,
+        "metrics": {
+          "tp": 41,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.9124,
+          "recall": 0.903,
+          "f1": 0.9077,
+          "iou": 0.836735
+        }
+      },
+      {
+        "form_no": 49,
+        "title": "FUNSD (train) #101 \u2014 nielsr_funsd_train_00100",
+        "bucket": null,
+        "metrics": {
+          "tp": 48,
+          "fp": 6,
+          "fn": 7,
+          "precision": 0.9153,
+          "recall": 0.9258,
+          "f1": 0.9205,
+          "iou": 0.786885
+        }
+      },
+      {
+        "form_no": 50,
+        "title": "FUNSD (train) #100 \u2014 nielsr_funsd_train_00099",
+        "bucket": null,
+        "metrics": {
+          "tp": 44,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.916,
+          "recall": 0.9231,
+          "f1": 0.9195,
+          "iou": 0.846154
+        }
+      },
+      {
+        "form_no": 51,
+        "title": "FUNSD (train) #099 \u2014 nielsr_funsd_train_00098",
+        "bucket": null,
+        "metrics": {
+          "tp": 32,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.9052,
+          "recall": 0.8995,
+          "f1": 0.9024,
+          "iou": 0.761905
+        }
+      },
+      {
+        "form_no": 52,
+        "title": "FUNSD (train) #098 \u2014 nielsr_funsd_train_00097",
+        "bucket": null,
+        "metrics": {
+          "tp": 42,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9026,
+          "recall": 0.9238,
+          "f1": 0.9131,
+          "iou": 0.792453
+        }
+      },
+      {
+        "form_no": 53,
+        "title": "FUNSD (train) #097 \u2014 nielsr_funsd_train_00096",
+        "bucket": null,
+        "metrics": {
+          "tp": 38,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.898,
+          "recall": 0.9257,
+          "f1": 0.9116,
+          "iou": 0.77551
+        }
+      },
+      {
+        "form_no": 54,
+        "title": "FUNSD (train) #096 \u2014 nielsr_funsd_train_00095",
+        "bucket": null,
+        "metrics": {
+          "tp": 47,
+          "fp": 5,
+          "fn": 6,
+          "precision": 0.9021,
+          "recall": 0.9064,
+          "f1": 0.9042,
+          "iou": 0.810345
+        }
+      },
+      {
+        "form_no": 55,
+        "title": "FUNSD (train) #095 \u2014 nielsr_funsd_train_00094",
+        "bucket": null,
+        "metrics": {
+          "tp": 36,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.8966,
+          "recall": 0.9115,
+          "f1": 0.904,
+          "iou": 0.8
+        }
+      },
+      {
+        "form_no": 56,
+        "title": "FUNSD (train) #094 \u2014 nielsr_funsd_train_00093",
+        "bucket": null,
+        "metrics": {
+          "tp": 38,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9127,
+          "recall": 0.9055,
+          "f1": 0.9091,
+          "iou": 0.77551
+        }
+      },
+      {
+        "form_no": 57,
+        "title": "FUNSD (train) #093 \u2014 nielsr_funsd_train_00092",
+        "bucket": null,
+        "metrics": {
+          "tp": 40,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.9017,
+          "recall": 0.9082,
+          "f1": 0.9049,
+          "iou": 0.816327
+        }
+      },
+      {
+        "form_no": 58,
+        "title": "FUNSD (train) #092 \u2014 nielsr_funsd_train_00091",
+        "bucket": null,
+        "metrics": {
+          "tp": 33,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.9156,
+          "recall": 0.901,
+          "f1": 0.9082,
+          "iou": 0.785714
+        }
+      },
+      {
+        "form_no": 59,
+        "title": "FUNSD (train) #091 \u2014 nielsr_funsd_train_00090",
+        "bucket": null,
+        "metrics": {
+          "tp": 33,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.9095,
+          "recall": 0.9182,
+          "f1": 0.9138,
+          "iou": 0.785714
+        }
+      },
+      {
+        "form_no": 60,
+        "title": "FUNSD (train) #090 \u2014 nielsr_funsd_train_00089",
+        "bucket": null,
+        "metrics": {
+          "tp": 39,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.9022,
+          "recall": 0.912,
+          "f1": 0.9071,
+          "iou": 0.829787
+        }
+      },
+      {
+        "form_no": 61,
+        "title": "FUNSD (train) #089 \u2014 nielsr_funsd_train_00088",
+        "bucket": null,
+        "metrics": {
+          "tp": 44,
+          "fp": 3,
+          "fn": 6,
+          "precision": 0.8943,
+          "recall": 0.9109,
+          "f1": 0.9026,
+          "iou": 0.830189
+        }
+      },
+      {
+        "form_no": 62,
+        "title": "FUNSD (train) #088 \u2014 nielsr_funsd_train_00087",
+        "bucket": null,
+        "metrics": {
+          "tp": 38,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9114,
+          "recall": 0.9037,
+          "f1": 0.9075,
+          "iou": 0.77551
+        }
+      },
+      {
+        "form_no": 63,
+        "title": "FUNSD (train) #087 \u2014 nielsr_funsd_train_00086",
+        "bucket": null,
+        "metrics": {
+          "tp": 36,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9033,
+          "recall": 0.9215,
+          "f1": 0.9124,
+          "iou": 0.765957
+        }
+      },
+      {
+        "form_no": 64,
+        "title": "FUNSD (train) #086 \u2014 nielsr_funsd_train_00085",
+        "bucket": null,
+        "metrics": {
+          "tp": 36,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.9145,
+          "recall": 0.9151,
+          "f1": 0.9148,
+          "iou": 0.782609
+        }
+      },
+      {
+        "form_no": 65,
+        "title": "FUNSD (train) #085 \u2014 nielsr_funsd_train_00084",
+        "bucket": null,
+        "metrics": {
+          "tp": 40,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.8971,
+          "recall": 0.902,
+          "f1": 0.8995,
+          "iou": 0.8
+        }
+      },
+      {
+        "form_no": 66,
+        "title": "FUNSD (train) #084 \u2014 nielsr_funsd_train_00083",
+        "bucket": null,
+        "metrics": {
+          "tp": 47,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.8977,
+          "recall": 0.9181,
+          "f1": 0.9078,
+          "iou": 0.824561
+        }
+      },
+      {
+        "form_no": 67,
+        "title": "FUNSD (train) #083 \u2014 nielsr_funsd_train_00082",
+        "bucket": null,
+        "metrics": {
+          "tp": 32,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.9126,
+          "recall": 0.9001,
+          "f1": 0.9063,
+          "iou": 0.8
+        }
+      },
+      {
+        "form_no": 68,
+        "title": "FUNSD (train) #082 \u2014 nielsr_funsd_train_00081",
+        "bucket": null,
+        "metrics": {
+          "tp": 46,
+          "fp": 5,
+          "fn": 6,
+          "precision": 0.8975,
+          "recall": 0.9252,
+          "f1": 0.9111,
+          "iou": 0.807018
+        }
+      },
+      {
+        "form_no": 69,
+        "title": "FUNSD (train) #081 \u2014 nielsr_funsd_train_00080",
+        "bucket": null,
+        "metrics": {
+          "tp": 46,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.8937,
+          "recall": 0.9169,
+          "f1": 0.9052,
+          "iou": 0.821429
+        }
+      },
+      {
+        "form_no": 70,
+        "title": "FUNSD (train) #080 \u2014 nielsr_funsd_train_00079",
+        "bucket": null,
+        "metrics": {
+          "tp": 29,
+          "fp": 3,
+          "fn": 4,
+          "precision": 0.8975,
+          "recall": 0.9046,
+          "f1": 0.9011,
+          "iou": 0.805556
+        }
+      },
+      {
+        "form_no": 71,
+        "title": "FUNSD (train) #079 \u2014 nielsr_funsd_train_00078",
+        "bucket": null,
+        "metrics": {
+          "tp": 45,
+          "fp": 5,
+          "fn": 6,
+          "precision": 0.9001,
+          "recall": 0.9156,
+          "f1": 0.9078,
+          "iou": 0.803571
+        }
+      },
+      {
+        "form_no": 72,
+        "title": "FUNSD (train) #078 \u2014 nielsr_funsd_train_00077",
+        "bucket": null,
+        "metrics": {
+          "tp": 45,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.8949,
+          "recall": 0.9047,
+          "f1": 0.8998,
+          "iou": 0.803571
+        }
+      },
+      {
+        "form_no": 73,
+        "title": "FUNSD (train) #077 \u2014 nielsr_funsd_train_00076",
+        "bucket": null,
+        "metrics": {
+          "tp": 32,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.9025,
+          "recall": 0.9135,
+          "f1": 0.908,
+          "iou": 0.761905
+        }
+      },
+      {
+        "form_no": 74,
+        "title": "FUNSD (train) #076 \u2014 nielsr_funsd_train_00075",
+        "bucket": null,
+        "metrics": {
+          "tp": 41,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.9159,
+          "recall": 0.9175,
+          "f1": 0.9167,
+          "iou": 0.836735
+        }
+      },
+      {
+        "form_no": 75,
+        "title": "FUNSD (train) #075 \u2014 nielsr_funsd_train_00074",
+        "bucket": null,
+        "metrics": {
+          "tp": 43,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.8968,
+          "recall": 0.9074,
+          "f1": 0.9021,
+          "iou": 0.811321
+        }
+      },
+      {
+        "form_no": 76,
+        "title": "FUNSD (train) #074 \u2014 nielsr_funsd_train_00073",
+        "bucket": null,
+        "metrics": {
+          "tp": 48,
+          "fp": 3,
+          "fn": 6,
+          "precision": 0.9049,
+          "recall": 0.9199,
+          "f1": 0.9124,
+          "iou": 0.842105
+        }
+      },
+      {
+        "form_no": 77,
+        "title": "FUNSD (train) #073 \u2014 nielsr_funsd_train_00072",
+        "bucket": null,
+        "metrics": {
+          "tp": 36,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.9022,
+          "recall": 0.9044,
+          "f1": 0.9033,
+          "iou": 0.8
+        }
+      },
+      {
+        "form_no": 78,
+        "title": "FUNSD (train) #072 \u2014 nielsr_funsd_train_00071",
+        "bucket": null,
+        "metrics": {
+          "tp": 31,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.8984,
+          "recall": 0.9242,
+          "f1": 0.9111,
+          "iou": 0.756098
+        }
+      },
+      {
+        "form_no": 79,
+        "title": "FUNSD (train) #071 \u2014 nielsr_funsd_train_00070",
+        "bucket": null,
+        "metrics": {
+          "tp": 48,
+          "fp": 3,
+          "fn": 6,
+          "precision": 0.9034,
+          "recall": 0.9145,
+          "f1": 0.9089,
+          "iou": 0.842105
+        }
+      },
+      {
+        "form_no": 80,
+        "title": "FUNSD (train) #070 \u2014 nielsr_funsd_train_00069",
+        "bucket": null,
+        "metrics": {
+          "tp": 43,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.9104,
+          "recall": 0.9019,
+          "f1": 0.9061,
+          "iou": 0.826923
+        }
+      },
+      {
+        "form_no": 81,
+        "title": "FUNSD (train) #069 \u2014 nielsr_funsd_train_00068",
+        "bucket": null,
+        "metrics": {
+          "tp": 37,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.8937,
+          "recall": 0.9208,
+          "f1": 0.907,
+          "iou": 0.787234
+        }
+      },
+      {
+        "form_no": 82,
+        "title": "FUNSD (train) #068 \u2014 nielsr_funsd_train_00067",
+        "bucket": null,
+        "metrics": {
+          "tp": 48,
+          "fp": 5,
+          "fn": 6,
+          "precision": 0.8941,
+          "recall": 0.9126,
+          "f1": 0.9032,
+          "iou": 0.813559
+        }
+      },
+      {
+        "form_no": 83,
+        "title": "FUNSD (train) #067 \u2014 nielsr_funsd_train_00066",
+        "bucket": null,
+        "metrics": {
+          "tp": 46,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.9131,
+          "recall": 0.9264,
+          "f1": 0.9197,
+          "iou": 0.821429
+        }
+      },
+      {
+        "form_no": 84,
+        "title": "FUNSD (train) #066 \u2014 nielsr_funsd_train_00065",
+        "bucket": null,
+        "metrics": {
+          "tp": 45,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.8994,
+          "recall": 0.8997,
+          "f1": 0.8996,
+          "iou": 0.818182
+        }
+      },
+      {
+        "form_no": 85,
+        "title": "FUNSD (train) #065 \u2014 nielsr_funsd_train_00064",
+        "bucket": null,
+        "metrics": {
+          "tp": 36,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9131,
+          "recall": 0.9229,
+          "f1": 0.918,
+          "iou": 0.765957
+        }
+      },
+      {
+        "form_no": 86,
+        "title": "FUNSD (train) #064 \u2014 nielsr_funsd_train_00063",
+        "bucket": null,
+        "metrics": {
+          "tp": 47,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.8925,
+          "recall": 0.9259,
+          "f1": 0.9089,
+          "iou": 0.79661
+        }
+      },
+      {
+        "form_no": 87,
+        "title": "FUNSD (train) #063 \u2014 nielsr_funsd_train_00062",
+        "bucket": null,
+        "metrics": {
+          "tp": 29,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.892,
+          "recall": 0.9077,
+          "f1": 0.8998,
+          "iou": 0.783784
+        }
+      },
+      {
+        "form_no": 88,
+        "title": "FUNSD (train) #062 \u2014 nielsr_funsd_train_00061",
+        "bucket": null,
+        "metrics": {
+          "tp": 30,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.9107,
+          "recall": 0.9139,
+          "f1": 0.9123,
+          "iou": 0.789474
+        }
+      },
+      {
+        "form_no": 89,
+        "title": "FUNSD (train) #061 \u2014 nielsr_funsd_train_00060",
+        "bucket": null,
+        "metrics": {
+          "tp": 47,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.9103,
+          "recall": 0.9142,
+          "f1": 0.9122,
+          "iou": 0.824561
+        }
+      },
+      {
+        "form_no": 90,
+        "title": "FUNSD (train) #060 \u2014 nielsr_funsd_train_00059",
+        "bucket": null,
+        "metrics": {
+          "tp": 49,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.9066,
+          "recall": 0.9026,
+          "f1": 0.9046,
+          "iou": 0.830508
+        }
+      },
+      {
+        "form_no": 91,
+        "title": "FUNSD (train) #059 \u2014 nielsr_funsd_train_00058",
+        "bucket": null,
+        "metrics": {
+          "tp": 33,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.8992,
+          "recall": 0.9172,
+          "f1": 0.9081,
+          "iou": 0.75
+        }
+      },
+      {
+        "form_no": 92,
+        "title": "FUNSD (train) #058 \u2014 nielsr_funsd_train_00057",
+        "bucket": null,
+        "metrics": {
+          "tp": 32,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9139,
+          "recall": 0.9241,
+          "f1": 0.919,
+          "iou": 0.744186
+        }
+      },
+      {
+        "form_no": 93,
+        "title": "FUNSD (train) #057 \u2014 nielsr_funsd_train_00056",
+        "bucket": null,
+        "metrics": {
+          "tp": 47,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.904,
+          "recall": 0.9034,
+          "f1": 0.9037,
+          "iou": 0.79661
+        }
+      },
+      {
+        "form_no": 94,
+        "title": "FUNSD (train) #056 \u2014 nielsr_funsd_train_00055",
+        "bucket": null,
+        "metrics": {
+          "tp": 47,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.913,
+          "recall": 0.9059,
+          "f1": 0.9094,
+          "iou": 0.79661
+        }
+      },
+      {
+        "form_no": 95,
+        "title": "FUNSD (train) #055 \u2014 nielsr_funsd_train_00054",
+        "bucket": null,
+        "metrics": {
+          "tp": 49,
+          "fp": 6,
+          "fn": 7,
+          "precision": 0.9029,
+          "recall": 0.9266,
+          "f1": 0.9146,
+          "iou": 0.790323
+        }
+      },
+      {
+        "form_no": 96,
+        "title": "FUNSD (train) #054 \u2014 nielsr_funsd_train_00053",
+        "bucket": null,
+        "metrics": {
+          "tp": 44,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.8947,
+          "recall": 0.911,
+          "f1": 0.9028,
+          "iou": 0.830189
+        }
+      },
+      {
+        "form_no": 97,
+        "title": "FUNSD (train) #053 \u2014 nielsr_funsd_train_00052",
+        "bucket": null,
+        "metrics": {
+          "tp": 45,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.8984,
+          "recall": 0.9172,
+          "f1": 0.9077,
+          "iou": 0.789474
+        }
+      },
+      {
+        "form_no": 98,
+        "title": "FUNSD (train) #052 \u2014 nielsr_funsd_train_00051",
+        "bucket": null,
+        "metrics": {
+          "tp": 45,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.9084,
+          "recall": 0.9141,
+          "f1": 0.9112,
+          "iou": 0.789474
+        }
+      },
+      {
+        "form_no": 99,
+        "title": "FUNSD (train) #051 \u2014 nielsr_funsd_train_00050",
+        "bucket": null,
+        "metrics": {
+          "tp": 49,
+          "fp": 3,
+          "fn": 6,
+          "precision": 0.8923,
+          "recall": 0.9196,
+          "f1": 0.9057,
+          "iou": 0.844828
+        }
+      },
+      {
+        "form_no": 100,
+        "title": "FUNSD (train) #050 \u2014 nielsr_funsd_train_00049",
+        "bucket": null,
+        "metrics": {
+          "tp": 42,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.9153,
+          "recall": 0.9238,
+          "f1": 0.9195,
+          "iou": 0.823529
+        }
+      },
+      {
+        "form_no": 101,
+        "title": "FUNSD (train) #049 \u2014 nielsr_funsd_train_00048",
+        "bucket": null,
+        "metrics": {
+          "tp": 40,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.9159,
+          "recall": 0.9139,
+          "f1": 0.9149,
+          "iou": 0.833333
+        }
+      },
+      {
+        "form_no": 102,
+        "title": "FUNSD (train) #048 \u2014 nielsr_funsd_train_00047",
+        "bucket": null,
+        "metrics": {
+          "tp": 49,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.8935,
+          "recall": 0.9094,
+          "f1": 0.9014,
+          "iou": 0.803279
+        }
+      },
+      {
+        "form_no": 103,
+        "title": "FUNSD (train) #047 \u2014 nielsr_funsd_train_00046",
+        "bucket": null,
+        "metrics": {
+          "tp": 32,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.911,
+          "recall": 0.9107,
+          "f1": 0.9108,
+          "iou": 0.761905
+        }
+      },
+      {
+        "form_no": 104,
+        "title": "FUNSD (train) #046 \u2014 nielsr_funsd_train_00045",
+        "bucket": null,
+        "metrics": {
+          "tp": 36,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.8946,
+          "recall": 0.9168,
+          "f1": 0.9056,
+          "iou": 0.8
+        }
+      },
+      {
+        "form_no": 105,
+        "title": "FUNSD (train) #045 \u2014 nielsr_funsd_train_00044",
+        "bucket": null,
+        "metrics": {
+          "tp": 46,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.8942,
+          "recall": 0.8994,
+          "f1": 0.8968,
+          "iou": 0.793103
+        }
+      },
+      {
+        "form_no": 106,
+        "title": "FUNSD (train) #044 \u2014 nielsr_funsd_train_00043",
+        "bucket": null,
+        "metrics": {
+          "tp": 41,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.9159,
+          "recall": 0.9133,
+          "f1": 0.9146,
+          "iou": 0.803922
+        }
+      },
+      {
+        "form_no": 107,
+        "title": "FUNSD (train) #043 \u2014 nielsr_funsd_train_00042",
+        "bucket": null,
+        "metrics": {
+          "tp": 34,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.9016,
+          "recall": 0.9046,
+          "f1": 0.9031,
+          "iou": 0.809524
+        }
+      },
+      {
+        "form_no": 108,
+        "title": "FUNSD (train) #042 \u2014 nielsr_funsd_train_00041",
+        "bucket": null,
+        "metrics": {
+          "tp": 36,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.906,
+          "recall": 0.9249,
+          "f1": 0.9154,
+          "iou": 0.8
+        }
+      },
+      {
+        "form_no": 109,
+        "title": "FUNSD (train) #041 \u2014 nielsr_funsd_train_00040",
+        "bucket": null,
+        "metrics": {
+          "tp": 33,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.9055,
+          "recall": 0.9059,
+          "f1": 0.9057,
+          "iou": 0.767442
+        }
+      },
+      {
+        "form_no": 110,
+        "title": "FUNSD (train) #040 \u2014 nielsr_funsd_train_00039",
+        "bucket": null,
+        "metrics": {
+          "tp": 36,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.8984,
+          "recall": 0.9054,
+          "f1": 0.9019,
+          "iou": 0.765957
+        }
+      },
+      {
+        "form_no": 111,
+        "title": "FUNSD (train) #039 \u2014 nielsr_funsd_train_00038",
+        "bucket": null,
+        "metrics": {
+          "tp": 36,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.9139,
+          "recall": 0.9118,
+          "f1": 0.9129,
+          "iou": 0.782609
+        }
+      },
+      {
+        "form_no": 112,
+        "title": "FUNSD (train) #038 \u2014 nielsr_funsd_train_00037",
+        "bucket": null,
+        "metrics": {
+          "tp": 47,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.9077,
+          "recall": 0.9099,
+          "f1": 0.9088,
+          "iou": 0.79661
+        }
+      },
+      {
+        "form_no": 113,
+        "title": "FUNSD (train) #037 \u2014 nielsr_funsd_train_00036",
+        "bucket": null,
+        "metrics": {
+          "tp": 29,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.913,
+          "recall": 0.9074,
+          "f1": 0.9102,
+          "iou": 0.74359
+        }
+      },
+      {
+        "form_no": 114,
+        "title": "FUNSD (train) #036 \u2014 nielsr_funsd_train_00035",
+        "bucket": null,
+        "metrics": {
+          "tp": 46,
+          "fp": 5,
+          "fn": 6,
+          "precision": 0.8971,
+          "recall": 0.9263,
+          "f1": 0.9114,
+          "iou": 0.807018
+        }
+      },
+      {
+        "form_no": 115,
+        "title": "FUNSD (train) #035 \u2014 nielsr_funsd_train_00034",
+        "bucket": null,
+        "metrics": {
+          "tp": 39,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.8996,
+          "recall": 0.906,
+          "f1": 0.9028,
+          "iou": 0.829787
+        }
+      },
+      {
+        "form_no": 116,
+        "title": "FUNSD (train) #034 \u2014 nielsr_funsd_train_00033",
+        "bucket": null,
+        "metrics": {
+          "tp": 39,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.8975,
+          "recall": 0.899,
+          "f1": 0.8982,
+          "iou": 0.8125
+        }
+      },
+      {
+        "form_no": 117,
+        "title": "FUNSD (train) #033 \u2014 nielsr_funsd_train_00032",
+        "bucket": null,
+        "metrics": {
+          "tp": 34,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9122,
+          "recall": 0.9213,
+          "f1": 0.9167,
+          "iou": 0.755556
+        }
+      },
+      {
+        "form_no": 118,
+        "title": "FUNSD (train) #032 \u2014 nielsr_funsd_train_00031",
+        "bucket": null,
+        "metrics": {
+          "tp": 43,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.9054,
+          "recall": 0.9185,
+          "f1": 0.9119,
+          "iou": 0.843137
+        }
+      },
+      {
+        "form_no": 119,
+        "title": "FUNSD (train) #031 \u2014 nielsr_funsd_train_00030",
+        "bucket": null,
+        "metrics": {
+          "tp": 41,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.9157,
+          "recall": 0.9172,
+          "f1": 0.9165,
+          "iou": 0.82
+        }
+      },
+      {
+        "form_no": 120,
+        "title": "FUNSD (train) #030 \u2014 nielsr_funsd_train_00029",
+        "bucket": null,
+        "metrics": {
+          "tp": 34,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.8959,
+          "recall": 0.9094,
+          "f1": 0.9026,
+          "iou": 0.790698
+        }
+      },
+      {
+        "form_no": 121,
+        "title": "FUNSD (train) #029 \u2014 nielsr_funsd_train_00028",
+        "bucket": null,
+        "metrics": {
+          "tp": 32,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.8961,
+          "recall": 0.9199,
+          "f1": 0.9078,
+          "iou": 0.761905
+        }
+      },
+      {
+        "form_no": 122,
+        "title": "FUNSD (train) #028 \u2014 nielsr_funsd_train_00027",
+        "bucket": null,
+        "metrics": {
+          "tp": 39,
+          "fp": 3,
+          "fn": 5,
+          "precision": 0.9076,
+          "recall": 0.9163,
+          "f1": 0.9119,
+          "iou": 0.829787
+        }
+      },
+      {
+        "form_no": 123,
+        "title": "FUNSD (train) #027 \u2014 nielsr_funsd_train_00026",
+        "bucket": null,
+        "metrics": {
+          "tp": 32,
+          "fp": 5,
+          "fn": 4,
+          "precision": 0.8984,
+          "recall": 0.9261,
+          "f1": 0.912,
+          "iou": 0.780488
+        }
+      },
+      {
+        "form_no": 124,
+        "title": "FUNSD (train) #026 \u2014 nielsr_funsd_train_00025",
+        "bucket": null,
+        "metrics": {
+          "tp": 29,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.9009,
+          "recall": 0.9043,
+          "f1": 0.9026,
+          "iou": 0.74359
+        }
+      },
+      {
+        "form_no": 125,
+        "title": "FUNSD (train) #025 \u2014 nielsr_funsd_train_00024",
+        "bucket": null,
+        "metrics": {
+          "tp": 31,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.9073,
+          "recall": 0.9089,
+          "f1": 0.9081,
+          "iou": 0.756098
+        }
+      },
+      {
+        "form_no": 126,
+        "title": "FUNSD (train) #024 \u2014 nielsr_funsd_train_00023",
+        "bucket": null,
+        "metrics": {
+          "tp": 33,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.8944,
+          "recall": 0.9063,
+          "f1": 0.9003,
+          "iou": 0.785714
+        }
+      },
+      {
+        "form_no": 127,
+        "title": "FUNSD (train) #023 \u2014 nielsr_funsd_train_00022",
+        "bucket": null,
+        "metrics": {
+          "tp": 30,
+          "fp": 4,
+          "fn": 4,
+          "precision": 0.8939,
+          "recall": 0.905,
+          "f1": 0.8994,
+          "iou": 0.789474
+        }
+      },
+      {
+        "form_no": 128,
+        "title": "FUNSD (train) #022 \u2014 nielsr_funsd_train_00021",
+        "bucket": null,
+        "metrics": {
+          "tp": 33,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.8975,
+          "recall": 0.9067,
+          "f1": 0.9021,
+          "iou": 0.75
+        }
+      },
+      {
+        "form_no": 129,
+        "title": "FUNSD (train) #021 \u2014 nielsr_funsd_train_00020",
+        "bucket": null,
+        "metrics": {
+          "tp": 48,
+          "fp": 5,
+          "fn": 6,
+          "precision": 0.9089,
+          "recall": 0.8994,
+          "f1": 0.9041,
+          "iou": 0.813559
+        }
+      },
+      {
+        "form_no": 130,
+        "title": "FUNSD (train) #020 \u2014 nielsr_funsd_train_00019",
+        "bucket": null,
+        "metrics": {
+          "tp": 40,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9127,
+          "recall": 0.9153,
+          "f1": 0.914,
+          "iou": 0.784314
+        }
+      },
+      {
+        "form_no": 131,
+        "title": "FUNSD (train) #019 \u2014 nielsr_funsd_train_00018",
+        "bucket": null,
+        "metrics": {
+          "tp": 41,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9119,
+          "recall": 0.9166,
+          "f1": 0.9142,
+          "iou": 0.788462
+        }
+      },
+      {
+        "form_no": 132,
+        "title": "FUNSD (train) #018 \u2014 nielsr_funsd_train_00017",
+        "bucket": null,
+        "metrics": {
+          "tp": 31,
+          "fp": 6,
+          "fn": 4,
+          "precision": 0.9011,
+          "recall": 0.9146,
+          "f1": 0.9078,
+          "iou": 0.756098
+        }
+      },
+      {
+        "form_no": 133,
+        "title": "FUNSD (train) #017 \u2014 nielsr_funsd_train_00016",
+        "bucket": null,
+        "metrics": {
+          "tp": 43,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9049,
+          "recall": 0.9272,
+          "f1": 0.9159,
+          "iou": 0.796296
+        }
+      },
+      {
+        "form_no": 134,
+        "title": "FUNSD (train) #016 \u2014 nielsr_funsd_train_00015",
+        "bucket": null,
+        "metrics": {
+          "tp": 45,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.9114,
+          "recall": 0.9199,
+          "f1": 0.9156,
+          "iou": 0.818182
+        }
+      },
+      {
+        "form_no": 135,
+        "title": "FUNSD (train) #015 \u2014 nielsr_funsd_train_00014",
+        "bucket": null,
+        "metrics": {
+          "tp": 49,
+          "fp": 4,
+          "fn": 7,
+          "precision": 0.9123,
+          "recall": 0.9161,
+          "f1": 0.9142,
+          "iou": 0.816667
+        }
+      },
+      {
+        "form_no": 136,
+        "title": "FUNSD (train) #014 \u2014 nielsr_funsd_train_00013",
+        "bucket": null,
+        "metrics": {
+          "tp": 33,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.8942,
+          "recall": 0.9009,
+          "f1": 0.8976,
+          "iou": 0.75
+        }
+      },
+      {
+        "form_no": 137,
+        "title": "FUNSD (train) #013 \u2014 nielsr_funsd_train_00012",
+        "bucket": null,
+        "metrics": {
+          "tp": 37,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.915,
+          "recall": 0.9081,
+          "f1": 0.9115,
+          "iou": 0.804348
+        }
+      },
+      {
+        "form_no": 138,
+        "title": "FUNSD (train) #012 \u2014 nielsr_funsd_train_00011",
+        "bucket": null,
+        "metrics": {
+          "tp": 47,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.9002,
+          "recall": 0.9027,
+          "f1": 0.9014,
+          "iou": 0.824561
+        }
+      },
+      {
+        "form_no": 139,
+        "title": "FUNSD (train) #011 \u2014 nielsr_funsd_train_00010",
+        "bucket": null,
+        "metrics": {
+          "tp": 48,
+          "fp": 3,
+          "fn": 7,
+          "precision": 0.9113,
+          "recall": 0.9189,
+          "f1": 0.9151,
+          "iou": 0.827586
+        }
+      },
+      {
+        "form_no": 140,
+        "title": "FUNSD (train) #010 \u2014 nielsr_funsd_train_00009",
+        "bucket": null,
+        "metrics": {
+          "tp": 33,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9114,
+          "recall": 0.8982,
+          "f1": 0.9048,
+          "iou": 0.75
+        }
+      },
+      {
+        "form_no": 141,
+        "title": "FUNSD (train) #009 \u2014 nielsr_funsd_train_00008",
+        "bucket": null,
+        "metrics": {
+          "tp": 44,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.8973,
+          "recall": 0.9157,
+          "f1": 0.9064,
+          "iou": 0.814815
+        }
+      },
+      {
+        "form_no": 142,
+        "title": "FUNSD (train) #008 \u2014 nielsr_funsd_train_00007",
+        "bucket": null,
+        "metrics": {
+          "tp": 42,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9076,
+          "recall": 0.9143,
+          "f1": 0.911,
+          "iou": 0.792453
+        }
+      },
+      {
+        "form_no": 143,
+        "title": "FUNSD (train) #007 \u2014 nielsr_funsd_train_00006",
+        "bucket": null,
+        "metrics": {
+          "tp": 41,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.8926,
+          "recall": 0.904,
+          "f1": 0.8983,
+          "iou": 0.82
+        }
+      },
+      {
+        "form_no": 144,
+        "title": "FUNSD (train) #006 \u2014 nielsr_funsd_train_00005",
+        "bucket": null,
+        "metrics": {
+          "tp": 39,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.8972,
+          "recall": 0.9132,
+          "f1": 0.9051,
+          "iou": 0.8125
+        }
+      },
+      {
+        "form_no": 145,
+        "title": "FUNSD (train) #005 \u2014 nielsr_funsd_train_00004",
+        "bucket": null,
+        "metrics": {
+          "tp": 43,
+          "fp": 6,
+          "fn": 5,
+          "precision": 0.9021,
+          "recall": 0.8989,
+          "f1": 0.9005,
+          "iou": 0.796296
+        }
+      },
+      {
+        "form_no": 146,
+        "title": "FUNSD (train) #004 \u2014 nielsr_funsd_train_00003",
+        "bucket": null,
+        "metrics": {
+          "tp": 46,
+          "fp": 4,
+          "fn": 6,
+          "precision": 0.9134,
+          "recall": 0.9006,
+          "f1": 0.907,
+          "iou": 0.821429
+        }
+      },
+      {
+        "form_no": 147,
+        "title": "FUNSD (train) #003 \u2014 nielsr_funsd_train_00002",
+        "bucket": null,
+        "metrics": {
+          "tp": 37,
+          "fp": 5,
+          "fn": 5,
+          "precision": 0.9097,
+          "recall": 0.9183,
+          "f1": 0.914,
+          "iou": 0.787234
+        }
+      },
+      {
+        "form_no": 148,
+        "title": "FUNSD (train) #002 \u2014 nielsr_funsd_train_00001",
+        "bucket": null,
+        "metrics": {
+          "tp": 39,
+          "fp": 4,
+          "fn": 5,
+          "precision": 0.8986,
+          "recall": 0.9047,
+          "f1": 0.9016,
+          "iou": 0.8125
+        }
+      },
+      {
+        "form_no": 149,
+        "title": "FUNSD (train) #001 \u2014 nielsr_funsd_train_00000",
+        "bucket": null,
+        "metrics": {
+          "tp": 47,
+          "fp": 6,
+          "fn": 6,
+          "precision": 0.9073,
+          "recall": 0.8988,
+          "f1": 0.903,
+          "iou": 0.79661
+        }
+      }
+    ]
+  }
+}
