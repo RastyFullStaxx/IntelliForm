@@ -20,6 +20,7 @@ function initWorkspace() {
   const $ = (id) => document.getElementById(id);
   const sidebarToggle = $("sidebarToggle");
   const sidebar = $("sidebar");
+  const sidebarCloseBtn = $("sidebarClose");
   const pageToggler = $("togglePages");
   const thumbSidebar = $("thumbnailSidebar");
   const analyzeBtn = $("analyzeTool");
@@ -373,12 +374,13 @@ function initWorkspace() {
         toggleSidebarOpen();
       }
     });
-    document.addEventListener("click", (e) => {
-      if (!sidebar.contains(e.target) && !sidebarToggle.contains(e.target)) {
-        setSidebarOpen(false);
-      }
-    });
   }
+
+  sidebarCloseBtn?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    setSidebarOpen(false);
+    sidebarToggle?.focus?.();
+  });
 
   // ---- FAQ guide ----
   if (faqButton && faqPanel) {
@@ -635,6 +637,7 @@ function initWorkspace() {
     // Mark workspace start once the PDF is ready (used for user/session timing)
     if (!workspaceShownAt && isMetricsOptIn()) {
       workspaceShownAt = ws_now();
+      ensureMetricsEnabledAt();
       ws_persistInflight();
     }
   }
@@ -1770,6 +1773,7 @@ function findAnchorForLabel(labelRaw, annotations){
             if (status !== "saved" && workspaceLogged) return;
             const cid = ws_currentCanonical();
             if (!cid) return;
+            const metricsAt = ensureMetricsEnabledAt();
 
             const payload = {
               user_id: getUserId(),
@@ -1781,12 +1785,10 @@ function findAnchorForLabel(labelRaw, annotations){
               meta: Object.assign({ status }, extraMeta || {})
             };
 
-            if (navigator.sendBeacon) {
-              const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
-              navigator.sendBeacon(apiUrl("/api/user.log"), blob);
-            } else {
-              await POST_JSON("/api/user.log", payload);
-            }
+            if (metricsAt) payload.meta.metrics_enabled_at = metricsAt;
+
+            const ok = await sendLog("/api/user.log", payload, { preferBeacon: true });
+            if (!ok) queueLog("/api/user.log", payload);
             if (status === "saved") {
               workspaceLogged = true;
               ws_clearInflight();
@@ -2069,8 +2071,75 @@ function findAnchorForLabel(labelRaw, annotations){
   let ws_silenceAbandon   = false;
 
   function ws_now() { return Date.now(); }
+  function getMetricsEnabledAt() {
+    const raw = sessionStorage.getItem(METRICS_TS_KEY) || localStorage.getItem(METRICS_TS_KEY);
+    const num = Number(raw);
+    return Number.isFinite(num) && num > 0 ? num : null;
+  }
+  function stampMetricsEnabledAt(ts) {
+    const val = String(ts);
+    try {
+      sessionStorage.setItem(METRICS_TS_KEY, val);
+      localStorage.setItem(METRICS_TS_KEY, val);
+    } catch {}
+    return ts;
+  }
+  function ensureMetricsEnabledAt() {
+    if (!isMetricsOptIn()) return null;
+    const existing = getMetricsEnabledAt();
+    if (existing) return existing;
+    return stampMetricsEnabledAt(ws_now());
+  }
   function ws_currentCanonical() {
     return lastCanonicalId || sessionStorage.getItem("uploadedFormId") || "";
+  }
+
+  function readPendingLogs() {
+    try {
+      const arr = JSON.parse(localStorage.getItem(PENDING_LOGS_KEY) || "[]");
+      return Array.isArray(arr) ? arr : [];
+    } catch {
+      return [];
+    }
+  }
+  function writePendingLogs(logs) {
+    try {
+      const capped = logs.slice(-30);
+      localStorage.setItem(PENDING_LOGS_KEY, JSON.stringify(capped));
+    } catch {}
+  }
+  function queueLog(path, payload) {
+    const logs = readPendingLogs();
+    logs.push({ path, payload, ts: ws_now() });
+    writePendingLogs(logs);
+  }
+  async function sendLog(path, payload, opts = {}) {
+    const url = apiUrl(path);
+    if (opts.preferBeacon && navigator.sendBeacon) {
+      const ok = navigator.sendBeacon(url, new Blob([JSON.stringify(payload)], { type: "application/json" }));
+      if (ok) return true;
+    }
+    try {
+      const res = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        keepalive: true
+      });
+      return !!res?.ok;
+    } catch {
+      return false;
+    }
+  }
+  async function flushPendingLogs() {
+    const pending = readPendingLogs();
+    if (!pending.length) return;
+    const remaining = [];
+    for (const item of pending) {
+      const ok = await sendLog(item.path, item.payload, { preferBeacon: false });
+      if (!ok) remaining.push(item);
+    }
+    writePendingLogs(remaining);
   }
 
   function ws_persistInflight() {
@@ -2082,7 +2151,8 @@ function findAnchorForLabel(labelRaw, annotations){
         canonical_id: cid,
         user_id: getUserId(),
         method: "intelliform",
-        page_url: location.pathname + location.search
+        page_url: location.pathname + location.search,
+        metrics_enabled_at: ensureMetricsEnabledAt()
       }));
     } catch {}
   }
@@ -2098,23 +2168,22 @@ function findAnchorForLabel(labelRaw, annotations){
 
       const finished = ws_now();
       const duration = Math.max(0, finished - Number(rec.started_at));
+      const meta = { status: "abandoned_recovery", page_url: rec.page_url || null };
+      const recMetricsAt = rec.metrics_enabled_at || ensureMetricsEnabledAt();
+      if (recMetricsAt) meta.metrics_enabled_at = recMetricsAt;
 
-      const body = JSON.stringify({
+      const payload = {
         user_id: rec.user_id || getUserId(),
         canonical_id: rec.canonical_id,
         method: rec.method || "intelliform",
         started_at: rec.started_at,
         finished_at: finished,
         duration_ms: duration,
-        meta: { status: "abandoned_recovery", page_url: rec.page_url || null }
-      });
+        meta
+      };
 
-      if (navigator.sendBeacon) {
-        const blob = new Blob([body], { type: "application/json" });
-        navigator.sendBeacon(apiUrl("/api/user.log"), blob);
-      } else {
-        await POST_JSON("/api/user.log", JSON.parse(body));
-      }
+      const ok = await sendLog("/api/user.log", payload, { preferBeacon: true });
+      if (!ok) queueLog("/api/user.log", payload);
     } catch (e) {
       console.warn("[workspace recovery] failed:", e);
     } finally {
@@ -2123,6 +2192,7 @@ function findAnchorForLabel(labelRaw, annotations){
   }
 
   ws_tryRecoverAbandoned();
+  flushPendingLogs();
 
   // ===== Research logging (timers + endpoints) =====
   const LS_KEY_UID = "research_user_id";
@@ -2133,6 +2203,8 @@ function findAnchorForLabel(labelRaw, annotations){
     intelliform: { label: "IntelliForm", desc: "LLMv3 + GNN", icon: "bi-layers-fill" },
     baseline: { label: "Baseline", desc: "LLMv3 only", icon: "bi-exclamation-triangle-fill" }
   };
+  const METRICS_TS_KEY = "if_metrics_enabled_at";
+  const PENDING_LOGS_KEY = "if_pending_logs_v1";
 
   function isMetricsOptIn() {
     const flag = sessionStorage.getItem(METRICS_KEY) || localStorage.getItem(METRICS_KEY);
@@ -2208,19 +2280,21 @@ function findAnchorForLabel(labelRaw, annotations){
   function nowMs() { return Date.now(); }
 
   async function logToolMetricsFromExplainer(explainer) {
-    try {
-      const payload = {
-        canonical_id: explainer.canonical_id || currentFormId || sessionStorage.getItem("uploadedFormId") || "",
-        form_title:   explainer.title || (storedName || "Form"),
-        bucket:       explainer.bucket || (guessFromPath(baseFromPath(storedWeb) || "form.pdf").bucket),
-        metrics:      explainer.metrics || {},
-        source:       "analysis",
-        note:         "workspace.js post-analysis"
-      };
-      if (!payload.canonical_id || !isMetricsOptIn()) return;
-      await POST_JSON("/api/metrics.log", payload);
-    } catch (e) {
-      console.warn("[metrics.log] failed:", e);
+    const payload = {
+      canonical_id: explainer.canonical_id || currentFormId || sessionStorage.getItem("uploadedFormId") || "",
+      form_title:   explainer.title || (storedName || "Form"),
+      bucket:       explainer.bucket || (guessFromPath(baseFromPath(storedWeb) || "form.pdf").bucket),
+      metrics:      explainer.metrics || {},
+      source:       "analysis",
+      note:         "workspace.js post-analysis"
+    };
+    const metricsAt = ensureMetricsEnabledAt();
+    if (metricsAt) payload.meta = Object.assign({}, payload.meta || {}, { metrics_enabled_at: metricsAt });
+    if (!payload.canonical_id || !isMetricsOptIn()) return;
+    const ok = await sendLog("/api/metrics.log", payload);
+    if (!ok) {
+      console.warn("[metrics.log] failed; queued for retry.");
+      queueLog("/api/metrics.log", payload);
     }
   }
 
@@ -2228,6 +2302,7 @@ function findAnchorForLabel(labelRaw, annotations){
     try {
       if (!lastCanonicalId || !isMetricsOptIn()) return;
       const user_id = getUserId();
+      const metricsAt = ensureMetricsEnabledAt();
       const body = {
         user_id,
         canonical_id: lastCanonicalId,
@@ -2237,7 +2312,9 @@ function findAnchorForLabel(labelRaw, annotations){
         duration_ms: lastDuration,
         meta: finalMeta || {}
       };
-      await POST_JSON("/api/user.log", body);
+      if (metricsAt) body.meta.metrics_enabled_at = metricsAt;
+      const ok = await sendLog("/api/user.log", body);
+      if (!ok) queueLog("/api/user.log", body);
     } catch (e) {
       console.warn("[user.log] failed:", e);
     }
@@ -2248,7 +2325,8 @@ function findAnchorForLabel(labelRaw, annotations){
       if (!analysisStartAt || lastFinishAt || !isMetricsOptIn()) return;
       const cid = lastCanonicalId || sessionStorage.getItem("uploadedFormId") || "";
       if (!cid) return;
-      const body = JSON.stringify({
+      const metricsAt = ensureMetricsEnabledAt();
+      const payload = {
         user_id: getUserId(),
         canonical_id: cid,
         method: "intelliform",
@@ -2256,18 +2334,23 @@ function findAnchorForLabel(labelRaw, annotations){
         finished_at: nowMs(),
         duration_ms: nowMs() - analysisStartAt,
         meta: { status: "abandoned" }
+      };
+      if (metricsAt) payload.meta.metrics_enabled_at = metricsAt;
+      sendLog("/api/user.log", payload, { preferBeacon: true }).then((sent) => {
+        if (!sent) queueLog("/api/user.log", payload);
       });
-      const blob = new Blob([body], { type: "application/json" });
-      navigator.sendBeacon && navigator.sendBeacon(apiUrl("/api/user.log"), blob);
     } catch {}
   });
 
-  function ws_sendAbandonBeacon(tag) {
+  async function ws_sendAbandonBeacon(tag) {
     try {
       if (!isMetricsOptIn() || !workspaceShownAt || workspaceLogged) return;
       const cid = ws_currentCanonical();
       if (!cid) return;
       const finished = ws_now();
+      const metricsAt = ensureMetricsEnabledAt();
+      const meta = { status: tag || "abandoned" };
+      if (metricsAt) meta.metrics_enabled_at = metricsAt;
       const payload = {
         user_id: getUserId(),
         canonical_id: cid,
@@ -2275,19 +2358,12 @@ function findAnchorForLabel(labelRaw, annotations){
         started_at: workspaceShownAt,
         finished_at: finished,
         duration_ms: finished - workspaceShownAt,
-        meta: { status: tag || "abandoned" }
+        meta
       };
-      const body = JSON.stringify(payload);
-      if (navigator.sendBeacon) {
-        const blob = new Blob([body], { type: "application/json" });
-        navigator.sendBeacon(apiUrl("/api/user.log"), blob);
-        workspaceLogged = true;
-        ws_clearInflight();
-      } else {
-        apiFetch("/api/user.log", { method: "POST", headers: { "Content-Type": "application/json" }, body }).catch(()=>{});
-        workspaceLogged = true;
-        ws_clearInflight();
-      }
+      const ok = await sendLog("/api/user.log", payload, { preferBeacon: true });
+      if (!ok) queueLog("/api/user.log", payload);
+      workspaceLogged = true;
+      ws_clearInflight();
     } catch {}
   }
 

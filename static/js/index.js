@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const LOTTIE_SRC = 'https://lottie.host/d84b7346-4ae4-474c-952c-e6fc61b63c44/PlF7Tm4ByD.lottie';
   let dotLottiePlayer = null;
   const METRICS_KEY = 'if_metrics_opt_in';
+  const METRICS_TS_KEY = 'if_metrics_enabled_at';
   const LS_UID = 'research_user_id';
   const MODE_KEY = 'if_mode_choice';
   const MODES = {
@@ -48,6 +49,33 @@ document.addEventListener('DOMContentLoaded', function () {
     return flag === '1';
   };
 
+  const getMetricsEnabledAt = () => {
+    const raw = sessionStorage.getItem(METRICS_TS_KEY) || localStorage.getItem(METRICS_TS_KEY);
+    const n = Number(raw);
+    return Number.isFinite(n) && n > 0 ? n : null;
+  };
+
+  const stampMetricsEnabledAt = () => {
+    const ts = Date.now();
+    try {
+      sessionStorage.setItem(METRICS_TS_KEY, String(ts));
+      localStorage.setItem(METRICS_TS_KEY, String(ts));
+    } catch {}
+    return ts;
+  };
+
+  const clearMetricsEnabledAt = () => {
+    try {
+      sessionStorage.removeItem(METRICS_TS_KEY);
+      localStorage.removeItem(METRICS_TS_KEY);
+    } catch {}
+  };
+
+  const ensureMetricsTimestamp = () => {
+    if (!isTesterModeOn()) return null;
+    return getMetricsEnabledAt() || stampMetricsEnabledAt();
+  };
+
   function updateBetaButtonUI() {
     if (!betaBtn) return;
     const active = isTesterModeOn();
@@ -69,6 +97,11 @@ document.addEventListener('DOMContentLoaded', function () {
         sessionStorage.removeItem(LS_UID);
         localStorage.removeItem(LS_UID);
       }
+      if (on) {
+        if (!getMetricsEnabledAt()) stampMetricsEnabledAt();
+      } else {
+        clearMetricsEnabledAt();
+      }
     } catch {}
     updateBetaButtonUI();
   }
@@ -76,7 +109,10 @@ document.addEventListener('DOMContentLoaded', function () {
   function ensureMetricsDefault() {
     const hasFlag = sessionStorage.getItem(METRICS_KEY) || localStorage.getItem(METRICS_KEY);
     if (!hasFlag) setMetricsOptIn(false);
-    else updateBetaButtonUI();
+    else {
+      updateBetaButtonUI();
+      ensureMetricsTimestamp();
+    }
   }
 
   ensureMetricsDefault();

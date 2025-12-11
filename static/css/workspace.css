@@ -983,8 +983,8 @@ body {
 .sidebar-top{
   display:flex;
   flex-direction:column;
-  gap:8px;
-  margin-top:-16px;
+  gap:12px;
+  margin-top:0;
 }
 .sidebar-top .cta-card{ width: 92%; }
 .sidebar-tool:hover{ background: linear-gradient(135deg, rgba(255,213,74,.26), rgba(3,26,70,.96)); transform: translateY(-1px); box-shadow:0 12px 32px rgba(0,0,0,0.28); }
@@ -1190,11 +1190,49 @@ body {
   text-align:center;
 }
 
-.sidebar-title{ text-align:center; margin-top:.4rem; margin-bottom:-.3rem }
+.sidebar-title{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:4px 12px 0;
+  margin-top:.2rem;
+  margin-bottom:12px;
+}
+.sidebar-close-row{
+  display:flex;
+  width:100%;
+  justify-content:flex-end;
+  padding-right:2px;
+}
 .sidebar-title h5{
-  font-size:1.3rem; font-weight:700; color:#fff; letter-spacing:.5px; text-transform:uppercase; margin-top:-2px;
+  flex:0 0 auto;
+  font-size:1.3rem; font-weight:700; color:#fff; letter-spacing:.5px; text-transform:uppercase; margin:0 auto;
   text-shadow:0 0 4px #4180c9, 0 0 8px #1f3a64, 0 0 12px #1f3a64; animation: glowPulse 2s ease-in-out infinite;
 }
+.sidebar-close{
+  border:1px solid rgba(255,255,255,0.2);
+  background: linear-gradient(135deg, rgba(255,213,74,0.15), rgba(3,26,70,0.85));
+  color:#fff;
+  width:32px; height:32px;
+  border-radius:10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 6px 16px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.14);
+  transition: transform .1s ease, box-shadow .16s ease, border-color .14s ease;
+}
+.sidebar-close:hover,
+.sidebar-close:focus-visible{
+  border-color: var(--brand-gold);
+  box-shadow:0 10px 22px rgba(0,0,0,0.32), inset 0 1px 0 rgba(255,255,255,0.2), 0 0 0 2px rgba(255,213,74,0.35);
+  transform: translateY(-1px);
+  outline:none;
+}
+.sidebar-close i{ font-size:14px; line-height:1; }
 .sidebar-title.collapsed{ display:none; }
 @keyframes glowPulse{
   0%{text-shadow:0 0 4px #4180c9,0 0 8px #1f3a64,0 0 12px #1f3a64}
