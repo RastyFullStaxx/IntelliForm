@@ -1,0 +1,155 @@
+{
+  "title": "AutoCharge Facility (ACF) for BPI Credit Cards Authorization Form",
+  "form_id": "autocharge-acf-bpi",
+  "sections": [
+    {
+      "title": "CARDHOLDER INFORMATION",
+      "fields": [
+        {
+          "label": "Principal Cardholder’s Name",
+          "summary": "Enter the name of the principal cardholder."
+        },
+        {
+          "label": "Supplementary Cardholder’s Name",
+          "summary": "Enter the name of the supplementary cardholder (if applicable)."
+        },
+        {
+          "label": "Mobile Phone Number",
+          "summary": "Enter the mobile phone number."
+        }
+      ]
+    },
+    {
+      "title": "PURPOSE",
+      "fields": [
+        {
+          "label": "I want to:",
+          "summary": "Select the purpose of the form (Enroll, Change/Update, Cancel)."
+        },
+        {
+          "label": "Enroll my BPI Credit Card to the BPI AutoCharge Facility",
+          "summary": "Select this option to enroll your BPI Credit Card."
+        },
+        {
+          "label": "Card Number",
+          "summary": "Enter the BPI Credit Card number."
+        },
+        {
+          "label": "Card Expiry (MM/YY)",
+          "summary": "Enter the card expiry date in MM/YY format."
+        },
+        {
+          "label": "Change/Update my nominated credit card and/or card expiry",
+          "summary": "Select this option to change/update your card details."
+        },
+        {
+          "label": "From:",
+          "summary": "Enter the current card expiry date in MM/YY format."
+        },
+        {
+          "label": "To:",
+          "summary": "Enter the new card expiry date in MM/YY format."
+        },
+        {
+          "label": "Cancel my BPI AutoCharge Facility enrollment",
+          "summary": "Select this option to cancel your enrollment."
+        },
+        {
+          "label": "Card Number",
+          "summary": "Enter the BPI Credit Card number for cancellation."
+        },
+        {
+          "label": "Card Expiry (MM/YY)",
+          "summary": "Enter the card expiry date in MM/YY format for cancellation."
+        }
+      ]
+    },
+    {
+      "title": "UTILITY BILL DETAILS: MERALCO AUTOCHARGE",
+      "fields": [
+        {
+          "label": "Account Name",
+          "summary": "Enter the account name as per the Meralco billing statement."
+        },
+        {
+          "label": "Customer Account Number",
+          "summary": "Enter the 10-digit customer account number from the Meralco billing statement."
+        }
+      ]
+    },
+    {
+      "title": "UTILITY BILL DETAILS: GLOBE AUTOCHARGE",
+      "fields": [
+        {
+          "label": "Account Name",
+          "summary": "Enter the account name as per the Globe billing statement."
+        },
+        {
+          "label": "Account Number",
+          "summary": "Enter the account number from the Globe billing statement."
+        }
+      ]
+    },
+    {
+      "title": "SIGNATURE",
+      "fields": [
+        {
+          "label": "Principal Cardholder’s Name and Signature",
+          "summary": "Sign and print the name of the principal cardholder."
+        },
+        {
+          "label": "Date",
+          "summary": "Enter the date of signing."
+        },
+        {
+          "label": "Supplementary Cardholder’s Name and Signature (if applicable)",
+          "summary": "Sign and print the name of the supplementary cardholder (if applicable)."
+        },
+        {
+          "label": "Date",
+          "summary": "Enter the date of signing."
+        }
+      ]
+    },
+    {
+      "title": "FOR BANK USE ONLY",
+      "fields": [
+        {
+          "label": "Request filed through Contact Center",
+          "summary": "Office use only; leave blank."
+        },
+        {
+          "label": "Request filed through Branch",
+          "summary": "Office use only; leave blank."
+        },
+        {
+          "label": "Service Request No.",
+          "summary": "Office use only; leave blank."
+        },
+        {
+          "label": "DTAS Request No.",
+          "summary": "Office use only; leave blank."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 20,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "c06e012d72e9633fb7447aad3bc002a7c5793b03aa1096e508e7e3b55dff84e7",
+  "bucket": "banking",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-06T23:25:49Z",
+  "aliases": [
+    "autocharge_acf_bpi_form.pdf",
+    "BPI_AutoCharge_Auth_Form"
+  ],
+  "source_pdf": "data\\ph_trained\\ph-supplemental-forms\\Banking_CreditCardholdersAutoChargeForm.pdf",
+  "fields": []
+}

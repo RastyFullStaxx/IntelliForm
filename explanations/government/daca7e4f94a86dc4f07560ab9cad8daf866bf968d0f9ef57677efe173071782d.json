@@ -1,0 +1,91 @@
+{
+  "title": "Informed Consent Form",
+  "form_id": "urec-form-11",
+  "sections": [
+    {
+      "title": "Title of the Research Study",
+      "fields": [
+        {
+          "label": "Title of the Research Study",
+          "summary": "FIELD-LABEL DISAMBIGUATION AND COMPLETION-TIME REDUCTION IN PDF FORMS USING LAYOUTLMV3 WITH GRAPH NEURAL NETWORK ARCHITECTURE"
+        }
+      ]
+    },
+    {
+      "title": "Researchers",
+      "fields": [
+        {
+          "label": "Researchers",
+          "summary": "1. Dinglasa, Roanne Maye B. 2. Espartero, Rasty C. 3. Mahayag, David Geisler M. 4. Placente, Yesa V."
+        }
+      ]
+    },
+    {
+      "title": "Contact Information of the Researchers",
+      "fields": [
+        {
+          "label": "Cellphone number",
+          "summary": "Enter cellphone number (e.g., (+63) 917 997 9789)"
+        },
+        {
+          "label": "Email address",
+          "summary": "Enter email addresses (e.g., davidgeislermahayag2203@gmail.com)"
+        }
+      ]
+    },
+    {
+      "title": "Background",
+      "fields": [
+        {
+          "label": "Background",
+          "summary": "Participants will be recruited through purposive sampling emphasizing voluntary participation."
+        }
+      ]
+    },
+    {
+      "title": "Purpose of the Study",
+      "fields": [
+        {
+          "label": "Purpose of the Study",
+          "summary": "Evaluate the effectiveness of IntelliForm for filling out PDF forms."
+        }
+      ]
+    },
+    {
+      "title": "Procedures of the Study",
+      "fields": [
+        {
+          "label": "Procedures of the Study",
+          "summary": "Participants will receive a 15-minute orientation and provide written informed consent."
+        }
+      ]
+    },
+    {
+      "title": "Benefits",
+      "fields": [
+        {
+          "label": "Benefits",
+          "summary": "Indirect benefits by exposing participants to an innovative AI-based tool."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 8,
+    "fp": 0,
+    "fn": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "canonical_id": "daca7e4f94a86dc4f07560ab9cad8daf866bf968d0f9ef57677efe173071782d",
+  "bucket": "government",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-10T08:56:13+00:00",
+  "aliases": [
+    "1818b3c5a74140188f8c326b0c011e7a_Consent-Form",
+    "1818b3c5a74140188f8c326b0c011e7a_Consent-Form.pdf",
+    "Consent-Form"
+  ]
+}
