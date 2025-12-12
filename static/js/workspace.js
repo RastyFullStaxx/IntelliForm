@@ -605,18 +605,26 @@ function initWorkspace() {
   window.addEventListener("resize", () => renderPage(currentPage));
 
   function persistUpload(obj) {
-    // Reset workspace session when a new file is loaded
-    workspaceShownAt = null;
-    workspaceFinishedAt = null;
-    workspaceDuration = null;
-    workspaceLogged = false;
-    analysisStartAt = null;
-    lastFinishAt = null;
-    lastDuration = null;
-    analysisWaitMsTotal = 0;
-    analysisInFlight = false;
-    ws_clearInflight();
-    
+    const prevWeb  = normalizeToWebUrl(sessionStorage.getItem("uploadedWebPath") || "");
+    const prevDisk = sessionStorage.getItem("uploadedDiskPath") || "";
+    const nextWeb  = normalizeToWebUrl(obj?.web_path || "");
+    const nextDisk = obj?.disk_path || "";
+    const isSameUpload = (!!prevWeb && !!nextWeb && prevWeb === nextWeb) || (!!prevDisk && !!nextDisk && prevDisk === nextDisk);
+
+    if (!isSameUpload) {
+      // Reset workspace session only when a new file is loaded
+      workspaceShownAt = null;
+      workspaceFinishedAt = null;
+      workspaceDuration = null;
+      workspaceLogged = false;
+      analysisStartAt = null;
+      lastFinishAt = null;
+      lastDuration = null;
+      analysisWaitMsTotal = 0;
+      analysisInFlight = false;
+      ws_clearInflight();
+    }
+
     if (!obj) return;
     if (obj.web_path) sessionStorage.setItem("uploadedWebPath", normalizeToWebUrl(obj.web_path));
     if (obj.disk_path) sessionStorage.setItem("uploadedDiskPath", obj.disk_path);
@@ -1779,8 +1787,7 @@ function findAnchorForLabel(labelRaw, annotations){
         async function logWorkspaceEvent(status, finishedAt, extraMeta) {
           try {
             if (!isMetricsOptIn() || !workspaceShownAt) return;
-            // Allow final save to log even if we logged earlier events (e.g., print); other events respect the guard.
-            if (status !== "saved" && workspaceLogged) return;
+            if (workspaceLogged) return;
             const cid = ws_currentCanonical();
             if (!cid) return;
             const metricsAt = ensureMetricsEnabledAt();
