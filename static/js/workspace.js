@@ -190,10 +190,11 @@ function initWorkspace() {
       // Non-blocking log for print (does not end the session timer)
       if (isMetricsOptIn() && workspaceShownAt && !workspaceLogged) {
         const finished = ws_now();
+        const method = getModeChoice();
         const payload = {
           user_id: getUserId(),
           canonical_id: ws_currentCanonical(),
-          method: "intelliform",
+          method,
           started_at: workspaceShownAt,
           finished_at: finished,
           duration_ms: finished - workspaceShownAt,
@@ -609,6 +610,11 @@ function initWorkspace() {
     workspaceFinishedAt = null;
     workspaceDuration = null;
     workspaceLogged = false;
+    analysisStartAt = null;
+    lastFinishAt = null;
+    lastDuration = null;
+    analysisWaitMsTotal = 0;
+    analysisInFlight = false;
     ws_clearInflight();
     
     if (!obj) return;
@@ -838,6 +844,7 @@ function initWorkspace() {
     analysisStartAt = nowMs();
     lastFinishAt = null;
     lastDuration = null;
+    analysisInFlight = true;
 
     // Open determinate progress
     openProgress("Analyzing form…", "Preparing your PDF viewer");
@@ -914,18 +921,21 @@ function initWorkspace() {
       // Success
       lastFinishAt = nowMs();
       lastDuration = lastFinishAt - analysisStartAt;
+      analysisWaitMsTotal += Math.max(0, lastDuration || 0);
       closeProgressSuccess();
 
     } catch (e) {
       console.error("runAnalysis error:", e);
       lastFinishAt = nowMs();
       lastDuration = lastFinishAt - (analysisStartAt || lastFinishAt);
+      analysisWaitMsTotal += Math.max(0, lastDuration || 0);
       closeProgressError(e?.message);
     } finally {
       if (analyzeBtn && !analyzeBtn.classList.contains("dismissed")) {
         analyzeBtn.classList.remove("running");
         analyzeBtn.removeAttribute("aria-busy");
       }
+      analysisInFlight = false;
     }
   }
 
@@ -1774,18 +1784,24 @@ function findAnchorForLabel(labelRaw, annotations){
             const cid = ws_currentCanonical();
             if (!cid) return;
             const metricsAt = ensureMetricsEnabledAt();
+            const method = getModeChoice();
+            const baseDuration = Math.max(0, finishedAt - workspaceShownAt);
+            const analysisDeduct = (method === "intelliform" && status === "saved") ? analysisWaitSoFar() : 0;
+            const durationMs = Math.max(0, baseDuration - (analysisDeduct || 0));
+            const meta = Object.assign({ status }, extraMeta || {});
+
+            if (analysisDeduct > 0) meta.analysis_ms = analysisDeduct;
+            if (metricsAt) meta.metrics_enabled_at = metricsAt;
 
             const payload = {
               user_id: getUserId(),
               canonical_id: cid,
-              method: "intelliform",
+              method,
               started_at: workspaceShownAt,
               finished_at: finishedAt,
-              duration_ms: Math.max(0, finishedAt - workspaceShownAt),
-              meta: Object.assign({ status }, extraMeta || {})
+              duration_ms: durationMs,
+              meta
             };
-
-            if (metricsAt) payload.meta.metrics_enabled_at = metricsAt;
 
             const ok = await sendLog("/api/user.log", payload, { preferBeacon: true });
             if (!ok) queueLog("/api/user.log", payload);
@@ -2108,10 +2124,19 @@ function findAnchorForLabel(labelRaw, annotations){
       localStorage.setItem(PENDING_LOGS_KEY, JSON.stringify(capped));
     } catch {}
   }
+  let pendingFlushTimer = null;
+  function schedulePendingFlush(delayMs = 1200) {
+    if (pendingFlushTimer) return;
+    pendingFlushTimer = setTimeout(async () => {
+      pendingFlushTimer = null;
+      await flushPendingLogs();
+    }, delayMs);
+  }
   function queueLog(path, payload) {
     const logs = readPendingLogs();
     logs.push({ path, payload, ts: ws_now() });
     writePendingLogs(logs);
+    schedulePendingFlush();
   }
   async function sendLog(path, payload, opts = {}) {
     const url = apiUrl(path);
@@ -2150,7 +2175,7 @@ function findAnchorForLabel(labelRaw, annotations){
         started_at: workspaceShownAt,
         canonical_id: cid,
         user_id: getUserId(),
-        method: "intelliform",
+        method: getModeChoice(),
         page_url: location.pathname + location.search,
         metrics_enabled_at: ensureMetricsEnabledAt()
       }));
@@ -2171,11 +2196,12 @@ function findAnchorForLabel(labelRaw, annotations){
       const meta = { status: "abandoned_recovery", page_url: rec.page_url || null };
       const recMetricsAt = rec.metrics_enabled_at || ensureMetricsEnabledAt();
       if (recMetricsAt) meta.metrics_enabled_at = recMetricsAt;
+      const method = rec.method || getModeChoice() || "intelliform";
 
       const payload = {
         user_id: rec.user_id || getUserId(),
         canonical_id: rec.canonical_id,
-        method: rec.method || "intelliform",
+        method,
         started_at: rec.started_at,
         finished_at: finished,
         duration_ms: duration,
@@ -2275,9 +2301,15 @@ function findAnchorForLabel(labelRaw, annotations){
   let analysisStartAt = null;
   let lastFinishAt    = null;
   let lastDuration    = null;
+  let analysisWaitMsTotal = 0;
+  let analysisInFlight = false;
   let lastCanonicalId = null;
 
   function nowMs() { return Date.now(); }
+  function analysisWaitSoFar() {
+    const inFlight = (analysisInFlight && analysisStartAt) ? Math.max(0, nowMs() - analysisStartAt) : 0;
+    return Math.max(0, analysisWaitMsTotal + inFlight);
+  }
 
   async function logToolMetricsFromExplainer(explainer) {
     const payload = {
@@ -2303,10 +2335,11 @@ function findAnchorForLabel(labelRaw, annotations){
       if (!lastCanonicalId || !isMetricsOptIn()) return;
       const user_id = getUserId();
       const metricsAt = ensureMetricsEnabledAt();
+      const method = getModeChoice();
       const body = {
         user_id,
         canonical_id: lastCanonicalId,
-        method: "intelliform",
+        method,
         started_at: analysisStartAt,
         finished_at: lastFinishAt,
         duration_ms: lastDuration,
@@ -2326,10 +2359,11 @@ function findAnchorForLabel(labelRaw, annotations){
       const cid = lastCanonicalId || sessionStorage.getItem("uploadedFormId") || "";
       if (!cid) return;
       const metricsAt = ensureMetricsEnabledAt();
+      const method = getModeChoice();
       const payload = {
         user_id: getUserId(),
         canonical_id: cid,
-        method: "intelliform",
+        method,
         started_at: analysisStartAt,
         finished_at: nowMs(),
         duration_ms: nowMs() - analysisStartAt,
@@ -2349,12 +2383,13 @@ function findAnchorForLabel(labelRaw, annotations){
       if (!cid) return;
       const finished = ws_now();
       const metricsAt = ensureMetricsEnabledAt();
+      const method = getModeChoice();
       const meta = { status: tag || "abandoned" };
       if (metricsAt) meta.metrics_enabled_at = metricsAt;
       const payload = {
         user_id: getUserId(),
         canonical_id: cid,
-        method: "intelliform",
+        method,
         started_at: workspaceShownAt,
         finished_at: finished,
         duration_ms: finished - workspaceShownAt,
