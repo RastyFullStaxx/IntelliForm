@@ -1,0 +1,64 @@
+{
+  "title": "Credit Cardholders Auto Charge Form",
+  "form_id": "credit-cardholders-auto-charge-form",
+  "sections": [
+    {
+      "title": "Account Information",
+      "fields": [
+        {
+          "label": "Account Number",
+          "summary": "Enter your account number."
+        },
+        {
+          "label": "Name on Account",
+          "summary": "Enter the name as it appears on the account."
+        }
+      ]
+    },
+    {
+      "title": "Payment Information",
+      "fields": [
+        {
+          "label": "Payment Amount",
+          "summary": "Enter the amount to be charged."
+        },
+        {
+          "label": "Payment Frequency",
+          "summary": "Select how often the payment should be made."
+        }
+      ]
+    },
+    {
+      "title": "Authorization",
+      "fields": [
+        {
+          "label": "Signature",
+          "summary": "Sign to authorize the charges."
+        },
+        {
+          "label": "Date",
+          "summary": "Enter the date of authorization (MM/DD/YYYY, e.g., 11/28/2025)."
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 6,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  },
+  "canonical_id": "9e8e82db628bddd2ffa154717e334d86c2ac8ddeeffa9bec6e7d2cce5fd332ab",
+  "bucket": "banking",
+  "schema_version": 1,
+  "created_at": "2023-10-01T00:00:00Z",
+  "updated_at": "2025-12-11T08:37:35+00:00",
+  "aliases": [
+    "388acfec19a84dd09d45e22fdd76a135_BaselineMethod_Banking_CreditCardholdersAutoChargeForm_edited",
+    "388acfec19a84dd09d45e22fdd76a135_BaselineMethod_Banking_CreditCardholdersAutoChargeForm_edited.pdf",
+    "Credit Cardholders Auto Charge Form",
+    "CreditCardholdersAutoChargeForm"
+  ]
+}
