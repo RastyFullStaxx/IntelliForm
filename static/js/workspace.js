@@ -738,7 +738,6 @@ function initWorkspace() {
         overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
 
         applyPointerRouting();
-        placeAutoTextForPage(pageNum);
 
         LAST_COMMIT_SEQ = mySeq;
         // Give layout a tick to settle, then resolve
@@ -850,7 +849,6 @@ function initWorkspace() {
       analyzeBtn.classList.add("running");
       analyzeBtn.setAttribute("aria-busy", "true");
     }
-    resetAutoTextState();
     analysisStartAt = nowMs();
     lastFinishAt = null;
     lastDuration = null;
@@ -925,8 +923,7 @@ function initWorkspace() {
 
       // 6) Final polish (10%)
       await runStep("Finalizing… Please hold on!", 10, async () => {
-        await prepareAutoTextAnchors(explainer);
-        placeAutoTextForPage(currentPage);
+        // any quick, non-blocking polish can go here later
       }, P);
 
       // Success
@@ -1506,14 +1503,6 @@ function findAnchorForLabel(labelRaw, annotations){
     return { x: (evt.clientX - rect.left), y: (evt.clientY - rect.top) };
   }
 
-  // Auto text placement (state container)
-  const AUTO_TEXT_STATE = {
-    enabled: true,
-    formId: null,
-    anchors: [],
-    placedPages: new Set(),
-  };
-
   // paint strokes (draw layer only)
   function paintEdits(pageNum) {
     overlayCtx.clearRect(0, 0, overlayCanvas.width, overlayCanvas.height);
@@ -1536,8 +1525,8 @@ function findAnchorForLabel(labelRaw, annotations){
   }
 
   // --- Draggable + editable text nodes ---
-  function spawnTextNode(cssX, cssY, opts = {}) {
-    const pageNum = opts.page ?? currentPage;
+  function spawnTextNode(cssX, cssY) {
+    const pageNum = currentPage;
     const { invx, invy } = pageScaleFactors(pageNum);
 
     const wrap = document.createElement("div");
@@ -1547,12 +1536,6 @@ function findAnchorForLabel(labelRaw, annotations){
       outline:2.5px dashed #1e90ff; outline-offset:3px; border-radius:6px; padding:8px 10px 10px 34px;
       box-shadow:0 0 0 1px rgba(30,144,255,.25); background:rgba(255,255,255,0.08); user-select:none;`;
     wrap.dataset.page = String(pageNum);
-    if (opts.auto) wrap.dataset.auto = "1";
-    if (opts.className) wrap.classList.add(opts.className);
-    if (opts.width) {
-      wrap.style.minWidth = `${opts.width}px`;
-      wrap.style.width = `${opts.width}px`;
-    }
 
     const handle = document.createElement("div");
     handle.className = "ta-handle";
@@ -1574,8 +1557,7 @@ function findAnchorForLabel(labelRaw, annotations){
     content.style.cssText = `
       min-width:30px; min-height:18px; line-height:1.25; color:#000;
       font:14px Inter, system-ui, sans-serif; user-select:text; cursor:text;`;
-    content.textContent = (opts.initialText ?? "Type here");
-    if (opts.placeholder) content.dataset.placeholder = opts.placeholder;
+    content.textContent = "Type here";
     wrap.appendChild(content);
 
     const bar = document.createElement("div");
@@ -1595,7 +1577,7 @@ function findAnchorForLabel(labelRaw, annotations){
     const model = {
       id: "t" + Date.now() + Math.random().toString(36).slice(2,6),
       x: cssX * invx, y: cssY * invy,                  // base coords
-      text: (opts.initialText ?? "Type here"), font: "Inter", size: opts.fontSize || 14, color: "#000000"
+      text: "Type here", font: "Inter", size: 14, color: "#000000"
     };
     const ed = EDIT(pageNum); ed.texts.push(model);
     wrap.dataset.key = model.id;
@@ -1653,125 +1635,9 @@ function findAnchorForLabel(labelRaw, annotations){
     const parent = pdfCanvas.parentElement || document.body;
     if (getComputedStyle(parent).position === "static") parent.style.position = "relative";
     parent.appendChild(wrap);
-    if (opts.auto) {
-      wrap.style.outlineColor = "#f5c400";
-      wrap.style.boxShadow = "0 0 0 1px rgba(245,196,0,.35)";
-    }
-    const autoFocus = (opts.autofocus !== false);
-    if (autoFocus) {
-      content.focus();
-      const sel = window.getSelection(); const range = document.createRange();
-      range.selectNodeContents(content); range.collapse(false); sel.removeAllRanges(); sel.addRange(range);
-    }
-
-    return wrap;
-  }
-
-  function removeAutoTextNodes(pageNum = null) {
-    const nodes = Array.from(document.querySelectorAll('.text-annot[data-auto="1"]'));
-    for (const n of nodes) {
-      const p = Number(n.dataset.page);
-      if (pageNum != null && p !== Number(pageNum)) continue;
-      const key = n.dataset.key;
-      if (key && pageEdits[p]) {
-        const ed = EDIT(p);
-        const idx = ed.texts.findIndex(t => t.id === key);
-        if (idx >= 0) ed.texts.splice(idx, 1);
-      }
-      n.remove();
-    }
-  }
-
-  async function prepareAutoTextAnchors(explainer) {
-    try {
-      if (!explainer) return;
-      const ok = await ensureAnnotationsReady();
-      if (!ok || !cachedAnnotations) return;
-
-      const labels = [];
-      (explainer.sections || []).forEach((sec) => {
-        (sec.fields || []).forEach((f) => { if (f?.label) labels.push(f.label); });
-      });
-
-      const seen = new Set();
-      const anchors = [];
-      for (const label of labels) {
-        const anchor = findAnchorForLabel(label, cachedAnnotations);
-        if (!anchor || !Array.isArray(anchor.bbox)) continue;
-        const sig = `${anchor.page || 0}:${anchor.bbox.join(",")}`;
-        if (seen.has(sig)) continue;
-        seen.add(sig);
-        anchors.push({ label, anchor });
-      }
-
-      if (!anchors.length) return;
-      AUTO_TEXT_STATE.formId = currentFormId;
-      AUTO_TEXT_STATE.anchors = anchors;
-      AUTO_TEXT_STATE.placedPages = new Set();
-
-      placeAutoTextForPage(currentPage);
-    } catch (e) {
-      console.warn("prepareAutoTextAnchors failed", e);
-    }
-  }
-
-  function resetAutoTextState() {
-    removeAutoTextNodes();
-    AUTO_TEXT_STATE.anchors = [];
-    AUTO_TEXT_STATE.formId = null;
-    AUTO_TEXT_STATE.placedPages = new Set();
-  }
-
-  function placeAutoTextForPage(pageNum) {
-    try {
-      if (!AUTO_TEXT_STATE.enabled) return;
-      if (!AUTO_TEXT_STATE.anchors.length) return;
-      if (AUTO_TEXT_STATE.formId && currentFormId && AUTO_TEXT_STATE.formId !== currentFormId) return;
-      if (AUTO_TEXT_STATE.placedPages.has(pageNum)) return;
-
-      const zeroPage = Math.max(0, (pageNum || 1) - 1);
-      const hits = AUTO_TEXT_STATE.anchors.filter((a) => (a.anchor.page || 0) === zeroPage);
-      if (!hits.length) return;
-
-      if (!editMode) enterEdit();
-
-      const hostW = pageLayer?.clientWidth || overlayCanvas.clientWidth || pdfCanvas.clientWidth || 800;
-      const hostH = pageLayer?.clientHeight || overlayCanvas.clientHeight || pdfCanvas.clientHeight || 1000;
-
-      for (const h of hits) {
-        const rect = pdfBBoxToCssRect(h.anchor.bbox, pageNum);
-        let width = Math.max(140, rect.w * 1.6);
-        width = Math.min(width, Math.max(140, hostW - 16));
-
-        let x = rect.x + rect.w + 12;
-        if (x + width > hostW - 8) x = rect.x - width - 12;
-        if (x < 8) x = 8;
-
-        const targetH = 34;
-        let y = rect.y - 4;
-        if (y < 8) y = 8;
-        if (y + targetH > hostH - 8) y = Math.max(8, hostH - targetH - 8);
-
-        const node = spawnTextNode(x, y, {
-          page: pageNum,
-          initialText: "",
-          fontSize: 14,
-          autofocus: false,
-          className: "auto-text-annot",
-          auto: true,
-          width
-        });
-        if (node) {
-          node.title = `Detected field: ${h.label || "Field"}`;
-          const content = node.querySelector(".ta-content");
-          if (content) content.dataset.placeholder = h.label || "Fill here";
-        }
-      }
-
-      AUTO_TEXT_STATE.placedPages.add(pageNum);
-    } catch (e) {
-      console.warn("placeAutoTextForPage failed", e);
-    }
+    content.focus();
+    const sel = window.getSelection(); const range = document.createRange();
+    range.selectNodeContents(content); range.collapse(false); sel.removeAllRanges(); sel.addRange(range);
   }
 
   // Edit mode toggle

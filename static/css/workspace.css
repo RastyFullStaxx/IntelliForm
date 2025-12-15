@@ -1499,17 +1499,6 @@ body.text-mode   { cursor: text; }
   z-index: 5;
 }
 .text-annot[contenteditable="true"]:focus { outline: 2px solid #0ea5e9; }
-.text-annot.auto-text-annot{
-  outline: 2px dashed var(--brand-gold);
-  box-shadow: 0 0 0 1px rgba(245,196,0,.35), 0 10px 24px rgba(0,0,0,0.25);
-  background: rgba(255,255,255,0.92);
-}
-.text-annot[data-auto="1"] .ta-content:empty:before{
-  content: attr(data-placeholder);
-  color: #6b7280;
-  font-weight: 600;
-  opacity: 0.9;
-}
 
 /* Sidebar sticky footer */
 .sidebar-footer{
