@@ -6,6 +6,7 @@ Batch-produce facade artifacts for FUNSD:
 - GNN visuals (if utils.graph_builder is available)
 - enhanced tokens JSON (llmgnnenhancedembeddings)
 
+
 Flow per item:
   1) Convert FUNSD image -> one-page PDF -> /uploads/funsd/<split>/<id>.pdf
   2) POST /api/prelabel (form_id stub + pdf_disk_path=/uploads/...)
