@@ -23,7 +23,8 @@ Usage
     --splits train test \
     --model-tag llmv3-gnn \
     --bucket government \
-    --limit 0
+    --limit 00
+
 
 Notes
 -----
