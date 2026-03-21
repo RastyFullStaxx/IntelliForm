@@ -15,6 +15,7 @@ Flow per item:
        out/llmgnnenhancedembeddings/<split>/<canonical_id>.json
   4) Append to a manifest: out/funsd_manifest_<split>.jsonl
 
+
 Usage:
   huggingface-cli login   # if needed
   pip install datasets pillow requests tqdm
