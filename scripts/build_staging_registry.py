@@ -38,7 +38,7 @@ def _scan_training_fallback() -> list[Dict[str, Any]]:
         }
         out.append(row)
     return out
-
+    
 def main():
     STAGING.mkdir(parents=True, exist_ok=True)
     items = []
