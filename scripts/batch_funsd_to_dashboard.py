@@ -4,7 +4,7 @@ Batch-populate the Researcher Dashboard's FUNSD tab (Facade mode).
 
 What it does
 ------------
-- Loads FUNSD via 🤗 datasets.
+- Loads FUNSD via datasets.
 - For each example (train/test), derives deterministic base precision/recall in a realistic band,
   then calls your FastAPI endpoint /api/metrics.log with source="funsd".
 - Lets the server's tweak_metrics() (services/metrics_postprocessor.py) finish:
