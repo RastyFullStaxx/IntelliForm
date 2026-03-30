@@ -9,7 +9,7 @@ What it does
   then calls your FastAPI endpoint /api/metrics.log with source="funsd".
 - Lets the server's tweak_metrics() (services/metrics_postprocessor.py) finish:
   ceilings, tiny jitter, edit/change factors, and plausible TP/FP/FN.
-- After each split, posts a micro-average row (sum TP/FP/FN over the split).
+- After each splits, posts a micro-average row (sum TP/FP/FN over the split).
 
 Outputs
 -------
