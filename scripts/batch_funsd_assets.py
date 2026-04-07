@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # scripts/batch_funsd_assets.py
+
 """
 Batch-produce facade artifacts for FUNSD:
 - overlay PNGs (from services/overlay_renderer.render_overlays)
