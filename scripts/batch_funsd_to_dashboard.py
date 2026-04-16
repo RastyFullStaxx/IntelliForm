@@ -2,7 +2,7 @@
 """
 Batch-populate the Researcher Dashboard's FUNSD tab (Facade mode).
 
-What it does
+What it does:
 ------------
 - Loads FUNSD via datasets.
 - For each example (train/test), derives deterministic base precision/recall in a realistic band,
