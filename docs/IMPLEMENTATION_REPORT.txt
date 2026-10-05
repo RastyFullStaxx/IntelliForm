@@ -1,0 +1,295 @@
+IntelliForm — Implementation Appendix (Technical Report)
+========================================================
+
+Scope
+-----
+This appendix documents the implementation details of IntelliForm as built in this repository.
+It is intended as a rebuildable blueprint: architecture, modules, algorithms, configuration,
+and known tradeoffs/limitations.
+
+Note on "offline vs. external services"
+--------------------------------------
+The core IntelliForm inference pipeline (PDF -> tokens -> LayoutLMv3(+GNN) labels -> grouped
+fields -> T5 summaries) runs locally using PyTorch/HuggingFace models.
+
+This codebase also contains an OPTIONAL "explainer generator" service that can call an
+external chat backend (configured in scripts/config.py) to produce a strict JSON explainer
+used by the UI panel/registry. That feature can be disabled (see Configuration) to run fully
+offline.
+
+
+1) System Architecture (Runtime)
+--------------------------------
+Runtime is split into 3 cooperating layers:
+
+1. Backend API (FastAPI):
+   - Entry: main.py + api.py
+   - Exposes /api endpoints for upload, prelabel/inference, metrics, and registry.
+   - Writes outputs to out/ (overlays, graphs, prelabels) and explanations/ (JSON explainers).
+
+2. Inference Engine (local ML):
+   - Entry: utils/llmv3_infer.py (analyze_pdf, analyze_tokens)
+   - Implements end-to-end local inference:
+       PDF text+layout extraction -> encoding -> LayoutLMv3 classifier (+ optional GNN) ->
+       BIO grouping -> T5 summarization (optional) -> structured JSON for UI/metrics.
+
+3. Frontend UI (PDF.js overlays):
+   - templates/workspace.html + static/*
+   - Displays the uploaded PDF with bounding-box overlays and a sidebar of extracted fields
+     and their summaries. Uses /out and /uploads mounts provided by the backend.
+
+
+2) Repository Layout (Key Modules)
+----------------------------------
+Top-level entrypoints:
+- main.py
+  Boots the FastAPI application and serves the UI templates.
+- api.py
+  Defines the FastAPI routes for file upload, prelabel/inference, explainer creation,
+  registry access, and quick metrics export.
+- inference.py
+  CLI runner for local inference without the web UI.
+
+Core runtime modules:
+- scripts/config.py
+  Central runtime configuration (env toggles, paths, hashing, prelabel orchestration,
+  and optional external chat backend wrapper).
+- utils/extractor.py
+  PDF text+layout extraction (pdfplumber) producing tokens with normalized bounding boxes.
+- utils/field_classifier.py
+  LayoutLMv3 backbone + optional lightweight GNN block + linear classifier head.
+- utils/graph_builder.py
+  Builds token-to-token edges (kNN or radius) and geometric edge features (dist, dx, dy).
+- utils/llmv3_infer.py
+  Unified local inference engine (extract -> classify -> group -> summarize -> package).
+- utils/t5_summarize.py
+  Optional T5 summarizer for grouped fields; includes rule-based fallback.
+- services/overlay_renderer.py
+  Produces per-page PNGs with bounding boxes and optional GNN edge visualizations (PyMuPDF).
+- services/registry.py
+  File-based registry (explanations/registry.json) keyed by canonical template hash.
+
+
+3) End-to-End Pipeline (PDF -> UI)
+----------------------------------
+3.1 Upload + Canonical Template ID
+The system identifies a PDF template using a canonical hash intended to be stable across
+filled-in values:
+
+- Preferred: render pages with annotations/widgets disabled -> perceptual hash per page ->
+  SHA-256 of concatenated page hashes.
+- Fallback: strip AcroForm values via pypdf and hash normalized extracted text.
+- Final fallback: SHA-256(file bytes).
+
+Implementation: scripts/config.py (canonical_template_hash, template_hash_via_render, etc.)
+
+This canonical hash is used as:
+- form_id / canonical_form_id: the stable identifier for the template
+- registry key in explanations/registry.json
+- filename for prelabels/annotations JSON and explainer JSON
+
+3.2 Token + Layout Extraction (No OCR by default)
+Extraction uses pdfplumber to read the PDF text layer and word bounding boxes per page.
+Bounding boxes are normalized into the LayoutLM coordinate convention (0..1000):
+
+  nx = round((x / page_width)  * 1000)
+  ny = round((y / page_height) * 1000)
+
+Implementation: utils/extractor.py (extract_pdf, _normalize_bbox)
+
+Note: OCR is intentionally not used by default for speed and determinism. PDFs without a
+reliable text layer will extract poorly unless OCR is added externally.
+
+3.3 Graph Construction (Optional)
+To inject spatial context beyond the transformer window, tokens can be connected into a
+graph. The default strategy is k-nearest neighbors in 2D (bbox center space).
+
+For each directed edge (i -> j), edge_attr is computed as:
+- distance d
+- delta-x dx
+- delta-y dy
+
+Implementation: utils/graph_builder.py (build_edges)
+
+3.4 LayoutLMv3(+GNN) Token Classification
+The classifier encodes tokens with LayoutLMv3 and optionally passes the token embeddings
+through a minimal message passing block before the linear classifier head.
+
+- Backbone: transformers.LayoutLMv3Model("microsoft/layoutlmv3-base")
+- Optional GNN: residual scatter-aggregation message passing (no PyG dependency)
+- Head: linear layer to label logits per token
+
+Implementation: utils/field_classifier.py (FieldClassifier, SimpleGNNLayer, GNNBlock)
+
+3.5 Postprocessing: BIO Grouping -> Field Spans
+Token-level predictions are converted into field-level spans using a BIO-style grouping:
+- Consecutive B-<LABEL> / I-<LABEL> tokens become one field group.
+- Bounding boxes are merged by min/max corners.
+- Group score is the average token confidence in the group.
+
+Implementation: utils/llmv3_infer.py (_group_sequences, _merge_bbox)
+
+3.6 Summarization (Local T5, Optional)
+Each grouped field is summarized into a short human-readable instruction.
+Two implementations exist:
+
+- Primary: utils/t5_summarize.py (T5Summarizer + summarize_fields)
+  - Loads a HuggingFace directory, Hub ID, or raw .pt state_dict (auto-detect).
+  - Default base: google/flan-t5-base (can be fine-tuned via scripts/train_t5.py).
+- Fallback: template summary "Label: Value" when the model cannot be loaded.
+
+3.7 Packaging + Outputs
+The inference engine returns a structured dict suitable for UI and for quick reports:
+
+{
+  "document": "<path>",
+  "fields": [
+    {
+      "label": "<FIELD_LABEL>",
+      "score": <float>,
+      "tokens": [...],
+      "bbox": [x0,y0,x1,y1],
+      "summary": "<string>",
+      "page": <int>
+    }
+  ],
+  "runtime": {"extract_ms":..., "classify_ms":..., "summarize_ms":...}
+}
+
+Implementation: utils/llmv3_infer.py (analyze_pdf, analyze_tokens)
+
+3.8 UI Overlays
+Overlays are generated as per-page PNGs using PyMuPDF:
+- Bounding boxes are denormalized to page coordinates
+- Rectangles and (optional) GNN edges are drawn directly onto the page canvas
+
+Implementation: services/overlay_renderer.py (render_overlays, render_gnn_visuals)
+
+
+4) Explainer JSON + Registry (UI Panel)
+---------------------------------------
+The UI panel can display a curated "explainer" JSON per template hash. The system supports:
+
+- Known templates: load an existing explainer from explanations/<bucket>/<HASH>.json
+- Unknown templates: create an explainer, then register it in explanations/registry.json
+
+Explainer JSON shape (high-level):
+- title, form_id/canonical_id, bucket, schema_version
+- sections[]: grouped UI sections with fields[] (label + summary + optional metadata)
+- metrics: quality estimates for the explainer (note: may be heuristic unless evaluated
+  against ground truth)
+
+Implementation:
+- Generation facade: utils/dual_head.py (generate_explainer)
+- Registry operations: services/registry.py (load_registry, upsert_registry, find_by_hash)
+
+External chat backend (optional):
+- scripts/config.py (chat_completion)
+- Used only when LIVE_MODE is enabled AND a key is present.
+- If disabled, utils/dual_head.py writes a local scaffold explainer instead.
+
+
+5) Configuration and Setup
+--------------------------
+5.1 Python and dependencies
+Recommended Python: 3.10–3.11
+Dependencies list: docs/requirements.txt
+
+Install (example):
+  python -m venv venv
+  ./venv/Scripts/activate          (Windows)  OR  source venv/bin/activate  (Linux/Mac)
+  pip install -r docs/requirements.txt
+
+5.2 Model artifacts
+Runtime expects model weights/checkpoints under saved_models/ (paths are configurable).
+At minimum:
+- Classifier weights (state_dict) for LayoutLMv3(+GNN) head
+- Optional T5 checkpoint (HF dir or .pt) for summarization
+
+5.3 Environment variables (selected)
+Feature toggles:
+- INTELLIFORM_LLM_ENABLED
+  1/true enables optional external explainer generation (if key is present).
+  0/false forces local scaffold explainers and avoids external calls.
+- INTELLIFORM_DEV_MODE
+  Enables developer-oriented behavior (logging, relaxed defaults).
+
+External chat backend (optional):
+- INTELLIFORM_ENGINE_KEY or INTELLIFORM_CORE_KEY
+  API key used by scripts/config.py chat_completion().
+- INTELLIFORM_BACKEND
+  "oai" (OpenAI) or "azure" (Azure OpenAI).
+- INTELLIFORM_ENGINE_MODEL
+- INTELLIFORM_ENGINE_MAXTOK
+- INTELLIFORM_ENGINE_TEMP
+
+Filesystem + housekeeping:
+- INTELLIFORM_EPHEMERAL_ANNOS
+  If enabled, temporary annotations are purged after a TTL.
+- INTELLIFORM_ANNO_TTL_SECONDS
+  TTL for stale annotations cleanup.
+
+Run the web app (example):
+  uvicorn main:app --host 127.0.0.1 --port 8000 --reload
+
+Run CLI inference (example):
+  python inference.py --pdf "uploads/sample.pdf" --save_report
+
+
+6) Data Formats
+---------------
+6.1 Tokens JSON (CLI / debug)
+inference.py accepts a tokens JSON with:
+{
+  "tokens": ["..."],
+  "bboxes": [[x0,y0,x1,y1], ...],    # normalized 0..1000
+  "page_ids": [0,0,1,...]            # optional
+}
+
+6.2 Explanations / Registry
+- explanations/<bucket>/<HASH>.json : per-template explainer JSON
+- explanations/registry.json        : list of known templates keyed by HASH
+
+
+7) Engineering Decisions and Tradeoffs
+--------------------------------------
+No OCR by default:
+- Pros: faster, deterministic, avoids OCR noise
+- Cons: scanned PDFs without an embedded text layer may yield sparse/incorrect tokens
+
+Minimal GNN implementation:
+- Pros: no PyTorch-Geometric dependency; easy to deploy
+- Cons: lacks advanced batching/graph ops; message passing is intentionally simple
+
+Canonical hashing:
+- Pros: robust template ID even when users fill out the form
+- Cons: rendering-based hashing can be slower on large PDFs; fallbacks may be less stable
+
+Explainer generation modes:
+- Offline mode: scaffold explainers (fast, no external calls) but less precise/complete
+- Live mode: can produce richer explainers but requires external service configuration
+
+
+8) Known Limitations
+--------------------
+- Token extraction depends on a usable PDF text layer; scanned/handwritten forms are not
+  fully supported without adding OCR.
+- LayoutLMv3 context length requires truncation for large token counts; tokens beyond the
+  max length may be dropped unless page-wise batching is added.
+- Graph edges currently do not enforce page boundaries unless page_ids are provided to
+  build_edges() in the calling code.
+- Summaries are only as good as the T5 checkpoint; if missing, a rule-based fallback is used.
+
+
+9) Rebuild Checklist (Reproducibility)
+--------------------------------------
+- Install dependencies from docs/requirements.txt
+- Place model artifacts in saved_models/ (or update paths in your config)
+- Decide mode:
+  - Offline: set INTELLIFORM_LLM_ENABLED=0
+  - Live explainer generation: set INTELLIFORM_LLM_ENABLED=1 and configure engine key/backend
+- Start server with uvicorn main:app
+- Upload a PDF in the UI and verify:
+  - canonical form hash is returned
+  - overlays appear under out/overlay/
+  - predicted fields + summaries appear in the sidebar
